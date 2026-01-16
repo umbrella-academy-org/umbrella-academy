@@ -4,13 +4,11 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-export default function ProfilePage() {
+export default function EducationPage() {
   const router = useRouter();
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    gender: '',
-    dateOfBirth: '',
+    email1: '',
+    email2: '',
     country: '',
     phoneCode: '+250',
     phoneNumber: '',
@@ -22,28 +20,20 @@ export default function ProfilePage() {
 
   const handleContinue = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.firstName || !formData.lastName) {
-      alert('Please enter your first and last name');
-      return;
-    }
-    if (!formData.gender) {
-      alert('Please select your gender');
-      return;
-    }
-    if (!formData.dateOfBirth) {
-      alert('Please enter your date of birth');
+    if (!formData.email1 || !formData.email2) {
+      alert('Please fill in all email fields');
       return;
     }
     if (!formData.country) {
-      alert('Please select your country');
+      alert('Please select a country');
       return;
     }
     if (!formData.phoneNumber) {
       alert('Please enter your phone number');
       return;
     }
-    console.log('Profile data:', formData);
-    router.push('/auth/education');
+    console.log('Education data:', formData);
+    router.push('/auth/education-level');
   };
 
   return (
@@ -74,76 +64,40 @@ export default function ProfilePage() {
 
             {/* Title */}
             <h1 className="text-3xl font-semibold text-gray-900 mb-2">
-              Tell Us About You
+              Education Details
             </h1>
             <p className="text-gray-500 mb-8 text-center">
-              Enter your personal details so we can complete your profile.
+              Fill in your current level of study and where you're learning from.
             </p>
 
             {/* Form */}
             <form onSubmit={handleContinue} className="w-full space-y-4">
-              {/* First Name and Last Name */}
+              {/* Email fields */}
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-2">
-                    First Name
+                  <label htmlFor="email1" className="block text-sm font-medium text-gray-700 mb-2">
+                    Email
                   </label>
                   <input
-                    type="text"
-                    id="firstName"
-                    value={formData.firstName}
-                    onChange={(e) => handleChange('firstName', e.target.value)}
-                    placeholder="eg. John"
+                    type="email"
+                    id="email1"
+                    value={formData.email1}
+                    onChange={(e) => handleChange('email1', e.target.value)}
+                    placeholder="Enter your email"
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
                     required
                   />
                 </div>
                 <div>
-                  <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-2">
-                    Last Name
+                  <label htmlFor="email2" className="block text-sm font-medium text-gray-700 mb-2">
+                    Email
                   </label>
                   <input
-                    type="text"
-                    id="lastName"
-                    value={formData.lastName}
-                    onChange={(e) => handleChange('lastName', e.target.value)}
-                    placeholder="eg. Doe"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
-                    required
-                  />
-                </div>
-              </div>
-
-              {/* Gender and Date of Birth */}
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label htmlFor="gender" className="block text-sm font-medium text-gray-700 mb-2">
-                    Gender
-                  </label>
-                  <select
-                    id="gender"
-                    value={formData.gender}
-                    onChange={(e) => handleChange('gender', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white"
-                    required
-                  >
-                    <option value="">Preferred gender</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
-                    <option value="prefer-not-to-say">Prefer not to say</option>
-                  </select>
-                </div>
-                <div>
-                  <label htmlFor="dateOfBirth" className="block text-sm font-medium text-gray-700 mb-2">
-                    Date Of Birth
-                  </label>
-                  <input
-                    type="date"
-                    id="dateOfBirth"
-                    value={formData.dateOfBirth}
-                    onChange={(e) => handleChange('dateOfBirth', e.target.value)}
-                    placeholder="DD / MM / YY"
+                    type="email"
+                    id="email2"
+                    value={formData.email2}
+                    onChange={(e) => handleChange('email2', e.target.value)}
+                    placeholder="Enter your email"
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
                     required
                   />
@@ -162,7 +116,7 @@ export default function ProfilePage() {
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white"
                   required
                 >
-                  <option value="">No country selected</option>
+                  <option value="">Enter your email</option>
                   <option value="us">United States</option>
                   <option value="uk">United Kingdom</option>
                   <option value="ca">Canada</option>
@@ -230,7 +184,7 @@ export default function ProfilePage() {
       <div className="hidden lg:block flex-1 relative overflow-hidden">
         <Image
           src="/auth/login/image.png"
-          alt="Palm trees against blue sky"
+          alt="Night sky with stars"
           fill
           className="object-cover object-center scale-105"
           priority

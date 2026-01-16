@@ -2,8 +2,10 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function CreatePasswordPage() {
+  const router = useRouter();
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -24,6 +26,7 @@ export default function CreatePasswordPage() {
       return;
     }
     console.log('Password created');
+    router.push('/auth/profile');
   };
 
   return (

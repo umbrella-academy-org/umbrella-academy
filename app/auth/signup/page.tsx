@@ -2,13 +2,20 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
+  const router = useRouter();
   const [email, setEmail] = useState('');
 
   const handleContinue = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!email || !/\S+@\S+\.\S+/.test(email)) {
+      alert('Please enter a valid email address');
+      return;
+    }
     console.log('Email:', email);
+    router.push('/auth/verify');
   };
 
   const handleGoogleSignIn = () => {

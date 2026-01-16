@@ -2,8 +2,10 @@
 
 import Image from 'next/image';
 import { useState, useRef, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function VerifyPage() {
+  const router = useRouter();
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
   const [timer, setTimer] = useState(120);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
@@ -50,7 +52,13 @@ export default function VerifyPage() {
 
   const handleContinue = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('OTP:', otp.join(''));
+    const otpValue = otp.join('');
+    if (otpValue.length !== 6) {
+      alert('Please enter the complete 6-digit code');
+      return;
+    }
+    console.log('OTP:', otpValue);
+    router.push('/auth/create-password');
   };
 
   const handleResend = () => {
