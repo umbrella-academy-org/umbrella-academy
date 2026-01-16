@@ -10,6 +10,7 @@ export default function CreatePasswordPage() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [errors, setErrors] = useState({ password: '', confirmPassword: '' });
 
   const hasMinLength = password.length >= 8;
   const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
@@ -17,12 +18,22 @@ export default function CreatePasswordPage() {
 
   const handleContinue = (e: React.FormEvent) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      alert('Passwords do not match');
+    setErrors({ password: '', confirmPassword: '' });
+    
+    if (!password) {
+      setErrors(prev => ({ ...prev, password: 'Password is required' }));
       return;
     }
     if (!hasMinLength || !hasSpecialChar || !hasNumber) {
-      alert('Please meet all password requirements');
+      setErrors(prev => ({ ...prev, password: 'Please meet all password requirements' }));
+      return;
+    }
+    if (!confirmPassword) {
+      setErrors(prev => ({ ...prev, confirmPassword: 'Please confirm your password' }));
+      return;
+    }
+    if (password !== confirmPassword) {
+      setErrors(prev => ({ ...prev, confirmPassword: 'Passwords do not match' }));
       return;
     }
     console.log('Password created');
@@ -75,9 +86,14 @@ export default function CreatePasswordPage() {
                     type={showPassword ? 'text' : 'password'}
                     id="password"
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                      setErrors(prev => ({ ...prev, password: '' }));
+                    }}
                     placeholder="••••••••"
-                    className="w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
+                    className={`w-full px-4 py-3 pr-12 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${
+                      errors.password ? 'border-red-500' : 'border-gray-300'
+                    }`}
                     required
                   />
                   <button
@@ -97,6 +113,7 @@ export default function CreatePasswordPage() {
                     )}
                   </button>
                 </div>
+                {errors.password && <p className="mt-2 text-sm text-red-500">{errors.password}</p>}
               </div>
 
               {/* Confirm Password field */}
@@ -109,9 +126,14 @@ export default function CreatePasswordPage() {
                     type={showConfirmPassword ? 'text' : 'password'}
                     id="confirmPassword"
                     value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    onChange={(e) => {
+                      setConfirmPassword(e.target.value);
+                      setErrors(prev => ({ ...prev, confirmPassword: '' }));
+                    }}
                     placeholder="••••••••"
-                    className="w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
+                    className={`w-full px-4 py-3 pr-12 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${
+                      errors.confirmPassword ? 'border-red-500' : 'border-gray-300'
+                    }`}
                     required
                   />
                   <button
@@ -131,6 +153,7 @@ export default function CreatePasswordPage() {
                     )}
                   </button>
                 </div>
+                {errors.confirmPassword && <p className="mt-2 text-sm text-red-500">{errors.confirmPassword}</p>}
               </div>
 
               {/* Password requirements */}

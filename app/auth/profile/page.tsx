@@ -15,33 +15,44 @@ export default function ProfilePage() {
     phoneCode: '+250',
     phoneNumber: '',
   });
+  const [errors, setErrors] = useState({
+    firstName: '',
+    lastName: '',
+    gender: '',
+    dateOfBirth: '',
+    country: '',
+    phoneNumber: '',
+  });
 
   const handleChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
+    setErrors((prev) => ({ ...prev, [field]: '' }));
   };
 
   const handleContinue = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.firstName || !formData.lastName) {
-      alert('Please enter your first and last name');
+    const newErrors = {
+      firstName: '',
+      lastName: '',
+      gender: '',
+      dateOfBirth: '',
+      country: '',
+      phoneNumber: '',
+    };
+    
+    if (!formData.firstName) newErrors.firstName = 'First name is required';
+    if (!formData.lastName) newErrors.lastName = 'Last name is required';
+    if (!formData.gender) newErrors.gender = 'Please select your gender';
+    if (!formData.dateOfBirth) newErrors.dateOfBirth = 'Date of birth is required';
+    if (!formData.country) newErrors.country = 'Please select your country';
+    if (!formData.phoneNumber) newErrors.phoneNumber = 'Phone number is required';
+    
+    setErrors(newErrors);
+    
+    if (Object.values(newErrors).some(error => error !== '')) {
       return;
     }
-    if (!formData.gender) {
-      alert('Please select your gender');
-      return;
-    }
-    if (!formData.dateOfBirth) {
-      alert('Please enter your date of birth');
-      return;
-    }
-    if (!formData.country) {
-      alert('Please select your country');
-      return;
-    }
-    if (!formData.phoneNumber) {
-      alert('Please enter your phone number');
-      return;
-    }
+    
     console.log('Profile data:', formData);
     router.push('/auth/education');
   };
@@ -94,9 +105,12 @@ export default function ProfilePage() {
                     value={formData.firstName}
                     onChange={(e) => handleChange('firstName', e.target.value)}
                     placeholder="eg. John"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
+                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${
+                      errors.firstName ? 'border-red-500' : 'border-gray-300'
+                    }`}
                     required
                   />
+                  {errors.firstName && <p className="mt-1 text-sm text-red-500">{errors.firstName}</p>}
                 </div>
                 <div>
                   <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-2">
@@ -108,9 +122,12 @@ export default function ProfilePage() {
                     value={formData.lastName}
                     onChange={(e) => handleChange('lastName', e.target.value)}
                     placeholder="eg. Doe"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
+                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${
+                      errors.lastName ? 'border-red-500' : 'border-gray-300'
+                    }`}
                     required
                   />
+                  {errors.lastName && <p className="mt-1 text-sm text-red-500">{errors.lastName}</p>}
                 </div>
               </div>
 
@@ -124,7 +141,9 @@ export default function ProfilePage() {
                     id="gender"
                     value={formData.gender}
                     onChange={(e) => handleChange('gender', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white"
+                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white text-gray-900 ${
+                      errors.gender ? 'border-red-500' : 'border-gray-300'
+                    }`}
                     required
                   >
                     <option value="">Preferred gender</option>
@@ -133,6 +152,7 @@ export default function ProfilePage() {
                     <option value="other">Other</option>
                     <option value="prefer-not-to-say">Prefer not to say</option>
                   </select>
+                  {errors.gender && <p className="mt-1 text-sm text-red-500">{errors.gender}</p>}
                 </div>
                 <div>
                   <label htmlFor="dateOfBirth" className="block text-sm font-medium text-gray-700 mb-2">
@@ -144,9 +164,12 @@ export default function ProfilePage() {
                     value={formData.dateOfBirth}
                     onChange={(e) => handleChange('dateOfBirth', e.target.value)}
                     placeholder="DD / MM / YY"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
+                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 ${
+                      errors.dateOfBirth ? 'border-red-500' : 'border-gray-300'
+                    }`}
                     required
                   />
+                  {errors.dateOfBirth && <p className="mt-1 text-sm text-red-500">{errors.dateOfBirth}</p>}
                 </div>
               </div>
 
@@ -159,7 +182,9 @@ export default function ProfilePage() {
                   id="country"
                   value={formData.country}
                   onChange={(e) => handleChange('country', e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white"
+                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white text-gray-900 ${
+                    errors.country ? 'border-red-500' : 'border-gray-300'
+                  }`}
                   required
                 >
                   <option value="">No country selected</option>
@@ -171,6 +196,7 @@ export default function ProfilePage() {
                   <option value="ug">Uganda</option>
                   <option value="tz">Tanzania</option>
                 </select>
+                {errors.country && <p className="mt-1 text-sm text-red-500">{errors.country}</p>}
               </div>
 
               {/* Phone Number */}
@@ -182,7 +208,7 @@ export default function ProfilePage() {
                   <select
                     value={formData.phoneCode}
                     onChange={(e) => handleChange('phoneCode', e.target.value)}
-                    className="w-24 px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white"
+                    className="w-24 px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white text-gray-900"
                   >
                     <option value="+250">+250</option>
                     <option value="+1">+1</option>
@@ -190,15 +216,20 @@ export default function ProfilePage() {
                     <option value="+254">+254</option>
                     <option value="+256">+256</option>
                   </select>
-                  <input
-                    type="tel"
-                    id="phoneNumber"
-                    value={formData.phoneNumber}
-                    onChange={(e) => handleChange('phoneNumber', e.target.value)}
-                    placeholder="7XXX-XXX-XXX"
-                    className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
-                    required
-                  />
+                  <div className="flex-1">
+                    <input
+                      type="tel"
+                      id="phoneNumber"
+                      value={formData.phoneNumber}
+                      onChange={(e) => handleChange('phoneNumber', e.target.value)}
+                      placeholder="7XXX-XXX-XXX"
+                      className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${
+                        errors.phoneNumber ? 'border-red-500' : 'border-gray-300'
+                      }`}
+                      required
+                    />
+                    {errors.phoneNumber && <p className="mt-1 text-sm text-red-500">{errors.phoneNumber}</p>}
+                  </div>
                 </div>
               </div>
 

@@ -8,6 +8,7 @@ export default function VerifyPage() {
   const router = useRouter();
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
   const [timer, setTimer] = useState(120);
+  const [error, setError] = useState('');
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   useEffect(() => {
@@ -21,6 +22,7 @@ export default function VerifyPage() {
     if (value.length > 1) return;
     if (!/^\d*$/.test(value)) return;
 
+    setError('');
     const newOtp = [...otp];
     newOtp[index] = value;
     setOtp(newOtp);
@@ -52,9 +54,10 @@ export default function VerifyPage() {
 
   const handleContinue = (e: React.FormEvent) => {
     e.preventDefault();
+    setError('');
     const otpValue = otp.join('');
     if (otpValue.length !== 6) {
-      alert('Please enter the complete 6-digit code');
+      setError('Please enter the complete 6-digit code');
       return;
     }
     console.log('OTP:', otpValue);
@@ -111,7 +114,7 @@ export default function VerifyPage() {
 
             {/* OTP Form */}
             <form onSubmit={handleContinue} className="w-full">
-              <div className="flex gap-3 justify-center mb-4">
+              <div className="flex gap-3 justify-center mb-2">
                 {otp.map((digit, index) => (
                   <input
                     key={index}
@@ -123,10 +126,13 @@ export default function VerifyPage() {
                     onChange={(e) => handleChange(index, e.target.value)}
                     onKeyDown={(e) => handleKeyDown(index, e)}
                     onPaste={handlePaste}
-                    className="w-12 h-14 text-center text-xl font-semibold border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
+                    className={`w-12 h-14 text-center text-xl font-semibold border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 ${
+                      error ? 'border-red-500' : 'border-gray-300'
+                    }`}
                   />
                 ))}
               </div>
+              {error && <p className="mb-4 text-sm text-red-500 text-center">{error}</p>}
 
               {/* Resend link */}
               <div className="text-center mb-6">

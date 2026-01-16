@@ -7,11 +7,17 @@ import { useRouter } from 'next/navigation';
 export default function LoginPage() {
   const router = useRouter();
   const [email, setEmail] = useState('');
+  const [error, setError] = useState('');
 
   const handleContinue = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || !/\S+@\S+\.\S+/.test(email)) {
-      alert('Please enter a valid email address');
+    setError('');
+    if (!email) {
+      setError('Email is required');
+      return;
+    }
+    if (!/\S+@\S+\.\S+/.test(email)) {
+      setError('Please enter a valid email address');
       return;
     }
     console.log('Email:', email);
@@ -54,11 +60,17 @@ export default function LoginPage() {
                 type="email"
                 id="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  setError('');
+                }}
                 placeholder="Enter your email"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
+                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${
+                  error ? 'border-red-500' : 'border-gray-300'
+                }`}
                 required
               />
+              {error && <p className="mt-2 text-sm text-red-500">{error}</p>}
             </div>
 
             <button

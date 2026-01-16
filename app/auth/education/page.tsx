@@ -83,8 +83,8 @@ export default function EducationPage() {
                     id="email1"
                     value={formData.email1}
                     onChange={(e) => handleChange('email1', e.target.value)}
-                    placeholder="Enter your email"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
+                    placeholder="Enter your email" className="placeholder:text-gray-400"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
                     required
                   />
                 </div>
@@ -97,8 +97,8 @@ export default function EducationPage() {
                     id="email2"
                     value={formData.email2}
                     onChange={(e) => handleChange('email2', e.target.value)}
-                    placeholder="Enter your email"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
+                    placeholder="Enter your email" className="placeholder:text-gray-400"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
                     required
                   />
                 </div>
@@ -113,7 +113,7 @@ export default function EducationPage() {
                   id="country"
                   value={formData.country}
                   onChange={(e) => handleChange('country', e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white"
                   required
                 >
                   <option value="">Enter your email</option>
@@ -136,7 +136,7 @@ export default function EducationPage() {
                   <select
                     value={formData.phoneCode}
                     onChange={(e) => handleChange('phoneCode', e.target.value)}
-                    className="w-24 px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white"
+                    className="w-24 px-3 py-3 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white"
                   >
                     <option value="+250">+250</option>
                     <option value="+1">+1</option>
@@ -150,7 +150,7 @@ export default function EducationPage() {
                     value={formData.phoneNumber}
                     onChange={(e) => handleChange('phoneNumber', e.target.value)}
                     placeholder="7XXX-XXX-XXX"
-                    className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
+                    className="flex-1 px-4 py-3 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
                     required
                   />
                 </div>
