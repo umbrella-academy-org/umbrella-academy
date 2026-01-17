@@ -23,7 +23,7 @@ export default function MentorProfilePage() {
     }
     
     console.log('Mentor bio:', bio);
-    router.push('/auth/mentor/upload-proofs');
+    router.push('/auth/mentor/education');
   };
 
   return (

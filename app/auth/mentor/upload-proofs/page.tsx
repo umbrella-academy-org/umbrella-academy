@@ -183,7 +183,8 @@ export default function UploadProofsPage() {
               <div className="flex justify-center gap-2 pt-4">
                 <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
                 <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
-                <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
+                <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
+                <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
                 <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
               </div>
             </form>
