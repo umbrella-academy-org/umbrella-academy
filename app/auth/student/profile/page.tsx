@@ -54,7 +54,7 @@ export default function ProfilePage() {
     }
     
     console.log('Profile data:', formData);
-    router.push('/auth/education');
+    router.push('/auth/student/education');
   };
 
   return (

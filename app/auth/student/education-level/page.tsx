@@ -23,7 +23,7 @@ export default function EducationLevelPage() {
       return;
     }
     console.log('Selected level:', selectedLevel);
-    router.push('/auth/referral');
+    router.push('/auth/student/referral');
   };
 
   return (

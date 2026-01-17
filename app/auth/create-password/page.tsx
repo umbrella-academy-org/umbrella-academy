@@ -37,7 +37,14 @@ export default function CreatePasswordPage() {
       return;
     }
     console.log('Password created');
-    router.push('/auth/profile');
+    
+    // Route based on user type
+    const userType = typeof window !== 'undefined' ? localStorage.getItem('userType') : null;
+    if (userType === 'mentor') {
+      router.push('/auth/mentor/profile');
+    } else {
+      router.push('/auth/student/profile');
+    }
   };
 
   return (

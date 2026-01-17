@@ -109,7 +109,7 @@ export default function VerifyPage() {
               Enter the 6-digit code we sent to your email.
             </p>
             <p className="text-yellow-600 text-sm mb-8">
-              (johndoe@example.com)
+              ({typeof window !== 'undefined' ? localStorage.getItem('signupEmail') || 'johndoe@example.com' : 'johndoe@example.com'})
             </p>
 
             {/* OTP Form */}
@@ -118,7 +118,7 @@ export default function VerifyPage() {
                 {otp.map((digit, index) => (
                   <input
                     key={index}
-                    ref={(el) => (inputRefs.current[index] = el)}
+                    ref={(el) => { inputRefs.current[index] = el; }}
                     type="text"
                     inputMode="numeric"
                     maxLength={1}

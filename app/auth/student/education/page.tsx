@@ -33,7 +33,7 @@ export default function EducationPage() {
       return;
     }
     console.log('Education data:', formData);
-    router.push('/auth/education-level');
+    router.push('/auth/student/education-level');
   };
 
   return (
