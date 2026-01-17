@@ -131,6 +131,13 @@ export default function LoginPage() {
               Sign Up
             </a>
           </p>
+          
+          {/* Forgot password link */}
+          <p className="mt-2 text-sm text-gray-600 text-center">
+            <a href="/auth/forgot-password" className="text-yellow-600 hover:text-yellow-700 font-medium">
+              Forgot password?
+            </a>
+          </p>
         </div>
 
         {/* Footer */}

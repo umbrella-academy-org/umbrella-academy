@@ -61,7 +61,14 @@ export default function VerifyPage() {
       return;
     }
     console.log('OTP:', otpValue);
-    router.push('/auth/create-password');
+    
+    // Check if this is a password reset flow
+    const authFlow = typeof window !== 'undefined' ? localStorage.getItem('authFlow') : null;
+    if (authFlow === 'reset-password') {
+      router.push('/auth/reset-password');
+    } else {
+      router.push('/auth/create-password');
+    }
   };
 
   const handleResend = () => {
@@ -109,7 +116,9 @@ export default function VerifyPage() {
               Enter the 6-digit code we sent to your email.
             </p>
             <p className="text-yellow-600 text-sm mb-8">
-              ({typeof window !== 'undefined' ? localStorage.getItem('signupEmail') || 'johndoe@example.com' : 'johndoe@example.com'})
+              ({typeof window !== 'undefined' ? 
+                localStorage.getItem('signupEmail') || localStorage.getItem('resetEmail') || 'johndoe@example.com' 
+                : 'johndoe@example.com'})
             </p>
 
             {/* OTP Form */}
