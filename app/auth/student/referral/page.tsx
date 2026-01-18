@@ -24,14 +24,14 @@ export default function ReferralPage() {
       return;
     }
     console.log('Selected source:', selectedSource);
-    // Navigate to next page or complete signup
-    router.push('/');
+    // Navigate to choose wing page
+    router.push('/auth/student/choose-wing');
   };
 
   return (
     <div className="flex min-h-screen">
       {/* Left side - Form */}
-      <div className="flex flex-1 flex-col justify-between p-8 bg-white">
+      <div className="flex flex-[2] flex-col justify-between p-8 bg-white">
         <div className="flex flex-col flex-1 max-w-md mx-auto w-full">
           {/* Go back button */}
           <button
@@ -110,7 +110,7 @@ export default function ReferralPage() {
       </div>
 
       {/* Right side - Image */}
-      <div className="hidden lg:block flex-1 relative overflow-hidden">
+      <div className="hidden lg:block flex-[1] relative overflow-hidden">
         <Image
           src="/auth/login/image.png"
           alt="Green fern leaves"
@@ -123,3 +123,4 @@ export default function ReferralPage() {
     </div>
   );
 }
+

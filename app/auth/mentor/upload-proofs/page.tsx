@@ -61,17 +61,27 @@ export default function UploadProofsPage() {
     e.preventDefault();
     const file = e.dataTransfer.files[0];
     if (file) {
-      const fakeEvent = {
-        target: { files: [file] }
-      } as React.ChangeEvent<HTMLInputElement>;
-      handleFileUpload(fakeEvent);
+      // Create a proper file input change event
+      const input = document.createElement('input');
+      input.type = 'file';
+      const dataTransfer = new DataTransfer();
+      dataTransfer.items.add(file);
+      input.files = dataTransfer.files;
+      
+      const event = new Event('change', { bubbles: true });
+      Object.defineProperty(event, 'target', {
+        writable: false,
+        value: input
+      });
+      
+      handleFileUpload(event as unknown as React.ChangeEvent<HTMLInputElement>);
     }
   };
 
   return (
     <div className="flex min-h-screen">
       {/* Left side - Form */}
-      <div className="flex flex-1 flex-col justify-between p-8 bg-white">
+      <div className="flex flex-[2] flex-col justify-between p-8 bg-white">
         <div className="flex flex-col flex-1 max-w-md mx-auto w-full">
           {/* Go back button */}
           <button
@@ -198,7 +208,7 @@ export default function UploadProofsPage() {
       </div>
 
       {/* Right side - Image */}
-      <div className="hidden lg:block flex-1 relative overflow-hidden">
+      <div className="hidden lg:block flex-[1] relative overflow-hidden">
         <Image
           src="/auth/login/image.png"
           alt="Underwater bubbles"

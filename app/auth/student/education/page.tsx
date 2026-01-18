@@ -39,7 +39,7 @@ export default function EducationPage() {
   return (
     <div className="flex min-h-screen">
       {/* Left side - Form */}
-      <div className="flex flex-1 flex-col justify-between p-8 bg-white">
+      <div className="flex flex-[2] flex-col justify-between p-8 bg-white">
         <div className="flex flex-col flex-1 max-w-md mx-auto w-full">
           {/* Go back button */}
           <button
@@ -83,8 +83,8 @@ export default function EducationPage() {
                     id="email1"
                     value={formData.email1}
                     onChange={(e) => handleChange('email1', e.target.value)}
-                    placeholder="Enter your email" className="placeholder:text-gray-400"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
+                    placeholder="Enter your email"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent placeholder:text-gray-400"
                     required
                   />
                 </div>
@@ -97,8 +97,8 @@ export default function EducationPage() {
                     id="email2"
                     value={formData.email2}
                     onChange={(e) => handleChange('email2', e.target.value)}
-                    placeholder="Enter your email" className="placeholder:text-gray-400"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
+                    placeholder="Enter your email"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent placeholder:text-gray-400"
                     required
                   />
                 </div>
@@ -181,7 +181,7 @@ export default function EducationPage() {
       </div>
 
       {/* Right side - Image */}
-      <div className="hidden lg:block flex-1 relative overflow-hidden">
+      <div className="hidden lg:block flex-[1] relative overflow-hidden">
         <Image
           src="/auth/login/image.png"
           alt="Night sky with stars"
@@ -194,3 +194,4 @@ export default function EducationPage() {
     </div>
   );
 }
+
