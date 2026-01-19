@@ -4,37 +4,77 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-export default function EducationPage() {
+export default function StudentEducationPage() {
   const router = useRouter();
   const [formData, setFormData] = useState({
-    email1: '',
-    email2: '',
-    country: '',
-    phoneCode: '+250',
-    phoneNumber: '',
+    fieldOfInterest: '',
+    skillLevel: '',
+    learningGoals: '',
+  });
+  const [errors, setErrors] = useState({
+    fieldOfInterest: '',
+    skillLevel: '',
+    learningGoals: '',
   });
 
   const handleChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
+    setErrors((prev) => ({ ...prev, [field]: '' }));
   };
 
   const handleContinue = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.email1 || !formData.email2) {
-      alert('Please fill in all email fields');
+    const newErrors = {
+      fieldOfInterest: '',
+      skillLevel: '',
+      learningGoals: '',
+    };
+    
+    if (!formData.fieldOfInterest) newErrors.fieldOfInterest = 'Please select your field of interest';
+    if (!formData.skillLevel) newErrors.skillLevel = 'Please select your current skill level';
+    if (!formData.learningGoals) newErrors.learningGoals = 'Please select your learning goals';
+    
+    setErrors(newErrors);
+    
+    if (Object.values(newErrors).some(error => error !== '')) {
       return;
     }
-    if (!formData.country) {
-      alert('Please select a country');
-      return;
-    }
-    if (!formData.phoneNumber) {
-      alert('Please enter your phone number');
-      return;
-    }
-    console.log('Education data:', formData);
+    
+    console.log('Student education data:', formData);
     router.push('/auth/student/education-level');
   };
+
+  const fieldsOfInterest = [
+    { value: 'programming', label: 'Programming & Development' },
+    { value: 'design', label: 'UI/UX Design' },
+    { value: 'data-science', label: 'Data Science & Analytics' },
+    { value: 'cybersecurity', label: 'Cybersecurity' },
+    { value: 'digital-marketing', label: 'Digital Marketing' },
+    { value: 'business', label: 'Business & Entrepreneurship' },
+    { value: 'mobile-dev', label: 'Mobile Development' },
+    { value: 'web-dev', label: 'Web Development' },
+    { value: 'ai-ml', label: 'Artificial Intelligence & Machine Learning' },
+    { value: 'devops', label: 'DevOps & Cloud Computing' },
+  ];
+
+  const skillLevels = [
+    { value: 'beginner', label: 'Beginner - Just starting out' },
+    { value: 'novice', label: 'Novice - Some basic knowledge' },
+    { value: 'intermediate', label: 'Intermediate - Comfortable with basics' },
+    { value: 'advanced', label: 'Advanced - Strong understanding' },
+    { value: 'expert', label: 'Expert - Professional level' },
+  ];
+
+  const learningGoals = [
+    { value: 'career-change', label: 'Career Change - Switch to tech' },
+    { value: 'skill-upgrade', label: 'Skill Upgrade - Enhance current skills' },
+    { value: 'freelancing', label: 'Freelancing - Start freelance work' },
+    { value: 'startup', label: 'Startup - Build my own product' },
+    { value: 'promotion', label: 'Promotion - Advance in current role' },
+    { value: 'hobby', label: 'Hobby - Personal interest' },
+    { value: 'certification', label: 'Certification - Get certified' },
+    { value: 'portfolio', label: 'Portfolio - Build impressive projects' },
+  ];
 
   return (
     <div className="flex min-h-screen">
@@ -71,89 +111,77 @@ export default function EducationPage() {
             </p>
 
             {/* Form */}
-            <form onSubmit={handleContinue} className="w-full space-y-4">
-              {/* Email fields */}
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label htmlFor="email1" className="block text-sm font-medium text-gray-700 mb-2">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email1"
-                    value={formData.email1}
-                    onChange={(e) => handleChange('email1', e.target.value)}
-                    placeholder="Enter your email"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent placeholder:text-gray-400"
-                    required
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email2" className="block text-sm font-medium text-gray-700 mb-2">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email2"
-                    value={formData.email2}
-                    onChange={(e) => handleChange('email2', e.target.value)}
-                    placeholder="Enter your email"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent placeholder:text-gray-400"
-                    required
-                  />
-                </div>
-              </div>
-
-              {/* Select Country */}
+            <form onSubmit={handleContinue} className="w-full space-y-6">
+              {/* Field of Interest */}
               <div>
-                <label htmlFor="country" className="block text-sm font-medium text-gray-700 mb-2">
-                  Select Country
+                <label htmlFor="fieldOfInterest" className="block text-sm font-medium text-gray-700 mb-2">
+                  Field of Interest
                 </label>
                 <select
-                  id="country"
-                  value={formData.country}
-                  onChange={(e) => handleChange('country', e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white"
+                  id="fieldOfInterest"
+                  value={formData.fieldOfInterest}
+                  onChange={(e) => handleChange('fieldOfInterest', e.target.value)}
+                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white text-gray-900 ${
+                    errors.fieldOfInterest ? 'border-red-500' : 'border-gray-300'
+                  }`}
                   required
                 >
-                  <option value="">Enter your email</option>
-                  <option value="us">United States</option>
-                  <option value="uk">United Kingdom</option>
-                  <option value="ca">Canada</option>
-                  <option value="rw">Rwanda</option>
-                  <option value="ke">Kenya</option>
-                  <option value="ug">Uganda</option>
-                  <option value="tz">Tanzania</option>
+                  <option value="">Select the field of your interest</option>
+                  {fieldsOfInterest.map((field) => (
+                    <option key={field.value} value={field.value}>
+                      {field.label}
+                    </option>
+                  ))}
                 </select>
+                {errors.fieldOfInterest && <p className="mt-1 text-sm text-red-500">{errors.fieldOfInterest}</p>}
               </div>
 
-              {/* Phone Number */}
+              {/* Current Skill Level */}
               <div>
-                <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-700 mb-2">
-                  Phone Number
+                <label htmlFor="skillLevel" className="block text-sm font-medium text-gray-700 mb-2">
+                  Current Skill Level
                 </label>
-                <div className="flex gap-2">
-                  <select
-                    value={formData.phoneCode}
-                    onChange={(e) => handleChange('phoneCode', e.target.value)}
-                    className="w-24 px-3 py-3 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white"
-                  >
-                    <option value="+250">+250</option>
-                    <option value="+1">+1</option>
-                    <option value="+44">+44</option>
-                    <option value="+254">+254</option>
-                    <option value="+256">+256</option>
-                  </select>
-                  <input
-                    type="tel"
-                    id="phoneNumber"
-                    value={formData.phoneNumber}
-                    onChange={(e) => handleChange('phoneNumber', e.target.value)}
-                    placeholder="7XXX-XXX-XXX"
-                    className="flex-1 px-4 py-3 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
-                    required
-                  />
-                </div>
+                <select
+                  id="skillLevel"
+                  value={formData.skillLevel}
+                  onChange={(e) => handleChange('skillLevel', e.target.value)}
+                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white text-gray-900 ${
+                    errors.skillLevel ? 'border-red-500' : 'border-gray-300'
+                  }`}
+                  required
+                >
+                  <option value="">Select your Skill Level</option>
+                  {skillLevels.map((level) => (
+                    <option key={level.value} value={level.value}>
+                      {level.label}
+                    </option>
+                  ))}
+                </select>
+                {errors.skillLevel && <p className="mt-1 text-sm text-red-500">{errors.skillLevel}</p>}
+              </div>
+
+              {/* Learning Goals */}
+              <div>
+                <label htmlFor="learningGoals" className="block text-sm font-medium text-gray-700 mb-2">
+                  Learning Goals
+                </label>
+                <select
+                  id="learningGoals"
+                  value={formData.learningGoals}
+                  onChange={(e) => handleChange('learningGoals', e.target.value)}
+                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white text-gray-900 ${
+                    errors.learningGoals ? 'border-red-500' : 'border-gray-300'
+                  }`}
+                  required
+                >
+                  <option value="">Select your Learning Goals</option>
+                  {learningGoals.map((goal) => (
+                    <option key={goal.value} value={goal.value}>
+                      {goal.label}
+                    </option>
+                  ))}
+                </select>
+                {errors.learningGoals && <p className="mt-1 text-sm text-red-500">{errors.learningGoals}</p>}
               </div>
 
               <button
@@ -166,7 +194,7 @@ export default function EducationPage() {
               {/* Progress dots */}
               <div className="flex justify-center gap-2 pt-4">
                 <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
-                <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
+                <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
                 <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
                 <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
               </div>
@@ -194,4 +222,3 @@ export default function EducationPage() {
     </div>
   );
 }
-
