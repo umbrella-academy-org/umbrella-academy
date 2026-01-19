@@ -167,7 +167,7 @@ export default function Sidebar({ activeItem = 'Home' }: SidebarProps) {
           </div>
           <div className="flex-1">
             <div className="font-medium text-white">Olivia Rhye</div>
-            <div className="text-sm text-gray-400">olivia@untitledui.com</div>
+            <div className="text-sm text-gray-400">olivia@umbrellaacademy.com</div>
           </div>
           <button className="text-gray-400 hover:text-white">
             <Settings className="w-5 h-5" />
