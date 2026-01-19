@@ -31,6 +31,12 @@ export default function Home() {
           >
             View Dashboard (Demo)
           </a>
+          <a
+            href="/dashboard/student/calendar"
+            className="w-full border border-yellow-600 text-yellow-600 py-4 px-6 rounded-lg font-medium hover:bg-yellow-50 transition-colors flex items-center justify-center"
+          >
+            View Calendar (Demo)
+          </a>
         </div>
       </div>
     </div>

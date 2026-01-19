@@ -17,7 +17,7 @@ export default function StudentDashboard() {
   return (
     <div className="flex h-screen bg-gray-50">
       {/* Sidebar - Fixed */}
-      <Sidebar />
+      <Sidebar activeItem="Home" />
       
       {/* Main Content - Scrollable */}
       <div className="flex-1 flex flex-col overflow-hidden">

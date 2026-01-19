@@ -1,52 +1,77 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { Home, Calendar, Map, Bell, Video, CreditCard, HelpCircle, MessageSquare, X, Settings } from 'lucide-react';
 
 interface SidebarItem {
   icon: React.ReactNode;
   label: string;
+  href: string;
   active?: boolean;
 }
 
-export default function Sidebar() {
-  const [activeItem, setActiveItem] = useState('Home');
+interface SidebarProps {
+  activeItem?: string;
+}
+
+export default function Sidebar({ activeItem = 'Home' }: SidebarProps) {
+  const [currentActive, setCurrentActive] = useState(activeItem);
+  const router = useRouter();
+
+  // Update current active when prop changes
+  useEffect(() => {
+    setCurrentActive(activeItem);
+  }, [activeItem]);
 
   const sidebarItems: SidebarItem[] = [
     {
       icon: <Home className="w-5 h-5" />,
       label: 'Home',
+      href: '/dashboard/student',
       active: true
     },
     {
       icon: <Calendar className="w-5 h-5" />,
-      label: 'Smart Calendar'
+      label: 'Smart Calendar',
+      href: '/dashboard/student/calendar'
     },
     {
       icon: <Map className="w-5 h-5" />,
-      label: 'Roadmap'
+      label: 'Roadmap',
+      href: '/dashboard/student/roadmap'
     },
     {
       icon: <Bell className="w-5 h-5" />,
-      label: 'Notifications'
+      label: 'Notifications',
+      href: '/dashboard/student/notifications'
     },
     {
       icon: <Video className="w-5 h-5" />,
-      label: 'Live Session'
+      label: 'Live Session',
+      href: '/dashboard/student/live-session'
     },
     {
       icon: <CreditCard className="w-5 h-5" />,
-      label: 'Subscription'
+      label: 'Subscription',
+      href: '/dashboard/student/subscription'
     },
     {
       icon: <HelpCircle className="w-5 h-5" />,
-      label: 'Support'
+      label: 'Support',
+      href: '/dashboard/student/support'
     },
     {
       icon: <MessageSquare className="w-5 h-5" />,
-      label: 'Feedback'
+      label: 'Feedback',
+      href: '/dashboard/student/feedback'
     }
   ];
+
+  const handleNavigation = (item: SidebarItem) => {
+    setCurrentActive(item.label);
+    router.push(item.href);
+  };
 
   return (
     <div className="w-64 bg-gray-900 text-white flex flex-col h-screen overflow-y-scroll">
@@ -71,9 +96,9 @@ export default function Sidebar() {
           {sidebarItems.map((item) => (
             <li key={item.label}>
               <button
-                onClick={() => setActiveItem(item.label)}
+                onClick={() => handleNavigation(item)}
                 className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-colors ${
-                  activeItem === item.label
+                  currentActive === item.label
                     ? 'bg-yellow-600 text-white'
                     : 'text-gray-300 hover:text-white hover:bg-gray-800'
                 }`}
