@@ -63,7 +63,7 @@ export default function Calendar({ selectedDateRange, onDateRangeChange }: Calen
       days.push(
         <button
           key={`prev-${prevMonthDays - i}`}
-          className="w-8 h-8 text-sm text-gray-400 hover:bg-gray-100 rounded"
+          className="w-10 h-10 text-sm text-gray-400 hover:bg-gray-100 rounded-full flex items-center justify-center"
         >
           {prevMonthDays - i}
         </button>
@@ -73,20 +73,22 @@ export default function Calendar({ selectedDateRange, onDateRangeChange }: Calen
     // Current month days
     for (let day = 1; day <= daysInMonth; day++) {
       const isToday = isCurrentMonth && day === today.getDate();
-      const isSelected = day === 6 || day === 12; // Highlight some days as selected
+      const isSelected = day === 6 || day === 12; // Highlight days 6 and 12 as selected
+      const hasEvent = day === 11 || day === 24; // Small dots for events
       
       days.push(
         <button
           key={day}
-          className={`w-8 h-8 text-sm rounded transition-colors ${
-            isToday
+          className={`w-10 h-10 text-sm rounded-full transition-colors flex items-center justify-center relative ${
+            isSelected
               ? 'bg-yellow-600 text-white font-medium'
-              : isSelected
-              ? 'bg-blue-100 text-blue-700 font-medium'
               : 'text-gray-700 hover:bg-gray-100'
           }`}
         >
           {day}
+          {hasEvent && !isSelected && (
+            <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-yellow-600 rounded-full"></div>
+          )}
         </button>
       );
     }
@@ -97,7 +99,7 @@ export default function Calendar({ selectedDateRange, onDateRangeChange }: Calen
       days.push(
         <button
           key={`next-${day}`}
-          className="w-8 h-8 text-sm text-gray-400 hover:bg-gray-100 rounded"
+          className="w-10 h-10 text-sm text-gray-400 hover:bg-gray-100 rounded-full flex items-center justify-center"
         >
           {day}
         </button>
@@ -109,74 +111,84 @@ export default function Calendar({ selectedDateRange, onDateRangeChange }: Calen
 
   return (
     <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-      <h3 className="text-lg font-semibold text-gray-900 mb-6">Calendar & Events</h3>
-      
-      {/* Date Range Selector */}
-      <div className="mb-6">
-        <div className="space-y-2">
-          {dateRanges.map((range) => (
+      {/* Left side - Date Range Selector */}
+      <div className="grid grid-cols-2 gap-8">
+        <div>
+          <div className="space-y-4">
+            {dateRanges.map((range) => (
+              <button
+                key={range}
+                onClick={() => onDateRangeChange(range)}
+                className={`block w-full text-left text-base transition-colors ${
+                  selectedDateRange === range
+                    ? 'text-gray-900 font-medium'
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                {range}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Right side - Calendar */}
+        <div>
+          {/* Calendar Header */}
+          <div className="flex items-center justify-between mb-6">
             <button
-              key={range}
-              onClick={() => onDateRangeChange(range)}
-              className={`block w-full text-left px-3 py-2 text-sm rounded-lg transition-colors ${
-                selectedDateRange === range
-                  ? 'bg-yellow-50 text-yellow-700 font-medium'
-                  : 'text-gray-600 hover:bg-gray-50'
-              }`}
+              onClick={() => navigateMonth('prev')}
+              className="p-2 text-gray-400 hover:text-gray-600"
             >
-              {range}
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
             </button>
-          ))}
-        </div>
-      </div>
+            
+            <h4 className="text-lg font-medium text-gray-600">
+              {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
+            </h4>
+            
+            <button
+              onClick={() => navigateMonth('next')}
+              className="p-2 text-gray-400 hover:text-gray-600"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
 
-      {/* Calendar Header */}
-      <div className="flex items-center justify-between mb-4">
-        <button
-          onClick={() => navigateMonth('prev')}
-          className="p-1 text-gray-400 hover:text-gray-600"
-        >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
-        
-        <h4 className="font-semibold text-gray-900">
-          {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
-        </h4>
-        
-        <button
-          onClick={() => navigateMonth('next')}
-          className="p-1 text-gray-400 hover:text-gray-600"
-        >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-          </svg>
-        </button>
-      </div>
-
-      {/* Calendar Grid */}
-      <div className="mb-4">
-        {/* Day headers */}
-        <div className="grid grid-cols-7 gap-1 mb-2">
-          {['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'].map((day) => (
-            <div key={day} className="text-center text-xs font-medium text-gray-500 py-2">
-              {day}
+          {/* Calendar Grid */}
+          <div className="mb-6">
+            {/* Day headers */}
+            <div className="grid grid-cols-7 gap-1 mb-3">
+              {['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sat', 'Su'].map((day) => (
+                <div key={day} className="text-center text-sm font-medium text-gray-500 py-2">
+                  {day}
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-        
-        {/* Calendar days */}
-        <div className="grid grid-cols-7 gap-1">
-          {renderCalendarDays()}
-        </div>
-      </div>
+            
+            {/* Calendar days */}
+            <div className="grid grid-cols-7 gap-1">
+              {renderCalendarDays()}
+            </div>
+          </div>
 
-      {/* Date Range Display */}
-      <div className="flex items-center justify-between text-sm text-gray-600 pt-4 border-t border-gray-100">
-        <span>Jan 6, 20...</span>
-        <span>—</span>
-        <span>Jan 12,...</span>
+          {/* Date Range Display */}
+          <div className="flex items-center justify-center gap-4">
+            <button className="px-4 py-2 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50">
+              Today
+            </button>
+            <button className="px-4 py-2 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50">
+              Jan 6, 20...
+            </button>
+            <span className="text-gray-400">—</span>
+            <button className="px-4 py-2 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50">
+              Jan 12,...
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

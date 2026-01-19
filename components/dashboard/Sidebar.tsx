@@ -80,7 +80,7 @@ export default function Sidebar() {
   ];
 
   return (
-    <div className="w-64 bg-gray-900 text-white flex flex-col h-screen overflow-scroll">
+    <div className="w-64 bg-gray-900 text-white flex flex-col h-screen overflow-y-scroll">
       {/* Logo */}
       <div className="p-6 border-b border-gray-800">
         <div className="flex items-center gap-3">
