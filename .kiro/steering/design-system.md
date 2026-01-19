@@ -2,7 +2,7 @@
 inclusion: always
 ---
 
-# Design System Rules for U-Academy
+# Design System Rules for Umbrella Academy
 
 ## Project Overview
 - **Framework**: Next.js 16.1.2 with React 19.2.3

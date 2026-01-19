@@ -12,7 +12,7 @@ export default function RenewSubscriptionPage() {
     cardNumber: '1234 1234 1234 1234',
     expiry: '06 / 2024',
     cvv: '',
-    email: 'billing@untitledui.com',
+    email: 'billing@umbrellaacademy.com',
     streetAddress: '100 Smith Street',
     city: 'Collingwood',
     state: 'VIC',

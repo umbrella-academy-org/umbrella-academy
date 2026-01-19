@@ -22,7 +22,7 @@ export default function SignupPage() {
 
           {/* Title */}
           <h1 className="text-3xl font-semibold text-gray-900 mb-2">
-            Join U-Academy
+            Join Umbrella Academy
           </h1>
           <p className="text-gray-500 mb-8">
             Choose your role to get started.

@@ -30,7 +30,7 @@ export default function PaymentMethod() {
         {/* Billing Email */}
         <div className="flex items-center gap-3 text-sm text-gray-600">
           <Mail className="w-4 h-4" />
-          <span>billing@untitledui.com</span>
+          <span>billing@umbrellaacademy.com</span>
         </div>
       </div>
     </div>

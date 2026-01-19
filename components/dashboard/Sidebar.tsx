@@ -84,7 +84,7 @@ export default function Sidebar({ activeItem = 'Home' }: SidebarProps) {
             </svg>
           </div>
           <div>
-            <div className="font-semibold">eLearning</div>
+            <div className="font-semibold">Umbrella Academy</div>
             <div className="text-sm text-gray-400">Student</div>
           </div>
         </div>
@@ -147,9 +147,12 @@ export default function Sidebar({ activeItem = 'Home' }: SidebarProps) {
               </div>
               <div className="flex items-center gap-2 mt-3">
                 <span className="text-sm text-gray-400">Plans</span>
-                <button className="text-sm text-yellow-600 hover:text-yellow-500">
+                <a 
+                  href="/dashboard/student/subscription/renew"
+                  className="text-sm text-yellow-600 hover:text-yellow-500"
+                >
                   Renew Plan
-                </button>
+                </a>
               </div>
             </div>
           </div>
@@ -164,7 +167,7 @@ export default function Sidebar({ activeItem = 'Home' }: SidebarProps) {
           </div>
           <div className="flex-1">
             <div className="font-medium text-white">Olivia Rhye</div>
-            <div className="text-sm text-gray-400">olivia@untitledui.com</div>
+            <div className="text-sm text-gray-400">olivia@umbrellaacademy.com</div>
           </div>
           <button className="text-gray-400 hover:text-white">
             <Settings className="w-5 h-5" />
