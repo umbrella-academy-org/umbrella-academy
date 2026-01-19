@@ -62,7 +62,7 @@ export default function MentorReferralPage() {
               Where Did You Hear About Us?
             </h1>
             <p className="text-gray-500 mb-8 text-center">
-              Help us understand how mentors discover U-Academy.
+              Help us understand how mentors discover Umbrella Academy.
             </p>
 
             {/* Form */}
