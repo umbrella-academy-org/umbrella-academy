@@ -54,7 +54,7 @@ export default function StudentDashboard() {
             <StatsCards />
 
             {/* Main Dashboard Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 mt-6">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 mt-6">
               {/* Left Column - Charts and Course (3 columns) */}
               <div className="lg:col-span-3 space-y-4">
                 {/* Monthly Sessions Chart */}
@@ -70,8 +70,8 @@ export default function StudentDashboard() {
                 />
               </div>
 
-              {/* Right Column - Sidebar Content (1 column) */}
-              <div className="space-y-4">
+              {/* Right Column - Sidebar Content (2 columns) */}
+              <div className="lg:col-span-2 space-y-4">
                 {/* Current Phase */}
                 <CurrentPhase />
                 
