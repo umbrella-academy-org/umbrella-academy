@@ -15,18 +15,18 @@ export default function StudentDashboard() {
   const [selectedDateRange, setSelectedDateRange] = useState('Today');
 
   return (
-    <div className="flex min-h-screen bg-gray-50">
-      {/* Sidebar */}
+    <div className="flex h-screen bg-gray-50">
+      {/* Sidebar - Fixed */}
       <Sidebar />
       
-      {/* Main Content */}
-      <div className="flex-1 flex flex-col">
+      {/* Main Content - Scrollable */}
+      <div className="flex-1 flex flex-col overflow-hidden">
         {/* Header */}
         <Header />
         
-        {/* Dashboard Content */}
-        <main className="flex-1 p-6 overflow-auto">
-          <div className="max-w-7xl mx-auto">
+        {/* Dashboard Content - Scrollable */}
+        <main className="flex-1 overflow-auto">
+          <div className="p-6">
             {/* Welcome Section */}
             <div className="mb-8">
               <div className="flex items-center justify-between">
@@ -54,29 +54,29 @@ export default function StudentDashboard() {
             <StatsCards />
 
             {/* Main Dashboard Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-8">
-              {/* Left Column - Charts and Course */}
-              <div className="lg:col-span-2 space-y-6">
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 mt-8">
+              {/* Left Column - Charts and Course (3 columns) */}
+              <div className="lg:col-span-3 space-y-6">
                 {/* Monthly Sessions Chart */}
                 <MonthlySessionsChart />
                 
                 {/* Course Card */}
                 <CourseCard />
+                
+                {/* Calendar - Moved below charts */}
+                <Calendar 
+                  selectedDateRange={selectedDateRange}
+                  onDateRangeChange={setSelectedDateRange}
+                />
               </div>
 
-              {/* Right Column - Sidebar Content */}
+              {/* Right Column - Sidebar Content (1 column) */}
               <div className="space-y-6">
                 {/* Current Phase */}
                 <CurrentPhase />
                 
                 {/* Scheduled Events */}
                 <ScheduledEvents />
-                
-                {/* Calendar */}
-                <Calendar 
-                  selectedDateRange={selectedDateRange}
-                  onDateRangeChange={setSelectedDateRange}
-                />
                 
                 {/* Live Sessions */}
                 <LiveSessions />

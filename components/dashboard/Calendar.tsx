@@ -109,6 +109,8 @@ export default function Calendar({ selectedDateRange, onDateRangeChange }: Calen
 
   return (
     <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+      <h3 className="text-lg font-semibold text-gray-900 mb-6">Calendar & Events</h3>
+      
       {/* Date Range Selector */}
       <div className="mb-6">
         <div className="space-y-2">
