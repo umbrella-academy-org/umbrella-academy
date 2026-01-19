@@ -2,7 +2,7 @@
 
 import { FileText, RotateCcw } from 'lucide-react';
 
-export default function SubscriptionHeader() {
+export default function RenewHeader() {
   return (
     <div className="flex items-center justify-between">
       <div>
@@ -15,13 +15,10 @@ export default function SubscriptionHeader() {
           <FileText className="w-4 h-4" />
           Generate a Report
         </button>
-        <a
-          href="/dashboard/student/subscription/renew"
-          className="bg-yellow-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-yellow-700 transition-colors flex items-center gap-2"
-        >
+        <button className="bg-yellow-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-yellow-700 transition-colors flex items-center gap-2">
           <RotateCcw className="w-4 h-4" />
           Renew Plan
-        </a>
+        </button>
       </div>
     </div>
   );
