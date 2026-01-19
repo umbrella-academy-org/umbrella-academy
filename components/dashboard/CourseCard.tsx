@@ -1,5 +1,7 @@
 'use client';
 
+import { Play, ChevronRight } from 'lucide-react';
+
 export default function CourseCard() {
   return (
     <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
@@ -9,9 +11,7 @@ export default function CourseCard() {
           <div className="absolute inset-0 bg-black bg-opacity-20"></div>
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="w-6 h-6 bg-yellow-600 rounded-full flex items-center justify-center">
-              <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z"/>
-              </svg>
+              <Play className="w-3 h-3 text-white fill-current" />
             </div>
           </div>
           {/* Code-like overlay */}
@@ -52,9 +52,7 @@ export default function CourseCard() {
           <div className="mt-3">
             <div className="flex items-center justify-between text-xs text-gray-600 mb-1">
               <span>Phases Details</span>
-              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
+              <ChevronRight className="w-3 h-3" />
             </div>
             <div className="w-full bg-gray-200 rounded-full h-1.5">
               <div className="bg-yellow-600 h-1.5 rounded-full" style={{ width: '75%' }}></div>

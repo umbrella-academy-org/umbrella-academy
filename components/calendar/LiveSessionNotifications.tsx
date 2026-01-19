@@ -7,47 +7,24 @@ interface LiveSession {
   title: string;
   description: string;
   time: string;
-  status: 'success' | 'info' | 'warning';
-  actions: {
-    primary: string;
-    secondary: string;
-  };
+  status: 'info' | 'warning';
 }
 
-export default function LiveSessions() {
+export default function LiveSessionNotifications() {
   const sessions: LiveSession[] = [
     {
       id: '1',
-      title: 'Successfully updated profile',
+      title: 'Javascript Env Setup',
       description: 'Lorem ipsum dolor sit amet consectetur adipiscing elit. Aliquid pariatur, ipsum dolor.',
       time: 'in 2hrs',
-      status: 'info',
-      actions: {
-        primary: 'Attend',
-        secondary: 'View Details'
-      }
+      status: 'info'
     },
     {
-      id: '2', 
-      title: 'Successfully updated profile',
+      id: '2',
+      title: 'Assignment On OS',
       description: 'Lorem ipsum dolor sit amet consectetur adipiscing elit. Aliquid pariatur, ipsum dolor.',
       time: 'in 2hrs',
-      status: 'warning',
-      actions: {
-        primary: 'Attend',
-        secondary: 'View Details'
-      }
-    },
-    {
-      id: '3',
-      title: 'Successfully updated profile', 
-      description: 'Lorem ipsum dolor sit amet consectetur adipiscing elit. Aliquid pariatur, ipsum dolor.',
-      time: 'in 2hrs',
-      status: 'info',
-      actions: {
-        primary: 'Attend',
-        secondary: 'View Details'
-      }
+      status: 'warning'
     }
   ];
 
@@ -92,10 +69,10 @@ export default function LiveSessions() {
                 <p className="text-sm text-gray-600 mb-3 leading-relaxed">{session.description}</p>
                 <div className="flex items-center gap-3">
                   <button className="text-sm text-gray-600 hover:text-gray-900 font-medium">
-                    {session.actions.secondary}
+                    View Details
                   </button>
                   <button className="px-3 py-1 bg-yellow-600 text-white text-sm font-medium rounded hover:bg-yellow-700 transition-colors">
-                    {session.actions.primary}
+                    Attend
                   </button>
                 </div>
               </div>

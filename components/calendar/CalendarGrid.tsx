@@ -3,12 +3,12 @@
 import { useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-interface CalendarProps {
+interface CalendarGridProps {
   selectedDateRange: string;
   onDateRangeChange: (range: string) => void;
 }
 
-export default function Calendar({ selectedDateRange, onDateRangeChange }: CalendarProps) {
+export default function CalendarGrid({ selectedDateRange, onDateRangeChange }: CalendarGridProps) {
   const [currentDate, setCurrentDate] = useState(new Date(2024, 0, 1)); // January 2024
 
   const dateRanges = [
@@ -38,8 +38,6 @@ export default function Calendar({ selectedDateRange, onDateRangeChange }: Calen
 
   const daysInMonth = getDaysInMonth(currentDate);
   const firstDay = getFirstDayOfMonth(currentDate);
-  const today = new Date();
-  const isCurrentMonth = currentDate.getMonth() === today.getMonth() && currentDate.getFullYear() === today.getFullYear();
 
   const navigateMonth = (direction: 'prev' | 'next') => {
     setCurrentDate(prev => {
@@ -73,23 +71,18 @@ export default function Calendar({ selectedDateRange, onDateRangeChange }: Calen
     
     // Current month days
     for (let day = 1; day <= daysInMonth; day++) {
-      const isToday = isCurrentMonth && day === today.getDate();
       const isSelected = day === 6 || day === 12; // Highlight days 6 and 12 as selected
-      const hasEvent = day === 11 || day === 24; // Small dots for events
       
       days.push(
         <button
           key={day}
-          className={`w-8 h-8 text-xs rounded-full transition-colors flex items-center justify-center relative ${
+          className={`w-8 h-8 text-xs rounded-full transition-colors flex items-center justify-center ${
             isSelected
               ? 'bg-yellow-600 text-white font-medium'
               : 'text-gray-700 hover:bg-gray-100'
           }`}
         >
           {day}
-          {hasEvent && !isSelected && (
-            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-yellow-600 rounded-full"></div>
-          )}
         </button>
       );
     }
@@ -170,20 +163,6 @@ export default function Calendar({ selectedDateRange, onDateRangeChange }: Calen
             <div className="grid grid-cols-7 gap-1">
               {renderCalendarDays()}
             </div>
-          </div>
-
-          {/* Date Range Display */}
-          <div className="flex items-center justify-center gap-2">
-            <button className="px-3 py-1 border border-gray-300 rounded text-xs text-gray-600 hover:bg-gray-50">
-              Today
-            </button>
-            <button className="px-3 py-1 border border-gray-300 rounded text-xs text-gray-600 hover:bg-gray-50">
-              Jan 6, 20...
-            </button>
-            <span className="text-gray-400 text-xs">—</span>
-            <button className="px-3 py-1 border border-gray-300 rounded text-xs text-gray-600 hover:bg-gray-50">
-              Jan 12,...
-            </button>
           </div>
         </div>
       </div>
