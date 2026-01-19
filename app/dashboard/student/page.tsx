@@ -26,9 +26,9 @@ export default function StudentDashboard() {
         
         {/* Dashboard Content - Scrollable */}
         <main className="flex-1 overflow-auto">
-          <div className="p-6">
+          <div className="p-4">
             {/* Welcome Section */}
-            <div className="mb-8">
+            <div className="mb-6">
               <div className="flex items-center justify-between">
                 <div>
                   <h1 className="text-2xl font-semibold text-gray-900 flex items-center gap-2">
@@ -54,9 +54,9 @@ export default function StudentDashboard() {
             <StatsCards />
 
             {/* Main Dashboard Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 mt-8">
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 mt-6">
               {/* Left Column - Charts and Course (3 columns) */}
-              <div className="lg:col-span-3 space-y-6">
+              <div className="lg:col-span-3 space-y-4">
                 {/* Monthly Sessions Chart */}
                 <MonthlySessionsChart />
                 
@@ -71,7 +71,7 @@ export default function StudentDashboard() {
               </div>
 
               {/* Right Column - Sidebar Content (1 column) */}
-              <div className="space-y-6">
+              <div className="space-y-4">
                 {/* Current Phase */}
                 <CurrentPhase />
                 

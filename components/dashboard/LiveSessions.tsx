@@ -79,43 +79,43 @@ export default function LiveSessions() {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3">
       {sessions.map((session) => (
         <div
           key={session.id}
-          className="bg-white rounded-xl p-6 shadow-sm border border-gray-100"
+          className="bg-white rounded-xl p-4 shadow-sm border border-gray-100"
         >
-          <div className="flex items-start justify-between mb-4">
-            <div className="flex items-start gap-4 flex-1">
+          <div className="flex items-start justify-between mb-3">
+            <div className="flex items-start gap-3 flex-1">
               {getStatusIcon(session.status)}
               <div className="flex-1">
-                <div className="flex items-center gap-2 mb-2">
-                  <h4 className="font-medium text-gray-900">Live Session</h4>
+                <div className="flex items-center gap-2 mb-1">
+                  <h4 className="text-sm font-medium text-gray-900">Live Session</h4>
                 </div>
-                <h3 className="text-lg font-medium text-gray-900 mb-2">{session.title}</h3>
-                <p className="text-gray-600 mb-4 leading-relaxed">{session.description}</p>
-                <div className="flex items-center gap-4">
-                  <button className="text-gray-600 hover:text-gray-900 font-medium">
+                <h3 className="text-base font-medium text-gray-900 mb-2">{session.title}</h3>
+                <p className="text-sm text-gray-600 mb-3 leading-relaxed">{session.description}</p>
+                <div className="flex items-center gap-3">
+                  <button className="text-sm text-gray-600 hover:text-gray-900 font-medium">
                     {session.actions.secondary}
                   </button>
-                  <button className="px-4 py-2 bg-yellow-600 text-white font-medium rounded-lg hover:bg-yellow-700 transition-colors">
+                  <button className="px-3 py-1 bg-yellow-600 text-white text-sm font-medium rounded hover:bg-yellow-700 transition-colors">
                     {session.actions.primary}
                   </button>
                 </div>
               </div>
             </div>
             
-            <div className="flex items-center gap-3 ml-4">
+            <div className="flex items-center gap-2 ml-3">
               <div className="text-right">
-                <div className="px-3 py-1 bg-purple-100 text-purple-700 text-sm font-medium rounded-full flex items-center gap-1">
+                <div className="px-2 py-1 bg-purple-100 text-purple-700 text-xs font-medium rounded-full flex items-center gap-1">
                   {session.time}
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
               </div>
               <button className="text-gray-400 hover:text-gray-600">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>

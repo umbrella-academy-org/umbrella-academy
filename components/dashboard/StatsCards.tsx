@@ -52,15 +52,15 @@ export default function StatsCards() {
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
       {stats.map((stat, index) => (
-        <div key={index} className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+        <div key={index} className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600 mb-2">{stat.title}</p>
-              <p className="text-3xl font-bold text-gray-900">{stat.value}</p>
+              <p className="text-xs font-medium text-gray-600 mb-1">{stat.title}</p>
+              <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
             </div>
-            <div className={`p-3 rounded-lg bg-gray-50 ${stat.color}`}>
+            <div className={`p-2 rounded-lg bg-gray-50 ${stat.color}`}>
               {stat.icon}
             </div>
           </div>
