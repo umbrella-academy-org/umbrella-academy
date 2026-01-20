@@ -11,17 +11,17 @@ import ScheduledEvents from '@/components/dashboard/ScheduledEvents';
 import Calendar from '@/components/dashboard/Calendar';
 import LiveSessions from '@/components/dashboard/LiveSessions';
 
-export default function TrainerDashboard() {
+export default function MentorDashboard() {
   const [selectedDateRange, setSelectedDateRange] = useState('This month');
 
   return (
     <div className="flex min-h-screen bg-white">
-      <Sidebar activeItem="Home" userType="trainer" />
+      <Sidebar activeItem="Home" userType="mentor" />
       
       <div className="flex-1 flex flex-col min-w-0">
         <Header 
           breadcrumb="Home" 
-          userType="trainer"
+          userType="mentor"
           actions={
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
               <button className="px-3 py-2 border border-gray-300 text-gray-700 text-xs sm:text-sm font-medium rounded-lg hover:bg-gray-50 transition-all duration-200 interactive-button">
@@ -39,10 +39,10 @@ export default function TrainerDashboard() {
             {/* Welcome Section */}
             <div className="mb-4 sm:mb-6 lg:mb-8 animate-fade-in">
               <h1 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-gray-900 mb-2">
-                Welcome back, Jane 👋
+                Welcome back, Sarah 👋
               </h1>
               <p className="text-sm sm:text-base text-gray-600">
-                Track, manage and forecast your students.
+                Guide, mentor and support your students on their learning journey.
               </p>
             </div>
 

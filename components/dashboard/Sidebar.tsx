@@ -45,6 +45,11 @@ export default function Sidebar({ activeItem = 'Home', userType = 'student' }: S
             href: '/dashboard/trainer/calendar'
           },
           {
+            icon: <BookOpen className="w-5 h-5" />,
+            label: 'Courses',
+            href: '/dashboard/trainer/courses'
+          },
+          {
             icon: <FileText className="w-5 h-5" />,
             label: 'Assignment',
             href: '/dashboard/trainer/assignment'

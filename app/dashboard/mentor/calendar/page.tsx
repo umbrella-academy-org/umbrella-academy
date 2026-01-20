@@ -10,17 +10,17 @@ import ActivityStats from '@/components/trainer/ActivityStats';
 import CalendarGrid from '@/components/trainer/CalendarGrid';
 import LiveSessionNotifications from '@/components/trainer/LiveSessionNotifications';
 
-export default function TrainerCalendarPage() {
+export default function MentorCalendarPage() {
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   return (
-    <div className="flex h-screen bg-white">
-      <Sidebar activeItem="Smart Calendar" userType="trainer" />
+    <div className="flex min-h-screen bg-white">
+      <Sidebar activeItem="Schedule" userType="mentor" />
       
-      <div className="flex-1 flex flex-col min-w-0 lg:ml-0">
+      <div className="flex-1 flex flex-col min-w-0">
         <Header 
-          breadcrumb="Smart Calendar" 
-          userType="trainer"
+          breadcrumb="Schedule" 
+          userType="mentor"
           actions={
             <div className="flex items-center gap-2 sm:gap-3">
               <button className="px-3 py-2 bg-yellow-600 text-white text-xs sm:text-sm font-medium rounded-lg hover:bg-yellow-700 transition-all duration-200 interactive-button transform hover:scale-105">
