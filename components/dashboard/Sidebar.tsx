@@ -54,6 +54,11 @@ export default function Sidebar({ activeItem = 'Home', userType = 'student' }: S
             label: 'Live Session',
             href: '/dashboard/trainer/live-session'
           },
+          {
+            icon: <CreditCard className="w-5 h-5" />,
+            label: 'Wallet',
+            href: '/dashboard/trainer/wallet'
+          },
         ];
       case 'mentor':
         return [
@@ -75,8 +80,8 @@ export default function Sidebar({ activeItem = 'Home', userType = 'student' }: S
           },
           {
             icon: <CreditCard className="w-5 h-5" />,
-            label: 'Earnings',
-            href: '/dashboard/mentor/earnings'
+            label: 'Wallet',
+            href: '/dashboard/mentor/wallet'
           },
           {
             icon: <HelpCircle className="w-5 h-5" />,

@@ -3,21 +3,21 @@
 import Sidebar from '@/components/dashboard/Sidebar';
 import Header from '@/components/dashboard/Header';
 
-export default function MentorEarningsPage() {
+export default function TrainerWalletPage() {
   return (
     <div className="flex h-screen bg-white">
-      <Sidebar activeItem="Earnings" userType="mentor" />
+      <Sidebar activeItem="Wallet" userType="trainer" />
       
       <div className="flex-1 flex flex-col min-w-0">
         <Header 
-          breadcrumb="Earnings" 
-          userType="mentor"
+          breadcrumb="Wallet" 
+          userType="trainer"
         />
         
         <main className="flex-1 p-3 sm:p-4 lg:p-6 overflow-y-auto">
           <div className="max-w-7xl mx-auto">
             <div className="bg-white rounded-lg border border-gray-200 p-6">
-              <h1 className="text-2xl font-semibold text-gray-900 mb-4">Earnings</h1>
+              <h1 className="text-2xl font-semibold text-gray-900 mb-4">Wallet</h1>
               <p className="text-gray-600">Your earnings and payment history will appear here.</p>
             </div>
           </div>
