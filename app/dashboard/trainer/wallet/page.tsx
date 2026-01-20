@@ -1,24 +1,46 @@
 'use client';
 
+import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
 import Header from '@/components/dashboard/Header';
+import WalletHeader from '@/components/trainer/WalletHeader';
+import WalletBalance from '@/components/trainer/WalletBalance';
+import EarningsStats from '@/components/trainer/EarningsStats';
+import TransactionHistory from '@/components/trainer/TransactionHistory';
 
 export default function TrainerWalletPage() {
   return (
     <div className="flex h-screen bg-white">
+      {/* Sidebar - Fixed */}
       <Sidebar activeItem="Wallet" userType="trainer" />
-      
-      <div className="flex-1 flex flex-col min-w-0">
-        <Header 
-          breadcrumb="Wallet" 
-          userType="trainer"
-        />
-        
-        <main className="flex-1 p-3 sm:p-4 lg:p-6 overflow-y-auto">
-          <div className="max-w-7xl mx-auto">
-            <div className="bg-white rounded-lg border border-gray-200 p-6">
-              <h1 className="text-2xl font-semibold text-gray-900 mb-4">Wallet</h1>
-              <p className="text-gray-600">Your earnings and payment history will appear here.</p>
+
+      {/* Main Content - Scrollable */}
+      <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
+        {/* Header */}
+        <Header breadcrumb="Wallet" userType="trainer" />
+
+        {/* Wallet Content - Scrollable */}
+        <main className="flex-1 overflow-auto">
+          <div className="p-3 lg:p-4">
+            {/* Wallet Header */}
+            <WalletHeader />
+
+            {/* Main Wallet Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 mt-4 lg:mt-6">
+              {/* Left Column - Balance */}
+              <div className="space-y-4 lg:space-y-6">
+                <WalletBalance />
+              </div>
+
+              {/* Right Column - Stats */}
+              <div className="space-y-4 lg:space-y-6">
+                <EarningsStats />
+              </div>
+            </div>
+
+            {/* Transaction History - Full Width */}
+            <div className="mt-6 lg:mt-8">
+              <TransactionHistory />
             </div>
           </div>
         </main>
