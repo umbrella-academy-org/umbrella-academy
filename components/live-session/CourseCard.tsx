@@ -2,7 +2,15 @@
 
 import { Star, User } from 'lucide-react';
 
-export default function CourseCard() {
+interface CourseCardProps {
+  user?: {
+    name?: string;
+    expertise?: string;
+  };
+  userType?: 'student' | 'trainer';
+}
+
+export default function CourseCard({ user, userType = 'student' }: CourseCardProps) {
   return (
     <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
       <div className="flex gap-4">
@@ -42,7 +50,7 @@ export default function CourseCard() {
                 Details
               </button>
               <a
-                href="/dashboard/student/live-session/call"
+                href={`/dashboard/${userType}/live-session/call`}
                 className="px-4 py-2 bg-yellow-600 text-white text-sm font-medium rounded hover:bg-yellow-700 transition-colors"
               >
                 Select
@@ -59,8 +67,8 @@ export default function CourseCard() {
                   <User className="w-4 h-4 text-white" />
                 </div>
                 <div>
-                  <div className="text-sm font-medium text-gray-900">Demi Wilkinson</div>
-                  <div className="text-xs text-gray-500">Expert in Software Engineering</div>
+                  <div className="text-sm font-medium text-gray-900">{user?.name || 'Demi Wilkinson'}</div>
+                  <div className="text-xs text-gray-500">{user?.expertise || 'Expert in Software Engineering'}</div>
                 </div>
               </div>
             </div>

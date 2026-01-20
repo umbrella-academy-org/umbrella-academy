@@ -36,7 +36,7 @@ export default function LiveSessionPage() {
               {/* Left Column - Course and Calendar (3 columns on xl) */}
               <div className="xl:col-span-3 space-y-3 lg:space-y-4">
                 {/* Course Card */}
-                <CourseCard />
+                <CourseCard userType="student" />
 
                 {/* Session Tabs */}
                 <SessionTabs 
