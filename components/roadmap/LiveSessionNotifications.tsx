@@ -71,9 +71,12 @@ export default function LiveSessionNotifications() {
                   <button className="text-sm text-gray-600 hover:text-gray-900 font-medium">
                     View Details
                   </button>
-                  <button className="px-3 py-1 bg-yellow-600 text-white text-sm font-medium rounded hover:bg-yellow-700 transition-colors">
+                  <a 
+                    href="/dashboard/student/live-session/call"
+                    className="px-3 py-1 bg-yellow-600 text-white text-sm font-medium rounded hover:bg-yellow-700 transition-colors"
+                  >
                     Attend
-                  </button>
+                  </a>
                 </div>
               </div>
             </div>

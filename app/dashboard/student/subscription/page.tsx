@@ -14,18 +14,18 @@ export default function SubscriptionPage() {
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen bg-white">
       {/* Sidebar - Fixed */}
       <Sidebar activeItem="Subscription" />
 
       {/* Main Content - Scrollable */}
-      <div className="flex-1 flex flex-col overflow-hidden">
+      <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
         {/* Header */}
         <Header breadcrumb="Plan & Subscriptions" />
 
         {/* Subscription Content - Scrollable */}
         <main className="flex-1 overflow-auto">
-          <div className="p-4">
+          <div className="p-3 lg:p-4">
             {/* Subscription Header */}
             <SubscriptionHeader />
 
@@ -38,25 +38,25 @@ export default function SubscriptionPage() {
             />
 
             {/* Caregivers Count */}
-            <div className="mt-6 mb-4">
-              <h2 className="text-xl font-semibold text-gray-900">1000+ Caregivers</h2>
+            <div className="mt-4 lg:mt-6 mb-3 lg:mb-4">
+              <h2 className="text-lg lg:text-xl font-semibold text-gray-900">1000+ Caregivers</h2>
             </div>
 
             {/* Main Subscription Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 mt-4 lg:mt-6">
               {/* Left Column - Current Plan */}
-              <div className="space-y-6">
+              <div className="space-y-4 lg:space-y-6">
                 <CurrentPlan />
               </div>
 
               {/* Right Column - Payment Method */}
-              <div className="space-y-6">
+              <div className="space-y-4 lg:space-y-6">
                 <PaymentMethod />
               </div>
             </div>
 
             {/* Billing and Invoices - Full Width */}
-            <div className="mt-8">
+            <div className="mt-6 lg:mt-8">
               <BillingInvoices />
             </div>
           </div>
