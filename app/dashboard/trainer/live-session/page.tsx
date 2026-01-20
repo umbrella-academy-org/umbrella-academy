@@ -18,7 +18,7 @@ export default function LiveSessionPage() {
   return (
     <div className="flex h-screen bg-white">
       {/* Sidebar - Fixed */}
-      <Sidebar activeItem="Live Session" />
+      <Sidebar activeItem="Live Session" userType='trainer'/>
 
       {/* Main Content - Scrollable */}
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
@@ -36,7 +36,7 @@ export default function LiveSessionPage() {
               {/* Left Column - Course and Calendar (3 columns on xl) */}
               <div className="xl:col-span-3 space-y-3 lg:space-y-4">
                 {/* Course Card */}
-                <CourseCard userType="student" />
+                <CourseCard userType="trainer" />
 
                 {/* Session Tabs */}
                 <SessionTabs 

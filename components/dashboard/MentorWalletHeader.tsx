@@ -2,12 +2,12 @@
 
 import { FileText, Banknote } from 'lucide-react';
 
-export default function WalletHeader() {
+export default function MentorWalletHeader() {
   return (
     <div className="flex items-center justify-between mb-6">
       <div>
         <h1 className="text-2xl font-semibold text-gray-900">My Wallet 💰</h1>
-        <p className="text-gray-600 mt-1">Track your earnings, manage withdrawals, and view payment history</p>
+        <p className="text-gray-600 mt-1">Track your mentoring earnings, manage withdrawals, and view payment history</p>
       </div>
       
       <div className="flex items-center gap-3">

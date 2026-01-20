@@ -47,7 +47,7 @@ inclusion: always
 - **Error Messages**: `mt-2 text-sm text-red-500`
 
 ### Layout Patterns
-- **Split Layout**: `flex min-h-screen` with `flex-1` sections
+- **Split Layout**: `flex h-screen` with `flex-1` sections
 - **Centered Content**: `flex flex-col items-center justify-center flex-1`
 - **Form Container**: `max-w-md mx-auto w-full`
 

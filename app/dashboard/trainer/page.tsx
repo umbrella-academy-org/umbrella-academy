@@ -15,7 +15,7 @@ export default function TrainerDashboard() {
   const [selectedDateRange, setSelectedDateRange] = useState('This month');
 
   return (
-    <div className="flex min-h-screen bg-white">
+    <div className="flex h-screen bg-white">
       <Sidebar activeItem="Home" userType="trainer" />
       
       <div className="flex-1 flex flex-col min-w-0">

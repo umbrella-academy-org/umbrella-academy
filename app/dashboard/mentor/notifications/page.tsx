@@ -5,7 +5,7 @@ import Header from '@/components/dashboard/Header';
 
 export default function MentorNotificationsPage() {
   return (
-    <div className="flex min-h-screen bg-white">
+    <div className="flex h-screen bg-white">
       <Sidebar activeItem="Notifications" userType="mentor" />
       
       <div className="flex-1 flex flex-col min-w-0">

@@ -6,7 +6,7 @@ export default function Home() {
   const { navigate } = useNavigationWithLoading();
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-white px-4 sm:px-6 lg:px-8">
+    <div className="flex h-screen items-center justify-center bg-white px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-6 p-4 sm:p-6 lg:p-8 animate-fade-in">
         <div className="text-center">
           <div className="mx-auto w-12 h-12 sm:w-16 sm:h-16 bg-yellow-600 rounded-2xl flex items-center justify-center mb-4 sm:mb-6 transform hover:scale-110 transition-all duration-300 hover:shadow-lg animate-bounce-subtle">
