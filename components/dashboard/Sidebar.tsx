@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Home, Calendar, Map, Bell, Video, CreditCard, HelpCircle, MessageSquare, X, Settings, Menu, User } from 'lucide-react';
+import { Home, Calendar, Map, Bell, Video, CreditCard, HelpCircle, MessageSquare, X, Settings, Menu, User, BookOpen, FileText } from 'lucide-react';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
 
 interface SidebarItem {
@@ -9,6 +9,8 @@ interface SidebarItem {
   label: string;
   href: string;
   active?: boolean;
+  hasDropdown?: boolean;
+  badge?: string;
 }
 
 interface SidebarProps {
@@ -43,34 +45,9 @@ export default function Sidebar({ activeItem = 'Home', userType = 'student' }: S
             href: '/dashboard/trainer/calendar'
           },
           {
-            icon: <User className="w-5 h-5" />,
-            label: 'Students',
-            href: '/dashboard/trainer/students'
-          },
-          {
-            icon: <Bell className="w-5 h-5" />,
-            label: 'Notifications',
-            href: '/dashboard/trainer/notifications'
-          },
-          {
-            icon: <Video className="w-5 h-5" />,
-            label: 'Live Session',
-            href: '/dashboard/trainer/live-session'
-          },
-          {
-            icon: <CreditCard className="w-5 h-5" />,
-            label: 'My Wallet',
-            href: '/dashboard/trainer/wallet'
-          },
-          {
-            icon: <HelpCircle className="w-5 h-5" />,
-            label: 'Support',
-            href: '/dashboard/trainer/support'
-          },
-          {
-            icon: <MessageSquare className="w-5 h-5" />,
-            label: 'Feedback',
-            href: '/dashboard/trainer/feedback'
+            icon: <FileText className="w-5 h-5" />,
+            label: 'Assignment',
+            href: '/dashboard/trainer/assignment'
           }
         ];
       case 'mentor':
