@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import { Home, Calendar, Map, Bell, Video, CreditCard, HelpCircle, MessageSquare, X, Settings, Menu } from 'lucide-react';
+import { useNavigationWithLoading } from '@/lib/utils/navigation';
 
 interface SidebarItem {
   icon: React.ReactNode;
@@ -18,7 +18,7 @@ interface SidebarProps {
 export default function Sidebar({ activeItem = 'Home' }: SidebarProps) {
   const [currentActive, setCurrentActive] = useState(activeItem);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const router = useRouter();
+  const { navigate } = useNavigationWithLoading();
 
   // Update current active when prop changes
   useEffect(() => {
@@ -72,7 +72,7 @@ export default function Sidebar({ activeItem = 'Home' }: SidebarProps) {
   const handleNavigation = (item: SidebarItem) => {
     setCurrentActive(item.label);
     setIsMobileMenuOpen(false); // Close mobile menu on navigation
-    router.push(item.href);
+    navigate(item.href);
   };
 
   return (

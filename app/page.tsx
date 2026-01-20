@@ -1,4 +1,10 @@
+'use client';
+
+import { useNavigationWithLoading } from '@/lib/utils/navigation';
+
 export default function Home() {
+  const { navigate } = useNavigationWithLoading();
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-white px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-6 p-4 sm:p-6 lg:p-8 animate-fade-in">
@@ -13,24 +19,24 @@ export default function Home() {
         </div>
         
         <div className="space-y-3 sm:space-y-4">
-          <a
-            href="/auth/signup"
+          <button
+            onClick={() => navigate('/auth/signup')}
             className="w-full bg-yellow-600 text-white py-3 sm:py-4 px-4 sm:px-6 rounded-lg font-medium hover:bg-yellow-700 transition-all duration-300 flex items-center justify-center text-sm sm:text-base transform hover:scale-105 hover:shadow-lg animate-slide-up animation-delay-300 group"
           >
             <span className="group-hover:translate-x-1 transition-transform duration-200">Create Account</span>
-          </a>
-          <a
-            href="/auth/login"
+          </button>
+          <button
+            onClick={() => navigate('/auth/login')}
             className="w-full border border-gray-300 text-gray-700 py-3 sm:py-4 px-4 sm:px-6 rounded-lg font-medium hover:bg-gray-50 hover:border-gray-400 transition-all duration-300 flex items-center justify-center text-sm sm:text-base transform hover:scale-105 hover:shadow-md animate-slide-up animation-delay-400 group"
           >
             <span className="group-hover:translate-x-1 transition-transform duration-200">Sign In</span>
-          </a>
-          <a
-            href="/dashboard/student"
+          </button>
+          <button
+            onClick={() => navigate('/dashboard/student')}
             className="w-full border border-yellow-600 text-yellow-600 py-3 sm:py-4 px-4 sm:px-6 rounded-lg font-medium hover:bg-yellow-50 hover:border-yellow-700 transition-all duration-300 flex items-center justify-center text-sm sm:text-base transform hover:scale-105 hover:shadow-md animate-slide-up animation-delay-500 group"
           >
             <span className="group-hover:translate-x-1 transition-transform duration-200">Go to Dashboard</span>
-          </a>
+          </button>
         </div>
       </div>
     </div>

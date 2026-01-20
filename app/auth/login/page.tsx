@@ -2,10 +2,10 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useNavigationWithLoading } from '@/lib/utils/navigation';
 
 export default function LoginPage() {
-  const router = useRouter();
+  const { navigate } = useNavigationWithLoading();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -29,7 +29,7 @@ export default function LoginPage() {
     }
     
     console.log('Login:', { email, password });
-    router.push('/dashboard/student');
+    navigate('/dashboard/student');
   };
 
   return (
@@ -127,16 +127,22 @@ export default function LoginPage() {
           {/* Sign up link */}
           <p className="mt-6 text-sm text-gray-600">
             Don't have an account?{' '}
-            <a href="/auth/signup" className="text-yellow-600 hover:text-yellow-700 font-medium">
+            <button 
+              onClick={() => navigate('/auth/signup')}
+              className="text-yellow-600 hover:text-yellow-700 font-medium"
+            >
               Sign Up
-            </a>
+            </button>
           </p>
           
           {/* Forgot password link */}
           <p className="mt-2 text-sm text-gray-600 text-center">
-            <a href="/auth/forgot-password" className="text-yellow-600 hover:text-yellow-700 font-medium">
+            <button 
+              onClick={() => navigate('/auth/forgot-password')}
+              className="text-yellow-600 hover:text-yellow-700 font-medium"
+            >
               Forgot password?
-            </a>
+            </button>
           </p>
         </div>
 
