@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Home, Calendar, Map, Bell, Video, CreditCard, HelpCircle, MessageSquare, X, Settings, Menu, User, BookOpen, FileText } from 'lucide-react';
+import { Home, Calendar, Map, Bell, Video, CreditCard, HelpCircle, MessageSquare, X, Settings, Menu, User } from 'lucide-react';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
 
 interface SidebarItem {
@@ -45,15 +45,15 @@ export default function Sidebar({ activeItem = 'Home', userType = 'student' }: S
             href: '/dashboard/trainer/calendar'
           },
           {
-            icon: <BookOpen className="w-5 h-5" />,
-            label: 'Courses',
-            href: '/dashboard/trainer/courses'
+            icon: <User className="w-5 h-5" />,
+            label: 'My Students',
+            href: '/dashboard/trainer/students'
           },
           {
-            icon: <FileText className="w-5 h-5" />,
-            label: 'Assignment',
-            href: '/dashboard/trainer/assignment'
-          }
+            icon: <Video className="w-5 h-5" />,
+            label: 'Live Session',
+            href: '/dashboard/trainer/live-session'
+          },
         ];
       case 'mentor':
         return [
@@ -64,24 +64,9 @@ export default function Sidebar({ activeItem = 'Home', userType = 'student' }: S
             active: true
           },
           {
-            icon: <Calendar className="w-5 h-5" />,
-            label: 'Schedule',
-            href: '/dashboard/mentor/schedule'
-          },
-          {
             icon: <User className="w-5 h-5" />,
             label: 'My Students',
             href: '/dashboard/mentor/students'
-          },
-          {
-            icon: <Map className="w-5 h-5" />,
-            label: 'Curriculum',
-            href: '/dashboard/mentor/curriculum'
-          },
-          {
-            icon: <Video className="w-5 h-5" />,
-            label: 'Sessions',
-            href: '/dashboard/mentor/sessions'
           },
           {
             icon: <Bell className="w-5 h-5" />,
@@ -198,7 +183,7 @@ export default function Sidebar({ activeItem = 'Home', userType = 'student' }: S
 
       {/* Mobile Overlay */}
       {isMobileMenuOpen && (
-        <div 
+        <div
           className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-40"
           onClick={() => setIsMobileMenuOpen(false)}
         />
@@ -240,11 +225,10 @@ export default function Sidebar({ activeItem = 'Home', userType = 'student' }: S
               <li key={item.label}>
                 <button
                   onClick={() => handleNavigation(item)}
-                  className={`w-full flex items-center gap-3 px-3 lg:px-4 py-2 lg:py-3 rounded-lg text-left transition-colors text-sm lg:text-base ${
-                    currentActive === item.label
+                  className={`w-full flex items-center gap-3 px-3 lg:px-4 py-2 lg:py-3 rounded-lg text-left transition-colors text-sm lg:text-base ${currentActive === item.label
                       ? 'bg-yellow-600 text-white'
                       : 'text-gray-300 hover:text-white hover:bg-gray-800'
-                  }`}
+                    }`}
                 >
                   {item.icon}
                   <span className="font-medium">{item.label}</span>
@@ -260,7 +244,7 @@ export default function Sidebar({ activeItem = 'Home', userType = 'student' }: S
             <button className="absolute top-2 right-2 text-gray-400 hover:text-white">
               <X className="w-4 h-4" />
             </button>
-            
+
             <div className="flex flex-col items-center">
               <div className="relative w-16 h-16 mb-4">
                 <svg className="w-16 h-16 transform -rotate-90" viewBox="0 0 36 36">
@@ -282,11 +266,11 @@ export default function Sidebar({ activeItem = 'Home', userType = 'student' }: S
                   <span className="text-xl font-bold text-yellow-600">{userInfo.progressValue}%</span>
                 </div>
               </div>
-              
+
               <div className="text-center">
                 <div className="font-semibold text-white">{userInfo.progressLabel}</div>
                 <div className="text-sm text-gray-400 mt-1">
-                  {userType === 'student' 
+                  {userType === 'student'
                     ? 'You can renew your plan at anytime before expiry'
                     : userType === 'trainer'
                       ? 'Current training capacity this month'
@@ -297,7 +281,7 @@ export default function Sidebar({ activeItem = 'Home', userType = 'student' }: S
                   <span className="text-sm text-gray-400">
                     {userType === 'student' ? 'Plans' : 'Manage'}
                   </span>
-                  <a 
+                  <a
                     href={userInfo.renewHref}
                     className="text-sm text-yellow-600 hover:text-yellow-500"
                   >

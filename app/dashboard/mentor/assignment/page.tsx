@@ -16,7 +16,7 @@ export default function MentorAssignmentPage() {
   const [activeTab, setActiveTab] = useState('pending');
 
   return (
-    <div className="flex min-h-screen bg-white">
+    <div className="flex h-screen bg-white">
       <Sidebar activeItem="Sessions" userType="mentor" />
       
       <div className="flex-1 flex flex-col min-w-0">

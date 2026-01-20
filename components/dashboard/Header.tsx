@@ -8,7 +8,7 @@ interface HeaderProps {
   actions?: React.ReactNode;
 }
 
-export default function Header({ breadcrumb = 'Home', userType = 'student', actions }: HeaderProps) {
+export default function Header({ breadcrumb = 'Home', userType = 'trainer', actions }: HeaderProps) {
   return (
     <header className="bg-white border-b border-gray-200 px-4 lg:px-6 py-3 lg:py-4">
       <div className="flex items-center justify-between">

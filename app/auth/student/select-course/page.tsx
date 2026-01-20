@@ -162,7 +162,7 @@ export default function SelectCoursePage() {
   const wingInfo = getWingInfo(selectedWing);
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex h-screen">
       {/* Left side - Form */}
       <div className="flex flex-[2] flex-col justify-between p-8 bg-white">
         <div className="flex flex-col flex-1 max-w-md mx-auto w-full">
