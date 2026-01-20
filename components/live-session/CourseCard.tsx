@@ -41,9 +41,12 @@ export default function CourseCard() {
               <button className="text-sm text-gray-600 hover:text-gray-900 font-medium">
                 Details
               </button>
-              <button className="px-4 py-2 bg-yellow-600 text-white text-sm font-medium rounded hover:bg-yellow-700 transition-colors">
+              <a
+                href="/dashboard/student/live-session/call"
+                className="px-4 py-2 bg-yellow-600 text-white text-sm font-medium rounded hover:bg-yellow-700 transition-colors"
+              >
                 Select
-              </button>
+              </a>
             </div>
           </div>
 
