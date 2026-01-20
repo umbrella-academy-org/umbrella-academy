@@ -29,7 +29,7 @@ export default function LoginPage() {
     }
     
     console.log('Login:', { email, password });
-    router.push('/');
+    router.push('/dashboard/student');
   };
 
   return (

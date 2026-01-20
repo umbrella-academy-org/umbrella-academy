@@ -14,7 +14,7 @@ export default function SubscriptionPage() {
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen bg-white">
       {/* Sidebar - Fixed */}
       <Sidebar activeItem="Subscription" />
 

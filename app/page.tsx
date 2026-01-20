@@ -1,6 +1,6 @@
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50">
+    <div className="flex min-h-screen items-center justify-center bg-white">
       <div className="max-w-md w-full space-y-6 p-8">
         <div className="text-center">
           <div className="mx-auto w-16 h-16 bg-yellow-600 rounded-2xl flex items-center justify-center mb-6">
@@ -29,37 +29,7 @@ export default function Home() {
             href="/dashboard/student"
             className="w-full border border-yellow-600 text-yellow-600 py-4 px-6 rounded-lg font-medium hover:bg-yellow-50 transition-colors flex items-center justify-center"
           >
-            View Dashboard (Demo)
-          </a>
-          <a
-            href="/dashboard/student/calendar"
-            className="w-full border border-yellow-600 text-yellow-600 py-4 px-6 rounded-lg font-medium hover:bg-yellow-50 transition-colors flex items-center justify-center"
-          >
-            View Calendar (Demo)
-          </a>
-          <a
-            href="/dashboard/student/roadmap"
-            className="w-full border border-yellow-600 text-yellow-600 py-4 px-6 rounded-lg font-medium hover:bg-yellow-50 transition-colors flex items-center justify-center"
-          >
-            View Roadmap (Demo)
-          </a>
-          <a
-            href="/dashboard/student/live-session"
-            className="w-full border border-yellow-600 text-yellow-600 py-4 px-6 rounded-lg font-medium hover:bg-yellow-50 transition-colors flex items-center justify-center"
-          >
-            View Live Sessions (Demo)
-          </a>
-          <a
-            href="/dashboard/student/notifications"
-            className="w-full border border-yellow-600 text-yellow-600 py-4 px-6 rounded-lg font-medium hover:bg-yellow-50 transition-colors flex items-center justify-center"
-          >
-            View Notifications (Demo)
-          </a>
-          <a
-            href="/dashboard/student/subscription"
-            className="w-full border border-yellow-600 text-yellow-600 py-4 px-6 rounded-lg font-medium hover:bg-yellow-50 transition-colors flex items-center justify-center"
-          >
-            View Subscription (Demo)
+            Go to Dashboard
           </a>
         </div>
       </div>
