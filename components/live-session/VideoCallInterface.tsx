@@ -87,57 +87,57 @@ export default function VideoCallInterface({
       </div>
 
       {/* Top Left - Participant Info */}
-      <div className="absolute top-6 left-6 z-20">
-        <div className="flex items-center gap-3 bg-black bg-opacity-40 rounded-lg px-4 py-3 backdrop-blur-sm">
-          <div className="w-10 h-10 bg-gray-600 rounded-full flex items-center justify-center overflow-hidden">
-            <User className="w-5 h-5 text-white" />
+      <div className="absolute top-3 lg:top-6 left-3 lg:left-6 z-20">
+        <div className="flex items-center gap-2 lg:gap-3 bg-black bg-opacity-40 rounded-lg px-3 lg:px-4 py-2 lg:py-3 backdrop-blur-sm">
+          <div className="w-8 h-8 lg:w-10 lg:h-10 bg-gray-600 rounded-full flex items-center justify-center overflow-hidden">
+            <User className="w-4 h-4 lg:w-5 lg:h-5 text-white" />
           </div>
           <div className="text-white">
-            <div className="text-sm font-medium">Dave Jones</div>
+            <div className="text-xs lg:text-sm font-medium">Dave Jones</div>
             <div className="text-xs text-gray-300">You</div>
           </div>
         </div>
       </div>
 
       {/* Top Center - Call Duration */}
-      <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20">
-        <div className="bg-black bg-opacity-40 rounded-full px-4 py-2 backdrop-blur-sm">
-          <div className="text-white text-sm font-medium flex items-center gap-2">
-            <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+      <div className="absolute top-3 lg:top-6 left-1/2 transform -translate-x-1/2 z-20">
+        <div className="bg-black bg-opacity-40 rounded-full px-3 lg:px-4 py-1.5 lg:py-2 backdrop-blur-sm">
+          <div className="text-white text-xs lg:text-sm font-medium flex items-center gap-2">
+            <div className="w-1.5 h-1.5 lg:w-2 lg:h-2 bg-red-500 rounded-full animate-pulse"></div>
             {callDuration}
           </div>
         </div>
       </div>
 
       {/* Top Right - Other Participant Video + Fullscreen Button */}
-      <div className="absolute top-6 right-6 z-20 flex flex-col items-end gap-3">
+      <div className="absolute top-3 lg:top-6 right-3 lg:right-6 z-20 flex flex-col items-end gap-2 lg:gap-3">
         {/* Fullscreen Toggle Button */}
         <button 
           onClick={onFullscreenToggle}
-          className="bg-black bg-opacity-40 rounded-lg p-2 backdrop-blur-sm hover:bg-opacity-60 transition-all"
+          className="bg-black bg-opacity-40 rounded-lg p-1.5 lg:p-2 backdrop-blur-sm hover:bg-opacity-60 transition-all"
         >
           {isFullscreen ? (
-            <Minimize className="w-5 h-5 text-white" />
+            <Minimize className="w-4 h-4 lg:w-5 lg:h-5 text-white" />
           ) : (
-            <Maximize className="w-5 h-5 text-white" />
+            <Maximize className="w-4 h-4 lg:w-5 lg:h-5 text-white" />
           )}
         </button>
         
         {/* Other Participant Video */}
-        <div className="w-40 h-28 bg-gray-800 rounded-xl overflow-hidden border-2 border-white shadow-xl">
+        <div className="w-28 h-20 lg:w-40 lg:h-28 bg-gray-800 rounded-xl overflow-hidden border-2 border-white shadow-xl">
           <div className="w-full h-full bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
             {/* Participant avatar */}
-            <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center overflow-hidden">
+            <div className="w-12 h-12 lg:w-16 lg:h-16 bg-blue-500 rounded-full flex items-center justify-center overflow-hidden">
               <div className="w-full h-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
-                <span className="text-white text-lg font-medium">M</span>
+                <span className="text-white text-sm lg:text-lg font-medium">M</span>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Left Side - Volume Control */}
-      <div className="absolute left-6 top-1/2 transform -translate-y-1/2 z-20">
+      {/* Left Side - Volume Control - Hidden on mobile */}
+      <div className="hidden lg:flex absolute left-6 top-1/2 transform -translate-y-1/2 z-20">
         <div className="flex flex-col items-center bg-black bg-opacity-40 rounded-full p-3 backdrop-blur-sm">
           {/* Volume slider */}
           <div className="w-1 h-24 bg-gray-600 rounded-full relative mb-3">
@@ -152,19 +152,19 @@ export default function VideoCallInterface({
       </div>
 
       {/* Bottom Center - Main Controls */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
-        <div className="flex items-center gap-4 bg-black bg-opacity-40 rounded-full px-6 py-4 backdrop-blur-sm">
+      <div className="absolute bottom-4 lg:bottom-8 left-1/2 transform -translate-x-1/2 z-20">
+        <div className="flex items-center gap-2 lg:gap-4 bg-black bg-opacity-40 rounded-full px-4 lg:px-6 py-3 lg:py-4 backdrop-blur-sm">
           {/* Grid View */}
-          <button className="w-12 h-12 bg-gray-700 bg-opacity-80 hover:bg-opacity-100 rounded-full flex items-center justify-center transition-all">
-            <Grid3X3 className="w-5 h-5 text-white" />
+          <button className="w-10 h-10 lg:w-12 lg:h-12 bg-gray-700 bg-opacity-80 hover:bg-opacity-100 rounded-full flex items-center justify-center transition-all">
+            <Grid3X3 className="w-4 h-4 lg:w-5 lg:h-5 text-white" />
           </button>
 
           {/* Mute Toggle */}
           <button 
             onClick={onMuteToggle}
-            className="w-12 h-12 bg-gray-700 bg-opacity-80 hover:bg-opacity-100 rounded-full flex items-center justify-center transition-all"
+            className="w-10 h-10 lg:w-12 lg:h-12 bg-gray-700 bg-opacity-80 hover:bg-opacity-100 rounded-full flex items-center justify-center transition-all"
           >
-            <Mic className="w-5 h-5 text-white" />
+            <Mic className="w-4 h-4 lg:w-5 lg:h-5 text-white" />
           </button>
 
           {/* End Call - Larger red button */}
@@ -173,22 +173,22 @@ export default function VideoCallInterface({
               onEndCall();
               window.location.href = '/dashboard/student/live-session';
             }}
-            className="w-16 h-16 bg-red-600 hover:bg-red-700 rounded-full flex items-center justify-center transition-all shadow-lg"
+            className="w-12 h-12 lg:w-16 lg:h-16 bg-red-600 hover:bg-red-700 rounded-full flex items-center justify-center transition-all shadow-lg"
           >
-            <Phone className="w-6 h-6 text-white transform rotate-135" />
+            <Phone className="w-5 h-5 lg:w-6 lg:h-6 text-white transform rotate-135" />
           </button>
 
           {/* Video Toggle */}
           <button 
             onClick={onVideoToggle}
-            className="w-12 h-12 bg-gray-700 bg-opacity-80 hover:bg-opacity-100 rounded-full flex items-center justify-center transition-all"
+            className="w-10 h-10 lg:w-12 lg:h-12 bg-gray-700 bg-opacity-80 hover:bg-opacity-100 rounded-full flex items-center justify-center transition-all"
           >
-            <Video className="w-5 h-5 text-white" />
+            <Video className="w-4 h-4 lg:w-5 lg:h-5 text-white" />
           </button>
 
           {/* Settings */}
-          <button className="w-12 h-12 bg-gray-700 bg-opacity-80 hover:bg-opacity-100 rounded-full flex items-center justify-center transition-all">
-            <Settings className="w-5 h-5 text-white" />
+          <button className="w-10 h-10 lg:w-12 lg:h-12 bg-gray-700 bg-opacity-80 hover:bg-opacity-100 rounded-full flex items-center justify-center transition-all">
+            <Settings className="w-4 h-4 lg:w-5 lg:h-5 text-white" />
           </button>
         </div>
       </div>

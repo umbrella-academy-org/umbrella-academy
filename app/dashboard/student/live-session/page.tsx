@@ -21,20 +21,20 @@ export default function LiveSessionPage() {
       <Sidebar activeItem="Live Session" />
 
       {/* Main Content - Scrollable */}
-      <div className="flex-1 flex flex-col overflow-hidden">
+      <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
         {/* Header */}
         <Header breadcrumb="Live Sessions" />
 
         {/* Live Session Content - Scrollable */}
         <main className="flex-1 overflow-auto">
-          <div className="p-4">
+          <div className="p-3 lg:p-4">
             {/* Live Session Header */}
             <LiveSessionHeader />
 
             {/* Main Live Session Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 mt-6">
-              {/* Left Column - Course and Calendar (3 columns) */}
-              <div className="lg:col-span-3 space-y-4">
+            <div className="grid grid-cols-1 xl:grid-cols-5 gap-3 lg:gap-4 mt-4 lg:mt-6">
+              {/* Left Column - Course and Calendar (3 columns on xl) */}
+              <div className="xl:col-span-3 space-y-3 lg:space-y-4">
                 {/* Course Card */}
                 <CourseCard />
 
@@ -51,8 +51,8 @@ export default function LiveSessionPage() {
                 />
               </div>
 
-              {/* Right Column - Stats and Upcoming (2 columns) */}
-              <div className="lg:col-span-2 space-y-4">
+              {/* Right Column - Stats and Upcoming (2 columns on xl) */}
+              <div className="xl:col-span-2 space-y-3 lg:space-y-4">
                 {/* Session Stats */}
                 <SessionStats onUpcomingClick={() => setShowUpcomingModal(true)} />
               </div>
