@@ -11,15 +11,23 @@ export default function LiveSessionCallPage() {
   const [isVideoOn, setIsVideoOn] = useState(true);
   const [callDuration, setCallDuration] = useState(809); // Start at 13:29
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+
+  // Ensure client-side rendering for timer
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   // Timer for call duration
   useEffect(() => {
+    if (!isClient) return;
+    
     const timer = setInterval(() => {
       setCallDuration(prev => prev + 1);
     }, 1000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [isClient]);
 
   const formatDuration = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
