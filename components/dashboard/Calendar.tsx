@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Calendar as CalendarIcon } from 'lucide-react';
 
 interface CalendarProps {
   selectedDateRange: string;
@@ -10,6 +10,7 @@ interface CalendarProps {
 
 export default function Calendar({ selectedDateRange, onDateRangeChange }: CalendarProps) {
   const [currentDate, setCurrentDate] = useState(new Date(2024, 0, 1)); // January 2024
+  const [hoveredDay, setHoveredDay] = useState<number | null>(null);
 
   const dateRanges = [
     'Today',
@@ -64,7 +65,7 @@ export default function Calendar({ selectedDateRange, onDateRangeChange }: Calen
       days.push(
         <button
           key={`prev-${prevMonthDays - i}`}
-          className="w-8 h-8 text-xs text-gray-400 hover:bg-gray-100 rounded-full flex items-center justify-center"
+          className="w-7 h-7 sm:w-8 sm:h-8 text-xs text-gray-400 hover:bg-gray-100 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110"
         >
           {prevMonthDays - i}
         </button>
@@ -80,15 +81,21 @@ export default function Calendar({ selectedDateRange, onDateRangeChange }: Calen
       days.push(
         <button
           key={day}
-          className={`w-8 h-8 text-xs rounded-full transition-colors flex items-center justify-center relative ${
+          onMouseEnter={() => setHoveredDay(day)}
+          onMouseLeave={() => setHoveredDay(null)}
+          className={`w-7 h-7 sm:w-8 sm:h-8 text-xs rounded-full transition-all duration-200 flex items-center justify-center relative transform hover:scale-110 ${
             isSelected
-              ? 'bg-yellow-600 text-white font-medium'
-              : 'text-gray-700 hover:bg-gray-100'
-          }`}
+              ? 'bg-yellow-600 text-white font-medium shadow-lg animate-pulse-glow'
+              : isToday
+                ? 'bg-blue-100 text-blue-600 font-medium'
+                : 'text-gray-700 hover:bg-gray-100'
+          } ${hoveredDay === day ? 'shadow-md' : ''}`}
         >
           {day}
           {hasEvent && !isSelected && (
-            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-yellow-600 rounded-full"></div>
+            <div className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-yellow-600 rounded-full transition-all duration-200 ${
+              hoveredDay === day ? 'animate-pulse scale-150' : ''
+            }`}></div>
           )}
         </button>
       );
@@ -100,7 +107,7 @@ export default function Calendar({ selectedDateRange, onDateRangeChange }: Calen
       days.push(
         <button
           key={`next-${day}`}
-          className="w-8 h-8 text-xs text-gray-400 hover:bg-gray-100 rounded-full flex items-center justify-center"
+          className="w-7 h-7 sm:w-8 sm:h-8 text-xs text-gray-400 hover:bg-gray-100 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110"
         >
           {day}
         </button>
@@ -111,20 +118,26 @@ export default function Calendar({ selectedDateRange, onDateRangeChange }: Calen
   };
 
   return (
-    <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
-      {/* Left side - Date Range Selector */}
-      <div className="grid grid-cols-2 gap-6">
-        <div>
-          <div className="space-y-3">
-            {dateRanges.map((range) => (
+    <div className="bg-white rounded-xl p-3 sm:p-4 shadow-sm border border-gray-100 interactive-card animate-fade-in">
+      {/* Mobile: Stack vertically, Desktop: Side by side */}
+      <div className="flex flex-col lg:grid lg:grid-cols-2 gap-4 lg:gap-6">
+        {/* Left side - Date Range Selector */}
+        <div className="order-2 lg:order-1">
+          <div className="flex items-center gap-2 mb-3 lg:hidden">
+            <CalendarIcon className="w-4 h-4 text-gray-600" />
+            <h4 className="text-sm font-medium text-gray-900">Quick Select</h4>
+          </div>
+          <div className="grid grid-cols-3 sm:grid-cols-1 gap-1 sm:gap-2 lg:space-y-3">
+            {dateRanges.map((range, index) => (
               <button
                 key={range}
                 onClick={() => onDateRangeChange(range)}
-                className={`block w-full text-left text-sm transition-colors ${
+                className={`text-left text-xs sm:text-sm transition-all duration-200 p-2 sm:p-1 rounded-lg animate-slide-up ${
                   selectedDateRange === range
-                    ? 'text-gray-900 font-medium'
-                    : 'text-gray-600 hover:text-gray-900'
+                    ? 'text-yellow-600 font-medium bg-yellow-50 transform scale-105'
+                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                 }`}
+                style={{ animationDelay: `${index * 50}ms` }}
               >
                 {range}
               </button>
@@ -133,23 +146,23 @@ export default function Calendar({ selectedDateRange, onDateRangeChange }: Calen
         </div>
 
         {/* Right side - Calendar */}
-        <div>
+        <div className="order-1 lg:order-2">
           {/* Calendar Header */}
           <div className="flex items-center justify-between mb-4">
             <button
               onClick={() => navigateMonth('prev')}
-              className="p-1 text-gray-400 hover:text-gray-600"
+              className="p-1.5 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-all duration-200 transform hover:scale-110"
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
             
-            <h4 className="text-base font-medium text-gray-600">
+            <h4 className="text-sm sm:text-base font-medium text-gray-600 animate-fade-in">
               {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
             </h4>
             
             <button
               onClick={() => navigateMonth('next')}
-              className="p-1 text-gray-400 hover:text-gray-600"
+              className="p-1.5 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-all duration-200 transform hover:scale-110"
             >
               <ChevronRight className="w-4 h-4" />
             </button>
@@ -159,8 +172,12 @@ export default function Calendar({ selectedDateRange, onDateRangeChange }: Calen
           <div className="mb-4">
             {/* Day headers */}
             <div className="grid grid-cols-7 gap-1 mb-2">
-              {['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sat', 'Su'].map((day) => (
-                <div key={day} className="text-center text-xs font-medium text-gray-500 py-1">
+              {['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'].map((day, index) => (
+                <div 
+                  key={day} 
+                  className="text-center text-xs font-medium text-gray-500 py-1 animate-slide-up"
+                  style={{ animationDelay: `${index * 50}ms` }}
+                >
                   {day}
                 </div>
               ))}
@@ -173,15 +190,15 @@ export default function Calendar({ selectedDateRange, onDateRangeChange }: Calen
           </div>
 
           {/* Date Range Display */}
-          <div className="flex items-center justify-center gap-2">
-            <button className="px-3 py-1 border border-gray-300 rounded text-xs text-gray-600 hover:bg-gray-50">
+          <div className="flex flex-wrap items-center justify-center gap-2">
+            <button className="px-2 sm:px-3 py-1 border border-gray-300 rounded text-xs text-gray-600 hover:bg-gray-50 transition-all duration-200 interactive-button">
               Today
             </button>
-            <button className="px-3 py-1 border border-gray-300 rounded text-xs text-gray-600 hover:bg-gray-50">
+            <button className="px-2 sm:px-3 py-1 border border-gray-300 rounded text-xs text-gray-600 hover:bg-gray-50 transition-all duration-200 interactive-button">
               Jan 6, 20...
             </button>
             <span className="text-gray-400 text-xs">—</span>
-            <button className="px-3 py-1 border border-gray-300 rounded text-xs text-gray-600 hover:bg-gray-50">
+            <button className="px-2 sm:px-3 py-1 border border-gray-300 rounded text-xs text-gray-600 hover:bg-gray-50 transition-all duration-200 interactive-button">
               Jan 12,...
             </button>
           </div>

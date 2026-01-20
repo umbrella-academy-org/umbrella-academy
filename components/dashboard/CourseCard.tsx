@@ -1,48 +1,81 @@
 'use client';
 
-import { Play, ChevronRight } from 'lucide-react';
+import { Play, ChevronRight, Star } from 'lucide-react';
+import { useState } from 'react';
 
 export default function CourseCard() {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
-    <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+    <div 
+      className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 interactive-card animate-fade-in hover:shadow-lg transition-all duration-300"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <div className="flex items-start gap-3">
         {/* Course Image */}
-        <div className="w-24 h-18 bg-gradient-to-br from-blue-900 to-blue-700 rounded-lg overflow-hidden flex-shrink-0 relative">
-          <div className="absolute inset-0 bg-black bg-opacity-20"></div>
+        <div className="w-20 h-16 sm:w-24 sm:h-18 bg-gradient-to-br from-blue-900 to-blue-700 rounded-lg overflow-hidden flex-shrink-0 relative group cursor-pointer">
+          <div className="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-10 transition-all duration-300"></div>
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-6 h-6 bg-yellow-600 rounded-full flex items-center justify-center">
+            <div className={`w-6 h-6 bg-yellow-600 rounded-full flex items-center justify-center transition-all duration-300 ${
+              isHovered ? 'scale-110 animate-pulse-glow' : ''
+            }`}>
               <Play className="w-3 h-3 text-white fill-current" />
             </div>
           </div>
-          {/* Code-like overlay */}
+          {/* Code-like overlay with animation */}
           <div className="absolute top-1 left-1 right-1">
             <div className="space-y-1">
-              <div className="h-0.5 bg-blue-300 rounded w-3/4 opacity-60"></div>
-              <div className="h-0.5 bg-green-300 rounded w-1/2 opacity-60"></div>
-              <div className="h-0.5 bg-yellow-300 rounded w-2/3 opacity-60"></div>
+              <div className={`h-0.5 bg-blue-300 rounded w-3/4 opacity-60 transition-all duration-500 ${
+                isHovered ? 'animate-shimmer' : ''
+              }`}></div>
+              <div className={`h-0.5 bg-green-300 rounded w-1/2 opacity-60 transition-all duration-700 ${
+                isHovered ? 'animate-shimmer' : ''
+              }`} style={{ animationDelay: '0.2s' }}></div>
+              <div className={`h-0.5 bg-yellow-300 rounded w-2/3 opacity-60 transition-all duration-900 ${
+                isHovered ? 'animate-shimmer' : ''
+              }`} style={{ animationDelay: '0.4s' }}></div>
             </div>
           </div>
         </div>
 
         {/* Course Info */}
-        <div className="flex-1">
-          <div className="flex items-start justify-between">
-            <div>
-              <h3 className="text-base font-semibold text-gray-900 mb-1">Winmax Rwanda</h3>
+        <div className="flex-1 min-w-0">
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
+            <div className="flex-1 min-w-0">
+              <h3 className="text-sm sm:text-base font-semibold text-gray-900 mb-1 truncate group-hover:text-yellow-600 transition-colors">
+                Winmax Rwanda
+              </h3>
               <p className="text-xs text-gray-500 mb-1">31 September, 2025</p>
-              <div className="flex items-center gap-2 mb-2">
-                <span className="px-2 py-0.5 bg-purple-100 text-purple-700 text-xs font-medium rounded-full">
+              <div className="flex items-center gap-2 mb-2 flex-wrap">
+                <span className="px-2 py-0.5 bg-purple-100 text-purple-700 text-xs font-medium rounded-full animate-pulse">
                   ● Active
                 </span>
+                <div className="flex items-center gap-1">
+                  {[...Array(5)].map((_, i) => (
+                    <Star 
+                      key={i} 
+                      className={`w-3 h-3 transition-all duration-200 ${
+                        i < 4 ? 'text-yellow-400 fill-current' : 'text-gray-300'
+                      }`}
+                      style={{ animationDelay: `${i * 100}ms` }}
+                    />
+                  ))}
+                  <span className="text-xs text-gray-500 ml-1">4.8</span>
+                </div>
               </div>
-              <p className="text-xs text-gray-600 mb-3">Programming & Development</p>
+              <p className="text-xs text-gray-600 mb-3 truncate">Programming & Development</p>
             </div>
             
             {/* Progress */}
-            <div className="text-right">
-              <div className="text-xl font-bold text-gray-900 mb-1">75%</div>
-              <p className="text-xs text-gray-500 mb-2">2 Out of 3 Phases Finished</p>
-              <button className="px-3 py-1 bg-yellow-600 text-white text-xs font-medium rounded hover:bg-yellow-700 transition-colors">
+            <div className="text-right flex-shrink-0">
+              <div className={`text-lg sm:text-xl font-bold text-gray-900 mb-1 transition-all duration-300 ${
+                isHovered ? 'scale-110 text-yellow-600' : ''
+              }`}>
+                75%
+              </div>
+              <p className="text-xs text-gray-500 mb-2 whitespace-nowrap">2 Out of 3 Phases</p>
+              <button className="px-3 py-1 bg-yellow-600 text-white text-xs font-medium rounded hover:bg-yellow-700 transition-all duration-200 interactive-button transform hover:scale-105 focus:ring-2 focus:ring-yellow-300">
                 Continue
               </button>
             </div>
@@ -51,11 +84,23 @@ export default function CourseCard() {
           {/* Progress Bar */}
           <div className="mt-3">
             <div className="flex items-center justify-between text-xs text-gray-600 mb-1">
-              <span>Phases Details</span>
-              <ChevronRight className="w-3 h-3" />
+              <span className="hover:text-gray-800 transition-colors">Phases Details</span>
+              <ChevronRight className={`w-3 h-3 transition-transform duration-200 ${
+                isHovered ? 'translate-x-1' : ''
+              }`} />
             </div>
-            <div className="w-full bg-gray-200 rounded-full h-1.5">
-              <div className="bg-yellow-600 h-1.5 rounded-full" style={{ width: '75%' }}></div>
+            <div className="w-full bg-gray-200 rounded-full h-1.5 overflow-hidden">
+              <div 
+                className="bg-gradient-to-r from-yellow-500 to-yellow-600 h-1.5 rounded-full transition-all duration-1000 ease-out relative"
+                style={{ width: isHovered ? '75%' : '60%' }}
+              >
+                <div className="absolute inset-0 bg-white opacity-30 animate-shimmer"></div>
+              </div>
+            </div>
+            <div className="flex justify-between text-xs text-gray-400 mt-1">
+              <span>Started</span>
+              <span>In Progress</span>
+              <span>Complete</span>
             </div>
           </div>
         </div>
