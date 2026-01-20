@@ -1,0 +1,135 @@
+'use client';
+
+import { Users, CheckCircle, DollarSign, Star, TrendingUp } from 'lucide-react';
+import { useState } from 'react';
+
+interface StatCard {
+  icon: React.ReactNode;
+  title: string;
+  value: string | number;
+  color: string;
+  trend?: string;
+  trendDirection?: 'up' | 'down';
+  subtitle?: string;
+}
+
+export default function TrainerStatsCards() {
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+
+  const stats: StatCard[] = [
+    {
+      icon: <Users className="w-5 h-5 lg:w-6 lg:h-6" />,
+      title: 'Active Students',
+      value: 2,
+      color: 'text-blue-600',
+      trend: '+2 this month',
+      trendDirection: 'up',
+      subtitle: 'Currently enrolled'
+    },
+    {
+      icon: <CheckCircle className="w-5 h-5 lg:w-6 lg:h-6" />,
+      title: 'Completed Sessions',
+      value: 12,
+      color: 'text-green-600',
+      trend: '+4 this week',
+      trendDirection: 'up',
+      subtitle: 'Total sessions done'
+    },
+    {
+      icon: <DollarSign className="w-5 h-5 lg:w-6 lg:h-6" />,
+      title: 'Earnings',
+      value: '23,000',
+      color: 'text-yellow-600',
+      trend: '+15% vs last month',
+      trendDirection: 'up',
+      subtitle: 'RWF this month'
+    },
+    {
+      icon: <Star className="w-5 h-5 lg:w-6 lg:h-6" />,
+      title: 'Average Rating',
+      value: 12,
+      color: 'text-purple-600',
+      trend: '4.9/5.0 stars',
+      trendDirection: 'up',
+      subtitle: 'Student feedback'
+    },
+    {
+      icon: <TrendingUp className="w-5 h-5 lg:w-6 lg:h-6" />,
+      title: 'Unread Notifications',
+      value: 12,
+      color: 'text-red-600',
+      trend: '3 urgent',
+      trendDirection: 'up',
+      subtitle: 'Requires attention'
+    }
+  ];
+
+  return (
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 lg:gap-4">
+      {stats.map((stat, index) => (
+        <div 
+          key={index} 
+          className="bg-white rounded-xl p-3 lg:p-4 shadow-sm border border-gray-100 interactive-card cursor-pointer group animate-slide-up hover:shadow-lg transition-all duration-300"
+          style={{ animationDelay: `${index * 100}ms` }}
+          onMouseEnter={() => setHoveredCard(index)}
+          onMouseLeave={() => setHoveredCard(null)}
+        >
+          <div className="flex flex-col gap-2">
+            {/* Icon and Title */}
+            <div className="flex items-center justify-between">
+              <div className={`p-2 rounded-lg bg-gray-50 ${stat.color} group-hover:scale-110 transition-all duration-300 ${
+                hoveredCard === index ? 'animate-pulse-glow' : ''
+              }`}>
+                {stat.icon}
+              </div>
+              {stat.trend && (
+                <span className={`text-xs font-medium px-2 py-1 rounded-full ${
+                  stat.trendDirection === 'up' 
+                    ? 'text-green-700 bg-green-100' 
+                    : 'text-red-700 bg-red-100'
+                } transition-all duration-300 ${
+                  hoveredCard === index ? 'animate-pulse scale-105' : ''
+                }`}>
+                  {stat.trend}
+                </span>
+              )}
+            </div>
+
+            {/* Value and Title */}
+            <div>
+              <p className="text-xs font-medium text-gray-600 mb-1 group-hover:text-gray-800 transition-colors">
+                {stat.title}
+              </p>
+              <div className="flex items-baseline gap-1">
+                <p className={`text-lg lg:text-2xl font-bold text-gray-900 group-hover:scale-105 transition-transform ${
+                  hoveredCard === index ? stat.color : ''
+                }`}>
+                  {stat.value}
+                </p>
+                {stat.title === 'Earnings' && (
+                  <span className="text-xs text-gray-500 font-medium">RWF</span>
+                )}
+              </div>
+              {stat.subtitle && (
+                <p className="text-xs text-gray-500 mt-1">{stat.subtitle}</p>
+              )}
+            </div>
+          </div>
+          
+          {/* Progress bar animation */}
+          <div className="mt-3 w-full bg-gray-200 rounded-full h-1 overflow-hidden">
+            <div 
+              className={`h-1 rounded-full transition-all duration-1000 ease-out ${
+                stat.color.replace('text-', 'bg-')
+              }`}
+              style={{ 
+                width: hoveredCard === index ? '100%' : '0%',
+                transitionDelay: hoveredCard === index ? '200ms' : '0ms'
+              }}
+            />
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}

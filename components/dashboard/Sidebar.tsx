@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Home, Calendar, Map, Bell, Video, CreditCard, HelpCircle, MessageSquare, X, Settings, Menu } from 'lucide-react';
+import { Home, Calendar, Map, Bell, Video, CreditCard, HelpCircle, MessageSquare, X, Settings, Menu, User } from 'lucide-react';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
 
 interface SidebarItem {
@@ -13,9 +13,10 @@ interface SidebarItem {
 
 interface SidebarProps {
   activeItem?: string;
+  userType?: 'student' | 'trainer' | 'mentor';
 }
 
-export default function Sidebar({ activeItem = 'Home' }: SidebarProps) {
+export default function Sidebar({ activeItem = 'Home', userType = 'student' }: SidebarProps) {
   const [currentActive, setCurrentActive] = useState(activeItem);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { navigate } = useNavigationWithLoading();
@@ -25,49 +26,177 @@ export default function Sidebar({ activeItem = 'Home' }: SidebarProps) {
     setCurrentActive(activeItem);
   }, [activeItem]);
 
-  const sidebarItems: SidebarItem[] = [
-    {
-      icon: <Home className="w-5 h-5" />,
-      label: 'Home',
-      href: '/dashboard/student',
-      active: true
-    },
-    {
-      icon: <Calendar className="w-5 h-5" />,
-      label: 'Smart Calendar',
-      href: '/dashboard/student/calendar'
-    },
-    {
-      icon: <Map className="w-5 h-5" />,
-      label: 'Roadmap',
-      href: '/dashboard/student/roadmap'
-    },
-    {
-      icon: <Bell className="w-5 h-5" />,
-      label: 'Notifications',
-      href: '/dashboard/student/notifications'
-    },
-    {
-      icon: <Video className="w-5 h-5" />,
-      label: 'Live Session',
-      href: '/dashboard/student/live-session'
-    },
-    {
-      icon: <CreditCard className="w-5 h-5" />,
-      label: 'Subscription',
-      href: '/dashboard/student/subscription'
-    },
-    {
-      icon: <HelpCircle className="w-5 h-5" />,
-      label: 'Support',
-      href: '/dashboard/student/support'
-    },
-    {
-      icon: <MessageSquare className="w-5 h-5" />,
-      label: 'Feedback',
-      href: '/dashboard/student/feedback'
+  // Define navigation items based on user type
+  const getNavigationItems = (): SidebarItem[] => {
+    switch (userType) {
+      case 'trainer':
+        return [
+          {
+            icon: <Home className="w-5 h-5" />,
+            label: 'Home',
+            href: '/dashboard/trainer',
+            active: true
+          },
+          {
+            icon: <Calendar className="w-5 h-5" />,
+            label: 'Smart Calendar',
+            href: '/dashboard/trainer/calendar'
+          },
+          {
+            icon: <User className="w-5 h-5" />,
+            label: 'Students',
+            href: '/dashboard/trainer/students'
+          },
+          {
+            icon: <Bell className="w-5 h-5" />,
+            label: 'Notifications',
+            href: '/dashboard/trainer/notifications'
+          },
+          {
+            icon: <Video className="w-5 h-5" />,
+            label: 'Live Session',
+            href: '/dashboard/trainer/live-session'
+          },
+          {
+            icon: <CreditCard className="w-5 h-5" />,
+            label: 'My Wallet',
+            href: '/dashboard/trainer/wallet'
+          },
+          {
+            icon: <HelpCircle className="w-5 h-5" />,
+            label: 'Support',
+            href: '/dashboard/trainer/support'
+          },
+          {
+            icon: <MessageSquare className="w-5 h-5" />,
+            label: 'Feedback',
+            href: '/dashboard/trainer/feedback'
+          }
+        ];
+      case 'mentor':
+        return [
+          {
+            icon: <Home className="w-5 h-5" />,
+            label: 'Home',
+            href: '/dashboard/mentor',
+            active: true
+          },
+          {
+            icon: <Calendar className="w-5 h-5" />,
+            label: 'Schedule',
+            href: '/dashboard/mentor/schedule'
+          },
+          {
+            icon: <User className="w-5 h-5" />,
+            label: 'My Students',
+            href: '/dashboard/mentor/students'
+          },
+          {
+            icon: <Map className="w-5 h-5" />,
+            label: 'Curriculum',
+            href: '/dashboard/mentor/curriculum'
+          },
+          {
+            icon: <Video className="w-5 h-5" />,
+            label: 'Sessions',
+            href: '/dashboard/mentor/sessions'
+          },
+          {
+            icon: <Bell className="w-5 h-5" />,
+            label: 'Notifications',
+            href: '/dashboard/mentor/notifications'
+          },
+          {
+            icon: <CreditCard className="w-5 h-5" />,
+            label: 'Earnings',
+            href: '/dashboard/mentor/earnings'
+          },
+          {
+            icon: <HelpCircle className="w-5 h-5" />,
+            label: 'Support',
+            href: '/dashboard/mentor/support'
+          }
+        ];
+      default: // student
+        return [
+          {
+            icon: <Home className="w-5 h-5" />,
+            label: 'Home',
+            href: '/dashboard/student',
+            active: true
+          },
+          {
+            icon: <Calendar className="w-5 h-5" />,
+            label: 'Smart Calendar',
+            href: '/dashboard/student/calendar'
+          },
+          {
+            icon: <Map className="w-5 h-5" />,
+            label: 'Roadmap',
+            href: '/dashboard/student/roadmap'
+          },
+          {
+            icon: <Bell className="w-5 h-5" />,
+            label: 'Notifications',
+            href: '/dashboard/student/notifications'
+          },
+          {
+            icon: <Video className="w-5 h-5" />,
+            label: 'Live Session',
+            href: '/dashboard/student/live-session'
+          },
+          {
+            icon: <CreditCard className="w-5 h-5" />,
+            label: 'Subscription',
+            href: '/dashboard/student/subscription'
+          },
+          {
+            icon: <HelpCircle className="w-5 h-5" />,
+            label: 'Support',
+            href: '/dashboard/student/support'
+          },
+          {
+            icon: <MessageSquare className="w-5 h-5" />,
+            label: 'Feedback',
+            href: '/dashboard/student/feedback'
+          }
+        ];
     }
-  ];
+  };
+
+  const sidebarItems = getNavigationItems();
+
+  // Get user type display info
+  const getUserTypeInfo = () => {
+    switch (userType) {
+      case 'trainer':
+        return {
+          displayName: 'Trainer',
+          progressLabel: '80% Capacity',
+          progressValue: 80,
+          renewLabel: 'Manage Schedule',
+          renewHref: '/dashboard/trainer/schedule'
+        };
+      case 'mentor':
+        return {
+          displayName: 'Mentor',
+          progressLabel: '12 Students',
+          progressValue: 75,
+          renewLabel: 'View Students',
+          renewHref: '/dashboard/mentor/students'
+        };
+      default:
+        return {
+          displayName: 'Student',
+          progressLabel: '8 Months',
+          progressValue: 80,
+          renewLabel: 'Renew Plan',
+          renewHref: '/dashboard/student/subscription/renew'
+        };
+    }
+  };
+
+  const userInfo = getUserTypeInfo();
 
   const handleNavigation = (item: SidebarItem) => {
     setCurrentActive(item.label);
@@ -117,7 +246,7 @@ export default function Sidebar({ activeItem = 'Home' }: SidebarProps) {
             </div>
             <div>
               <div className="font-semibold text-sm lg:text-base">Umbrella Academy</div>
-              <div className="text-xs lg:text-sm text-gray-400">Student</div>
+              <div className="text-xs lg:text-sm text-gray-400">{userInfo.displayName}</div>
             </div>
           </div>
         </div>
@@ -164,26 +293,33 @@ export default function Sidebar({ activeItem = 'Home' }: SidebarProps) {
                     fill="none"
                     stroke="#EAB308"
                     strokeWidth="2"
-                    strokeDasharray="80, 100"
+                    strokeDasharray={`${userInfo.progressValue}, 100`}
                   />
                 </svg>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-xl font-bold text-yellow-600">80%</span>
+                  <span className="text-xl font-bold text-yellow-600">{userInfo.progressValue}%</span>
                 </div>
               </div>
               
               <div className="text-center">
-                <div className="font-semibold text-white">8 Months</div>
+                <div className="font-semibold text-white">{userInfo.progressLabel}</div>
                 <div className="text-sm text-gray-400 mt-1">
-                  You can renew your plan at anytime before expiry
+                  {userType === 'student' 
+                    ? 'You can renew your plan at anytime before expiry'
+                    : userType === 'trainer'
+                      ? 'Current training capacity this month'
+                      : 'Active students under your mentorship'
+                  }
                 </div>
                 <div className="flex items-center gap-2 mt-3">
-                  <span className="text-sm text-gray-400">Plans</span>
+                  <span className="text-sm text-gray-400">
+                    {userType === 'student' ? 'Plans' : 'Manage'}
+                  </span>
                   <a 
-                    href="/dashboard/student/subscription/renew"
+                    href={userInfo.renewHref}
                     className="text-sm text-yellow-600 hover:text-yellow-500"
                   >
-                    Renew Plan
+                    {userInfo.renewLabel}
                   </a>
                 </div>
               </div>
