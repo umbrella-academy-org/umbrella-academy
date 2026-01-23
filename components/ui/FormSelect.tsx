@@ -1,21 +1,5 @@
 import React from 'react';
-
-interface Option {
-  value: string;
-  label: string;
-}
-
-interface FormSelectProps {
-  id: string;
-  label: string;
-  value: string;
-  onChange: (value: string) => void;
-  options: Option[];
-  placeholder?: string;
-  error?: string;
-  required?: boolean;
-  className?: string;
-}
+import { FormSelectProps, Option } from '@/types';
 
 export default function FormSelect({
   id,
@@ -37,7 +21,7 @@ export default function FormSelect({
         id={id}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white text-gray-900 ${
+        className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white text-black ${
           error ? 'border-red-500' : 'border-gray-300'
         }`}
         required={required}

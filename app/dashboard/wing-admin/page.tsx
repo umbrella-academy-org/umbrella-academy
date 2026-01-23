@@ -54,7 +54,7 @@ export default function WingAdminDashboard() {
                     <div className="text-sm text-green-600">Active Trainers</div>
                   </div>
                   <div className="text-center p-4 bg-yellow-50 rounded-lg">
-                    <div className="text-2xl font-bold text-yellow-600">€2,450</div>
+                    <div className="text-2xl font-bold text-yellow-600">RWF 3,675,000</div>
                     <div className="text-sm text-yellow-600">Wing Wallet</div>
                   </div>
                   <div className="text-center p-4 bg-purple-50 rounded-lg">

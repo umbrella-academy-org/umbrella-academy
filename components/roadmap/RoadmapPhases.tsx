@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Code, CheckCircle, ArrowRight, Lock, Play, Clock, Users, ChevronDown, ChevronRight, Video, BookOpen, FileText, Award } from 'lucide-react';
-import { Phase, Lesson, LiveSession } from '@/lib/types/roadmap';
+import { Phase, Lesson, LiveSession } from '@/types';
 import { sampleStudentRoadmap } from '@/lib/data/roadmap-sample';
 
 interface RoadmapPhasesProps {
@@ -142,7 +142,7 @@ export default function RoadmapPhases({ onPhaseSelect, onLessonSelect, selectedP
       </div>
 
       <div className="space-y-4">
-        {phases.map((phase) => {
+        {phases.map((phase: Phase) => {
           const statusConfig = getPhaseStatusConfig(phase.status);
           const StatusIcon = statusConfig.icon;
           const isExpanded = expandedPhases.includes(phase.id);
@@ -189,7 +189,7 @@ export default function RoadmapPhases({ onPhaseSelect, onLessonSelect, selectedP
               {isExpanded && (
                 <div className="border-t border-gray-200 bg-white bg-opacity-50">
                   <div className="p-4 space-y-3">
-                    {phase.lessons.map((lesson) => {
+                    {phase.lessons.map((lesson: Lesson) => {
                       const lessonConfig = getLessonStatusConfig(lesson.status);
                       const LessonIcon = lessonConfig.icon;
                       const isLessonExpanded = expandedLessons.includes(lesson.id);
@@ -248,7 +248,7 @@ export default function RoadmapPhases({ onPhaseSelect, onLessonSelect, selectedP
                             <div className="border-t border-gray-200 bg-white bg-opacity-70">
                               <div className="p-3 space-y-2">
                                 <h6 className="text-xs font-medium text-gray-700 mb-2">Live Sessions</h6>
-                                {lesson.liveSessions.map((session) => {
+                                {lesson.liveSessions.map((session: LiveSession) => {
                                   const sessionConfig = getLiveSessionStatusConfig(session.status);
                                   const SessionIcon = sessionConfig.icon;
 

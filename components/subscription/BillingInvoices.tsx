@@ -21,7 +21,7 @@ export default function BillingInvoices() {
       date: 'Dec 1, 2022',
       billingDate: 'Dec 1, 2022',
       status: 'Paid',
-      amount: 'USD $10.00',
+      amount: 'RWF 15,000',
       plan: 'Basic plan',
       duration: '1 Yr'
     },
@@ -31,7 +31,7 @@ export default function BillingInvoices() {
       date: 'Nov 1, 2022',
       billingDate: 'Nov 1, 2022',
       status: 'Paid',
-      amount: 'USD $10.00',
+      amount: 'RWF 15,000',
       plan: 'Basic plan',
       duration: '1 Yr'
     },
@@ -41,7 +41,7 @@ export default function BillingInvoices() {
       date: 'Oct 1, 2022',
       billingDate: 'Oct 1, 2022',
       status: 'Paid',
-      amount: 'USD $10.00',
+      amount: 'RWF 15,000',
       plan: 'Basic plan',
       duration: '1 Yr'
     },
@@ -51,7 +51,7 @@ export default function BillingInvoices() {
       date: 'Sep 1, 2022',
       billingDate: 'Sep 1, 2022',
       status: 'Paid',
-      amount: 'USD $10.00',
+      amount: 'RWF 15,000',
       plan: 'Basic plan',
       duration: '1 Yr'
     },
@@ -61,7 +61,7 @@ export default function BillingInvoices() {
       date: 'Aug 1, 2022',
       billingDate: 'Aug 1, 2022',
       status: 'Paid',
-      amount: 'USD $10.00',
+      amount: 'RWF 15,000',
       plan: 'Basic plan',
       duration: '1 Yr'
     },
@@ -71,7 +71,7 @@ export default function BillingInvoices() {
       date: 'Jul 1, 2022',
       billingDate: 'Jul 1, 2022',
       status: 'Paid',
-      amount: 'USD $10.00',
+      amount: 'RWF 15,000',
       plan: 'Basic plan',
       duration: '1 Yr'
     },
@@ -81,7 +81,7 @@ export default function BillingInvoices() {
       date: 'Jun 1, 2022',
       billingDate: 'Jun 1, 2022',
       status: 'Paid',
-      amount: 'USD $10.00',
+      amount: 'RWF 15,000',
       plan: 'Basic plan',
       duration: '1 Yr'
     }

@@ -84,7 +84,7 @@ export default function CreateRoadmapPage() {
         planId: 'custom-plan',
         planName: 'Custom Learning Plan',
         amount: 0,
-        currency: 'USD',
+        currency: 'RWF' as const,
         billingCycle: 'monthly' as const,
         startDate: new Date().toISOString(),
         endDate: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(),

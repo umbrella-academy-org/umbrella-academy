@@ -172,7 +172,7 @@ export default function PaymentPage() {
                   <p className="text-sm text-gray-600">Pay once to unlock your mentorship plan</p>
                 </div>
                 <div className="text-right">
-                  <div className="text-2xl font-bold text-gray-900">€50</div>
+                  <div className="text-2xl font-bold text-gray-900">RWF 75,000</div>
                   <div className="text-sm text-gray-600">per year</div>
                 </div>
               </div>

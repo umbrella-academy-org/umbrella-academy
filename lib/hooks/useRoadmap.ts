@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { StudentRoadmap } from '@/lib/types/roadmap';
+import { StudentRoadmap } from '@/types';
 import { sampleStudentRoadmap } from '@/lib/data/roadmap-sample';
 
 // Simple hook to manage roadmap state
