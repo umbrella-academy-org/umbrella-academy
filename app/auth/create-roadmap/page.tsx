@@ -83,4 +83,35 @@ export default function AuthCreateRoadmapPage() {
         planName: 'Custom Learning Plan',
         amount: 0,
         currency: 'USD',
-        billingC
+        billingCycle: 'monthly' as const,
+        startDate: new Date().toISOString(),
+        endDate: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(),
+        status: 'active' as const,
+        autoRenew: false
+      },
+      lastAccessedAt: new Date().toISOString(),
+      currentActivity: {
+        type: 'lesson' as const,
+        id: 'lesson-1-1',
+        title: `${roadmapData.phases[0]?.title} - Getting Started`
+      },
+      notifications: {
+        upcomingLiveSessions: [],
+        overdueAssignments: [],
+        newContent: []
+      }
+    };
+
+    // Save the roadmap
+    createRoadmap(newRoadmap);
+    
+    // Redirect to the student dashboard
+    router.push('/dashboard/student');
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-yellow-50 via-white to-yellow-50">
+      <RoadmapBuilder onSave={handleRoadmapSave} />
+    </div>
+  );
+}
