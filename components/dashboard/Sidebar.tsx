@@ -15,7 +15,7 @@ interface SidebarItem {
 
 interface SidebarProps {
   activeItem?: string;
-  userType?: 'student' | 'trainer' | 'mentor';
+  userType?: 'student' | 'trainer' | 'mentor' | 'wing-admin' | 'umbrella-admin';
 }
 
 export default function Sidebar({ activeItem = 'Home', userType = 'student' }: SidebarProps) {
@@ -74,6 +74,11 @@ export default function Sidebar({ activeItem = 'Home', userType = 'student' }: S
             href: '/dashboard/mentor/students'
           },
           {
+            icon: <Map className="w-5 h-5" />,
+            label: 'Roadmap Approvals',
+            href: '/dashboard/mentor/roadmap-approvals'
+          },
+          {
             icon: <Bell className="w-5 h-5" />,
             label: 'Notifications',
             href: '/dashboard/mentor/notifications'
@@ -87,6 +92,62 @@ export default function Sidebar({ activeItem = 'Home', userType = 'student' }: S
             icon: <HelpCircle className="w-5 h-5" />,
             label: 'Support',
             href: '/dashboard/mentor/support'
+          }
+        ];
+      case 'wing-admin':
+        return [
+          {
+            icon: <Home className="w-5 h-5" />,
+            label: 'Home',
+            href: '/dashboard/wing-admin'
+          },
+          {
+            icon: <User className="w-5 h-5" />,
+            label: 'Trainers',
+            href: '/dashboard/wing-admin/trainers'
+          },
+          {
+            icon: <Calendar className="w-5 h-5" />,
+            label: 'Student Activity',
+            href: '/dashboard/wing-admin/students'
+          },
+          {
+            icon: <CreditCard className="w-5 h-5" />,
+            label: 'Wing Wallet',
+            href: '/dashboard/wing-admin/wallet'
+          },
+          {
+            icon: <Settings className="w-5 h-5" />,
+            label: 'Wing Settings',
+            href: '/dashboard/wing-admin/settings'
+          }
+        ];
+      case 'umbrella-admin':
+        return [
+          {
+            icon: <Home className="w-5 h-5" />,
+            label: 'Home',
+            href: '/dashboard/umbrella-admin'
+          },
+          {
+            icon: <Settings className="w-5 h-5" />,
+            label: 'Wings',
+            href: '/dashboard/umbrella-admin/wings'
+          },
+          {
+            icon: <User className="w-5 h-5" />,
+            label: 'Users',
+            href: '/dashboard/umbrella-admin/users'
+          },
+          {
+            icon: <CreditCard className="w-5 h-5" />,
+            label: 'Financial',
+            href: '/dashboard/umbrella-admin/financial'
+          },
+          {
+            icon: <Bell className="w-5 h-5" />,
+            label: 'System Health',
+            href: '/dashboard/umbrella-admin/system'
           }
         ];
       default: // student
@@ -156,6 +217,22 @@ export default function Sidebar({ activeItem = 'Home', userType = 'student' }: S
           progressValue: 75,
           renewLabel: 'View Students',
           renewHref: '/dashboard/mentor/students'
+        };
+      case 'wing-admin':
+        return {
+          displayName: 'Wing Admin',
+          progressLabel: '24 Students',
+          progressValue: 85,
+          renewLabel: 'Manage Wing',
+          renewHref: '/dashboard/wing-admin/settings'
+        };
+      case 'umbrella-admin':
+        return {
+          displayName: 'System Admin',
+          progressLabel: '5 Wings',
+          progressValue: 95,
+          renewLabel: 'System Health',
+          renewHref: '/dashboard/umbrella-admin/system'
         };
       default:
         return {
