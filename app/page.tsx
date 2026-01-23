@@ -56,6 +56,21 @@ export default function Home() {
               >
                 <span className="group-hover:translate-x-1 transition-transform duration-200">Mentor Dashboard</span>
               </button>
+              {/* Admins pages */}
+
+               <button
+                onClick={() => navigate('/dashboard/wing-admin')}
+                className="w-full border border-purple-600 text-purple-600 py-2 sm:py-3 px-3 sm:px-4 rounded-lg font-medium hover:bg-purple-50 hover:border-purple-700 transition-all duration-300 flex items-center justify-center text-xs sm:text-sm transform hover:scale-105 hover:shadow-md animate-slide-up animation-delay-900 group"
+              >
+                <span className="group-hover:translate-x-1 transition-transform duration-200">Wing Admin Dashboard</span>
+              </button>
+              <button
+                onClick={() => navigate('/dashboard/umbrella-admin')}
+                className="w-full border border-indigo-600 text-indigo-600 py-2 sm:py-3 px-3 sm:px-4 rounded-lg font-medium hover:bg-indigo-50 hover:border-indigo-700 transition-all duration-300 flex items-center justify-center text-xs sm:text-sm transform hover:scale-105 hover:shadow-md animate-slide-up animation-delay-1000 group"
+              >
+                <span className="group-hover:translate-x-1 transition-transform duration-200">Umbrella Admin Dashboard</span>
+              </button>
+
             </div>
           </div>
         </div>
