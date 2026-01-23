@@ -103,6 +103,11 @@ export default function Sidebar({ activeItem = 'Home', userType = 'student' }: S
           },
           {
             icon: <User className="w-5 h-5" />,
+            label: 'Mentors',
+            href: '/dashboard/wing-admin/mentors'
+          },
+          {
+            icon: <User className="w-5 h-5" />,
             label: 'Trainers',
             href: '/dashboard/wing-admin/trainers'
           },
