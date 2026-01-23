@@ -1,0 +1,161 @@
+'use client';
+
+import Sidebar from '@/components/dashboard/Sidebar';
+import Header from '@/components/dashboard/Header';
+import { TrendingUp, DollarSign, CreditCard, PieChart } from 'lucide-react';
+
+export default function UmbrellaAdminFinancialPage() {
+  return (
+    <div className="flex h-screen bg-white">
+      <Sidebar activeItem="Financial" userType="umbrella-admin" />
+      
+      <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
+        <Header breadcrumb="Financial" />
+        
+        <main className="flex-1 overflow-auto">
+          <div className="p-3 lg:p-4">
+            <div className="mb-6">
+              <h1 className="text-2xl font-semibold text-gray-900 mb-2">Financial Overview</h1>
+              <p className="text-gray-600">Monitor system-wide financial performance</p>
+            </div>
+
+            {/* Financial Stats */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+              <div className="bg-gradient-to-r from-green-500 to-green-600 rounded-xl p-6 text-white">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-green-100 text-sm">Total Revenue</p>
+                    <p className="text-3xl font-bold">€45,230</p>
+                  </div>
+                  <DollarSign className="w-8 h-8 text-green-200" />
+                </div>
+              </div>
+              
+              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-gray-500 text-sm">Umbrella Share (65%)</p>
+                    <p className="text-2xl font-bold text-gray-900">€29,400</p>
+                  </div>
+                  <PieChart className="w-8 h-8 text-yellow-500" />
+                </div>
+              </div>
+              
+              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-gray-500 text-sm">Wings Share (35%)</p>
+                    <p className="text-2xl font-bold text-gray-900">€15,830</p>
+                  </div>
+                  <CreditCard className="w-8 h-8 text-blue-500" />
+                </div>
+              </div>
+              
+              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-gray-500 text-sm">Growth Rate</p>
+                    <p className="text-2xl font-bold text-green-600">+12.5%</p>
+                  </div>
+                  <TrendingUp className="w-8 h-8 text-green-500" />
+                </div>
+              </div>
+            </div>
+
+            {/* Wing Revenue Breakdown */}
+            <div className="bg-white rounded-xl shadow-sm border border-gray-100 mb-6">
+              <div className="p-6 border-b border-gray-200">
+                <h3 className="text-lg font-semibold text-gray-900">Revenue by Wing</h3>
+              </div>
+              <div className="p-6">
+                <div className="space-y-4">
+                  {[
+                    { name: 'Programming Wing', revenue: 12450, share: 27.5, growth: '+15%' },
+                    { name: 'Design Wing', revenue: 10230, share: 22.6, growth: '+8%' },
+                    { name: 'Marketing Wing', revenue: 9180, share: 20.3, growth: '+12%' },
+                    { name: 'Data Science Wing', revenue: 7890, share: 17.4, growth: '+18%' },
+                    { name: 'Business Wing', revenue: 5480, share: 12.1, growth: '+5%' }
+                  ].map((wing, index) => (
+                    <div key={index} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                      <div className="flex-1">
+                        <div className="font-medium text-gray-900">{wing.name}</div>
+                        <div className="text-sm text-gray-500">{wing.share}% of total revenue</div>
+                      </div>
+                      <div className="flex items-center gap-4">
+                        <div className="text-right">
+                          <div className="font-semibold text-gray-900">€{wing.revenue.toLocaleString()}</div>
+                          <div className="text-sm text-green-600">{wing.growth}</div>
+                        </div>
+                        <div className="w-16 bg-gray-200 rounded-full h-2">
+                          <div 
+                            className="bg-yellow-600 h-2 rounded-full" 
+                            style={{ width: `${wing.share * 4}%` }}
+                          ></div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Recent Transactions */}
+            <div className="bg-white rounded-xl shadow-sm border border-gray-100">
+              <div className="p-6 border-b border-gray-200">
+                <h3 className="text-lg font-semibold text-gray-900">Recent Transactions</h3>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead className="bg-gray-50">
+                    <tr>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Transaction
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Wing
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Amount
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Umbrella Share
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Date
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="bg-white divide-y divide-gray-200">
+                    {[
+                      { id: 1, description: 'Student Payment - Alice Johnson', wing: 'Programming', amount: 500, umbrellaShare: 325, date: '2024-01-22' },
+                      { id: 2, description: 'Student Payment - Bob Wilson', wing: 'Design', amount: 450, umbrellaShare: 292.5, date: '2024-01-22' },
+                      { id: 3, description: 'Student Payment - Carol Davis', wing: 'Marketing', amount: 400, umbrellaShare: 260, date: '2024-01-21' }
+                    ].map((transaction) => (
+                      <tr key={transaction.id}>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                          {transaction.description}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                          {transaction.wing}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                          €{transaction.amount}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-green-600">
+                          €{transaction.umbrellaShare}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                          {transaction.date}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  );
+}

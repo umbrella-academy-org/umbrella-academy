@@ -1,38 +1,124 @@
 'use client';
 
-import { CheckCircle, Clock } from 'lucide-react';
+import { Trophy, Target, Clock, CheckCircle } from 'lucide-react';
+import { sampleStudentRoadmap } from '@/lib/data/roadmap-sample';
 
 export default function CompletionStats() {
+  const { course, subscription } = sampleStudentRoadmap;
+  const progress = course.progress;
+  
+  // Calculate time-based stats
+  const enrolledDate = new Date(sampleStudentRoadmap.enrolledAt);
+  const now = new Date();
+  const daysEnrolled = Math.floor((now.getTime() - enrolledDate.getTime()) / (1000 * 60 * 60 * 24));
+  const weeksEnrolled = Math.floor(daysEnrolled / 7);
+  
+  // Calculate expected completion
+  const expectedCompletionDate = sampleStudentRoadmap.expectedCompletionDate 
+    ? new Date(sampleStudentRoadmap.expectedCompletionDate)
+    : null;
+  const weeksRemaining = expectedCompletionDate 
+    ? Math.ceil((expectedCompletionDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24 * 7))
+    : 0;
+
+  const stats = [
+    {
+      icon: CheckCircle,
+      label: 'Completed',
+      value: progress.completedPhases,
+      total: progress.totalPhases,
+      suffix: 'phases',
+      color: 'text-green-600',
+      bgColor: 'bg-green-100'
+    },
+    {
+      icon: Target,
+      label: 'In Progress',
+      value: progress.totalPhases - progress.completedPhases - (progress.totalPhases - progress.completedPhases - 1),
+      total: progress.totalPhases,
+      suffix: 'phase',
+      color: 'text-blue-600',
+      bgColor: 'bg-blue-100'
+    },
+    {
+      icon: Clock,
+      label: 'Time Spent',
+      value: weeksEnrolled,
+      total: course.estimatedDuration,
+      suffix: 'weeks',
+      color: 'text-purple-600',
+      bgColor: 'bg-purple-100'
+    },
+    {
+      icon: Trophy,
+      label: 'Lessons Done',
+      value: progress.completedLessons,
+      total: progress.totalLessons,
+      suffix: 'lessons',
+      color: 'text-yellow-600',
+      bgColor: 'bg-yellow-100'
+    }
+  ];
+
   return (
-    <div className="space-y-4">
-      {/* Completed Phases */}
-      <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
-        <div className="flex items-center justify-between mb-3">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
-              <CheckCircle className="w-5 h-5 text-green-600" />
-            </div>
-            <div>
-              <p className="text-sm font-medium text-gray-900">Completed Phases</p>
-            </div>
-          </div>
+    <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+      <div className="mb-6">
+        <h3 className="text-lg font-semibold text-gray-900 mb-2">Progress Overview</h3>
+        <div className="flex items-center justify-between">
+          <p className="text-sm text-gray-500">Overall completion</p>
+          <span className="text-sm font-medium text-gray-900">{progress.overallProgress}%</span>
         </div>
-        <div className="text-2xl font-bold text-gray-900">5</div>
+        <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
+          <div 
+            className="bg-yellow-600 h-2 rounded-full transition-all duration-500"
+            style={{ width: `${progress.overallProgress}%` }}
+          ></div>
+        </div>
       </div>
 
-      {/* Pending Phases */}
-      <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
-        <div className="flex items-center justify-between mb-3">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
-              <Clock className="w-5 h-5 text-orange-600" />
+      <div className="grid grid-cols-2 gap-4">
+        {stats.map((stat, index) => {
+          const Icon = stat.icon;
+          const percentage = stat.total > 0 ? Math.round((stat.value / stat.total) * 100) : 0;
+          
+          return (
+            <div key={index} className="text-center">
+              <div className={`w-12 h-12 ${stat.bgColor} rounded-lg flex items-center justify-center mx-auto mb-3`}>
+                <Icon className={`w-6 h-6 ${stat.color}`} />
+              </div>
+              <div className="text-2xl font-bold text-gray-900 mb-1">
+                {stat.value}
+                {stat.total && <span className="text-sm text-gray-500">/{stat.total}</span>}
+              </div>
+              <div className="text-xs text-gray-600 mb-2">{stat.suffix}</div>
+              <div className="text-xs font-medium text-gray-900">{stat.label}</div>
+              {stat.total > 0 && (
+                <div className="w-full bg-gray-200 rounded-full h-1 mt-2">
+                  <div 
+                    className={`h-1 rounded-full transition-all duration-300 ${stat.color.replace('text-', 'bg-')}`}
+                    style={{ width: `${percentage}%` }}
+                  ></div>
+                </div>
+              )}
             </div>
-            <div>
-              <p className="text-sm font-medium text-gray-900">Pending Phases</p>
+          );
+        })}
+      </div>
+
+      {/* Additional Info */}
+      <div className="mt-6 pt-4 border-t border-gray-100">
+        <div className="grid grid-cols-2 gap-4 text-center">
+          <div>
+            <div className="text-sm font-medium text-gray-900">{progress.attendedLiveSessions}</div>
+            <div className="text-xs text-gray-500">Sessions Attended</div>
+          </div>
+          <div>
+            <div className="text-sm font-medium text-gray-900">
+              {weeksRemaining > 0 ? `${weeksRemaining} weeks` : 'Completed'}
             </div>
+            <div className="text-xs text-gray-500">Time Remaining</div>
           </div>
         </div>
-        <div className="text-2xl font-bold text-gray-900">3</div>
       </div>
     </div>
   );
