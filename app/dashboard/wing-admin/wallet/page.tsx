@@ -52,7 +52,7 @@ export default function WingAdminWalletPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-yellow-100 text-sm">Available Balance</p>
-                    <p className="text-3xl font-bold">€2,450.00</p>
+                    <p className="text-3xl font-bold">RWF 3,675,000</p>
                   </div>
                   <CreditCard className="w-8 h-8 text-yellow-200" />
                 </div>
@@ -62,7 +62,7 @@ export default function WingAdminWalletPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-gray-500 text-sm">This Month</p>
-                    <p className="text-2xl font-bold text-gray-900">€1,225.00</p>
+                    <p className="text-2xl font-bold text-gray-900">RWF 1,837,500</p>
                   </div>
                   <TrendingUp className="w-8 h-8 text-green-500" />
                 </div>
@@ -72,7 +72,7 @@ export default function WingAdminWalletPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-gray-500 text-sm">Total Withdrawn</p>
-                    <p className="text-2xl font-bold text-gray-900">€8,750.00</p>
+                    <p className="text-2xl font-bold text-gray-900">RWF 13,125,000</p>
                   </div>
                   <Download className="w-8 h-8 text-blue-500" />
                 </div>

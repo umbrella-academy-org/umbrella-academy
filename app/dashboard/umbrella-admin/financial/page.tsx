@@ -25,7 +25,7 @@ export default function UmbrellaAdminFinancialPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-green-100 text-sm">Total Revenue</p>
-                    <p className="text-3xl font-bold">€45,230</p>
+                    <p className="text-3xl font-bold">RWF 67,845,000</p>
                   </div>
                   <DollarSign className="w-8 h-8 text-green-200" />
                 </div>
@@ -35,7 +35,7 @@ export default function UmbrellaAdminFinancialPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-gray-500 text-sm">Umbrella Share (65%)</p>
-                    <p className="text-2xl font-bold text-gray-900">€29,400</p>
+                    <p className="text-2xl font-bold text-gray-900">RWF 44,100,000</p>
                   </div>
                   <PieChart className="w-8 h-8 text-yellow-500" />
                 </div>
@@ -45,7 +45,7 @@ export default function UmbrellaAdminFinancialPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-gray-500 text-sm">Wings Share (35%)</p>
-                    <p className="text-2xl font-bold text-gray-900">€15,830</p>
+                    <p className="text-2xl font-bold text-gray-900">RWF 23,745,000</p>
                   </div>
                   <CreditCard className="w-8 h-8 text-blue-500" />
                 </div>

@@ -3,20 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Home, Calendar, Map, Bell, Video, CreditCard, HelpCircle, MessageSquare, X, Settings, Menu, User } from 'lucide-react';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
-
-interface SidebarItem {
-  icon: React.ReactNode;
-  label: string;
-  href: string;
-  active?: boolean;
-  hasDropdown?: boolean;
-  badge?: string;
-}
-
-interface SidebarProps {
-  activeItem?: string;
-  userType?: 'student' | 'trainer' | 'mentor' | 'wing-admin' | 'umbrella-admin';
-}
+import { SidebarProps, SidebarItem, UserType } from '@/types';
 
 export default function Sidebar({ activeItem = 'Home', userType = 'student' }: SidebarProps) {
   const [currentActive, setCurrentActive] = useState(activeItem);
@@ -100,6 +87,11 @@ export default function Sidebar({ activeItem = 'Home', userType = 'student' }: S
             icon: <Home className="w-5 h-5" />,
             label: 'Home',
             href: '/dashboard/wing-admin'
+          },
+          {
+            icon: <User className="w-5 h-5" />,
+            label: 'Mentors',
+            href: '/dashboard/wing-admin/mentors'
           },
           {
             icon: <User className="w-5 h-5" />,

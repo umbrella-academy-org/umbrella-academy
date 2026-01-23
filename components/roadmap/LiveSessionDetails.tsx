@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Video, Clock, Users, Calendar, Download, ExternalLink, Play, CheckCircle, X, AlertCircle } from 'lucide-react';
-import { LiveSession, Phase, Lesson } from '@/lib/types/roadmap';
+import { LiveSession, Phase, Lesson } from '@/types';
 import { sampleStudentRoadmap } from '@/lib/data/roadmap-sample';
 
 interface LiveSessionDetailsProps {
@@ -20,23 +20,23 @@ export default function LiveSessionDetails({ selectedPhaseId, selectedLessonId }
     if (selectedLessonId) {
       // Find the specific lesson and return its live sessions
       for (const phase of course.phases) {
-        const lesson = phase.lessons.find(l => l.id === selectedLessonId);
+        const lesson = phase.lessons.find((l: Lesson) => l.id === selectedLessonId);
         if (lesson) {
           return lesson.liveSessions;
         }
       }
     } else if (selectedPhaseId) {
       // Get all live sessions from the selected phase
-      const phase = course.phases.find(p => p.id === selectedPhaseId);
+      const phase = course.phases.find((p: Phase) => p.id === selectedPhaseId);
       if (phase) {
-        return phase.lessons.flatMap(lesson => lesson.liveSessions);
+        return phase.lessons.flatMap((lesson: Lesson) => lesson.liveSessions);
       }
     }
     
     // Default: return all upcoming live sessions from current phase
-    const currentPhase = course.phases.find(p => p.id === course.progress.currentPhaseId);
+    const currentPhase = course.phases.find((p: Phase) => p.id === course.progress.currentPhaseId);
     if (currentPhase) {
-      return currentPhase.lessons.flatMap(lesson => lesson.liveSessions);
+      return currentPhase.lessons.flatMap((lesson: Lesson) => lesson.liveSessions);
     }
     
     return [];

@@ -9,7 +9,7 @@ export default function CurrentPlan() {
         <div className="flex items-center justify-between mb-2">
           <h3 className="text-lg font-semibold text-gray-900">Basic plan</h3>
           <div className="text-right">
-            <div className="text-2xl font-bold text-gray-900">€50</div>
+            <div className="text-2xl font-bold text-gray-900">RWF 75,000</div>
             <div className="text-sm text-gray-500">per year</div>
           </div>
         </div>

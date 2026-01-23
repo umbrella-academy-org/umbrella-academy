@@ -1,4 +1,4 @@
-import { StudentRoadmap, Course, Phase, Lesson, LiveSession } from '@/lib/types/roadmap';
+import { StudentRoadmap, Course, Phase, Lesson, LiveSession } from '@/types';
 
 // Sample live sessions
 const sampleLiveSessions: LiveSession[] = [
@@ -236,7 +236,7 @@ export const sampleStudentRoadmap: StudentRoadmap = {
     planId: 'basic-yearly',
     planName: 'Basic Plan',
     amount: 50,
-    currency: 'EUR',
+    currency: 'RWF',
     billingCycle: 'yearly',
     startDate: '2024-01-10T00:00:00Z',
     endDate: '2025-01-10T00:00:00Z',

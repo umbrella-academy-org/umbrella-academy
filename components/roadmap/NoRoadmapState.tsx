@@ -7,7 +7,7 @@ export default function NoRoadmapState() {
   const { navigate } = useNavigationWithLoading();
 
   const handleCreateRoadmap = () => {
-    navigate('/dashboard/student/roadmap/create');
+    navigate('/auth/create-roadmap');
   };
 
   const features = [

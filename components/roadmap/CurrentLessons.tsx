@@ -2,11 +2,12 @@
 
 import { Play, CheckCircle, Lock, Clock, Video, BookOpen, Award } from 'lucide-react';
 import { sampleStudentRoadmap } from '@/lib/data/roadmap-sample';
+import { Phase, Lesson } from '@/types';
 
 export default function CurrentLessons() {
   const { course } = sampleStudentRoadmap;
-  const currentPhase = course.phases.find(p => p.id === course.progress.currentPhaseId);
-  const currentLesson = currentPhase?.lessons.find(l => l.id === course.progress.currentLessonId);
+  const currentPhase = course.phases.find((p: Phase) => p.id === course.progress.currentPhaseId);
+  const currentLesson = currentPhase?.lessons.find((l: Lesson) => l.id === course.progress.currentLessonId);
   
   if (!currentPhase || !currentLesson) {
     return (
@@ -58,7 +59,7 @@ export default function CurrentLessons() {
 
   // Get next lessons in the phase
   const nextLessons = currentPhase.lessons
-    .filter(lesson => lesson.order > currentLesson.order)
+    .filter((lesson: Lesson) => lesson.order > currentLesson.order)
     .slice(0, 2);
 
   return (
@@ -137,7 +138,7 @@ export default function CurrentLessons() {
         <div>
           <h4 className="text-sm font-medium text-gray-900 mb-3">Coming Next</h4>
           <div className="space-y-2">
-            {nextLessons.map((lesson) => {
+            {nextLessons.map((lesson: Lesson) => {
               const nextStatusConfig = getLessonStatusConfig(lesson.status);
               const NextIcon = nextStatusConfig.icon;
               

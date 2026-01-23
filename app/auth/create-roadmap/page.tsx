@@ -1,12 +1,10 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import Sidebar from '@/components/dashboard/Sidebar';
-import Header from '@/components/dashboard/Header';
 import RoadmapBuilder from '@/components/roadmap/RoadmapBuilder';
 import { useRoadmap } from '@/lib/hooks/useRoadmap';
 
-export default function CreateRoadmapPage() {
+export default function AuthCreateRoadmapPage() {
   const router = useRouter();
   const { createRoadmap } = useRoadmap();
 
@@ -107,27 +105,13 @@ export default function CreateRoadmapPage() {
     // Save the roadmap
     createRoadmap(newRoadmap);
     
-    // Redirect to the main roadmap page
-    router.push('/dashboard/student/roadmap');
+    // Redirect to the student dashboard
+    router.push('/dashboard/student');
   };
 
   return (
-    <div className="flex h-screen bg-white">
-      {/* Sidebar - Fixed */}
-      <Sidebar activeItem="Roadmap" />
-
-      {/* Main Content - Scrollable */}
-      <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
-        {/* Header */}
-        <Header breadcrumb="Create Roadmap" />
-
-        {/* Content - Scrollable */}
-        <main className="flex-1 overflow-auto">
-          <div className="p-3 lg:p-4">
-            <RoadmapBuilder onSave={handleRoadmapSave} />
-          </div>
-        </main>
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-yellow-50 via-white to-yellow-50">
+      <RoadmapBuilder onSave={handleRoadmapSave} />
     </div>
   );
 }

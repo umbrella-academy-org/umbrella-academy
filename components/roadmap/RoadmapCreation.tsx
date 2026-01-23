@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { CheckCircle, Clock, Users, Star, ArrowRight, CreditCard } from 'lucide-react';
-import { Course, StudentRoadmap } from '@/lib/types/roadmap';
+import { Course, StudentRoadmap } from '@/types';
 
 interface RoadmapCreationProps {
   course: Course;
@@ -36,7 +36,7 @@ export default function RoadmapCreation({ course, onRoadmapCreated }: RoadmapCre
             planId: 'basic-yearly',
             planName: 'Basic Plan',
             amount: 50,
-            currency: 'EUR',
+            currency: 'RWF',
             billingCycle: 'yearly',
             startDate: new Date().toISOString(),
             endDate: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(),
@@ -178,7 +178,7 @@ export default function RoadmapCreation({ course, onRoadmapCreated }: RoadmapCre
             <p className="text-sm text-gray-600">Full access to course and mentoring</p>
           </div>
           <div className="text-right">
-            <div className="text-2xl font-bold text-gray-900">€50</div>
+            <div className="text-2xl font-bold text-gray-900">RWF 75,000</div>
             <div className="text-sm text-gray-500">per year</div>
           </div>
         </div>

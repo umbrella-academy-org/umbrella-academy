@@ -66,7 +66,7 @@ export default function UmbrellaAdminDashboard() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-gray-500 text-sm">Total Revenue</p>
-                    <p className="text-2xl font-bold text-gray-900">€45,230</p>
+                    <p className="text-2xl font-bold text-gray-900">RWF 67,845,000</p>
                   </div>
                   <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
                     <div className="w-6 h-6 bg-yellow-600 rounded-lg"></div>
@@ -94,11 +94,11 @@ export default function UmbrellaAdminDashboard() {
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Wings Performance</h3>
                 <div className="space-y-4">
                   {[
-                    { name: 'Programming Wing', students: 324, revenue: '€12,450', performance: 95 },
-                    { name: 'Design Wing', students: 287, revenue: '€10,230', performance: 92 },
-                    { name: 'Marketing Wing', students: 256, revenue: '€9,180', performance: 88 },
-                    { name: 'Data Science Wing', students: 198, revenue: '€7,890', performance: 90 },
-                    { name: 'Business Wing', students: 182, revenue: '€5,480', performance: 85 }
+                    { name: 'Programming Wing', students: 324, revenue: 'RWF 18,675,000', performance: 95 },
+                    { name: 'Design Wing', students: 287, revenue: 'RWF 15,345,000', performance: 92 },
+                    { name: 'Marketing Wing', students: 256, revenue: 'RWF 13,770,000', performance: 88 },
+                    { name: 'Data Science Wing', students: 198, revenue: 'RWF 11,835,000', performance: 90 },
+                    { name: 'Business Wing', students: 182, revenue: 'RWF 8,220,000', performance: 85 }
                   ].map((wing, index) => (
                     <div key={index} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                       <div className="flex-1">

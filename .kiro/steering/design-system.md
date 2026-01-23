@@ -35,7 +35,7 @@ inclusion: always
 
 ### Form Elements
 - **Input Fields**:
-  - Base: `w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent`
+  - Base: `w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-black`
   - Error State: Add `border-red-500`
   - Placeholder: `placeholder:text-gray-400`
 
