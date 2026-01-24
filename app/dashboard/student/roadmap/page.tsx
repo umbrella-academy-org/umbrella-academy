@@ -100,7 +100,7 @@ export default function RoadmapPage() {
                 {/* Live Session Details - New component replacing LiveSessionNotifications */}
                 <LiveSessionDetails 
                   selectedPhaseId={selectedPhaseId}
-                  selectedLessonId={selectedLessonId}
+                  selectedSessionId={selectedLessonId}
                 />
               </div>
             </div>

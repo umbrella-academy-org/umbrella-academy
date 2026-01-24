@@ -1,100 +1,90 @@
 import { useState } from 'react';
-import { Course, CourseLevel } from '@/types';
-import { useCourses, useAuth } from '@/contexts';
+import { Roadmap } from '@/types';
+import { useRoadmaps, useAuth } from '@/contexts';
 
-interface CreateCourseData {
+interface CreateRoadmapData {
   title: string;
   description: string;
-  category: string;
-  level: CourseLevel;
+  difficulty: 'beginner' | 'intermediate' | 'advanced';
   estimatedDuration: number;
   tags: string[];
-  skills: string[];
-  mentorId: string;
+  studentId: string;
+  trainerId?: string;
+  mentorId?: string;
 }
 
-interface UseCreateCourseReturn {
-  createCourse: (data: CreateCourseData) => Promise<Course | null>;
+interface UseCreateRoadmapReturn {
+  createRoadmap: (data: CreateRoadmapData) => Promise<Roadmap | null>;
   isLoading: boolean;
   error: string | null;
 }
 
-export function useCreateCourse(): UseCreateCourseReturn {
-  const { refreshCourses } = useCourses();
+export function useCreateRoadmap(): UseCreateRoadmapReturn {
+  const { refreshRoadmaps } = useRoadmaps();
   const { hasPermission } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const createCourse = async (data: CreateCourseData): Promise<Course | null> => {
+  const createRoadmap = async (data: CreateRoadmapData): Promise<Roadmap | null> => {
     setIsLoading(true);
     setError(null);
 
     try {
       // Check permissions
-      if (!hasPermission('manage_courses') && !hasPermission('manage_system')) {
-        throw new Error('Insufficient permissions to create courses');
+      if (!hasPermission('manage_roadmaps') && !hasPermission('manage_system')) {
+        throw new Error('Insufficient permissions to create roadmaps');
       }
 
       // Validate required fields
       if (!data.title.trim()) {
-        throw new Error('Course title is required');
+        throw new Error('Roadmap title is required');
       }
       if (!data.description.trim()) {
-        throw new Error('Course description is required');
+        throw new Error('Roadmap description is required');
       }
       if (data.estimatedDuration <= 0) {
-        throw new Error('Course duration must be greater than 0');
+        throw new Error('Roadmap duration must be greater than 0');
       }
 
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1200));
 
-      // Create new course object
-      const newCourse: Course = {
-        id: `course_${Date.now()}`,
+      // Create new roadmap object
+      const newRoadmap: Roadmap = {
+        id: `roadmap_${Date.now()}`,
         title: data.title,
         description: data.description,
-        category: data.category,
-        level: data.level,
+        studentId: data.studentId,
+        trainerId: data.trainerId,
+        mentorId: data.mentorId,
+        status: 'draft',
+        createdAt: new Date().toISOString().split('T')[0],
         estimatedDuration: data.estimatedDuration,
-        rating: 0,
-        totalStudents: 0,
-        thumbnail: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=300&fit=crop',
-        tags: data.tags,
-        skills: data.skills,
-        mentor: {
-          id: data.mentorId,
-          name: 'New Mentor', // Would be fetched from mentor data
-          expertise: data.skills,
-          rating: 0,
-          totalStudents: 0
-        },
         phases: [],
+        tags: data.tags,
+        difficulty: data.difficulty,
         progress: {
-          currentPhaseId: undefined,
-          currentLessonId: undefined,
           overallProgress: 0,
           completedPhases: 0,
           totalPhases: 0,
-          completedLessons: 0,
-          totalLessons: 0,
-          totalLiveSessions: 0,
-          attendedLiveSessions: 0,
-          missedLiveSessions: 0
+          completedSessions: 0,
+          totalSessions: 0,
+          hoursCompleted: 0,
+          totalEstimatedHours: 0
         }
       };
 
       // In a real app, this would make an API call
-      console.log('Creating course:', newCourse);
+      console.log('Creating roadmap:', newRoadmap);
 
-      // Refresh courses list
-      await refreshCourses();
+      // Refresh roadmaps list
+      await refreshRoadmaps();
 
-      return newCourse;
+      return newRoadmap;
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to create course';
+      const errorMessage = err instanceof Error ? err.message : 'Failed to create roadmap';
       setError(errorMessage);
-      console.error('Create course error:', err);
+      console.error('Create roadmap error:', err);
       return null;
     } finally {
       setIsLoading(false);
@@ -102,8 +92,11 @@ export function useCreateCourse(): UseCreateCourseReturn {
   };
 
   return {
-    createCourse,
+    createRoadmap,
     isLoading,
     error
   };
 }
+
+// Keep the old export name for backward compatibility
+export const useCreateCourse = useCreateRoadmap;

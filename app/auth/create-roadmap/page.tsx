@@ -17,62 +17,46 @@ export default function AuthCreateRoadmapPage() {
     const newRoadmap = {
       id: `roadmap-${Date.now()}`,
       studentId: 'current-student',
-      courseId: 'custom-course',
-      course: {
-        id: 'custom-course',
+      roadmapId: `roadmap-${Date.now()}`,
+      roadmap: {
+        id: `roadmap-${Date.now()}`,
         title: roadmapData.goal,
         description: `Custom learning path: ${roadmapData.goal}`,
-        category: 'Custom Learning',
-        level: 'beginner' as const,
+        studentId: 'current-student',
+        status: 'draft' as const,
+        createdAt: new Date().toISOString(),
         estimatedDuration: roadmapData.totalEstimatedWeeks,
-        rating: 5,
-        totalStudents: 1,
-        thumbnail: '',
-        tags: ['Custom', 'Self-Paced'],
-        skills: [],
-        mentor: {
-          id: 'mentor-1',
-          name: 'Your Mentor',
-          avatar: '',
-          expertise: ['Custom Learning'],
-          rating: 5,
-          totalStudents: 1
-        },
         phases: roadmapData.phases.map((phase, index) => ({
           id: `phase-${index + 1}`,
           title: phase.title,
           description: phase.description,
-          order: phase.order,
-          estimatedDuration: phase.estimatedWeeks,
-          status: index === 0 ? 'available' as const : 'locked' as const,
-          progress: 0,
-          lessons: [
+          objectives: [`Learn ${phase.title}`, `Master ${phase.title} concepts`],
+          estimatedHours: phase.estimatedWeeks * 10, // Assume 10 hours per week
+          status: index === 0 ? 'active' as const : 'pending' as const,
+          sessions: [
             {
-              id: `lesson-${index + 1}-1`,
+              id: `session-${index + 1}-1`,
               title: `${phase.title} - Getting Started`,
               description: `Introduction to ${phase.title}`,
-              order: 1,
-              estimatedDuration: 60,
-              status: index === 0 ? 'available' as const : 'locked' as const,
-              progress: 0,
-              type: 'theory' as const,
-              liveSessions: [],
-              content: {}
+              duration: 2, // 2 hours
+              status: 'pending' as const,
+              materials: [],
+              objectives: [`Understand ${phase.title} basics`],
             }
-          ]
+          ],
+          order: index + 1,
         })),
+        tags: ['Custom', 'Self-Paced'],
+        difficulty: 'beginner' as const,
         progress: {
-          currentPhaseId: 'phase-1',
-          currentLessonId: 'lesson-1-1',
           overallProgress: 0,
           completedPhases: 0,
           totalPhases: roadmapData.phases.length,
-          completedLessons: 0,
-          totalLessons: roadmapData.phases.length,
-          totalLiveSessions: 0,
-          attendedLiveSessions: 0,
-          missedLiveSessions: 0
-        }
+          completedSessions: 0,
+          totalSessions: roadmapData.phases.length,
+          hoursCompleted: 0,
+          totalEstimatedHours: roadmapData.totalEstimatedWeeks * 10,
+        },
       },
       enrolledAt: new Date().toISOString(),
       startedAt: new Date().toISOString(),
@@ -83,7 +67,7 @@ export default function AuthCreateRoadmapPage() {
         planName: 'Custom Learning Plan',
         amount: 0,
         currency: 'RWF' as const,
-        billingCycle: 'monthly' as const,
+        billingCycle: 'yearly' as const,
         startDate: new Date().toISOString(),
         endDate: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(),
         status: 'active' as const,
@@ -91,12 +75,12 @@ export default function AuthCreateRoadmapPage() {
       },
       lastAccessedAt: new Date().toISOString(),
       currentActivity: {
-        type: 'lesson' as const,
-        id: 'lesson-1-1',
+        type: 'session' as const,
+        id: 'session-1-1',
         title: `${roadmapData.phases[0]?.title} - Getting Started`
       },
       notifications: {
-        upcomingLiveSessions: [],
+        upcomingSessions: [],
         overdueAssignments: [],
         newContent: []
       }

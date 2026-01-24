@@ -1,7 +1,7 @@
 // Component props and UI-related type definitions
 
 import { UserType } from './user';
-import { Phase } from './course';
+import { RoadmapPhase } from './roadmap';
 
 export interface SidebarItem {
   icon: any;
@@ -20,7 +20,7 @@ export interface SidebarProps {
 export interface RoadmapBuilderProps {
   onSave: (roadmapData: {
     goal: string;
-    phases: Phase[];
+    phases: RoadmapPhase[];
     totalEstimatedWeeks: number;
   }) => void;
 }

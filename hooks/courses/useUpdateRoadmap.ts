@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { StudentRoadmap, RoadmapStatus } from '@/types';
-import { useCourses, useAuth } from '@/contexts';
+import { useRoadmaps, useAuth } from '@/contexts';
 
 interface UpdateRoadmapData {
   roadmapId: string;
@@ -20,7 +20,7 @@ interface UseUpdateRoadmapReturn {
 }
 
 export function useUpdateRoadmap(): UseUpdateRoadmapReturn {
-  const { refreshRoadmaps } = useCourses();
+  const { refreshStudentRoadmaps } = useRoadmaps();
   const { hasPermission, user: currentUser } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -47,19 +47,19 @@ export function useUpdateRoadmap(): UseUpdateRoadmapReturn {
       console.log('Updating roadmap:', data);
 
       // Refresh roadmaps
-      await refreshRoadmaps();
+      await refreshStudentRoadmaps();
 
       // Return mock updated roadmap
       const updatedRoadmap: StudentRoadmap = {
         id: data.roadmapId,
         studentId: 'mock_student',
-        courseId: 'mock_course',
-        course: {} as any, // Would be populated from actual data
+        roadmapId: 'mock_roadmap',
+        roadmap: {} as any, // Would be populated from actual data
         enrolledAt: new Date().toISOString(),
-        status: data.status || 'active',
+        status: 'active',
         subscription: {} as any, // Would be populated from actual data
         notifications: {
-          upcomingLiveSessions: [],
+          upcomingSessions: [],
           overdueAssignments: [],
           newContent: []
         }

@@ -2,14 +2,14 @@
 
 import { useState } from 'react';
 import { CheckCircle, Clock, Users, Star, ArrowRight, CreditCard } from 'lucide-react';
-import { Course, StudentRoadmap } from '@/types';
+import { StudentRoadmap, Roadmap } from '@/types';
 
 interface RoadmapCreationProps {
-  course: Course;
+  roadmap: Roadmap;
   onRoadmapCreated: (roadmap: StudentRoadmap) => void;
 }
 
-export default function RoadmapCreation({ course, onRoadmapCreated }: RoadmapCreationProps) {
+export default function RoadmapCreation({ roadmap, onRoadmapCreated }: RoadmapCreationProps) {
   const [isCreating, setIsCreating] = useState(false);
   const [step, setStep] = useState<'preview' | 'payment' | 'creating' | 'completed'>('preview');
 
@@ -26,16 +26,16 @@ export default function RoadmapCreation({ course, onRoadmapCreated }: RoadmapCre
         const newRoadmap: StudentRoadmap = {
           id: `roadmap-${Date.now()}`,
           studentId: 'current-student',
-          courseId: course.id,
-          course: course,
+          roadmapId: roadmap.id,
+          roadmap: roadmap,
           enrolledAt: new Date().toISOString(),
           startedAt: new Date().toISOString(),
-          expectedCompletionDate: new Date(Date.now() + course.estimatedDuration * 7 * 24 * 60 * 60 * 1000).toISOString(),
+          expectedCompletionDate: new Date(Date.now() + roadmap.estimatedDuration * 7 * 24 * 60 * 60 * 1000).toISOString(),
           status: 'active',
           subscription: {
             planId: 'basic-yearly',
             planName: 'Basic Plan',
-            amount: 50,
+            amount: 75000,
             currency: 'RWF',
             billingCycle: 'yearly',
             startDate: new Date().toISOString(),
@@ -45,12 +45,12 @@ export default function RoadmapCreation({ course, onRoadmapCreated }: RoadmapCre
           },
           lastAccessedAt: new Date().toISOString(),
           currentActivity: {
-            type: 'lesson',
-            id: course.phases[0]?.lessons[0]?.id || '',
-            title: course.phases[0]?.lessons[0]?.title || ''
+            type: 'session',
+            id: roadmap.phases[0]?.sessions[0]?.id || '',
+            title: roadmap.phases[0]?.sessions[0]?.title || ''
           },
           notifications: {
-            upcomingLiveSessions: [],
+            upcomingSessions: [],
             overdueAssignments: [],
             newContent: []
           }
@@ -102,35 +102,37 @@ export default function RoadmapCreation({ course, onRoadmapCreated }: RoadmapCre
     );
   }
 
+  const totalSessions = roadmap.phases.reduce((total, phase) => total + phase.sessions.length, 0);
+
   return (
     <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
       <div className="mb-6">
         <h3 className="text-xl font-semibold text-gray-900 mb-2">Create Your Learning Roadmap</h3>
-        <p className="text-gray-600">Start your personalized learning journey with {course.title}</p>
+        <p className="text-gray-600">Start your personalized learning journey with {roadmap.title}</p>
       </div>
 
-      {/* Course Preview */}
+      {/* Roadmap Preview */}
       <div className="border border-gray-200 rounded-lg p-4 mb-6">
         <div className="flex items-start gap-4">
           <div className="w-16 h-12 bg-gradient-to-br from-blue-900 to-blue-700 rounded-lg flex-shrink-0 flex items-center justify-center">
             <div className="w-6 h-6 bg-yellow-600 rounded-full"></div>
           </div>
           <div className="flex-1">
-            <h4 className="font-semibold text-gray-900 mb-1">{course.title}</h4>
-            <p className="text-sm text-gray-600 mb-2">{course.description}</p>
+            <h4 className="font-semibold text-gray-900 mb-1">{roadmap.title}</h4>
+            <p className="text-sm text-gray-600 mb-2">{roadmap.description}</p>
             
             <div className="flex items-center gap-4 text-sm text-gray-500">
               <div className="flex items-center gap-1">
                 <Clock className="w-4 h-4" />
-                <span>{course.estimatedDuration} weeks</span>
+                <span>{roadmap.estimatedDuration} weeks</span>
               </div>
               <div className="flex items-center gap-1">
                 <Star className="w-4 h-4 text-yellow-500 fill-current" />
-                <span>{course.rating}</span>
+                <span>{roadmap.difficulty}</span>
               </div>
               <div className="flex items-center gap-1">
                 <Users className="w-4 h-4" />
-                <span>{course.totalStudents} students</span>
+                <span>{roadmap.phases.length} phases</span>
               </div>
             </div>
           </div>
@@ -143,25 +145,23 @@ export default function RoadmapCreation({ course, onRoadmapCreated }: RoadmapCre
         <div className="space-y-2">
           <div className="flex items-center gap-2">
             <CheckCircle className="w-4 h-4 text-green-600" />
-            <span className="text-sm text-gray-700">{course.phases.length} structured learning phases</span>
+            <span className="text-sm text-gray-700">{roadmap.phases.length} structured learning phases</span>
           </div>
           <div className="flex items-center gap-2">
             <CheckCircle className="w-4 h-4 text-green-600" />
             <span className="text-sm text-gray-700">
-              {course.phases.reduce((total, phase) => total + phase.lessons.length, 0)} interactive lessons
+              {totalSessions} interactive sessions
             </span>
           </div>
           <div className="flex items-center gap-2">
             <CheckCircle className="w-4 h-4 text-green-600" />
             <span className="text-sm text-gray-700">
-              {course.phases.reduce((total, phase) => 
-                total + phase.lessons.reduce((lessonTotal, lesson) => lessonTotal + lesson.liveSessions.length, 0), 0
-              )} live mentoring sessions
+              Live mentoring and collaboration sessions
             </span>
           </div>
           <div className="flex items-center gap-2">
             <CheckCircle className="w-4 h-4 text-green-600" />
-            <span className="text-sm text-gray-700">Personal mentor: {course.mentor.name}</span>
+            <span className="text-sm text-gray-700">Personal mentor guidance</span>
           </div>
           <div className="flex items-center gap-2">
             <CheckCircle className="w-4 h-4 text-green-600" />
@@ -175,7 +175,7 @@ export default function RoadmapCreation({ course, onRoadmapCreated }: RoadmapCre
         <div className="flex items-center justify-between">
           <div>
             <h4 className="font-semibold text-gray-900">Basic Plan</h4>
-            <p className="text-sm text-gray-600">Full access to course and mentoring</p>
+            <p className="text-sm text-gray-600">Full access to roadmap and mentoring</p>
           </div>
           <div className="text-right">
             <div className="text-2xl font-bold text-gray-900">RWF 75,000</div>

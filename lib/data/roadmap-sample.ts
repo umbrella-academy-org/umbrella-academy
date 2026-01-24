@@ -177,7 +177,6 @@ export const sampleStudentRoadmap: StudentRoadmap = {
   expectedCompletionDate: '2025-03-25',
   status: 'active',
   subscription: {
-    userId: 'user_001',
     planId: 'basic-yearly',
     planName: 'Basic Plan',
     amount: 50000,
@@ -186,10 +185,7 @@ export const sampleStudentRoadmap: StudentRoadmap = {
     startDate: '2024-09-25',
     endDate: '2025-09-25',
     status: 'active',
-    autoRenew: true,
-    paymentMethod: 'mobile_money',
-    createdAt: '2024-09-25',
-    updatedAt: '2024-09-25'
+    autoRenew: true
   },
   lastAccessedAt: '2024-12-20',
   currentActivity: {

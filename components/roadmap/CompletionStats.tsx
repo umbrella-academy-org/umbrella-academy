@@ -4,8 +4,8 @@ import { Trophy, Target, Clock, CheckCircle } from 'lucide-react';
 import { sampleStudentRoadmap } from '@/lib/data/roadmap-sample';
 
 export default function CompletionStats() {
-  const { course, subscription } = sampleStudentRoadmap;
-  const progress = course.progress;
+  const { roadmap, subscription } = sampleStudentRoadmap;
+  const progress = roadmap.progress;
   
   // Calculate time-based stats
   const enrolledDate = new Date(sampleStudentRoadmap.enrolledAt);
@@ -44,7 +44,7 @@ export default function CompletionStats() {
       icon: Clock,
       label: 'Time Spent',
       value: weeksEnrolled,
-      total: course.estimatedDuration,
+      total: roadmap.estimatedDuration,
       suffix: 'weeks',
       color: 'text-purple-600',
       bgColor: 'bg-purple-100'
@@ -52,8 +52,8 @@ export default function CompletionStats() {
     {
       icon: Trophy,
       label: 'Lessons Done',
-      value: progress.completedLessons,
-      total: progress.totalLessons,
+      value: progress.completedSessions,
+      total: progress.totalSessions,
       suffix: 'lessons',
       color: 'text-yellow-600',
       bgColor: 'bg-yellow-100'
@@ -109,7 +109,7 @@ export default function CompletionStats() {
       <div className="mt-6 pt-4 border-t border-gray-100">
         <div className="grid grid-cols-2 gap-4 text-center">
           <div>
-            <div className="text-sm font-medium text-gray-900">{progress.attendedLiveSessions}</div>
+            <div className="text-sm font-medium text-gray-900">{progress.completedSessions}</div>
             <div className="text-xs text-gray-500">Sessions Attended</div>
           </div>
           <div>
