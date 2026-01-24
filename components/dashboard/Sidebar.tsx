@@ -1,23 +1,36 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Home, Calendar, Map, Bell, Video, CreditCard, HelpCircle, MessageSquare, X, Settings, Menu, User } from 'lucide-react';
+import { Home, Calendar, Map, Bell, Video, CreditCard, HelpCircle, MessageSquare, X, Settings, Menu, User, LogOut } from 'lucide-react';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
+import { useAuth } from '@/contexts';
 import { SidebarProps, SidebarItem, UserType } from '@/types';
 
-export default function Sidebar({ activeItem = 'Home', userType = 'student' }: SidebarProps) {
+export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps) {
   const [currentActive, setCurrentActive] = useState(activeItem);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { navigate } = useNavigationWithLoading();
+  const { user, logout } = useAuth();
+
+  // Use user data from context, fallback to prop
+  const currentUserType = user?.role || userType || 'student';
+  const userName = user?.name || 'User';
+  const userEmail = user?.email || 'user@umbrella.rw';
+  const userInitials = userName.split(' ').map(n => n[0]).join('').toUpperCase();
 
   // Update current active when prop changes
   useEffect(() => {
     setCurrentActive(activeItem);
   }, [activeItem]);
 
+  const handleLogout = async () => {
+    await logout();
+    navigate('/auth/login');
+  };
+
   // Define navigation items based on user type
   const getNavigationItems = (): SidebarItem[] => {
-    switch (userType) {
+    switch (currentUserType) {
       case 'trainer':
         return [
           {
@@ -193,7 +206,7 @@ export default function Sidebar({ activeItem = 'Home', userType = 'student' }: S
 
   // Get user type display info
   const getUserTypeInfo = () => {
-    switch (userType) {
+    switch (currentUserType) {
       case 'trainer':
         return {
           displayName: 'Trainer',
@@ -370,16 +383,25 @@ export default function Sidebar({ activeItem = 'Home', userType = 'student' }: S
         {/* User Profile */}
         <div className="p-3 lg:p-4 border-t border-gray-800">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 lg:w-10 lg:h-10 bg-orange-400 rounded-full flex items-center justify-center">
-              <span className="text-xs lg:text-sm font-medium text-white">OR</span>
+            <div className="w-8 h-8 lg:w-10 lg:h-10 bg-yellow-600 rounded-full flex items-center justify-center">
+              <span className="text-xs lg:text-sm font-medium text-white">{userInitials}</span>
             </div>
             <div className="flex-1 min-w-0">
-              <div className="font-medium text-white text-sm lg:text-base truncate">Olivia Rhye</div>
-              <div className="text-xs lg:text-sm text-gray-400 truncate">olivia@umbrellaacademy.com</div>
+              <div className="font-medium text-white text-sm lg:text-base truncate">{userName}</div>
+              <div className="text-xs lg:text-sm text-gray-400 truncate">{userEmail}</div>
             </div>
-            <button className="text-gray-400 hover:text-white">
-              <Settings className="w-4 h-4 lg:w-5 lg:h-5" />
-            </button>
+            <div className="flex items-center gap-1">
+              <button className="text-gray-400 hover:text-white p-1">
+                <Settings className="w-4 h-4 lg:w-5 lg:h-5" />
+              </button>
+              <button 
+                onClick={handleLogout}
+                className="text-gray-400 hover:text-red-400 p-1"
+                title="Logout"
+              >
+                <LogOut className="w-4 h-4 lg:w-5 lg:h-5" />
+              </button>
+            </div>
           </div>
         </div>
       </div>

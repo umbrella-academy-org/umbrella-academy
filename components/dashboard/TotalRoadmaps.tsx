@@ -2,9 +2,61 @@
 
 import { Play, ChevronRight, Users, Clock, CheckCircle } from 'lucide-react';
 import { useState } from 'react';
+import { StudentRoadmap, UserType } from '@/types';
 
-export default function TotalRoadmaps() {
+interface TotalRoadmapsProps {
+  roadmaps: StudentRoadmap[];
+  userType: UserType;
+}
+
+export default function TotalRoadmaps({ roadmaps, userType }: TotalRoadmapsProps) {
   const [isHovered, setIsHovered] = useState(false);
+
+  // Calculate roadmap statistics
+  const totalRoadmaps = roadmaps.length;
+  const completedRoadmaps = roadmaps.filter(r => r.status === 'completed').length;
+  const activeRoadmaps = roadmaps.filter(r => r.status === 'active').length;
+  const pendingRoadmaps = roadmaps.filter(r => r.status === 'enrolled').length;
+  
+  // Calculate overall progress
+  const overallProgress = totalRoadmaps > 0 
+    ? Math.round(roadmaps.reduce((sum, r) => sum + r.course.progress.overallProgress, 0) / totalRoadmaps)
+    : 0;
+
+  // Get the most recent or active roadmap for display
+  const featuredRoadmap = roadmaps.find(r => r.status === 'active') || roadmaps[0];
+  
+  // Get course info if roadmap exists
+  const courseInfo = featuredRoadmap ? {
+    title: featuredRoadmap.course.title,
+    description: featuredRoadmap.course.description,
+    totalPhases: featuredRoadmap.course.phases.length,
+    completedPhases: featuredRoadmap.course.phases.filter(p => p.status === 'completed').length,
+    estimatedDuration: `${featuredRoadmap.course.phases.length * 4} weeks`, // 4 weeks per phase
+    studentsCount: roadmaps.filter(r => r.courseId === featuredRoadmap.courseId).length
+  } : null;
+
+  if (!featuredRoadmap || !courseInfo) {
+    return (
+      <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+        <div className="text-center py-8">
+          <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <CheckCircle className="w-8 h-8 text-gray-400" />
+          </div>
+          <h3 className="text-lg font-semibold text-gray-900 mb-2">No Roadmaps Available</h3>
+          <p className="text-sm text-gray-600 mb-4">
+            {userType === 'trainer' 
+              ? 'No student roadmaps assigned to you yet.'
+              : 'Start your learning journey by creating a roadmap.'
+            }
+          </p>
+          <button className="px-4 py-2 bg-yellow-600 text-white text-sm font-medium rounded-lg hover:bg-yellow-700 transition-colors">
+            {userType === 'trainer' ? 'View All Students' : 'Create Roadmap'}
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div 
@@ -41,7 +93,7 @@ export default function TotalRoadmaps() {
           {/* Course Label */}
           <div className="absolute bottom-2 left-2 right-2">
             <div className="bg-black bg-opacity-50 rounded px-2 py-1">
-              <p className="text-white text-xs font-medium">Programming & Development</p>
+              <p className="text-white text-xs font-medium truncate">{courseInfo.title}</p>
             </div>
           </div>
         </div>
@@ -54,15 +106,19 @@ export default function TotalRoadmaps() {
                 <h3 className={`text-lg font-semibold text-gray-900 transition-colors duration-200 ${
                   isHovered ? 'text-yellow-600' : ''
                 }`}>
-                  Total Roadmaps
+                  {userType === 'trainer' ? 'Student Roadmaps' : 'My Roadmaps'}
                 </h3>
-                <span className="px-2 py-1 bg-green-100 text-green-700 text-xs font-medium rounded-full animate-pulse">
-                  ● Active
+                <span className={`px-2 py-1 text-xs font-medium rounded-full animate-pulse ${
+                  activeRoadmaps > 0 
+                    ? 'bg-green-100 text-green-700' 
+                    : 'bg-gray-100 text-gray-700'
+                }`}>
+                  ● {activeRoadmaps > 0 ? 'Active' : 'Inactive'}
                 </span>
               </div>
               
-              <p className="text-sm text-gray-600 mb-3">
-                22 September, 2023
+              <p className="text-sm text-gray-600 mb-3 truncate">
+                {courseInfo.description}
               </p>
 
               {/* Stats */}
@@ -70,15 +126,22 @@ export default function TotalRoadmaps() {
                 <div className="flex items-center gap-2">
                   <Users className="w-4 h-4 text-blue-600" />
                   <div>
-                    <p className="text-xs text-gray-500">Students</p>
-                    <p className="text-sm font-semibold text-gray-900">8/10</p>
+                    <p className="text-xs text-gray-500">
+                      {userType === 'trainer' ? 'Students' : 'Phases'}
+                    </p>
+                    <p className="text-sm font-semibold text-gray-900">
+                      {userType === 'trainer' 
+                        ? `${courseInfo.studentsCount}/${courseInfo.studentsCount + 2}` 
+                        : `${courseInfo.completedPhases}/${courseInfo.totalPhases}`
+                      }
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
                   <Clock className="w-4 h-4 text-orange-600" />
                   <div>
                     <p className="text-xs text-gray-500">Duration</p>
-                    <p className="text-sm font-semibold text-gray-900">6 months</p>
+                    <p className="text-sm font-semibold text-gray-900">{courseInfo.estimatedDuration}</p>
                   </div>
                 </div>
               </div>
@@ -89,15 +152,17 @@ export default function TotalRoadmaps() {
               <div className={`text-2xl font-bold text-gray-900 mb-1 transition-all duration-300 ${
                 isHovered ? 'scale-110 text-yellow-600' : ''
               }`}>
-                75%
+                {overallProgress}%
               </div>
-              <p className="text-xs text-gray-500 mb-2 whitespace-nowrap">5 out of 8 Roadmaps Completed</p>
+              <p className="text-xs text-gray-500 mb-2 whitespace-nowrap">
+                {completedRoadmaps} of {totalRoadmaps} Roadmaps Completed
+              </p>
               <div className="flex gap-2">
                 <button className="px-3 py-1.5 border border-gray-300 text-gray-700 text-xs font-medium rounded-lg hover:bg-gray-50 transition-all duration-200 interactive-button">
                   View All
                 </button>
                 <button className="px-3 py-1.5 bg-yellow-600 text-white text-xs font-medium rounded-lg hover:bg-yellow-700 transition-all duration-200 interactive-button transform hover:scale-105 focus:ring-2 focus:ring-yellow-300">
-                  Continue
+                  {userType === 'trainer' ? 'Manage' : 'Continue'}
                 </button>
               </div>
             </div>
@@ -106,7 +171,7 @@ export default function TotalRoadmaps() {
           {/* Progress Bar */}
           <div className="mt-4">
             <div className="flex items-center justify-between text-xs text-gray-600 mb-2">
-              <span className="hover:text-gray-800 transition-colors">Roadmap Progress</span>
+              <span className="hover:text-gray-800 transition-colors">Overall Progress</span>
               <ChevronRight className={`w-3 h-3 transition-transform duration-200 ${
                 isHovered ? 'translate-x-1' : ''
               }`} />
@@ -114,7 +179,7 @@ export default function TotalRoadmaps() {
             <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
               <div 
                 className="bg-gradient-to-r from-yellow-500 to-yellow-600 h-2 rounded-full transition-all duration-1000 ease-out relative"
-                style={{ width: isHovered ? '75%' : '60%' }}
+                style={{ width: isHovered ? `${overallProgress}%` : `${Math.max(overallProgress - 10, 0)}%` }}
               >
                 <div className="absolute inset-0 bg-white opacity-30 animate-shimmer"></div>
               </div>
@@ -130,15 +195,15 @@ export default function TotalRoadmaps() {
           <div className="mt-4 flex items-center gap-4 text-xs">
             <div className="flex items-center gap-1">
               <CheckCircle className="w-3 h-3 text-green-500" />
-              <span className="text-gray-600">5 Completed</span>
+              <span className="text-gray-600">{completedRoadmaps} Completed</span>
             </div>
             <div className="flex items-center gap-1">
               <Clock className="w-3 h-3 text-orange-500" />
-              <span className="text-gray-600">2 In Progress</span>
+              <span className="text-gray-600">{activeRoadmaps} Active</span>
             </div>
             <div className="flex items-center gap-1">
               <div className="w-3 h-3 rounded-full border-2 border-gray-300"></div>
-              <span className="text-gray-600">1 Pending</span>
+              <span className="text-gray-600">{pendingRoadmaps} Pending</span>
             </div>
           </div>
         </div>

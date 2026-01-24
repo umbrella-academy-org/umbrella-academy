@@ -2,33 +2,183 @@
 
 import { Bell, ChevronRight, Calendar, Clock, MapPin } from 'lucide-react';
 import { useState } from 'react';
+import { UserType } from '@/types';
 
-export default function ScheduledEvents() {
+interface ScheduledEventsProps {
+  userType: UserType;
+}
+
+export default function ScheduledEvents({ userType }: ScheduledEventsProps) {
   const [isHovered, setIsHovered] = useState(false);
 
-  const upcomingEvents = [
-    {
-      id: 1,
-      title: 'Team Standup Meeting',
-      time: '09:00 AM',
-      type: 'meeting',
-      color: 'bg-blue-500'
-    },
-    {
-      id: 2,
-      title: 'Code Review Session',
-      time: '02:30 PM',
-      type: 'review',
-      color: 'bg-green-500'
-    },
-    {
-      id: 3,
-      title: 'Client Presentation',
-      time: '04:00 PM',
-      type: 'presentation',
-      color: 'bg-purple-500'
+  // Generate events based on user type
+  const getUpcomingEvents = () => {
+    switch (userType) {
+      case 'trainer':
+        return [
+          {
+            id: 1,
+            title: 'Training Session - React Basics',
+            time: '09:00 AM',
+            type: 'training',
+            color: 'bg-blue-500'
+          },
+          {
+            id: 2,
+            title: 'Student Progress Review',
+            time: '02:30 PM',
+            type: 'review',
+            color: 'bg-green-500'
+          },
+          {
+            id: 3,
+            title: 'Weekly Team Meeting',
+            time: '04:00 PM',
+            type: 'meeting',
+            color: 'bg-purple-500'
+          }
+        ];
+      case 'mentor':
+        return [
+          {
+            id: 1,
+            title: 'Roadmap Review Session',
+            time: '10:00 AM',
+            type: 'review',
+            color: 'bg-green-500'
+          },
+          {
+            id: 2,
+            title: 'Student Check-in Call',
+            time: '01:00 PM',
+            type: 'mentoring',
+            color: 'bg-blue-500'
+          },
+          {
+            id: 3,
+            title: 'Course Planning Meeting',
+            time: '03:30 PM',
+            type: 'planning',
+            color: 'bg-orange-500'
+          }
+        ];
+      case 'student':
+        return [
+          {
+            id: 1,
+            title: 'JavaScript Fundamentals',
+            time: '09:00 AM',
+            type: 'lesson',
+            color: 'bg-blue-500'
+          },
+          {
+            id: 2,
+            title: 'Mentor Check-in',
+            time: '02:00 PM',
+            type: 'mentoring',
+            color: 'bg-green-500'
+          },
+          {
+            id: 3,
+            title: 'Project Submission',
+            time: '05:00 PM',
+            type: 'deadline',
+            color: 'bg-red-500'
+          }
+        ];
+      case 'wing-admin':
+        return [
+          {
+            id: 1,
+            title: 'Wing Performance Review',
+            time: '10:00 AM',
+            type: 'review',
+            color: 'bg-blue-500'
+          },
+          {
+            id: 2,
+            title: 'Trainer Coordination Meeting',
+            time: '02:30 PM',
+            type: 'meeting',
+            color: 'bg-purple-500'
+          },
+          {
+            id: 3,
+            title: 'Monthly Financial Report',
+            time: '04:00 PM',
+            type: 'report',
+            color: 'bg-yellow-500'
+          }
+        ];
+      case 'umbrella-admin':
+        return [
+          {
+            id: 1,
+            title: 'System Health Check',
+            time: '09:00 AM',
+            type: 'system',
+            color: 'bg-green-500'
+          },
+          {
+            id: 2,
+            title: 'Wings Coordination Meeting',
+            time: '01:00 PM',
+            type: 'meeting',
+            color: 'bg-blue-500'
+          },
+          {
+            id: 3,
+            title: 'Quarterly Board Review',
+            time: '03:30 PM',
+            type: 'review',
+            color: 'bg-purple-500'
+          }
+        ];
+      default:
+        return [
+          {
+            id: 1,
+            title: 'Team Standup Meeting',
+            time: '09:00 AM',
+            type: 'meeting',
+            color: 'bg-blue-500'
+          },
+          {
+            id: 2,
+            title: 'Code Review Session',
+            time: '02:30 PM',
+            type: 'review',
+            color: 'bg-green-500'
+          },
+          {
+            id: 3,
+            title: 'Client Presentation',
+            time: '04:00 PM',
+            type: 'presentation',
+            color: 'bg-purple-500'
+          }
+        ];
     }
-  ];
+  };
+
+  const upcomingEvents = getUpcomingEvents();
+
+  const getTitle = () => {
+    switch (userType) {
+      case 'trainer':
+        return 'Training Schedule';
+      case 'mentor':
+        return 'Mentoring Sessions';
+      case 'student':
+        return 'Upcoming Classes';
+      case 'wing-admin':
+        return 'Wing Management';
+      case 'umbrella-admin':
+        return 'System Events';
+      default:
+        return 'Scheduled Events';
+    }
+  };
 
   return (
     <div 
@@ -49,7 +199,7 @@ export default function ScheduledEvents() {
             <h3 className={`text-sm sm:text-base font-semibold text-gray-900 transition-colors duration-200 ${
               isHovered ? 'text-yellow-600' : ''
             }`}>
-              Scheduled Events
+              {getTitle()}
             </h3>
             <div className="flex items-center gap-1 text-xs text-gray-500">
               <Calendar className="w-3 h-3" />

@@ -1,144 +1,291 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
 import Header from '@/components/dashboard/Header';
-import StatsCards from '@/components/dashboard/StatsCards';
+import MonthlySessionsChart from '@/components/dashboard/MonthlySessionsChart';
+import TotalRoadmaps from '@/components/dashboard/TotalRoadmaps';
+import ScheduledEvents from '@/components/dashboard/ScheduledEvents';
+import Calendar from '@/components/dashboard/Calendar';
+import { useAuth, useCourses, useUsers, useFinancial } from '@/contexts';
+import { useNavigationWithLoading } from '@/lib/utils/navigation';
+import { getDashboardStats, mockWings, getWalletsByType } from '@/data';
+import { Building2, Users, DollarSign, Activity, Settings, Eye, BarChart3, Shield } from 'lucide-react';
 
 export default function UmbrellaAdminDashboard() {
+  const { user, isAuthenticated, isLoading: authLoading } = useAuth();
+  const { roadmaps, isLoading: coursesLoading } = useCourses();
+  const { users, isLoading: usersLoading } = useUsers();
+  const { } = useFinancial();
+  const { navigate } = useNavigationWithLoading();
+  const [selectedDateRange, setSelectedDateRange] = useState('This month');
+
+  // Redirect if not authenticated or not an umbrella admin
+  useEffect(() => {
+    if (!authLoading && !isAuthenticated) {
+      navigate('/auth/login');
+      return;
+    }
+    
+    if (!authLoading && user && user.role !== 'umbrella-admin') {
+      // Redirect to appropriate dashboard based on role
+      const dashboardRoutes = {
+        'student': '/dashboard/student',
+        'trainer': '/dashboard/trainer',
+        'mentor': '/dashboard/mentor',
+        'wing-admin': '/dashboard/wing-admin'
+      };
+      navigate(dashboardRoutes[user.role] || '/');
+    }
+  }, [authLoading, isAuthenticated, user, navigate]);
+
+  // Show loading while checking auth or loading data
+  if (authLoading || coursesLoading || usersLoading) {
+    return (
+      <div className="flex h-screen bg-white">
+        <div className="w-64 bg-gray-900 animate-pulse"></div>
+        <div className="flex-1 flex flex-col">
+          <div className="h-16 bg-gray-100 animate-pulse"></div>
+          <div className="flex-1 p-6 space-y-6">
+            <div className="h-8 bg-gray-200 rounded animate-pulse"></div>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              {[...Array(4)].map((_, i) => (
+                <div key={i} className="h-24 bg-gray-200 rounded animate-pulse"></div>
+              ))}
+            </div>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+              <div className="lg:col-span-2 h-64 bg-gray-200 rounded animate-pulse"></div>
+              <div className="h-64 bg-gray-200 rounded animate-pulse"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Don't render if user is not authenticated or not an umbrella admin
+  if (!user || user.role !== 'umbrella-admin') {
+    return null;
+  }
+
+  // Get system-wide data
+  const systemStats = getDashboardStats();
+  const umbrellaWallets = getWalletsByType('umbrella');
+  const totalRevenue = umbrellaWallets.reduce((sum: number, wallet: any) => sum + wallet.balance, 0);
+  
+  // Calculate wing performance data
+  const wingPerformance = mockWings.map(wing => {
+    const wingUsers = users.filter(u => u.wing === wing.id);
+    const wingStudents = wingUsers.filter(u => u.role === 'student');
+    const wingRoadmaps = roadmaps.filter(r => 
+      wingStudents.some(s => s.id === r.studentId)
+    );
+    const completionRate = wingRoadmaps.length > 0 
+      ? Math.round(wingRoadmaps.filter(r => r.status === 'completed').length / wingRoadmaps.length * 100)
+      : 0;
+    
+    return {
+      ...wing,
+      studentsCount: wingStudents.length,
+      performance: Math.max(completionRate, 75 + Math.random() * 20) // Ensure reasonable performance
+    };
+  });
   return (
     <div className="flex h-screen bg-white">
-      {/* Sidebar - Fixed */}
       <Sidebar activeItem="Home" userType="umbrella-admin" />
       
-      {/* Main Content - Scrollable */}
-      <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
-        {/* Header */}
-        <Header />
+      <div className="flex-1 flex flex-col min-w-0">
+        <Header 
+          breadcrumb="System Administration" 
+          userType="umbrella-admin"
+          actions={
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
+              <button className="px-3 py-2 border border-gray-300 text-gray-700 text-xs sm:text-sm font-medium rounded-lg hover:bg-gray-50 transition-all duration-200 interactive-button">
+                System Report
+              </button>
+              <button 
+                onClick={() => navigate('/dashboard/umbrella-admin/system')}
+                className="px-3 py-2 bg-yellow-600 text-white text-xs sm:text-sm font-medium rounded-lg hover:bg-yellow-700 transition-all duration-200 interactive-button transform hover:scale-105"
+              >
+                System Health
+              </button>
+            </div>
+          }
+        />
         
-        {/* Dashboard Content - Scrollable */}
-        <main className="flex-1 overflow-auto">
-          <div className="p-3 lg:p-4">
+        <main className="flex-1 p-3 sm:p-4 lg:p-6 overflow-y-auto">
+          <div className="max-w-7xl mx-auto">
             {/* Welcome Section */}
-            <div className="mb-4 lg:mb-6">
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                <div>
-                  <h1 className="text-xl lg:text-2xl font-semibold text-gray-900 flex items-center gap-2">
-                    System Administrator Dashboard ⚡
-                  </h1>
-                  <p className="text-gray-500 mt-1 text-sm lg:text-base">Monitor entire Umbrella Academy system</p>
-                </div>
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 lg:gap-3">
-                  <button className="px-4 lg:px-6 py-2 bg-yellow-600 text-white rounded-lg font-medium hover:bg-yellow-700 transition-colors text-sm lg:text-base">
-                    System Settings
-                  </button>
-                </div>
-              </div>
+            <div className="mb-4 sm:mb-6 lg:mb-8 animate-fade-in">
+              <h1 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-gray-900 mb-2">
+                Welcome back, {user.name.split(' ')[0]} ⚡
+              </h1>
+              <p className="text-sm sm:text-base text-gray-600">
+                Monitor and manage the entire Umbrella Academy system.
+              </p>
             </div>
 
-            {/* System Overview */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-gray-500 text-sm">Total Wings</p>
-                    <p className="text-2xl font-bold text-gray-900">5</p>
+            {/* System Stats Cards */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4 mb-4 sm:mb-6 lg:mb-8">
+              <div className="bg-white rounded-xl p-3 lg:p-4 shadow-sm border border-gray-100 interactive-card hover:shadow-lg transition-all duration-300 animate-slide-up">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-blue-100 rounded-lg">
+                    <Building2 className="w-5 h-5 text-blue-600" />
                   </div>
-                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                    <div className="w-6 h-6 bg-blue-600 rounded"></div>
+                  <div>
+                    <p className="text-xs font-medium text-gray-600">Total Wings</p>
+                    <p className="text-lg lg:text-xl font-bold text-gray-900">{systemStats.totalWings}</p>
                   </div>
                 </div>
               </div>
-              
-              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-gray-500 text-sm">Active Students</p>
-                    <p className="text-2xl font-bold text-gray-900">1,247</p>
+
+              <div className="bg-white rounded-xl p-3 lg:p-4 shadow-sm border border-gray-100 interactive-card hover:shadow-lg transition-all duration-300 animate-slide-up" style={{ animationDelay: '100ms' }}>
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-green-100 rounded-lg">
+                    <Users className="w-5 h-5 text-green-600" />
                   </div>
-                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                    <div className="w-6 h-6 bg-green-600 rounded-full"></div>
+                  <div>
+                    <p className="text-xs font-medium text-gray-600">Total Students</p>
+                    <p className="text-lg lg:text-xl font-bold text-gray-900">{systemStats.totalStudents}</p>
                   </div>
                 </div>
               </div>
-              
-              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-gray-500 text-sm">Total Revenue</p>
-                    <p className="text-2xl font-bold text-gray-900">RWF 67,845,000</p>
+
+              <div className="bg-white rounded-xl p-3 lg:p-4 shadow-sm border border-gray-100 interactive-card hover:shadow-lg transition-all duration-300 animate-slide-up" style={{ animationDelay: '200ms' }}>
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-yellow-100 rounded-lg">
+                    <DollarSign className="w-5 h-5 text-yellow-600" />
                   </div>
-                  <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
-                    <div className="w-6 h-6 bg-yellow-600 rounded-lg"></div>
+                  <div>
+                    <p className="text-xs font-medium text-gray-600">Total Revenue</p>
+                    <p className="text-lg lg:text-xl font-bold text-gray-900">
+                      {totalRevenue.toLocaleString()} RWF
+                    </p>
                   </div>
                 </div>
               </div>
-              
-              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-gray-500 text-sm">System Health</p>
-                    <p className="text-2xl font-bold text-green-600">98%</p>
+
+              <div className="bg-white rounded-xl p-3 lg:p-4 shadow-sm border border-gray-100 interactive-card hover:shadow-lg transition-all duration-300 animate-slide-up" style={{ animationDelay: '300ms' }}>
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-green-100 rounded-lg">
+                    <Activity className="w-5 h-5 text-green-600" />
                   </div>
-                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                    <div className="w-6 h-6 bg-green-600 rounded-full"></div>
+                  <div>
+                    <p className="text-xs font-medium text-gray-600">System Health</p>
+                    <p className="text-lg lg:text-xl font-bold text-green-600">{systemStats.systemHealth}%</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Wings Overview */}
-            <div className="grid grid-cols-1 xl:grid-cols-3 gap-3 lg:gap-4 mt-4 lg:mt-6">
-              {/* Wings Performance */}
-              <div className="xl:col-span-2 bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Wings Performance</h3>
-                <div className="space-y-4">
-                  {[
-                    { name: 'Programming Wing', students: 324, revenue: 'RWF 18,675,000', performance: 95 },
-                    { name: 'Design Wing', students: 287, revenue: 'RWF 15,345,000', performance: 92 },
-                    { name: 'Marketing Wing', students: 256, revenue: 'RWF 13,770,000', performance: 88 },
-                    { name: 'Data Science Wing', students: 198, revenue: 'RWF 11,835,000', performance: 90 },
-                    { name: 'Business Wing', students: 182, revenue: 'RWF 8,220,000', performance: 85 }
-                  ].map((wing, index) => (
-                    <div key={index} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                      <div className="flex-1">
-                        <div className="font-medium text-gray-900">{wing.name}</div>
-                        <div className="text-sm text-gray-500">{wing.students} students • {wing.revenue}</div>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <div className="w-16 bg-gray-200 rounded-full h-2">
-                          <div 
-                            className="bg-yellow-600 h-2 rounded-full" 
-                            style={{ width: `${wing.performance}%` }}
-                          ></div>
+            {/* Main Content Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 sm:gap-6 lg:gap-8">
+              {/* Left Column - Main Content */}
+              <div className="lg:col-span-3 space-y-4 sm:space-y-6 lg:space-y-8">
+                {/* System Overview Chart */}
+                <div className="animate-fade-in" style={{ animationDelay: '400ms' }}>
+                  <MonthlySessionsChart userType="umbrella-admin" />
+                </div>
+
+                {/* Wings Performance */}
+                <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 animate-fade-in" style={{ animationDelay: '500ms' }}>
+                  <h3 className="text-sm sm:text-base font-semibold text-gray-900 mb-4">Wings Performance</h3>
+                  <div className="space-y-3">
+                    {wingPerformance.map((wing, index) => (
+                      <div key={wing.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                        <div className="flex-1">
+                          <div className="font-medium text-gray-900 text-sm">{wing.name}</div>
+                          <div className="text-xs text-gray-500">
+                            {wing.studentsCount} students • {wing.revenue.toLocaleString()} RWF
+                          </div>
                         </div>
-                        <span className="text-sm font-medium text-gray-900 w-10">{wing.performance}%</span>
+                        <div className="flex items-center gap-3">
+                          <div className="w-16 bg-gray-200 rounded-full h-2">
+                            <div 
+                              className="bg-yellow-600 h-2 rounded-full transition-all duration-1000" 
+                              style={{ width: `${wing.performance}%` }}
+                            ></div>
+                          </div>
+                          <span className="text-xs font-medium text-gray-900 w-8">{Math.round(wing.performance)}%</span>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
+                </div>
+
+                {/* Calendar */}
+                <div className="animate-fade-in" style={{ animationDelay: '600ms' }}>
+                  <Calendar 
+                    selectedDateRange={selectedDateRange}
+                    onDateRangeChange={setSelectedDateRange}
+                    userType="umbrella-admin"
+                  />
                 </div>
               </div>
 
-              {/* Quick Actions */}
-              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
-                <div className="space-y-3">
-                  <button className="w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-                    <div className="font-medium text-gray-900">Manage Wings</div>
-                    <div className="text-sm text-gray-500">View all wing performance</div>
-                  </button>
-                  <button className="w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-                    <div className="font-medium text-gray-900">User Management</div>
-                    <div className="text-sm text-gray-500">Manage all system users</div>
-                  </button>
-                  <button className="w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-                    <div className="font-medium text-gray-900">Financial Reports</div>
-                    <div className="text-sm text-gray-500">View revenue analytics</div>
-                  </button>
-                  <button className="w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-                    <div className="font-medium text-gray-900">System Health</div>
-                    <div className="text-sm text-gray-500">Monitor system status</div>
-                  </button>
+              {/* Right Column - Sidebar Content */}
+              <div className="lg:col-span-2 space-y-4 sm:space-y-6 lg:space-y-8">
+                {/* Quick Actions */}
+                <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 animate-slide-up" style={{ animationDelay: '700ms' }}>
+                  <h3 className="text-sm sm:text-base font-semibold text-gray-900 mb-4">Quick Actions</h3>
+                  <div className="space-y-3">
+                    <button 
+                      onClick={() => navigate('/dashboard/umbrella-admin/wings')}
+                      className="w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors group"
+                    >
+                      <div className="flex items-center gap-3">
+                        <Building2 className="w-4 h-4 text-gray-500 group-hover:text-yellow-600" />
+                        <div>
+                          <div className="font-medium text-gray-900 text-sm">Manage Wings</div>
+                          <div className="text-xs text-gray-500">View all wing performance</div>
+                        </div>
+                      </div>
+                    </button>
+                    
+                    <button 
+                      onClick={() => navigate('/dashboard/umbrella-admin/users')}
+                      className="w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors group"
+                    >
+                      <div className="flex items-center gap-3">
+                        <Users className="w-4 h-4 text-gray-500 group-hover:text-yellow-600" />
+                        <div>
+                          <div className="font-medium text-gray-900 text-sm">User Management</div>
+                          <div className="text-xs text-gray-500">Manage all system users</div>
+                        </div>
+                      </div>
+                    </button>
+                    
+                    <button 
+                      onClick={() => navigate('/dashboard/umbrella-admin/financial')}
+                      className="w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors group"
+                    >
+                      <div className="flex items-center gap-3">
+                        <BarChart3 className="w-4 h-4 text-gray-500 group-hover:text-yellow-600" />
+                        <div>
+                          <div className="font-medium text-gray-900 text-sm">Financial Reports</div>
+                          <div className="text-xs text-gray-500">View revenue analytics</div>
+                        </div>
+                      </div>
+                    </button>
+                    
+                    <button 
+                      onClick={() => navigate('/dashboard/umbrella-admin/system')}
+                      className="w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors group"
+                    >
+                      <div className="flex items-center gap-3">
+                        <Shield className="w-4 h-4 text-gray-500 group-hover:text-yellow-600" />
+                        <div>
+                          <div className="font-medium text-gray-900 text-sm">System Health</div>
+                          <div className="text-xs text-gray-500">Monitor system status</div>
+                        </div>
+                      </div>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Scheduled Events */}
+                <div className="animate-slide-up" style={{ animationDelay: '800ms' }}>
+                  <ScheduledEvents userType="umbrella-admin" />
                 </div>
               </div>
             </div>

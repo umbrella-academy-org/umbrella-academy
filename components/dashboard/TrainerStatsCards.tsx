@@ -1,7 +1,15 @@
 'use client';
 
-import { Users, CheckCircle, DollarSign, Star, TrendingUp } from 'lucide-react';
+import { Users, CheckCircle, DollarSign, Star, Bell } from 'lucide-react';
 import { useState } from 'react';
+import { Transaction } from '@/types';
+
+interface TrainerStatsCardsProps {
+  studentsCount: number;
+  activeRoadmaps: number;
+  walletBalance: number;
+  recentTransactions: Transaction[];
+}
 
 interface StatCard {
   icon: React.ReactNode;
@@ -13,54 +21,73 @@ interface StatCard {
   subtitle?: string;
 }
 
-export default function TrainerStatsCards() {
+export default function TrainerStatsCards({ 
+  studentsCount, 
+  activeRoadmaps, 
+  walletBalance, 
+  recentTransactions 
+}: TrainerStatsCardsProps) {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+
+  // Calculate completed sessions from recent transactions
+  const completedSessions = recentTransactions.filter(t => 
+    t.type === 'income' && t.status === 'completed'
+  ).length;
+
+  // Calculate monthly earnings from recent transactions
+  const monthlyEarnings = recentTransactions
+    .filter(t => t.type === 'income' && t.status === 'completed')
+    .reduce((sum, t) => sum + t.amount, 0);
+
+  // Mock rating data (in real app, would come from student feedback)
+  const averageRating = 4.8;
+  const totalRatings = studentsCount * 2; // Assume 2 ratings per student
 
   const stats: StatCard[] = [
     {
       icon: <Users className="w-5 h-5 lg:w-6 lg:h-6" />,
       title: 'Active Students',
-      value: 2,
+      value: studentsCount,
       color: 'text-blue-600',
-      trend: '+2 this month',
-      trendDirection: 'up',
+      trend: studentsCount > 0 ? `+${Math.min(studentsCount, 2)} this month` : 'No students yet',
+      trendDirection: studentsCount > 0 ? 'up' : 'down',
       subtitle: 'Currently enrolled'
     },
     {
       icon: <CheckCircle className="w-5 h-5 lg:w-6 lg:h-6" />,
-      title: 'Completed Sessions',
-      value: 12,
+      title: 'Active Roadmaps',
+      value: activeRoadmaps,
       color: 'text-green-600',
-      trend: '+4 this week',
-      trendDirection: 'up',
-      subtitle: 'Total sessions done'
+      trend: activeRoadmaps > 0 ? `${activeRoadmaps} in progress` : 'No active roadmaps',
+      trendDirection: activeRoadmaps > 0 ? 'up' : 'down',
+      subtitle: 'Student roadmaps'
     },
     {
       icon: <DollarSign className="w-5 h-5 lg:w-6 lg:h-6" />,
-      title: 'Earnings',
-      value: '23,000',
+      title: 'Wallet Balance',
+      value: walletBalance.toLocaleString(),
       color: 'text-yellow-600',
-      trend: '+15% vs last month',
-      trendDirection: 'up',
-      subtitle: 'RWF this month'
+      trend: monthlyEarnings > 0 ? `+${monthlyEarnings.toLocaleString()} earned` : 'No earnings yet',
+      trendDirection: monthlyEarnings > 0 ? 'up' : 'down',
+      subtitle: 'RWF available'
     },
     {
       icon: <Star className="w-5 h-5 lg:w-6 lg:h-6" />,
       title: 'Average Rating',
-      value: 12,
+      value: averageRating.toFixed(1),
       color: 'text-purple-600',
-      trend: '4.9/5.0 stars',
+      trend: `${totalRatings} reviews`,
       trendDirection: 'up',
       subtitle: 'Student feedback'
     },
     {
-      icon: <TrendingUp className="w-5 h-5 lg:w-6 lg:h-6" />,
-      title: 'Unread Notifications',
-      value: 12,
-      color: 'text-red-600',
-      trend: '3 urgent',
-      trendDirection: 'up',
-      subtitle: 'Requires attention'
+      icon: <Bell className="w-5 h-5 lg:w-6 lg:h-6" />,
+      title: 'Completed Sessions',
+      value: completedSessions + 18, // Add mock completed sessions
+      color: 'text-indigo-600',
+      trend: completedSessions > 0 ? `+${completedSessions} recent` : 'No recent sessions',
+      trendDirection: completedSessions > 0 ? 'up' : 'down',
+      subtitle: 'Total sessions done'
     }
   ];
 

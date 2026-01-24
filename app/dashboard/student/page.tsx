@@ -129,7 +129,7 @@ export default function StudentDashboard() {
               {/* Left Column - Charts and Course (3 columns on xl) */}
               <div className="xl:col-span-3 space-y-3 lg:space-y-4">
                 {/* Monthly Sessions Chart */}
-                <MonthlySessionsChart />
+                <MonthlySessionsChart userType="student" />
                 
                 {/* Course Card */}
                 <CourseCard activeRoadmap={activeRoadmap} />
@@ -138,6 +138,7 @@ export default function StudentDashboard() {
                 <Calendar 
                   selectedDateRange={selectedDateRange}
                   onDateRangeChange={setSelectedDateRange}
+                  userType="student"
                 />
               </div>
 
@@ -147,10 +148,10 @@ export default function StudentDashboard() {
                 <CurrentPhase activeRoadmap={activeRoadmap} />
                 
                 {/* Scheduled Events */}
-                <ScheduledEvents />
+                <ScheduledEvents userType="student" />
                 
                 {/* Live Sessions */}
-                <LiveSessions />
+                <LiveSessions userType="student" />
               </div>
             </div>
           </div>

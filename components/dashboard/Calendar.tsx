@@ -2,13 +2,15 @@
 
 import { useState } from 'react';
 import { ChevronLeft, ChevronRight, Calendar as CalendarIcon } from 'lucide-react';
+import { UserType } from '@/types';
 
 interface CalendarProps {
   selectedDateRange: string;
   onDateRangeChange: (range: string) => void;
+  userType: UserType;
 }
 
-export default function Calendar({ selectedDateRange, onDateRangeChange }: CalendarProps) {
+export default function Calendar({ selectedDateRange, onDateRangeChange, userType }: CalendarProps) {
   const [currentDate, setCurrentDate] = useState(new Date(2024, 0, 1)); // January 2024
   const [hoveredDay, setHoveredDay] = useState<number | null>(null);
 

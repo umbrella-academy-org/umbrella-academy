@@ -2,6 +2,7 @@
 
 import { Monitor, Video, Clock, X, Users, Play } from 'lucide-react';
 import { useState } from 'react';
+import { UserType } from '@/types';
 
 interface LiveSession {
   id: string;
@@ -16,47 +17,141 @@ interface LiveSession {
   };
 }
 
-export default function LiveSessions() {
+interface LiveSessionsProps {
+  userType: UserType;
+}
+
+export default function LiveSessions({ userType }: LiveSessionsProps) {
   const [hoveredSession, setHoveredSession] = useState<string | null>(null);
 
-  const sessions: LiveSession[] = [
-    {
-      id: '1',
-      title: 'React Advanced Patterns Workshop',
-      description: 'Deep dive into advanced React patterns including render props, compound components, and custom hooks.',
-      time: 'in 2hrs',
-      status: 'info',
-      participants: 24,
-      actions: {
-        primary: 'Join Session',
-        secondary: 'View Details'
-      }
-    },
-    {
-      id: '2', 
-      title: 'JavaScript Performance Optimization',
-      description: 'Learn techniques to optimize JavaScript performance, memory management, and bundle size reduction.',
-      time: 'in 4hrs',
-      status: 'warning',
-      participants: 18,
-      actions: {
-        primary: 'Set Reminder',
-        secondary: 'View Details'
-      }
-    },
-    {
-      id: '3',
-      title: 'Node.js Microservices Architecture', 
-      description: 'Building scalable microservices with Node.js, Docker, and Kubernetes deployment strategies.',
-      time: 'Tomorrow',
-      status: 'info',
-      participants: 32,
-      actions: {
-        primary: 'Register',
-        secondary: 'View Details'
-      }
+  // Generate sessions based on user type
+  const getSessions = (): LiveSession[] => {
+    switch (userType) {
+      case 'trainer':
+        return [
+          {
+            id: '1',
+            title: 'React Fundamentals Training',
+            description: 'Teaching React basics to new students including components, props, and state management.',
+            time: 'in 2hrs',
+            status: 'info',
+            participants: 8,
+            actions: {
+              primary: 'Start Session',
+              secondary: 'Prepare Materials'
+            }
+          },
+          {
+            id: '2', 
+            title: 'JavaScript Debugging Workshop',
+            description: 'Interactive session on debugging techniques and tools for JavaScript development.',
+            time: 'in 4hrs',
+            status: 'warning',
+            participants: 6,
+            actions: {
+              primary: 'Set Reminder',
+              secondary: 'View Students'
+            }
+          }
+        ];
+      case 'mentor':
+        return [
+          {
+            id: '1',
+            title: 'Student Progress Review',
+            description: 'One-on-one mentoring session to review student progress and provide guidance.',
+            time: 'in 1hr',
+            status: 'success',
+            participants: 1,
+            actions: {
+              primary: 'Join Call',
+              secondary: 'View Roadmap'
+            }
+          },
+          {
+            id: '2', 
+            title: 'Career Guidance Session',
+            description: 'Group mentoring session focused on career development and industry insights.',
+            time: 'in 3hrs',
+            status: 'info',
+            participants: 5,
+            actions: {
+              primary: 'Prepare Session',
+              secondary: 'View Agenda'
+            }
+          }
+        ];
+      case 'student':
+        return [
+          {
+            id: '1',
+            title: 'React Advanced Patterns Workshop',
+            description: 'Deep dive into advanced React patterns including render props and custom hooks.',
+            time: 'in 2hrs',
+            status: 'info',
+            participants: 24,
+            actions: {
+              primary: 'Join Session',
+              secondary: 'View Materials'
+            }
+          },
+          {
+            id: '2', 
+            title: 'Mentor Check-in Call',
+            description: 'Weekly one-on-one session with your mentor to discuss progress and challenges.',
+            time: 'in 5hrs',
+            status: 'success',
+            participants: 2,
+            actions: {
+              primary: 'Join Call',
+              secondary: 'Prepare Questions'
+            }
+          }
+        ];
+      default:
+        return [
+          {
+            id: '1',
+            title: 'React Advanced Patterns Workshop',
+            description: 'Deep dive into advanced React patterns including render props, compound components, and custom hooks.',
+            time: 'in 2hrs',
+            status: 'info',
+            participants: 24,
+            actions: {
+              primary: 'Join Session',
+              secondary: 'View Details'
+            }
+          },
+          {
+            id: '2', 
+            title: 'JavaScript Performance Optimization',
+            description: 'Learn techniques to optimize JavaScript performance, memory management, and bundle size reduction.',
+            time: 'in 4hrs',
+            status: 'warning',
+            participants: 18,
+            actions: {
+              primary: 'Set Reminder',
+              secondary: 'View Details'
+            }
+          }
+        ];
     }
-  ];
+  };
+
+  const sessions = getSessions();
+
+  const getTitle = () => {
+    switch (userType) {
+      case 'trainer':
+        return 'Training Sessions';
+      case 'mentor':
+        return 'Mentoring Sessions';
+      case 'student':
+        return 'Live Sessions';
+      default:
+        return 'Live Sessions';
+    }
+  };
 
   const getStatusIcon = (status: LiveSession['status'], isHovered: boolean) => {
     const baseClasses = "w-10 h-10 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center flex-shrink-0 transition-all duration-300";
