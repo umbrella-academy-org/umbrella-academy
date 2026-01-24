@@ -7,14 +7,14 @@ import MonthlySessionsChart from '@/components/dashboard/MonthlySessionsChart';
 import TotalRoadmaps from '@/components/dashboard/TotalRoadmaps';
 import ScheduledEvents from '@/components/dashboard/ScheduledEvents';
 import Calendar from '@/components/dashboard/Calendar';
-import { useAuth, useCourses, useUsers, useFinancial } from '@/contexts';
+import { useAuth, useRoadmaps, useUsers, useFinancial } from '@/contexts';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
 import { getDashboardStats, mockWings, getWalletsByType } from '@/data';
 import { Building2, Users, DollarSign, Activity, Settings, Eye, BarChart3, Shield } from 'lucide-react';
 
 export default function UmbrellaAdminDashboard() {
   const { user, isAuthenticated, isLoading: authLoading } = useAuth();
-  const { roadmaps, isLoading: coursesLoading } = useCourses();
+  const { studentRoadmaps, isLoading: roadmapsLoading } = useRoadmaps();
   const { users, isLoading: usersLoading } = useUsers();
   const { } = useFinancial();
   const { navigate } = useNavigationWithLoading();
@@ -40,7 +40,7 @@ export default function UmbrellaAdminDashboard() {
   }, [authLoading, isAuthenticated, user, navigate]);
 
   // Show loading while checking auth or loading data
-  if (authLoading || coursesLoading || usersLoading) {
+  if (authLoading || roadmapsLoading || usersLoading) {
     return (
       <div className="flex h-screen bg-white">
         <div className="w-64 bg-gray-900 animate-pulse"></div>
@@ -77,7 +77,7 @@ export default function UmbrellaAdminDashboard() {
   const wingPerformance = mockWings.map(wing => {
     const wingUsers = users.filter(u => u.wing === wing.id);
     const wingStudents = wingUsers.filter(u => u.role === 'student');
-    const wingRoadmaps = roadmaps.filter(r => 
+    const wingRoadmaps = studentRoadmaps.filter(r => 
       wingStudents.some(s => s.id === r.studentId)
     );
     const completionRate = wingRoadmaps.length > 0 

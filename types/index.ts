@@ -3,7 +3,7 @@
 // User types
 export * from './user';
 
-// Course and learning types
+// Live session and learning activity types
 export * from './course';
 
 // Payment and subscription types
@@ -25,8 +25,9 @@ export * from './components';
 export * from './forms';
 
 // Utility types
-export type PhaseStatus = 'locked' | 'available' | 'in-progress' | 'completed';
-export type LessonStatus = 'locked' | 'available' | 'in-progress' | 'completed';
-export type LiveSessionStatus = 'scheduled' | 'completed' | 'cancelled' | 'missed';
-export type CourseLevel = 'beginner' | 'intermediate' | 'advanced';
-export type RoadmapStatus = 'enrolled' | 'active' | 'paused' | 'completed' | 'cancelled';
+export type SessionStatus = 'pending' | 'scheduled' | 'in-progress' | 'completed' | 'cancelled';
+export type LiveSessionStatus = 'scheduled' | 'live' | 'completed' | 'cancelled';
+export type RoadmapStatus = 'draft' | 'pending-approval' | 'approved' | 'active' | 'paused' | 'completed' | 'rejected';
+export type StudentRoadmapStatus = 'enrolled' | 'active' | 'paused' | 'completed' | 'cancelled';
+export type PhaseStatus = 'pending' | 'active' | 'completed';
+export type DifficultyLevel = 'beginner' | 'intermediate' | 'advanced';

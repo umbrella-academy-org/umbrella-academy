@@ -20,23 +20,23 @@ export default function TotalRoadmaps({ roadmaps, userType }: TotalRoadmapsProps
   
   // Calculate overall progress
   const overallProgress = totalRoadmaps > 0 
-    ? Math.round(roadmaps.reduce((sum, r) => sum + r.course.progress.overallProgress, 0) / totalRoadmaps)
+    ? Math.round(roadmaps.reduce((sum, r) => sum + r.roadmap.progress.overallProgress, 0) / totalRoadmaps)
     : 0;
 
   // Get the most recent or active roadmap for display
   const featuredRoadmap = roadmaps.find(r => r.status === 'active') || roadmaps[0];
   
-  // Get course info if roadmap exists
-  const courseInfo = featuredRoadmap ? {
-    title: featuredRoadmap.course.title,
-    description: featuredRoadmap.course.description,
-    totalPhases: featuredRoadmap.course.phases.length,
-    completedPhases: featuredRoadmap.course.phases.filter(p => p.status === 'completed').length,
-    estimatedDuration: `${featuredRoadmap.course.phases.length * 4} weeks`, // 4 weeks per phase
-    studentsCount: roadmaps.filter(r => r.courseId === featuredRoadmap.courseId).length
+  // Get roadmap info if roadmap exists
+  const roadmapInfo = featuredRoadmap ? {
+    title: featuredRoadmap.roadmap.title,
+    description: featuredRoadmap.roadmap.description,
+    totalPhases: featuredRoadmap.roadmap.phases.length,
+    completedPhases: featuredRoadmap.roadmap.phases.filter(p => p.status === 'completed').length,
+    estimatedDuration: `${featuredRoadmap.roadmap.estimatedDuration} weeks`,
+    studentsCount: roadmaps.filter(r => r.roadmapId === featuredRoadmap.roadmapId).length
   } : null;
 
-  if (!featuredRoadmap || !courseInfo) {
+  if (!featuredRoadmap || !roadmapInfo) {
     return (
       <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
         <div className="text-center py-8">
@@ -90,15 +90,15 @@ export default function TotalRoadmaps({ roadmaps, userType }: TotalRoadmapsProps
             </div>
           </div>
           
-          {/* Course Label */}
+          {/* Roadmap Label */}
           <div className="absolute bottom-2 left-2 right-2">
             <div className="bg-black bg-opacity-50 rounded px-2 py-1">
-              <p className="text-white text-xs font-medium truncate">{courseInfo.title}</p>
+              <p className="text-white text-xs font-medium truncate">{roadmapInfo.title}</p>
             </div>
           </div>
         </div>
 
-        {/* Course Info */}
+        {/* Roadmap Info */}
         <div className="flex-1 min-w-0">
           <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
             <div className="flex-1 min-w-0">
@@ -118,7 +118,7 @@ export default function TotalRoadmaps({ roadmaps, userType }: TotalRoadmapsProps
               </div>
               
               <p className="text-sm text-gray-600 mb-3 truncate">
-                {courseInfo.description}
+                {roadmapInfo.description}
               </p>
 
               {/* Stats */}
@@ -131,8 +131,8 @@ export default function TotalRoadmaps({ roadmaps, userType }: TotalRoadmapsProps
                     </p>
                     <p className="text-sm font-semibold text-gray-900">
                       {userType === 'trainer' 
-                        ? `${courseInfo.studentsCount}/${courseInfo.studentsCount + 2}` 
-                        : `${courseInfo.completedPhases}/${courseInfo.totalPhases}`
+                        ? `${roadmapInfo.studentsCount}/${roadmapInfo.studentsCount + 2}` 
+                        : `${roadmapInfo.completedPhases}/${roadmapInfo.totalPhases}`
                       }
                     </p>
                   </div>
@@ -141,7 +141,7 @@ export default function TotalRoadmaps({ roadmaps, userType }: TotalRoadmapsProps
                   <Clock className="w-4 h-4 text-orange-600" />
                   <div>
                     <p className="text-xs text-gray-500">Duration</p>
-                    <p className="text-sm font-semibold text-gray-900">{courseInfo.estimatedDuration}</p>
+                    <p className="text-sm font-semibold text-gray-900">{roadmapInfo.estimatedDuration}</p>
                   </div>
                 </div>
               </div>

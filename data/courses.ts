@@ -397,3 +397,6 @@ export const getCourseById = (id: string) => mockCourses.find(course => course.i
 export const getCoursesByCategory = (category: string) => mockCourses.filter(course => course.category === category);
 export const getCoursesByLevel = (level: string) => mockCourses.filter(course => course.level === level);
 export const getMentorById = (id: string) => mockMentors.find(mentor => mentor.id === id);
+
+// Export live sessions
+export { mockLiveSessions };

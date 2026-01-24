@@ -16,4 +16,4 @@ export * from './financial';
 export * from './system';
 
 // Re-export context hooks for convenience
-export { useAuth, useUsers, useCourses, useFinancial, useSystem } from '@/contexts';
+export { useAuth, useUsers, useRoadmaps, useFinancial, useSystem } from '@/contexts';

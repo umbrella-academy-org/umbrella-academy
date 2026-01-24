@@ -9,12 +9,12 @@ import TotalRoadmaps from '@/components/dashboard/TotalRoadmaps';
 import ScheduledEvents from '@/components/dashboard/ScheduledEvents';
 import Calendar from '@/components/dashboard/Calendar';
 import LiveSessions from '@/components/dashboard/LiveSessions';
-import { useAuth, useCourses, useUsers, useFinancial } from '@/contexts';
+import { useAuth, useRoadmaps, useUsers, useFinancial } from '@/contexts';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
 
 export default function MentorDashboard() {
   const { user, isAuthenticated, isLoading: authLoading } = useAuth();
-  const { courses, roadmaps, isLoading: coursesLoading } = useCourses();
+  const { roadmaps, studentRoadmaps, isLoading: roadmapsLoading } = useRoadmaps();
   const { students, isLoading: usersLoading } = useUsers();
   const { userWallet, getUserTransactions } = useFinancial();
   const { navigate } = useNavigationWithLoading();
@@ -40,7 +40,7 @@ export default function MentorDashboard() {
   }, [authLoading, isAuthenticated, user, navigate]);
 
   // Show loading while checking auth or loading data
-  if (authLoading || coursesLoading || usersLoading) {
+  if (authLoading || roadmapsLoading || usersLoading) {
     return (
       <div className="flex h-screen bg-white">
         <div className="w-64 bg-gray-900 animate-pulse"></div>
@@ -75,17 +75,17 @@ export default function MentorDashboard() {
   }
 
   // Get mentor-specific data
-  const mentorCourses = courses.filter(course => course.mentor.id === user.id);
-  const mentorRoadmaps = roadmaps.filter(roadmap => 
-    mentorCourses.some(course => course.id === roadmap.courseId)
+  const mentorRoadmaps = roadmaps.filter(roadmap => roadmap.mentorId === user.id);
+  const mentorStudentRoadmaps = studentRoadmaps.filter(roadmap => 
+    roadmap.roadmap.mentorId === user.id
   );
   const mentorStudents = students.filter(student => 
-    mentorRoadmaps.some(roadmap => roadmap.studentId === student.id)
+    mentorStudentRoadmaps.some(roadmap => roadmap.studentId === student.id)
   );
 
   const recentTransactions = getUserTransactions().slice(0, 5);
-  const activeRoadmaps = mentorRoadmaps.filter(roadmap => roadmap.status === 'active');
-  const pendingApprovals = mentorRoadmaps.filter(roadmap => roadmap.status === 'enrolled').length;
+  const activeRoadmaps = mentorStudentRoadmaps.filter(roadmap => roadmap.status === 'active');
+  const pendingApprovals = mentorRoadmaps.filter(roadmap => roadmap.status === 'pending-approval').length;
 
   return (
     <div className="flex h-screen bg-white">
@@ -144,7 +144,7 @@ export default function MentorDashboard() {
                 {/* Total Roadmaps */}
                 <div className="animate-fade-in" style={{ animationDelay: '300ms' }}>
                   <TotalRoadmaps 
-                    roadmaps={mentorRoadmaps}
+                    roadmaps={mentorStudentRoadmaps}
                     userType="mentor"
                   />
                 </div>

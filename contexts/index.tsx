@@ -2,7 +2,7 @@
 
 export { AuthProvider, useAuth } from './AuthContext';
 export { UserProvider, useUsers } from './UserContext';
-export { CourseProvider, useCourses } from './CourseContext';
+export { RoadmapProvider, useRoadmaps } from './RoadmapContext';
 export { FinancialProvider, useFinancial } from './FinancialContext';
 export { SystemProvider, useSystem } from './SystemContext';
 
@@ -10,7 +10,7 @@ export { SystemProvider, useSystem } from './SystemContext';
 import React from 'react';
 import { AuthProvider } from './AuthContext';
 import { UserProvider } from './UserContext';
-import { CourseProvider } from './CourseContext';
+import { RoadmapProvider } from './RoadmapContext';
 import { FinancialProvider } from './FinancialContext';
 import { SystemProvider } from './SystemContext';
 
@@ -22,13 +22,13 @@ export function AppProviders({ children }: AppProvidersProps) {
   return (
     <AuthProvider>
       <UserProvider>
-        <CourseProvider>
+        <RoadmapProvider>
           <FinancialProvider>
             <SystemProvider>
               {children}
             </SystemProvider>
           </FinancialProvider>
-        </CourseProvider>
+        </RoadmapProvider>
       </UserProvider>
     </AuthProvider>
   );

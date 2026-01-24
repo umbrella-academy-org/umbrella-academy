@@ -7,14 +7,14 @@ import MonthlySessionsChart from '@/components/dashboard/MonthlySessionsChart';
 import TotalRoadmaps from '@/components/dashboard/TotalRoadmaps';
 import ScheduledEvents from '@/components/dashboard/ScheduledEvents';
 import Calendar from '@/components/dashboard/Calendar';
-import { useAuth, useCourses, useUsers, useFinancial } from '@/contexts';
+import { useAuth, useRoadmaps, useUsers, useFinancial } from '@/contexts';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
 import { getWingDashboardStats, getWalletsByType } from '@/data';
 import { Users, GraduationCap, DollarSign, TrendingUp, Settings, Eye, Wallet } from 'lucide-react';
 
 export default function WingAdminDashboard() {
   const { user, isAuthenticated, isLoading: authLoading } = useAuth();
-  const { roadmaps, isLoading: coursesLoading } = useCourses();
+  const { studentRoadmaps, isLoading: roadmapsLoading } = useRoadmaps();
   const { users, isLoading: usersLoading } = useUsers();
   const { } = useFinancial();
   const { navigate } = useNavigationWithLoading();
@@ -40,7 +40,7 @@ export default function WingAdminDashboard() {
   }, [authLoading, isAuthenticated, user, navigate]);
 
   // Show loading while checking auth or loading data
-  if (authLoading || coursesLoading || usersLoading) {
+  if (authLoading || roadmapsLoading || usersLoading) {
     return (
       <div className="flex h-screen bg-white">
         <div className="w-64 bg-gray-900 animate-pulse"></div>
@@ -74,7 +74,7 @@ export default function WingAdminDashboard() {
   const wingTrainers = wingUsers.filter(u => u.role === 'trainer');
   const wingMentors = wingUsers.filter(u => u.role === 'mentor');
   
-  const wingRoadmaps = roadmaps.filter(roadmap => 
+  const wingRoadmaps = studentRoadmaps.filter(roadmap => 
     wingStudents.some(student => student.id === roadmap.studentId)
   );
   

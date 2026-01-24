@@ -10,12 +10,12 @@ import CurrentPhase from '@/components/dashboard/CurrentPhase';
 import ScheduledEvents from '@/components/dashboard/ScheduledEvents';
 import Calendar from '@/components/dashboard/Calendar';
 import LiveSessions from '@/components/dashboard/LiveSessions';
-import { useAuth, useCourses } from '@/contexts';
+import { useAuth, useRoadmaps } from '@/contexts';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
 
 export default function StudentDashboard() {
   const { user, isAuthenticated, isLoading: authLoading } = useAuth();
-  const { roadmaps, isLoading: coursesLoading } = useCourses();
+  const { studentRoadmaps, isLoading: roadmapsLoading } = useRoadmaps();
   const { navigate } = useNavigationWithLoading();
   const [selectedDateRange, setSelectedDateRange] = useState('Today');
 
@@ -39,7 +39,7 @@ export default function StudentDashboard() {
   }, [authLoading, isAuthenticated, user, navigate]);
 
   // Show loading while checking auth or loading data
-  if (authLoading || coursesLoading) {
+  if (authLoading || roadmapsLoading) {
     return (
       <div className="flex h-screen bg-white">
         <div className="w-64 bg-gray-900 animate-pulse"></div>
@@ -74,7 +74,7 @@ export default function StudentDashboard() {
   }
 
   // Get student's active roadmap
-  const activeRoadmap = roadmaps.find(roadmap => 
+  const activeRoadmap = studentRoadmaps.find(roadmap => 
     roadmap.studentId === user.id && roadmap.status === 'active'
   );
 

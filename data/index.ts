@@ -7,8 +7,9 @@ export * from './users';
 export { mockWings, getWingById, getWingByCode, getActiveWings, getTotalStudents, getTotalTrainers } from './wings';
 export { getTotalRevenue as getWingsTotalRevenue } from './wings';
 
-// Course data
-export * from './courses';
+// Roadmap data (replaces course data)
+export * from './courses'; // Keep for live sessions
+export * from './roadmaps';
 
 // Transaction and wallet data
 export { 
@@ -35,8 +36,7 @@ export * from './system';
 // Combined data helpers
 import { mockUsers } from './users';
 import { mockWings } from './wings';
-import { mockCourses } from './courses';
-import { mockStudentRoadmaps } from './roadmaps';
+import { mockRoadmaps, mockStudentRoadmaps } from './roadmaps';
 import { mockSystemStats } from './system';
 
 export const getDashboardStats = () => ({
@@ -46,7 +46,7 @@ export const getDashboardStats = () => ({
   totalMentors: mockUsers.filter(u => u.role === 'mentor').length,
   totalWings: mockWings.length,
   activeWings: mockWings.filter(w => w.status === 'active').length,
-  totalCourses: mockCourses.length,
+  totalRoadmaps: mockRoadmaps.length,
   activeRoadmaps: mockStudentRoadmaps.filter(r => r.status === 'active').length,
   totalRevenue: mockWings.reduce((sum, wing) => sum + wing.revenue, 0),
   systemHealth: mockSystemStats.systemUptime
@@ -84,17 +84,17 @@ export const getTrainerDashboardStats = (trainerId: string) => {
 };
 
 export const getMentorDashboardStats = (mentorId: string) => {
-  const mentorCourses = mockCourses.filter(c => c.mentor.id === mentorId);
-  const mentorStudents = mockStudentRoadmaps.filter(r => 
-    mentorCourses.some(c => c.id === r.courseId)
+  const mentorRoadmaps = mockRoadmaps.filter(r => r.mentorId === mentorId);
+  const mentorStudentRoadmaps = mockStudentRoadmaps.filter(r => 
+    r.roadmap.mentorId === mentorId
   );
   
   return {
-    totalCourses: mentorCourses.length,
-    totalStudents: mentorStudents.length,
-    activeStudents: mentorStudents.filter(r => r.status === 'active').length,
-    averageProgress: mentorStudents.reduce((sum, r) => sum + r.course.progress.overallProgress, 0) / mentorStudents.length || 0,
-    pendingApprovals: 3, // Mock data
+    totalRoadmaps: mentorRoadmaps.length,
+    totalStudents: mentorStudentRoadmaps.length,
+    activeStudents: mentorStudentRoadmaps.filter(r => r.status === 'active').length,
+    averageProgress: mentorStudentRoadmaps.reduce((sum, r) => sum + r.roadmap.progress.overallProgress, 0) / mentorStudentRoadmaps.length || 0,
+    pendingApprovals: mentorRoadmaps.filter(r => r.status === 'pending-approval').length,
     monthlyRevenue: 450000 // RWF
   };
 };

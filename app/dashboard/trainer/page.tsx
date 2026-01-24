@@ -10,12 +10,12 @@ import TrainingCapacity from '@/components/dashboard/TrainingCapacity';
 import ScheduledEvents from '@/components/dashboard/ScheduledEvents';
 import Calendar from '@/components/dashboard/Calendar';
 import LiveSessions from '@/components/dashboard/LiveSessions';
-import { useAuth, useCourses, useUsers, useFinancial } from '@/contexts';
+import { useAuth, useRoadmaps, useUsers, useFinancial } from '@/contexts';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
 
 export default function TrainerDashboard() {
   const { user, isAuthenticated, isLoading: authLoading } = useAuth();
-  const { roadmaps, isLoading: coursesLoading } = useCourses();
+  const { studentRoadmaps, isLoading: roadmapsLoading } = useRoadmaps();
   const { students, isLoading: usersLoading } = useUsers();
   const { userWallet, getUserTransactions } = useFinancial();
   const { navigate } = useNavigationWithLoading();
@@ -41,7 +41,7 @@ export default function TrainerDashboard() {
   }, [authLoading, isAuthenticated, user, navigate]);
 
   // Show loading while checking auth or loading data
-  if (authLoading || coursesLoading || usersLoading) {
+  if (authLoading || roadmapsLoading || usersLoading) {
     return (
       <div className="flex h-screen bg-white">
         <div className="w-64 bg-gray-900 animate-pulse"></div>
@@ -80,11 +80,11 @@ export default function TrainerDashboard() {
     student.wing === user.wing // In real app, would filter by assigned trainer
   );
   
-  const trainerRoadmaps = roadmaps.filter(roadmap => 
-    trainerStudents.some(student => student.id === roadmap.studentId)
+  const trainerStudentRoadmaps = studentRoadmaps.filter(roadmap => 
+    roadmap.roadmap.trainerId === user.id
   );
 
-  const activeRoadmaps = trainerRoadmaps.filter(roadmap => roadmap.status === 'active');
+  const activeRoadmaps = trainerStudentRoadmaps.filter(roadmap => roadmap.status === 'active');
   const recentTransactions = getUserTransactions().slice(0, 5);
 
   return (
@@ -144,7 +144,7 @@ export default function TrainerDashboard() {
                 {/* Total Roadmaps */}
                 <div className="animate-fade-in" style={{ animationDelay: '300ms' }}>
                   <TotalRoadmaps 
-                    roadmaps={trainerRoadmaps}
+                    roadmaps={trainerStudentRoadmaps}
                     userType="trainer"
                   />
                 </div>

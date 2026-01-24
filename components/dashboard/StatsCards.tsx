@@ -2,7 +2,7 @@
 
 import { User, Calendar, Video, BarChart3 } from 'lucide-react';
 import { useState } from 'react';
-import { useAuth, useCourses } from '@/contexts';
+import { useAuth, useRoadmaps } from '@/contexts';
 
 interface StatCard {
   icon: React.ReactNode;
@@ -16,31 +16,31 @@ interface StatCard {
 export default function StatsCards() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const { user } = useAuth();
-  const { roadmaps } = useCourses();
+  const { studentRoadmaps } = useRoadmaps();
 
   // Get student's active roadmap
-  const activeRoadmap = roadmaps.find(roadmap => 
+  const activeStudentRoadmap = studentRoadmaps.find(roadmap => 
     roadmap.studentId === user?.id && roadmap.status === 'active'
   );
 
   // Calculate stats based on real data
-  const totalPhases = activeRoadmap?.course.progress.totalPhases || 0;
-  const completedPhases = activeRoadmap?.course.progress.completedPhases || 0;
-  const totalLessons = activeRoadmap?.course.progress.totalLessons || 0;
-  const completedLessons = activeRoadmap?.course.progress.completedLessons || 0;
-  const totalSessions = activeRoadmap?.course.progress.totalLiveSessions || 0;
-  const attendedSessions = activeRoadmap?.course.progress.attendedLiveSessions || 0;
-  const overallProgress = activeRoadmap?.course.progress.overallProgress || 0;
+  const totalPhases = activeStudentRoadmap?.roadmap.progress.totalPhases || 0;
+  const completedPhases = activeStudentRoadmap?.roadmap.progress.completedPhases || 0;
+  const totalSessions = activeStudentRoadmap?.roadmap.progress.totalSessions || 0;
+  const completedSessions = activeStudentRoadmap?.roadmap.progress.completedSessions || 0;
+  const totalHours = activeStudentRoadmap?.roadmap.progress.totalEstimatedHours || 0;
+  const completedHours = activeStudentRoadmap?.roadmap.progress.hoursCompleted || 0;
+  const overallProgress = activeStudentRoadmap?.roadmap.progress.overallProgress || 0;
 
   // Calculate trends (mock calculation for demo)
   const phaseCompletionRate = totalPhases > 0 ? Math.round((completedPhases / totalPhases) * 100) : 0;
-  const lessonCompletionRate = totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
-  const sessionAttendanceRate = totalSessions > 0 ? Math.round((attendedSessions / totalSessions) * 100) : 0;
+  const sessionCompletionRate = totalSessions > 0 ? Math.round((completedSessions / totalSessions) * 100) : 0;
+  const hoursCompletionRate = totalHours > 0 ? Math.round((completedHours / totalHours) * 100) : 0;
 
   const stats: StatCard[] = [
     {
       icon: <BarChart3 className="w-5 h-5 lg:w-6 lg:h-6" />,
-      title: 'Course Progress',
+      title: 'Roadmap Progress',
       value: `${Math.round(overallProgress)}%`,
       color: 'text-yellow-600',
       trend: overallProgress > 50 ? '+Good' : 'Start',
@@ -56,28 +56,28 @@ export default function StatsCards() {
     },
     {
       icon: <Calendar className="w-5 h-5 lg:w-6 lg:h-6" />,
-      title: 'Lessons Done',
-      value: `${completedLessons}/${totalLessons}`,
+      title: 'Sessions Done',
+      value: `${completedSessions}/${totalSessions}`,
       color: 'text-blue-600',
-      trend: lessonCompletionRate > 0 ? `${lessonCompletionRate}%` : '0%',
-      trendDirection: lessonCompletionRate > 50 ? 'up' : 'down'
+      trend: sessionCompletionRate > 0 ? `${sessionCompletionRate}%` : '0%',
+      trendDirection: sessionCompletionRate > 50 ? 'up' : 'down'
     },
     {
       icon: <Video className="w-5 h-5 lg:w-6 lg:h-6" />,
-      title: 'Sessions Attended',
-      value: `${attendedSessions}/${totalSessions}`,
+      title: 'Hours Completed',
+      value: `${completedHours}/${totalHours}h`,
       color: 'text-purple-600',
-      trend: sessionAttendanceRate > 0 ? `${sessionAttendanceRate}%` : '0%',
-      trendDirection: sessionAttendanceRate > 80 ? 'up' : 'down'
+      trend: hoursCompletionRate > 0 ? `${hoursCompletionRate}%` : '0%',
+      trendDirection: hoursCompletionRate > 80 ? 'up' : 'down'
     }
   ];
 
   // If no active roadmap, show placeholder stats
-  if (!activeRoadmap) {
+  if (!activeStudentRoadmap) {
     const placeholderStats: StatCard[] = [
       {
         icon: <BarChart3 className="w-5 h-5 lg:w-6 lg:h-6" />,
-        title: 'Course Progress',
+        title: 'Roadmap Progress',
         value: '0%',
         color: 'text-gray-400'
       },
@@ -89,14 +89,14 @@ export default function StatsCards() {
       },
       {
         icon: <Calendar className="w-5 h-5 lg:w-6 lg:h-6" />,
-        title: 'Lessons Done',
+        title: 'Sessions Done',
         value: '0/0',
         color: 'text-gray-400'
       },
       {
         icon: <Video className="w-5 h-5 lg:w-6 lg:h-6" />,
-        title: 'Sessions Attended',
-        value: '0/0',
+        title: 'Hours Completed',
+        value: '0/0h',
         color: 'text-gray-400'
       }
     ];
@@ -116,7 +116,7 @@ export default function StatsCards() {
                 <p className="text-lg lg:text-2xl font-bold text-gray-400">
                   {stat.value}
                 </p>
-                <p className="text-xs text-gray-400 mt-1">No active course</p>
+                <p className="text-xs text-gray-400 mt-1">No active roadmap</p>
               </div>
               <div className="p-1.5 lg:p-2 rounded-lg bg-gray-50 text-gray-400">
                 {stat.icon}

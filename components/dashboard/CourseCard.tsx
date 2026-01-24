@@ -21,23 +21,23 @@ export default function CourseCard({ activeRoadmap }: CourseCardProps) {
           <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <Play className="w-6 h-6 text-gray-400" />
           </div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">No Active Course</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-2">No Active Roadmap</h3>
           <p className="text-gray-500 mb-4">Start your learning journey today</p>
           <button 
             onClick={() => navigate('/dashboard/student/roadmap')}
             className="px-4 py-2 bg-yellow-600 text-white rounded-lg font-medium hover:bg-yellow-700 transition-colors"
           >
-            Browse Courses
+            Browse Roadmaps
           </button>
         </div>
       </div>
     );
   }
 
-  const { course } = activeRoadmap;
-  const progress = course.progress.overallProgress;
-  const completedPhases = course.progress.completedPhases;
-  const totalPhases = course.progress.totalPhases;
+  const { roadmap } = activeRoadmap;
+  const progress = roadmap.progress.overallProgress;
+  const completedPhases = roadmap.progress.completedPhases;
+  const totalPhases = roadmap.progress.totalPhases;
 
   return (
     <div 
@@ -46,17 +46,9 @@ export default function CourseCard({ activeRoadmap }: CourseCardProps) {
       onMouseLeave={() => setIsHovered(false)}
     >
       <div className="flex items-start gap-3">
-        {/* Course Image */}
+        {/* Roadmap Image */}
         <div className="w-20 h-16 sm:w-24 sm:h-18 bg-gradient-to-br from-blue-900 to-blue-700 rounded-lg overflow-hidden flex-shrink-0 relative group cursor-pointer">
-          {course.thumbnail ? (
-            <img 
-              src={course.thumbnail} 
-              alt={course.title}
-              className="w-full h-full object-cover"
-            />
-          ) : (
-            <div className="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-10 transition-all duration-300"></div>
-          )}
+          <div className="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-10 transition-all duration-300"></div>
           <div className="absolute inset-0 flex items-center justify-center">
             <div className={`w-6 h-6 bg-yellow-600 rounded-full flex items-center justify-center transition-all duration-300 ${
               isHovered ? 'scale-110 animate-pulse-glow' : ''
@@ -80,12 +72,12 @@ export default function CourseCard({ activeRoadmap }: CourseCardProps) {
           </div>
         </div>
 
-        {/* Course Info */}
+        {/* Roadmap Info */}
         <div className="flex-1 min-w-0">
           <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
             <div className="flex-1 min-w-0">
               <h3 className="text-sm sm:text-base font-semibold text-gray-900 mb-1 truncate group-hover:text-yellow-600 transition-colors">
-                {course.title}
+                {roadmap.title}
               </h3>
               <p className="text-xs text-gray-500 mb-1">
                 Enrolled: {new Date(activeRoadmap.enrolledAt).toLocaleDateString()}
@@ -105,15 +97,15 @@ export default function CourseCard({ activeRoadmap }: CourseCardProps) {
                     <Star 
                       key={i} 
                       className={`w-3 h-3 transition-all duration-200 ${
-                        i < Math.floor(course.rating) ? 'text-yellow-400 fill-current' : 'text-gray-300'
+                        i < Math.floor(roadmap.difficulty === 'beginner' ? 3 : roadmap.difficulty === 'intermediate' ? 4 : 5) ? 'text-yellow-400 fill-current' : 'text-gray-300'
                       }`}
                       style={{ animationDelay: `${i * 100}ms` }}
                     />
                   ))}
-                  <span className="text-xs text-gray-500 ml-1">{course.rating}</span>
+                  <span className="text-xs text-gray-500 ml-1">{roadmap.difficulty}</span>
                 </div>
               </div>
-              <p className="text-xs text-gray-600 mb-3 truncate">{course.category}</p>
+              <p className="text-xs text-gray-600 mb-3 truncate">{roadmap.tags.join(', ')}</p>
             </div>
             
             {/* Progress */}
@@ -138,7 +130,7 @@ export default function CourseCard({ activeRoadmap }: CourseCardProps) {
           {/* Progress Bar */}
           <div className="mt-3">
             <div className="flex items-center justify-between text-xs text-gray-600 mb-1">
-              <span className="hover:text-gray-800 transition-colors">Phase Progress</span>
+              <span className="hover:text-gray-800 transition-colors">Roadmap Progress</span>
               <ChevronRight className={`w-3 h-3 transition-transform duration-200 ${
                 isHovered ? 'translate-x-1' : ''
               }`} />
