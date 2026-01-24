@@ -1,35 +1,75 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
+import { useLogin } from '@/hooks';
+import { useAuth } from '@/contexts';
 
 export default function LoginPage() {
   const { navigate } = useNavigationWithLoading();
+  const { login, isLoading, error } = useLogin();
+  const { isAuthenticated, user } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [errors, setErrors] = useState({ email: '', password: '' });
+  const [localErrors, setLocalErrors] = useState({ email: '', password: '' });
 
-  const handleLogin = (e: React.FormEvent) => {
+  // Redirect if already authenticated
+  useEffect(() => {
+    if (isAuthenticated && user) {
+      // Redirect based on user role
+      const dashboardRoutes = {
+        'student': '/dashboard/student',
+        'trainer': '/dashboard/trainer',
+        'mentor': '/dashboard/mentor',
+        'wing-admin': '/dashboard/wing-admin',
+        'umbrella-admin': '/dashboard/umbrella-admin'
+      };
+      navigate(dashboardRoutes[user.role]);
+    }
+  }, [isAuthenticated, user, navigate]);
+
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setErrors({ email: '', password: '' });
+    setLocalErrors({ email: '', password: '' });
     
+    // Client-side validation
     if (!email) {
-      setErrors(prev => ({ ...prev, email: 'Email is required' }));
+      setLocalErrors(prev => ({ ...prev, email: 'Email is required' }));
       return;
     }
     if (!/\S+@\S+\.\S+/.test(email)) {
-      setErrors(prev => ({ ...prev, email: 'Please enter a valid email address' }));
+      setLocalErrors(prev => ({ ...prev, email: 'Please enter a valid email address' }));
       return;
     }
     if (!password) {
-      setErrors(prev => ({ ...prev, password: 'Password is required' }));
+      setLocalErrors(prev => ({ ...prev, password: 'Password is required' }));
       return;
     }
     
-    console.log('Login:', { email, password });
-    navigate('/dashboard/student');
+    // Attempt login
+    const success = await login({ email, password });
+    
+    if (success) {
+      // Navigation will be handled by useEffect above
+      console.log('Login successful');
+    }
+    // Error handling is managed by the useLogin hook
+  };
+
+  // Demo credentials helper
+  const fillDemoCredentials = (role: string) => {
+    const demoCredentials = {
+      student: 'jane.mukamana@student.umbrella.rw',
+      trainer: 'sarah.ingabire@trainer.umbrella.rw',
+      mentor: 'robert.kayitare@mentor.umbrella.rw',
+      'wing-admin': 'emmanuel.nkurunziza@admin.umbrella.rw',
+      'umbrella-admin': 'patrick.rwigema@umbrella.rw'
+    };
+    
+    setEmail(demoCredentials[role as keyof typeof demoCredentials] || '');
+    setPassword('demo123'); // Demo password
   };
 
   return (
@@ -54,6 +94,48 @@ export default function LoginPage() {
             Sign in to your account to continue.
           </p>
 
+          {/* Demo Credentials */}
+          <div className="w-full mb-6 p-4 bg-gray-50 rounded-lg">
+            <p className="text-sm font-medium text-gray-700 mb-2">Demo Accounts:</p>
+            <div className="grid grid-cols-2 gap-2">
+              <button
+                type="button"
+                onClick={() => fillDemoCredentials('student')}
+                className="text-xs px-2 py-1 bg-blue-100 text-blue-700 rounded hover:bg-blue-200 transition-colors"
+              >
+                Student
+              </button>
+              <button
+                type="button"
+                onClick={() => fillDemoCredentials('trainer')}
+                className="text-xs px-2 py-1 bg-green-100 text-green-700 rounded hover:bg-green-200 transition-colors"
+              >
+                Trainer
+              </button>
+              <button
+                type="button"
+                onClick={() => fillDemoCredentials('mentor')}
+                className="text-xs px-2 py-1 bg-purple-100 text-purple-700 rounded hover:bg-purple-200 transition-colors"
+              >
+                Mentor
+              </button>
+              <button
+                type="button"
+                onClick={() => fillDemoCredentials('wing-admin')}
+                className="text-xs px-2 py-1 bg-orange-100 text-orange-700 rounded hover:bg-orange-200 transition-colors"
+              >
+                Wing Admin
+              </button>
+            </div>
+            <button
+              type="button"
+              onClick={() => fillDemoCredentials('umbrella-admin')}
+              className="text-xs px-2 py-1 bg-red-100 text-red-700 rounded hover:bg-red-200 transition-colors mt-2 w-full"
+            >
+              Umbrella Admin
+            </button>
+          </div>
+
           {/* Form */}
           <form onSubmit={handleLogin} className="w-full space-y-4">
             <div>
@@ -66,15 +148,16 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => {
                   setEmail(e.target.value);
-                  setErrors(prev => ({ ...prev, email: '' }));
+                  setLocalErrors(prev => ({ ...prev, email: '' }));
                 }}
                 placeholder="Enter your email"
                 className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${
-                  errors.email ? 'border-red-500' : 'border-gray-300'
+                  localErrors.email || error ? 'border-red-500' : 'border-gray-300'
                 }`}
                 required
+                disabled={isLoading}
               />
-              {errors.email && <p className="mt-2 text-sm text-red-500">{errors.email}</p>}
+              {localErrors.email && <p className="mt-2 text-sm text-red-500">{localErrors.email}</p>}
             </div>
 
             <div>
@@ -88,18 +171,20 @@ export default function LoginPage() {
                   value={password}
                   onChange={(e) => {
                     setPassword(e.target.value);
-                    setErrors(prev => ({ ...prev, password: '' }));
+                    setLocalErrors(prev => ({ ...prev, password: '' }));
                   }}
                   placeholder="Enter your password"
                   className={`w-full px-4 py-3 pr-12 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${
-                    errors.password ? 'border-red-500' : 'border-gray-300'
+                    localErrors.password || error ? 'border-red-500' : 'border-gray-300'
                   }`}
                   required
+                  disabled={isLoading}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  disabled={isLoading}
                 >
                   {showPassword ? (
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -113,14 +198,32 @@ export default function LoginPage() {
                   )}
                 </button>
               </div>
-              {errors.password && <p className="mt-2 text-sm text-red-500">{errors.password}</p>}
+              {localErrors.password && <p className="mt-2 text-sm text-red-500">{localErrors.password}</p>}
             </div>
+
+            {/* Display login error */}
+            {error && (
+              <div className="p-3 bg-red-50 border border-red-200 rounded-lg">
+                <p className="text-sm text-red-600">{error}</p>
+              </div>
+            )}
 
             <button
               type="submit"
-              className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-colors"
+              disabled={isLoading}
+              className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Sign In
+              {isLoading ? (
+                <div className="flex items-center justify-center">
+                  <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Signing in...
+                </div>
+              ) : (
+                'Sign In'
+              )}
             </button>
           </form>
 
@@ -130,6 +233,7 @@ export default function LoginPage() {
             <button 
               onClick={() => navigate('/auth/signup')}
               className="text-yellow-600 hover:text-yellow-700 font-medium"
+              disabled={isLoading}
             >
               Sign Up
             </button>
@@ -140,6 +244,7 @@ export default function LoginPage() {
             <button 
               onClick={() => navigate('/auth/forgot-password')}
               className="text-yellow-600 hover:text-yellow-700 font-medium"
+              disabled={isLoading}
             >
               Forgot password?
             </button>
