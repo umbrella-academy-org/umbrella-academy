@@ -108,7 +108,7 @@ export default function CreateRoadmapPage() {
         </main>
       </div>
        {/* Right side - Image */}
-      <div className="hidden lg:block flex-[1] relative overflow-hidden">
+      <div className=" lg:block flex-[1] relative overflow-hidden">
         <Image
           src="/auth/login/image.png"
           alt="Misty mountains"

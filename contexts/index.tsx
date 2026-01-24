@@ -13,6 +13,7 @@ import { UserProvider } from './UserContext';
 import { RoadmapProvider } from './RoadmapContext';
 import { FinancialProvider } from './FinancialContext';
 import { SystemProvider } from './SystemContext';
+import { ThemeProvider } from '@/components/providers/ThemeProvider';
 
 interface AppProvidersProps {
   children: React.ReactNode;
@@ -20,16 +21,18 @@ interface AppProvidersProps {
 
 export function AppProviders({ children }: AppProvidersProps) {
   return (
-    <AuthProvider>
-      <UserProvider>
-        <RoadmapProvider>
-          <FinancialProvider>
-            <SystemProvider>
-              {children}
-            </SystemProvider>
-          </FinancialProvider>
-        </RoadmapProvider>
-      </UserProvider>
-    </AuthProvider>
+    <ThemeProvider defaultMode="system" enableSystem={true}>
+      <AuthProvider>
+        <UserProvider>
+          <RoadmapProvider>
+            <FinancialProvider>
+              <SystemProvider>
+                {children}
+              </SystemProvider>
+            </FinancialProvider>
+          </RoadmapProvider>
+        </UserProvider>
+      </AuthProvider>
+    </ThemeProvider>
   );
 }

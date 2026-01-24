@@ -37,7 +37,7 @@ const generateSessions = (phaseTitle: string, estimatedHours: number, studentAva
 export const mockRoadmaps: Roadmap[] = [
   {
     id: 'roadmap_001',
-    title: 'Full Stack Web Development Journey',
+    title: 'Full Web Development Journey',
     description: 'A comprehensive roadmap to become a full-stack web developer using modern technologies',
     studentId: 'user_001',
     trainerId: 'user_101',
