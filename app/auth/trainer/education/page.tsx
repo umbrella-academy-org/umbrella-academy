@@ -15,7 +15,7 @@ export default function TrainerEducationPage() {
   const handleContinue = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Trainer education:', education);
-    router.push('/auth/trainer/referral');
+    router.push('/auth/trainer/choose-wing');
   };
 
   return (
