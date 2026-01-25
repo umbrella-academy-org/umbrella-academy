@@ -10,7 +10,7 @@ export default function TrainerChatPage() {
             <Sidebar activeItem="Chat" userType="trainer" />
 
             <div className="flex-1 flex flex-col min-w-0">
-                <main className="flex-1 p-4 lg:p-8 overflow-hidden bg-gray-50/30">
+                <main className="flex-1 overflow-hidden bg-gray-50/30">
                     <ChatInterface userType="trainer" />
                 </main>
             </div>
