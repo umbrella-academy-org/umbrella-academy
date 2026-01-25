@@ -30,7 +30,7 @@ export default function MentorProfilePage() {
 
             <div className="flex-1 flex flex-col min-w-0">
                 <main className="flex-1 p-4 lg:p-8 overflow-y-auto bg-gray-50/30">
-                    <div className="max-w-5xl mx-auto animate-fade-in">
+                    <div className="max-w-full mx-auto animate-fade-in">
                         {/* Profile Header Card */}
                         <div className="bg-white rounded-[2rem] border border-gray-100 shadow-xl shadow-gray-200/50 overflow-hidden mb-8 interactive-card">
                             <div className="h-48 bg-gradient-to-br from-blue-600 via-indigo-700 to-blue-900 relative overflow-hidden">
@@ -44,8 +44,8 @@ export default function MentorProfilePage() {
                                 </button>
                             </div>
 
-                            <div className="px-10 pb-10">
-                                <div className="flex flex-col md:flex-row md:items-end -mt-16 gap-8">
+                            <div className="px-10 pb-10 pt-10">
+                                <div className="flex flex-col md:flex-row md:items-end -mt-16 gap-20">
                                     <div className="relative group">
                                         <div className="w-32 h-32 rounded-[2.5rem] bg-white p-1.5 shadow-2xl shadow-blue-200/50 transform group-hover:scale-105 transition-all duration-500">
                                             <div className="w-full h-full bg-gradient-to-br from-blue-50 to-blue-100 rounded-[2.2rem] flex items-center justify-center text-blue-700 text-4xl font-extrabold border border-blue-200 uppercase tracking-tighter">
@@ -58,7 +58,7 @@ export default function MentorProfilePage() {
                                     </div>
 
                                     <div className="flex-1 flex flex-col md:flex-row md:items-center justify-between gap-6 pb-2">
-                                        <div>
+                                        <div className=''>
                                             <div className="flex items-center gap-3">
                                                 <h1 className="text-3xl font-black text-gray-900 tracking-tight">{profileData.name}</h1>
                                                 <div className="px-2.5 py-1 bg-blue-50 text-blue-700 border border-blue-100 rounded-full text-[10px] font-black uppercase tracking-wider">ACADEMIC DIRECTOR</div>
@@ -89,7 +89,7 @@ export default function MentorProfilePage() {
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 ">
                             {/* Left Column - Personal Info */}
                             <div className="lg:col-span-2 space-y-8 animate-slide-up">
                                 <div className="bg-white rounded-[2rem] border border-gray-100 shadow-xl shadow-gray-200/30 p-10 interactive-card">
