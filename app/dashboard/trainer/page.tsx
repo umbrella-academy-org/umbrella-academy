@@ -93,7 +93,7 @@ export default function TrainerDashboard() {
 
       <div className="flex-1 flex flex-col min-w-0">
         <main className="flex-1 p-3 sm:p-4 lg:p-6 overflow-y-auto">
-          <div className="max-w-7xl mx-auto">
+          <div className="w-full mx-auto">
             {/* Welcome Section */}
             <div className="mb-4 sm:mb-6 lg:mb-8 animate-fade-in">
               <h1 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-gray-900 mb-2">

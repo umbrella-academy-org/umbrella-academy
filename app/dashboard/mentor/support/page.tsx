@@ -10,7 +10,7 @@ export default function MentorSupportPage() {
 
       <div className="flex-1 flex flex-col min-w-0">
         <main className="flex-1 p-3 sm:p-4 lg:p-6 overflow-y-auto">
-          <div className="max-w-7xl mx-auto">
+          <div className="max-w-fullmx-auto">
             <div className="bg-white rounded-lg border border-gray-200 p-6">
               <h1 className="text-2xl font-semibold text-gray-900 mb-4">Support Center</h1>
               <p className="text-gray-600">Get help and support for your mentoring activities.</p>
