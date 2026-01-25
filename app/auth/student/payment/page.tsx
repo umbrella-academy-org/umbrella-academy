@@ -49,103 +49,95 @@ export default function PaymentPage() {
               </div>
             </div>
 
-            <h1 className="text-4xl font-black text-gray-900 tracking-tight mb-2 text-center uppercase">
+            <h1 className="text-3xl font-semibold text-gray-900 mb-2">
               Secure Payment
             </h1>
-            <p className="text-sm font-bold text-gray-400 mb-10 text-center uppercase tracking-widest">
-              Unlock your premium mentorship plan today.
+            <p className="text-gray-500 mb-8 text-center px-4">
+              Unlock your premium mentorship plan and start learning today.
             </p>
 
-            <div className="w-full bg-gray-900 rounded-3xl p-8 mb-10 text-white relative overflow-hidden shadow-2xl">
-              <div className="relative z-10">
-                <div className="flex justify-between items-start mb-12">
-                  <CreditCard className="w-10 h-10 text-yellow-600" />
-                  <div className="text-right">
-                    <p className="text-[10px] font-black uppercase tracking-widest text-gray-500">Mentorship Fee</p>
-                    <p className="text-3xl font-black tracking-tighter">RWF 75,000</p>
-                  </div>
-                </div>
-                <div>
-                  <p className="text-[10px] font-black uppercase tracking-widest text-gray-500 mb-1">Academy Access</p>
-                  <p className="text-sm font-bold">12 Months Premium Support</p>
-                </div>
+            <div className="w-full bg-gray-50 rounded-xl p-6 mb-8 border border-gray-100 flex justify-between items-center">
+              <div>
+                <h3 className="font-semibold text-gray-900">Annual Plan</h3>
+                <p className="text-sm text-gray-500">Premium access for 12 months</p>
               </div>
-              <div className="absolute top-0 right-0 w-64 h-64 bg-yellow-600 rounded-full opacity-10 -mr-32 -mt-32 blur-3xl"></div>
+              <div className="text-right">
+                <p className="text-2xl font-bold text-yellow-600">RWF 75,000</p>
+              </div>
             </div>
 
-            <form onSubmit={handleContinue} className="w-full space-y-6">
+            <form onSubmit={handleContinue} className="w-full space-y-4">
               <div>
-                <label className="block text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
                   Cardholder Name
                 </label>
                 <input
                   type="text"
                   placeholder="OLIVIA RHYE"
-                  className="w-full px-4 py-3 bg-gray-50 border-2 border-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 uppercase font-bold text-sm transition-all"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400"
                   required
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-2">
-                    Card Number
-                  </label>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Card Details
+                </label>
+                <div className="relative">
                   <input
                     type="text"
                     placeholder="XXXX XXXX XXXX XXXX"
-                    className="w-full px-4 py-3 bg-gray-50 border-2 border-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 font-bold text-sm transition-all"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400"
                     required
                   />
-                </div>
-                <div className="grid grid-cols-2 gap-2">
-                  <div>
-                    <label className="block text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-2">
-                      Expiry
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="MM/YY"
-                      className="w-full px-4 py-3 bg-gray-50 border-2 border-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 font-bold text-sm transition-all"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-2">
-                      CVC
-                    </label>
-                    <input
-                      type="password"
-                      placeholder="•••"
-                      className="w-full px-4 py-3 bg-gray-50 border-2 border-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 font-bold text-sm transition-all"
-                      required
-                    />
+                  <div className="absolute right-3 top-1/2 -translate-y-1/2 flex gap-1">
+                    <ShieldCheck className="w-4 h-4 text-green-500" />
                   </div>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 bg-green-50 p-4 rounded-2xl border border-green-100">
-                <ShieldCheck className="w-5 h-5 text-green-600" />
-                <p className="text-[10px] font-bold text-green-700 uppercase tracking-tight">Your data is encrypted with 256-bit AES protection.</p>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Expiry
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="MM/YY"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    CVC
+                  </label>
+                  <input
+                    type="password"
+                    placeholder="•••"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400"
+                    required
+                  />
+                </div>
               </div>
 
               <button
                 type="submit"
-                className="w-full bg-yellow-600 text-white py-5 rounded-2xl font-black uppercase tracking-[0.2em] text-xs hover:bg-yellow-700 transition-all shadow-xl shadow-yellow-600/20 active:scale-95 mt-4"
+                className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-colors mt-6"
               >
-                Authorize Payment
+                Complete Payment
               </button>
 
               <div className="flex justify-center gap-2 pt-6">
                 {[1, 2, 3, 4, 5, 6, 7].map((i) => (
-                  <div key={i} className={`h-1.5 rounded-full transition-all ${i === 7 ? 'w-8 bg-yellow-600' : 'w-2 bg-gray-200'}`}></div>
+                  <div key={i} className={`h-2 rounded-full transition-all ${i === 7 ? 'w-8 bg-yellow-600' : 'w-2 bg-gray-300'}`}></div>
                 ))}
               </div>
             </form>
           </div>
         </div>
 
-        <div className="text-[10px] font-black text-gray-300 uppercase tracking-[0.3em] text-center mt-8">
+        <div className="text-sm text-gray-500 text-center mt-8">
           © Dreamize 2025
         </div>
       </div>
@@ -155,11 +147,10 @@ export default function PaymentPage() {
           src="/auth/login/image.png"
           alt="Payment background"
           fill
-          className="object-cover object-center scale-110 grayscale hover:grayscale-0 transition-all duration-1000"
+          className="object-cover object-center scale-105"
           priority
           quality={100}
         />
-        <div className="absolute inset-0 bg-yellow-600/10 mix-blend-multiply"></div>
       </div>
     </div>
   );

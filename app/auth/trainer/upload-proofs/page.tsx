@@ -29,7 +29,7 @@ export default function UploadProofsPage() {
 
     setError('');
     setUploadedFile(file);
-    
+
     // Simulate upload progress
     let progress = 0;
     const interval = setInterval(() => {
@@ -43,14 +43,14 @@ export default function UploadProofsPage() {
 
   const handleContinue = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!uploadedFile) {
       setError('Please upload your proof documents');
       return;
     }
-    
+
     console.log('Uploaded file:', uploadedFile);
-    router.push('/');
+    router.push('/auth/trainer/pending');
   };
 
   const handleDragOver = (e: React.DragEvent) => {
@@ -67,13 +67,13 @@ export default function UploadProofsPage() {
       const dataTransfer = new DataTransfer();
       dataTransfer.items.add(file);
       input.files = dataTransfer.files;
-      
+
       const event = new Event('change', { bubbles: true });
       Object.defineProperty(event, 'target', {
         writable: false,
         value: input
       });
-      
+
       handleFileUpload(event as unknown as React.ChangeEvent<HTMLInputElement>);
     }
   };
@@ -116,9 +116,8 @@ export default function UploadProofsPage() {
             <form onSubmit={handleContinue} className="w-full">
               {/* Upload Area */}
               <div
-                className={`border-2 border-dashed rounded-lg p-8 text-center mb-4 transition-colors ${
-                  error ? 'border-red-300 bg-red-50' : 'border-gray-300 hover:border-yellow-600 hover:bg-yellow-50'
-                }`}
+                className={`border-2 border-dashed rounded-lg p-8 text-center mb-4 transition-colors ${error ? 'border-red-300 bg-red-50' : 'border-gray-300 hover:border-yellow-600 hover:bg-yellow-50'
+                  }`}
                 onDragOver={handleDragOver}
                 onDrop={handleDrop}
               >
@@ -129,7 +128,7 @@ export default function UploadProofsPage() {
                   accept=".pdf,.png,.jpg,.jpeg,.gif"
                   onChange={handleFileUpload}
                 />
-                
+
                 {!uploadedFile ? (
                   <>
                     <div className="mb-4">
@@ -163,16 +162,16 @@ export default function UploadProofsPage() {
                         </svg>
                       </div>
                     </div>
-                    
+
                     {uploadProgress < 100 && (
                       <div className="w-full bg-gray-200 rounded-full h-2">
-                        <div 
+                        <div
                           className="bg-blue-600 h-2 rounded-full transition-all duration-300"
                           style={{ width: `${uploadProgress}%` }}
                         ></div>
                       </div>
                     )}
-                    
+
                     {uploadProgress === 100 && (
                       <p className="text-sm text-green-600 font-medium">Upload complete!</p>
                     )}

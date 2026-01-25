@@ -92,8 +92,8 @@ export default function CreateRoadmapPage() {
     // Save the roadmap
     createRoadmap(newRoadmap);
 
-    // Redirect to the main roadmap page
-    router.push('/dashboard/student/roadmap');
+    // Redirect to the pending approval page
+    router.push('/auth/student/pending-roadmap');
   };
 
   return (
@@ -127,7 +127,7 @@ export default function CreateRoadmapPage() {
               Create Your Roadmap
             </h1>
             <p className="text-gray-500 mb-8 text-center max-w-md">
-              Customise your learning journey by setting goals and breaking them into achievable phases.
+              Customize your learning journey by setting goals and breaking them into achievable phases.
             </p>
 
             {/* Roadmap Builder Component */}
@@ -137,18 +137,16 @@ export default function CreateRoadmapPage() {
 
             {/* Progress dots */}
             <div className="flex justify-center gap-2 py-8">
-              <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
-              <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
-              <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
-              <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
-              <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
+              {[1, 2, 3, 4, 5, 6].map((i) => (
+                <div key={i} className="w-8 h-2 bg-yellow-600 rounded-full"></div>
+              ))}
               <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
             </div>
           </div>
         </div>
 
         {/* Footer */}
-        <div className="text-sm text-gray-500">
+        <div className="text-sm text-gray-500 text-center">
           © Dreamize 2025
         </div>
       </div>
@@ -157,7 +155,7 @@ export default function CreateRoadmapPage() {
       <div className="hidden lg:block flex-[1] relative overflow-hidden">
         <Image
           src="/auth/login/image.png"
-          alt="Misty mountains"
+          alt="Abstract design"
           fill
           className="object-cover object-center scale-105"
           priority

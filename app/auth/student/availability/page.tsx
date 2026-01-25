@@ -60,18 +60,18 @@ export default function StudentAvailabilityPage() {
                         </div>
 
                         {/* Title */}
-                        <h1 className="text-4xl font-black text-gray-900 tracking-tight mb-2 text-center uppercase">
+                        <h1 className="text-3xl font-semibold text-gray-900 mb-2">
                             Your Availability
                         </h1>
-                        <p className="text-sm font-bold text-gray-400 mb-10 text-center uppercase tracking-widest">
+                        <p className="text-gray-500 mb-8 text-center">
                             How many hours can you dedicate to learning?
                         </p>
 
                         {/* Form */}
-                        <form onSubmit={handleContinue} className="w-full space-y-8">
+                        <form onSubmit={handleContinue} className="w-full space-y-6">
                             {/* Hours per Day */}
                             <div>
-                                <label className="block text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-4">
+                                <label className="block text-sm font-medium text-gray-700 mb-2">
                                     Daily Commitment (Hours)
                                 </label>
                                 <div className="grid grid-cols-5 gap-3">
@@ -80,9 +80,9 @@ export default function StudentAvailabilityPage() {
                                             key={h}
                                             type="button"
                                             onClick={() => setHoursPerDay(h)}
-                                            className={`py-4 rounded-xl text-sm font-black transition-all border-2 ${hoursPerDay === h
-                                                    ? 'border-yellow-600 bg-yellow-50 text-yellow-600 shadow-md scale-105'
-                                                    : 'border-gray-100 bg-gray-50 text-gray-400 hover:border-gray-200'
+                                            className={`py-3 rounded-lg text-sm font-medium transition-all border ${hoursPerDay === h
+                                                ? 'border-yellow-600 bg-yellow-50 text-yellow-600'
+                                                : 'border-gray-300 bg-white text-gray-600 hover:border-gray-400'
                                                 }`}
                                         >
                                             {h}
@@ -93,7 +93,7 @@ export default function StudentAvailabilityPage() {
 
                             {/* Time Slots */}
                             <div>
-                                <label className="block text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-4">
+                                <label className="block text-sm font-medium text-gray-700 mb-2">
                                     Preferred Time Windows
                                 </label>
                                 <div className="space-y-3">
@@ -102,21 +102,21 @@ export default function StudentAvailabilityPage() {
                                             key={slot.id}
                                             type="button"
                                             onClick={() => toggleSlot(slot.id)}
-                                            className={`w-full flex items-center gap-4 p-4 border-2 rounded-2xl transition-all ${timeSlots.includes(slot.id)
-                                                    ? 'border-yellow-600 bg-yellow-50 shadow-sm'
-                                                    : 'border-gray-100 bg-white hover:border-gray-200'
+                                            className={`w-full flex items-center gap-4 p-4 border rounded-lg transition-all ${timeSlots.includes(slot.id)
+                                                ? 'border-yellow-600 bg-yellow-50'
+                                                : 'border-gray-300 bg-white hover:border-gray-400'
                                                 }`}
                                         >
-                                            <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${timeSlots.includes(slot.id) ? 'bg-yellow-600 text-white' : 'bg-gray-100 text-gray-400'
+                                            <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-colors ${timeSlots.includes(slot.id) ? 'bg-yellow-600 text-white' : 'bg-gray-100 text-gray-400'
                                                 }`}>
                                                 <Clock className="w-5 h-5" />
                                             </div>
                                             <div className="flex-1 text-left">
-                                                <p className={`text-sm font-black uppercase tracking-tight ${timeSlots.includes(slot.id) ? 'text-gray-900' : 'text-gray-500'
+                                                <p className={`text-sm font-semibold ${timeSlots.includes(slot.id) ? 'text-gray-900' : 'text-gray-700'
                                                     }`}>
                                                     {slot.label}
                                                 </p>
-                                                <p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">{slot.time}</p>
+                                                <p className="text-xs text-gray-500">{slot.time}</p>
                                             </div>
                                             {timeSlots.includes(slot.id) && (
                                                 <CheckCircle className="w-5 h-5 text-yellow-600" />
@@ -128,23 +128,27 @@ export default function StudentAvailabilityPage() {
 
                             <button
                                 type="submit"
-                                className="w-full bg-yellow-600 text-white py-5 rounded-2xl font-black uppercase tracking-[0.2em] text-xs hover:bg-yellow-700 transition-all shadow-xl shadow-yellow-600/20 active:scale-95"
+                                className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-colors"
                             >
                                 Continue
                             </button>
 
                             {/* Progress dots */}
                             <div className="flex justify-center gap-2 pt-4">
-                                {[1, 2, 3, 4, 5].map((i) => (
-                                    <div key={i} className={`h-1.5 rounded-full transition-all ${i === 4 ? 'w-8 bg-yellow-600' : 'w-2 bg-gray-200'}`}></div>
-                                ))}
+                                <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
+                                <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
+                                <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
+                                <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
+                                <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
+                                <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
+                                <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
                             </div>
                         </form>
                     </div>
                 </div>
 
                 {/* Footer */}
-                <div className="text-[10px] font-black text-gray-300 uppercase tracking-[0.3em] text-center mt-8">
+                <div className="text-sm text-gray-500 text-center mt-8">
                     © Dreamize 2025
                 </div>
             </div>
@@ -155,7 +159,7 @@ export default function StudentAvailabilityPage() {
                     src="/auth/login/image.png"
                     alt="Abstract design"
                     fill
-                    className="object-cover object-center scale-110 grayscale hover:grayscale-0 transition-all duration-1000"
+                    className="object-cover object-center scale-105"
                     priority
                     quality={100}
                 />

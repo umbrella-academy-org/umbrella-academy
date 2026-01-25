@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-export default function MentorSignupPage() {
+export default function TrainerSignupPage() {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
@@ -20,16 +20,16 @@ export default function MentorSignupPage() {
       setError('Please enter a valid email address');
       return;
     }
-    console.log('Mentor Email:', email);
+    console.log('Trainer Email:', email);
     // Store user type in localStorage or state management
-    localStorage.setItem('userType', 'mentor');
+    localStorage.setItem('userType', 'trainer');
     localStorage.setItem('signupEmail', email);
     router.push('/auth/verify');
   };
 
   const handleGoogleSignIn = () => {
-    console.log('Google sign in for mentor');
-    localStorage.setItem('userType', 'mentor');
+    console.log('Google sign in for trainer');
+    localStorage.setItem('userType', 'trainer');
   };
 
   return (
@@ -59,10 +59,10 @@ export default function MentorSignupPage() {
 
           {/* Title */}
           <h1 className="text-3xl font-semibold text-gray-900 mb-2">
-            Create Mentor Account
+            Apply as Trainer
           </h1>
           <p className="text-gray-500 mb-8">
-            Enter your email to get started as a mentor.
+            Enter your email to start your application.
           </p>
 
           {/* Form */}
@@ -80,9 +80,8 @@ export default function MentorSignupPage() {
                   setError('');
                 }}
                 placeholder="Enter your email"
-                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${
-                  error ? 'border-red-500' : 'border-gray-300'
-                }`}
+                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${error ? 'border-red-500' : 'border-gray-300'
+                  }`}
                 required
               />
               {error && <p className="mt-2 text-sm text-red-500">{error}</p>}

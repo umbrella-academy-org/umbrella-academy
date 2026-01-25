@@ -4,32 +4,28 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-export default function MentorProfilePage() {
+export default function TrainerReferralPage() {
   const router = useRouter();
-  const [bio, setBio] = useState('');
-  const [error, setError] = useState('');
+  const [selectedSource, setSelectedSource] = useState('');
+
+  const sources = [
+    'LinkedIn',
+    'Google Search',
+    'Facebook / Instagram',
+    'Friend / Colleague',
+    'Other',
+  ];
 
   const handleContinue = (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
-    
-    if (!bio.trim()) {
-      setError('Please tell students about yourself');
-      return;
-    }
-    if (bio.length < 50) {
-      setError('Please write at least 50 characters');
-      return;
-    }
-    
-    console.log('Mentor bio:', bio);
-    router.push('/auth/mentor/education');
+    console.log('Trainer referral source:', selectedSource);
+    router.push('/auth/trainer/availability');
   };
 
   return (
     <div className="flex h-screen">
-      {/* Left side - Form */}
-      <div className="flex flex-[2] flex-col justify-between p-8 bg-white">
+      {/* Left side - Content */}
+      <div className="flex flex-[2] flex-col justify-between p-8 bg-white overflow-y-auto">
         <div className="flex flex-col flex-1 max-w-md mx-auto w-full">
           {/* Go back button */}
           <button
@@ -54,38 +50,45 @@ export default function MentorProfilePage() {
 
             {/* Title */}
             <h1 className="text-3xl font-semibold text-gray-900 mb-2">
-              Tell Students About Yourself
+              How did you find us?
             </h1>
-            <p className="text-gray-500 mb-8 text-center">
-              Introduce your expertise and approach to mentoring in a few sentences.
+            <p className="text-gray-500 mb-8 text-center text-sm px-4">
+              Help us understand where our amazing trainers come from.
             </p>
 
             {/* Form */}
-            <form onSubmit={handleContinue} className="w-full">
-              <div className="mb-4">
-                <textarea
-                  value={bio}
-                  onChange={(e) => {
-                    setBio(e.target.value);
-                    setError('');
-                  }}
-                  placeholder="I'm a Product Designer based in Melbourne, Australia. I specialise in UX/UI design, brand strategy, and Webflow development."
-                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 resize-none h-32 ${
-                    error ? 'border-red-500' : 'border-gray-300'
-                  }`}
-                  required
-                />
-                <div className="flex justify-between items-center mt-2">
-                  {error && <p className="text-sm text-red-500">{error}</p>}
-                  <p className="text-sm text-gray-500 ml-auto">
-                    {bio.length}/275 characters left
-                  </p>
-                </div>
-              </div>
+            <form onSubmit={handleContinue} className="w-full space-y-3">
+              {sources.map((source, index) => (
+                <label
+                  key={index}
+                  className={`flex items-center gap-4 p-4 border rounded-lg cursor-pointer transition-all ${selectedSource === source
+                      ? 'border-yellow-600 bg-yellow-50'
+                      : 'border-gray-200 bg-white hover:border-gray-300'
+                    }`}
+                >
+                  <div className={`w-8 h-8 rounded-full border-2 flex items-center justify-center transition-colors ${selectedSource === source ? 'border-yellow-600' : 'border-gray-300'
+                    }`}>
+                    {selectedSource === source && (
+                      <div className="w-2.5 h-2.5 bg-yellow-600 rounded-full"></div>
+                    )}
+                  </div>
+                  <span className={`text-sm font-medium ${selectedSource === source ? 'text-gray-900' : 'text-gray-600'}`}>
+                    {source}
+                  </span>
+                  <input
+                    type="radio"
+                    name="referral"
+                    value={source}
+                    className="hidden"
+                    onChange={(e) => setSelectedSource(e.target.value)}
+                    required
+                  />
+                </label>
+              ))}
 
               <button
                 type="submit"
-                className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-colors"
+                className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-colors mt-6"
               >
                 Continue
               </button>
@@ -93,7 +96,8 @@ export default function MentorProfilePage() {
               {/* Progress dots */}
               <div className="flex justify-center gap-2 pt-4">
                 <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
-                <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
+                <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
+                <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
                 <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
                 <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
               </div>
@@ -111,7 +115,7 @@ export default function MentorProfilePage() {
       <div className="hidden lg:block flex-[1] relative overflow-hidden">
         <Image
           src="/auth/login/image.png"
-          alt="Mediterranean coastal view"
+          alt="Green fern leaves"
           fill
           className="object-cover object-center scale-105"
           priority

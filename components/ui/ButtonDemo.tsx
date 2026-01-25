@@ -8,7 +8,8 @@
  */
 
 import React, { useState } from 'react';
-import { Button, ButtonGroup } from './Button';
+import { Button } from './Button';
+import { ButtonGroup } from './ButtonGroup';
 
 // Example icons for demonstration
 const PlusIcon = ({ className }: { className?: string }) => (
@@ -72,7 +73,7 @@ export function ButtonDemo() {
         <ButtonGroup spacing="md">
           <Button>Normal</Button>
           <Button disabled>Disabled</Button>
-          <Button 
+          <Button
             loading={loading === 'loading-demo'}
             onClick={() => handleLoadingDemo('loading-demo')}
           >
@@ -93,7 +94,7 @@ export function ButtonDemo() {
               <Button variant="danger" icon={{ position: 'left', component: TrashIcon }}>Delete</Button>
             </ButtonGroup>
           </div>
-          
+
           <div>
             <h3 className="text-lg font-medium mb-2">Right Icons</h3>
             <ButtonGroup spacing="md">
@@ -101,20 +102,20 @@ export function ButtonDemo() {
               <Button variant="secondary" icon={{ position: 'right', component: PlusIcon }}>Add New</Button>
             </ButtonGroup>
           </div>
-          
+
           <div>
             <h3 className="text-lg font-medium mb-2">Icon Only</h3>
             <ButtonGroup spacing="md">
-              <Button 
+              <Button
                 icon={{ position: 'only', component: PlusIcon }}
                 aria-label="Add item"
               />
-              <Button 
+              <Button
                 variant="secondary"
                 icon={{ position: 'only', component: DownloadIcon }}
                 aria-label="Download"
               />
-              <Button 
+              <Button
                 variant="danger"
                 icon={{ position: 'only', component: TrashIcon }}
                 aria-label="Delete"
@@ -136,14 +137,14 @@ export function ButtonDemo() {
       <section className="space-y-4">
         <h2 className="text-xl font-semibold">Loading with Icons</h2>
         <ButtonGroup spacing="md">
-          <Button 
+          <Button
             icon={{ position: 'left', component: PlusIcon }}
             loading={loading === 'icon-loading-1'}
             onClick={() => handleLoadingDemo('icon-loading-1')}
           >
             {loading === 'icon-loading-1' ? 'Adding...' : 'Add Item'}
           </Button>
-          <Button 
+          <Button
             variant="secondary"
             icon={{ position: 'only', component: DownloadIcon }}
             loading={loading === 'icon-loading-2'}
@@ -165,7 +166,7 @@ export function ButtonDemo() {
               <Button variant="danger">Delete</Button>
             </ButtonGroup>
           </div>
-          
+
           <div>
             <h3 className="text-lg font-medium mb-2">Vertical</h3>
             <ButtonGroup orientation="vertical" spacing="sm">

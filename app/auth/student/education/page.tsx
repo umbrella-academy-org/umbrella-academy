@@ -105,10 +105,10 @@ export default function StudentEducationPage() {
             </div>
 
             {/* Title */}
-            <h1 className="text-4xl font-black text-gray-900 tracking-tight mb-2 text-center uppercase">
+            <h1 className="text-3xl font-semibold text-gray-900 mb-2">
               Education Details
             </h1>
-            <p className="text-sm font-bold text-gray-400 mb-10 text-center uppercase tracking-widest">
+            <p className="text-gray-500 mb-8 text-center text-sm px-4">
               Fill in your current study path and learning objectives.
             </p>
 
@@ -116,14 +116,14 @@ export default function StudentEducationPage() {
             <form onSubmit={handleContinue} className="w-full space-y-6">
               {/* Field of Interest */}
               <div>
-                <label htmlFor="fieldOfInterest" className="block text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-2">
+                <label htmlFor="fieldOfInterest" className="block text-sm font-medium text-gray-700 mb-2">
                   Field of Interest
                 </label>
                 <select
                   id="fieldOfInterest"
                   value={formData.fieldOfInterest}
                   onChange={(e) => handleChange('fieldOfInterest', e.target.value)}
-                  className={`w-full px-4 py-3 bg-gray-50 border-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none text-gray-900 transition-all ${errors.fieldOfInterest ? 'border-red-500' : 'border-gray-100'
+                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white text-gray-900 ${errors.fieldOfInterest ? 'border-red-500' : 'border-gray-300'
                     }`}
                   required
                 >
@@ -134,19 +134,19 @@ export default function StudentEducationPage() {
                     </option>
                   ))}
                 </select>
-                {errors.fieldOfInterest && <p className="mt-1 text-xs font-bold text-red-500 uppercase tracking-tighter">{errors.fieldOfInterest}</p>}
+                {errors.fieldOfInterest && <p className="mt-1 text-xs text-red-500">{errors.fieldOfInterest}</p>}
               </div>
 
               {/* Current Skill Level */}
               <div>
-                <label htmlFor="skillLevel" className="block text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-2">
+                <label htmlFor="skillLevel" className="block text-sm font-medium text-gray-700 mb-2">
                   Current Skill Level
                 </label>
                 <select
                   id="skillLevel"
                   value={formData.skillLevel}
                   onChange={(e) => handleChange('skillLevel', e.target.value)}
-                  className={`w-full px-4 py-3 bg-gray-50 border-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none text-gray-900 transition-all ${errors.skillLevel ? 'border-red-500' : 'border-gray-100'
+                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white text-gray-900 ${errors.skillLevel ? 'border-red-500' : 'border-gray-300'
                     }`}
                   required
                 >
@@ -157,19 +157,19 @@ export default function StudentEducationPage() {
                     </option>
                   ))}
                 </select>
-                {errors.skillLevel && <p className="mt-1 text-xs font-bold text-red-500 uppercase tracking-tighter">{errors.skillLevel}</p>}
+                {errors.skillLevel && <p className="mt-1 text-xs text-red-500">{errors.skillLevel}</p>}
               </div>
 
               {/* Learning Goals */}
               <div>
-                <label htmlFor="learningGoals" className="block text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-2">
+                <label htmlFor="learningGoals" className="block text-sm font-medium text-gray-700 mb-2">
                   Learning Goals
                 </label>
                 <select
                   id="learningGoals"
                   value={formData.learningGoals}
                   onChange={(e) => handleChange('learningGoals', e.target.value)}
-                  className={`w-full px-4 py-3 bg-gray-50 border-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none text-gray-900 transition-all ${errors.learningGoals ? 'border-red-500' : 'border-gray-100'
+                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white text-gray-900 ${errors.learningGoals ? 'border-red-500' : 'border-gray-300'
                     }`}
                   required
                 >
@@ -180,20 +180,22 @@ export default function StudentEducationPage() {
                     </option>
                   ))}
                 </select>
-                {errors.learningGoals && <p className="mt-1 text-xs font-bold text-red-500 uppercase tracking-tighter">{errors.learningGoals}</p>}
+                {errors.learningGoals && <p className="mt-1 text-xs text-red-500">{errors.learningGoals}</p>}
               </div>
 
               <button
                 type="submit"
-                className="w-full bg-yellow-600 text-white py-5 rounded-2xl font-black uppercase tracking-[0.2em] text-xs hover:bg-yellow-700 transition-all shadow-xl shadow-yellow-600/20 active:scale-95 mt-4"
+                className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-colors mt-4"
               >
                 Continue
               </button>
 
               {/* Progress dots */}
               <div className="flex justify-center gap-2 pt-4">
-                {[1, 2, 3, 4, 5, 6].map((i) => (
-                  <div key={i} className={`h-1.5 rounded-full transition-all ${i === 2 ? 'w-8 bg-yellow-600' : 'w-2 bg-gray-200'}`}></div>
+                <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
+                <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
+                {[3, 4, 5, 6, 7].map((i) => (
+                  <div key={i} className="w-2 h-2 bg-gray-300 rounded-full"></div>
                 ))}
               </div>
             </form>
@@ -201,7 +203,7 @@ export default function StudentEducationPage() {
         </div>
 
         {/* Footer */}
-        <div className="text-[10px] font-black text-gray-300 uppercase tracking-[0.3em] text-center mt-8">
+        <div className="text-sm text-gray-500 text-center">
           © Dreamize 2025
         </div>
       </div>
@@ -212,11 +214,10 @@ export default function StudentEducationPage() {
           src="/auth/login/image.png"
           alt="Abstract design"
           fill
-          className="object-cover object-center scale-110 grayscale hover:grayscale-0 transition-all duration-1000"
+          className="object-cover object-center scale-105"
           priority
           quality={100}
         />
-        <div className="absolute inset-0 bg-yellow-600/10 mix-blend-multiply"></div>
       </div>
     </div>
   );

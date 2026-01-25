@@ -120,10 +120,10 @@ export default function ChooseWingPage() {
             </div>
 
             {/* Title */}
-            <h1 className="text-4xl font-black text-gray-900 tracking-tight mb-2 text-center uppercase">
+            <h1 className="text-3xl font-semibold text-gray-900 mb-2 text-center">
               Select Wing
             </h1>
-            <p className="text-sm font-bold text-gray-400 mb-10 text-center uppercase tracking-widest">
+            <p className="text-gray-500 mb-10 text-center text-sm">
               Choose your specialized path in the Academy.
             </p>
 
@@ -133,28 +133,28 @@ export default function ChooseWingPage() {
                 {wings.map((wing) => (
                   <div
                     key={wing.id}
-                    className={`flex items-start gap-4 p-4 border-2 rounded-2xl cursor-pointer transition-all ${selectedWing === wing.id
-                        ? 'border-yellow-600 bg-yellow-50 shadow-md scale-[1.02]'
-                        : 'border-gray-50 bg-gray-50/50 hover:border-gray-100 hover:bg-gray-50'
+                    className={`flex items-start gap-4 p-4 border rounded-lg cursor-pointer transition-all ${selectedWing === wing.id
+                        ? 'border-yellow-600 bg-yellow-50'
+                        : 'border-gray-200 bg-white hover:border-gray-300'
                       }`}
                     onClick={() => handleWingSelect(wing.id)}
                   >
-                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-xl shadow-sm transition-colors ${selectedWing === wing.id ? 'bg-yellow-600 text-white' : 'bg-white'
+                    <div className={`w-12 h-12 rounded-lg flex items-center justify-center text-xl shadow-sm transition-colors ${selectedWing === wing.id ? 'bg-yellow-600 text-white' : 'bg-gray-50'
                       }`}>
                       {wing.icon}
                     </div>
 
                     <div className="flex-1">
-                      <h3 className={`text-sm font-black uppercase tracking-tight ${selectedWing === wing.id ? 'text-gray-900' : 'text-gray-500'}`}>
+                      <h3 className={`text-sm font-semibold ${selectedWing === wing.id ? 'text-gray-900' : 'text-gray-700'}`}>
                         {wing.title}
                       </h3>
-                      <p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mt-0.5">
+                      <p className="text-xs text-gray-500 mt-0.5">
                         {wing.students.toLocaleString()} Students Enrolled
                       </p>
 
                       <div className="flex items-center gap-2 mt-2">
                         {renderStars(wing.rating)}
-                        <span className="text-[10px] font-black text-yellow-600 uppercase italic">Top Wing</span>
+                        <span className="text-[10px] font-medium text-yellow-600 uppercase tracking-wider">Top Wing</span>
                       </div>
                     </div>
 
@@ -165,19 +165,19 @@ export default function ChooseWingPage() {
                 ))}
               </div>
 
-              {error && <p className="mb-4 text-xs font-black text-red-500 text-center uppercase tracking-tighter">{error}</p>}
+              {error && <p className="mb-4 text-xs font-medium text-red-500 text-center">{error}</p>}
 
               <button
                 type="submit"
-                className="w-full bg-yellow-600 text-white py-5 rounded-2xl font-black uppercase tracking-[0.2em] text-xs hover:bg-yellow-700 transition-all shadow-xl shadow-yellow-600/20 active:scale-95"
+                className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-all active:scale-95"
               >
-                Complete Registration
+                Continue
               </button>
 
               {/* Progress dots */}
               <div className="flex justify-center gap-2 pt-6">
-                {[1, 2, 3, 4, 5, 6].map((i) => (
-                  <div key={i} className={`h-1.5 rounded-full transition-all ${i === 6 ? 'w-8 bg-yellow-600' : 'w-2 bg-yellow-600/30'}`}></div>
+                {[1, 2, 3, 4, 5, 6, 7].map((i) => (
+                  <div key={i} className={`h-2 rounded-full transition-all ${i === 5 ? 'w-8 bg-yellow-600' : 'w-2 bg-gray-300'}`}></div>
                 ))}
               </div>
             </form>
