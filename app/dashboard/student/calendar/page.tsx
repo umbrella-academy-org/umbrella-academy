@@ -46,8 +46,8 @@ export default function SmartCalendarPage() {
                 {/* Calendar Info */}
                 <CalendarInfo />
 
-                {/* Upcoming Activities */}
-                <UpcomingActivities />
+                {/* Upcoming Sessions */}
+                <UpcomingSessions />
 
                 {/* Live Session Notifications */}
                 <LiveSessionNotifications />

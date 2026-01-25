@@ -72,7 +72,7 @@ export default function CalendarGrid({ selectedDateRange, onDateRangeChange }: C
     // Current month days
     for (let day = 1; day <= daysInMonth; day++) {
       const isSelected = day === 6 || day === 12;
-      const hasActivity = [6, 12, 18, 24].includes(day);
+      const hasLiveSession = [6, 12, 18, 24].includes(day);
 
       days.push(
         <button
@@ -83,7 +83,7 @@ export default function CalendarGrid({ selectedDateRange, onDateRangeChange }: C
             }`}
         >
           <span>{day}</span>
-          {hasActivity && (
+          {hasLiveSession && (
             <span className={`w-1 h-1 rounded-full absolute bottom-1.5 ${isSelected ? 'bg-white' : 'bg-yellow-500'
               }`}></span>
           )}
