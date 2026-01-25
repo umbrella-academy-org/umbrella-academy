@@ -122,7 +122,7 @@ export default function PickMentorPage() {
     console.log('Selected mentor:', selectedMentor);
     // Store selected mentor
     localStorage.setItem('selectedMentor', selectedMentor);
-    router.push('/auth/student/select-course');
+    router.push('/auth/student/payment');
   };
 
   const renderStars = (rating: number) => {

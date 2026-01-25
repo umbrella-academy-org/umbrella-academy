@@ -60,7 +60,7 @@ export default function ProfilePage() {
   return (
     <div className="flex h-screen">
       {/* Left side - Form */}
-      <div className="flex flex-[2] flex-col justify-between p-8 bg-white">
+      <div className="flex flex-[2] flex-col justify-between p-8 bg-white overflow-auto">
         <div className="flex flex-col flex-1 max-w-md mx-auto w-full">
           {/* Go back button */}
           <button

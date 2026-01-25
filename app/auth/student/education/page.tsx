@@ -43,7 +43,7 @@ export default function StudentEducationPage() {
     console.log('Student education data:', formData);
     // Store education data for roadmap creation
     localStorage.setItem('studentEducationData', JSON.stringify(formData));
-    router.push('/auth/create-roadmap');
+    router.push('/auth/student/education-level');
   };
 
   const fieldsOfInterest = [
@@ -81,7 +81,7 @@ export default function StudentEducationPage() {
   return (
     <div className="flex h-screen">
       {/* Left side - Form */}
-      <div className="flex flex-[2] flex-col justify-between p-8 bg-white">
+      <div className="flex flex-[2] flex-col justify-between p-8 bg-white overflow-auto">
         <div className="flex flex-col flex-1 max-w-md mx-auto w-full">
           {/* Go back button */}
           <button
