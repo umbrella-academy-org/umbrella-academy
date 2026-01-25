@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
-import Header from '@/components/dashboard/Header';
+
 import CalendarHeader from '@/components/calendar/CalendarHeader';
 import CalendarInfo from '@/components/calendar/CalendarInfo';
 import CalendarGrid from '@/components/calendar/CalendarGrid';
@@ -19,9 +19,6 @@ export default function SmartCalendarPage() {
 
       {/* Main Content - Scrollable */}
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
-        {/* Header */}
-        <Header />
-
         {/* Calendar Content - Scrollable */}
         <main className="flex-1 overflow-auto">
           <div className="p-3 lg:p-4">

@@ -1,7 +1,7 @@
 'use client';
 
 import Sidebar from '@/components/dashboard/Sidebar';
-import Header from '@/components/dashboard/Header';
+
 import { CreditCard, TrendingUp, Download, ArrowUpRight } from 'lucide-react';
 
 export default function WingAdminWalletPage() {
@@ -35,10 +35,8 @@ export default function WingAdminWalletPage() {
   return (
     <div className="flex h-screen bg-white">
       <Sidebar activeItem="Wing Wallet" userType="wing-admin" />
-      
+
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
-        <Header breadcrumb="Wing Wallet" />
-        
         <main className="flex-1 overflow-auto">
           <div className="p-3 lg:p-4">
             <div className="mb-6">
@@ -57,7 +55,7 @@ export default function WingAdminWalletPage() {
                   <CreditCard className="w-8 h-8 text-yellow-200" />
                 </div>
               </div>
-              
+
               <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
                 <div className="flex items-center justify-between">
                   <div>
@@ -67,7 +65,7 @@ export default function WingAdminWalletPage() {
                   <TrendingUp className="w-8 h-8 text-green-500" />
                 </div>
               </div>
-              
+
               <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
                 <div className="flex items-center justify-between">
                   <div>
@@ -114,16 +112,14 @@ export default function WingAdminWalletPage() {
                       <tr key={transaction.id}>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="flex items-center">
-                            <div className={`w-2 h-2 rounded-full mr-3 ${
-                              transaction.type === 'income' ? 'bg-green-500' : 'bg-red-500'
-                            }`}></div>
+                            <div className={`w-2 h-2 rounded-full mr-3 ${transaction.type === 'income' ? 'bg-green-500' : 'bg-red-500'
+                              }`}></div>
                             <div className="text-sm text-gray-900">{transaction.description}</div>
                           </div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className={`text-sm font-medium ${
-                            transaction.type === 'income' ? 'text-green-600' : 'text-red-600'
-                          }`}>
+                          <div className={`text-sm font-medium ${transaction.type === 'income' ? 'text-green-600' : 'text-red-600'
+                            }`}>
                             {transaction.type === 'income' ? '+' : ''}€{Math.abs(transaction.amount).toFixed(2)}
                           </div>
                         </td>

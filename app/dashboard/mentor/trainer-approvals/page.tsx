@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
-import Header from '@/components/dashboard/Header';
+
 import { CheckCircle, XCircle, Clock, User, Star, Award, BookOpen, Calendar } from 'lucide-react';
 
 export default function MentorTrainerApprovalsPage() {
@@ -109,8 +109,6 @@ export default function MentorTrainerApprovalsPage() {
       <Sidebar activeItem="Trainer Approvals" userType="mentor" />
 
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
-        <Header breadcrumb="Trainer Approvals" />
-
         <main className="flex-1 overflow-auto">
           <div className="p-3 lg:p-6">
             <div className="mb-8">

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
-import Header from '@/components/dashboard/Header';
+
 import { Settings, Lock, Bell, Moon, Globe, Shield, CreditCard, LogOut, ChevronRight, Save, Check, Users, Video } from 'lucide-react';
 import { useAuth } from '@/contexts';
 
@@ -22,7 +22,6 @@ export default function TrainerSettingsPage() {
             <Sidebar activeItem="Settings" userType="trainer" />
 
             <div className="flex-1 flex flex-col min-w-0">
-                <Header breadcrumb="Settings" userType="trainer" />
 
                 <main className="flex-1 p-4 lg:p-8 overflow-y-auto bg-gray-50/30">
                     <div className="max-w-5xl mx-auto">
@@ -46,8 +45,8 @@ export default function TrainerSettingsPage() {
                                             key={item.id}
                                             onClick={() => setActiveSection(item.id)}
                                             className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeSection === item.id
-                                                    ? 'bg-green-600 text-white shadow-md'
-                                                    : 'text-gray-600 hover:bg-white hover:text-gray-900 border border-transparent hover:border-gray-100'
+                                                ? 'bg-green-600 text-white shadow-md'
+                                                : 'text-gray-600 hover:bg-white hover:text-gray-900 border border-transparent hover:border-gray-100'
                                                 }`}
                                         >
                                             {item.icon}

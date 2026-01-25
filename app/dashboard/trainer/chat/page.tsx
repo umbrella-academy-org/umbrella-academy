@@ -1,7 +1,7 @@
 'use client';
 
 import Sidebar from '@/components/dashboard/Sidebar';
-import Header from '@/components/dashboard/Header';
+
 import ChatInterface from '@/components/chat/ChatInterface';
 
 export default function TrainerChatPage() {
@@ -10,9 +10,7 @@ export default function TrainerChatPage() {
             <Sidebar activeItem="Chat" userType="trainer" />
 
             <div className="flex-1 flex flex-col min-w-0">
-                <Header breadcrumb="Chat" userType="trainer" />
-
-                <main className="flex-1 p-4 lg:p-8 overflow-hidden bg-gray-50/30">
+                <main className="flex-1 overflow-hidden bg-gray-50/30">
                     <ChatInterface userType="trainer" />
                 </main>
             </div>

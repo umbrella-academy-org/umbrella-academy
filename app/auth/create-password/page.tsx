@@ -40,8 +40,8 @@ export default function CreatePasswordPage() {
     
     // Route based on user type
     const userType = typeof window !== 'undefined' ? localStorage.getItem('userType') : null;
-    if (userType === 'mentor') {
-      router.push('/auth/mentor/profile');
+    if (userType === 'trainer') {
+      router.push('/auth/trainer/profile');
     } else {
       router.push('/auth/student/profile');
     }

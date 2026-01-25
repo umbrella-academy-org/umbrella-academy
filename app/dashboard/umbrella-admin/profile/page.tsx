@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
-import Header from '@/components/dashboard/Header';
+
 import { User, Mail, Shield, Bell, Calendar, MapPin, Camera, Edit2, Check, X, Phone, Globe, BookOpen, Award, Zap, Briefcase } from 'lucide-react';
 import { useAuth } from '@/contexts';
 
@@ -21,8 +21,6 @@ export default function UmbrellaAdminProfilePage() {
             <Sidebar activeItem="Profile" userType="umbrella-admin" />
 
             <div className="flex-1 flex flex-col min-w-0">
-                <Header breadcrumb="My Profile" userType="umbrella-admin" />
-
                 <main className="flex-1 p-4 lg:p-8 overflow-y-auto bg-gray-50/30">
                     <div className="max-w-5xl mx-auto">
                         {/* Profile Header Card */}

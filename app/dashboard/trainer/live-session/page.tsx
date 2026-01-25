@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
-import Header from '@/components/dashboard/Header';
+
 import LiveSessionHeader from '@/components/live-session/LiveSessionHeader';
 import CourseCard from '@/components/live-session/CourseCard';
 import SessionTabs from '@/components/live-session/SessionTabs';
@@ -18,13 +18,10 @@ export default function LiveSessionPage() {
   return (
     <div className="flex h-screen bg-white">
       {/* Sidebar - Fixed */}
-      <Sidebar activeItem="Live Session" userType='trainer'/>
+      <Sidebar activeItem="Live Session" userType='trainer' />
 
       {/* Main Content - Scrollable */}
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
-        {/* Header */}
-        <Header breadcrumb="Live Sessions" />
-
         {/* Live Session Content - Scrollable */}
         <main className="flex-1 overflow-auto">
           <div className="p-3 lg:p-4">
@@ -39,7 +36,7 @@ export default function LiveSessionPage() {
                 <CourseCard userType="trainer" />
 
                 {/* Session Tabs */}
-                <SessionTabs 
+                <SessionTabs
                   activeTab={activeTab}
                   onTabChange={setActiveTab}
                 />

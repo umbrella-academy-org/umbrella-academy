@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
-import Header from '@/components/dashboard/Header';
+
 import { MessageSquare, Star, Send, CheckCircle2 } from 'lucide-react';
 
 export default function StudentFeedbackPage() {
@@ -33,8 +33,6 @@ export default function StudentFeedbackPage() {
             <Sidebar activeItem="Feedback" userType="student" />
 
             <div className="flex-1 flex flex-col min-w-0">
-                <Header breadcrumb="Feedback" userType="student" />
-
                 <main className="flex-1 p-4 lg:p-8 overflow-y-auto bg-gray-50/30">
                     <div className="max-w-3xl mx-auto">
                         <div className="mb-8">
@@ -71,8 +69,8 @@ export default function StudentFeedbackPage() {
                                                     type="button"
                                                     onClick={() => setCategory(c)}
                                                     className={`px-4 py-3 rounded-xl text-sm font-medium border transition-all ${category === c
-                                                            ? 'border-yellow-600 bg-yellow-50 text-yellow-600 shadow-sm'
-                                                            : 'border-gray-200 bg-white text-gray-600 hover:border-gray-300'
+                                                        ? 'border-yellow-600 bg-yellow-50 text-yellow-600 shadow-sm'
+                                                        : 'border-gray-200 bg-white text-gray-600 hover:border-gray-300'
                                                         }`}
                                                 >
                                                     {c}

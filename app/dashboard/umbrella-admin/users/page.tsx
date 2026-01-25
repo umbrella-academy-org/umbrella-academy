@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
-import Header from '@/components/dashboard/Header';
+
 import { Plus, Edit, Trash2, Eye, Phone, Mail, MapPin } from 'lucide-react';
 
 export default function UmbrellaAdminUsersPage() {
@@ -157,10 +157,8 @@ export default function UmbrellaAdminUsersPage() {
   return (
     <div className="flex h-screen bg-white">
       <Sidebar activeItem="Users" userType="umbrella-admin" />
-      
+
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
-        <Header breadcrumb="Users" />
-        
         <main className="flex-1 overflow-auto">
           <div className="p-3 lg:p-4">
             <div className="mb-6">
@@ -187,11 +185,10 @@ export default function UmbrellaAdminUsersPage() {
                 <button
                   key={tab.key}
                   onClick={() => setSelectedTab(tab.key as any)}
-                  className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
-                    selectedTab === tab.key
+                  className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${selectedTab === tab.key
                       ? 'border-yellow-600 text-yellow-600'
                       : 'border-transparent text-gray-500 hover:text-gray-700'
-                  }`}
+                    }`}
                 >
                   {tab.label} ({tab.count})
                 </button>
@@ -254,9 +251,9 @@ export default function UmbrellaAdminUsersPage() {
                       <tr key={user.id}>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="flex items-center">
-                            <img 
-                              className="h-10 w-10 rounded-full object-cover" 
-                              src={user.avatar} 
+                            <img
+                              className="h-10 w-10 rounded-full object-cover"
+                              src={user.avatar}
                               alt={user.name}
                             />
                             <div className="ml-4">
@@ -265,7 +262,7 @@ export default function UmbrellaAdminUsersPage() {
                             </div>
                           </div>
                         </td>
-                        
+
                         {selectedTab === 'students' && (
                           <>
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
@@ -283,7 +280,7 @@ export default function UmbrellaAdminUsersPage() {
                             </td>
                           </>
                         )}
-                        
+
                         {selectedTab === 'trainers' && (
                           <>
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
@@ -300,7 +297,7 @@ export default function UmbrellaAdminUsersPage() {
                             </td>
                           </>
                         )}
-                        
+
                         {selectedTab === 'mentors' && (
                           <>
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
@@ -317,7 +314,7 @@ export default function UmbrellaAdminUsersPage() {
                             </td>
                           </>
                         )}
-                        
+
                         {selectedTab === 'admins' && (
                           <>
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
@@ -334,7 +331,7 @@ export default function UmbrellaAdminUsersPage() {
                             </td>
                           </>
                         )}
-                        
+
                         <td className="px-6 py-4 whitespace-nowrap">
                           <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
                             {user.status}

@@ -1,7 +1,7 @@
 'use client';
 
 import Sidebar from '@/components/dashboard/Sidebar';
-import Header from '@/components/dashboard/Header';
+
 
 export default function UmbrellaAdminWingsPage() {
   const wings = [
@@ -60,10 +60,8 @@ export default function UmbrellaAdminWingsPage() {
   return (
     <div className="flex h-screen bg-white">
       <Sidebar activeItem="Wings" userType="umbrella-admin" />
-      
+
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
-        <Header breadcrumb="Wings" />
-        
         <main className="flex-1 overflow-auto">
           <div className="p-3 lg:p-4">
             <div className="mb-6">
@@ -121,11 +119,10 @@ export default function UmbrellaAdminWingsPage() {
                           RWF {wing.revenue.toLocaleString()}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                            wing.status === 'active' 
+                          <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${wing.status === 'active'
                               ? 'bg-green-100 text-green-800'
                               : 'bg-yellow-100 text-yellow-800'
-                          }`}>
+                            }`}>
                             {wing.status}
                           </span>
                         </td>

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
-import Header from '@/components/dashboard/Header';
+
 import { HelpCircle, Search, Mail, MessageCircle, FileText, ChevronRight, ExternalLink } from 'lucide-react';
 
 export default function StudentSupportPage() {
@@ -32,8 +32,6 @@ export default function StudentSupportPage() {
             <Sidebar activeItem="Support" userType="student" />
 
             <div className="flex-1 flex flex-col min-w-0">
-                <Header breadcrumb="Support" userType="student" />
-
                 <main className="flex-1 p-4 lg:p-8 overflow-y-auto bg-gray-50/30">
                     <div className="max-w-5xl mx-auto">
                         {/* Hero Section */}

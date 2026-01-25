@@ -99,7 +99,7 @@ export default function SessionList({ activeTab }: SessionListProps) {
                         key={session.id}
                         onMouseEnter={() => setHoveredId(session.id)}
                         onMouseLeave={() => setHoveredId(null)}
-                        className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm hover:border-yellow-200 hover:shadow-md transition-all duration-300 group relative overflow-hidden"
+                        className="bg-white rounded-lg p-5 border border-gray-100 shadow-sm hover:border-yellow-200 hover:shadow-md transition-all duration-300 group relative overflow-hidden"
                     >
                         {/* Background Accent */}
                         <div className={`absolute top-0 right-0 w-48 h-48 rounded-full -mr-24 -mt-24 opacity-0 group-hover:opacity-10 transition-opacity duration-500 blur-3xl ${session.status === 'live' ? 'bg-red-500' : 'bg-yellow-400'
@@ -127,7 +127,7 @@ export default function SessionList({ activeTab }: SessionListProps) {
                                             {session.time}
                                         </span>
                                     </div>
-                                    <h3 className={`text-lg font-semibold text-gray-900 transition-colors duration-300 ${hoveredId === session.id ? 'text-yellow-600' : ''
+                                    <h3 className={`text-lg font-semibold text-gray-700 transition-colors duration-300 ${hoveredId === session.id ? 'text-yellow-600' : ''
                                         }`}>
                                         {session.title}
                                     </h3>

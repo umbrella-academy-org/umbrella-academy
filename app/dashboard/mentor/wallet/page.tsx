@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
-import Header from '@/components/dashboard/Header';
+
 import MentorWalletHeader from '@/components/dashboard/MentorWalletHeader';
 import MentorWalletBalance from '@/components/dashboard/MentorWalletBalance';
 import MentorEarningsStats from '@/components/dashboard/MentorEarningsStats';
@@ -16,9 +16,6 @@ export default function MentorWalletPage() {
 
       {/* Main Content - Scrollable */}
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
-        {/* Header */}
-        <Header breadcrumb="Wallet" userType="mentor" />
-
         {/* Wallet Content - Scrollable */}
         <main className="flex-1 overflow-auto">
           <div className="p-3 lg:p-4">

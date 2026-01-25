@@ -98,7 +98,7 @@ export default function StudentSignupPage() {
             <button
               type="button"
               onClick={handleGoogleSignIn}
-              className="w-full flex items-center justify-center gap-3 py-3 border border-gray-300 rounded-lg font-medium hover:bg-gray-50 transition-colors"
+              className="w-full text-gray-600 flex items-center justify-center gap-3 py-3 border border-gray-300 rounded-lg font-medium hover:bg-gray-50 transition-colors"
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24">
                 <path

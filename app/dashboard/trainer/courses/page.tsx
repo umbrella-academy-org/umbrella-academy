@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
-import Header from '@/components/dashboard/Header';
+
 import CoursesHeader from '@/components/trainer/CoursesHeader';
 import FeaturedCourse from '@/components/trainer/FeaturedCourse';
 import CourseModules from '@/components/trainer/CourseModules';
@@ -15,20 +15,9 @@ export default function TrainerCoursesPage() {
   return (
     <div className="flex h-screen bg-white">
       <Sidebar activeItem="Courses" userType="trainer" />
-      
+
       <div className="flex-1 flex flex-col min-w-0 lg:ml-0">
-        <Header 
-          breadcrumb="Courses" 
-          userType="trainer"
-          actions={
-            <div className="flex items-center gap-2 sm:gap-3">
-              <button className="px-3 py-2 bg-yellow-600 text-white text-xs sm:text-sm font-medium rounded-lg hover:bg-yellow-700 transition-all duration-200 interactive-button transform hover:scale-105">
-                Add Activity
-              </button>
-            </div>
-          }
-        />
-        
+
         <main className="flex-1 p-3 sm:p-4 lg:p-6 overflow-y-auto">
           <div className="max-w-7xl mx-auto">
             {/* Courses Header */}
@@ -40,7 +29,7 @@ export default function TrainerCoursesPage() {
               <div className="lg:col-span-2 space-y-4 sm:space-y-6 lg:space-y-8">
                 {/* Featured Course */}
                 <div className="animate-fade-in" style={{ animationDelay: '100ms' }}>
-                  <FeaturedCourse 
+                  <FeaturedCourse
                     selectedCourse={selectedCourse}
                     onCourseSelect={setSelectedCourse}
                   />

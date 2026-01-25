@@ -381,3 +381,7 @@ html {
   outline: none;
   box-shadow: 0 0 0 3px rgba(202, 138, 4, 0.3);
 }
+
+input {
+color: rgb(86, 84, 84);
+}

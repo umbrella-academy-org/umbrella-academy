@@ -30,7 +30,7 @@ export default function MentorAvailabilityPage() {
             return;
         }
         console.log('Mentor Availability:', { hoursPerDay, timeSlots });
-        router.push('/auth/mentor/upload-proofs');
+        router.push('/auth/trainer/upload-proofs');
     };
 
     return (
