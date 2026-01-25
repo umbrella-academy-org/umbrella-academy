@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { CheckCircle } from 'lucide-react';
 
 export default function EducationLevelPage() {
   const router = useRouter();
@@ -53,56 +54,64 @@ export default function EducationLevelPage() {
             </div>
 
             {/* Title */}
-            <h1 className="text-3xl font-semibold text-gray-900 mb-2">
-              Education Details
+            <h1 className="text-4xl font-black text-gray-900 tracking-tight mb-2 text-center uppercase">
+              Degree Level
             </h1>
-            <p className="text-gray-500 mb-8 text-center">
-              Fill in your current level of study and where you're learning from.
+            <p className="text-sm font-bold text-gray-400 mb-10 text-center uppercase tracking-widest">
+              What is your current or highest academic qualification?
             </p>
 
             {/* Form */}
-            <form onSubmit={handleContinue} className="w-full space-y-3">
+            <form onSubmit={handleContinue} className="w-full space-y-4">
               {/* Education level options */}
               {educationLevels.map((level, index) => (
                 <label
                   key={index}
-                  className="flex items-center gap-3 p-4 border border-gray-300 rounded-lg text-gray-900 cursor-pointer hover:bg-gray-50 transition-colors"
+                  className={`flex items-center gap-4 p-5 border-2 rounded-2xl cursor-pointer transition-all ${selectedLevel === level
+                    ? 'border-yellow-600 bg-yellow-50 shadow-md scale-105'
+                    : 'border-gray-50 bg-gray-50/50 hover:border-gray-100 hover:bg-gray-50'
+                    }`}
                 >
-                  <svg className="w-5 h-5 text-blue-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                  </svg>
-                  <span className="flex-1 text-gray-700">{level}</span>
+                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${selectedLevel === level ? 'bg-yellow-600 text-white' : 'bg-white text-gray-400'
+                    }`}>
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                  </div>
+                  <span className={`flex-1 text-sm font-black uppercase tracking-tight ${selectedLevel === level ? 'text-gray-900' : 'text-gray-500'}`}>{level}</span>
                   <input
                     type="radio"
                     name="educationLevel"
                     value={level}
                     checked={selectedLevel === level}
                     onChange={(e) => setSelectedLevel(e.target.value)}
-                    className="w-5 h-5 text-yellow-600 focus:ring-yellow-600 focus:ring-2"
+                    className="hidden"
                   />
+                  {selectedLevel === level && (
+                    <CheckCircle className="w-5 h-5 text-yellow-600" />
+                  )}
                 </label>
               ))}
 
               <button
                 type="submit"
-                className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-colors mt-6"
+                className="w-full bg-yellow-600 text-white py-5 rounded-2xl font-black uppercase tracking-[0.2em] text-xs hover:bg-yellow-700 transition-all shadow-xl shadow-yellow-600/20 active:scale-95 mt-6"
               >
                 Continue
               </button>
 
               {/* Progress dots */}
               <div className="flex justify-center gap-2 pt-4">
-                <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
-                <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
-                <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
-                <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
+                {[1, 2, 3, 4, 5, 6].map((i) => (
+                  <div key={i} className={`h-1.5 rounded-full transition-all ${i === 3 ? 'w-8 bg-yellow-600' : 'w-2 bg-gray-200'}`}></div>
+                ))}
               </div>
             </form>
           </div>
         </div>
 
         {/* Footer */}
-        <div className="text-sm text-gray-500">
+        <div className="text-[10px] font-black text-gray-300 uppercase tracking-[0.3em] text-center mt-8">
           © Dreamize 2025
         </div>
       </div>
@@ -111,12 +120,13 @@ export default function EducationLevelPage() {
       <div className="hidden lg:block flex-[1] relative overflow-hidden">
         <Image
           src="/auth/login/image.png"
-          alt="Pink jellyfish underwater"
+          alt="Abstract design"
           fill
-          className="object-cover object-center scale-105"
+          className="object-cover object-center scale-110 grayscale hover:grayscale-0 transition-all duration-1000"
           priority
           quality={100}
         />
+        <div className="absolute inset-0 bg-yellow-600/10 mix-blend-multiply"></div>
       </div>
     </div>
   );

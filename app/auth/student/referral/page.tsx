@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { Share2, CheckCircle } from 'lucide-react';
 
 export default function ReferralPage() {
   const router = useRouter();
@@ -24,30 +25,30 @@ export default function ReferralPage() {
       return;
     }
     console.log('Selected source:', selectedSource);
-    // Navigate to choose wing page
-    router.push('/auth/student/choose-wing');
+    // Navigate to availability page
+    router.push('/auth/student/availability');
   };
 
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen bg-white">
       {/* Left side - Form */}
-      <div className="flex flex-[2] flex-col justify-between p-8 bg-white overflow-y-scroll">
+      <div className="flex flex-[2] flex-col justify-between p-8 bg-white overflow-y-auto">
         <div className="flex flex-col flex-1 max-w-md mx-auto w-full">
           {/* Go back button */}
           <button
             onClick={() => window.history.back()}
-            className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-8"
+            className="flex items-center gap-2 text-gray-400 hover:text-gray-900 mb-8 transition-colors group"
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            <svg className="w-5 h-5 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M15 19l-7-7 7-7" />
             </svg>
-            Go back
+            <span className="text-xs font-black uppercase tracking-widest">Go back</span>
           </button>
 
           <div className="flex flex-col items-center justify-center flex-1">
             {/* Logo */}
             <div className="mb-8">
-              <div className="w-16 h-16 bg-yellow-600 rounded-2xl flex items-center justify-center">
+              <div className="w-16 h-16 bg-yellow-600 rounded-2xl flex items-center justify-center shadow-lg shadow-yellow-600/20">
                 <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" />
                 </svg>
@@ -55,11 +56,11 @@ export default function ReferralPage() {
             </div>
 
             {/* Title */}
-            <h1 className="text-3xl font-semibold text-gray-900 mb-2 text-center">
-              Where Did You Here About Us?
+            <h1 className="text-4xl font-black text-gray-900 tracking-tight mb-2 text-center uppercase">
+              Discovery
             </h1>
-            <p className="text-gray-500 mb-8 text-center">
-              Fill in your current level of study and where you're learning from.
+            <p className="text-sm font-bold text-gray-400 mb-10 text-center uppercase tracking-widest">
+              How did you hear about Umbrella Academy?
             </p>
 
             {/* Form */}
@@ -68,40 +69,47 @@ export default function ReferralPage() {
               {sources.map((source, index) => (
                 <label
                   key={index}
-                  className="flex items-center gap-3 p-4 border border-gray-300 rounded-lg text-gray-900 cursor-pointer hover:bg-gray-50 transition-colors"
+                  className={`flex items-center gap-4 p-4 border-2 rounded-2xl cursor-pointer transition-all ${selectedSource === source
+                      ? 'border-yellow-600 bg-yellow-50 shadow-md scale-105'
+                      : 'border-gray-50 bg-gray-50/50 hover:border-gray-100 hover:bg-gray-50'
+                    }`}
                 >
-                  <svg className="w-5 h-5 text-blue-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                  </svg>
-                  <span className="flex-1 text-gray-700">{source}</span>
+                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${selectedSource === source ? 'bg-yellow-600 text-white' : 'bg-white text-gray-400'
+                    }`}>
+                    <Share2 className="w-4 h-4" />
+                  </div>
+                  <span className={`flex-1 text-sm font-black uppercase tracking-tight ${selectedSource === source ? 'text-gray-900' : 'text-gray-500'}`}>{source}</span>
                   <input
                     type="radio"
                     name="source"
                     value={source}
                     checked={selectedSource === source}
                     onChange={(e) => setSelectedSource(e.target.value)}
-                    className="w-5 h-5 text-yellow-600 focus:ring-yellow-600 focus:ring-2"
+                    className="hidden"
                   />
+                  {selectedSource === source && (
+                    <CheckCircle className="w-5 h-5 text-yellow-600" />
+                  )}
                 </label>
               ))}
 
               <button
                 type="submit"
-                className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-colors mt-6"
+                className="w-full bg-yellow-600 text-white py-5 rounded-2xl font-black uppercase tracking-[0.2em] text-xs hover:bg-yellow-700 transition-all shadow-xl shadow-yellow-600/20 active:scale-95 mt-6"
               >
                 Continue
               </button>
 
               {/* Progress dots */}
               <div className="flex justify-center gap-2 pt-4">
-                <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
-                <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
-                <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
-                <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
+                {[1, 2, 3, 4, 5, 6].map((i) => (
+                  <div key={i} className={`h-1.5 rounded-full transition-all ${i === 4 ? 'w-8 bg-yellow-600' : 'w-2 bg-gray-200'}`}></div>
+                ))}
               </div>
             </form>
           </div>
         </div>
+
 
         {/* Footer */}
         <div className="text-sm text-gray-500">

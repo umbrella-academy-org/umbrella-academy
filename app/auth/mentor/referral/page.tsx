@@ -21,14 +21,14 @@ export default function MentorReferralPage() {
   const handleContinue = (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
-    
+
     if (!selectedSource) {
       setError('Please select where you heard about us');
       return;
     }
-    
+
     console.log('Mentor selected source:', selectedSource);
-    router.push('/auth/mentor/upload-proofs');
+    router.push('/auth/mentor/availability');
   };
 
   return (
