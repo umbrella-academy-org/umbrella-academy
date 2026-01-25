@@ -17,9 +17,9 @@ export default function MentorStudentsPage() {
       <Sidebar activeItem="My Students" userType="mentor" />
 
       <div className="flex-1 flex flex-col min-w-0">
-       
+
         <main className="flex-1 p-3 sm:p-4 lg:p-6 overflow-y-auto">
-          <div className="max-w-7xl mx-auto space-y-4 sm:space-y-6 lg:space-y-8">
+          <div className="max-w-fullmx-auto space-y-4 sm:space-y-6 lg:space-y-8">
             {/* Students Header */}
             <StudentsHeader />
 

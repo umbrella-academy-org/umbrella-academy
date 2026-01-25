@@ -17,11 +17,11 @@ export default function MentorAssignmentPage() {
   return (
     <div className="flex h-screen bg-white">
       <Sidebar activeItem="Sessions" userType="mentor" />
-      
+
       <div className="flex-1 flex flex-col min-w-0">
-        
+
         <main className="flex-1 p-3 sm:p-4 lg:p-6 overflow-y-auto">
-          <div className="max-w-7xl mx-auto space-y-4 sm:space-y-6 lg:space-y-8">
+          <div className="max-w-fullmx-auto space-y-4 sm:space-y-6 lg:space-y-8">
             {/* Assignment Header */}
             <AssignmentHeader />
 
@@ -36,7 +36,7 @@ export default function MentorAssignmentPage() {
 
                 {/* Assignment Tabs */}
                 <div className="animate-fade-in" style={{ animationDelay: '200ms' }}>
-                  <AssignmentTabs 
+                  <AssignmentTabs
                     activeTab={activeTab}
                     onTabChange={setActiveTab}
                   />
