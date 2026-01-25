@@ -1,7 +1,7 @@
 'use client';
 
 import Sidebar from '@/components/dashboard/Sidebar';
-import Header from '@/components/dashboard/Header';
+
 import { Settings, Shield, Bell, Lock, Globe } from 'lucide-react';
 
 export default function UmbrellaAdminSettingsPage() {
@@ -10,8 +10,6 @@ export default function UmbrellaAdminSettingsPage() {
             <Sidebar activeItem="Settings" userType="umbrella-admin" />
 
             <div className="flex-1 flex flex-col min-w-0">
-                <Header breadcrumb="Settings" userType="umbrella-admin" />
-
                 <main className="flex-1 p-4 lg:p-8 overflow-y-auto bg-gray-50/30">
                     <div className="max-w-5xl mx-auto">
                         <div className="mb-8">

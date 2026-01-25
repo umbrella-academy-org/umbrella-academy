@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
-import Header from '@/components/dashboard/Header';
+
 import NotificationsHeader from '@/components/notifications/NotificationsHeader';
 import NotificationsFilters from '@/components/notifications/NotificationsFilters';
 import ActivityFeed from '@/components/notifications/ActivityFeed';
@@ -20,9 +20,6 @@ export default function NotificationsPage() {
 
       {/* Main Content - Scrollable */}
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
-        {/* Header */}
-        <Header breadcrumb="Notifications" />
-
         {/* Notifications Content - Scrollable */}
         <main className="flex-1 overflow-auto">
           <div className="p-3 lg:p-4">

@@ -1,7 +1,7 @@
 'use client';
 
 import Sidebar from '@/components/dashboard/Sidebar';
-import Header from '@/components/dashboard/Header';
+
 
 export default function WingAdminStudentsPage() {
   const students = [
@@ -37,10 +37,8 @@ export default function WingAdminStudentsPage() {
   return (
     <div className="flex h-screen bg-white">
       <Sidebar activeItem="Student Activity" userType="wing-admin" />
-      
+
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
-        <Header breadcrumb="Student Activity" />
-        
         <main className="flex-1 overflow-auto">
           <div className="p-3 lg:p-4">
             <div className="mb-6">
@@ -88,8 +86,8 @@ export default function WingAdminStudentsPage() {
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="flex items-center">
                             <div className="w-16 bg-gray-200 rounded-full h-2 mr-2">
-                              <div 
-                                className="bg-yellow-600 h-2 rounded-full" 
+                              <div
+                                className="bg-yellow-600 h-2 rounded-full"
                                 style={{ width: `${student.progress}%` }}
                               ></div>
                             </div>
@@ -100,11 +98,10 @@ export default function WingAdminStudentsPage() {
                           {student.lastSession}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                            student.status === 'active' 
+                          <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${student.status === 'active'
                               ? 'bg-green-100 text-green-800'
                               : 'bg-yellow-100 text-yellow-800'
-                          }`}>
+                            }`}>
                             {student.status}
                           </span>
                         </td>

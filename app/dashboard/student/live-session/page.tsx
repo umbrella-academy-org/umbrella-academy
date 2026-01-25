@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
-import Header from '@/components/dashboard/Header';
+
 import LiveSessionHeader from '@/components/live-session/LiveSessionHeader';
 import CourseCard from '@/components/live-session/CourseCard';
 import SessionTabs from '@/components/live-session/SessionTabs';
@@ -24,9 +24,6 @@ export default function LiveSessionPage() {
 
       {/* Main Content - Scrollable */}
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
-        {/* Header */}
-        <Header breadcrumb="Live Sessions" userType="student" />
-
         {/* Live Session Content - Scrollable */}
         <main className="flex-1 overflow-auto bg-gray-50/30">
           <div className="max-w-7xl mx-auto p-4 lg:p-8">

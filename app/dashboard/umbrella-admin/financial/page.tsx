@@ -1,17 +1,15 @@
 'use client';
 
 import Sidebar from '@/components/dashboard/Sidebar';
-import Header from '@/components/dashboard/Header';
+
 import { TrendingUp, DollarSign, CreditCard, PieChart } from 'lucide-react';
 
 export default function UmbrellaAdminFinancialPage() {
   return (
     <div className="flex h-screen bg-white">
       <Sidebar activeItem="Financial" userType="umbrella-admin" />
-      
+
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
-        <Header breadcrumb="Financial" />
-        
         <main className="flex-1 overflow-auto">
           <div className="p-3 lg:p-4">
             <div className="mb-6">
@@ -30,7 +28,7 @@ export default function UmbrellaAdminFinancialPage() {
                   <DollarSign className="w-8 h-8 text-green-200" />
                 </div>
               </div>
-              
+
               <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
                 <div className="flex items-center justify-between">
                   <div>
@@ -40,7 +38,7 @@ export default function UmbrellaAdminFinancialPage() {
                   <PieChart className="w-8 h-8 text-yellow-500" />
                 </div>
               </div>
-              
+
               <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
                 <div className="flex items-center justify-between">
                   <div>
@@ -50,7 +48,7 @@ export default function UmbrellaAdminFinancialPage() {
                   <CreditCard className="w-8 h-8 text-blue-500" />
                 </div>
               </div>
-              
+
               <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
                 <div className="flex items-center justify-between">
                   <div>
@@ -87,8 +85,8 @@ export default function UmbrellaAdminFinancialPage() {
                           <div className="text-sm text-green-600">{wing.growth}</div>
                         </div>
                         <div className="w-16 bg-gray-200 rounded-full h-2">
-                          <div 
-                            className="bg-yellow-600 h-2 rounded-full" 
+                          <div
+                            className="bg-yellow-600 h-2 rounded-full"
                             style={{ width: `${wing.share * 4}%` }}
                           ></div>
                         </div>

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
-import Header from '@/components/dashboard/Header';
+
 import VideoCallInterface from '@/components/live-session/VideoCallInterface';
 
 export default function LiveSessionCallPage() {
@@ -21,7 +21,7 @@ export default function LiveSessionCallPage() {
   // Timer for call duration
   useEffect(() => {
     if (!isClient) return;
-    
+
     const timer = setInterval(() => {
       setCallDuration(prev => prev + 1);
     }, 1000);
@@ -64,9 +64,6 @@ export default function LiveSessionCallPage() {
 
       {/* Main Content - Video Call */}
       <div className="flex-1 flex flex-col overflow-hidden">
-        {/* Header */}
-        <Header breadcrumb="Assignments" />
-
         {/* Video Call Interface */}
         <main className="flex-1 overflow-hidden">
           <VideoCallInterface

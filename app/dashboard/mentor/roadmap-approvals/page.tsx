@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
-import Header from '@/components/dashboard/Header';
+
 import { CheckCircle, XCircle, Clock, User, Calendar, Target } from 'lucide-react';
 
 export default function MentorRoadmapApprovalsPage() {
@@ -127,10 +127,8 @@ export default function MentorRoadmapApprovalsPage() {
   return (
     <div className="flex h-screen bg-white">
       <Sidebar activeItem="Roadmap Approvals" userType="mentor" />
-      
+
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
-        <Header breadcrumb="Roadmap Approvals" />
-        
         <main className="flex-1 overflow-auto">
           <div className="p-3 lg:p-4">
             <div className="mb-6">
@@ -149,9 +147,8 @@ export default function MentorRoadmapApprovalsPage() {
                     {pendingRoadmaps.map((roadmap) => (
                       <div
                         key={roadmap.id}
-                        className={`p-4 cursor-pointer hover:bg-gray-50 transition-colors ${
-                          selectedRoadmap === roadmap.id ? 'bg-yellow-50 border-r-4 border-yellow-600' : ''
-                        }`}
+                        className={`p-4 cursor-pointer hover:bg-gray-50 transition-colors ${selectedRoadmap === roadmap.id ? 'bg-yellow-50 border-r-4 border-yellow-600' : ''
+                          }`}
                         onClick={() => setSelectedRoadmap(roadmap.id)}
                       >
                         <div className="flex items-start justify-between mb-2">

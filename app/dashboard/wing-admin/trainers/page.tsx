@@ -1,7 +1,7 @@
 'use client';
 
 import Sidebar from '@/components/dashboard/Sidebar';
-import Header from '@/components/dashboard/Header';
+
 
 export default function WingAdminTrainersPage() {
   const trainers = [
@@ -37,10 +37,8 @@ export default function WingAdminTrainersPage() {
   return (
     <div className="flex h-screen bg-white">
       <Sidebar activeItem="Trainers" userType="wing-admin" />
-      
+
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
-        <Header breadcrumb="Trainers" />
-        
         <main className="flex-1 overflow-auto">
           <div className="p-3 lg:p-4">
             <div className="mb-6">
@@ -92,11 +90,10 @@ export default function WingAdminTrainersPage() {
                           {trainer.available} slots
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                            trainer.status === 'active' 
+                          <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${trainer.status === 'active'
                               ? 'bg-green-100 text-green-800'
                               : 'bg-red-100 text-red-800'
-                          }`}>
+                            }`}>
                             {trainer.status}
                           </span>
                         </td>

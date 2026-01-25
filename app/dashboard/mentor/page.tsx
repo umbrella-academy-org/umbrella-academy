@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
-import Header from '@/components/dashboard/Header';
+
 import TrainerStatsCards from '@/components/dashboard/TrainerStatsCards';
 import MonthlySessionsChart from '@/components/dashboard/MonthlySessionsChart';
 import TotalRoadmaps from '@/components/dashboard/TotalRoadmaps';
@@ -26,7 +26,7 @@ export default function MentorDashboard() {
       navigate('/auth/login');
       return;
     }
-    
+
     if (!authLoading && user && user.role !== 'mentor') {
       // Redirect to appropriate dashboard based on role
       const dashboardRoutes = {
@@ -76,10 +76,10 @@ export default function MentorDashboard() {
 
   // Get mentor-specific data
   const mentorRoadmaps = roadmaps.filter(roadmap => roadmap.mentorId === user.id);
-  const mentorStudentRoadmaps = studentRoadmaps.filter(roadmap => 
+  const mentorStudentRoadmaps = studentRoadmaps.filter(roadmap =>
     roadmap.roadmap.mentorId === user.id
   );
-  const mentorStudents = students.filter(student => 
+  const mentorStudents = students.filter(student =>
     mentorStudentRoadmaps.some(roadmap => roadmap.studentId === student.id)
   );
 
@@ -90,26 +90,8 @@ export default function MentorDashboard() {
   return (
     <div className="flex h-screen bg-white">
       <Sidebar activeItem="Home" userType="mentor" />
-      
+
       <div className="flex-1 flex flex-col min-w-0">
-        <Header 
-          breadcrumb="Home" 
-          userType="mentor"
-          actions={
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
-              <button className="px-3 py-2 border border-gray-300 text-gray-700 text-xs sm:text-sm font-medium rounded-lg hover:bg-gray-50 transition-all duration-200 interactive-button">
-                Generate Report
-              </button>
-              <button 
-                onClick={() => navigate('/dashboard/mentor/roadmap-approvals')}
-                className="px-3 py-2 bg-yellow-600 text-white text-xs sm:text-sm font-medium rounded-lg hover:bg-yellow-700 transition-all duration-200 interactive-button transform hover:scale-105"
-              >
-                Review Roadmaps ({pendingApprovals})
-              </button>
-            </div>
-          }
-        />
-        
         <main className="flex-1 p-3 sm:p-4 lg:p-6 overflow-y-auto">
           <div className="max-w-7xl mx-auto">
             {/* Welcome Section */}
@@ -124,7 +106,7 @@ export default function MentorDashboard() {
 
             {/* Stats Cards */}
             <div className="mb-4 sm:mb-6 lg:mb-8">
-              <TrainerStatsCards 
+              <TrainerStatsCards
                 studentsCount={mentorStudents.length}
                 activeRoadmaps={activeRoadmaps.length}
                 walletBalance={userWallet?.balance || 0}
@@ -143,7 +125,7 @@ export default function MentorDashboard() {
 
                 {/* Total Roadmaps */}
                 <div className="animate-fade-in" style={{ animationDelay: '300ms' }}>
-                  <TotalRoadmaps 
+                  <TotalRoadmaps
                     roadmaps={mentorStudentRoadmaps}
                     userType="mentor"
                   />
@@ -151,7 +133,7 @@ export default function MentorDashboard() {
 
                 {/* Calendar */}
                 <div className="animate-fade-in" style={{ animationDelay: '400ms' }}>
-                  <Calendar 
+                  <Calendar
                     selectedDateRange={selectedDateRange}
                     onDateRangeChange={setSelectedDateRange}
                     userType="mentor"

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
-import Header from '@/components/dashboard/Header';
+
 import TrainerStatsCards from '@/components/dashboard/TrainerStatsCards';
 import MonthlySessionsChart from '@/components/dashboard/MonthlySessionsChart';
 import TotalRoadmaps from '@/components/dashboard/TotalRoadmaps';
@@ -27,7 +27,7 @@ export default function TrainerDashboard() {
       navigate('/auth/login');
       return;
     }
-    
+
     if (!authLoading && user && user.role !== 'trainer') {
       // Redirect to appropriate dashboard based on role
       const dashboardRoutes = {
@@ -76,11 +76,11 @@ export default function TrainerDashboard() {
   }
 
   // Get trainer-specific data
-  const trainerStudents = students.filter(student => 
+  const trainerStudents = students.filter(student =>
     student.wing === user.wing // In real app, would filter by assigned trainer
   );
-  
-  const trainerStudentRoadmaps = studentRoadmaps.filter(roadmap => 
+
+  const trainerStudentRoadmaps = studentRoadmaps.filter(roadmap =>
     roadmap.roadmap.trainerId === user.id
   );
 
@@ -90,26 +90,8 @@ export default function TrainerDashboard() {
   return (
     <div className="flex h-screen bg-white">
       <Sidebar activeItem="Home" userType="trainer" />
-      
+
       <div className="flex-1 flex flex-col min-w-0">
-        <Header 
-          breadcrumb="Home" 
-          userType="trainer"
-          actions={
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
-              <button className="px-3 py-2 border border-gray-300 text-gray-700 text-xs sm:text-sm font-medium rounded-lg hover:bg-gray-50 transition-all duration-200 interactive-button">
-                Generate a Report
-              </button>
-              <button 
-                onClick={() => navigate('/dashboard/trainer/live-session')}
-                className="px-3 py-2 bg-yellow-600 text-white text-xs sm:text-sm font-medium rounded-lg hover:bg-yellow-700 transition-all duration-200 interactive-button transform hover:scale-105"
-              >
-                Schedule a Session
-              </button>
-            </div>
-          }
-        />
-        
         <main className="flex-1 p-3 sm:p-4 lg:p-6 overflow-y-auto">
           <div className="max-w-7xl mx-auto">
             {/* Welcome Section */}
@@ -124,7 +106,7 @@ export default function TrainerDashboard() {
 
             {/* Stats Cards */}
             <div className="mb-4 sm:mb-6 lg:mb-8">
-              <TrainerStatsCards 
+              <TrainerStatsCards
                 studentsCount={trainerStudents.length}
                 activeRoadmaps={activeRoadmaps.length}
                 walletBalance={userWallet?.balance || 0}
@@ -143,7 +125,7 @@ export default function TrainerDashboard() {
 
                 {/* Total Roadmaps */}
                 <div className="animate-fade-in" style={{ animationDelay: '300ms' }}>
-                  <TotalRoadmaps 
+                  <TotalRoadmaps
                     roadmaps={trainerStudentRoadmaps}
                     userType="trainer"
                   />
@@ -151,7 +133,7 @@ export default function TrainerDashboard() {
 
                 {/* Calendar */}
                 <div className="animate-fade-in" style={{ animationDelay: '400ms' }}>
-                  <Calendar 
+                  <Calendar
                     selectedDateRange={selectedDateRange}
                     onDateRangeChange={setSelectedDateRange}
                     userType="trainer"
@@ -163,7 +145,7 @@ export default function TrainerDashboard() {
               <div className="lg:col-span-2 space-y-4 sm:space-y-6 lg:space-y-8">
                 {/* Training Capacity */}
                 <div className="animate-slide-up" style={{ animationDelay: '500ms' }}>
-                  <TrainingCapacity 
+                  <TrainingCapacity
                     assignedStudents={trainerStudents.length}
                     maxCapacity={20} // Mock capacity
                     weeklyHours={32} // Mock hours

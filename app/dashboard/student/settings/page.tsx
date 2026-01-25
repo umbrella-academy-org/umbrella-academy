@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
-import Header from '@/components/dashboard/Header';
+
 import { Settings, Lock, Bell, Eye, Moon, Globe, Shield, CreditCard, LogOut, ChevronRight, Save, Check } from 'lucide-react';
 import { useAuth } from '@/contexts';
 
@@ -27,8 +27,6 @@ export default function StudentSettingsPage() {
             <Sidebar activeItem="Settings" userType="student" />
 
             <div className="flex-1 flex flex-col min-w-0">
-                <Header breadcrumb="Settings" userType="student" />
-
                 <main className="flex-1 p-4 lg:p-8 overflow-y-auto bg-gray-50/30">
                     <div className="max-w-5xl mx-auto">
                         <div className="mb-8">

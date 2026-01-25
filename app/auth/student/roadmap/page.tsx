@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import Sidebar from '@/components/dashboard/Sidebar';
-import Header from '@/components/dashboard/Header';
+
 import RoadmapBuilder from '@/components/roadmap/RoadmapBuilder';
 import { useRoadmap } from '@/lib/hooks/useRoadmap';
 import Image from 'next/image';

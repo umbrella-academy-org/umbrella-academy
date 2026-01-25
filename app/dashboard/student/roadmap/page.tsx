@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
-import Header from '@/components/dashboard/Header';
+
 import RoadmapHeader from '@/components/roadmap/RoadmapHeader';
 import CourseOverview from '@/components/roadmap/CourseOverview';
 import RoadmapPhases from '@/components/roadmap/RoadmapPhases';
@@ -17,7 +17,7 @@ export default function RoadmapPage() {
   const [selectedDateRange, setSelectedDateRange] = useState('Today');
   const [selectedPhaseId, setSelectedPhaseId] = useState<string | undefined>();
   const [selectedLessonId, setSelectedLessonId] = useState<string | undefined>();
-  
+
   const { roadmap, isLoading, hasRoadmap } = useRoadmap();
 
   const handlePhaseSelect = (phaseId: string) => {
@@ -35,7 +35,6 @@ export default function RoadmapPage() {
       <div className="flex h-screen bg-white">
         <Sidebar activeItem="Roadmap" />
         <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
-          <Header breadcrumb="Roadmap" />
           <main className="flex-1 overflow-auto flex items-center justify-center">
             <div className="text-center">
               <div className="w-8 h-8 border-4 border-yellow-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
@@ -59,9 +58,6 @@ export default function RoadmapPage() {
 
       {/* Main Content - Scrollable */}
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
-        {/* Header */}
-        <Header breadcrumb="Roadmap" />
-
         {/* Roadmap Content - Scrollable */}
         <main className="flex-1 overflow-auto">
           <div className="p-3 lg:p-4">
@@ -76,7 +72,7 @@ export default function RoadmapPage() {
                 <CourseOverview />
 
                 {/* Enhanced Roadmap Phases with Live Sessions */}
-                <RoadmapPhases 
+                <RoadmapPhases
                   onPhaseSelect={handlePhaseSelect}
                   onLessonSelect={handleLessonSelect}
                   selectedPhaseId={selectedPhaseId}
@@ -98,7 +94,7 @@ export default function RoadmapPage() {
                 <CurrentLessons />
 
                 {/* Live Session Details - New component replacing LiveSessionNotifications */}
-                <LiveSessionDetails 
+                <LiveSessionDetails
                   selectedPhaseId={selectedPhaseId}
                   selectedSessionId={selectedLessonId}
                 />

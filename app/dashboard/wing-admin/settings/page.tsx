@@ -1,16 +1,14 @@
 'use client';
 
 import Sidebar from '@/components/dashboard/Sidebar';
-import Header from '@/components/dashboard/Header';
+
 
 export default function WingAdminSettingsPage() {
   return (
     <div className="flex h-screen bg-white">
       <Sidebar activeItem="Wing Settings" userType="wing-admin" />
-      
+
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
-        <Header breadcrumb="Wing Settings" />
-        
         <main className="flex-1 overflow-auto">
           <div className="p-3 lg:p-4">
             <div className="mb-6">

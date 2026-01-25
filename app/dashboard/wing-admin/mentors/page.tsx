@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
-import Header from '@/components/dashboard/Header';
+
 import { Plus, User, Mail, Star, Users, CheckCircle, XCircle } from 'lucide-react';
 
 export default function WingAdminMentorsPage() {
@@ -69,8 +69,6 @@ export default function WingAdminMentorsPage() {
       <Sidebar activeItem="Mentors" userType="wing-admin" />
 
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
-        <Header breadcrumb="Mentors" />
-
         <main className="flex-1 overflow-auto">
           <div className="p-3 lg:p-6">
             <div className="mb-8">

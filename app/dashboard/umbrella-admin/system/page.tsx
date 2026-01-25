@@ -1,7 +1,7 @@
 'use client';
 
 import Sidebar from '@/components/dashboard/Sidebar';
-import Header from '@/components/dashboard/Header';
+
 import { Server, Database, Wifi, Shield, AlertTriangle, CheckCircle } from 'lucide-react';
 
 export default function UmbrellaAdminSystemPage() {
@@ -39,10 +39,8 @@ export default function UmbrellaAdminSystemPage() {
   return (
     <div className="flex h-screen bg-white">
       <Sidebar activeItem="System Health" userType="umbrella-admin" />
-      
+
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
-        <Header breadcrumb="System Health" />
-        
         <main className="flex-1 overflow-auto">
           <div className="p-3 lg:p-4">
             <div className="mb-6">
@@ -61,12 +59,10 @@ export default function UmbrellaAdminSystemPage() {
                         <p className="text-gray-500 text-sm">{metric.name}</p>
                         <p className="text-2xl font-bold text-gray-900">{metric.value}</p>
                       </div>
-                      <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${
-                        metric.status === 'healthy' ? 'bg-green-100' : 'bg-red-100'
-                      }`}>
-                        <Icon className={`w-6 h-6 ${
-                          metric.status === 'healthy' ? 'text-green-600' : 'text-red-600'
-                        }`} />
+                      <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${metric.status === 'healthy' ? 'bg-green-100' : 'bg-red-100'
+                        }`}>
+                        <Icon className={`w-6 h-6 ${metric.status === 'healthy' ? 'text-green-600' : 'text-red-600'
+                          }`} />
                       </div>
                     </div>
                   </div>
@@ -98,11 +94,10 @@ export default function UmbrellaAdminSystemPage() {
                           ) : (
                             <AlertTriangle className="w-4 h-4 text-yellow-500" />
                           )}
-                          <span className={`text-xs px-2 py-1 rounded-full ${
-                            service.status === 'operational' 
+                          <span className={`text-xs px-2 py-1 rounded-full ${service.status === 'operational'
                               ? 'bg-green-100 text-green-800'
                               : 'bg-yellow-100 text-yellow-800'
-                          }`}>
+                            }`}>
                             {service.status}
                           </span>
                         </div>
@@ -121,19 +116,17 @@ export default function UmbrellaAdminSystemPage() {
                   <div className="space-y-4">
                     {systemAlerts.map((alert) => (
                       <div key={alert.id} className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
-                        <div className={`w-2 h-2 rounded-full mt-2 ${
-                          alert.type === 'warning' ? 'bg-yellow-500' :
-                          alert.type === 'success' ? 'bg-green-500' : 'bg-blue-500'
-                        }`}></div>
+                        <div className={`w-2 h-2 rounded-full mt-2 ${alert.type === 'warning' ? 'bg-yellow-500' :
+                            alert.type === 'success' ? 'bg-green-500' : 'bg-blue-500'
+                          }`}></div>
                         <div className="flex-1">
                           <p className="text-sm text-gray-900">{alert.message}</p>
                           <p className="text-xs text-gray-500 mt-1">{alert.time}</p>
                         </div>
-                        <span className={`text-xs px-2 py-1 rounded-full ${
-                          alert.severity === 'high' ? 'bg-red-100 text-red-800' :
-                          alert.severity === 'medium' ? 'bg-yellow-100 text-yellow-800' :
-                          'bg-gray-100 text-gray-800'
-                        }`}>
+                        <span className={`text-xs px-2 py-1 rounded-full ${alert.severity === 'high' ? 'bg-red-100 text-red-800' :
+                            alert.severity === 'medium' ? 'bg-yellow-100 text-yellow-800' :
+                              'bg-gray-100 text-gray-800'
+                          }`}>
                           {alert.severity}
                         </span>
                       </div>

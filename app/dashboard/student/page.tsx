@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
-import Header from '@/components/dashboard/Header';
+
 import StatsCards from '@/components/dashboard/StatsCards';
 import MonthlySessionsChart from '@/components/dashboard/MonthlySessionsChart';
 import CourseCard from '@/components/dashboard/CourseCard';
@@ -25,7 +25,7 @@ export default function StudentDashboard() {
       navigate('/auth/login');
       return;
     }
-    
+
     if (!authLoading && user && user.role !== 'student') {
       // Redirect to appropriate dashboard based on role
       const dashboardRoutes = {
@@ -74,7 +74,7 @@ export default function StudentDashboard() {
   }
 
   // Get student's active roadmap
-  const activeRoadmap = studentRoadmaps.find(roadmap => 
+  const activeRoadmap = studentRoadmaps.find(roadmap =>
     roadmap.studentId === user.id && roadmap.status === 'active'
   );
 
@@ -82,15 +82,9 @@ export default function StudentDashboard() {
     <div className="flex h-screen bg-white">
       {/* Sidebar - Fixed */}
       <Sidebar activeItem="Home" userType="student" />
-      
+
       {/* Main Content - Scrollable */}
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
-        {/* Header */}
-        <Header 
-          breadcrumb="Home"
-          userType="student"
-        />
-        
         {/* Dashboard Content - Scrollable */}
         <main className="flex-1 overflow-auto">
           <div className="p-3 lg:p-4">
@@ -111,7 +105,7 @@ export default function StudentDashboard() {
                     <span className="hidden sm:inline">Generate a Report</span>
                     <span className="sm:hidden">Report</span>
                   </button>
-                  <button 
+                  <button
                     onClick={() => navigate('/dashboard/student/roadmap')}
                     className="px-4 lg:px-6 py-2 bg-yellow-600 text-white rounded-lg font-medium hover:bg-yellow-700 transition-colors text-sm lg:text-base"
                   >
@@ -130,12 +124,12 @@ export default function StudentDashboard() {
               <div className="xl:col-span-3 space-y-3 lg:space-y-4">
                 {/* Monthly Sessions Chart */}
                 <MonthlySessionsChart userType="student" />
-                
+
                 {/* Course Card */}
                 <CourseCard activeRoadmap={activeRoadmap} />
-                
+
                 {/* Calendar - Moved below charts */}
-                <Calendar 
+                <Calendar
                   selectedDateRange={selectedDateRange}
                   onDateRangeChange={setSelectedDateRange}
                   userType="student"
@@ -146,10 +140,10 @@ export default function StudentDashboard() {
               <div className="xl:col-span-2 space-y-3 lg:space-y-4">
                 {/* Current Phase */}
                 <CurrentPhase activeRoadmap={activeRoadmap} />
-                
+
                 {/* Scheduled Events */}
                 <ScheduledEvents userType="student" />
-                
+
                 {/* Live Sessions */}
                 <LiveSessions userType="student" />
               </div>

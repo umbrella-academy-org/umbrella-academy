@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
-import Header from '@/components/dashboard/Header';
+
 import MonthlySessionsChart from '@/components/dashboard/MonthlySessionsChart';
 import TotalRoadmaps from '@/components/dashboard/TotalRoadmaps';
 import ScheduledEvents from '@/components/dashboard/ScheduledEvents';
@@ -26,7 +26,7 @@ export default function UmbrellaAdminDashboard() {
       navigate('/auth/login');
       return;
     }
-    
+
     if (!authLoading && user && user.role !== 'umbrella-admin') {
       // Redirect to appropriate dashboard based on role
       const dashboardRoutes = {
@@ -72,18 +72,18 @@ export default function UmbrellaAdminDashboard() {
   const systemStats = getDashboardStats();
   const umbrellaWallets = getWalletsByType('umbrella');
   const totalRevenue = umbrellaWallets.reduce((sum: number, wallet: any) => sum + wallet.balance, 0);
-  
+
   // Calculate wing performance data
   const wingPerformance = mockWings.map(wing => {
     const wingUsers = users.filter(u => u.wing === wing.id);
     const wingStudents = wingUsers.filter(u => u.role === 'student');
-    const wingRoadmaps = studentRoadmaps.filter(r => 
+    const wingRoadmaps = studentRoadmaps.filter(r =>
       wingStudents.some(s => s.id === r.studentId)
     );
-    const completionRate = wingRoadmaps.length > 0 
+    const completionRate = wingRoadmaps.length > 0
       ? Math.round(wingRoadmaps.filter(r => r.status === 'completed').length / wingRoadmaps.length * 100)
       : 0;
-    
+
     return {
       ...wing,
       studentsCount: wingStudents.length,
@@ -93,26 +93,8 @@ export default function UmbrellaAdminDashboard() {
   return (
     <div className="flex h-screen bg-white">
       <Sidebar activeItem="Home" userType="umbrella-admin" />
-      
+
       <div className="flex-1 flex flex-col min-w-0">
-        <Header 
-          breadcrumb="System Administration" 
-          userType="umbrella-admin"
-          actions={
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
-              <button className="px-3 py-2 border border-gray-300 text-gray-700 text-xs sm:text-sm font-medium rounded-lg hover:bg-gray-50 transition-all duration-200 interactive-button">
-                System Report
-              </button>
-              <button 
-                onClick={() => navigate('/dashboard/umbrella-admin/system')}
-                className="px-3 py-2 bg-yellow-600 text-white text-xs sm:text-sm font-medium rounded-lg hover:bg-yellow-700 transition-all duration-200 interactive-button transform hover:scale-105"
-              >
-                System Health
-              </button>
-            </div>
-          }
-        />
-        
         <main className="flex-1 p-3 sm:p-4 lg:p-6 overflow-y-auto">
           <div className="max-w-7xl mx-auto">
             {/* Welcome Section */}
@@ -201,8 +183,8 @@ export default function UmbrellaAdminDashboard() {
                         </div>
                         <div className="flex items-center gap-3">
                           <div className="w-16 bg-gray-200 rounded-full h-2">
-                            <div 
-                              className="bg-yellow-600 h-2 rounded-full transition-all duration-1000" 
+                            <div
+                              className="bg-yellow-600 h-2 rounded-full transition-all duration-1000"
                               style={{ width: `${wing.performance}%` }}
                             ></div>
                           </div>
@@ -215,7 +197,7 @@ export default function UmbrellaAdminDashboard() {
 
                 {/* Calendar */}
                 <div className="animate-fade-in" style={{ animationDelay: '600ms' }}>
-                  <Calendar 
+                  <Calendar
                     selectedDateRange={selectedDateRange}
                     onDateRangeChange={setSelectedDateRange}
                     userType="umbrella-admin"
@@ -229,7 +211,7 @@ export default function UmbrellaAdminDashboard() {
                 <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 animate-slide-up" style={{ animationDelay: '700ms' }}>
                   <h3 className="text-sm sm:text-base font-semibold text-gray-900 mb-4">Quick Actions</h3>
                   <div className="space-y-3">
-                    <button 
+                    <button
                       onClick={() => navigate('/dashboard/umbrella-admin/wings')}
                       className="w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors group"
                     >
@@ -241,8 +223,8 @@ export default function UmbrellaAdminDashboard() {
                         </div>
                       </div>
                     </button>
-                    
-                    <button 
+
+                    <button
                       onClick={() => navigate('/dashboard/umbrella-admin/users')}
                       className="w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors group"
                     >
@@ -254,8 +236,8 @@ export default function UmbrellaAdminDashboard() {
                         </div>
                       </div>
                     </button>
-                    
-                    <button 
+
+                    <button
                       onClick={() => navigate('/dashboard/umbrella-admin/financial')}
                       className="w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors group"
                     >
@@ -267,8 +249,8 @@ export default function UmbrellaAdminDashboard() {
                         </div>
                       </div>
                     </button>
-                    
-                    <button 
+
+                    <button
                       onClick={() => navigate('/dashboard/umbrella-admin/system')}
                       className="w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors group"
                     >

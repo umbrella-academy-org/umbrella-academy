@@ -1,7 +1,7 @@
 'use client';
 
 import Sidebar from '@/components/dashboard/Sidebar';
-import Header from '@/components/dashboard/Header';
+
 
 import MentorActivityFeed from '@/components/notifications/MentorActivityFeed';
 import MentorNotificationStats from '@/components/notifications/MentorNotificationStats';
@@ -14,11 +14,6 @@ export default function MentorNotificationsPage() {
 
       {/* Main Content - Scrollable */}
       <div className="flex-1 flex flex-col min-w-0 lg:ml-0 overflow-hidden">
-        {/* Header */}
-        <Header
-          breadcrumb="Mentorship Alerts"
-          userType="mentor"
-        />
 
         {/* notifications Content - Scrollable */}
         <main className="flex-1 overflow-auto bg-gray-50/30">

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
-import Header from '@/components/dashboard/Header';
+
 import MonthlySessionsChart from '@/components/dashboard/MonthlySessionsChart';
 import TotalRoadmaps from '@/components/dashboard/TotalRoadmaps';
 import ScheduledEvents from '@/components/dashboard/ScheduledEvents';
@@ -26,7 +26,7 @@ export default function WingAdminDashboard() {
       navigate('/auth/login');
       return;
     }
-    
+
     if (!authLoading && user && user.role !== 'wing-admin') {
       // Redirect to appropriate dashboard based on role
       const dashboardRoutes = {
@@ -73,11 +73,11 @@ export default function WingAdminDashboard() {
   const wingStudents = wingUsers.filter(u => u.role === 'student');
   const wingTrainers = wingUsers.filter(u => u.role === 'trainer');
   const wingMentors = wingUsers.filter(u => u.role === 'mentor');
-  
-  const wingRoadmaps = studentRoadmaps.filter(roadmap => 
+
+  const wingRoadmaps = studentRoadmaps.filter(roadmap =>
     wingStudents.some(student => student.id === roadmap.studentId)
   );
-  
+
   const wingWallets = getWalletsByType('wing');
   const wingWallet = wingWallets.find((w: any) => w.ownerId === user.wing);
   const wingStats = getWingDashboardStats(user.wing || '');
@@ -87,26 +87,8 @@ export default function WingAdminDashboard() {
   return (
     <div className="flex h-screen bg-white">
       <Sidebar activeItem="Home" userType="wing-admin" />
-      
+
       <div className="flex-1 flex flex-col min-w-0">
-        <Header 
-          breadcrumb="Wing Administration" 
-          userType="wing-admin"
-          actions={
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
-              <button className="px-3 py-2 border border-gray-300 text-gray-700 text-xs sm:text-sm font-medium rounded-lg hover:bg-gray-50 transition-all duration-200 interactive-button">
-                Generate Report
-              </button>
-              <button 
-                onClick={() => navigate('/dashboard/wing-admin/settings')}
-                className="px-3 py-2 bg-yellow-600 text-white text-xs sm:text-sm font-medium rounded-lg hover:bg-yellow-700 transition-all duration-200 interactive-button transform hover:scale-105"
-              >
-                Wing Settings
-              </button>
-            </div>
-          }
-        />
-        
         <main className="flex-1 p-3 sm:p-4 lg:p-6 overflow-y-auto">
           <div className="max-w-7xl mx-auto">
             {/* Welcome Section */}
@@ -183,7 +165,7 @@ export default function WingAdminDashboard() {
 
                 {/* Wing Roadmaps Overview */}
                 <div className="animate-fade-in" style={{ animationDelay: '500ms' }}>
-                  <TotalRoadmaps 
+                  <TotalRoadmaps
                     roadmaps={wingRoadmaps}
                     userType="wing-admin"
                   />
@@ -191,7 +173,7 @@ export default function WingAdminDashboard() {
 
                 {/* Calendar */}
                 <div className="animate-fade-in" style={{ animationDelay: '600ms' }}>
-                  <Calendar 
+                  <Calendar
                     selectedDateRange={selectedDateRange}
                     onDateRangeChange={setSelectedDateRange}
                     userType="wing-admin"
@@ -205,7 +187,7 @@ export default function WingAdminDashboard() {
                 <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 animate-slide-up" style={{ animationDelay: '700ms' }}>
                   <h3 className="text-sm sm:text-base font-semibold text-gray-900 mb-4">Quick Actions</h3>
                   <div className="space-y-3">
-                    <button 
+                    <button
                       onClick={() => navigate('/dashboard/wing-admin/trainers')}
                       className="w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors group"
                     >
@@ -217,8 +199,8 @@ export default function WingAdminDashboard() {
                         </div>
                       </div>
                     </button>
-                    
-                    <button 
+
+                    <button
                       onClick={() => navigate('/dashboard/wing-admin/students')}
                       className="w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors group"
                     >
@@ -230,8 +212,8 @@ export default function WingAdminDashboard() {
                         </div>
                       </div>
                     </button>
-                    
-                    <button 
+
+                    <button
                       onClick={() => navigate('/dashboard/wing-admin/wallet')}
                       className="w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors group"
                     >
