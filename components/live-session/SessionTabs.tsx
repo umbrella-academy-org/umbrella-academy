@@ -14,13 +14,13 @@ export default function SessionTabs({ activeTab, onTabChange }: SessionTabsProps
   ];
 
   return (
-    <div className="bg-white rounded-2xl p-2 shadow-sm border border-gray-100 flex items-center justify-between overflow-x-auto">
+    <div className=" border border-gray-100 flex items-center justify-between overflow-x-auto">
       <div className="flex items-center gap-1 min-w-max">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => onTabChange(tab.id)}
-            className={`px-6 py-2.5 text-sm font-medium rounded-xl transition-all duration-300 ${activeTab === tab.id
+            className={`px-6 py-2.5 text-sm font-medium rounded-lg transition-all duration-300 ${activeTab === tab.id
               ? 'bg-yellow-600 text-white shadow-md'
               : 'text-gray-500 hover:text-gray-900 hover:bg-gray-50'
               }`}

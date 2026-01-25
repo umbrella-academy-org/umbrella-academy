@@ -58,7 +58,7 @@ export default function CalendarInfo() {
         </div>
 
         {/* Action Button */}
-        <button className="w-full mt-6 py-3 bg-gray-900 text-white text-xs font-bold rounded-xl hover:bg-gray-800 transition-all active:scale-[0.98] shadow-lg shadow-gray-200">
+        <button className="w-full mt-6 py-3 bg-yellow-600 text-white text-xs font-bold rounded-xl hover:bg-gray-800 transition-all active:scale-[0.98] shadow-lg shadow-gray-200">
           View Full Roadmap
         </button>
       </div>
