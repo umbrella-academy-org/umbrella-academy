@@ -3,22 +3,31 @@
 import { Users, TrendingUp, Clock, ChevronRight } from 'lucide-react';
 import { useState } from 'react';
 
-export default function TrainingCapacity() {
+interface TrainingCapacityProps {
+  assignedStudents: number;
+  maxCapacity: number;
+  weeklyHours: number;
+}
+
+export default function TrainingCapacity({ assignedStudents, maxCapacity, weeklyHours }: TrainingCapacityProps) {
   const [isHovered, setIsHovered] = useState(false);
 
+  // Mock weekly schedule data based on props
   const capacityData = [
-    { day: 'Mon', sessions: 3, capacity: 4 },
-    { day: 'Tue', sessions: 2, capacity: 4 },
-    { day: 'Wed', sessions: 4, capacity: 4 },
-    { day: 'Thu', sessions: 1, capacity: 4 },
-    { day: 'Fri', sessions: 3, capacity: 4 },
-    { day: 'Sat', sessions: 2, capacity: 4 },
+    { day: 'Mon', sessions: Math.min(Math.floor(assignedStudents * 0.2), 4), capacity: 4 },
+    { day: 'Tue', sessions: Math.min(Math.floor(assignedStudents * 0.15), 4), capacity: 4 },
+    { day: 'Wed', sessions: Math.min(Math.floor(assignedStudents * 0.25), 4), capacity: 4 },
+    { day: 'Thu', sessions: Math.min(Math.floor(assignedStudents * 0.1), 4), capacity: 4 },
+    { day: 'Fri', sessions: Math.min(Math.floor(assignedStudents * 0.2), 4), capacity: 4 },
+    { day: 'Sat', sessions: Math.min(Math.floor(assignedStudents * 0.1), 4), capacity: 4 },
     { day: 'Sun', sessions: 0, capacity: 4 }
   ];
 
   const totalSessions = capacityData.reduce((sum, day) => sum + day.sessions, 0);
   const totalCapacity = capacityData.reduce((sum, day) => sum + day.capacity, 0);
-  const utilizationRate = Math.round((totalSessions / totalCapacity) * 100);
+  const utilizationRate = totalCapacity > 0 ? Math.round((totalSessions / totalCapacity) * 100) : 0;
+  const averageSessionsPerDay = totalSessions > 0 ? (totalSessions / 7).toFixed(1) : '0.0';
+  const weeklyGrowth = Math.max(0, assignedStudents - 3); // Mock growth calculation
 
   return (
     <div 
@@ -55,9 +64,9 @@ export default function TrainingCapacity() {
           <div className={`text-xl font-bold text-gray-900 transition-all duration-300 ${
             isHovered ? 'scale-110 text-blue-600' : ''
           }`}>
-            {totalSessions}/{totalCapacity}
+            {assignedStudents}/{maxCapacity}
           </div>
-          <p className="text-xs text-gray-600 mt-1">Sessions Booked</p>
+          <p className="text-xs text-gray-600 mt-1">Students Assigned</p>
         </div>
         <div className="text-center p-3 bg-gray-50 rounded-lg">
           <div className={`text-xl font-bold text-gray-900 transition-all duration-300 ${
@@ -109,11 +118,11 @@ export default function TrainingCapacity() {
       <div className="flex items-center justify-between text-xs text-gray-600 mb-4">
         <div className="flex items-center gap-1">
           <TrendingUp className="w-3 h-3 text-green-500" />
-          <span>+2 sessions vs last week</span>
+          <span>+{weeklyGrowth} students vs last week</span>
         </div>
         <div className="flex items-center gap-1">
           <Clock className="w-3 h-3 text-blue-500" />
-          <span>Avg: 2.1 sessions/day</span>
+          <span>Avg: {averageSessionsPerDay} sessions/day</span>
         </div>
       </div>
 

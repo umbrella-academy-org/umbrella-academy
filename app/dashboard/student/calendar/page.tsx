@@ -4,9 +4,7 @@ import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
 import Header from '@/components/dashboard/Header';
 import CalendarHeader from '@/components/calendar/CalendarHeader';
-import AddActivityForm from '@/components/calendar/AddActivityForm';
 import CalendarInfo from '@/components/calendar/CalendarInfo';
-import ActivityStats from '@/components/calendar/ActivityStats';
 import CalendarGrid from '@/components/calendar/CalendarGrid';
 import UpcomingActivities from '@/components/calendar/UpcomingActivities';
 import LiveSessionNotifications from '@/components/calendar/LiveSessionNotifications';
@@ -35,11 +33,7 @@ export default function SmartCalendarPage() {
               {/* Left Column - Forms and Calendar (3 columns on xl) */}
               <div className="xl:col-span-3 space-y-3 lg:space-y-4">
                 {/* Add Activity Form */}
-                <AddActivityForm />
-                
-                {/* Activity Stats */}
-                <ActivityStats />
-                
+              
                 {/* Calendar Grid */}
                 <CalendarGrid 
                   selectedDateRange={selectedDateRange}

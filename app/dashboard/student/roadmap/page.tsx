@@ -55,7 +55,7 @@ export default function RoadmapPage() {
   return (
     <div className="flex h-screen bg-white">
       {/* Sidebar - Fixed */}
-      <Sidebar activeItem="Roadmap" />
+      <Sidebar activeItem="Roadmap" userType='student' />
 
       {/* Main Content - Scrollable */}
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
@@ -100,7 +100,7 @@ export default function RoadmapPage() {
                 {/* Live Session Details - New component replacing LiveSessionNotifications */}
                 <LiveSessionDetails 
                   selectedPhaseId={selectedPhaseId}
-                  selectedLessonId={selectedLessonId}
+                  selectedSessionId={selectedLessonId}
                 />
               </div>
             </div>

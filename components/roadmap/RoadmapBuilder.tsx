@@ -2,9 +2,17 @@
 
 import { useState } from 'react';
 import { Plus, X, Clock, Target, ArrowRight, Save, BookOpen, Edit3, Calendar, ChevronRight, GraduationCap } from 'lucide-react';
-import { RoadmapBuilderProps, Phase } from '@/types';
+import { RoadmapBuilderProps } from '@/types';
 
 // Local interface for the roadmap data structure
+interface Phase {
+  id: string;
+  title: string;
+  description: string;
+  estimatedWeeks: number;
+  order: number;
+}
+
 interface RoadmapData {
   goal: string;
   phases: Phase[];
@@ -20,11 +28,8 @@ export default function RoadmapBuilder({ onSave }: RoadmapBuilderProps) {
       id: Date.now().toString(),
       title: '',
       description: '',
-      estimatedDuration: 1,
-      order: phases.length + 1,
-      status: 'locked',
-      progress: 0,
-      lessons: []
+      estimatedWeeks: 1,
+      order: phases.length + 1
     };
     setPhases([...phases, newPhase]);
   };
@@ -47,7 +52,7 @@ export default function RoadmapBuilder({ onSave }: RoadmapBuilderProps) {
     ));
   };
 
-  const totalWeeks = phases.reduce((sum, phase) => sum + phase.estimatedDuration, 0);
+  const totalWeeks = phases.reduce((sum, phase) => sum + phase.estimatedWeeks, 0);
   const isValid = goal.trim() && phases.length > 0 && phases.every(phase => phase.title.trim());
 
   const handleSave = () => {
@@ -55,10 +60,24 @@ export default function RoadmapBuilder({ onSave }: RoadmapBuilderProps) {
       onSave({
         goal: goal.trim(),
         phases: phases.map((phase, index) => ({
-          ...phase,
-          order: index + 1,
+          id: phase.id,
           title: phase.title.trim(),
-          description: phase.description.trim()
+          description: phase.description.trim(),
+          objectives: [`Learn ${phase.title}`, `Master ${phase.title} concepts`],
+          estimatedHours: phase.estimatedWeeks * 10, // Convert weeks to hours
+          status: 'pending' as const,
+          sessions: [
+            {
+              id: `${phase.id}_session_1`,
+              title: `${phase.title} - Session 1`,
+              description: `Introduction to ${phase.title}`,
+              duration: 2,
+              status: 'pending' as const,
+              materials: [],
+              objectives: [`Understand ${phase.title} basics`],
+            }
+          ],
+          order: index + 1
         })),
         totalEstimatedWeeks: totalWeeks
       });
@@ -163,7 +182,7 @@ e.g., 'I want to become a full-stack web developer' or 'Master data science and 
                               <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wide">Phase {index + 1}</h3>
                               <div className="flex items-center gap-2 mt-1">
                                 <Calendar className="w-4 h-4 text-yellow-600" />
-                                <span className="text-sm font-medium text-yellow-600">{phase.estimatedDuration} weeks</span>
+                                <span className="text-sm font-medium text-yellow-600">{phase.estimatedWeeks} weeks</span>
                               </div>
                             </div>
                           </div>
@@ -208,8 +227,8 @@ e.g., 'I want to become a full-stack web developer' or 'Master data science and 
                                 type="number"
                                 min="1"
                                 max="52"
-                                value={phase.estimatedDuration}
-                                onChange={(e) => updatePhase(phase.id, 'estimatedDuration', parseInt(e.target.value) || 1)}
+                                value={phase.estimatedWeeks}
+                                onChange={(e) => updatePhase(phase.id, 'estimatedWeeks', parseInt(e.target.value) || 1)}
                                 className="w-12 bg-transparent text-yellow-800 font-medium focus:outline-none text-center text-black"
                               />
                               <span className="text-yellow-700 font-medium text-sm">weeks</span>
@@ -221,7 +240,7 @@ e.g., 'I want to become a full-stack web developer' or 'Master data science and 
                         <div className="mt-6 pt-4 border-t border-gray-200">
                           <div className="flex items-center justify-between text-xs text-gray-500">
                             <span>Phase {index + 1} of {phases.length}</span>
-                            <span>{Math.ceil(phase.estimatedDuration / 4)} month{Math.ceil(phase.estimatedDuration / 4) !== 1 ? 's' : ''}</span>
+                            <span>{Math.ceil(phase.estimatedWeeks / 4)} month{Math.ceil(phase.estimatedWeeks / 4) !== 1 ? 's' : ''}</span>
                           </div>
                         </div>
                       </div>

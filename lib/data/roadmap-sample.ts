@@ -1,4 +1,4 @@
-import { StudentRoadmap, Course, Phase, Lesson, LiveSession } from '@/types';
+import { StudentRoadmap, Roadmap, RoadmapPhase, Session, LiveSession } from '@/types';
 
 // Sample live sessions
 const sampleLiveSessions: LiveSession[] = [
@@ -6,251 +6,195 @@ const sampleLiveSessions: LiveSession[] = [
     id: 'ls-1',
     title: 'JavaScript Fundamentals - Variables & Data Types',
     description: 'Interactive session covering JavaScript variables, data types, and basic operations',
-    scheduledDate: '2024-01-25T10:00:00Z',
-    duration: 60,
+    trainerId: 'user_101',
+    trainerName: 'Sarah Ingabire',
+    trainerAvatar: '/trainers/sarah-ingabire.jpg',
+    studentIds: ['user_001'],
+    roadmapId: 'roadmap_001',
+    sessionId: 'session_frontend_fundamentals_1',
+    scheduledAt: '2024-01-25T10:00:00Z',
+    duration: 2,
     status: 'scheduled',
     meetingLink: 'https://meet.example.com/js-fundamentals-1',
-    mentorId: 'mentor-1',
-    mentorName: 'John Smith',
-    mentorAvatar: '/mentors/john-smith.jpg',
-    participants: 12,
-    maxParticipants: 20,
     materials: [
       {
         id: 'mat-1',
         title: 'JavaScript Variables Cheat Sheet',
-        type: 'pdf',
-        url: '/materials/js-variables-cheat-sheet.pdf'
+        type: 'document',
+        url: '/materials/js-variables-cheat-sheet.pdf',
+        description: 'Comprehensive guide to JavaScript variables',
+        uploadedAt: '2024-01-20T00:00:00Z',
+        uploadedBy: 'user_101'
       }
-    ]
+    ],
+    objectives: [
+      'Understand JavaScript variable declaration',
+      'Learn about different data types',
+      'Practice variable manipulation'
+    ],
+    maxParticipants: 20,
+    actualParticipants: 12
   },
   {
     id: 'ls-2',
     title: 'JavaScript Functions Deep Dive',
     description: 'Advanced concepts in JavaScript functions, closures, and scope',
-    scheduledDate: '2024-01-27T14:00:00Z',
-    duration: 90,
+    trainerId: 'user_101',
+    trainerName: 'Sarah Ingabire',
+    studentIds: ['user_001'],
+    roadmapId: 'roadmap_001',
+    sessionId: 'session_frontend_fundamentals_5',
+    scheduledAt: '2024-01-27T14:00:00Z',
+    duration: 1.5,
     status: 'scheduled',
     meetingLink: 'https://meet.example.com/js-functions',
-    mentorId: 'mentor-1',
-    mentorName: 'John Smith',
-    participants: 8,
-    maxParticipants: 15
-  },
-  {
-    id: 'ls-3',
-    title: 'DOM Manipulation Workshop',
-    description: 'Hands-on workshop for DOM manipulation and event handling',
-    scheduledDate: '2024-01-30T16:00:00Z',
-    duration: 120,
-    status: 'scheduled',
-    mentorId: 'mentor-1',
-    mentorName: 'John Smith',
-    participants: 15,
-    maxParticipants: 20
+    materials: [],
+    objectives: [
+      'Master function declarations and expressions',
+      'Understand closures and scope',
+      'Practice advanced function patterns'
+    ],
+    maxParticipants: 15,
+    actualParticipants: 8
   }
 ];
 
-// Sample lessons
-const sampleLessons: Lesson[] = [
+// Sample sessions (auto-generated based on student availability)
+const sampleSessions: Session[] = [
   {
-    id: 'lesson-1',
-    title: 'Introduction to JavaScript',
-    description: 'Learn the basics of JavaScript programming language',
-    order: 1,
-    estimatedDuration: 120,
+    id: 'session_frontend_fundamentals_1',
+    title: 'Frontend Fundamentals - Session 1',
+    description: 'Introduction to HTML5 semantic elements',
+    duration: 2,
     status: 'completed',
     completedAt: '2024-01-20T10:00:00Z',
-    progress: 100,
-    type: 'theory',
-    content: {
-      videoUrl: 'https://video.example.com/js-intro',
-      materials: [
-        {
-          id: 'mat-intro-1',
-          title: 'JavaScript Introduction Guide',
-          type: 'pdf',
-          url: '/materials/js-intro-guide.pdf'
-        }
-      ]
-    },
-    liveSessions: [sampleLiveSessions[0]]
-  },
-  {
-    id: 'lesson-2',
-    title: 'Variables and Data Types',
-    description: 'Understanding JavaScript variables, data types, and operators',
-    order: 2,
-    estimatedDuration: 90,
-    status: 'in-progress',
-    progress: 60,
-    type: 'practical',
-    content: {
-      assignments: [
-        {
-          id: 'assign-1',
-          title: 'Variable Declaration Exercise',
-          description: 'Create variables of different data types',
-          dueDate: '2024-01-28T23:59:59Z',
-          status: 'pending'
-        }
-      ]
-    },
-    liveSessions: [sampleLiveSessions[0]]
-  },
-  {
-    id: 'lesson-3',
-    title: 'Functions and Scope',
-    description: 'Master JavaScript functions, parameters, and scope concepts',
-    order: 3,
-    estimatedDuration: 150,
-    status: 'available',
-    progress: 0,
-    type: 'theory',
-    liveSessions: [sampleLiveSessions[1]],
-    prerequisites: ['lesson-2']
-  },
-  {
-    id: 'lesson-4',
-    title: 'DOM Manipulation',
-    description: 'Learn to interact with HTML elements using JavaScript',
-    order: 4,
-    estimatedDuration: 180,
-    status: 'locked',
-    progress: 0,
-    type: 'practical',
-    liveSessions: [sampleLiveSessions[2]],
-    prerequisites: ['lesson-3']
-  }
-];
-
-// Sample phases
-const samplePhases: Phase[] = [
-  {
-    id: 'phase-1',
-    title: 'JavaScript Fundamentals',
-    description: 'Master the core concepts of JavaScript programming',
-    order: 1,
-    estimatedDuration: 4,
-    status: 'in-progress',
-    startedAt: '2024-01-15T00:00:00Z',
-    progress: 65,
-    lessons: sampleLessons,
-    requirements: {
-      minimumLessonsCompleted: 3,
-      minimumGrade: 70
-    },
-    milestones: [
-      {
-        id: 'milestone-1',
-        title: 'Complete Basic Syntax',
-        description: 'Understand variables, data types, and basic operations',
-        completed: true,
-        completedAt: '2024-01-20T10:00:00Z'
-      },
-      {
-        id: 'milestone-2',
-        title: 'Build First Interactive Page',
-        description: 'Create a webpage with JavaScript interactions',
-        completed: false
-      }
+    liveSessionId: 'ls-1',
+    materials: ['/materials/html5-guide.pdf', '/materials/semantic-elements.pdf'],
+    objectives: [
+      'Understand HTML5 semantic structure',
+      'Learn about document structure',
+      'Practice creating semantic HTML'
     ]
   },
   {
-    id: 'phase-2',
-    title: 'Advanced JavaScript Concepts',
-    description: 'Dive deeper into advanced JavaScript features and patterns',
-    order: 2,
-    estimatedDuration: 6,
-    status: 'locked',
-    progress: 0,
-    lessons: [], // Would contain advanced lessons
-    requirements: {
-      minimumLessonsCompleted: 4,
-      minimumGrade: 75
-    }
+    id: 'session_frontend_fundamentals_2',
+    title: 'Frontend Fundamentals - Session 2',
+    description: 'CSS Grid and Flexbox fundamentals',
+    duration: 2,
+    status: 'in-progress',
+    materials: ['/materials/css-grid-guide.pdf', '/materials/flexbox-cheatsheet.pdf'],
+    objectives: [
+      'Master CSS Grid layout',
+      'Understand Flexbox properties',
+      'Build responsive layouts'
+    ]
   },
   {
-    id: 'phase-3',
-    title: 'Web Development Projects',
-    description: 'Apply your skills in real-world web development projects',
-    order: 3,
-    estimatedDuration: 8,
-    status: 'locked',
-    progress: 0,
-    lessons: [], // Would contain project-based lessons
-    requirements: {
-      minimumLessonsCompleted: 6,
-      minimumGrade: 80
-    }
+    id: 'session_frontend_fundamentals_3',
+    title: 'Frontend Fundamentals - Session 3',
+    description: 'JavaScript ES6+ features',
+    duration: 2,
+    status: 'pending',
+    materials: ['/materials/es6-features.pdf'],
+    objectives: [
+      'Learn arrow functions and destructuring',
+      'Understand template literals',
+      'Practice modern JavaScript syntax'
+    ]
   }
 ];
 
-// Sample course
-export const sampleCourse: Course = {
-  id: 'course-1',
-  title: 'Full-Stack Web Development with JavaScript',
-  description: 'Complete web development course covering frontend and backend technologies',
-  category: 'Programming & Development',
-  level: 'beginner',
-  estimatedDuration: 18,
-  rating: 4.5,
-  totalStudents: 1247,
-  thumbnail: '/courses/fullstack-js.jpg',
-  tags: ['JavaScript', 'React', 'Node.js', 'MongoDB', 'Web Development'],
-  skills: ['Frontend Development', 'Backend Development', 'Database Design', 'API Development'],
-  mentor: {
-    id: 'mentor-1',
-    name: 'John Smith',
-    avatar: '/mentors/john-smith.jpg',
-    expertise: ['JavaScript', 'React', 'Node.js', 'MongoDB'],
-    rating: 4.8,
-    totalStudents: 3420
+// Sample roadmap phases
+const samplePhases: RoadmapPhase[] = [
+  {
+    id: 'phase_001_1',
+    title: 'Frontend Fundamentals',
+    description: 'Learn HTML, CSS, and JavaScript basics',
+    objectives: [
+      'Master HTML5 semantic elements',
+      'Understand CSS Grid and Flexbox',
+      'Learn JavaScript ES6+ features'
+    ],
+    estimatedHours: 60,
+    status: 'active',
+    sessions: sampleSessions,
+    order: 1
   },
+  {
+    id: 'phase_001_2',
+    title: 'React Development',
+    description: 'Build modern web applications with React',
+    objectives: [
+      'Understand React components and JSX',
+      'Master state management with hooks',
+      'Build responsive user interfaces'
+    ],
+    estimatedHours: 80,
+    status: 'pending',
+    sessions: [], // Would be populated with React sessions
+    prerequisites: ['phase_001_1'],
+    order: 2
+  }
+];
+
+// Sample roadmap
+export const sampleRoadmap: Roadmap = {
+  id: 'roadmap_001',
+  title: 'Full Stack Web Development Journey',
+  description: 'A comprehensive roadmap to become a full-stack web developer using modern technologies',
+  studentId: 'user_001',
+  trainerId: 'user_101',
+  mentorId: 'user_201',
+  status: 'active',
+  createdAt: '2024-09-20',
+  approvedAt: '2024-09-22',
+  startedAt: '2024-09-25',
+  estimatedDuration: 24,
   phases: samplePhases,
+  tags: ['web-development', 'javascript', 'react', 'node.js'],
+  difficulty: 'intermediate',
+  collaborationId: 'collab_001',
+  approvalNotes: 'Excellent roadmap structure. Well-defined objectives and realistic timeline.',
   progress: {
-    currentPhaseId: 'phase-1',
-    currentLessonId: 'lesson-2',
-    overallProgress: 22,
+    overallProgress: 25,
     completedPhases: 0,
-    totalPhases: 3,
-    completedLessons: 1,
-    totalLessons: 4,
-    totalLiveSessions: 3,
-    attendedLiveSessions: 0,
-    missedLiveSessions: 0
+    totalPhases: 2,
+    completedSessions: 1,
+    totalSessions: 3,
+    hoursCompleted: 2,
+    totalEstimatedHours: 140
   }
 };
 
 // Sample student roadmap
 export const sampleStudentRoadmap: StudentRoadmap = {
-  id: 'roadmap-1',
-  studentId: 'student-1',
-  courseId: 'course-1',
-  course: sampleCourse,
-  enrolledAt: '2024-01-10T00:00:00Z',
-  startedAt: '2024-01-15T00:00:00Z',
-  expectedCompletionDate: '2024-07-15T00:00:00Z',
+  id: 'student_roadmap_001',
+  studentId: 'user_001',
+  roadmapId: 'roadmap_001',
+  roadmap: sampleRoadmap,
+  enrolledAt: '2024-09-25',
+  startedAt: '2024-09-25',
+  expectedCompletionDate: '2025-03-25',
   status: 'active',
   subscription: {
     planId: 'basic-yearly',
     planName: 'Basic Plan',
-    amount: 50,
+    amount: 50000,
     currency: 'RWF',
     billingCycle: 'yearly',
-    startDate: '2024-01-10T00:00:00Z',
-    endDate: '2025-01-10T00:00:00Z',
+    startDate: '2024-09-25',
+    endDate: '2025-09-25',
     status: 'active',
     autoRenew: true
   },
-  lastAccessedAt: '2024-01-23T14:30:00Z',
+  lastAccessedAt: '2024-12-20',
   currentActivity: {
-    type: 'lesson',
-    id: 'lesson-2',
-    title: 'Variables and Data Types'
+    type: 'session',
+    id: 'session_frontend_fundamentals_2',
+    title: 'Frontend Fundamentals - Session 2'
   },
   notifications: {
-    upcomingLiveSessions: sampleLiveSessions.filter(session => session.status === 'scheduled'),
+    upcomingSessions: sampleSessions.filter(session => session.status === 'pending'),
     overdueAssignments: [],
     newContent: []
   }

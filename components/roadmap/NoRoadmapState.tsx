@@ -7,7 +7,8 @@ export default function NoRoadmapState() {
   const { navigate } = useNavigationWithLoading();
 
   const handleCreateRoadmap = () => {
-    navigate('/auth/create-roadmap');
+    // Redirect to complete profile/auth flow
+    navigate('/auth/student/profile');
   };
 
   const features = [
@@ -42,11 +43,11 @@ export default function NoRoadmapState() {
             <Map className="w-12 h-12 text-white" />
           </div>
           <h1 className="text-3xl font-semibold text-gray-900 mb-4">
-            Create Your Learning Roadmap
+            Complete Your Profile
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Start your personalized learning journey with structured phases, interactive lessons, 
-            and live mentoring sessions tailored to your goals.
+            It looks like you haven't completed your profile setup yet. Complete your profile 
+            to create your personalized learning roadmap with structured phases and mentoring sessions.
           </p>
         </div>
 
@@ -69,17 +70,17 @@ export default function NoRoadmapState() {
         {/* CTA Section */}
         <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-100 text-center">
           <h2 className="text-xl font-semibold text-gray-900 mb-4">
-            Ready to Start Learning?
+            Ready to Complete Your Setup?
           </h2>
           <p className="text-gray-600 mb-6">
-            Create your personalized learning roadmap and start your journey
+            Complete your profile to create your personalized learning roadmap
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <button
               onClick={handleCreateRoadmap}
               className="inline-flex items-center gap-2 px-8 py-3 bg-yellow-600 text-white font-medium rounded-lg hover:bg-yellow-700 transition-colors"
             >
-              Create My Roadmap
+              Complete Profile
               <ArrowRight className="w-4 h-4" />
             </button>
             

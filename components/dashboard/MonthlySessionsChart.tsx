@@ -1,26 +1,122 @@
 'use client';
 
 import { MoreHorizontal } from 'lucide-react';
+import { UserType } from '@/types';
 
-export default function MonthlySessionsChart() {
-  const chartData = [
-    { day: 'Mon', sessions: 3 },
-    { day: 'Tue', sessions: 2 },
-    { day: 'Wed', sessions: 2 },
-    { day: 'Thu', sessions: 4 },
-    { day: 'Fri', sessions: 5 },
-    { day: 'Sat', sessions: 5 },
-    { day: 'Sun', sessions: 4 }
-  ];
+interface MonthlySessionsChartProps {
+  userType: UserType;
+}
 
+export default function MonthlySessionsChart({ userType }: MonthlySessionsChartProps) {
+  // Generate chart data based on user type
+  const getChartData = () => {
+    switch (userType) {
+      case 'trainer':
+        return [
+          { day: 'Mon', sessions: 3 },
+          { day: 'Tue', sessions: 2 },
+          { day: 'Wed', sessions: 4 },
+          { day: 'Thu', sessions: 1 },
+          { day: 'Fri', sessions: 3 },
+          { day: 'Sat', sessions: 2 },
+          { day: 'Sun', sessions: 0 }
+        ];
+      case 'mentor':
+        return [
+          { day: 'Mon', sessions: 2 },
+          { day: 'Tue', sessions: 3 },
+          { day: 'Wed', sessions: 1 },
+          { day: 'Thu', sessions: 4 },
+          { day: 'Fri', sessions: 2 },
+          { day: 'Sat', sessions: 1 },
+          { day: 'Sun', sessions: 0 }
+        ];
+      case 'student':
+        return [
+          { day: 'Mon', sessions: 1 },
+          { day: 'Tue', sessions: 1 },
+          { day: 'Wed', sessions: 2 },
+          { day: 'Thu', sessions: 1 },
+          { day: 'Fri', sessions: 2 },
+          { day: 'Sat', sessions: 1 },
+          { day: 'Sun', sessions: 0 }
+        ];
+      case 'wing-admin':
+        return [
+          { day: 'Mon', sessions: 15 },
+          { day: 'Tue', sessions: 18 },
+          { day: 'Wed', sessions: 12 },
+          { day: 'Thu', sessions: 22 },
+          { day: 'Fri', sessions: 16 },
+          { day: 'Sat', sessions: 8 },
+          { day: 'Sun', sessions: 5 }
+        ];
+      case 'umbrella-admin':
+        return [
+          { day: 'Mon', sessions: 45 },
+          { day: 'Tue', sessions: 52 },
+          { day: 'Wed', sessions: 38 },
+          { day: 'Thu', sessions: 61 },
+          { day: 'Fri', sessions: 48 },
+          { day: 'Sat', sessions: 25 },
+          { day: 'Sun', sessions: 18 }
+        ];
+      default:
+        return [
+          { day: 'Mon', sessions: 3 },
+          { day: 'Tue', sessions: 2 },
+          { day: 'Wed', sessions: 2 },
+          { day: 'Thu', sessions: 4 },
+          { day: 'Fri', sessions: 5 },
+          { day: 'Sat', sessions: 5 },
+          { day: 'Sun', sessions: 4 }
+        ];
+    }
+  };
+
+  const chartData = getChartData();
   const maxSessions = Math.max(...chartData.map(d => d.sessions));
+
+  const getTitle = () => {
+    switch (userType) {
+      case 'trainer':
+        return 'Training Sessions';
+      case 'mentor':
+        return 'Mentoring Sessions';
+      case 'student':
+        return 'Learning Sessions';
+      case 'wing-admin':
+        return 'Wing Activities';
+      case 'umbrella-admin':
+        return 'System Activities';
+      default:
+        return 'Monthly Sessions';
+    }
+  };
+
+  const getDescription = () => {
+    switch (userType) {
+      case 'trainer':
+        return 'Track your training sessions with students over time';
+      case 'mentor':
+        return 'Monitor your mentoring activities and student interactions';
+      case 'student':
+        return 'View your learning sessions and study time';
+      case 'wing-admin':
+        return 'Track wing-wide activities and performance metrics';
+      case 'umbrella-admin':
+        return 'Monitor system-wide activities across all wings';
+      default:
+        return 'Track how you interact with sessions over time';
+    }
+  };
 
   return (
     <div className="bg-white rounded-xl p-3 lg:p-4 shadow-sm border border-gray-100">
       <div className="flex items-center justify-between mb-4 lg:mb-6">
         <div>
-          <h3 className="text-sm lg:text-base font-semibold text-gray-900">Monthly Sessions</h3>
-          <p className="text-xs text-gray-500 mt-1">Track how you interact with sessions over time</p>
+          <h3 className="text-sm lg:text-base font-semibold text-gray-900">{getTitle()}</h3>
+          <p className="text-xs text-gray-500 mt-1">{getDescription()}</p>
         </div>
         <button className="p-1 text-gray-400 hover:text-gray-600">
           <MoreHorizontal className="w-4 h-4" />

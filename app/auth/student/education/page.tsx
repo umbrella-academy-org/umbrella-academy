@@ -41,7 +41,9 @@ export default function StudentEducationPage() {
     }
     
     console.log('Student education data:', formData);
-    router.push('/auth/student/education-level');
+    // Store education data for roadmap creation
+    localStorage.setItem('studentEducationData', JSON.stringify(formData));
+    router.push('/auth/create-roadmap');
   };
 
   const fieldsOfInterest = [

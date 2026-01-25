@@ -2,41 +2,39 @@
 
 import { useState } from 'react';
 import { Video, Clock, Users, Calendar, Download, ExternalLink, Play, CheckCircle, X, AlertCircle } from 'lucide-react';
-import { LiveSession, Phase, Lesson } from '@/types';
+import { LiveSession } from '@/types';
 import { sampleStudentRoadmap } from '@/lib/data/roadmap-sample';
 
 interface LiveSessionDetailsProps {
   selectedPhaseId?: string;
-  selectedLessonId?: string;
+  selectedSessionId?: string;
 }
 
-export default function LiveSessionDetails({ selectedPhaseId, selectedLessonId }: LiveSessionDetailsProps) {
-  const [activeTab, setActiveTab] = useState<'upcoming' | 'completed' | 'missed'>('upcoming');
+export default function LiveSessionDetails({ selectedPhaseId, selectedSessionId }: LiveSessionDetailsProps) {
+  const [activeTab, setActiveTab] = useState<'upcoming' | 'completed' | 'cancelled'>('upcoming');
 
-  // Get all live sessions from the selected phase or lesson
+  // Get all live sessions from the selected phase or session
   const getAllLiveSessions = (): LiveSession[] => {
-    const course = sampleStudentRoadmap.course;
+    const roadmap = sampleStudentRoadmap.roadmap;
     
-    if (selectedLessonId) {
-      // Find the specific lesson and return its live sessions
-      for (const phase of course.phases) {
-        const lesson = phase.lessons.find((l: Lesson) => l.id === selectedLessonId);
-        if (lesson) {
-          return lesson.liveSessions;
+    if (selectedSessionId) {
+      // Find the specific session and return its linked live sessions
+      for (const phase of roadmap.phases) {
+        const session = phase.sessions.find(s => s.id === selectedSessionId);
+        if (session && session.liveSessionId) {
+          // In a real app, you'd fetch the live session by ID
+          // For now, return empty array as sessions don't directly contain live sessions
+          return [];
         }
       }
     } else if (selectedPhaseId) {
       // Get all live sessions from the selected phase
-      const phase = course.phases.find((p: Phase) => p.id === selectedPhaseId);
+      const phase = roadmap.phases.find(p => p.id === selectedPhaseId);
       if (phase) {
-        return phase.lessons.flatMap((lesson: Lesson) => lesson.liveSessions);
+        // In a real app, you'd fetch live sessions linked to this phase
+        // For now, return empty array
+        return [];
       }
-    }
-    
-    // Default: return all upcoming live sessions from current phase
-    const currentPhase = course.phases.find((p: Phase) => p.id === course.progress.currentPhaseId);
-    if (currentPhase) {
-      return currentPhase.lessons.flatMap((lesson: Lesson) => lesson.liveSessions);
     }
     
     return [];
@@ -46,14 +44,14 @@ export default function LiveSessionDetails({ selectedPhaseId, selectedLessonId }
   
   const upcomingSessions = allSessions.filter(session => session.status === 'scheduled');
   const completedSessions = allSessions.filter(session => session.status === 'completed');
-  const missedSessions = allSessions.filter(session => session.status === 'missed');
+  const cancelledSessions = allSessions.filter(session => session.status === 'cancelled');
 
   const getActiveSessionsList = () => {
     switch (activeTab) {
       case 'completed':
         return completedSessions;
-      case 'missed':
-        return missedSessions;
+      case 'cancelled':
+        return cancelledSessions;
       default:
         return upcomingSessions;
     }
@@ -104,12 +102,12 @@ export default function LiveSessionDetails({ selectedPhaseId, selectedLessonId }
           icon: X,
           actionText: 'Cancelled'
         };
-      default: // missed
+      default: // live
         return {
           color: 'text-orange-600',
           bgColor: 'bg-orange-100',
           icon: AlertCircle,
-          actionText: 'View Recording'
+          actionText: 'Join Now'
         };
     }
   };
@@ -121,11 +119,11 @@ export default function LiveSessionDetails({ selectedPhaseId, selectedLessonId }
           <Video className="w-12 h-12 text-gray-400 mx-auto mb-4" />
           <h3 className="text-lg font-medium text-gray-900 mb-2">No Live Sessions</h3>
           <p className="text-sm text-gray-500">
-            {selectedLessonId 
-              ? 'This lesson doesn\'t have any live sessions scheduled.'
+            {selectedSessionId 
+              ? 'This session doesn\'t have any live sessions scheduled.'
               : selectedPhaseId 
                 ? 'This phase doesn\'t have any live sessions scheduled.'
-                : 'Select a phase or lesson to view live sessions.'
+                : 'Select a phase or session to view live sessions.'
             }
           </p>
         </div>
@@ -138,8 +136,8 @@ export default function LiveSessionDetails({ selectedPhaseId, selectedLessonId }
       <div className="mb-6">
         <h3 className="text-lg font-semibold text-gray-900 mb-2">Live Sessions</h3>
         <p className="text-sm text-gray-500">
-          {selectedLessonId 
-            ? 'Sessions for selected lesson'
+          {selectedSessionId 
+            ? 'Sessions for selected session'
             : selectedPhaseId 
               ? 'Sessions for selected phase'
               : 'Upcoming sessions from current phase'
@@ -170,14 +168,14 @@ export default function LiveSessionDetails({ selectedPhaseId, selectedLessonId }
           Completed ({completedSessions.length})
         </button>
         <button
-          onClick={() => setActiveTab('missed')}
+          onClick={() => setActiveTab('cancelled')}
           className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
-            activeTab === 'missed'
+            activeTab === 'cancelled'
               ? 'border-yellow-600 text-yellow-600'
               : 'border-transparent text-gray-500 hover:text-gray-700'
           }`}
         >
-          Missed ({missedSessions.length})
+          Cancelled ({cancelledSessions.length})
         </button>
       </div>
 
@@ -202,18 +200,16 @@ export default function LiveSessionDetails({ selectedPhaseId, selectedLessonId }
                     <div className="flex flex-wrap items-center gap-4 text-xs text-gray-500">
                       <div className="flex items-center gap-1">
                         <Calendar className="w-3 h-3" />
-                        <span>{formatDate(session.scheduledDate)}</span>
+                        <span>{formatDate(session.scheduledAt)}</span>
                       </div>
                       <div className="flex items-center gap-1">
                         <Clock className="w-3 h-3" />
-                        <span>{session.duration} min</span>
+                        <span>{session.duration} hours</span>
                       </div>
-                      {session.participants && (
-                        <div className="flex items-center gap-1">
-                          <Users className="w-3 h-3" />
-                          <span>{session.participants}/{session.maxParticipants} participants</span>
-                        </div>
-                      )}
+                      <div className="flex items-center gap-1">
+                        <Users className="w-3 h-3" />
+                        <span>{session.actualParticipants || 0}/{session.maxParticipants} participants</span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -257,15 +253,15 @@ export default function LiveSessionDetails({ selectedPhaseId, selectedLessonId }
                 </div>
               )}
 
-              {/* Mentor Info */}
+              {/* Trainer Info */}
               <div className="border-t border-gray-100 pt-3 mt-3">
                 <div className="flex items-center gap-2">
                   <div className="w-6 h-6 bg-yellow-600 rounded-full flex items-center justify-center">
                     <span className="text-xs font-medium text-white">
-                      {session.mentorName.charAt(0)}
+                      {session.trainerName.charAt(0)}
                     </span>
                   </div>
-                  <span className="text-xs text-gray-600">with {session.mentorName}</span>
+                  <span className="text-xs text-gray-600">with {session.trainerName}</span>
                 </div>
               </div>
             </div>

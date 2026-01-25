@@ -1,14 +1,28 @@
 'use client';
 
-import { Home, Search, Grid3X3, Bell } from 'lucide-react';
+import { Home, Search, Grid3X3, Bell, LogOut } from 'lucide-react';
+import { useAuth } from '@/contexts';
+import { useNavigationWithLoading } from '@/lib/utils/navigation';
 
 interface HeaderProps {
   breadcrumb?: string;
-  userType?: 'student' | 'trainer' | 'mentor';
+  userType?: 'student' | 'trainer' | 'mentor' | 'wing-admin' | 'umbrella-admin';
   actions?: React.ReactNode;
 }
 
-export default function Header({ breadcrumb = 'Home', userType = 'trainer', actions }: HeaderProps) {
+export default function Header({ breadcrumb = 'Home', userType, actions }: HeaderProps) {
+  const { user, logout } = useAuth();
+  const { navigate } = useNavigationWithLoading();
+
+  // Use user data from context, fallback to prop
+  const currentUserType = user?.role || userType || 'student';
+  const userName = user?.name || 'User';
+  const userInitials = userName.split(' ').map(n => n[0]).join('').toUpperCase();
+
+  const handleLogout = async () => {
+    await logout();
+    navigate('/auth/login');
+  };
   return (
     <header className="bg-white border-b border-gray-200 px-4 lg:px-6 py-3 lg:py-4">
       <div className="flex items-center justify-between">
@@ -53,11 +67,20 @@ export default function Header({ breadcrumb = 'Home', userType = 'trainer', acti
 
             {/* Profile */}
             <div className="flex items-center gap-3">
-              <div className="w-6 h-6 lg:w-8 lg:h-8 bg-orange-400 rounded-full overflow-hidden flex items-center justify-center">
+              <div className="w-6 h-6 lg:w-8 lg:h-8 bg-yellow-600 rounded-full overflow-hidden flex items-center justify-center">
                 <span className="text-white text-xs lg:text-sm font-medium">
-                  {userType === 'trainer' ? 'J' : userType === 'mentor' ? 'M' : 'O'}
+                  {userInitials}
                 </span>
               </div>
+              
+              {/* Logout Button */}
+              <button
+                onClick={handleLogout}
+                className="p-2 text-gray-400 hover:text-red-600 transition-colors"
+                title="Logout"
+              >
+                <LogOut className="w-5 h-5 lg:w-6 lg:h-6" />
+              </button>
             </div>
           </div>
         )}
