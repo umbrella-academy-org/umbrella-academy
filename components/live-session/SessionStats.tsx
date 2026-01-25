@@ -38,8 +38,8 @@ export default function SessionStats({ onUpcomingClick }: SessionStatsProps) {
               {stat.icon}
             </div>
             <div>
-              <div className="text-2xl font-black text-gray-900 leading-none mb-1">{stat.value}</div>
-              <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{stat.label}</div>
+              <div className="text-2xl font-semibold text-gray-900 leading-none mb-1">{stat.value}</div>
+              <div className="text-[11px] font-medium text-gray-500">{stat.label}</div>
             </div>
           </div>
         </div>

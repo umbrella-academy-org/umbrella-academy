@@ -102,13 +102,13 @@ export default function SessionList({ activeTab }: SessionListProps) {
                         className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm hover:border-yellow-200 hover:shadow-md transition-all duration-300 group relative overflow-hidden"
                     >
                         {/* Background Accent */}
-                        <div className={`absolute top-0 right-0 w-32 h-32 rounded-full -mr-16 -mt-16 opacity-0 group-hover:opacity-10 transition-opacity duration-500 blur-3xl ${session.status === 'live' ? 'bg-red-500' : 'bg-yellow-200'
+                        <div className={`absolute top-0 right-0 w-48 h-48 rounded-full -mr-24 -mt-24 opacity-0 group-hover:opacity-10 transition-opacity duration-500 blur-3xl ${session.status === 'live' ? 'bg-red-500' : 'bg-yellow-400'
                             }`}></div>
 
                         <div className="flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
                             <div className="flex items-center gap-5 flex-1 w-full">
                                 {/* Type Icon */}
-                                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shadow-sm ${session.type === 'live' ? 'bg-red-50 text-red-600' :
+                                <div className={`w-14 h-14 rounded-xl flex items-center justify-center shadow-sm ${session.type === 'live' ? 'bg-red-50 text-red-600' :
                                     session.type === 'mentoring' ? 'bg-yellow-50 text-yellow-600' :
                                         'bg-green-50 text-green-600'
                                     }`}>
@@ -118,21 +118,21 @@ export default function SessionList({ activeTab }: SessionListProps) {
                                 </div>
 
                                 <div className="flex-1 min-w-0">
-                                    <div className="flex items-center gap-3 mb-1">
-                                        <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md border ${getStatusStyle(session.status)}`}>
-                                            {session.status === 'live' ? '● Live Now' : session.status}
+                                    <div className="flex items-center gap-3 mb-2">
+                                        <span className={`text-[11px] font-semibold px-2.5 py-1 rounded-md border ${getStatusStyle(session.status)}`}>
+                                            {session.status === 'live' ? '● Live Now' : session.status.charAt(0).toUpperCase() + session.status.slice(1)}
                                         </span>
-                                        <span className="text-[10px] font-medium text-gray-400 flex items-center gap-1 uppercase tracking-widest">
-                                            <Clock className="w-3 h-3" />
+                                        <span className="text-xs font-medium text-gray-500 flex items-center gap-1.5">
+                                            <Clock className="w-3.5 h-3.5" />
                                             {session.time}
                                         </span>
                                     </div>
-                                    <h3 className={`text-lg font-semibold text-gray-900 tracking-tight transition-colors duration-300 ${hoveredId === session.id ? 'text-yellow-600' : ''
+                                    <h3 className={`text-lg font-semibold text-gray-900 transition-colors duration-300 ${hoveredId === session.id ? 'text-yellow-600' : ''
                                         }`}>
                                         {session.title}
                                     </h3>
-                                    <p className="text-sm text-gray-500 font-medium truncate max-w-md">
-                                        Instructor: <span className="text-gray-700 font-semibold">{session.instructor}</span> • {session.description}
+                                    <p className="text-sm text-gray-500 mt-1 truncate max-w-md">
+                                        Trainer: <span className="text-gray-900 font-semibold">{session.instructor}</span> • {session.description}
                                     </p>
                                 </div>
                             </div>
@@ -141,17 +141,17 @@ export default function SessionList({ activeTab }: SessionListProps) {
                                 {session.status === 'live' ? (
                                     <button
                                         onClick={() => router.push('/dashboard/student/live-session/call')}
-                                        className="flex-1 md:flex-none px-8 py-3 bg-red-600 text-white text-xs font-bold uppercase tracking-widest rounded-xl hover:bg-red-700 shadow-lg shadow-red-600/20 transition-all active:scale-95 animate-pulse"
+                                        className="flex-1 md:flex-none px-8 py-3 bg-red-600 text-white text-sm font-semibold rounded-lg hover:bg-red-700 shadow-md transition-all active:scale-95 animate-pulse"
                                     >
-                                        Join Call
+                                        Join Meeting
                                     </button>
                                 ) : session.status === 'upcoming' ? (
-                                    <button className="flex-1 md:flex-none px-8 py-3 bg-yellow-600 text-white text-xs font-bold uppercase tracking-widest rounded-xl hover:bg-yellow-700 shadow-lg shadow-yellow-600/20 transition-all active:scale-95">
-                                        Register
+                                    <button className="flex-1 md:flex-none px-8 py-3 bg-yellow-600 text-white text-sm font-semibold rounded-lg hover:bg-yellow-700 shadow-md transition-all active:scale-95">
+                                        Register Session
                                     </button>
                                 ) : (
-                                    <button className="flex-1 md:flex-none px-8 py-3 bg-white border border-gray-200 text-gray-600 text-xs font-bold uppercase tracking-widest rounded-xl hover:bg-gray-50 transition-all active:scale-95">
-                                        View Recording
+                                    <button className="flex-1 md:flex-none px-8 py-3 bg-white border border-gray-200 text-gray-600 text-sm font-semibold rounded-lg hover:bg-gray-50 transition-all active:scale-95">
+                                        Watch Recording
                                     </button>
                                 )}
                             </div>

@@ -66,12 +66,12 @@ export default function SessionCalendar({ selectedDateRange, onDateRangeChange }
 
       <div className="relative z-10">
         <div className="flex items-center justify-between mb-6">
-          <h3 className="text-lg font-black text-gray-900 tracking-tight leading-none">Schedule</h3>
+          <h3 className="text-base font-semibold text-gray-900 tracking-tight leading-none">Schedule</h3>
           <div className="flex items-center gap-1.5 bg-gray-50 p-1 rounded-lg border border-gray-100">
             <button className="p-1 hover:bg-white hover:shadow-sm rounded transition-all">
               <ChevronLeft className="w-3.5 h-3.5 text-gray-600" />
             </button>
-            <span className="text-[10px] font-black uppercase tracking-widest text-gray-400 px-1">Jan 2024</span>
+            <span className="text-[11px] font-semibold text-gray-500 px-1">Jan 2024</span>
             <button className="p-1 hover:bg-white hover:shadow-sm rounded transition-all">
               <ChevronRight className="w-3.5 h-3.5 text-gray-600" />
             </button>
@@ -84,9 +84,9 @@ export default function SessionCalendar({ selectedDateRange, onDateRangeChange }
             <button
               key={range}
               onClick={() => onDateRangeChange(range)}
-              className={`whitespace-nowrap px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all border ${selectedDateRange === range
-                ? 'bg-yellow-600 text-white border-yellow-600 shadow-md shadow-yellow-600/20'
-                : 'bg-white text-gray-400 border-gray-100 hover:border-yellow-200'
+              className={`whitespace-nowrap px-4 py-2 rounded-lg text-xs font-semibold transition-all border ${selectedDateRange === range
+                ? 'bg-yellow-600 text-white border-yellow-600 shadow-md'
+                : 'bg-white text-gray-500 border-gray-100 hover:border-yellow-200'
                 }`}
             >
               {range}
@@ -98,7 +98,7 @@ export default function SessionCalendar({ selectedDateRange, onDateRangeChange }
         <div className="mt-4">
           <div className="grid grid-cols-7 gap-1 mb-2">
             {weekDays.map((day) => (
-              <div key={day} className="text-center text-[9px] font-bold text-gray-400 uppercase tracking-widest py-2">
+              <div key={day} className="text-center text-[10px] font-semibold text-gray-400 uppercase tracking-wider py-2">
                 {day}
               </div>
             ))}
@@ -108,18 +108,18 @@ export default function SessionCalendar({ selectedDateRange, onDateRangeChange }
             {calendarDays.map((date, index) => (
               <button
                 key={index}
-                className={`w-full aspect-square text-xs font-bold rounded-xl flex flex-col items-center justify-center transition-all relative ${date.isOtherMonth
+                className={`w-full aspect-square text-xs font-medium rounded-lg flex flex-col items-center justify-center transition-all relative ${date.isOtherMonth
                   ? 'text-gray-200 cursor-not-allowed opacity-40'
                   : date.isToday
-                    ? 'bg-yellow-600 text-white shadow-lg shadow-yellow-600/20'
+                    ? 'bg-yellow-600 text-white shadow-md'
                     : date.hasSession
-                      ? 'bg-yellow-100 text-yellow-800'
+                      ? 'bg-yellow-50 text-yellow-700'
                       : 'text-gray-600 hover:bg-yellow-50 hover:text-yellow-600'
                   }`}
               >
                 <span>{date.day}</span>
                 {date.hasSession && (
-                  <span className={`w-1 h-1 rounded-full absolute bottom-1.5 ${date.isToday ? 'bg-yellow-400' : 'bg-yellow-600'
+                  <span className={`w-1 h-1 rounded-full absolute bottom-1.5 ${date.isToday ? 'bg-yellow-200' : 'bg-yellow-600'
                     }`}></span>
                 )}
               </button>
@@ -130,10 +130,10 @@ export default function SessionCalendar({ selectedDateRange, onDateRangeChange }
         {/* Quick Footer Info */}
         <div className="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-yellow-400"></div>
-            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Sessions</span>
+            <div className="w-2 h-2 rounded-full bg-yellow-500"></div>
+            <span className="text-[11px] font-medium text-gray-500">Sessions</span>
           </div>
-          <button className="text-[10px] font-black text-yellow-600 uppercase tracking-widest hover:underline decoration-2 underline-offset-4">
+          <button className="text-[11px] font-semibold text-yellow-600 hover:underline decoration-2 underline-offset-4">
             Full View
           </button>
         </div>

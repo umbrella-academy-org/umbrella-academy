@@ -40,6 +40,11 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
             active: true
           },
           {
+            icon: <User className="w-5 h-5" />,
+            label: 'Profile',
+            href: '/dashboard/trainer/profile'
+          },
+          {
             icon: <Calendar className="w-5 h-5" />,
             label: 'Smart Calendar',
             href: '/dashboard/trainer/calendar'
@@ -59,6 +64,11 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
             label: 'Wallet',
             href: '/dashboard/trainer/wallet'
           },
+          {
+            icon: <Settings className="w-5 h-5" />,
+            label: 'Settings',
+            href: '/dashboard/trainer/settings'
+          },
         ];
       case 'mentor':
         return [
@@ -67,6 +77,11 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
             label: 'Home',
             href: '/dashboard/mentor',
             active: true
+          },
+          {
+            icon: <User className="w-5 h-5" />,
+            label: 'Profile',
+            href: '/dashboard/mentor/profile'
           },
           {
             icon: <User className="w-5 h-5" />,
@@ -92,6 +107,11 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
             icon: <HelpCircle className="w-5 h-5" />,
             label: 'Support',
             href: '/dashboard/mentor/support'
+          },
+          {
+            icon: <Settings className="w-5 h-5" />,
+            label: 'Settings',
+            href: '/dashboard/mentor/settings'
           }
         ];
       case 'wing-admin':
@@ -100,6 +120,11 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
             icon: <Home className="w-5 h-5" />,
             label: 'Home',
             href: '/dashboard/wing-admin'
+          },
+          {
+            icon: <User className="w-5 h-5" />,
+            label: 'Profile',
+            href: '/dashboard/wing-admin/profile'
           },
           {
             icon: <User className="w-5 h-5" />,
@@ -123,7 +148,7 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
           },
           {
             icon: <Settings className="w-5 h-5" />,
-            label: 'Wing Settings',
+            label: 'Settings',
             href: '/dashboard/wing-admin/settings'
           }
         ];
@@ -135,7 +160,12 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
             href: '/dashboard/umbrella-admin'
           },
           {
-            icon: <Settings className="w-5 h-5" />,
+            icon: <User className="w-5 h-5" />,
+            label: 'Profile',
+            href: '/dashboard/umbrella-admin/profile'
+          },
+          {
+            icon: <Map className="w-5 h-5" />,
             label: 'Wings',
             href: '/dashboard/umbrella-admin/wings'
           },
@@ -153,6 +183,11 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
             icon: <Bell className="w-5 h-5" />,
             label: 'System Health',
             href: '/dashboard/umbrella-admin/system'
+          },
+          {
+            icon: <Settings className="w-5 h-5" />,
+            label: 'Settings',
+            href: '/dashboard/umbrella-admin/settings'
           }
         ];
       default: // student
@@ -162,6 +197,11 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
             label: 'Home',
             href: '/dashboard/student',
             active: true
+          },
+          {
+            icon: <User className="w-5 h-5" />,
+            label: 'Profile',
+            href: '/dashboard/student/profile'
           },
           {
             icon: <Calendar className="w-5 h-5" />,
@@ -197,6 +237,11 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
             icon: <MessageSquare className="w-5 h-5" />,
             label: 'Feedback',
             href: '/dashboard/student/feedback'
+          },
+          {
+            icon: <Settings className="w-5 h-5" />,
+            label: 'Settings',
+            href: '/dashboard/student/settings'
           }
         ];
     }
@@ -313,8 +358,8 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
                 <button
                   onClick={() => handleNavigation(item)}
                   className={`w-full flex items-center gap-3 px-3 lg:px-4 py-2 lg:py-3 rounded-lg text-left transition-colors text-sm lg:text-base ${currentActive === item.label
-                      ? 'bg-yellow-600 text-white'
-                      : 'text-gray-300 hover:text-white hover:bg-gray-800'
+                    ? 'bg-yellow-600 text-white'
+                    : 'text-gray-300 hover:text-white hover:bg-gray-800'
                     }`}
                 >
                   {item.icon}
@@ -394,7 +439,7 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
               <button className="text-gray-400 hover:text-white p-1">
                 <Settings className="w-4 h-4 lg:w-5 lg:h-5" />
               </button>
-              <button 
+              <button
                 onClick={handleLogout}
                 className="text-gray-400 hover:text-red-400 p-1"
                 title="Logout"
