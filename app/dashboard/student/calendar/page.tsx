@@ -30,18 +30,16 @@ export default function SmartCalendarPage() {
 
             {/* Main Calendar Grid */}
             <div className="grid grid-cols-1 xl:grid-cols-5 gap-3 lg:gap-4 mt-4 lg:mt-6">
-              {/* Left Column - Forms and Calendar (3 columns on xl) */}
+              {/* Left Column - Calendar (3 columns on xl) */}
               <div className="xl:col-span-3 space-y-3 lg:space-y-4">
-                {/* Add Activity Form */}
-
-                {/* Calendar Grid */}
+                {/* Main Calendar Grid */}
                 <CalendarGrid
                   selectedDateRange={selectedDateRange}
                   onDateRangeChange={setSelectedDateRange}
                 />
               </div>
 
-              {/* Right Column - Info and Activities (2 columns on xl) */}
+              {/* Right Column - Info and Sessions (2 columns on xl) */}
               <div className="xl:col-span-2 space-y-3 lg:space-y-4">
                 {/* Calendar Info */}
                 <CalendarInfo />

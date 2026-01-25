@@ -1,6 +1,6 @@
 'use client';
 
-import { Plus } from 'lucide-react';
+import { Calendar } from 'lucide-react';
 
 export default function CalendarHeader() {
   return (
