@@ -181,24 +181,21 @@ export default function ScheduledEvents({ userType }: ScheduledEventsProps) {
   };
 
   return (
-    <div 
+    <div
       className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 interactive-card hover:shadow-lg transition-all duration-300 animate-fade-in"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-3">
-          <div className={`p-2 bg-yellow-100 rounded-lg transition-all duration-300 ${
-            isHovered ? 'scale-110 animate-pulse-glow' : ''
-          }`}>
-            <Bell className={`w-4 h-4 text-yellow-600 transition-all duration-300 ${
-              isHovered ? 'animate-bounce-subtle' : ''
-            }`} />
+          <div className={`p-2 bg-yellow-100 rounded-lg transition-all duration-300 ${isHovered ? 'scale-110 animate-pulse-glow' : ''
+            }`}>
+            <Bell className={`w-4 h-4 text-yellow-600 transition-all duration-300 ${isHovered ? 'animate-bounce-subtle' : ''
+              }`} />
           </div>
           <div>
-            <h3 className={`text-sm sm:text-base font-semibold text-gray-900 transition-colors duration-200 ${
-              isHovered ? 'text-yellow-600' : ''
-            }`}>
+            <h3 className={`text-sm sm:text-base font-semibold text-gray-900 transition-colors duration-200 ${isHovered ? 'text-yellow-600' : ''
+              }`}>
               {getTitle()}
             </h3>
             <div className="flex items-center gap-1 text-xs text-gray-500">
@@ -207,9 +204,8 @@ export default function ScheduledEvents({ userType }: ScheduledEventsProps) {
             </div>
           </div>
         </div>
-        <button className={`text-yellow-600 hover:text-yellow-700 text-xs font-medium flex items-center gap-1 transition-all duration-200 ${
-          isHovered ? 'transform translate-x-1' : ''
-        }`}>
+        <button className={`text-yellow-600 hover:text-yellow-700 text-xs font-medium flex items-center gap-1 transition-all duration-200 ${isHovered ? 'transform translate-x-1' : ''
+          }`}>
           <span className="hidden sm:inline">Full calendar view</span>
           <span className="sm:hidden">View all</span>
           <ChevronRight className="w-3 h-3" />
@@ -220,7 +216,7 @@ export default function ScheduledEvents({ userType }: ScheduledEventsProps) {
       <div className="space-y-2">
         <h4 className="text-xs font-medium text-gray-600 mb-2">Today's Schedule</h4>
         {upcomingEvents.map((event, index) => (
-          <div 
+          <div
             key={event.id}
             className={`flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 transition-all duration-200 animate-slide-up cursor-pointer group`}
             style={{ animationDelay: `${index * 100}ms` }}
@@ -243,9 +239,6 @@ export default function ScheduledEvents({ userType }: ScheduledEventsProps) {
       {/* Quick Actions */}
       <div className="mt-4 pt-3 border-t border-gray-100">
         <div className="flex gap-2">
-          <button className="flex-1 px-3 py-2 bg-yellow-600 text-white text-xs font-medium rounded-lg hover:bg-yellow-700 transition-all duration-200 interactive-button transform hover:scale-105 focus:ring-2 focus:ring-yellow-300">
-            Add Event
-          </button>
           <button className="flex-1 px-3 py-2 border border-gray-300 text-gray-700 text-xs font-medium rounded-lg hover:bg-gray-50 transition-all duration-200 interactive-button">
             View Calendar
           </button>

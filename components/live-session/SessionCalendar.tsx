@@ -9,7 +9,7 @@ interface SessionCalendarProps {
 
 export default function SessionCalendar({ selectedDateRange, onDateRangeChange }: SessionCalendarProps) {
   const dateRanges = [
-    'Today', 'Yesterday', 'This week', 'Last week', 
+    'Today', 'Yesterday', 'This week', 'Last week',
     'This month', 'Last month', 'This year', 'Last year', 'All time'
   ];
 
@@ -61,46 +61,44 @@ export default function SessionCalendar({ selectedDateRange, onDateRangeChange }
   const weekDays = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
 
   return (
-    <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Date Range Selector */}
-        <div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Filter by Date</h3>
-          <div className="space-y-2">
-            {dateRanges.map((range) => (
-              <button
-                key={range}
-                onClick={() => onDateRangeChange(range)}
-                className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${
-                  selectedDateRange === range
-                    ? 'bg-yellow-50 text-yellow-700 font-medium'
-                    : 'text-gray-600 hover:bg-gray-50'
-                }`}
-              >
-                {range}
-              </button>
-            ))}
+    <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 relative overflow-hidden group">
+      <div className="absolute top-0 right-0 w-24 h-24 bg-yellow-50 rounded-full -mr-12 -mt-12 opacity-50 blur-2xl group-hover:bg-yellow-100 transition-colors duration-500"></div>
+
+      <div className="relative z-10">
+        <div className="flex items-center justify-between mb-6">
+          <h3 className="text-lg font-black text-gray-900 tracking-tight leading-none">Schedule</h3>
+          <div className="flex items-center gap-1.5 bg-gray-50 p-1 rounded-lg border border-gray-100">
+            <button className="p-1 hover:bg-white hover:shadow-sm rounded transition-all">
+              <ChevronLeft className="w-3.5 h-3.5 text-gray-600" />
+            </button>
+            <span className="text-[10px] font-black uppercase tracking-widest text-gray-400 px-1">Jan 2024</span>
+            <button className="p-1 hover:bg-white hover:shadow-sm rounded transition-all">
+              <ChevronRight className="w-3.5 h-3.5 text-gray-600" />
+            </button>
           </div>
         </div>
 
-        {/* Calendar */}
-        <div>
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold text-gray-900">January 2024</h3>
-            <div className="flex items-center gap-2">
-              <button className="p-1 hover:bg-gray-100 rounded">
-                <ChevronLeft className="w-4 h-4 text-gray-600" />
-              </button>
-              <button className="p-1 hover:bg-gray-100 rounded">
-                <ChevronRight className="w-4 h-4 text-gray-600" />
-              </button>
-            </div>
-          </div>
+        {/* Date Filter Pills */}
+        <div className="flex overflow-x-auto pb-4 gap-2 scrollbar-none no-scrollbar">
+          {dateRanges.map((range) => (
+            <button
+              key={range}
+              onClick={() => onDateRangeChange(range)}
+              className={`whitespace-nowrap px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all border ${selectedDateRange === range
+                ? 'bg-yellow-600 text-white border-yellow-600 shadow-md shadow-yellow-600/20'
+                : 'bg-white text-gray-400 border-gray-100 hover:border-yellow-200'
+                }`}
+            >
+              {range}
+            </button>
+          ))}
+        </div>
 
-          {/* Calendar Grid */}
+        {/* Calendar Grid */}
+        <div className="mt-4">
           <div className="grid grid-cols-7 gap-1 mb-2">
             {weekDays.map((day) => (
-              <div key={day} className="text-center text-xs font-medium text-gray-500 py-2">
+              <div key={day} className="text-center text-[9px] font-bold text-gray-400 uppercase tracking-widest py-2">
                 {day}
               </div>
             ))}
@@ -110,33 +108,37 @@ export default function SessionCalendar({ selectedDateRange, onDateRangeChange }
             {calendarDays.map((date, index) => (
               <button
                 key={index}
-                className={`aspect-square text-sm flex items-center justify-center rounded-lg transition-colors relative ${
-                  date.isOtherMonth
-                    ? 'text-gray-300'
-                    : date.isToday
-                    ? 'bg-yellow-600 text-white font-medium'
+                className={`w-full aspect-square text-xs font-bold rounded-xl flex flex-col items-center justify-center transition-all relative ${date.isOtherMonth
+                  ? 'text-gray-200 cursor-not-allowed opacity-40'
+                  : date.isToday
+                    ? 'bg-yellow-600 text-white shadow-lg shadow-yellow-600/20'
                     : date.hasSession
-                    ? 'bg-blue-100 text-blue-700 font-medium'
-                    : 'text-gray-700 hover:bg-gray-100'
-                }`}
+                      ? 'bg-yellow-100 text-yellow-800'
+                      : 'text-gray-600 hover:bg-yellow-50 hover:text-yellow-600'
+                  }`}
               >
-                {date.day}
+                <span>{date.day}</span>
                 {date.hasSession && (
-                  <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-blue-600 rounded-full"></div>
+                  <span className={`w-1 h-1 rounded-full absolute bottom-1.5 ${date.isToday ? 'bg-yellow-400' : 'bg-yellow-600'
+                    }`}></span>
                 )}
               </button>
             ))}
           </div>
+        </div>
 
-          {/* Date Range Display */}
-          <div className="mt-4 pt-4 border-t border-gray-100">
-            <div className="flex items-center justify-between text-sm">
-              <span className="text-gray-600">Today</span>
-              <span className="text-gray-900 font-medium">Jan 6, 20... — Jan 12, ...</span>
-            </div>
+        {/* Quick Footer Info */}
+        <div className="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 rounded-full bg-yellow-400"></div>
+            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Sessions</span>
           </div>
+          <button className="text-[10px] font-black text-yellow-600 uppercase tracking-widest hover:underline decoration-2 underline-offset-4">
+            Full View
+          </button>
         </div>
       </div>
     </div>
+
   );
 }

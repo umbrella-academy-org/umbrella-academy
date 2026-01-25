@@ -25,28 +25,26 @@ export default function SessionStats({ onUpcomingClick }: SessionStatsProps) {
   ];
 
   return (
-    <div className="space-y-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-1 gap-4">
       {stats.map((stat, index) => (
         <div
           key={index}
-          className={`bg-white rounded-xl p-4 shadow-sm border border-gray-100 ${
-            stat.clickable ? 'cursor-pointer hover:shadow-md transition-shadow' : ''
-          }`}
+          className={`bg-white rounded-2xl p-5 shadow-[0_8px_30px_rgb(0,0,0,0.02)] border border-gray-100 group transition-all duration-300 ${stat.clickable ? 'cursor-pointer hover:border-yellow-200 hover:shadow-lg hover:shadow-yellow-600/5' : ''
+            }`}
           onClick={stat.clickable ? onUpcomingClick : undefined}
         >
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className={`w-10 h-10 ${stat.bgColor} rounded-lg flex items-center justify-center`}>
-                {stat.icon}
-              </div>
-              <div>
-                <div className="text-2xl font-bold text-gray-900">{stat.value}</div>
-                <div className="text-sm text-gray-600">{stat.label}</div>
-              </div>
+          <div className="flex items-center gap-4">
+            <div className={`w-12 h-12 ${stat.bgColor} rounded-xl flex items-center justify-center transition-transform duration-500 group-hover:scale-110`}>
+              {stat.icon}
+            </div>
+            <div>
+              <div className="text-2xl font-black text-gray-900 leading-none mb-1">{stat.value}</div>
+              <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{stat.label}</div>
             </div>
           </div>
         </div>
       ))}
     </div>
+
   );
 }
