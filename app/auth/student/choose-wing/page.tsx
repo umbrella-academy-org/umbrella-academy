@@ -78,7 +78,7 @@ export default function ChooseWingPage() {
     console.log('Selected wing:', selectedWing);
     // Store selected wing
     localStorage.setItem('selectedWing', selectedWing);
-    router.push('/auth/student/pick-mentor');
+    router.push('/auth/student/pick-trainer');
   };
 
   const renderStars = (rating: number) => {
