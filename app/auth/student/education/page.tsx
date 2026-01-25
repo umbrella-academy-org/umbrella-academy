@@ -29,21 +29,21 @@ export default function StudentEducationPage() {
       skillLevel: '',
       learningGoals: '',
     };
-    
+
     if (!formData.fieldOfInterest) newErrors.fieldOfInterest = 'Please select your field of interest';
     if (!formData.skillLevel) newErrors.skillLevel = 'Please select your current skill level';
     if (!formData.learningGoals) newErrors.learningGoals = 'Please select your learning goals';
-    
+
     setErrors(newErrors);
-    
+
     if (Object.values(newErrors).some(error => error !== '')) {
       return;
     }
-    
+
     console.log('Student education data:', formData);
     // Store education data for roadmap creation
     localStorage.setItem('studentEducationData', JSON.stringify(formData));
-    router.push('/auth/create-roadmap');
+    router.push('/auth/student/education-level');
   };
 
   const fieldsOfInterest = [
@@ -81,7 +81,7 @@ export default function StudentEducationPage() {
   return (
     <div className="flex h-screen">
       {/* Left side - Form */}
-      <div className="flex flex-[2] flex-col justify-between p-8 bg-white">
+      <div className="flex flex-[2] flex-col justify-between p-8 bg-white overflow-auto">
         <div className="flex flex-col flex-1 max-w-md mx-auto w-full">
           {/* Go back button */}
           <button
@@ -108,8 +108,8 @@ export default function StudentEducationPage() {
             <h1 className="text-3xl font-semibold text-gray-900 mb-2">
               Education Details
             </h1>
-            <p className="text-gray-500 mb-8 text-center">
-              Fill in your current level of study and where you're learning from.
+            <p className="text-gray-500 mb-8 text-center text-sm px-4">
+              Fill in your current study path and learning objectives.
             </p>
 
             {/* Form */}
@@ -123,19 +123,18 @@ export default function StudentEducationPage() {
                   id="fieldOfInterest"
                   value={formData.fieldOfInterest}
                   onChange={(e) => handleChange('fieldOfInterest', e.target.value)}
-                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white text-gray-900 ${
-                    errors.fieldOfInterest ? 'border-red-500' : 'border-gray-300'
-                  }`}
+                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white text-gray-900 ${errors.fieldOfInterest ? 'border-red-500' : 'border-gray-300'
+                    }`}
                   required
                 >
-                  <option value="">Select the field of your interest</option>
+                  <option value="">Select interest</option>
                   {fieldsOfInterest.map((field) => (
                     <option key={field.value} value={field.value}>
                       {field.label}
                     </option>
                   ))}
                 </select>
-                {errors.fieldOfInterest && <p className="mt-1 text-sm text-red-500">{errors.fieldOfInterest}</p>}
+                {errors.fieldOfInterest && <p className="mt-1 text-xs text-red-500">{errors.fieldOfInterest}</p>}
               </div>
 
               {/* Current Skill Level */}
@@ -147,19 +146,18 @@ export default function StudentEducationPage() {
                   id="skillLevel"
                   value={formData.skillLevel}
                   onChange={(e) => handleChange('skillLevel', e.target.value)}
-                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white text-gray-900 ${
-                    errors.skillLevel ? 'border-red-500' : 'border-gray-300'
-                  }`}
+                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white text-gray-900 ${errors.skillLevel ? 'border-red-500' : 'border-gray-300'
+                    }`}
                   required
                 >
-                  <option value="">Select your Skill Level</option>
+                  <option value="">Select skill level</option>
                   {skillLevels.map((level) => (
                     <option key={level.value} value={level.value}>
                       {level.label}
                     </option>
                   ))}
                 </select>
-                {errors.skillLevel && <p className="mt-1 text-sm text-red-500">{errors.skillLevel}</p>}
+                {errors.skillLevel && <p className="mt-1 text-xs text-red-500">{errors.skillLevel}</p>}
               </div>
 
               {/* Learning Goals */}
@@ -171,24 +169,23 @@ export default function StudentEducationPage() {
                   id="learningGoals"
                   value={formData.learningGoals}
                   onChange={(e) => handleChange('learningGoals', e.target.value)}
-                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white text-gray-900 ${
-                    errors.learningGoals ? 'border-red-500' : 'border-gray-300'
-                  }`}
+                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white text-gray-900 ${errors.learningGoals ? 'border-red-500' : 'border-gray-300'
+                    }`}
                   required
                 >
-                  <option value="">Select your Learning Goals</option>
+                  <option value="">Select learning goals</option>
                   {learningGoals.map((goal) => (
                     <option key={goal.value} value={goal.value}>
                       {goal.label}
                     </option>
                   ))}
                 </select>
-                {errors.learningGoals && <p className="mt-1 text-sm text-red-500">{errors.learningGoals}</p>}
+                {errors.learningGoals && <p className="mt-1 text-xs text-red-500">{errors.learningGoals}</p>}
               </div>
 
               <button
                 type="submit"
-                className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-colors"
+                className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-colors mt-4"
               >
                 Continue
               </button>
@@ -197,15 +194,16 @@ export default function StudentEducationPage() {
               <div className="flex justify-center gap-2 pt-4">
                 <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
                 <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
-                <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
-                <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
+                {[3, 4, 5, 6, 7].map((i) => (
+                  <div key={i} className="w-2 h-2 bg-gray-300 rounded-full"></div>
+                ))}
               </div>
             </form>
           </div>
         </div>
 
         {/* Footer */}
-        <div className="text-sm text-gray-500">
+        <div className="text-sm text-gray-500 text-center">
           © Dreamize 2025
         </div>
       </div>
@@ -214,7 +212,7 @@ export default function StudentEducationPage() {
       <div className="hidden lg:block flex-[1] relative overflow-hidden">
         <Image
           src="/auth/login/image.png"
-          alt="Night sky with stars"
+          alt="Abstract design"
           fill
           className="object-cover object-center scale-105"
           priority

@@ -24,65 +24,67 @@ export default function Header({ breadcrumb = 'Home', userType, actions }: Heade
     navigate('/auth/login');
   };
   return (
-    <header className="bg-white border-b border-gray-200 px-4 lg:px-6 py-3 lg:py-4">
-      <div className="flex items-center justify-between">
+    <header className="bg-white px-4 lg:px-8 py-3 lg:py-5 flex items-center justify-between sticky top-0 z-30">
+      <div className="flex items-center gap-4">
         {/* Breadcrumb */}
-        <nav className="flex items-center gap-2 text-sm">
-          <Home className="w-4 h-4 text-gray-400" />
-          <span className="text-gray-600 truncate">{breadcrumb}</span>
-        </nav>
-
-        {/* Actions or Default Header Items */}
-        {actions ? (
-          <div className="flex items-center gap-2 lg:gap-4">
-            {actions}
+        <nav className="flex items-center gap-3 text-sm">
+          <button
+            onClick={() => navigate('/dashboard/' + currentUserType)}
+            className="p-1.5 hover:bg-gray-50 rounded-lg transition-colors text-gray-400 hover:text-gray-900"
+          >
+            <Home className="w-5 h-5" />
+          </button>
+          <span className="text-gray-300 text-lg">›</span>
+          <div className="px-4 py-1.5 bg-gray-50/80 rounded-full border border-gray-100/50">
+            <span className="text-gray-500 font-medium text-xs tracking-tight">{breadcrumb}</span>
           </div>
+        </nav>
+      </div>
+
+      {/* Actions */}
+      <div className="flex items-center gap-3 lg:gap-6">
+        {actions ? (
+          actions
         ) : (
-          <div className="flex items-center gap-2 lg:gap-4">
-            {/* Search - Hidden on mobile */}
-            <div className="relative hidden sm:block">
-              <input
-                type="text"
-                placeholder="Search..."
-                className="w-48 lg:w-64 pl-10 pr-4 py-2 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent focus:bg-white text-gray-900 placeholder:text-gray-500 text-sm"
-              />
-              <Search className="w-4 h-4 lg:w-5 lg:h-5 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
-            </div>
-
-            {/* Search icon for mobile */}
-            <button className="sm:hidden p-2 text-gray-400 hover:text-gray-600 transition-colors">
-              <Search className="w-5 h-5" />
-            </button>
-
-            {/* Notifications */}
-            <button className="relative p-2 text-gray-400 hover:text-gray-600 transition-colors">
-              <Grid3X3 className="w-5 h-5 lg:w-6 lg:h-6" />
-              <span className="absolute -top-1 -right-1 w-2 h-2 lg:w-3 lg:h-3 bg-red-500 rounded-full"></span>
-            </button>
-
-            {/* Bell Notifications */}
-            <button className="relative p-2 text-gray-400 hover:text-gray-600 transition-colors">
-              <Bell className="w-5 h-5 lg:w-6 lg:h-6" />
-            </button>
-
-            {/* Profile */}
-            <div className="flex items-center gap-3">
-              <div className="w-6 h-6 lg:w-8 lg:h-8 bg-yellow-600 rounded-full overflow-hidden flex items-center justify-center">
-                <span className="text-white text-xs lg:text-sm font-medium">
-                  {userInitials}
-                </span>
-              </div>
-              
-              {/* Logout Button */}
+          <>
+            {/* Chat & Notifications */}
+            <div className="flex items-center gap-2 lg:gap-5">
+              {/* Chat Icon with Badge */}
               <button
-                onClick={handleLogout}
-                className="p-2 text-gray-400 hover:text-red-600 transition-colors"
-                title="Logout"
+                onClick={() => navigate('/dashboard/' + currentUserType + '/chat')}
+                className="relative w-11 h-11 flex items-center justify-center rounded-xl border border-gray-100 hover:bg-gray-50 transition-all group"
               >
-                <LogOut className="w-5 h-5 lg:w-6 lg:h-6" />
+                <div className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-red-500 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold text-white shadow-sm ring-1 ring-red-100">
+                  2
+                </div>
+                <svg
+                  className="w-5 h-5 text-gray-500 group-hover:text-yellow-600 transition-colors"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                </svg>
+              </button>
+
+              {/* Bell Notifications */}
+              <button className="p-2 text-gray-400 hover:text-gray-900 transition-colors">
+                <Bell className="w-6 h-6" />
               </button>
             </div>
-          </div>
+
+            {/* Profile */}
+            <button
+              onClick={() => navigate('/dashboard/' + currentUserType + '/profile')}
+              className="w-10 h-10 rounded-full overflow-hidden border-2 border-gray-50 shadow-sm hover:border-yellow-200 transition-all"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=150&h=150"
+                alt="Profile"
+                className="w-full h-full object-cover"
+              />
+            </button>
+          </>
         )}
       </div>
     </header>

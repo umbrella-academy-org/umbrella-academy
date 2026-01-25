@@ -13,7 +13,7 @@ export default function CalendarGrid({ selectedDateRange, onDateRangeChange }: C
 
   const dateRanges = [
     'Today',
-    'Yesterday', 
+    'Yesterday',
     'This week',
     'Last week',
     'This month',
@@ -53,53 +53,57 @@ export default function CalendarGrid({ selectedDateRange, onDateRangeChange }: C
 
   const renderCalendarDays = () => {
     const days = [];
-    
+
     // Previous month's trailing days
     const prevMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 0);
     const prevMonthDays = prevMonth.getDate();
-    
+
     for (let i = firstDay - 1; i >= 0; i--) {
       days.push(
         <button
           key={`prev-${prevMonthDays - i}`}
-          className="w-8 h-8 text-xs text-gray-400 hover:bg-gray-100 rounded-full flex items-center justify-center"
+          className="w-10 h-10 text-xs text-gray-300 flex items-center justify-center cursor-default"
         >
           {prevMonthDays - i}
         </button>
       );
     }
-    
+
     // Current month days
     for (let day = 1; day <= daysInMonth; day++) {
-      const isSelected = day === 6 || day === 12; // Highlight days 6 and 12 as selected
-      
+      const isSelected = day === 6 || day === 12;
+      const hasLiveSession = [6, 12, 18, 24].includes(day);
+
       days.push(
         <button
           key={day}
-          className={`w-8 h-8 text-xs rounded-full transition-colors flex items-center justify-center ${
-            isSelected
-              ? 'bg-yellow-600 text-white font-medium'
-              : 'text-gray-700 hover:bg-gray-100'
-          }`}
+          className={`w-10 h-10 text-sm rounded-xl transition-all flex flex-col items-center justify-center relative ${isSelected
+            ? 'bg-yellow-600 text-white font-bold shadow-lg shadow-yellow-600/20 active:scale-95'
+            : 'text-gray-700 hover:bg-gray-50 hover:text-yellow-600'
+            }`}
         >
-          {day}
+          <span>{day}</span>
+          {hasLiveSession && (
+            <span className={`w-1 h-1 rounded-full absolute bottom-1.5 ${isSelected ? 'bg-white' : 'bg-yellow-500'
+              }`}></span>
+          )}
         </button>
       );
     }
-    
+
     // Next month's leading days
     const remainingCells = 42 - days.length; // 6 rows × 7 days
     for (let day = 1; day <= remainingCells; day++) {
       days.push(
         <button
           key={`next-${day}`}
-          className="w-8 h-8 text-xs text-gray-400 hover:bg-gray-100 rounded-full flex items-center justify-center"
+          className="w-10 h-10 text-xs text-gray-300 flex items-center justify-center cursor-default"
         >
           {day}
         </button>
       );
     }
-    
+
     return days;
   };
 
@@ -113,11 +117,10 @@ export default function CalendarGrid({ selectedDateRange, onDateRangeChange }: C
               <button
                 key={range}
                 onClick={() => onDateRangeChange(range)}
-                className={`block w-full text-left text-sm transition-colors ${
-                  selectedDateRange === range
-                    ? 'text-gray-900 font-medium'
-                    : 'text-gray-600 hover:text-gray-900'
-                }`}
+                className={`block w-full text-left text-sm transition-colors ${selectedDateRange === range
+                  ? 'text-gray-900 font-medium'
+                  : 'text-gray-600 hover:text-gray-900'
+                  }`}
               >
                 {range}
               </button>
@@ -135,11 +138,11 @@ export default function CalendarGrid({ selectedDateRange, onDateRangeChange }: C
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
-            
+
             <h4 className="text-base font-medium text-gray-600">
               {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
             </h4>
-            
+
             <button
               onClick={() => navigateMonth('next')}
               className="p-1 text-gray-400 hover:text-gray-600"
@@ -158,7 +161,7 @@ export default function CalendarGrid({ selectedDateRange, onDateRangeChange }: C
                 </div>
               ))}
             </div>
-            
+
             {/* Calendar days */}
             <div className="grid grid-cols-7 gap-1">
               {renderCalendarDays()}

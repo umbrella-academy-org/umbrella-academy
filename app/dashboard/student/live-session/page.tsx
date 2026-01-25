@@ -10,6 +10,8 @@ import SessionCalendar from '@/components/live-session/SessionCalendar';
 import SessionStats from '@/components/live-session/SessionStats';
 import UpcomingSessionsModal from '@/components/live-session/UpcomingSessionsModal';
 
+import SessionList from '@/components/live-session/SessionList';
+
 export default function LiveSessionPage() {
   const [activeTab, setActiveTab] = useState('Upcoming');
   const [selectedDateRange, setSelectedDateRange] = useState('Today');
@@ -18,31 +20,41 @@ export default function LiveSessionPage() {
   return (
     <div className="flex h-screen bg-white">
       {/* Sidebar - Fixed */}
-      <Sidebar activeItem="Live Session" />
+      <Sidebar activeItem="Live Session" userType="student" />
 
       {/* Main Content - Scrollable */}
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
         {/* Header */}
-        <Header breadcrumb="Live Sessions" />
+        <Header breadcrumb="Live Sessions" userType="student" />
 
         {/* Live Session Content - Scrollable */}
-        <main className="flex-1 overflow-auto">
-          <div className="p-3 lg:p-4">
+        <main className="flex-1 overflow-auto bg-gray-50/30">
+          <div className="max-w-7xl mx-auto p-4 lg:p-8">
             {/* Live Session Header */}
             <LiveSessionHeader />
 
-            {/* Main Live Session Grid */}
-            <div className="grid grid-cols-1 xl:grid-cols-5 gap-3 lg:gap-4 mt-4 lg:mt-6">
-              {/* Left Column - Course and Calendar (3 columns on xl) */}
-              <div className="xl:col-span-3 space-y-3 lg:space-y-4">
-                {/* Course Card */}
+            {/* Main Content Layout */}
+            <div className="flex flex-col xl:flex-row gap-8">
+              {/* Primary Content (List) */}
+              <div className="flex-1 space-y-6">
+                {/* Course Card Summary */}
                 <CourseCard userType="student" />
 
-                {/* Session Tabs */}
-                <SessionTabs 
-                  activeTab={activeTab}
-                  onTabChange={setActiveTab}
-                />
+                {/* Session Navigation & List Container */}
+                <div className="space-y-4">
+                  <SessionTabs
+                    activeTab={activeTab}
+                    onTabChange={setActiveTab}
+                  />
+
+                  <SessionList activeTab={activeTab} />
+                </div>
+              </div>
+
+              {/* Sidebar Content (Calendar & Stats) */}
+              <div className="xl:w-96 space-y-6">
+                {/* Session Stats */}
+                <SessionStats onUpcomingClick={() => setShowUpcomingModal(true)} />
 
                 {/* Session Calendar */}
                 <SessionCalendar
@@ -50,16 +62,11 @@ export default function LiveSessionPage() {
                   onDateRangeChange={setSelectedDateRange}
                 />
               </div>
-
-              {/* Right Column - Stats and Upcoming (2 columns on xl) */}
-              <div className="xl:col-span-2 space-y-3 lg:space-y-4">
-                {/* Session Stats */}
-                <SessionStats onUpcomingClick={() => setShowUpcomingModal(true)} />
-              </div>
             </div>
           </div>
         </main>
       </div>
+
 
       {/* Upcoming Sessions Modal */}
       {showUpcomingModal && (

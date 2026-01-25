@@ -51,10 +51,10 @@ export default function CompletionStats() {
     },
     {
       icon: Trophy,
-      label: 'Lessons Done',
+      label: 'Sessions Done',
       value: progress.completedSessions,
       total: progress.totalSessions,
-      suffix: 'lessons',
+      suffix: 'sessions',
       color: 'text-yellow-600',
       bgColor: 'bg-yellow-100'
     }

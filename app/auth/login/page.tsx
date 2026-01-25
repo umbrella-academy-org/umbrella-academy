@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
 import { useLogin } from '@/hooks';
 import { useAuth } from '@/contexts';
+import { mockUsers } from '@/data/users';
 
 export default function LoginPage() {
   const { navigate } = useNavigationWithLoading();
@@ -19,7 +20,7 @@ export default function LoginPage() {
   useEffect(() => {
     if (isAuthenticated && user) {
       // Redirect based on user role
-      const dashboardRoutes = {
+      const dashboardRoutes: Record<string, string> = {
         'student': '/dashboard/student',
         'trainer': '/dashboard/trainer',
         'mentor': '/dashboard/mentor',
@@ -33,7 +34,7 @@ export default function LoginPage() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLocalErrors({ email: '', password: '' });
-    
+
     // Client-side validation
     if (!email) {
       setLocalErrors(prev => ({ ...prev, email: 'Email is required' }));
@@ -47,10 +48,10 @@ export default function LoginPage() {
       setLocalErrors(prev => ({ ...prev, password: 'Password is required' }));
       return;
     }
-    
+
     // Attempt login
     const success = await login({ email, password });
-    
+
     if (success) {
       // Navigation will be handled by useEffect above
       console.log('Login successful');
@@ -60,22 +61,17 @@ export default function LoginPage() {
 
   // Demo credentials helper
   const fillDemoCredentials = (role: string) => {
-    const demoCredentials = {
-      student: 'jane.mukamana@student.umbrella.rw',
-      trainer: 'sarah.ingabire@trainer.umbrella.rw',
-      mentor: 'robert.kayitare@mentor.umbrella.rw',
-      'wing-admin': 'emmanuel.nkurunziza@admin.umbrella.rw',
-      'umbrella-admin': 'patrick.rwigema@umbrella.rw'
-    };
-    
-    setEmail(demoCredentials[role as keyof typeof demoCredentials] || '');
-    setPassword('demo123'); // Demo password
+    const demoUser = mockUsers.find(u => u.role === role);
+    if (demoUser) {
+      setEmail(demoUser.email);
+      setPassword('demo123'); // Master demo password
+    }
   };
 
   return (
     <div className="flex h-screen">
       {/* Left side - Form */}
-      <div className="flex flex-[2] flex-col justify-between p-8 bg-white">
+      <div className="flex flex-[2] flex-col justify-between p-8 bg-white overflow-y-auto">
         <div className="flex flex-col items-center justify-center flex-1 max-w-md mx-auto w-full">
           {/* Logo */}
           <div className="mb-8">
@@ -148,12 +144,11 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => {
                   setEmail(e.target.value);
-                  setLocalErrors(prev => ({ ...prev, email: '' }));
+                  setLocalErrors((prev: { email: string; password: string }) => ({ ...prev, email: '' }));
                 }}
                 placeholder="Enter your email"
-                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${
-                  localErrors.email || error ? 'border-red-500' : 'border-gray-300'
-                }`}
+                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${localErrors.email || error ? 'border-red-500' : 'border-gray-300'
+                  }`}
                 required
                 disabled={isLoading}
               />
@@ -174,9 +169,8 @@ export default function LoginPage() {
                     setLocalErrors(prev => ({ ...prev, password: '' }));
                   }}
                   placeholder="Enter your password"
-                  className={`w-full px-4 py-3 pr-12 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${
-                    localErrors.password || error ? 'border-red-500' : 'border-gray-300'
-                  }`}
+                  className={`w-full px-4 py-3 pr-12 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${localErrors.password || error ? 'border-red-500' : 'border-gray-300'
+                    }`}
                   required
                   disabled={isLoading}
                 />
@@ -230,7 +224,7 @@ export default function LoginPage() {
           {/* Sign up link */}
           <p className="mt-6 text-sm text-gray-600">
             Don't have an account?{' '}
-            <button 
+            <button
               onClick={() => navigate('/auth/signup')}
               className="text-yellow-600 hover:text-yellow-700 font-medium"
               disabled={isLoading}
@@ -238,10 +232,10 @@ export default function LoginPage() {
               Sign Up
             </button>
           </p>
-          
+
           {/* Forgot password link */}
           <p className="mt-2 text-sm text-gray-600 text-center">
-            <button 
+            <button
               onClick={() => navigate('/auth/forgot-password')}
               className="text-yellow-600 hover:text-yellow-700 font-medium"
               disabled={isLoading}

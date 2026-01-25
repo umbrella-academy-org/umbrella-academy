@@ -48,7 +48,7 @@ export default function SignupPage() {
             </button>
 
             <button
-              onClick={() => router.push('/auth/mentor/signup')}
+              onClick={() => router.push('/auth/trainer/signup')}
               className="w-full p-6 border-2 border-gray-200 rounded-lg hover:border-yellow-600 hover:bg-yellow-50 transition-colors text-left"
             >
               <div className="flex items-center gap-4">
@@ -58,8 +58,8 @@ export default function SignupPage() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900">I'm a Mentor</h3>
-                  <p className="text-gray-600">Ready to teach and share my expertise</p>
+                  <h3 className="text-lg font-semibold text-gray-900">I'm a Trainer</h3>
+                  <p className="text-gray-600">Apply to train and share your expertise</p>
                 </div>
               </div>
             </button>

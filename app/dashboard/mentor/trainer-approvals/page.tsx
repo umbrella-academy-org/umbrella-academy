@@ -107,18 +107,18 @@ export default function MentorTrainerApprovalsPage() {
   return (
     <div className="flex h-screen bg-white">
       <Sidebar activeItem="Trainer Approvals" userType="mentor" />
-      
+
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
         <Header breadcrumb="Trainer Approvals" />
-        
+
         <main className="flex-1 overflow-auto">
-          <div className="p-3 lg:p-4">
-            <div className="mb-6">
-              <h1 className="text-2xl font-semibold text-gray-900 mb-2">Trainer Approvals</h1>
-              <p className="text-gray-600">Review and approve trainer applications</p>
+          <div className="p-3 lg:p-6">
+            <div className="mb-8">
+              <h1 className="text-2xl font-semibold text-gray-900 mb-1">Trainer Applications</h1>
+              <p className="text-sm text-gray-500">Review and vet new trainer candidates for your wing.</p>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {/* Trainer Applications List */}
               <div className="lg:col-span-1">
                 <div className="bg-white rounded-xl shadow-sm border border-gray-100">
@@ -129,9 +129,8 @@ export default function MentorTrainerApprovalsPage() {
                     {pendingTrainers.map((trainer) => (
                       <div
                         key={trainer.id}
-                        className={`p-4 cursor-pointer hover:bg-gray-50 transition-colors ${
-                          selectedTrainer === trainer.id ? 'bg-yellow-50 border-r-4 border-yellow-600' : ''
-                        }`}
+                        className={`p-4 cursor-pointer hover:bg-gray-50 transition-colors ${selectedTrainer === trainer.id ? 'bg-yellow-50 border-r-4 border-yellow-600' : ''
+                          }`}
                         onClick={() => setSelectedTrainer(trainer.id)}
                       >
                         <div className="flex items-start justify-between mb-2">
@@ -314,7 +313,7 @@ export default function MentorTrainerApprovalsPage() {
                       {/* Portfolio Link */}
                       <div>
                         <h3 className="font-semibold text-gray-900 mb-3">Portfolio</h3>
-                        <a 
+                        <a
                           href={selectedTrainerData.portfolio}
                           target="_blank"
                           rel="noopener noreferrer"

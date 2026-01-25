@@ -91,27 +91,71 @@ export default function CreateRoadmapPage() {
 
     // Save the roadmap
     createRoadmap(newRoadmap);
-    
-    // Redirect to the main roadmap page
-    router.push('/dashboard/student/roadmap');
+
+    // Redirect to the pending approval page
+    router.push('/auth/student/pending-roadmap');
   };
 
   return (
-    <div className="flex h-screen bg-white">
-      {/* Main Content - Scrollable */}
-      <div className="flex flex-[2] flex-col justify-between p-8 bg-white overflow-y-scroll">
-        {/* Content - Scrollable */}
-        <main className="flex-1 overflow-auto">
-          <div className="p-3 lg:p-4">
-            <RoadmapBuilder onSave={handleRoadmapSave} />
+    <div className="flex h-screen">
+      {/* Left side - Form */}
+      <div className="flex flex-[2] flex-col justify-between p-8 bg-white overflow-y-auto">
+        <div className="flex flex-col flex-1 max-w-2xl mx-auto w-full">
+          {/* Go back button */}
+          <button
+            onClick={() => window.history.back()}
+            className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-8"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+            Go back
+          </button>
+
+          <div className="flex flex-col items-center flex-1">
+            {/* Logo */}
+            <div className="mb-8">
+              <div className="w-16 h-16 bg-yellow-600 rounded-2xl flex items-center justify-center">
+                <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" />
+                </svg>
+              </div>
+            </div>
+
+            {/* Title */}
+            <h1 className="text-3xl font-semibold text-gray-900 mb-2">
+              Create Your Roadmap
+            </h1>
+            <p className="text-gray-500 mb-8 text-center max-w-md">
+              Customize your learning journey by setting goals and breaking them into achievable phases.
+            </p>
+
+            {/* Roadmap Builder Component */}
+            <div className="w-full">
+              <RoadmapBuilder onSave={handleRoadmapSave} />
+            </div>
+
+            {/* Progress dots */}
+            <div className="flex justify-center gap-2 py-8">
+              {[1, 2, 3, 4, 5, 6].map((i) => (
+                <div key={i} className="w-8 h-2 bg-yellow-600 rounded-full"></div>
+              ))}
+              <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
+            </div>
           </div>
-        </main>
+        </div>
+
+        {/* Footer */}
+        <div className="text-sm text-gray-500 text-center">
+          © Dreamize 2025
+        </div>
       </div>
-       {/* Right side - Image */}
-      <div className=" lg:block flex-[1] relative overflow-hidden">
+
+      {/* Right side - Image */}
+      <div className="hidden lg:block flex-[1] relative overflow-hidden">
         <Image
           src="/auth/login/image.png"
-          alt="Misty mountains"
+          alt="Abstract design"
           fill
           className="object-cover object-center scale-105"
           priority

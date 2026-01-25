@@ -39,20 +39,20 @@ export default function ProfilePage() {
       country: '',
       phoneNumber: '',
     };
-    
+
     if (!formData.firstName) newErrors.firstName = 'First name is required';
     if (!formData.lastName) newErrors.lastName = 'Last name is required';
     if (!formData.gender) newErrors.gender = 'Please select your gender';
     if (!formData.dateOfBirth) newErrors.dateOfBirth = 'Date of birth is required';
     if (!formData.country) newErrors.country = 'Please select your country';
     if (!formData.phoneNumber) newErrors.phoneNumber = 'Phone number is required';
-    
+
     setErrors(newErrors);
-    
+
     if (Object.values(newErrors).some(error => error !== '')) {
       return;
     }
-    
+
     console.log('Profile data:', formData);
     router.push('/auth/student/education');
   };
@@ -60,7 +60,7 @@ export default function ProfilePage() {
   return (
     <div className="flex h-screen">
       {/* Left side - Form */}
-      <div className="flex flex-[2] flex-col justify-between p-8 bg-white">
+      <div className="flex flex-[2] flex-col justify-between p-8 bg-white overflow-auto">
         <div className="flex flex-col flex-1 max-w-md mx-auto w-full">
           {/* Go back button */}
           <button
@@ -88,7 +88,7 @@ export default function ProfilePage() {
               Tell Us About You
             </h1>
             <p className="text-gray-500 mb-8 text-center">
-              Enter your personal details so we can complete your profile.
+              Enter your personal details to complete your profile.
             </p>
 
             {/* Form */}
@@ -105,12 +105,11 @@ export default function ProfilePage() {
                     value={formData.firstName}
                     onChange={(e) => handleChange('firstName', e.target.value)}
                     placeholder="eg. John"
-                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${
-                      errors.firstName ? 'border-red-500' : 'border-gray-300'
-                    }`}
+                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${errors.firstName ? 'border-red-500' : 'border-gray-300'
+                      }`}
                     required
                   />
-                  {errors.firstName && <p className="mt-1 text-sm text-red-500">{errors.firstName}</p>}
+                  {errors.firstName && <p className="mt-1 text-xs text-red-500">{errors.firstName}</p>}
                 </div>
                 <div>
                   <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-2">
@@ -122,12 +121,11 @@ export default function ProfilePage() {
                     value={formData.lastName}
                     onChange={(e) => handleChange('lastName', e.target.value)}
                     placeholder="eg. Doe"
-                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${
-                      errors.lastName ? 'border-red-500' : 'border-gray-300'
-                    }`}
+                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${errors.lastName ? 'border-red-500' : 'border-gray-300'
+                      }`}
                     required
                   />
-                  {errors.lastName && <p className="mt-1 text-sm text-red-500">{errors.lastName}</p>}
+                  {errors.lastName && <p className="mt-1 text-xs text-red-500">{errors.lastName}</p>}
                 </div>
               </div>
 
@@ -141,18 +139,16 @@ export default function ProfilePage() {
                     id="gender"
                     value={formData.gender}
                     onChange={(e) => handleChange('gender', e.target.value)}
-                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white text-gray-900 ${
-                      errors.gender ? 'border-red-500' : 'border-gray-300'
-                    }`}
+                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white text-gray-900 ${errors.gender ? 'border-red-500' : 'border-gray-300'
+                      }`}
                     required
                   >
-                    <option value="">Preferred gender</option>
+                    <option value="">Gender</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                     <option value="other">Other</option>
-                    <option value="prefer-not-to-say">Prefer not to say</option>
                   </select>
-                  {errors.gender && <p className="mt-1 text-sm text-red-500">{errors.gender}</p>}
+                  {errors.gender && <p className="mt-1 text-xs text-red-500">{errors.gender}</p>}
                 </div>
                 <div>
                   <label htmlFor="dateOfBirth" className="block text-sm font-medium text-gray-700 mb-2">
@@ -163,17 +159,15 @@ export default function ProfilePage() {
                     id="dateOfBirth"
                     value={formData.dateOfBirth}
                     onChange={(e) => handleChange('dateOfBirth', e.target.value)}
-                    placeholder="DD / MM / YY"
-                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 ${
-                      errors.dateOfBirth ? 'border-red-500' : 'border-gray-300'
-                    }`}
+                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 ${errors.dateOfBirth ? 'border-red-500' : 'border-gray-300'
+                      }`}
                     required
                   />
-                  {errors.dateOfBirth && <p className="mt-1 text-sm text-red-500">{errors.dateOfBirth}</p>}
+                  {errors.dateOfBirth && <p className="mt-1 text-xs text-red-500">{errors.dateOfBirth}</p>}
                 </div>
               </div>
 
-              {/* Select Country */}
+              {/* Country */}
               <div>
                 <label htmlFor="country" className="block text-sm font-medium text-gray-700 mb-2">
                   Select Country
@@ -182,21 +176,17 @@ export default function ProfilePage() {
                   id="country"
                   value={formData.country}
                   onChange={(e) => handleChange('country', e.target.value)}
-                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white text-gray-900 ${
-                    errors.country ? 'border-red-500' : 'border-gray-300'
-                  }`}
+                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white text-gray-900 ${errors.country ? 'border-red-500' : 'border-gray-300'
+                    }`}
                   required
                 >
-                  <option value="">No country selected</option>
-                  <option value="us">United States</option>
-                  <option value="uk">United Kingdom</option>
-                  <option value="ca">Canada</option>
-                  <option value="rw">Rwanda</option>
-                  <option value="ke">Kenya</option>
-                  <option value="ug">Uganda</option>
-                  <option value="tz">Tanzania</option>
+                  <option value="">Country</option>
+                  <option value="rwanda">🇷🇼 Rwanda</option>
+                  <option value="kenya">🇰🇪 Kenya</option>
+                  <option value="uganda">🇺🇬 Uganda</option>
+                  <option value="tanzania">🇹🇿 Tanzania</option>
                 </select>
-                {errors.country && <p className="mt-1 text-sm text-red-500">{errors.country}</p>}
+                {errors.country && <p className="mt-1 text-xs text-red-500">{errors.country}</p>}
               </div>
 
               {/* Phone Number */}
@@ -204,15 +194,13 @@ export default function ProfilePage() {
                 <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-700 mb-2">
                   Phone Number
                 </label>
-                <div className="flex gap-2">
+                <div className="flex gap-3">
                   <select
                     value={formData.phoneCode}
                     onChange={(e) => handleChange('phoneCode', e.target.value)}
                     className="w-24 px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white text-gray-900"
                   >
                     <option value="+250">+250</option>
-                    <option value="+1">+1</option>
-                    <option value="+44">+44</option>
                     <option value="+254">+254</option>
                     <option value="+256">+256</option>
                   </select>
@@ -223,19 +211,18 @@ export default function ProfilePage() {
                       value={formData.phoneNumber}
                       onChange={(e) => handleChange('phoneNumber', e.target.value)}
                       placeholder="7XXX-XXX-XXX"
-                      className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${
-                        errors.phoneNumber ? 'border-red-500' : 'border-gray-300'
-                      }`}
+                      className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${errors.phoneNumber ? 'border-red-500' : 'border-gray-300'
+                        }`}
                       required
                     />
-                    {errors.phoneNumber && <p className="mt-1 text-sm text-red-500">{errors.phoneNumber}</p>}
+                    {errors.phoneNumber && <p className="mt-1 text-xs text-red-500">{errors.phoneNumber}</p>}
                   </div>
                 </div>
               </div>
 
               <button
                 type="submit"
-                className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-colors"
+                className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-colors mt-4"
               >
                 Continue
               </button>
@@ -243,16 +230,16 @@ export default function ProfilePage() {
               {/* Progress dots */}
               <div className="flex justify-center gap-2 pt-4">
                 <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
-                <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
-                <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
-                <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
+                {[2, 3, 4, 5, 6, 7].map((i) => (
+                  <div key={i} className="w-2 h-2 bg-gray-300 rounded-full"></div>
+                ))}
               </div>
             </form>
           </div>
         </div>
 
         {/* Footer */}
-        <div className="text-sm text-gray-500">
+        <div className="text-sm text-gray-500 text-center">
           © Dreamize 2025
         </div>
       </div>
@@ -261,7 +248,7 @@ export default function ProfilePage() {
       <div className="hidden lg:block flex-[1] relative overflow-hidden">
         <Image
           src="/auth/login/image.png"
-          alt="Palm trees against blue sky"
+          alt="Abstract design"
           fill
           className="object-cover object-center scale-105"
           priority
@@ -271,4 +258,3 @@ export default function ProfilePage() {
     </div>
   );
 }
-
