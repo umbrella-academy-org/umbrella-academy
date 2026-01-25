@@ -34,9 +34,6 @@ export default function RenewSubscriptionPage() {
 
       {/* Main Content - Scrollable */}
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
-        {/* Header */}
-        <Header breadcrumb="Plan & Subscriptions" />
-
         {/* Renew Content - Scrollable */}
         <main className="flex-1 overflow-auto">
           <div className="p-3 lg:p-4">
