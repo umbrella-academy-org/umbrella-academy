@@ -48,7 +48,7 @@ export default function StudentProfilePage() {
                                 <div className="flex flex-col md:flex-row md:items-end -mt-16 gap-8">
                                     <div className="relative group">
                                         <div className="w-32 h-32 rounded-[2.5rem] bg-white p-1.5 shadow-2xl shadow-yellow-200/50 transform group-hover:scale-105 transition-all duration-500">
-                                            <div className="w-full h-full bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-[2.2rem] flex items-center justify-center text-yellow-700 text-4xl font-extrabold border border-yellow-200 uppercase tracking-tighter">
+                                            <div className="w-full h-full bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-[2.2rem] flex items-center justify-center text-yellow-700 text-4xl font-extrabold border border-yellow-200 uppercase  er">
                                                 {profileData.name.split(' ').map(n => n[0]).join('')}
                                             </div>
                                         </div>
@@ -60,7 +60,7 @@ export default function StudentProfilePage() {
                                     <div className="flex-1 flex flex-col md:flex-row md:items-center justify-between gap-6 pb-2">
                                         <div>
                                             <div className="flex items-center gap-3">
-                                                <h1 className="text-3xl font-black text-gray-900 tracking-tight">{profileData.name}</h1>
+                                                <h1 className="text-3xl font-black text-gray-900  ">{profileData.name}</h1>
                                                 <div className="px-2.5 py-1 bg-yellow-50 text-yellow-700 border border-yellow-100 rounded-full text-[10px] font-black uppercase tracking-wider">PRO STUDENT</div>
                                             </div>
                                             <p className="text-gray-500 font-semibold flex items-center gap-2 mt-1.5">
@@ -268,7 +268,7 @@ export default function StudentProfilePage() {
                                         <div className="w-14 h-14 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
                                             <HelpCircleIcon className="w-7 h-7 text-yellow-500" />
                                         </div>
-                                        <h3 className="text-2xl font-black mb-3 tracking-tight">Access Support</h3>
+                                        <h3 className="text-2xl font-black mb-3  ">Access Support</h3>
                                         <p className="text-gray-400 font-medium text-sm leading-relaxed mb-8">Got questions? Our student success team is ready to assist you 24/7.</p>
                                         <button className="w-full py-4 bg-yellow-600 text-white rounded-[1.2rem] font-black hover:bg-yellow-500 shadow-xl shadow-yellow-600/20 active:scale-95 transition-all flex items-center justify-center gap-2 group">
                                             Get Assistance

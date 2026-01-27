@@ -66,7 +66,7 @@ export default function SessionCalendar({ selectedDateRange, onDateRangeChange }
 
       <div className="relative z-10">
         <div className="flex items-center justify-between mb-6">
-          <h3 className="text-base font-semibold text-gray-900 tracking-tight leading-none">Schedule</h3>
+          <h3 className="text-base font-semibold text-gray-900    ">Schedule</h3>
           <div className="flex items-center gap-1.5 bg-gray-50 p-1 rounded-lg border border-gray-100">
             <button className="p-1 hover:bg-white hover:shadow-sm rounded transition-all">
               <ChevronLeft className="w-3.5 h-3.5 text-gray-600" />

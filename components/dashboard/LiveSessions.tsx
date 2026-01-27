@@ -195,7 +195,7 @@ export default function LiveSessions({ userType }: LiveSessionsProps) {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between px-1">
-        <h3 className="text-lg font-bold text-gray-900 tracking-tight">{getTitle()}</h3>
+        <h3 className="text-lg font-bold text-gray-900  ">{getTitle()}</h3>
         <span className="text-[10px] font-bold text-gray-400 uppercase   bg-gray-50 px-2 py-1 rounded-md border border-gray-100">
           2 Active Today
         </span>
@@ -231,7 +231,7 @@ export default function LiveSessions({ userType }: LiveSessionsProps) {
                 <div className={`px-2 py-1 bg-purple-50 text-purple-600 text-[10px] font-bold rounded-md flex items-center gap-1.5 border border-purple-100 transition-transform duration-300 ${hoveredSession === session.id ? 'scale-105' : ''
                   }`}>
                   <Clock className="w-3 h-3" />
-                  <span className="whitespace-nowrap uppercase tracking-tighter">{session.time}</span>
+                  <span className="whitespace-nowrap uppercase  er">{session.time}</span>
                 </div>
               </div>
 
@@ -265,7 +265,7 @@ export default function LiveSessions({ userType }: LiveSessionsProps) {
           {/* Activity Progress for 'Live Soon' */}
           {session.status === 'info' && (
             <div className="mt-5 pt-4 border-t border-gray-100/60">
-              <div className="flex items-center justify-between text-[10px] mb-2 font-bold tracking-tight">
+              <div className="flex items-center justify-between text-[10px] mb-2 font-bold  ">
                 <span className="text-blue-500 uppercase  ">Connection window opens in</span>
                 <span className="text-gray-900 bg-blue-50 px-2 py-0.5 rounded border border-blue-100 font-mono">01:45:22</span>
               </div>

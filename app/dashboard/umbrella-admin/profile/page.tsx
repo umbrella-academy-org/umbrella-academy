@@ -36,7 +36,7 @@ export default function UmbrellaAdminProfilePage() {
                                 <div className="flex flex-col md:flex-row md:items-end -mt-16 gap-8">
                                     <div className="relative group">
                                         <div className="w-32 h-32 rounded-[2.5rem] bg-white p-1.5 shadow-2xl shadow-red-200/50 transform group-hover:scale-105 transition-all duration-500">
-                                            <div className="w-full h-full bg-gradient-to-br from-red-50 to-red-100 rounded-[2.2rem] flex items-center justify-center text-red-700 text-4xl font-extrabold border border-red-200 uppercase tracking-tighter">
+                                            <div className="w-full h-full bg-gradient-to-br from-red-50 to-red-100 rounded-[2.2rem] flex items-center justify-center text-red-700 text-4xl font-extrabold border border-red-200 uppercase  er">
                                                 {profileData.name.split(' ').map(n => n[0]).join('')}
                                             </div>
                                         </div>
@@ -48,7 +48,7 @@ export default function UmbrellaAdminProfilePage() {
                                     <div className="flex-1 flex flex-col md:flex-row md:items-center justify-between gap-6 pb-2">
                                         <div>
                                             <div className="flex items-center gap-3">
-                                                <h1 className="text-3xl font-black text-gray-900 tracking-tight">{profileData.name}</h1>
+                                                <h1 className="text-3xl font-black text-gray-900  ">{profileData.name}</h1>
                                                 <div className="px-2.5 py-1 bg-red-50 text-red-700 border border-red-100 rounded-full text-[10px] font-black uppercase tracking-wider">SYSTEM ROOT</div>
                                             </div>
                                             <p className="text-gray-500 font-semibold flex items-center gap-2 mt-1.5">
@@ -71,7 +71,7 @@ export default function UmbrellaAdminProfilePage() {
                                         <div className="p-8 bg-gray-900 rounded-[2rem] text-white relative overflow-hidden group">
                                             <div className="relative z-10">
                                                 <p className="text-xs font-bold text-gray-400 uppercase tracking-[0.2em] mb-4">Access Level</p>
-                                                <p className="text-2xl font-black mb-2 tracking-tight transition-transform group-hover:translate-x-1">Tier 1 Elite</p>
+                                                <p className="text-2xl font-black mb-2   transition-transform group-hover:translate-x-1">Tier 1 Elite</p>
                                                 <p className="text-xs text-red-400 font-bold uppercase   flex items-center gap-2">
                                                     <div className="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse" />
                                                     Full System Override
@@ -83,7 +83,7 @@ export default function UmbrellaAdminProfilePage() {
                                         <div className="p-8 bg-red-50 rounded-[2rem] border border-red-100 relative group overflow-hidden">
                                             <div className="relative z-10">
                                                 <p className="text-xs font-bold text-red-400 uppercase tracking-[0.2em] mb-4">Network Integrity</p>
-                                                <p className="text-2xl font-black text-red-900 mb-2 tracking-tight">Healthy</p>
+                                                <p className="text-2xl font-black text-red-900 mb-2  ">Healthy</p>
                                                 <p className="text-xs text-red-700/60 font-bold uppercase  ">All Wings Operational</p>
                                             </div>
                                             <Activity className="absolute bottom-4 right-4 w-12 h-12 text-red-200/50 transform group-hover:scale-110 transition-transform duration-500" />

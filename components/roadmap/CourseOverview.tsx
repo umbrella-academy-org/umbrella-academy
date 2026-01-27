@@ -26,7 +26,7 @@ export default function CourseOverview() {
                 ))}
               </div>
             </div>
-            <h3 className="text-2xl font-bold text-gray-900 tracking-tight mb-1">Programming & Development</h3>
+            <h3 className="text-2xl font-bold text-gray-900   mb-1">Programming & Development</h3>
             <p className="text-sm text-gray-500 font-medium flex items-center gap-2">
               <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
               Full Stack Engineering Track
@@ -38,7 +38,7 @@ export default function CourseOverview() {
         <div className="flex items-center gap-4 bg-gray-50 px-5 py-3 rounded-2xl border border-gray-100 group/mentor hover:bg-white hover:shadow-md transition-all duration-300">
           <div className="text-right">
             <p className="text-[10px] text-gray-400 uppercase font-bold   mb-0.5">Your Mentor</p>
-            <p className="text-sm font-bold text-gray-900 leading-none mb-1">Demi Wilkinson</p>
+            <p className="text-sm font-bold text-gray-900   mb-1">Demi Wilkinson</p>
             <p className="text-[11px] text-gray-500 font-medium">Principal Engineer</p>
           </div>
 

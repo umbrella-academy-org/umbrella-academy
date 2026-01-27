@@ -7,7 +7,7 @@ export default function SmartCalendarHeader() {
     <div className="mb-8 animate-fade-in">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 mb-8">
         <div>
-          <h1 className="text-3xl font-black text-gray-900 tracking-tight mb-1">
+          <h1 className="text-3xl font-black text-gray-900   mb-1">
             Smart Calendar
           </h1>
           <p className="text-sm font-medium text-gray-500">
@@ -36,7 +36,7 @@ export default function SmartCalendarHeader() {
           { label: 'Roadmap Depth', value: '94%' }
         ].map((stat, i) => (
           <div key={i} className="bg-white rounded-[14px] p-4 text-center shadow-sm border border-gray-100/50">
-            <div className="text-xl font-black text-gray-900 tracking-tight">{stat.value}</div>
+            <div className="text-xl font-black text-gray-900  ">{stat.value}</div>
             <div className="text-[10px] font-bold text-gray-400 uppercase   mt-1">{stat.label}</div>
           </div>
         ))}

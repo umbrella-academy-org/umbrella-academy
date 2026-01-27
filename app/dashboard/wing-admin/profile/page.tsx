@@ -38,7 +38,7 @@ export default function WingAdminProfilePage() {
                                 <div className="flex flex-col md:flex-row md:items-end -mt-16 gap-8">
                                     <div className="relative group">
                                         <div className="w-32 h-32 rounded-[2.5rem] bg-white p-1.5 shadow-2xl shadow-orange-200/50 transform group-hover:scale-105 transition-all duration-500">
-                                            <div className="w-full h-full bg-gradient-to-br from-orange-50 to-orange-100 rounded-[2.2rem] flex items-center justify-center text-orange-700 text-4xl font-extrabold border border-orange-200 uppercase tracking-tighter">
+                                            <div className="w-full h-full bg-gradient-to-br from-orange-50 to-orange-100 rounded-[2.2rem] flex items-center justify-center text-orange-700 text-4xl font-extrabold border border-orange-200 uppercase  er">
                                                 {profileData.name.split(' ').map(n => n[0]).join('')}
                                             </div>
                                         </div>
@@ -50,7 +50,7 @@ export default function WingAdminProfilePage() {
                                     <div className="flex-1 flex flex-col md:flex-row md:items-center justify-between gap-6 pb-2">
                                         <div>
                                             <div className="flex items-center gap-3">
-                                                <h1 className="text-3xl font-black text-gray-900 tracking-tight">{profileData.name}</h1>
+                                                <h1 className="text-3xl font-black text-gray-900  ">{profileData.name}</h1>
                                                 <div className="px-2.5 py-1 bg-orange-50 text-orange-700 border border-orange-100 rounded-full text-[10px] font-black uppercase tracking-wider">WING COMMANDER</div>
                                             </div>
                                             <p className="text-gray-500 font-semibold flex items-center gap-2 mt-1.5">
@@ -119,7 +119,7 @@ export default function WingAdminProfilePage() {
 
                                 <div className="p-8 bg-gray-900 rounded-[2.5rem] text-white shadow-2xl shadow-gray-900/40 relative overflow-hidden group">
                                     <div className="relative z-10">
-                                        <h4 className="text-xl font-black mb-2 tracking-tight">Wing Support</h4>
+                                        <h4 className="text-xl font-black mb-2  ">Wing Support</h4>
                                         <p className="text-gray-400 text-xs font-medium mb-6 leading-relaxed">Need help managing your wing? Contact system admin.</p>
                                         <button className="w-full py-4 bg-orange-600 hover:bg-orange-500 rounded-[1.2rem] font-black text-sm transition-all shadow-xl shadow-orange-600/20">
                                             Get Support

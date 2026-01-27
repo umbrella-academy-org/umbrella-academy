@@ -21,7 +21,7 @@ export default function MentorNotificationsPage() {
             {/* Section Header */}
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
               <div>
-                <h1 className="text-3xl font-black text-gray-900 tracking-tight leading-none mb-2">Mentor Hub</h1>
+                <h1 className="text-3xl font-black text-gray-900     mb-2">Mentor Hub</h1>
                 <p className="text-sm font-medium text-gray-500">Monitor your students' success and manage administrative requests.</p>
               </div>
               <div className="flex items-center gap-2">
@@ -38,43 +38,8 @@ export default function MentorNotificationsPage() {
             <MentorNotificationStats />
 
             {/* Main Feed Container */}
-            <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
-              {/* Activity Feed (Primary) */}
-              <div className="xl:col-span-2">
-                <MentorActivityFeed />
-              </div>
-
-              {/* Side Metadata (Real-time Suggestions) */}
-              <div className="space-y-6">
-                <div className="bg-gradient-to-tr from-gray-900 to-gray-800 rounded-3xl p-8 text-white relative overflow-hidden shadow-2xl">
-                  <div className="relative z-10">
-                    <h3 className="text-xl font-black tracking-tight mb-2">Mentor Insight</h3>
-                    <p className="text-sm text-gray-400 font-medium leading-relaxed mb-6 italic opacity-80">"Roadmap approvals are currently 40% faster this month. Students show high engagement with Feedback Loops."</p>
-                    <button className="w-full py-4 bg-yellow-600 text-white text-[10px] font-bold uppercase   rounded-2xl hover:bg-yellow-700 transition-all shadow-lg shadow-yellow-600/20">
-                      Download Report
-                    </button>
-                  </div>
-                  {/* Background design */}
-                  <div className="absolute top-0 right-0 w-48 h-48 bg-yellow-600 rounded-full -mr-24 -mt-24 opacity-10 blur-3xl"></div>
-                  <div className="absolute bottom-0 left-0 w-32 h-32 bg-blue-600 rounded-full -ml-16 -mb-16 opacity-10 blur-3xl"></div>
-                </div>
-
-                <div className="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm">
-                  <h3 className="text-[10px] font-black text-gray-400 uppercase   mb-4">Support Directives</h3>
-                  <div className="space-y-4">
-                    {[
-                      'Prioritize Jane\'s Roadmap (Urgent)',
-                      'Complete Session Review for Eric',
-                      'Reply to Mentoring Sync Request'
-                    ].map((task, i) => (
-                      <div key={i} className="flex items-center gap-3 group cursor-pointer">
-                        <div className="w-1.5 h-1.5 rounded-full bg-yellow-400 group-hover:scale-150 transition-transform"></div>
-                        <span className="text-xs font-bold text-gray-700 group-hover:text-yellow-600 transition-colors">{task}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
+            <div className="grid grid-cols-1 gap-8">
+              <MentorActivityFeed />
             </div>
           </div>
         </main>

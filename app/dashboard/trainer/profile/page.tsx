@@ -48,7 +48,7 @@ export default function TrainerProfilePage() {
                                 <div className="flex flex-col md:flex-row md:items-end -mt-16 gap-8">
                                     <div className="relative group">
                                         <div className="w-32 h-32 rounded-[2.5rem] bg-white p-1.5 shadow-2xl shadow-green-200/50 transform group-hover:scale-105 transition-all duration-500">
-                                            <div className="w-full h-full bg-gradient-to-br from-green-50 to-green-100 rounded-[2.2rem] flex items-center justify-center text-green-700 text-4xl font-extrabold border border-green-200 uppercase tracking-tighter">
+                                            <div className="w-full h-full bg-gradient-to-br from-green-50 to-green-100 rounded-[2.2rem] flex items-center justify-center text-green-700 text-4xl font-extrabold border border-green-200 uppercase  er">
                                                 {profileData.name.split(' ').map(n => n[0]).join('')}
                                             </div>
                                         </div>
@@ -60,7 +60,7 @@ export default function TrainerProfilePage() {
                                     <div className="flex-1 flex flex-col md:flex-row md:items-center justify-between gap-6 pb-2">
                                         <div>
                                             <div className="flex items-center gap-3">
-                                                <h1 className="text-3xl font-black text-gray-900 tracking-tight">{profileData.name}</h1>
+                                                <h1 className="text-3xl font-black text-gray-900  ">{profileData.name}</h1>
                                                 <div className="px-2.5 py-1 bg-green-50 text-green-700 border border-green-100 rounded-full text-[10px] font-black uppercase tracking-wider">CERTIFIED TRAINER</div>
                                             </div>
                                             <p className="text-gray-500 font-semibold flex items-center gap-2 mt-1.5">

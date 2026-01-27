@@ -71,7 +71,7 @@ export default function ProfilePage() {
             <div className="w-8 h-8 rounded-full bg-white border border-gray-100 flex items-center justify-center group-hover:bg-gray-50 transition-colors shadow-sm">
               <ChevronLeft className="w-4 h-4" />
             </div>
-            <span className="text-sm font-semibold tracking-tight">Go back</span>
+            <span className="text-sm font-semibold  ">Go back</span>
           </button>
 
           <div className="flex flex-col flex-1">
@@ -85,7 +85,7 @@ export default function ProfilePage() {
             </div>
 
             {/* Title */}
-            <h1 className="text-4xl font-black text-gray-900 mb-3 tracking-tight">
+            <h1 className="text-4xl font-black text-gray-900 mb-3  ">
               Tell Us About You
             </h1>
             <p className="text-gray-500 mb-10 font-medium leading-relaxed max-w-sm">
@@ -257,7 +257,7 @@ export default function ProfilePage() {
               <div className="w-12 h-12 bg-yellow-500 rounded-2xl flex items-center justify-center shadow-lg shadow-yellow-500/30">
                 <CheckCircle2 className="w-7 h-7 text-white" />
               </div>
-              <h3 className="text-2xl font-black text-white tracking-tight">Student Access</h3>
+              <h3 className="text-2xl font-black text-white  ">Student Access</h3>
             </div>
             <p className="text-gray-300 font-medium text-lg leading-relaxed">Join thousands of African developers building the future of the continent through high-end technical training.</p>
             <div className="flex items-center gap-8 mt-10">

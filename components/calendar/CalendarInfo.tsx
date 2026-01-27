@@ -10,7 +10,7 @@ export default function CalendarInfo() {
 
       <div className="relative z-10">
         <div className="flex items-center justify-between mb-6">
-          <h3 className="text-lg font-bold text-gray-900 tracking-tight">Learning Status</h3>
+          <h3 className="text-lg font-bold text-gray-900  ">Learning Status</h3>
           <span className="px-2.5 py-1 bg-green-100 text-green-700 text-[10px] font-bold uppercase rounded-md tracking-wider">
             On Track
           </span>
@@ -51,7 +51,7 @@ export default function CalendarInfo() {
               <span className="text-xs font-bold text-yellow-700">DW</span>
             </div>
             <div>
-              <p className="text-[10px] text-gray-400 font-bold uppercase   leading-none mb-1">Mentor</p>
+              <p className="text-[10px] text-gray-400 font-bold uppercase     mb-1">Mentor</p>
               <p className="text-sm font-bold text-gray-900">Demi Wilkinson</p>
             </div>
           </div>

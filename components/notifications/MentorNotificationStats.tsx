@@ -46,7 +46,7 @@ export default function MentorNotificationStats() {
                             {stat.icon}
                         </div>
                         <div>
-                            <div className="text-2xl font-black text-gray-900 tracking-tight leading-none mb-1 text-center">{stat.value}</div>
+                            <div className="text-2xl font-black text-gray-900     mb-1 text-center">{stat.value}</div>
                             <div className="text-sm font-semibold text-gray-600 ">{stat.label}</div>
                         </div>
                     </div>

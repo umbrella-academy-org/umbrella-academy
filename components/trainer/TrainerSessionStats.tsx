@@ -49,7 +49,7 @@ export default function TrainerSessionStats() {
   return (
     <div className="animate-fade-in">
       <div className="flex items-center justify-between mb-6 px-1">
-        <h2 className="text-lg font-bold text-gray-900 tracking-tight">Session Performance</h2>
+        <h2 className="text-lg font-bold text-gray-900  ">Session Performance</h2>
         <div className="flex items-center gap-2">
           <select className="text-[10px] font-bold uppercase   bg-white border border-gray-100 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-600 shadow-sm">
             <option>Current Week</option>
@@ -71,7 +71,7 @@ export default function TrainerSessionStats() {
                 {stat.icon}
               </div>
               <div className="text-right">
-                <div className="text-2xl font-black text-gray-900 tracking-tight">{stat.value}</div>
+                <div className="text-2xl font-black text-gray-900  ">{stat.value}</div>
               </div>
             </div>
 
