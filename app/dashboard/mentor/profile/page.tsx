@@ -118,7 +118,7 @@ export default function MentorProfilePage() {
                                             <label className="text-xs font-bold text-gray-400 uppercase tracking-[0.2em] ml-1">Role Status</label>
                                             <div className="px-5 py-3.5 bg-green-50/50 border border-green-100 rounded-[1.2rem] flex items-center gap-2">
                                                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                                                <p className="text-green-700 font-black text-xs uppercase tracking-widest">Active Member</p>
+                                                <p className="text-green-700 font-black text-xs uppercase  ">Active Member</p>
                                             </div>
                                         </div>
                                         <div className="space-y-2">
@@ -154,7 +154,7 @@ export default function MentorProfilePage() {
                                                 </div>
                                                 <div>
                                                     <p className="text-lg font-black text-gray-900">Supervised Trainers</p>
-                                                    <p className="text-xs text-blue-800/60 font-bold uppercase tracking-widest">Profile Approval Access</p>
+                                                    <p className="text-xs text-blue-800/60 font-bold uppercase  ">Profile Approval Access</p>
                                                 </div>
                                             </div>
                                             <span className="text-3xl font-black text-blue-600">24</span>
@@ -167,7 +167,7 @@ export default function MentorProfilePage() {
                                                 </div>
                                                 <div>
                                                     <p className="text-lg font-black text-gray-900">Active Roadmaps</p>
-                                                    <p className="text-xs text-purple-800/60 font-bold uppercase tracking-widest">Quality Assurance Flow</p>
+                                                    <p className="text-xs text-purple-800/60 font-bold uppercase  ">Quality Assurance Flow</p>
                                                 </div>
                                             </div>
                                             <span className="text-3xl font-black text-purple-600">182</span>

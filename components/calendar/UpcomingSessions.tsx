@@ -45,10 +45,10 @@ export default function UpcomingSessions() {
 
             <div className="flex-1 -mt-1">
               <div className="flex items-center justify-between mb-1">
-                <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{session.time}</span>
+                <span className="text-[10px] font-bold text-gray-400 uppercase  ">{session.time}</span>
                 <span className={`text-[9px] font-black uppercase tracking-tighter px-1.5 py-0.5 rounded ${session.status === 'active' ? 'bg-blue-50 text-blue-600' :
-                    session.status === 'urgent' ? 'bg-green-50 text-green-600' :
-                      'bg-yellow-50 text-yellow-600'
+                  session.status === 'urgent' ? 'bg-green-50 text-green-600' :
+                    'bg-yellow-50 text-yellow-600'
                   }`}>
                   {session.type}
                 </span>

@@ -37,7 +37,7 @@ export default function CourseOverview() {
         {/* Mentor Section */}
         <div className="flex items-center gap-4 bg-gray-50 px-5 py-3 rounded-2xl border border-gray-100 group/mentor hover:bg-white hover:shadow-md transition-all duration-300">
           <div className="text-right">
-            <p className="text-[10px] text-gray-400 uppercase font-bold tracking-widest mb-0.5">Your Mentor</p>
+            <p className="text-[10px] text-gray-400 uppercase font-bold   mb-0.5">Your Mentor</p>
             <p className="text-sm font-bold text-gray-900 leading-none mb-1">Demi Wilkinson</p>
             <p className="text-[11px] text-gray-500 font-medium">Principal Engineer</p>
           </div>

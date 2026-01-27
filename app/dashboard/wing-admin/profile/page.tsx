@@ -75,16 +75,16 @@ export default function WingAdminProfilePage() {
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                         <div className="space-y-4">
                                             <div className="p-6 bg-gray-50 rounded-[1.5rem] border border-transparent hover:border-orange-100 transition-all">
-                                                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1 block">Primary Email</label>
+                                                <label className="text-[10px] font-black text-gray-400 uppercase   mb-1 block">Primary Email</label>
                                                 <p className="text-gray-900 font-bold">{profileData.email}</p>
                                             </div>
                                             <div className="p-6 bg-gray-50 rounded-[1.5rem] border border-transparent hover:border-orange-100 transition-all">
-                                                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1 block">Joining Date</label>
+                                                <label className="text-[10px] font-black text-gray-400 uppercase   mb-1 block">Joining Date</label>
                                                 <p className="text-gray-900 font-bold">{profileData.joinDate}</p>
                                             </div>
                                         </div>
                                         <div className="p-6 bg-orange-50/50 rounded-[2rem] border border-orange-100">
-                                            <label className="text-[10px] font-black text-orange-800/60 uppercase tracking-widest mb-4 block">Wing Mission</label>
+                                            <label className="text-[10px] font-black text-orange-800/60 uppercase   mb-4 block">Wing Mission</label>
                                             <p className="text-gray-700 font-medium leading-relaxed italic">"{profileData.bio}"</p>
                                         </div>
                                     </div>
@@ -96,12 +96,12 @@ export default function WingAdminProfilePage() {
                                         <div className="p-8 bg-gray-900 rounded-[2rem] text-white relative overflow-hidden group">
                                             <Users className="w-8 h-8 text-orange-500 mb-4 transform group-hover:scale-110 transition-transform" />
                                             <p className="text-3xl font-black mb-1">50+</p>
-                                            <p className="text-xs text-gray-400 font-bold uppercase tracking-widest">Active Trainers</p>
+                                            <p className="text-xs text-gray-400 font-bold uppercase  ">Active Trainers</p>
                                         </div>
                                         <div className="p-8 bg-orange-600 rounded-[2rem] text-white relative overflow-hidden group">
                                             <BookOpen className="w-8 h-8 text-white mb-4 transform group-hover:scale-110 transition-transform" />
                                             <p className="text-3xl font-black mb-1">500+</p>
-                                            <p className="text-xs text-orange-100 font-bold uppercase tracking-widest">Enrolled Students</p>
+                                            <p className="text-xs text-orange-100 font-bold uppercase  ">Enrolled Students</p>
                                         </div>
                                     </div>
                                 </div>

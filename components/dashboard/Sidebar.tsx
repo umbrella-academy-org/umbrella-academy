@@ -370,7 +370,7 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
             </div>
             <div className="min-w-0">
               <div className="font-bold text-lg text-white leading-tight tracking-tight truncate">eLearning</div>
-              <div className="text-xs font-medium text-gray-400 mt-0.5 uppercase tracking-widest">{userInfo.displayName}</div>
+              <div className="text-xs font-medium text-gray-400 mt-0.5 uppercase  ">{userInfo.displayName}</div>
             </div>
           </div>
         </div>

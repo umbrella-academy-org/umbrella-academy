@@ -213,7 +213,7 @@ export default function StudentProfilePage() {
                                                 <BookOpen className="w-7 h-7" />
                                             </div>
                                             <div>
-                                                <p className="text-xs font-bold text-yellow-800/60 uppercase tracking-widest mb-1">Enrolled Wing</p>
+                                                <p className="text-xs font-bold text-yellow-800/60 uppercase   mb-1">Enrolled Wing</p>
                                                 <p className="text-lg font-black text-gray-900">{profileData.wing}</p>
                                             </div>
                                         </div>
@@ -223,7 +223,7 @@ export default function StudentProfilePage() {
                                                 <Calendar className="w-7 h-7" />
                                             </div>
                                             <div>
-                                                <p className="text-xs font-bold text-blue-800/60 uppercase tracking-widest mb-1">Joining Date</p>
+                                                <p className="text-xs font-bold text-blue-800/60 uppercase   mb-1">Joining Date</p>
                                                 <p className="text-lg font-black text-gray-900">{profileData.joinDate}</p>
                                             </div>
                                         </div>

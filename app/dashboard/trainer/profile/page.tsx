@@ -226,7 +226,7 @@ export default function TrainerProfilePage() {
                                                     <Zap className="w-7 h-7" />
                                                 </div>
                                                 <div>
-                                                    <p className="text-xs font-bold text-green-800/60 uppercase tracking-widest mb-1">Experience</p>
+                                                    <p className="text-xs font-bold text-green-800/60 uppercase   mb-1">Experience</p>
                                                     <p className="text-lg font-black text-gray-900">{profileData.experience}</p>
                                                 </div>
                                             </div>
@@ -235,7 +235,7 @@ export default function TrainerProfilePage() {
                                                     <Calendar className="w-7 h-7" />
                                                 </div>
                                                 <div>
-                                                    <p className="text-xs font-bold text-blue-800/60 uppercase tracking-widest mb-1">Active Since</p>
+                                                    <p className="text-xs font-bold text-blue-800/60 uppercase   mb-1">Active Since</p>
                                                     <p className="text-lg font-black text-gray-900">{profileData.joinDate}</p>
                                                 </div>
                                             </div>

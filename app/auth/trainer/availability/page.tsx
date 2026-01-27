@@ -45,7 +45,7 @@ export default function MentorAvailabilityPage() {
                         <svg className="w-5 h-5 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M15 19l-7-7 7-7" />
                         </svg>
-                        <span className="text-xs font-black uppercase tracking-widest">Go back</span>
+                        <span className="text-xs font-black uppercase  ">Go back</span>
                     </button>
 
                     <div className="flex flex-col items-center justify-center flex-1">
@@ -79,8 +79,8 @@ export default function MentorAvailabilityPage() {
                                             type="button"
                                             onClick={() => setHoursPerDay(h)}
                                             className={`py-3 rounded-lg text-sm font-medium transition-all border ${hoursPerDay === h
-                                                    ? 'border-yellow-600 bg-yellow-50 text-yellow-600'
-                                                    : 'border-gray-300 bg-white text-gray-600 hover:border-gray-400'
+                                                ? 'border-yellow-600 bg-yellow-50 text-yellow-600'
+                                                : 'border-gray-300 bg-white text-gray-600 hover:border-gray-400'
                                                 }`}
                                         >
                                             {h}
@@ -101,8 +101,8 @@ export default function MentorAvailabilityPage() {
                                             type="button"
                                             onClick={() => toggleSlot(slot.id)}
                                             className={`w-full flex items-center gap-4 p-4 border rounded-lg transition-all ${timeSlots.includes(slot.id)
-                                                    ? 'border-yellow-600 bg-yellow-50'
-                                                    : 'border-gray-300 bg-white hover:border-gray-400'
+                                                ? 'border-yellow-600 bg-yellow-50'
+                                                : 'border-gray-300 bg-white hover:border-gray-400'
                                                 }`}
                                         >
                                             <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-colors ${timeSlots.includes(slot.id) ? 'bg-yellow-600 text-white' : 'bg-gray-100 text-gray-400'

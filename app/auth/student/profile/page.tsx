@@ -97,7 +97,7 @@ export default function ProfilePage() {
               {/* First Name and Last Name */}
               <div className="grid grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label htmlFor="firstName" className="block text-xs font-black text-gray-400 uppercase tracking-widest ml-1">
+                  <label htmlFor="firstName" className="block text-xs font-black text-gray-400 uppercase   ml-1">
                     First Name
                   </label>
                   <div className="relative group">
@@ -113,7 +113,7 @@ export default function ProfilePage() {
                   {errors.firstName && <p className="mt-1 text-[11px] font-bold text-red-500 ml-1">{errors.firstName}</p>}
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="lastName" className="block text-xs font-black text-gray-400 uppercase tracking-widest ml-1">
+                  <label htmlFor="lastName" className="block text-xs font-black text-gray-400 uppercase   ml-1">
                     Last Name
                   </label>
                   <input
@@ -131,7 +131,7 @@ export default function ProfilePage() {
               {/* Gender and Date of Birth */}
               <div className="grid grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label htmlFor="gender" className="block text-xs font-black text-gray-400 uppercase tracking-widest ml-1">
+                  <label htmlFor="gender" className="block text-xs font-black text-gray-400 uppercase   ml-1">
                     Gender
                   </label>
                   <select
@@ -147,7 +147,7 @@ export default function ProfilePage() {
                   </select>
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="dateOfBirth" className="block text-xs font-black text-gray-400 uppercase tracking-widest ml-1">
+                  <label htmlFor="dateOfBirth" className="block text-xs font-black text-gray-400 uppercase   ml-1">
                     Date Of Birth
                   </label>
                   <input
@@ -162,7 +162,7 @@ export default function ProfilePage() {
 
               {/* Country */}
               <div className="space-y-2">
-                <label htmlFor="country" className="block text-xs font-black text-gray-400 uppercase tracking-widest ml-1">
+                <label htmlFor="country" className="block text-xs font-black text-gray-400 uppercase   ml-1">
                   Residing Country
                 </label>
                 <select
@@ -181,7 +181,7 @@ export default function ProfilePage() {
 
               {/* Phone Number */}
               <div className="space-y-2">
-                <label htmlFor="phoneNumber" className="block text-xs font-black text-gray-400 uppercase tracking-widest ml-1">
+                <label htmlFor="phoneNumber" className="block text-xs font-black text-gray-400 uppercase   ml-1">
                   Contact Number
                 </label>
                 <div className="flex gap-4">
@@ -263,11 +263,11 @@ export default function ProfilePage() {
             <div className="flex items-center gap-8 mt-10">
               <div>
                 <div className="text-2xl font-black text-white">12k+</div>
-                <div className="text-xs font-bold text-gray-400 uppercase tracking-widest mt-1">Students</div>
+                <div className="text-xs font-bold text-gray-400 uppercase   mt-1">Students</div>
               </div>
               <div>
                 <div className="text-2xl font-black text-white">98%</div>
-                <div className="text-xs font-bold text-gray-400 uppercase tracking-widest mt-1">Completion</div>
+                <div className="text-xs font-bold text-gray-400 uppercase   mt-1">Completion</div>
               </div>
             </div>
           </div>

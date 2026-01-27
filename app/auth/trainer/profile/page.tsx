@@ -64,7 +64,7 @@ export default function TrainerProfilePage() {
             {/* Form */}
             <form onSubmit={handleContinue} className="w-full space-y-6">
               <div className="space-y-3">
-                <label className="block text-xs font-black text-gray-400 uppercase tracking-widest ml-1"> Your Professional Bio</label>
+                <label className="block text-xs font-black text-gray-400 uppercase   ml-1"> Your Professional Bio</label>
                 <div className="relative group">
                   <div className="absolute top-4 left-5 text-gray-300 group-focus-within:text-yellow-500 transition-colors">
                     <Quote className="w-5 h-5" />
@@ -84,7 +84,7 @@ export default function TrainerProfilePage() {
                   {error ? (
                     <p className="text-[11px] font-bold text-red-500">{error}</p>
                   ) : (
-                    <p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">MINIMUM 50 CHARACTERS</p>
+                    <p className="text-[11px] font-bold text-gray-400 uppercase  ">MINIMUM 50 CHARACTERS</p>
                   )}
                   <p className={`text-xs font-black ${bio.length < 50 ? 'text-gray-300' : 'text-green-500'}`}>
                     {bio.length} characters
@@ -149,11 +149,11 @@ export default function TrainerProfilePage() {
             <div className="flex items-center gap-8 mt-10">
               <div className="flex items-center gap-2 bg-white/5 px-4 py-2 rounded-xl border border-white/10">
                 <BookOpen className="w-4 h-4 text-yellow-500" />
-                <span className="text-xs font-black text-white uppercase tracking-widest">Impactful Curriculum</span>
+                <span className="text-xs font-black text-white uppercase  ">Impactful Curriculum</span>
               </div>
               <div className="flex items-center gap-2 bg-white/5 px-4 py-2 rounded-xl border border-white/10">
                 <CheckCircle2 className="w-4 h-4 text-green-500" />
-                <span className="text-xs font-black text-white uppercase tracking-widest">Global Standards</span>
+                <span className="text-xs font-black text-white uppercase  ">Global Standards</span>
               </div>
             </div>
           </div>

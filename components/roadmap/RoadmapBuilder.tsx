@@ -225,18 +225,18 @@ export default function RoadmapBuilder({ onSave }: RoadmapBuilderProps) {
           <div className="bg-gray-50 rounded-xl p-4 mb-6 border border-gray-100 flex items-center justify-between">
             <div className="flex items-center gap-6">
               <div className="text-center">
-                <p className="text-[10px] text-gray-400 uppercase font-bold tracking-widest mb-1">Total Time</p>
+                <p className="text-[10px] text-gray-400 uppercase font-bold   mb-1">Total Time</p>
                 <p className="text-lg font-bold text-gray-900">{totalWeeks} Weeks</p>
               </div>
               <div className="h-8 w-px bg-gray-200"></div>
               <div className="text-center">
-                <p className="text-[10px] text-gray-400 uppercase font-bold tracking-widest mb-1">Phases</p>
+                <p className="text-[10px] text-gray-400 uppercase font-bold   mb-1">Phases</p>
                 <p className="text-lg font-bold text-gray-900">{phases.length}</p>
               </div>
             </div>
 
             <div className="text-right">
-              <p className="text-[10px] text-gray-400 uppercase font-bold tracking-widest mb-1">Est. Lessons</p>
+              <p className="text-[10px] text-gray-400 uppercase font-bold   mb-1">Est. Lessons</p>
               <p className="text-lg font-bold text-gray-900">{phases.length * 3}</p>
             </div>
           </div>

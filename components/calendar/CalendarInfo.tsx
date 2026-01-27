@@ -19,7 +19,7 @@ export default function CalendarInfo() {
         <div className="space-y-6">
           {/* Active Goal */}
           <div>
-            <p className="text-[10px] text-gray-400 uppercase font-bold tracking-widest mb-1.5">Current Track</p>
+            <p className="text-[10px] text-gray-400 uppercase font-bold   mb-1.5">Current Track</p>
             <h4 className="text-base font-bold text-gray-900 mb-2">Programming & Development</h4>
             <div className="flex items-center justify-between text-xs mb-1.5">
               <span className="text-gray-500 font-medium">Goal Progress</span>
@@ -36,11 +36,11 @@ export default function CalendarInfo() {
           {/* Quick Stats Grid */}
           <div className="grid grid-cols-2 gap-4">
             <div className="bg-gray-50 p-3 rounded-xl border border-gray-100">
-              <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-1">Sessions</p>
+              <p className="text-[10px] text-gray-400 font-bold uppercase   mb-1">Sessions</p>
               <p className="text-lg font-bold text-gray-900">12/18</p>
             </div>
             <div className="bg-gray-50 p-3 rounded-xl border border-gray-100">
-              <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-1">Avg. Grade</p>
+              <p className="text-[10px] text-gray-400 font-bold uppercase   mb-1">Avg. Grade</p>
               <p className="text-lg font-bold text-gray-900">8.5</p>
             </div>
           </div>
@@ -51,7 +51,7 @@ export default function CalendarInfo() {
               <span className="text-xs font-bold text-yellow-700">DW</span>
             </div>
             <div>
-              <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest leading-none mb-1">Mentor</p>
+              <p className="text-[10px] text-gray-400 font-bold uppercase   leading-none mb-1">Mentor</p>
               <p className="text-sm font-bold text-gray-900">Demi Wilkinson</p>
             </div>
           </div>

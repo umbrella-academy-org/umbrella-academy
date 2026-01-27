@@ -196,7 +196,7 @@ export default function LiveSessions({ userType }: LiveSessionsProps) {
     <div className="space-y-4">
       <div className="flex items-center justify-between px-1">
         <h3 className="text-lg font-bold text-gray-900 tracking-tight">{getTitle()}</h3>
-        <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest bg-gray-50 px-2 py-1 rounded-md border border-gray-100">
+        <span className="text-[10px] font-bold text-gray-400 uppercase   bg-gray-50 px-2 py-1 rounded-md border border-gray-100">
           2 Active Today
         </span>
       </div>
@@ -222,7 +222,7 @@ export default function LiveSessions({ userType }: LiveSessionsProps) {
             <div className="flex-1 min-w-0">
               <div className="flex items-center justify-between gap-4 mb-2">
                 <div className="flex items-center gap-2">
-                  <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                  <span className="text-[10px] font-bold text-gray-400 uppercase  ">
                     Track Phase {index + 1}
                   </span>
                   {getStatusBadge(session.status)}
@@ -247,7 +247,7 @@ export default function LiveSessions({ userType }: LiveSessionsProps) {
               {/* Action Bar */}
               <div className="flex items-center justify-between pt-1">
                 <div className="flex items-center gap-3">
-                  <button className="text-xs font-bold text-gray-400 hover:text-gray-900 uppercase tracking-widest transition-colors duration-300">
+                  <button className="text-xs font-bold text-gray-400 hover:text-gray-900 uppercase   transition-colors duration-300">
                     {session.actions.secondary}
                   </button>
                 </div>
@@ -266,7 +266,7 @@ export default function LiveSessions({ userType }: LiveSessionsProps) {
           {session.status === 'info' && (
             <div className="mt-5 pt-4 border-t border-gray-100/60">
               <div className="flex items-center justify-between text-[10px] mb-2 font-bold tracking-tight">
-                <span className="text-blue-500 uppercase tracking-widest">Connection window opens in</span>
+                <span className="text-blue-500 uppercase  ">Connection window opens in</span>
                 <span className="text-gray-900 bg-blue-50 px-2 py-0.5 rounded border border-blue-100 font-mono">01:45:22</span>
               </div>
               <div className="w-full bg-gray-50 rounded-full h-1 overflow-hidden border border-gray-100">

@@ -72,7 +72,7 @@ export default function UmbrellaAdminProfilePage() {
                                             <div className="relative z-10">
                                                 <p className="text-xs font-bold text-gray-400 uppercase tracking-[0.2em] mb-4">Access Level</p>
                                                 <p className="text-2xl font-black mb-2 tracking-tight transition-transform group-hover:translate-x-1">Tier 1 Elite</p>
-                                                <p className="text-xs text-red-400 font-bold uppercase tracking-widest flex items-center gap-2">
+                                                <p className="text-xs text-red-400 font-bold uppercase   flex items-center gap-2">
                                                     <div className="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse" />
                                                     Full System Override
                                                 </p>
@@ -84,7 +84,7 @@ export default function UmbrellaAdminProfilePage() {
                                             <div className="relative z-10">
                                                 <p className="text-xs font-bold text-red-400 uppercase tracking-[0.2em] mb-4">Network Integrity</p>
                                                 <p className="text-2xl font-black text-red-900 mb-2 tracking-tight">Healthy</p>
-                                                <p className="text-xs text-red-700/60 font-bold uppercase tracking-widest">All Wings Operational</p>
+                                                <p className="text-xs text-red-700/60 font-bold uppercase  ">All Wings Operational</p>
                                             </div>
                                             <Activity className="absolute bottom-4 right-4 w-12 h-12 text-red-200/50 transform group-hover:scale-110 transition-transform duration-500" />
                                         </div>
@@ -95,11 +95,11 @@ export default function UmbrellaAdminProfilePage() {
                                     <h3 className="text-xl font-bold text-gray-900 mb-8">Master Records</h3>
                                     <div className="grid grid-cols-2 gap-6">
                                         <div className="p-6 bg-gray-50 rounded-[1.5rem] border border-transparent hover:border-red-100 transition-all">
-                                            <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1 block">Primary Email</label>
+                                            <label className="text-[10px] font-black text-gray-400 uppercase   mb-1 block">Primary Email</label>
                                             <p className="text-gray-900 font-bold break-all">{profileData.email}</p>
                                         </div>
                                         <div className="p-6 bg-gray-50 rounded-[1.5rem] border border-transparent hover:border-red-100 transition-all">
-                                            <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1 block">Creation Date</label>
+                                            <label className="text-[10px] font-black text-gray-400 uppercase   mb-1 block">Creation Date</label>
                                             <p className="text-gray-900 font-bold">{profileData.joinDate}</p>
                                         </div>
                                     </div>

@@ -101,7 +101,7 @@ export default function MentorActivityFeed() {
             <div className="flex items-center justify-between mb-8">
                 <div>
                     <h2 className="text-xl font-bold text-gray-900 tracking-tight leading-none">Mentor Activities</h2>
-                    <p className="text-xs text-gray-500 mt-1 font-medium italic">Track your students' progress and requests</p>
+                    <p className="text-xs text-gray-500 mt-1 font-medium">Track your students' progress and requests</p>
                 </div>
                 <button className="p-2 hover:bg-gray-50 rounded-xl transition-colors">
                     <MoreHorizontal className="w-5 h-5 text-gray-400" />
@@ -114,8 +114,8 @@ export default function MentorActivityFeed() {
                         key={activity.id}
                         onClick={() => setSelectedActivity(activity.id)}
                         className={`flex items-start gap-4 p-4 rounded-2xl transition-all duration-300 border group cursor-pointer ${selectedActivity === activity.id
-                                ? 'bg-yellow-50/50 border-yellow-200 shadow-sm shadow-yellow-600/5'
-                                : 'bg-white border-transparent hover:border-gray-100 hover:bg-gray-50/30'
+                            ? 'bg-yellow-50/50 border-yellow-200 shadow-sm shadow-yellow-600/5'
+                            : 'bg-white border-transparent hover:border-gray-100 hover:bg-gray-50/30'
                             }`}
                     >
                         {/* Student Avatar */}
@@ -133,7 +133,7 @@ export default function MentorActivityFeed() {
                         {/* Content Area */}
                         <div className="flex-1 min-w-0">
                             <div className="flex items-center justify-between gap-2 mb-1">
-                                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none">
+                                <p className="text-[10px] font-bold text-gray-400 uppercase   leading-none">
                                     {activity.type} • {activity.time}
                                 </p>
                                 {getStatusBadge(activity.status)}
@@ -149,21 +149,21 @@ export default function MentorActivityFeed() {
                             {selectedActivity === activity.id && (
                                 <div className="flex items-center gap-2 mt-4 animate-fade-in">
                                     {activity.type === 'roadmap' && (
-                                        <button className="px-4 py-2 bg-yellow-600 text-white text-[10px] font-bold uppercase tracking-widest rounded-lg hover:bg-yellow-700 shadow-lg shadow-yellow-600/20 transition-all active:scale-95">
+                                        <button className="px-4 py-2 bg-yellow-600 text-white text-[10px] font-bold uppercase   rounded-lg hover:bg-yellow-700 shadow-lg shadow-yellow-600/20 transition-all active:scale-95">
                                             Approve Roadmap
                                         </button>
                                     )}
                                     {activity.type === 'session' && (
-                                        <button className="px-4 py-2 bg-blue-600 text-white text-[10px] font-bold uppercase tracking-widest rounded-lg hover:bg-blue-700 shadow-lg shadow-blue-600/20 transition-all active:scale-95">
+                                        <button className="px-4 py-2 bg-blue-600 text-white text-[10px] font-bold uppercase   rounded-lg hover:bg-blue-700 shadow-lg shadow-blue-600/20 transition-all active:scale-95">
                                             Review Submission
                                         </button>
                                     )}
                                     {activity.type === 'sync' && (
-                                        <button className="px-4 py-2 bg-gray-900 text-white text-[10px] font-bold uppercase tracking-widest rounded-lg hover:bg-gray-800 shadow-lg shadow-gray-200 transition-all active:scale-95">
+                                        <button className="px-4 py-2 bg-gray-900 text-white text-[10px] font-bold uppercase   rounded-lg hover:bg-gray-800 shadow-lg shadow-gray-200 transition-all active:scale-95">
                                             Schedule Meeting
                                         </button>
                                     )}
-                                    <button className="px-4 py-2 bg-white border border-gray-100 text-gray-500 text-[10px] font-bold uppercase tracking-widest rounded-lg hover:bg-gray-50 transition-all active:scale-95">
+                                    <button className="px-4 py-2 bg-white border border-gray-100 text-gray-500 text-[10px] font-bold uppercase   rounded-lg hover:bg-gray-50 transition-all active:scale-95">
                                         View Details
                                     </button>
                                 </div>
