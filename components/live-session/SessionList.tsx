@@ -140,7 +140,7 @@ export default function SessionList({ activeTab }: SessionListProps) {
                             <div className="flex items-center gap-4 w-full md:w-auto mt-4 md:mt-0">
                                 {session.status === 'live' ? (
                                     <button
-                                        onClick={() => router.push('/dashboard/student/live-session/call')}
+                                        onClick={() => router.push('/post-signup/live-session/call')}
                                         className="flex-1 md:flex-none px-8 py-3 bg-red-600 text-white text-sm rounded-lg hover:bg-red-700 shadow-md transition-all active:scale-95 animate-pulse"
                                     >
                                         Join Meeting

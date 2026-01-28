@@ -196,7 +196,7 @@ export default function LiveSessions({ userType }: LiveSessionsProps) {
     <div className="space-y-4">
       <div className="flex items-center justify-between px-1">
         <h3 className="text-lg font-bold text-gray-900  ">{getTitle()}</h3>
-        <span className="text-[10px] font-bold text-gray-400 uppercase   bg-gray-50 px-2 py-1 rounded-md border border-gray-100">
+        <span className="text-[10px] font-bold text-gray-400    bg-gray-50 px-2 py-1 rounded-md border border-gray-100">
           2 Active Today
         </span>
       </div>
@@ -204,7 +204,7 @@ export default function LiveSessions({ userType }: LiveSessionsProps) {
       {sessions.map((session, index) => (
         <div
           key={session.id}
-          className="bg-white rounded-2xl p-5 shadow-[0_8px_30px_rgb(0,0,0,0.02)] border border-gray-100 group hover:border-yellow-200 transition-all duration-500 relative overflow-hidden"
+          className="bg-white rounded-lg p-5 shadow-[0_8px_30px_rgb(0,0,0,0.02)] border border-gray-100 group hover:border-yellow-200 transition-all duration-500 relative overflow-hidden"
           style={{ animationDelay: `${index * 150}ms` }}
           onMouseEnter={() => setHoveredSession(session.id)}
           onMouseLeave={() => setHoveredSession(null)}
@@ -222,7 +222,7 @@ export default function LiveSessions({ userType }: LiveSessionsProps) {
             <div className="flex-1 min-w-0">
               <div className="flex items-center justify-between gap-4 mb-2">
                 <div className="flex items-center gap-2">
-                  <span className="text-[10px] font-bold text-gray-400 uppercase  ">
+                  <span className="text-[10px] font-bold text-gray-400   ">
                     Track Phase {index + 1}
                   </span>
                   {getStatusBadge(session.status)}
@@ -231,7 +231,7 @@ export default function LiveSessions({ userType }: LiveSessionsProps) {
                 <div className={`px-2 py-1 bg-purple-50 text-purple-600 text-[10px] font-bold rounded-md flex items-center gap-1.5 border border-purple-100 transition-transform duration-300 ${hoveredSession === session.id ? 'scale-105' : ''
                   }`}>
                   <Clock className="w-3 h-3" />
-                  <span className="whitespace-nowrap uppercase  er">{session.time}</span>
+                  <span className="whitespace-nowrap   er">{session.time}</span>
                 </div>
               </div>
 
@@ -247,12 +247,12 @@ export default function LiveSessions({ userType }: LiveSessionsProps) {
               {/* Action Bar */}
               <div className="flex items-center justify-between pt-1">
                 <div className="flex items-center gap-3">
-                  <button className="text-xs font-bold text-gray-400 hover:text-gray-900 uppercase   transition-colors duration-300">
+                  <button className="text-xs text-gray-400 hover:text-gray-900    transition-colors duration-300">
                     {session.actions.secondary}
                   </button>
                 </div>
 
-                <button className={`flex items-center gap-2 px-5 py-2.5 bg-yellow-600 text-white text-xs font-bold rounded-lg hover:bg-yellow-700 transition-all duration-300 shadow-lg shadow-yellow-600/20 active:scale-95 ${hoveredSession === session.id ? 'translate-x-1' : ''
+                <button className={`flex items-center gap-2 px-5 py-2.5 bg-yellow-600 text-white text-xs rounded-lg hover:bg-yellow-700 transition-all duration-300 shadow-lg shadow-yellow-600/20 active:scale-95 ${hoveredSession === session.id ? 'translate-x-1' : ''
                   }`}>
                   <Play className="w-3 h-3 fill-current" />
                   {session.actions.primary}
@@ -266,7 +266,7 @@ export default function LiveSessions({ userType }: LiveSessionsProps) {
           {session.status === 'info' && (
             <div className="mt-5 pt-4 border-t border-gray-100/60">
               <div className="flex items-center justify-between text-[10px] mb-2 font-bold  ">
-                <span className="text-blue-500 uppercase  ">Connection window opens in</span>
+                <span className="text-blue-500   ">Connection window opens in</span>
                 <span className="text-gray-900 bg-blue-50 px-2 py-0.5 rounded border border-blue-100 font-mono">01:45:22</span>
               </div>
               <div className="w-full bg-gray-50 rounded-full h-1 overflow-hidden border border-gray-100">

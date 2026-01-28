@@ -48,15 +48,15 @@ export const getDashboardStats = () => ({
   activeWings: mockWings.filter(w => w.status === 'active').length,
   totalRoadmaps: mockRoadmaps.length,
   activeRoadmaps: mockStudentRoadmaps.filter(r => r.status === 'active').length,
-  totalRevenue: mockWings.reduce((sum, wing) => sum + wing.revenue, 0),
+  totalRevenue: mockWings.reduce((sum, wing) => sum + wing.totalRevenue, 0),
   systemHealth: mockSystemStats.systemUptime
 });
 
 export const getWingDashboardStats = (wingId: string) => {
   const wing = mockWings.find(w => w.id === wingId);
-  const wingUsers = mockUsers.filter(u => u.wing === wingId);
+  const wingUsers = mockUsers.filter(u => u.wingId === wingId);
   const wingRoadmaps = mockStudentRoadmaps.filter(r => 
-    mockUsers.find(u => u.id === r.studentId)?.wing === wingId
+    mockUsers.find(u => u.id === r.studentId)?.wingId === wingId
   );
   
   return {
@@ -64,7 +64,7 @@ export const getWingDashboardStats = (wingId: string) => {
     totalStudents: wingUsers.filter(u => u.role === 'student').length,
     totalTrainers: wingUsers.filter(u => u.role === 'trainer').length,
     activeRoadmaps: wingRoadmaps.filter(r => r.status === 'active').length,
-    wingRevenue: wing?.revenue || 0,
+    wingRevenue: wing?.totalRevenue || 0,
     wingStatus: wing?.status || 'inactive'
   };
 };

@@ -28,14 +28,14 @@ export default function SmartCalendarHeader() {
       </div>
 
       {/* Quick Action Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-1.5 bg-gray-50/50 rounded-2xl border border-gray-100/60 backdrop-blur-sm">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-1.5 bg-gray-50/50  backdrop-blur-sm">
         {[
           { label: 'Sessions This Week', value: '24' },
           { label: 'Total Sync Hours', value: '48h' },
           { label: 'Active Students', value: '18' },
           { label: 'Roadmap Depth', value: '94%' }
         ].map((stat, i) => (
-          <div key={i} className="bg-white rounded-[14px] p-4 text-center shadow-sm border border-gray-100/50">
+          <div key={i} className="bg-white rounded-lg p-4 text-center shadow-sm border border-gray-100/50">
             <div className="text-xl font-black text-gray-900  ">{stat.value}</div>
             <div className="text-[10px] font-bold text-gray-400 uppercase   mt-1">{stat.label}</div>
           </div>

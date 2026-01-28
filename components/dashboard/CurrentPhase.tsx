@@ -22,7 +22,7 @@ export default function CurrentPhase({ activeRoadmap }: CurrentPhaseProps) {
           <h3 className="text-sm font-semibold text-gray-900 mb-2">No Active Phase</h3>
           <p className="text-xs text-gray-500 mb-4">Start a roadmap to see your current phase</p>
           <button 
-            onClick={() => navigate('/dashboard/student/roadmap')}
+            onClick={() => navigate('/post-signup/roadmap')}
             className="px-3 py-2 bg-yellow-600 text-white text-xs font-medium rounded-lg hover:bg-yellow-700 transition-colors"
           >
             Browse Roadmaps
@@ -111,7 +111,7 @@ export default function CurrentPhase({ activeRoadmap }: CurrentPhaseProps) {
 
         {/* Action Button */}
         <button 
-          onClick={() => navigate('/dashboard/student/roadmap')}
+          onClick={() => navigate('/post-signup/roadmap')}
           className="w-full mt-3 px-3 py-2 bg-yellow-600 text-white text-xs font-medium rounded-lg hover:bg-yellow-700 transition-all duration-200 interactive-button transform hover:scale-105 focus:ring-2 focus:ring-yellow-300"
         >
           View Phase Details

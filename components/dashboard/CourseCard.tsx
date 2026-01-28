@@ -24,7 +24,7 @@ export default function CourseCard({ activeRoadmap }: CourseCardProps) {
           <h3 className="text-lg font-semibold text-gray-900 mb-2">No Active Roadmap</h3>
           <p className="text-gray-500 mb-4">Start your learning journey today</p>
           <button 
-            onClick={() => navigate('/dashboard/student/roadmap')}
+            onClick={() => navigate('/post-signup/roadmap')}
             className="px-4 py-2 bg-yellow-600 text-white rounded-lg font-medium hover:bg-yellow-700 transition-colors"
           >
             Browse Roadmaps
@@ -119,7 +119,7 @@ export default function CourseCard({ activeRoadmap }: CourseCardProps) {
                 {completedPhases} Out of {totalPhases} Phases
               </p>
               <button 
-                onClick={() => navigate('/dashboard/student/roadmap')}
+                onClick={() => navigate('/post-signup/roadmap')}
                 className="px-3 py-1 bg-yellow-600 text-white text-xs font-medium rounded hover:bg-yellow-700 transition-all duration-200 interactive-button transform hover:scale-105 focus:ring-2 focus:ring-yellow-300"
               >
                 Continue

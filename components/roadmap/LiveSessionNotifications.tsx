@@ -72,7 +72,7 @@ export default function LiveSessionNotifications() {
                     View Details
                   </button>
                   <a 
-                    href="/dashboard/student/live-session/call"
+                    href="/post-signup/live-session/call"
                     className="px-3 py-1 bg-yellow-600 text-white text-sm font-medium rounded hover:bg-yellow-700 transition-colors"
                   >
                     Attend

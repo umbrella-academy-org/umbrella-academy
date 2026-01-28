@@ -49,10 +49,19 @@ export function useCreateUser(): UseCreateUserReturn {
           name: data.name,
           email: data.email,
           role: 'student',
-          wing: data.wing,
+          wingId: data.wing || '',
+          wing: data.wing || '',
           status: 'active',
           joinDate: new Date().toISOString().split('T')[0],
           avatar: `https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face`,
+          profileData: {
+            bio: '',
+            skills: [],
+            experience: ''
+          },
+          createdAt: new Date(),
+          lastLogin: new Date(),
+          isActive: true,
           availability: {
             weeklyAvailableHours: 10,
             preferredSessionDuration: 2,
@@ -70,10 +79,19 @@ export function useCreateUser(): UseCreateUserReturn {
           name: data.name,
           email: data.email,
           role: 'trainer',
-          wing: data.wing,
+          wingId: data.wing || '',
+          wing: data.wing || '',
           status: 'active',
           joinDate: new Date().toISOString().split('T')[0],
           avatar: `https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face`,
+          profileData: {
+            bio: '',
+            skills: [],
+            experience: ''
+          },
+          createdAt: new Date(),
+          lastLogin: new Date(),
+          isActive: true,
           availability: {
             weeklyAvailableHours: 20,
             maxStudentsPerSession: 5,
@@ -93,10 +111,19 @@ export function useCreateUser(): UseCreateUserReturn {
           name: data.name,
           email: data.email,
           role: 'mentor',
-          wing: data.wing,
+          wingId: data.wing || '',
+          wing: data.wing || '',
           status: 'active',
           joinDate: new Date().toISOString().split('T')[0],
           avatar: `https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face`,
+          profileData: {
+            bio: '',
+            skills: [],
+            experience: ''
+          },
+          createdAt: new Date(),
+          lastLogin: new Date(),
+          isActive: true,
           expertise: ['General Mentoring'],
           experience: {
             yearsOfExperience: 3,
@@ -110,10 +137,19 @@ export function useCreateUser(): UseCreateUserReturn {
           name: data.name,
           email: data.email,
           role: data.role,
+          wingId: data.wing,
           wing: data.wing,
           status: 'active',
           joinDate: new Date().toISOString().split('T')[0],
           avatar: `https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face`,
+          profileData: {
+            bio: '',
+            skills: [],
+            experience: ''
+          },
+          createdAt: new Date(),
+          lastLogin: new Date(),
+          isActive: true,
           permissions: data.role === 'umbrella-admin' ? ['manage_system', 'manage_wing', 'manage_users'] : ['manage_wing', 'manage_users']
         };
       }

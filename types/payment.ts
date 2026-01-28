@@ -33,3 +33,44 @@ export interface Wallet {
   currency: Currency;
   transactions: Transaction[];
 }
+
+// Enhanced Payment Models for Wing-Based System
+
+export interface Payment {
+  id: string;
+  studentId: string;
+  wingId: string;
+  amount: number;
+  currency: Currency;
+  paymentMethod: 'momo'; // Only MoMo payments allowed
+  momoTransactionId: string;
+  status: 'pending' | 'completed' | 'failed' | 'refunded';
+  revenueDistribution: RevenueDistribution;
+  createdAt: Date;
+  processedAt?: Date;
+}
+
+export interface RevenueDistribution {
+  wingShare: number; // 65%
+  academyShare: number; // 25%
+  processingFee: number; // 10%
+  wingId: string;
+  transactionId: string;
+}
+
+export interface MoMoPaymentData {
+  phoneNumber: string;
+  amount: number;
+  currency: Currency;
+  reference: string;
+  description: string;
+}
+
+// Payment Processing Interface Props
+export interface PaymentProcessorProps {
+  amount: number;
+  wingId: string;
+  studentId: string;
+  paymentMethod: 'momo';
+  momoDetails: MoMoPaymentData;
+}

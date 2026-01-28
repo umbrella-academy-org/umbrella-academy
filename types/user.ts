@@ -1,5 +1,7 @@
 // User-related type definitions
 
+// User-related type definitions
+
 export type UserType = 'student' | 'trainer' | 'mentor' | 'wing-admin' | 'umbrella-admin';
 
 export interface BaseUser {
@@ -7,14 +9,25 @@ export interface BaseUser {
   name: string;
   email: string;
   role: UserType;
-  wing?: string;
+  wingId: string; // Required - every user must belong to exactly one wing
+  wing: string; // Wing identifier for compatibility
   status: 'active' | 'inactive' | 'suspended' | 'paused';
   joinDate: string;
   avatar?: string;
+  profileData: {
+    bio?: string;
+    skills?: string[];
+    experience?: string;
+  };
+  createdAt: Date;
+  lastLogin: Date;
+  isActive: boolean;
 }
 
 export interface StudentUser extends BaseUser {
   role: 'student';
+  wingId: string; // Required wing assignment
+  wing: string; // Wing identifier for compatibility
   availability: {
     weeklyAvailableHours: number;
     preferredSessionDuration: number; // in hours
@@ -29,6 +42,8 @@ export interface StudentUser extends BaseUser {
 
 export interface TrainerUser extends BaseUser {
   role: 'trainer';
+  wingId: string; // Required wing assignment
+  wing: string; // Wing identifier for compatibility
   availability: {
     weeklyAvailableHours: number;
     maxStudentsPerSession: number;
@@ -45,6 +60,8 @@ export interface TrainerUser extends BaseUser {
 
 export interface MentorUser extends BaseUser {
   role: 'mentor';
+  wingId: string; // Required wing assignment
+  wing: string; // Wing identifier for compatibility
   expertise: string[];
   experience: {
     yearsOfExperience: number;
@@ -52,8 +69,10 @@ export interface MentorUser extends BaseUser {
   };
 }
 
-export interface AdminUser extends BaseUser {
+export interface AdminUser extends Omit<BaseUser, 'wingId' | 'wing'> {
   role: 'wing-admin' | 'umbrella-admin';
+  wingId?: string; // Optional for umbrella-admin, required for wing-admin
+  wing?: string; // Wing identifier for compatibility
   permissions: string[];
 }
 

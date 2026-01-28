@@ -100,7 +100,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (user.role === 'umbrella-admin') return true;
     
     // Others can only access their own wing
-    return user.wing === wingId;
+    return user.wingId === wingId;
   };
 
   const value: AuthContextType = {

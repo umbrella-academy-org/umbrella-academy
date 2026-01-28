@@ -106,7 +106,7 @@ export default function StudentDashboard() {
                     <span className="sm:hidden">Report</span>
                   </button>
                   <button
-                    onClick={() => navigate('/dashboard/student/roadmap')}
+                    onClick={() => navigate('/post-signup/roadmap')}
                     className="px-4 lg:px-6 py-2 bg-yellow-600 text-white rounded-lg font-medium hover:bg-yellow-700 transition-colors text-sm lg:text-base"
                   >
                     Continue Learning

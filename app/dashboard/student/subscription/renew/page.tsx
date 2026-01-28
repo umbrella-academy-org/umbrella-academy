@@ -41,7 +41,7 @@ export default function RenewSubscriptionPage() {
             {/* Back Button */}
             <div className="mt-4 lg:mt-6 mb-4 lg:mb-6">
               <a
-                href="/dashboard/student/subscription"
+                href="/post-signup/subscription"
                 className="bg-yellow-600 text-white px-3 lg:px-4 py-2 rounded-lg font-medium hover:bg-yellow-700 transition-colors inline-block text-sm lg:text-base"
               >
                 ← Back

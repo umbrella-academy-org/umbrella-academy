@@ -16,7 +16,7 @@ export default function MentorProfilePage() {
         bio: 'Academic Director and Senior Mentor. Overseeing instructional quality and roadmap integrity for the Software Engineering wing.',
         expertise: ['Curriculum Design', 'Educational Leadership', 'Quality Assurance', 'Strategic Mentorship'],
         experience: '15+ Years',
-        wing: user?.wing || 'Software Engineering',
+        wing: user?.wingId || 'Software Engineering',
         joinDate: user?.joinDate || 'Jan 2022'
     });
 
