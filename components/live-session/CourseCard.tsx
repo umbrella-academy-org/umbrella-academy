@@ -36,7 +36,7 @@ export default function CourseCard({ user, userType = 'student' }: CourseCardPro
         <div className="flex-1">
           <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
             <div>
-              <h3 className="text-xl font-semibold text-gray-900 leading-none mb-2">Programming & Development</h3>
+              <h3 className="text-xl font-semibold text-gray-900   mb-2">Programming & Development</h3>
             </div>
 
             <div className="flex items-center gap-3">
@@ -45,9 +45,9 @@ export default function CourseCard({ user, userType = 'student' }: CourseCardPro
               </button>
               <a
                 href="/dashboard/student/live-session/call"
-                className="px-6 py-3 bg-yellow-600 text-white text-sm font-semibold rounded-lg hover:bg-yellow-700 transition-all duration-300 active:scale-95 shadow-sm"
+                className="px-6 py-3 bg-yellow-600 text-white text-sm  rounded-lg hover:bg-yellow-700 transition-all duration-300 active:scale-95 shadow-sm"
               >
-                Join Live Sync  
+                Join Live Sync
               </a>
             </div>
           </div>
@@ -57,7 +57,7 @@ export default function CourseCard({ user, userType = 'student' }: CourseCardPro
           </p>
 
           {/* Combined Trainer Section */}
-          <div className="flex items-center gap-4 bg-gray-50 p-4 rounded-xl border border-gray-100 group/mentor transition-all duration-300">
+          <div className="flex items-center gap-4 bg-gray-50 p-4 rounded-lg border border-gray-100 group/mentor transition-all duration-300">
             <div className="w-10 h-10 rounded-lg bg-yellow-600 flex items-center justify-center p-0.5 shadow-sm">
               <div className="w-full h-full bg-white rounded-md flex items-center justify-center overflow-hidden">
                 <User className="w-5 h-5 text-gray-900" />

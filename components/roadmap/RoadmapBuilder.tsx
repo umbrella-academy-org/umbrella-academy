@@ -134,7 +134,7 @@ export default function RoadmapBuilder({ onSave }: RoadmapBuilderProps) {
         {/* Vertical List of Phases */}
         <div className="space-y-4">
           {phases.length === 0 ? (
-            <div className="text-center py-12 border-2 border-dashed border-gray-200 rounded-xl bg-gray-50">
+            <div className="text-center py-12 border-2 border-dashed border-gray-200 rounded-lg bg-gray-50">
               <BookOpen className="w-12 h-12 text-gray-300 mx-auto mb-3" />
               <p className="text-gray-500 text-sm mb-4">Start by adding your first learning phase</p>
               <button
@@ -150,7 +150,7 @@ export default function RoadmapBuilder({ onSave }: RoadmapBuilderProps) {
               {phases.map((phase, index) => (
                 <div key={phase.id} className="relative group">
                   {/* Phase Card */}
-                  <div className="bg-white rounded-xl border border-gray-200 p-5 hover:border-yellow-600/50 transition-all duration-300 shadow-sm">
+                  <div className="bg-white rounded-lg border border-gray-200 p-5 hover:border-yellow-600/50 transition-all duration-300 shadow-sm">
                     {/* Phase Header */}
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex items-center gap-3">
@@ -222,21 +222,21 @@ export default function RoadmapBuilder({ onSave }: RoadmapBuilderProps) {
       {/* Summary & Action */}
       {phases.length > 0 && (
         <div className="pt-6 border-t border-gray-100">
-          <div className="bg-gray-50 rounded-xl p-4 mb-6 border border-gray-100 flex items-center justify-between">
+          <div className="bg-gray-50 rounded-lg p-4 mb-6 border border-gray-100 flex items-center justify-between">
             <div className="flex items-center gap-6">
               <div className="text-center">
-                <p className="text-[10px] text-gray-400 uppercase font-bold tracking-widest mb-1">Total Time</p>
+                <p className="text-[10px] text-gray-400 uppercase font-bold   mb-1">Total Time</p>
                 <p className="text-lg font-bold text-gray-900">{totalWeeks} Weeks</p>
               </div>
               <div className="h-8 w-px bg-gray-200"></div>
               <div className="text-center">
-                <p className="text-[10px] text-gray-400 uppercase font-bold tracking-widest mb-1">Phases</p>
+                <p className="text-[10px] text-gray-400 uppercase font-bold   mb-1">Phases</p>
                 <p className="text-lg font-bold text-gray-900">{phases.length}</p>
               </div>
             </div>
 
             <div className="text-right">
-              <p className="text-[10px] text-gray-400 uppercase font-bold tracking-widest mb-1">Est. Lessons</p>
+              <p className="text-[10px] text-gray-400 uppercase font-bold   mb-1">Est. Lessons</p>
               <p className="text-lg font-bold text-gray-900">{phases.length * 3}</p>
             </div>
           </div>
@@ -244,7 +244,7 @@ export default function RoadmapBuilder({ onSave }: RoadmapBuilderProps) {
           <button
             onClick={handleSave}
             disabled={!isValid}
-            className="w-full flex items-center justify-center gap-2 py-4 bg-yellow-600 text-white font-bold rounded-xl hover:bg-yellow-700 transition-all disabled:opacity-50 shadow-lg shadow-yellow-600/20 active:scale-[0.98]"
+            className="w-full flex items-center justify-center gap-2 py-3 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-all disabled:opacity-50 shadow-lg shadow-yellow-600/20 active:scale-[0.98]"
           >
             <Save className="w-5 h-5" />
             Create Your Roadmap

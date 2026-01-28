@@ -53,7 +53,7 @@ export default function UmbrellaAdminSystemPage() {
               {systemMetrics.map((metric, index) => {
                 const Icon = metric.icon;
                 return (
-                  <div key={index} className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+                  <div key={index} className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
                     <div className="flex items-center justify-between">
                       <div>
                         <p className="text-gray-500 text-sm">{metric.name}</p>
@@ -73,7 +73,7 @@ export default function UmbrellaAdminSystemPage() {
             {/* System Status */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
               {/* Service Status */}
-              <div className="bg-white rounded-xl shadow-sm border border-gray-100">
+              <div className="bg-white rounded-lg shadow-sm border border-gray-100">
                 <div className="p-6 border-b border-gray-200">
                   <h3 className="text-lg font-semibold text-gray-900">Service Status</h3>
                 </div>
@@ -108,7 +108,7 @@ export default function UmbrellaAdminSystemPage() {
               </div>
 
               {/* Recent Alerts */}
-              <div className="bg-white rounded-xl shadow-sm border border-gray-100">
+              <div className="bg-white rounded-lg shadow-sm border border-gray-100">
                 <div className="p-6 border-b border-gray-200">
                   <h3 className="text-lg font-semibold text-gray-900">Recent Alerts</h3>
                 </div>
@@ -137,7 +137,7 @@ export default function UmbrellaAdminSystemPage() {
             </div>
 
             {/* System Actions */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100">
+            <div className="bg-white rounded-lg shadow-sm border border-gray-100">
               <div className="p-6 border-b border-gray-200">
                 <h3 className="text-lg font-semibold text-gray-900">System Actions</h3>
               </div>

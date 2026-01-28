@@ -35,7 +35,7 @@ export default function ActivityStats() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
       {stats.map((stat, index) => (
-        <div key={index} className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+        <div key={index} className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
           <div className="flex items-center justify-between mb-3">
             <div className={`p-2 rounded-lg bg-gray-50 ${stat.color}`}>
               {stat.icon}

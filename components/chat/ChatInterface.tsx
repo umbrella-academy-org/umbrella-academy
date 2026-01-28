@@ -91,7 +91,7 @@ export default function ChatInterface({ userType }: { userType: string }) {
                         <input
                             type="text"
                             placeholder="Search chats..."
-                            className="w-full pl-10 pr-4 py-2 bg-gray-50 rounded-xl border border-transparent focus:bg-white focus:border-yellow-600 outline-none transition-all text-sm"
+                            className="w-full pl-10 pr-4 py-2 bg-gray-50 rounded-lg border border-transparent focus:bg-white focus:border-yellow-600 outline-none transition-all text-sm"
                         />
                     </div>
                 </div>
@@ -144,7 +144,7 @@ export default function ChatInterface({ userType }: { userType: string }) {
                                 </div>
                                 <div>
                                     <h3 className="font-bold text-gray-900 text-sm">{activeChat.name}</h3>
-                                    <p className="text-[10px] text-gray-500 font-medium uppercase tracking-widest">{activeChat.role} • {activeChat.online ? 'Online' : 'Away'}</p>
+                                    <p className="text-[10px] text-gray-500 font-medium uppercase  ">{activeChat.role} • {activeChat.online ? 'Online' : 'Away'}</p>
                                 </div>
                             </div>
                             <div className="flex items-center gap-2">
@@ -166,8 +166,8 @@ export default function ChatInterface({ userType }: { userType: string }) {
                                 <div key={msg.id} className={`flex ${msg.isMe ? 'justify-end' : 'justify-start'} animate-fade-in`}>
                                     <div className={`max-w-[70%] group ${msg.isMe ? 'items-end' : 'items-start'}`}>
                                         <div className={`px-4 py-3 rounded-2xl text-sm shadow-sm ${msg.isMe
-                                                ? 'bg-yellow-600 text-white rounded-tr-none'
-                                                : 'bg-white text-gray-800 border border-gray-100 rounded-tl-none'
+                                            ? 'bg-yellow-600 text-white rounded-tr-none'
+                                            : 'bg-white text-gray-800 border border-gray-100 rounded-tl-none'
                                             }`}>
                                             {msg.text}
                                         </div>
@@ -203,7 +203,7 @@ export default function ChatInterface({ userType }: { userType: string }) {
                                 </div>
                                 <button
                                     type="submit"
-                                    className="w-11 h-11 bg-yellow-600 text-white rounded-xl flex items-center justify-center shadow-lg shadow-yellow-600/20 hover:bg-yellow-700 transition-all active:scale-95"
+                                    className="w-11 h-11 bg-yellow-600 text-white rounded-lg flex items-center justify-center shadow-lg shadow-yellow-600/20 hover:bg-yellow-700 transition-all active:scale-95"
                                 >
                                     <Send className="w-5 h-5" />
                                 </button>

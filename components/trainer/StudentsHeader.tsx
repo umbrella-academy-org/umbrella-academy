@@ -51,7 +51,7 @@ export default function StudentsHeader() {
         {stats.map((stat, index) => (
           <div 
             key={index}
-            className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 interactive-card hover:shadow-lg transition-all duration-300 animate-slide-up"
+            className="bg-white rounded-lg p-4 shadow-sm border border-gray-100  hover:shadow-lg transition-all duration-300 animate-slide-up"
             style={{ animationDelay: `${index * 100}ms` }}
           >
             <div className="flex items-center justify-between mb-3">

@@ -4,14 +4,14 @@ import { Play, Star, User } from 'lucide-react';
 
 export default function CourseOverview() {
   return (
-    <div className="bg-white rounded-2xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 relative overflow-hidden group hover:border-yellow-200 transition-all duration-500">
+    <div className="bg-white rounded-lg p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 relative overflow-hidden group hover:border-yellow-200 transition-all duration-500">
       {/* Subtle Background Pattern */}
       <div className="absolute top-0 right-0 w-32 h-32 bg-yellow-50 rounded-full -mr-16 -mt-16 opacity-50 blur-3xl group-hover:bg-yellow-100 transition-colors duration-500"></div>
 
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
         {/* Course Discovery */}
         <div className="flex items-center gap-5">
-          <div className="w-16 h-16 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-2xl flex items-center justify-center shadow-lg shadow-yellow-600/20 transform group-hover:scale-105 transition-transform duration-500">
+          <div className="w-16 h-16 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-lg flex items-center justify-center shadow-lg shadow-yellow-600/20 transform group-hover:scale-105 transition-transform duration-500">
             <Play className="w-8 h-8 text-white fill-current" />
           </div>
 
@@ -26,7 +26,7 @@ export default function CourseOverview() {
                 ))}
               </div>
             </div>
-            <h3 className="text-2xl font-bold text-gray-900 tracking-tight mb-1">Programming & Development</h3>
+            <h3 className="text-2xl font-bold text-gray-900   mb-1">Programming & Development</h3>
             <p className="text-sm text-gray-500 font-medium flex items-center gap-2">
               <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
               Full Stack Engineering Track
@@ -35,15 +35,15 @@ export default function CourseOverview() {
         </div>
 
         {/* Mentor Section */}
-        <div className="flex items-center gap-4 bg-gray-50 px-5 py-3 rounded-2xl border border-gray-100 group/mentor hover:bg-white hover:shadow-md transition-all duration-300">
+        <div className="flex items-center gap-4 bg-gray-50 px-5 py-3 rounded-lg border border-gray-100 group/mentor hover:bg-white hover:shadow-md transition-all duration-300">
           <div className="text-right">
-            <p className="text-[10px] text-gray-400 uppercase font-bold tracking-widest mb-0.5">Your Mentor</p>
-            <p className="text-sm font-bold text-gray-900 leading-none mb-1">Demi Wilkinson</p>
+            <p className="text-[10px] text-gray-400 uppercase font-bold   mb-0.5">Your Mentor</p>
+            <p className="text-sm font-bold text-gray-900   mb-1">Demi Wilkinson</p>
             <p className="text-[11px] text-gray-500 font-medium">Principal Engineer</p>
           </div>
 
           <div className="relative">
-            <div className="w-12 h-12 rounded-xl overflow-hidden shadow-sm border border-white">
+            <div className="w-12 h-12 rounded-lg overflow-hidden shadow-sm border border-white">
               <div className="w-full h-full bg-gradient-to-br from-yellow-100 to-yellow-200 flex items-center justify-center">
                 <User className="w-6 h-6 text-yellow-700" />
               </div>

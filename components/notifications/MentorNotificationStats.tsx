@@ -39,18 +39,18 @@ export default function MentorNotificationStats() {
             {stats.map((stat, index) => (
                 <div
                     key={index}
-                    className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-500 group"
+                    className="bg-white rounded-lg p-6 border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-500 group"
                 >
                     <div className="flex items-center gap-4 mb-4">
-                        <div className={`w-12 h-12 ${stat.bgColor} rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500`}>
+                        <div className={`w-12 h-12 ${stat.bgColor} rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-500`}>
                             {stat.icon}
                         </div>
                         <div>
-                            <div className="text-2xl font-black text-gray-900 tracking-tight leading-none mb-1">{stat.value}</div>
-                            <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{stat.label}</div>
+                            <div className="text-2xl font-black text-gray-900     mb-1 text-center">{stat.value}</div>
+                            <div className="text-sm font-semibold text-gray-600 ">{stat.label}</div>
                         </div>
                     </div>
-                    <p className="text-[11px] text-gray-400 font-medium italic">{stat.description}</p>
+                    <p className="text-xs text-center text-gray-400 font-medium">{stat.description}</p>
                 </div>
             ))}
         </div>

@@ -84,7 +84,7 @@ export default function UpcomingSessions() {
   };
 
   return (
-    <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 animate-fade-in">
+    <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100 animate-fade-in">
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-lg font-semibold text-gray-900">Today's Sessions</h3>
         <span className="text-sm text-gray-500">{sessions.length} sessions</span>

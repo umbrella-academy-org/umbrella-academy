@@ -7,7 +7,7 @@ export default function CalendarHeader() {
     <div className="mb-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 tracking-tight">Smart Calendar</h1>
+          <h1 className="text-2xl font-bold text-gray-900  ">Smart Calendar</h1>
           <p className="text-sm text-gray-500 mt-1 font-medium">Your centralized schedule for sessions, milestones, and deadlines.</p>
         </div>
 

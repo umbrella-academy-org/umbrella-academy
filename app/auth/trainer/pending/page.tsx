@@ -33,7 +33,7 @@ export default function TrainerPendingPage() {
                         Thank you for applying to be a trainer at Umbrella Academy. Your profile and documents have been submitted to our mentors for review.
                     </p>
 
-                    <div className="bg-gray-50 rounded-xl p-6 w-full mb-8 text-left border border-gray-100">
+                    <div className="bg-gray-50 rounded-lg p-6 w-full mb-8 text-left border border-gray-100">
                         <h3 className="text-sm font-semibold text-gray-900 mb-2 uppercase tracking-wider">What happens next?</h3>
                         <ul className="space-y-3">
                             <li className="flex gap-3 text-sm text-gray-600">

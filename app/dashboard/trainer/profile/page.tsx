@@ -32,7 +32,7 @@ export default function TrainerProfilePage() {
                 <main className="flex-1 p-4 lg:p-8 overflow-y-auto bg-gray-50/30">
                     <div className="max-w-5xl mx-auto animate-fade-in">
                         {/* Profile Header Card */}
-                        <div className="bg-white rounded-[2rem] border border-gray-100 shadow-xl shadow-gray-200/50 overflow-hidden mb-8 interactive-card">
+                        <div className="bg-white rounded-[2rem] border border-gray-100 shadow-xl shadow-gray-200/50 overflow-hidden mb-8 ">
                             <div className="h-48 bg-gradient-to-br from-green-500 via-emerald-600 to-teal-700 relative overflow-hidden">
                                 {/* Decorative Abstract Shapes */}
                                 <div className="absolute top-0 left-0 w-full h-full opacity-20">
@@ -48,7 +48,7 @@ export default function TrainerProfilePage() {
                                 <div className="flex flex-col md:flex-row md:items-end -mt-16 gap-8">
                                     <div className="relative group">
                                         <div className="w-32 h-32 rounded-[2.5rem] bg-white p-1.5 shadow-2xl shadow-green-200/50 transform group-hover:scale-105 transition-all duration-500">
-                                            <div className="w-full h-full bg-gradient-to-br from-green-50 to-green-100 rounded-[2.2rem] flex items-center justify-center text-green-700 text-4xl font-extrabold border border-green-200 uppercase tracking-tighter">
+                                            <div className="w-full h-full bg-gradient-to-br from-green-50 to-green-100 rounded-[2.2rem] flex items-center justify-center text-green-700 text-4xl font-extrabold border border-green-200 uppercase  er">
                                                 {profileData.name.split(' ').map(n => n[0]).join('')}
                                             </div>
                                         </div>
@@ -60,7 +60,7 @@ export default function TrainerProfilePage() {
                                     <div className="flex-1 flex flex-col md:flex-row md:items-center justify-between gap-6 pb-2">
                                         <div>
                                             <div className="flex items-center gap-3">
-                                                <h1 className="text-3xl font-black text-gray-900 tracking-tight">{profileData.name}</h1>
+                                                <h1 className="text-3xl font-black text-gray-900  ">{profileData.name}</h1>
                                                 <div className="px-2.5 py-1 bg-green-50 text-green-700 border border-green-100 rounded-full text-[10px] font-black uppercase tracking-wider">CERTIFIED TRAINER</div>
                                             </div>
                                             <p className="text-gray-500 font-semibold flex items-center gap-2 mt-1.5">
@@ -105,7 +105,7 @@ export default function TrainerProfilePage() {
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                             {/* Left Column - Personal Info */}
                             <div className="lg:col-span-2 space-y-8 animate-slide-up">
-                                <div className="bg-white rounded-[2rem] border border-gray-100 shadow-xl shadow-gray-200/30 p-10 interactive-card">
+                                <div className="bg-white rounded-[2rem] border border-gray-100 shadow-xl shadow-gray-200/30 p-10 ">
                                     <div className="flex items-center gap-4 mb-8">
                                         <div className="w-12 h-12 bg-gray-50 rounded-2xl flex items-center justify-center text-gray-600">
                                             <User className="w-6 h-6" />
@@ -195,7 +195,7 @@ export default function TrainerProfilePage() {
                                     </div>
                                 </div>
 
-                                <div className="bg-white rounded-[2rem] border border-gray-100 shadow-xl shadow-gray-200/30 p-10 interactive-card">
+                                <div className="bg-white rounded-[2rem] border border-gray-100 shadow-xl shadow-gray-200/30 p-10 ">
                                     <div className="flex items-center gap-4 mb-8">
                                         <div className="w-12 h-12 bg-gray-50 rounded-2xl flex items-center justify-center text-gray-600">
                                             <Award className="w-6 h-6" />
@@ -226,7 +226,7 @@ export default function TrainerProfilePage() {
                                                     <Zap className="w-7 h-7" />
                                                 </div>
                                                 <div>
-                                                    <p className="text-xs font-bold text-green-800/60 uppercase tracking-widest mb-1">Experience</p>
+                                                    <p className="text-xs font-bold text-green-800/60 uppercase   mb-1">Experience</p>
                                                     <p className="text-lg font-black text-gray-900">{profileData.experience}</p>
                                                 </div>
                                             </div>
@@ -235,7 +235,7 @@ export default function TrainerProfilePage() {
                                                     <Calendar className="w-7 h-7" />
                                                 </div>
                                                 <div>
-                                                    <p className="text-xs font-bold text-blue-800/60 uppercase tracking-widest mb-1">Active Since</p>
+                                                    <p className="text-xs font-bold text-blue-800/60 uppercase   mb-1">Active Since</p>
                                                     <p className="text-lg font-black text-gray-900">{profileData.joinDate}</p>
                                                 </div>
                                             </div>
@@ -246,7 +246,7 @@ export default function TrainerProfilePage() {
 
                             {/* Right Column - Stats & Settings */}
                             <div className="space-y-8 animate-slide-up [animation-delay:200ms]">
-                                <div className="bg-white rounded-[2rem] border border-gray-100 shadow-xl shadow-gray-200/30 p-8 interactive-card">
+                                <div className="bg-white rounded-[2rem] border border-gray-100 shadow-xl shadow-gray-200/30 p-8 ">
                                     <h3 className="text-xl font-bold text-gray-900 mb-8 flex items-center gap-3">
                                         <Star className="w-5 h-5 text-yellow-500" />
                                         Performance Stats
@@ -266,7 +266,7 @@ export default function TrainerProfilePage() {
                                     </div>
                                 </div>
 
-                                <div className="bg-white rounded-[2rem] border border-gray-100 shadow-xl shadow-gray-200/30 p-8 interactive-card">
+                                <div className="bg-white rounded-[2rem] border border-gray-100 shadow-xl shadow-gray-200/30 p-8 ">
                                     <h3 className="text-xl font-bold text-gray-900 mb-8 flex items-center gap-3">
                                         <Settings className="w-5 h-5 text-gray-400" />
                                         Trainer Hub
@@ -314,7 +314,7 @@ function SettingsItem({ icon, label, color }: { icon: React.ReactNode, label: st
     return (
         <button className="w-full flex items-center justify-between p-4 rounded-2xl hover:bg-gray-50 transition-all border border-transparent hover:border-gray-100 group">
             <div className="flex items-center gap-4">
-                <div className={`w-10 h-10 rounded-xl flex items-center justify-center group-hover:text-white transition-all duration-300 ${colorClasses}`}>
+                <div className={`w-10 h-10 rounded-lg flex items-center justify-center group-hover:text-white transition-all duration-300 ${colorClasses}`}>
                     {icon}
                 </div>
                 <span className="text-sm font-bold text-gray-700 group-hover:text-gray-900">{label}</span>

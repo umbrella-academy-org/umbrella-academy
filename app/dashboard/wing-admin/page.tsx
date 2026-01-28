@@ -103,7 +103,7 @@ export default function WingAdminDashboard() {
 
             {/* Wing Stats Cards */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4 mb-4 sm:mb-6 lg:mb-8">
-              <div className="bg-white rounded-xl p-3 lg:p-4 shadow-sm border border-gray-100 interactive-card hover:shadow-lg transition-all duration-300 animate-slide-up">
+              <div className="bg-white rounded-lg p-3 lg:p-4 shadow-sm border border-gray-100  hover:shadow-lg transition-all duration-300 animate-slide-up">
                 <div className="flex items-center gap-3">
                   <div className="p-2 bg-blue-100 rounded-lg">
                     <Users className="w-5 h-5 text-blue-600" />
@@ -115,7 +115,7 @@ export default function WingAdminDashboard() {
                 </div>
               </div>
 
-              <div className="bg-white rounded-xl p-3 lg:p-4 shadow-sm border border-gray-100 interactive-card hover:shadow-lg transition-all duration-300 animate-slide-up" style={{ animationDelay: '100ms' }}>
+              <div className="bg-white rounded-lg p-3 lg:p-4 shadow-sm border border-gray-100  hover:shadow-lg transition-all duration-300 animate-slide-up" style={{ animationDelay: '100ms' }}>
                 <div className="flex items-center gap-3">
                   <div className="p-2 bg-green-100 rounded-lg">
                     <GraduationCap className="w-5 h-5 text-green-600" />
@@ -127,7 +127,7 @@ export default function WingAdminDashboard() {
                 </div>
               </div>
 
-              <div className="bg-white rounded-xl p-3 lg:p-4 shadow-sm border border-gray-100 interactive-card hover:shadow-lg transition-all duration-300 animate-slide-up" style={{ animationDelay: '200ms' }}>
+              <div className="bg-white rounded-lg p-3 lg:p-4 shadow-sm border border-gray-100  hover:shadow-lg transition-all duration-300 animate-slide-up" style={{ animationDelay: '200ms' }}>
                 <div className="flex items-center gap-3">
                   <div className="p-2 bg-yellow-100 rounded-lg">
                     <DollarSign className="w-5 h-5 text-yellow-600" />
@@ -141,7 +141,7 @@ export default function WingAdminDashboard() {
                 </div>
               </div>
 
-              <div className="bg-white rounded-xl p-3 lg:p-4 shadow-sm border border-gray-100 interactive-card hover:shadow-lg transition-all duration-300 animate-slide-up" style={{ animationDelay: '300ms' }}>
+              <div className="bg-white rounded-lg p-3 lg:p-4 shadow-sm border border-gray-100  hover:shadow-lg transition-all duration-300 animate-slide-up" style={{ animationDelay: '300ms' }}>
                 <div className="flex items-center gap-3">
                   <div className="p-2 bg-purple-100 rounded-lg">
                     <TrendingUp className="w-5 h-5 text-purple-600" />
@@ -184,7 +184,7 @@ export default function WingAdminDashboard() {
               {/* Right Column - Sidebar Content */}
               <div className="lg:col-span-2 space-y-4 sm:space-y-6 lg:space-y-8">
                 {/* Quick Actions */}
-                <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 animate-slide-up" style={{ animationDelay: '700ms' }}>
+                <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100 animate-slide-up" style={{ animationDelay: '700ms' }}>
                   <h3 className="text-sm sm:text-base font-semibold text-gray-900 mb-4">Quick Actions</h3>
                   <div className="space-y-3">
                     <button

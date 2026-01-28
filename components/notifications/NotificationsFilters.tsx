@@ -20,7 +20,7 @@ export default function NotificationsFilters({
   };
 
   return (
-    <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 mt-6">
+    <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100 mt-6">
       <div className="flex items-center justify-between gap-4">
         {/* Search */}
         <div className="relative flex-1 max-w-md">

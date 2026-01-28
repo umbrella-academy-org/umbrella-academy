@@ -49,9 +49,9 @@ export default function TrainerSessionStats() {
   return (
     <div className="animate-fade-in">
       <div className="flex items-center justify-between mb-6 px-1">
-        <h2 className="text-lg font-bold text-gray-900 tracking-tight">Session Performance</h2>
+        <h2 className="text-lg font-bold text-gray-900  ">Session Performance</h2>
         <div className="flex items-center gap-2">
-          <select className="text-[10px] font-bold uppercase tracking-widest bg-white border border-gray-100 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-600 shadow-sm">
+          <select className="text-[10px] font-bold uppercase   bg-white border border-gray-100 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-600 shadow-sm">
             <option>Current Week</option>
             <option>This Month</option>
             <option>Last Quarter</option>
@@ -67,20 +67,20 @@ export default function TrainerSessionStats() {
             style={{ animationDelay: `${index * 100}ms` }}
           >
             <div className="flex items-center justify-between mb-4">
-              <div className="p-2 bg-white rounded-xl shadow-sm group-hover:scale-110 transition-transform">
+              <div className="p-2 bg-white rounded-lg shadow-sm group-hover:scale-110 transition-transform">
                 {stat.icon}
               </div>
               <div className="text-right">
-                <div className="text-2xl font-black text-gray-900 tracking-tight">{stat.value}</div>
+                <div className="text-2xl font-black text-gray-900  ">{stat.value}</div>
               </div>
             </div>
 
             <div className="space-y-1">
-              <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest">{stat.title}</h3>
+              <h3 className="text-xs font-bold text-gray-400 uppercase  ">{stat.title}</h3>
               <p className="text-sm font-semibold text-gray-900">{stat.subtitle}</p>
               <div className={`text-[10px] font-bold flex items-center gap-1 mt-2 ${stat.trendType === 'positive'
-                  ? 'text-green-600'
-                  : 'text-gray-400'
+                ? 'text-green-600'
+                : 'text-gray-400'
                 }`}>
                 {stat.trend}
               </div>

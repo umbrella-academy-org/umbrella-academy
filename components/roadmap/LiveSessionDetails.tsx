@@ -114,7 +114,7 @@ export default function LiveSessionDetails({ selectedPhaseId, selectedSessionId 
 
   if (allSessions.length === 0) {
     return (
-      <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+      <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
         <div className="text-center py-8">
           <Video className="w-12 h-12 text-gray-400 mx-auto mb-4" />
           <h3 className="text-lg font-medium text-gray-900 mb-2">No Live Sessions</h3>
@@ -132,7 +132,7 @@ export default function LiveSessionDetails({ selectedPhaseId, selectedSessionId 
   }
 
   return (
-    <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+    <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
       <div className="mb-6">
         <h3 className="text-lg font-semibold text-gray-900 mb-2">Live Sessions</h3>
         <p className="text-sm text-gray-500">

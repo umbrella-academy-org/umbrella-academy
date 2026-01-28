@@ -96,7 +96,7 @@ export default function TrainerStatsCards({
       {stats.map((stat, index) => (
         <div 
           key={index} 
-          className="bg-white rounded-xl p-3 lg:p-4 shadow-sm border border-gray-100 interactive-card cursor-pointer group animate-slide-up hover:shadow-lg transition-all duration-300"
+          className="bg-white rounded-lg p-3 lg:p-4 shadow-sm border border-gray-100  cursor-pointer group animate-slide-up hover:shadow-lg transition-all duration-300"
           style={{ animationDelay: `${index * 100}ms` }}
           onMouseEnter={() => setHoveredCard(index)}
           onMouseLeave={() => setHoveredCard(null)}

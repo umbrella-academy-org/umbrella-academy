@@ -139,7 +139,7 @@ export default function ActivityFeed({ searchQuery, selectedActivity, onActivity
   );
 
   return (
-    <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+    <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-semibold text-gray-900">Recent activity</h2>
         <button className="text-gray-400 hover:text-gray-600">

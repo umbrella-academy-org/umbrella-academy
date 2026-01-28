@@ -163,7 +163,7 @@ export default function StudentsTable({ searchQuery, selectedStatus, selectedCou
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-100 animate-fade-in" style={{ animationDelay: '300ms' }}>
+    <div className="bg-white rounded-lg shadow-sm border border-gray-100 animate-fade-in" style={{ animationDelay: '300ms' }}>
       {/* Table Header */}
       <div className="px-6 py-4 border-b border-gray-200">
         <div className="flex items-center justify-between">

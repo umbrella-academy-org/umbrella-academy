@@ -56,7 +56,7 @@ export default function LiveSessionNotifications() {
       {sessions.map((session) => (
         <div
           key={session.id}
-          className="bg-white rounded-xl p-4 shadow-sm border border-gray-100"
+          className="bg-white rounded-lg p-4 shadow-sm border border-gray-100"
         >
           <div className="flex items-start justify-between mb-3">
             <div className="flex items-start gap-3 flex-1">

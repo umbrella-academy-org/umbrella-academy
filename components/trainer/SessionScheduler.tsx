@@ -41,7 +41,7 @@ export default function SessionScheduler({ selectedDate }: SessionSchedulerProps
   };
 
   return (
-    <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 animate-fade-in">
+    <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100 animate-fade-in">
       <div className="flex items-center gap-2 mb-4">
         <Calendar className="w-5 h-5 text-yellow-600" />
         <h3 className="text-lg font-semibold text-gray-900">Schedule Session</h3>

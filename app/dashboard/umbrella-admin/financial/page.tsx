@@ -19,7 +19,7 @@ export default function UmbrellaAdminFinancialPage() {
 
             {/* Financial Stats */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-              <div className="bg-gradient-to-r from-green-500 to-green-600 rounded-xl p-6 text-white">
+              <div className="bg-gradient-to-r from-green-500 to-green-600 rounded-lg p-6 text-white">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-green-100 text-sm">Total Revenue</p>
@@ -29,7 +29,7 @@ export default function UmbrellaAdminFinancialPage() {
                 </div>
               </div>
 
-              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+              <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-gray-500 text-sm">Umbrella Share (65%)</p>
@@ -39,7 +39,7 @@ export default function UmbrellaAdminFinancialPage() {
                 </div>
               </div>
 
-              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+              <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-gray-500 text-sm">Wings Share (35%)</p>
@@ -49,7 +49,7 @@ export default function UmbrellaAdminFinancialPage() {
                 </div>
               </div>
 
-              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+              <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-gray-500 text-sm">Growth Rate</p>
@@ -61,7 +61,7 @@ export default function UmbrellaAdminFinancialPage() {
             </div>
 
             {/* Wing Revenue Breakdown */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 mb-6">
+            <div className="bg-white rounded-lg shadow-sm border border-gray-100 mb-6">
               <div className="p-6 border-b border-gray-200">
                 <h3 className="text-lg font-semibold text-gray-900">Revenue by Wing</h3>
               </div>
@@ -98,7 +98,7 @@ export default function UmbrellaAdminFinancialPage() {
             </div>
 
             {/* Recent Transactions */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100">
+            <div className="bg-white rounded-lg shadow-sm border border-gray-100">
               <div className="p-6 border-b border-gray-200">
                 <h3 className="text-lg font-semibold text-gray-900">Recent Transactions</h3>
               </div>

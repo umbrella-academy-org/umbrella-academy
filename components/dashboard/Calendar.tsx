@@ -120,7 +120,7 @@ export default function Calendar({ selectedDateRange, onDateRangeChange, userTyp
   };
 
   return (
-    <div className="bg-white rounded-xl p-3 sm:p-4 shadow-sm border border-gray-100 interactive-card animate-fade-in">
+    <div className="bg-white rounded-lg p-3 sm:p-4 shadow-sm border border-gray-100  animate-fade-in">
       {/* Mobile: Stack vertically, Desktop: Side by side */}
       <div className="flex flex-col lg:grid lg:grid-cols-2 gap-4 lg:gap-6">
         {/* Left side - Date Range Selector */}

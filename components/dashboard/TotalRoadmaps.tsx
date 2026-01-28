@@ -38,7 +38,7 @@ export default function TotalRoadmaps({ roadmaps, userType }: TotalRoadmapsProps
 
   if (!featuredRoadmap || !roadmapInfo) {
     return (
-      <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+      <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
         <div className="text-center py-8">
           <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <CheckCircle className="w-8 h-8 text-gray-400" />
@@ -60,7 +60,7 @@ export default function TotalRoadmaps({ roadmaps, userType }: TotalRoadmapsProps
 
   return (
     <div 
-      className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 interactive-card hover:shadow-lg transition-all duration-300 animate-fade-in"
+      className="bg-white rounded-lg p-4 shadow-sm border border-gray-100  hover:shadow-lg transition-all duration-300 animate-fade-in"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >

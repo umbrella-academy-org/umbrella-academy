@@ -88,7 +88,7 @@ export default function BillingInvoices() {
   ];
 
   return (
-    <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+    <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
       <div className="flex items-center justify-between mb-6">
         <div>
           <h3 className="text-lg font-semibold text-gray-900">Billing and invoicing</h3>
@@ -147,7 +147,7 @@ export default function BillingInvoices() {
                   </div>
                 </td>
                 <td className="py-4 px-4">
-                  <button className="text-sm text-blue-600 hover:text-blue-700 font-medium">
+                  <button className="text-sm text-yellow-600 hover:text-yellow-700 font-medium">
                     Download
                   </button>
                 </td>

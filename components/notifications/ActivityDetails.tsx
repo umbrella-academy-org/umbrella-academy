@@ -9,7 +9,7 @@ interface ActivityDetailsProps {
 export default function ActivityDetails({ selectedActivity }: ActivityDetailsProps) {
   if (!selectedActivity) {
     return (
-      <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 h-fit">
+      <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100 h-fit">
         <div className="text-center">
           <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <Bell className="w-6 h-6 text-gray-400" />
@@ -51,7 +51,7 @@ export default function ActivityDetails({ selectedActivity }: ActivityDetailsPro
   const details = getActivityDetails();
 
   return (
-    <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 h-fit">
+    <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100 h-fit">
       <div className="flex items-center gap-3 mb-6">
         <div className="w-10 h-10 bg-orange-400 rounded-full flex items-center justify-center">
           <span className="text-white text-sm font-medium">PB</span>

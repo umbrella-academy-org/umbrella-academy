@@ -41,7 +41,7 @@ export default function StudentFeedbackPage() {
                         </div>
 
                         {submitted ? (
-                            <div className="bg-white rounded-2xl border border-gray-100 p-12 text-center animate-fade-in shadow-sm">
+                            <div className="bg-white rounded-lg border border-gray-100 p-12 text-center animate-fade-in shadow-sm">
                                 <div className="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6">
                                     <CheckCircle2 className="w-10 h-10 text-green-500" />
                                 </div>
@@ -57,7 +57,7 @@ export default function StudentFeedbackPage() {
                                 </button>
                             </div>
                         ) : (
-                            <div className="bg-white rounded-2xl border border-gray-100 p-6 lg:p-8 shadow-sm">
+                            <div className="bg-white rounded-lg border border-gray-100 p-6 lg:p-8 shadow-sm">
                                 <form onSubmit={handleSubmit} className="space-y-8">
                                     {/* Category Selection */}
                                     <div>
@@ -68,7 +68,7 @@ export default function StudentFeedbackPage() {
                                                     key={c}
                                                     type="button"
                                                     onClick={() => setCategory(c)}
-                                                    className={`px-4 py-3 rounded-xl text-sm font-medium border transition-all ${category === c
+                                                    className={`px-4 py-3 rounded-lg text-sm font-medium border transition-all ${category === c
                                                         ? 'border-yellow-600 bg-yellow-50 text-yellow-600 shadow-sm'
                                                         : 'border-gray-200 bg-white text-gray-600 hover:border-gray-300'
                                                         }`}
@@ -106,7 +106,7 @@ export default function StudentFeedbackPage() {
                                             value={feedback}
                                             onChange={(e) => setFeedback(e.target.value)}
                                             placeholder="Tell us what's on your mind..."
-                                            className="w-full px-4 py-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 h-40 resize-none transition-all"
+                                            className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 h-40 resize-none transition-all"
                                             required
                                         />
                                     </div>
@@ -115,7 +115,7 @@ export default function StudentFeedbackPage() {
                                     <div className="flex justify-end">
                                         <button
                                             type="submit"
-                                            className="flex items-center gap-2 px-8 py-3.5 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-all font-semibold shadow-md active:scale-95"
+                                            className="flex items-center gap-2 px-8 py-3.5 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-all  shadow-md active:scale-95"
                                         >
                                             <Send className="w-4 h-4" />
                                             Submit Feedback
@@ -127,7 +127,7 @@ export default function StudentFeedbackPage() {
 
                         {/* Previous Feedback Summary (Optional/Mock) */}
                         {!submitted && (
-                            <div className="mt-8 p-6 bg-yellow-50/50 rounded-xl border border-yellow-100 flex items-start gap-4">
+                            <div className="mt-8 p-6 bg-yellow-50/50 rounded-lg border border-yellow-100 flex items-start gap-4">
                                 <div className="w-10 h-10 bg-yellow-100 rounded-lg flex items-center justify-center flex-shrink-0 text-yellow-600">
                                     <MessageSquare className="w-5 h-5" />
                                 </div>
