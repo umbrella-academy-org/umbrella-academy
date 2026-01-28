@@ -6,7 +6,7 @@ This implementation plan restructures the educational platform to implement a wi
 
 ## Tasks
 
-- [ ] 1. Set up wing-based data models and database schema
+- [x] 1. Set up wing-based data models and database schema
   - Create TypeScript interfaces for Wing, Company, User, and related entities
   - Set up database migrations for new wing-based structure
   - Implement data access layer for wing management
@@ -20,13 +20,13 @@ This implementation plan restructures the educational platform to implement a wi
     - _Requirements: 1.1, 1.2, 1.3, 1.4_
 
 - [ ] 3. Build wing exploration and company display system
-  - [ ] 3.1 Create wing explorer component with company cards
+  - [x] 3.1 Create wing explorer component with company cards
     - Implement wing listing with industry categorization
     - Create company card components with website links, achievements, teaching focus, and images
     - Build hierarchical display showing wings containing companies
     - _Requirements: 2.1, 2.2, 2.3, 2.4, 2.5_
 
-  - [ ] 3.2 Implement wing selection workflow
+  - [x] 3.2 Implement wing selection workflow
     - Create wing selection interface with detailed company information
     - Implement permanent wing assignment upon selection
     - Trigger roadmap creation process after wing selection
@@ -36,13 +36,13 @@ This implementation plan restructures the educational platform to implement a wi
   - Run `npx tsc` to check for TypeScript compilation errors, ask the user if questions arise.
 
 - [ ] 5. Implement live session and collaborative roadmap creation
-  - [ ] 5.1 Create live session booking system
+  - [x] 5.1 Create live session booking system
     - Build trainer availability checking and session scheduling
     - Implement screen sharing integration setup
     - Create session management interface for trainers and students
     - _Requirements: 4.1, 4.2_
 
-  - [ ] 5.2 Build collaborative roadmap creation form
+  - [x] 5.2 Build collaborative roadmap creation form
     - Implement real-time collaborative form that both trainer and student can edit
     - Create roadmap data structure with goals, learning path, timeline, and assessment criteria
     - Implement session completion and roadmap saving for both parties
@@ -56,27 +56,27 @@ This implementation plan restructures the educational platform to implement a wi
     - _Requirements: 5.1, 5.2, 5.3, 5.4, 5.5_
 
 - [ ] 7. Build mentor management system with standardized tables
-  - [ ] 7.1 Create table management component
+  - [x] 7.1 Create table management component
     - Build reusable DataTable component with checkboxes, filters, and search
     - Implement filter controls at top of tables
     - Create search functionality for quick user discovery
     - Add column sorting and selection management
     - _Requirements: 6.1, 6.2, 6.3_
 
-  - [ ] 7.2 Implement mentor management interfaces
+  - [x] 7.2 Implement mentor management interfaces
     - Create mentor dashboard with trainer and student management tables
     - Implement wing-scoped user management operations
     - Build comprehensive user profile display with progress, status, and contact details
     - _Requirements: 6.4, 6.5_
 
 - [ ] 8. Implement MoMo payment system with revenue sharing
-  - [ ] 8.1 Create MoMo payment integration
+  - [x] 8.1 Create MoMo payment integration
     - Implement MoMo payment gateway integration
     - Create payment processing workflow for students
     - Build payment method restriction (MoMo only)
     - _Requirements: 7.1, 7.5_
 
-  - [ ] 8.2 Build automatic revenue distribution system
+  - [x] 8.2 Build automatic revenue distribution system
     - Implement 65% wing, 25% Umbrella Academy revenue split
     - Create payment-wing association tracking
     - Build financial reporting organized by wing
@@ -112,10 +112,11 @@ This implementation plan restructures the educational platform to implement a wi
     - _Requirements: 9.2, 9.4, 9.5_
 
 - [ ] 12. Relocate existing pages and implement navigation
-  - [ ] 12.1 Move existing pages to new locations
+  - [x] 12.1 Move existing pages to new locations
     - Relocate subscription, support, feedback, live-session, and roadmap pages
     - Preserve all existing page functionality and content
     - Update routing to reflect new page locations
+    - **CRITICAL RESTRICTION**: Only change routing paths, never modify page UI/content. If any UI changes are made accidentally, revert them immediately.
     - _Requirements: 10.1, 10.2, 10.4_
 
   - [ ] 12.2 Implement sidebar navigation for post-signup pages

@@ -5,6 +5,7 @@ export * from './user';
 
 // Live session and learning activity types
 export * from './course';
+export * from './session';
 
 // Payment and subscription types
 export * from './payment';
@@ -23,6 +24,12 @@ export * from './components';
 
 // Form component types
 export * from './forms';
+
+// Reporting and support types
+export * from './reporting';
+
+// Table management types
+export * from './table';
 
 // Utility types
 export type SessionStatus = 'pending' | 'scheduled' | 'in-progress' | 'completed' | 'cancelled';

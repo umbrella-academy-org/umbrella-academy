@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
 
-import { Plus, User, Mail, Star, Users, CheckCircle, XCircle } from 'lucide-react';
+import { Plus, CheckCircle, XCircle } from 'lucide-react';
+import MentorsTable from '@/components/wing-admin/MentorsTable';
 
 export default function WingAdminMentorsPage() {
   const [showCreateForm, setShowCreateForm] = useState(false);
@@ -177,98 +178,7 @@ export default function WingAdminMentorsPage() {
             )}
 
             {/* Mentors List */}
-            <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead className="bg-gray-50">
-                    <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Mentor
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Expertise
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Students
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Performance
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Status
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Actions
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="bg-white divide-y divide-gray-200">
-                    {mentors.map((mentor) => (
-                      <tr key={mentor.id}>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="flex items-center">
-                            <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center mr-3">
-                              <User className="w-5 h-5 text-purple-600" />
-                            </div>
-                            <div>
-                              <div className="text-sm font-medium text-gray-900">{mentor.name}</div>
-                              <div className="text-sm text-gray-500">{mentor.email}</div>
-                            </div>
-                          </div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="flex flex-wrap gap-1">
-                            {mentor.expertise.slice(0, 2).map((skill, index) => (
-                              <span key={index} className="inline-flex px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full">
-                                {skill}
-                              </span>
-                            ))}
-                            {mentor.expertise.length > 2 && (
-                              <span className="inline-flex px-2 py-1 text-xs font-medium bg-gray-100 text-gray-800 rounded-full">
-                                +{mentor.expertise.length - 2}
-                              </span>
-                            )}
-                          </div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm text-gray-900">
-                            {mentor.currentStudents}/{mentor.maxStudents}
-                          </div>
-                          <div className="w-16 bg-gray-200 rounded-full h-1.5 mt-1">
-                            <div
-                              className="bg-yellow-600 h-1.5 rounded-full"
-                              style={{ width: `${(mentor.currentStudents / mentor.maxStudents) * 100}%` }}
-                            ></div>
-                          </div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="flex items-center gap-2">
-                            <Star className="w-4 h-4 text-yellow-500 fill-current" />
-                            <span className="text-sm font-medium text-gray-900">{mentor.rating}</span>
-                          </div>
-                          <div className="text-xs text-gray-500">
-                            {mentor.approvedRoadmaps} roadmaps • {mentor.approvedTrainers} trainers
-                          </div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
-                            {mentor.status}
-                          </span>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                          <button className="text-yellow-600 hover:text-yellow-700 mr-3">
-                            View Details
-                          </button>
-                          <button className="text-gray-600 hover:text-gray-700">
-                            Edit
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
+            <MentorsTable mentors={mentors} />
           </div>
         </main>
       </div>

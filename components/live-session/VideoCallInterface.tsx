@@ -171,7 +171,7 @@ export default function VideoCallInterface({
           <button 
             onClick={() => {
               onEndCall();
-              window.location.href = '/dashboard/student/live-session';
+              window.location.href = '/post-signup/live-session';
             }}
             className="w-12 h-12 lg:w-16 lg:h-16 bg-red-600 hover:bg-red-700 rounded-full flex items-center justify-center transition-all shadow-lg"
           >

@@ -13,7 +13,7 @@ export default function WingAdminProfilePage() {
         email: user?.email || 'j.doe@dreamize.rw',
         location: 'Kigali, Rwanda',
         bio: 'Wing Administrator responsible for the Software Engineering department. Overseeing 50+ trainers and 500+ students.',
-        wing: user?.wing || 'Software Engineering',
+        wing: user?.wingId || 'Software Engineering',
         joinDate: user?.joinDate || 'Jan 2021'
     });
 

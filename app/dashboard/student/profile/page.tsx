@@ -15,7 +15,7 @@ export default function StudentProfilePage() {
         phone: '+250 788 000 000',
         location: 'Kigali, Rwanda',
         bio: 'Passionate learner focused on Full Stack Development and AI implementation.',
-        wing: user?.wing || 'Software Engineering',
+        wing: user?.wingId || 'Software Engineering',
         joinDate: user?.joinDate || 'Jan 2024'
     });
 
@@ -29,26 +29,23 @@ export default function StudentProfilePage() {
             <Sidebar activeItem="Profile" userType="student" />
 
             <div className="flex-1 flex flex-col min-w-0">
-                <main className="flex-1 p-4 lg:p-8 overflow-y-auto bg-gray-50/30">
+                <main className="flex-1 p-2 overflow-y-auto bg-gray-50/30">
                     <div className="max-w-5xl mx-auto animate-fade-in">
                         {/* Profile Header Card */}
-                        <div className="bg-white rounded-[2rem] border border-gray-100 shadow-xl shadow-gray-200/50 overflow-hidden mb-8 ">
+                        <div className="bg-white rounded-lg border border-gray-100 shadow-xl shadow-gray-200/50 overflow-hidden mb-8 ">
                             <div className="h-48 bg-gradient-to-br from-yellow-400 via-yellow-500 to-orange-500 relative overflow-hidden">
                                 {/* Decorative Abstract Shapes */}
                                 <div className="absolute top-0 left-0 w-full h-full opacity-20">
                                     <div className="absolute -top-24 -left-24 w-64 h-64 bg-white rounded-full blur-3xl" />
                                     <div className="absolute top-1/2 -right-12 w-48 h-48 bg-orange-200 rounded-full blur-2xl" />
                                 </div>
-                                <button className="absolute bottom-6 right-8 p-3 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl text-white hover:bg-white/20 transition-all shadow-xl interactive-button">
-                                    <Camera className="w-5 h-5" />
-                                </button>
                             </div>
 
-                            <div className="px-10 pb-10">
+                            <div className="px-10 py-10">
                                 <div className="flex flex-col md:flex-row md:items-end -mt-16 gap-8">
                                     <div className="relative group">
-                                        <div className="w-32 h-32 rounded-[2.5rem] bg-white p-1.5 shadow-2xl shadow-yellow-200/50 transform group-hover:scale-105 transition-all duration-500">
-                                            <div className="w-full h-full bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-[2.2rem] flex items-center justify-center text-yellow-700 text-4xl font-extrabold border border-yellow-200 uppercase  er">
+                                        <div className="w-32 h-32 rounded-full bg-white p-1.5 shadow-2xl shadow-yellow-200/50 transform group-hover:scale-105 transition-all duration-500">
+                                            <div className="w-full h-full bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-full flex items-center justify-center text-yellow-700 text-4xl font-extrabold border border-yellow-200 uppercase  er">
                                                 {profileData.name.split(' ').map(n => n[0]).join('')}
                                             </div>
                                         </div>
@@ -57,11 +54,11 @@ export default function StudentProfilePage() {
                                         </div>
                                     </div>
 
-                                    <div className="flex-1 flex flex-col md:flex-row md:items-center justify-between gap-6 pb-2">
+                                    <div className="flex-1 flex flex-col md:flex-row md:items-center justify-between gap-6  pb-2">
                                         <div>
                                             <div className="flex items-center gap-3">
-                                                <h1 className="text-3xl font-black text-gray-900  ">{profileData.name}</h1>
-                                                <div className="px-2.5 py-1 bg-yellow-50 text-yellow-700 border border-yellow-100 rounded-full text-[10px] font-black uppercase tracking-wider">PRO STUDENT</div>
+                                                <h1 className="text-3xl font-semibold text-gray-900  ">{profileData.name}</h1>
+                                                <div className="px-2.5 py-1 bg-yellow-50 text-yellow-700 border border-yellow-100 rounded-full text-[10px] font-semibold uppercase tracking-wider">PRO STUDENT</div>
                                             </div>
                                             <p className="text-gray-500 font-semibold flex items-center gap-2 mt-1.5">
                                                 <BookOpen className="w-4.5 h-4.5 text-yellow-600" />
@@ -76,13 +73,13 @@ export default function StudentProfilePage() {
                                                 <>
                                                     <button
                                                         onClick={() => setIsEditing(false)}
-                                                        className="px-6 py-3 border border-gray-200 text-gray-600 rounded-2xl font-bold hover:bg-gray-50 transition-all active:scale-95"
+                                                        className="px-6 py-3 border border-gray-200 text-gray-600 rounded-lg font-bold hover:bg-gray-50 transition-all active:scale-95"
                                                     >
                                                         Cancel
                                                     </button>
                                                     <button
                                                         onClick={handleSave}
-                                                        className="px-8 py-3 bg-gray-900 text-white rounded-2xl font-bold hover:bg-black shadow-xl shadow-gray-200 active:scale-95 transition-all"
+                                                        className="px-8 py-3 bg-gray-900 text-white rounded-lg font-bold hover:bg-black shadow-xl shadow-gray-200 active:scale-95 transition-all"
                                                     >
                                                         Save Changes
                                                     </button>
@@ -90,7 +87,7 @@ export default function StudentProfilePage() {
                                             ) : (
                                                 <button
                                                     onClick={() => setIsEditing(true)}
-                                                    className="flex items-center gap-2.5 px-8 py-3 bg-white border border-gray-200 text-gray-800 rounded-2xl font-bold hover:border-yellow-600 hover:text-yellow-600 shadow-sm hover:shadow-yellow-100/50 transition-all active:scale-95 group"
+                                                    className="flex items-center gap-2.5 px-8 py-3 bg-white border border-gray-200 text-gray-800 rounded-lg font-bold hover:border-yellow-600 hover:text-yellow-600 shadow-sm hover:shadow-yellow-100/50 transition-all active:scale-95 group"
                                                 >
                                                     <Edit2 className="w-4.5 h-4.5 group-hover:rotate-12 transition-transform" />
                                                     Edit Profile
@@ -105,10 +102,10 @@ export default function StudentProfilePage() {
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                             {/* Left Column - Personal Info */}
                             <div className="lg:col-span-2 space-y-8 animate-slide-up">
-                                <div className="bg-white rounded-[2rem] border border-gray-100 shadow-xl shadow-gray-200/30 p-10 ">
+                                <div className="bg-white rounded-lg border border-gray-100 shadow-xl shadow-gray-200/30 p-10 ">
                                     <div className="flex items-center justify-between mb-8">
                                         <div className="flex items-center gap-4">
-                                            <div className="w-12 h-12 bg-gray-50 rounded-2xl flex items-center justify-center text-gray-600">
+                                            <div className="w-12 h-12 bg-gray-50 rounded-lg flex items-center justify-center text-gray-600">
                                                 <User className="w-6 h-6" />
                                             </div>
                                             <h3 className="text-xl font-bold text-gray-900">Personal Details</h3>
@@ -188,20 +185,20 @@ export default function StudentProfilePage() {
                                                 value={profileData.bio}
                                                 onChange={(e) => setProfileData({ ...profileData, bio: e.target.value })}
                                                 rows={4}
-                                                className="w-full px-5 py-4 bg-gray-50 border-gray-100 rounded-[1.5rem] focus:ring-4 focus:ring-yellow-500/10 focus:border-yellow-500 outline-none transition-all font-medium resize-none leading-relaxed"
+                                                className="w-full px-5 py-4 bg-gray-50 border-gray-100 rounded-lg focus:ring-4 focus:ring-yellow-500/10 focus:border-yellow-500 outline-none transition-all font-medium resize-none leading-relaxed"
                                                 placeholder="Tell us about yourself..."
                                             />
                                         ) : (
-                                            <div className="p-6 bg-gray-50/50 rounded-[1.5rem] border border-transparent">
+                                            <div className="p-6 bg-gray-50/50 rounded-lg border border-transparent">
                                                 <p className="text-gray-700 font-medium leading-relaxed italic">"{profileData.bio}"</p>
                                             </div>
                                         )}
                                     </div>
                                 </div>
 
-                                <div className="bg-white rounded-[2rem] border border-gray-100 shadow-xl shadow-gray-200/30 p-10 ">
+                                <div className="bg-white rounded-lg border border-gray-100 shadow-xl shadow-gray-200/30 p-10 ">
                                     <div className="flex items-center gap-4 mb-8">
-                                        <div className="w-12 h-12 bg-gray-50 rounded-2xl flex items-center justify-center text-gray-600">
+                                        <div className="w-12 h-12 bg-gray-50 rounded-lg flex items-center justify-center text-gray-600">
                                             <Shield className="w-6 h-6" />
                                         </div>
                                         <h3 className="text-xl font-bold text-gray-900">Academy Identity</h3>
@@ -209,22 +206,22 @@ export default function StudentProfilePage() {
 
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                         <div className="flex items-center gap-6 p-6 bg-yellow-50/30 rounded-[1.8rem] border border-yellow-100/50 group hover:bg-yellow-50 transition-colors">
-                                            <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-yellow-600 shadow-sm transform group-hover:scale-110 transition-transform duration-500">
+                                            <div className="w-14 h-14 bg-white rounded-lg flex items-center justify-center text-yellow-600 shadow-sm transform group-hover:scale-110 transition-transform duration-500">
                                                 <BookOpen className="w-7 h-7" />
                                             </div>
                                             <div>
                                                 <p className="text-xs font-bold text-yellow-800/60 uppercase   mb-1">Enrolled Wing</p>
-                                                <p className="text-lg font-black text-gray-900">{profileData.wing}</p>
+                                                <p className="text-lg font-semibold text-gray-900">{profileData.wing}</p>
                                             </div>
                                         </div>
 
                                         <div className="flex items-center gap-6 p-6 bg-blue-50/30 rounded-[1.8rem] border border-blue-100/50 group hover:bg-blue-50 transition-colors">
-                                            <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-blue-600 shadow-sm transform group-hover:scale-110 transition-transform duration-500">
+                                            <div className="w-14 h-14 bg-white rounded-lg flex items-center justify-center text-blue-600 shadow-sm transform group-hover:scale-110 transition-transform duration-500">
                                                 <Calendar className="w-7 h-7" />
                                             </div>
                                             <div>
                                                 <p className="text-xs font-bold text-blue-800/60 uppercase   mb-1">Joining Date</p>
-                                                <p className="text-lg font-black text-gray-900">{profileData.joinDate}</p>
+                                                <p className="text-lg font-semibold text-gray-900">{profileData.joinDate}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -233,7 +230,7 @@ export default function StudentProfilePage() {
 
                             {/* Right Column - Preferences & Support */}
                             <div className="space-y-8 animate-slide-up [animation-delay:200ms]">
-                                <div className="bg-white rounded-[2rem] border border-gray-100 shadow-xl shadow-gray-200/30 p-8 ">
+                                <div className="bg-white rounded-lg border border-gray-100 shadow-xl shadow-gray-200/30 p-8 ">
                                     <h3 className="text-xl font-bold text-gray-900 mb-8 flex items-center gap-3">
                                         <Settings className="w-5 h-5 text-gray-400" />
                                         Account Settings
@@ -263,14 +260,14 @@ export default function StudentProfilePage() {
                                     </div>
                                 </div>
 
-                                <div className="bg-gray-900 rounded-[2rem] p-10 text-white relative overflow-hidden shadow-2xl shadow-gray-900/40 group">
+                                <div className="bg-gray-900 rounded-lg p-10 text-white relative overflow-hidden shadow-2xl shadow-gray-900/40 group">
                                     <div className="relative z-10">
-                                        <div className="w-14 h-14 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                                        <div className="w-14 h-14 bg-white/10 backdrop-blur-md rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
                                             <HelpCircleIcon className="w-7 h-7 text-yellow-500" />
                                         </div>
-                                        <h3 className="text-2xl font-black mb-3  ">Access Support</h3>
+                                        <h3 className="text-2xl font-semibold mb-3  ">Access Support</h3>
                                         <p className="text-gray-400 font-medium text-sm leading-relaxed mb-8">Got questions? Our student success team is ready to assist you 24/7.</p>
-                                        <button className="w-full py-4 bg-yellow-600 text-white rounded-[1.2rem] font-black hover:bg-yellow-500 shadow-xl shadow-yellow-600/20 active:scale-95 transition-all flex items-center justify-center gap-2 group">
+                                        <button className="w-full py-4 bg-yellow-600 text-white rounded-[1.2rem] font-semibold hover:bg-yellow-500 shadow-xl shadow-yellow-600/20 active:scale-95 transition-all flex items-center justify-center gap-2 group">
                                             Get Assistance
                                             <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                         </button>
@@ -300,7 +297,7 @@ function SettingsItem({ icon, label, color }: { icon: React.ReactNode, label: st
     const colorClasses = colors[color as keyof typeof colors] || colors.yellow;
 
     return (
-        <button className="w-full flex items-center justify-between p-4 rounded-2xl hover:bg-gray-50 transition-all border border-transparent hover:border-gray-100 group">
+        <button className="w-full flex items-center justify-between p-4 rounded-lg hover:bg-gray-50 transition-all border border-transparent hover:border-gray-100 group">
             <div className="flex items-center gap-4">
                 <div className={`w-10 h-10 rounded-lg flex items-center justify-center group-hover:text-white transition-all duration-300 ${colorClasses}`}>
                     {icon}

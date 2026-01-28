@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Home, Calendar, Map, Bell, Video, CreditCard, HelpCircle, MessageSquare, X, Settings, Menu, User, LogOut } from 'lucide-react';
+import { Home, Calendar, Map, Bell, Video, CreditCard, HelpCircle, MessageSquare, X, Settings, Menu, User, LogOut, AlertCircle, CheckCircle } from 'lucide-react';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
 import { useAuth } from '@/contexts';
 import { SidebarProps, SidebarItem, UserType } from '@/types';
@@ -9,6 +9,10 @@ import { SidebarProps, SidebarItem, UserType } from '@/types';
 export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps) {
   const [currentActive, setCurrentActive] = useState(activeItem);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isNewUser, setIsNewUser] = useState(false);
+  const [showNewUserGuide, setShowNewUserGuide] = useState(false);
+  // Dev toggle for new user simulation (for development only)
+  const [devNewUserMode, setDevNewUserMode] = useState(false);
   const { navigate } = useNavigationWithLoading();
   const { user, logout } = useAuth();
 
@@ -17,6 +21,52 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
   const userName = user?.name || 'User';
   const userEmail = user?.email || 'user@umbrella.rw';
   const userInitials = userName.split(' ').map(n => n[0]).join('').toUpperCase();
+
+  // Get completion status for new user steps
+  const getNewUserSteps = () => {
+    const hasSelectedWing = localStorage.getItem('selectedWing');
+    const hasCreatedRoadmap = localStorage.getItem('hasRoadmap');
+    const hasBookedSession = localStorage.getItem('hasBookedSession');
+    
+    return [
+      {
+        id: 'wing',
+        label: 'Choose Your Wing',
+        completed: !!hasSelectedWing,
+        href: '/wing-explorer',
+        description: 'Select your industry focus'
+      },
+      {
+        id: 'roadmap',
+        label: 'Create Learning Roadmap',
+        completed: !!hasCreatedRoadmap,
+        href: '/post-signup/roadmap',
+        description: 'Plan your learning journey'
+      },
+      {
+        id: 'session',
+        label: 'Book First Live Session',
+        completed: !!hasBookedSession,
+        href: '/post-signup/live-session',
+        description: 'Schedule with a trainer'
+      }
+    ];
+  };
+
+  // Check if user is new and what steps they've completed
+  useEffect(() => {
+    const newUserFlag = localStorage.getItem('isNewUser');
+    const hasSelectedWing = localStorage.getItem('selectedWing');
+    const hasCreatedRoadmap = localStorage.getItem('hasRoadmap');
+    
+    if ((newUserFlag === 'true' || devNewUserMode) && currentUserType === 'student') {
+      setIsNewUser(true);
+      setShowNewUserGuide(!hasSelectedWing || !hasCreatedRoadmap);
+    } else {
+      setIsNewUser(false);
+      setShowNewUserGuide(false);
+    }
+  }, [currentUserType, devNewUserMode]);
 
   // Update current active when prop changes
   useEffect(() => {
@@ -236,7 +286,7 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
           {
             icon: <Map className="w-5 h-5" />,
             label: 'Roadmap',
-            href: '/dashboard/student/roadmap'
+            href: '/post-signup/roadmap'
           },
           {
             icon: <Bell className="w-5 h-5" />,
@@ -246,22 +296,22 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
           {
             icon: <Video className="w-5 h-5" />,
             label: 'Live Session',
-            href: '/dashboard/student/live-session'
+            href: '/post-signup/live-session'
           },
           {
             icon: <CreditCard className="w-5 h-5" />,
             label: 'Subscription',
-            href: '/dashboard/student/subscription'
+            href: '/post-signup/subscription'
           },
           {
             icon: <HelpCircle className="w-5 h-5" />,
             label: 'Support',
-            href: '/dashboard/student/support'
+            href: '/post-signup/support'
           },
           {
             icon: <MessageSquare className="w-5 h-5" />,
             label: 'Feedback',
-            href: '/dashboard/student/feedback'
+            href: '/post-signup/feedback'
           },
           {
             icon: <Settings className="w-5 h-5" />,
@@ -315,7 +365,7 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
           progressLabel: '8 Months',
           progressValue: 80,
           renewLabel: 'Renew Plan',
-          renewHref: '/dashboard/student/subscription/renew'
+          renewHref: '/post-signup/subscription/renew'
         };
     }
   };
@@ -449,6 +499,54 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
             </div>
           </div>
         </div>
+
+        {/* Dev Toggle & New User Guide */}
+        {currentUserType === 'student' && (
+          <div className="p-3 lg:p-4 border-t border-gray-800">
+            {/* Dev Toggle */}
+            <div className="mb-4">
+              <button
+                onClick={() => setDevNewUserMode(!devNewUserMode)}
+                className={`w-full px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
+                  devNewUserMode 
+                    ? 'bg-yellow-600 text-white' 
+                    : 'bg-gray-800 text-gray-400 hover:text-white'
+                }`}
+              >
+                DEV: {devNewUserMode ? 'New User Mode ON' : 'New User Mode OFF'}
+              </button>
+            </div>
+
+            {/* New User Guide */}
+            {showNewUserGuide && (
+              <div className="bg-gray-800 rounded-lg p-4">
+                <div className="flex items-center gap-2 mb-3">
+                  <AlertCircle className="w-4 h-4 text-yellow-600" />
+                  <span className="text-sm font-medium text-white">Getting Started</span>
+                </div>
+                <div className="space-y-2">
+                  {getNewUserSteps().map((step) => (
+                    <div key={step.id} className="flex items-center gap-2">
+                      {step.completed ? (
+                        <CheckCircle className="w-4 h-4 text-green-500" />
+                      ) : (
+                        <div className="w-4 h-4 border-2 border-gray-600 rounded-full" />
+                      )}
+                      <button
+                        onClick={() => navigate(step.href)}
+                        className={`text-xs ${
+                          step.completed ? 'text-gray-400' : 'text-yellow-600 hover:text-yellow-500'
+                        }`}
+                      >
+                        {step.label}
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
 
         {/* User Profile */}
         <div className="p-3 lg:p-4 border-t border-gray-800">

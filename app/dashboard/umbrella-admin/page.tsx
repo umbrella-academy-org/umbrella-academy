@@ -178,7 +178,7 @@ export default function UmbrellaAdminDashboard() {
                         <div className="flex-1">
                           <div className="font-medium text-gray-900 text-sm">{wing.name}</div>
                           <div className="text-xs text-gray-500">
-                            {wing.studentsCount} students • {wing.revenue.toLocaleString()} RWF
+                            {wing.studentsCount} students • {wing.revenue?.toLocaleString()} RWF
                           </div>
                         </div>
                         <div className="flex items-center gap-3">

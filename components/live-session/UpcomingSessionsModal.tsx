@@ -96,7 +96,7 @@ export default function UpcomingSessionsModal({ onClose }: UpcomingSessionsModal
                   {session.canJoin ? 'Join' : "I won't be able to join"}
                 </button>
                 <a 
-                  href="/dashboard/student/live-session/call"
+                  href="/post-signup/live-session/call"
                   className="text-sm text-yellow-600 hover:text-yellow-700 font-medium"
                 >
                   Join

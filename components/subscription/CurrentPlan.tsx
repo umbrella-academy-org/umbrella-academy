@@ -30,7 +30,7 @@ export default function CurrentPlan() {
         </div>
 
         <a 
-          href="/dashboard/student/subscription/renew"
+          href="/post-signup/subscription/renew"
           className="flex items-center gap-2 text-yellow-600 hover:text-yellow-700 font-medium text-sm"
         >
           Upgrade plan
