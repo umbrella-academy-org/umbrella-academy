@@ -17,73 +17,53 @@ export default function BillingInvoices() {
   const invoices: Invoice[] = [
     {
       id: '1',
-      number: 'Invoice #007 - Dec 2022',
-      date: 'Dec 1, 2022',
-      billingDate: 'Dec 1, 2022',
+      number: 'Invoice #WE-2024-001',
+      date: 'Jan 15, 2024',
+      billingDate: 'Jan 15, 2024',
       status: 'Paid',
-      amount: 'RWF 15,000',
-      plan: 'Basic plan',
-      duration: '1 Yr'
+      amount: 'RWF 75,000',
+      plan: 'Wing Explorer Plan',
+      duration: '1 Year'
     },
     {
       id: '2',
-      number: 'Invoice #006 - Nov 2022',
-      date: 'Nov 1, 2022',
-      billingDate: 'Nov 1, 2022',
+      number: 'Invoice #WE-2023-012',
+      date: 'Dec 15, 2023',
+      billingDate: 'Dec 15, 2023',
       status: 'Paid',
-      amount: 'RWF 15,000',
-      plan: 'Basic plan',
-      duration: '1 Yr'
+      amount: 'RWF 25,000',
+      plan: 'Wing Explorer Plan',
+      duration: 'Monthly'
     },
     {
       id: '3',
-      number: 'Invoice #005 - Oct 2022',
-      date: 'Oct 1, 2022',
-      billingDate: 'Oct 1, 2022',
+      number: 'Invoice #WE-2023-011',
+      date: 'Nov 15, 2023',
+      billingDate: 'Nov 15, 2023',
       status: 'Paid',
-      amount: 'RWF 15,000',
-      plan: 'Basic plan',
-      duration: '1 Yr'
+      amount: 'RWF 25,000',
+      plan: 'Wing Explorer Plan',
+      duration: 'Monthly'
     },
     {
       id: '4',
-      number: 'Invoice #004 - Sep 2022',
-      date: 'Sep 1, 2022',
-      billingDate: 'Sep 1, 2022',
+      number: 'Invoice #WE-2023-010',
+      date: 'Oct 15, 2023',
+      billingDate: 'Oct 15, 2023',
       status: 'Paid',
-      amount: 'RWF 15,000',
-      plan: 'Basic plan',
-      duration: '1 Yr'
+      amount: 'RWF 25,000',
+      plan: 'Wing Explorer Plan',
+      duration: 'Monthly'
     },
     {
       id: '5',
-      number: 'Invoice #003 - Aug 2022',
-      date: 'Aug 1, 2022',
-      billingDate: 'Aug 1, 2022',
+      number: 'Invoice #WE-2023-009',
+      date: 'Sep 15, 2023',
+      billingDate: 'Sep 15, 2023',
       status: 'Paid',
-      amount: 'RWF 15,000',
-      plan: 'Basic plan',
-      duration: '1 Yr'
-    },
-    {
-      id: '6',
-      number: 'Invoice #002 - Jul 2022',
-      date: 'Jul 1, 2022',
-      billingDate: 'Jul 1, 2022',
-      status: 'Paid',
-      amount: 'RWF 15,000',
-      plan: 'Basic plan',
-      duration: '1 Yr'
-    },
-    {
-      id: '7',
-      number: 'Invoice #001 - Jun 2022',
-      date: 'Jun 1, 2022',
-      billingDate: 'Jun 1, 2022',
-      status: 'Paid',
-      amount: 'RWF 15,000',
-      plan: 'Basic plan',
-      duration: '1 Yr'
+      amount: 'RWF 25,000',
+      plan: 'Wing Explorer Plan',
+      duration: 'Monthly'
     }
   ];
 
