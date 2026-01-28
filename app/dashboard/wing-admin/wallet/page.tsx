@@ -1,6 +1,7 @@
 'use client';
 
 import Sidebar from '@/components/dashboard/Sidebar';
+import WalletTransactionsTable from '@/components/wing-admin/WalletTransactionsTable';
 
 import { CreditCard, TrendingUp, Download, ArrowUpRight } from 'lucide-react';
 
@@ -89,52 +90,8 @@ export default function WingAdminWalletPage() {
               <div className="p-6 border-b border-gray-200">
                 <h3 className="text-lg font-semibold text-gray-900">Transaction History</h3>
               </div>
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead className="bg-gray-50">
-                    <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Description
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Amount
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Date
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Status
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="bg-white divide-y divide-gray-200">
-                    {transactions.map((transaction) => (
-                      <tr key={transaction.id}>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="flex items-center">
-                            <div className={`w-2 h-2 rounded-full mr-3 ${transaction.type === 'income' ? 'bg-green-500' : 'bg-red-500'
-                              }`}></div>
-                            <div className="text-sm text-gray-900">{transaction.description}</div>
-                          </div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <div className={`text-sm font-medium ${transaction.type === 'income' ? 'text-green-600' : 'text-red-600'
-                            }`}>
-                            {transaction.type === 'income' ? '+' : ''}€{Math.abs(transaction.amount).toFixed(2)}
-                          </div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                          {transaction.date}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
-                            {transaction.status}
-                          </span>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+              <div className="p-6">
+                <WalletTransactionsTable transactions={transactions} />
               </div>
             </div>
           </div>

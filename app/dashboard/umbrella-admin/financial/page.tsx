@@ -1,15 +1,23 @@
 'use client';
 
 import Sidebar from '@/components/dashboard/Sidebar';
+import TransactionsTable from '@/components/umbrella-admin/TransactionsTable';
 
 import { TrendingUp, DollarSign, CreditCard, PieChart } from 'lucide-react';
 
 export default function UmbrellaAdminFinancialPage() {
+  const transactions = [
+    { id: 1, description: 'Student Payment - Alice Johnson', wing: 'Programming', amount: 500, umbrellaShare: 325, date: '2024-01-22' },
+    { id: 2, description: 'Student Payment - Bob Wilson', wing: 'Design', amount: 450, umbrellaShare: 292.5, date: '2024-01-22' },
+    { id: 3, description: 'Student Payment - Carol Davis', wing: 'Marketing', amount: 400, umbrellaShare: 260, date: '2024-01-21' },
+    { id: 4, description: 'Student Payment - David Wilson', wing: 'Data Science', amount: 550, umbrellaShare: 357.5, date: '2024-01-21' },
+    { id: 5, description: 'Student Payment - Eva Martinez', wing: 'Business', amount: 380, umbrellaShare: 247, date: '2024-01-20' }
+  ];
   return (
     <div className="flex h-screen bg-white">
       <Sidebar activeItem="Financial" userType="umbrella-admin" />
 
-      <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
+      <div className="flex-1 flex flex-col overflow-y-scroll lg:ml-0">
         <main className="flex-1 overflow-auto">
           <div className="p-3 lg:p-4">
             <div className="mb-6">
@@ -102,53 +110,8 @@ export default function UmbrellaAdminFinancialPage() {
               <div className="p-6 border-b border-gray-200">
                 <h3 className="text-lg font-semibold text-gray-900">Recent Transactions</h3>
               </div>
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead className="bg-gray-50">
-                    <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Transaction
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Wing
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Amount
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Umbrella Share
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Date
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="bg-white divide-y divide-gray-200">
-                    {[
-                      { id: 1, description: 'Student Payment - Alice Johnson', wing: 'Programming', amount: 500, umbrellaShare: 325, date: '2024-01-22' },
-                      { id: 2, description: 'Student Payment - Bob Wilson', wing: 'Design', amount: 450, umbrellaShare: 292.5, date: '2024-01-22' },
-                      { id: 3, description: 'Student Payment - Carol Davis', wing: 'Marketing', amount: 400, umbrellaShare: 260, date: '2024-01-21' }
-                    ].map((transaction) => (
-                      <tr key={transaction.id}>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                          {transaction.description}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                          {transaction.wing}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                          €{transaction.amount}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-green-600">
-                          €{transaction.umbrellaShare}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                          {transaction.date}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+              <div className="p-6">
+                <TransactionsTable transactions={transactions} />
               </div>
             </div>
           </div>
