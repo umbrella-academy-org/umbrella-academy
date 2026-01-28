@@ -147,7 +147,7 @@ export default function BillingInvoices() {
                   </div>
                 </td>
                 <td className="py-4 px-4">
-                  <button className="text-sm text-blue-600 hover:text-blue-700 font-medium">
+                  <button className="text-sm text-yellow-600 hover:text-yellow-700 font-medium">
                     Download
                   </button>
                 </td>

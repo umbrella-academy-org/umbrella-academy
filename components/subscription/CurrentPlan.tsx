@@ -25,13 +25,13 @@ export default function CurrentPlan() {
             <span>16.67%</span>
           </div>
           <div className="w-full bg-gray-200 rounded-full h-2">
-            <div className="bg-blue-600 h-2 rounded-full" style={{ width: '16.67%' }}></div>
+            <div className="bg-yellow-600 h-2 rounded-full" style={{ width: '16.67%' }}></div>
           </div>
         </div>
 
         <a 
           href="/dashboard/student/subscription/renew"
-          className="flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium text-sm"
+          className="flex items-center gap-2 text-yellow-600 hover:text-yellow-700 font-medium text-sm"
         >
           Upgrade plan
           <ArrowRight className="w-4 h-4" />
