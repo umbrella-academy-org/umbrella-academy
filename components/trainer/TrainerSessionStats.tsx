@@ -63,7 +63,7 @@ export default function TrainerSessionStats() {
         {stats.map((stat, index) => (
           <div
             key={stat.title}
-            className={`${stat.bgColor} ${stat.borderColor} border rounded-2xl p-5 hover:shadow-lg hover:shadow-yellow-600/5 transition-all duration-300 group`}
+            className={`${stat.bgColor} ${stat.borderColor} border rounded-lg p-5 hover:shadow-lg hover:shadow-yellow-600/5 transition-all duration-300 group`}
             style={{ animationDelay: `${index * 100}ms` }}
           >
             <div className="flex items-center justify-between mb-4">

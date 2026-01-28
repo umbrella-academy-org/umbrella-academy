@@ -85,11 +85,12 @@ This document outlines the requirements for a comprehensive restructuring of an 
 
 #### Acceptance Criteria
 
-1. WHEN mentors access management features, THE Educational_Platform SHALL display trainer and student profiles in organized tables
-2. WHEN viewing user tables, THE Educational_Platform SHALL provide search filters for efficient user discovery
-3. THE Educational_Platform SHALL grant mentors control over both trainers and students within their wing only
-4. WHEN mentors perform management actions, THE Educational_Platform SHALL restrict operations to users within the same wing
-5. THE Educational_Platform SHALL provide comprehensive user profile information including progress, status, and contact details
+1. WHEN mentors access management features, THE Educational_Platform SHALL display trainer and student profiles in organized tables with checkboxes for selection
+2. WHEN viewing user tables, THE Educational_Platform SHALL provide filter controls at the top of tables for efficient data filtering
+3. WHEN viewing user tables, THE Educational_Platform SHALL provide search functionality at the top of tables for quick user discovery
+4. THE Educational_Platform SHALL grant mentors control over both trainers and students within their wing only
+5. WHEN mentors perform management actions, THE Educational_Platform SHALL restrict operations to users within the same wing
+6. THE Educational_Platform SHALL provide comprehensive user profile information including progress, status, and contact details in table format
 
 ### Requirement 7: Wing-Based Payment System
 
@@ -127,7 +128,19 @@ This document outlines the requirements for a comprehensive restructuring of an 
 4. THE Educational_Platform SHALL maintain issue status and resolution history for all submitted problems
 5. WHEN users check issue status, THE Educational_Platform SHALL provide real-time updates on resolution progress
 
-### Requirement 10: Data Migration and System Transition
+### Requirement 10: Page Relocation and Navigation Structure
+
+**User Story:** As a platform administrator, I want to relocate existing pages to new locations with appropriate navigation, so that the new user flow is implemented without rebuilding existing functionality.
+
+#### Acceptance Criteria
+
+1. THE Educational_Platform SHALL move existing pages to new locations within the restructured navigation hierarchy
+2. WHEN pages are accessed after user signup, THE Educational_Platform SHALL display a sidebar navigation component
+3. THE Educational_Platform SHALL preserve all existing page functionality during relocation
+4. WHEN users navigate post-signup pages, THE Educational_Platform SHALL provide consistent sidebar navigation across all relocated pages
+5. THE Educational_Platform SHALL maintain all existing page content and features without modification during the restructuring
+
+### Requirement 11: Data Migration and System Transition
 
 **User Story:** As a platform administrator, I want seamless migration from the current system to the new structure, so that existing users and data are preserved.
 
