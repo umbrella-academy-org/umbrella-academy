@@ -1,147 +1,216 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
-
-import { MessageSquare, Star, Send, CheckCircle2 } from 'lucide-react';
+import { useAuth } from '@/contexts';
+import { useNavigationWithLoading } from '@/lib/utils/navigation';
 
 export default function StudentFeedbackPage() {
-    const [feedback, setFeedback] = useState('');
-    const [rating, setRating] = useState(0);
-    const [category, setCategory] = useState('Learning Experience');
-    const [submitted, setSubmitted] = useState(false);
+  const { user, isAuthenticated, isLoading: authLoading } = useAuth();
+  const { navigate } = useNavigationWithLoading();
+  const [feedbackType, setFeedbackType] = useState('general');
+  const [rating, setRating] = useState(5);
+  const [subject, setSubject] = useState('');
+  const [feedback, setFeedback] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const categories = [
-        'Learning Experience',
-        'Platform Interface',
-        'Trainer Performance',
-        'Course Content',
-        'Technical Support',
-        'Other'
-    ];
+  // Redirect if not authenticated or not a student
+  useEffect(() => {
+    if (!authLoading && !isAuthenticated) {
+      navigate('/auth/login');
+      return;
+    }
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        // Simulate submission
-        setTimeout(() => {
-            setSubmitted(true);
-        }, 500);
-    };
+    if (!authLoading && user && user.role !== 'student') {
+      const dashboardRoutes = {
+        'trainer': '/dashboard/trainer',
+        'mentor': '/dashboard/mentor',
+        'wing-admin': '/dashboard/wing-admin',
+        'umbrella-admin': '/dashboard/umbrella-admin'
+      };
+      navigate(dashboardRoutes[user.role] || '/');
+    }
+  }, [authLoading, isAuthenticated, user, navigate]);
 
+  if (authLoading) {
     return (
-        <div className="flex h-screen bg-white">
-            <Sidebar activeItem="Feedback" userType="student" />
-
-            <div className="flex-1 flex flex-col min-w-0">
-                <main className="flex-1 p-4 lg:p-8 overflow-y-auto bg-gray-50/30">
-                    <div className="max-w-3xl mx-auto">
-                        <div className="mb-8">
-                            <h1 className="text-3xl font-semibold text-gray-900 mb-2">Feedback</h1>
-                            <p className="text-gray-500">Your thoughts help us improve. Share your experience with us.</p>
-                        </div>
-
-                        {submitted ? (
-                            <div className="bg-white rounded-lg border border-gray-100 p-12 text-center animate-fade-in shadow-sm">
-                                <div className="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6">
-                                    <CheckCircle2 className="w-10 h-10 text-green-500" />
-                                </div>
-                                <h2 className="text-2xl font-semibold text-gray-900 mb-2">Thank you for your feedback!</h2>
-                                <p className="text-gray-500 mb-8 max-w-sm mx-auto">
-                                    We've received your message and will use it to make Umbrella Academy even better.
-                                </p>
-                                <button
-                                    onClick={() => setSubmitted(false)}
-                                    className="px-8 py-3 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-all font-medium"
-                                >
-                                    Send another feedback
-                                </button>
-                            </div>
-                        ) : (
-                            <div className="bg-white rounded-lg border border-gray-100 p-6 lg:p-8 shadow-sm">
-                                <form onSubmit={handleSubmit} className="space-y-8">
-                                    {/* Category Selection */}
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-4">What is this feedback about?</label>
-                                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                                            {categories.map((c) => (
-                                                <button
-                                                    key={c}
-                                                    type="button"
-                                                    onClick={() => setCategory(c)}
-                                                    className={`px-4 py-3 rounded-lg text-sm font-medium border transition-all ${category === c
-                                                        ? 'border-yellow-600 bg-yellow-50 text-yellow-600 shadow-sm'
-                                                        : 'border-gray-200 bg-white text-gray-600 hover:border-gray-300'
-                                                        }`}
-                                                >
-                                                    {c}
-                                                </button>
-                                            ))}
-                                        </div>
-                                    </div>
-
-                                    {/* Star Rating */}
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-3">Overall Rating</label>
-                                        <div className="flex gap-2">
-                                            {[1, 2, 3, 4, 5].map((star) => (
-                                                <button
-                                                    key={star}
-                                                    type="button"
-                                                    onClick={() => setRating(star)}
-                                                    className="transition-transform active:scale-90"
-                                                >
-                                                    <Star
-                                                        className={`w-8 h-8 ${rating >= star ? 'text-yellow-400 fill-current' : 'text-gray-200'
-                                                            }`}
-                                                    />
-                                                </button>
-                                            ))}
-                                        </div>
-                                    </div>
-
-                                    {/* Feedback Textarea */}
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-2">Detailed Feedback</label>
-                                        <textarea
-                                            value={feedback}
-                                            onChange={(e) => setFeedback(e.target.value)}
-                                            placeholder="Tell us what's on your mind..."
-                                            className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 h-40 resize-none transition-all"
-                                            required
-                                        />
-                                    </div>
-
-                                    {/* Submit Button */}
-                                    <div className="flex justify-end">
-                                        <button
-                                            type="submit"
-                                            className="flex items-center gap-2 px-8 py-3.5 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-all  shadow-md active:scale-95"
-                                        >
-                                            <Send className="w-4 h-4" />
-                                            Submit Feedback
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                        )}
-
-                        {/* Previous Feedback Summary (Optional/Mock) */}
-                        {!submitted && (
-                            <div className="mt-8 p-6 bg-yellow-50/50 rounded-lg border border-yellow-100 flex items-start gap-4">
-                                <div className="w-10 h-10 bg-yellow-100 rounded-lg flex items-center justify-center flex-shrink-0 text-yellow-600">
-                                    <MessageSquare className="w-5 h-5" />
-                                </div>
-                                <div>
-                                    <h4 className="text-sm font-semibold text-yellow-800">Why your feedback matters?</h4>
-                                    <p className="text-sm text-yellow-700/80 mt-1 leading-relaxed">
-                                        We read every single piece of feedback. It's the primary way we prioritize new features and improvements to ensure your learning experience is world-class.
-                                    </p>
-                                </div>
-                            </div>
-                        )}
-                    </div>
-                </main>
-            </div>
+      <div className="flex h-screen bg-white">
+        <div className="w-64 bg-gray-900 animate-pulse"></div>
+        <div className="flex-1 p-6">
+          <div className="h-8 bg-gray-200 rounded animate-pulse"></div>
         </div>
+      </div>
     );
+  }
+
+  if (!user || user.role !== 'student') {
+    return null;
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    // Reset form
+    setSubject('');
+    setFeedback('');
+    setFeedbackType('general');
+    setRating(5);
+    setIsSubmitting(false);
+
+    alert('Feedback submitted successfully! Thank you for helping us improve.');
+  };
+
+  return (
+    <div className="flex h-screen bg-white">
+      <Sidebar activeItem="Feedback" userType="student" />
+
+      <div className="flex-1 flex flex-col overflow-hidden">
+        <main className="flex-1 overflow-auto p-6">
+          <div className="max-w-4xl mx-auto">
+            <div className="mb-6">
+              <h1 className="text-2xl font-semibold text-gray-900">Share Your Feedback</h1>
+              <p className="text-gray-600 mt-1">Help us improve your learning experience</p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {/* Feedback Form */}
+              <div className="lg:col-span-2">
+                <div className="bg-white border border-gray-200 rounded-lg p-6">
+                  <h2 className="text-lg font-semibold text-gray-900 mb-4">Submit Feedback</h2>
+                  
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Feedback Type
+                        </label>
+                        <select
+                          value={feedbackType}
+                          onChange={(e) => setFeedbackType(e.target.value)}
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                        >
+                          <option value="general">General Feedback</option>
+                          <option value="trainer">Trainer Experience</option>
+                          <option value="platform">Platform Features</option>
+                          <option value="roadmap">Roadmap Quality</option>
+                          <option value="suggestion">Feature Suggestion</option>
+                          <option value="bug">Bug Report</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Overall Rating
+                        </label>
+                        <select
+                          value={rating}
+                          onChange={(e) => setRating(Number(e.target.value))}
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                        >
+                          <option value={5}>⭐⭐⭐⭐⭐ Excellent</option>
+                          <option value={4}>⭐⭐⭐⭐ Good</option>
+                          <option value={3}>⭐⭐⭐ Average</option>
+                          <option value={2}>⭐⭐ Poor</option>
+                          <option value={1}>⭐ Very Poor</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Subject
+                      </label>
+                      <input
+                        type="text"
+                        value={subject}
+                        onChange={(e) => setSubject(e.target.value)}
+                        placeholder="Brief summary of your feedback"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Your Feedback
+                      </label>
+                      <textarea
+                        value={feedback}
+                        onChange={(e) => setFeedback(e.target.value)}
+                        placeholder="Please share your thoughts, suggestions, or experiences..."
+                        rows={6}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                        required
+                      />
+                    </div>
+
+                    <div className="flex justify-end">
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="px-6 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        {isSubmitting ? 'Submitting...' : 'Submit Feedback'}
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+              {/* Feedback Info */}
+              <div className="space-y-6">
+                <div className="bg-white border border-gray-200 rounded-lg p-6">
+                  <h3 className="font-semibold text-gray-900 mb-3">Why Your Feedback Matters</h3>
+                  <div className="space-y-3 text-sm text-gray-600">
+                    <p>Your feedback helps us:</p>
+                    <ul className="space-y-1 ml-4">
+                      <li>• Improve trainer quality</li>
+                      <li>• Enhance platform features</li>
+                      <li>• Create better roadmaps</li>
+                      <li>• Fix technical issues</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="bg-white border border-gray-200 rounded-lg p-6">
+                  <h3 className="font-semibold text-gray-900 mb-3">Recent Improvements</h3>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex items-start gap-2">
+                      <div className="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
+                      <div>
+                        <p className="font-medium text-gray-900">Enhanced Live Sessions</p>
+                        <p className="text-gray-600">Based on your feedback about video quality</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <div className="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
+                      <div>
+                        <p className="font-medium text-gray-900">Better Roadmap Navigation</p>
+                        <p className="text-gray-600">Improved based on user suggestions</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                  <div className="flex items-start gap-2">
+                    <svg className="w-5 h-5 text-yellow-600 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <div>
+                      <p className="text-sm font-medium text-yellow-800">Anonymous Feedback</p>
+                      <p className="text-sm text-yellow-700">Your feedback is anonymous and helps improve the platform for everyone.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  );
 }

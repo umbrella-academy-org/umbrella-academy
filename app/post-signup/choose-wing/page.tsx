@@ -1,9 +1,9 @@
 'use client';
 
-import Image from 'next/image';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { CheckCircle } from 'lucide-react';
+import Sidebar from '@/components/dashboard/Sidebar';
 
 interface Wing {
   id: string;
@@ -79,112 +79,103 @@ export default function ChooseWingPage() {
 
   return (
     <div className="flex h-screen bg-white">
-      {/* Left side - Form */}
-      <div className="flex flex-[2] flex-col justify-between p-8 bg-white overflow-y-auto">
-        <div className="flex flex-col flex-1 max-w-md mx-auto w-full">
-          {/* Go back button */}
-          <button
-            onClick={() => router.push('/post-signup/availability')}
-            className="flex items-center gap-2 text-gray-400 hover:text-gray-900 mb-8 transition-colors group"
-          >
-            <svg className="w-5 h-5 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M15 19l-7-7 7-7" />
-            </svg>
-            <span className="text-xs font-black uppercase">Go back</span>
-          </button>
+      <Sidebar activeItem="Roadmap" userType="student" />
+      
+      <div className="flex-1 flex flex-col overflow-hidden">
+        <main className="flex-1 overflow-auto flex items-center justify-center bg-gray-50">
+          <div className="max-w-md w-full p-8">
+            {/* Go back button */}
+            <button
+              onClick={() => router.push('/post-signup/availability')}
+              className="flex items-center gap-2 text-gray-400 hover:text-gray-900 mb-8 transition-colors group"
+            >
+              <svg className="w-5 h-5 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M15 19l-7-7 7-7" />
+              </svg>
+              <span className="text-xs font-black uppercase">Go back</span>
+            </button>
 
-          <div className="flex flex-col items-center justify-center flex-1">
-            {/* Logo */}
-            <div className="mb-8">
-              <div className="w-16 h-16 bg-yellow-600 rounded-2xl flex items-center justify-center shadow-lg shadow-yellow-600/20">
-                <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" />
-                </svg>
+            <div className="text-center">
+              {/* Logo */}
+              <div className="mb-8">
+                <div className="w-16 h-16 bg-yellow-600 rounded-2xl flex items-center justify-center shadow-lg shadow-yellow-600/20 mx-auto">
+                  <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" />
+                  </svg>
+                </div>
+              </div>
+
+              {/* Title */}
+              <h1 className="text-3xl font-semibold text-gray-900 mb-2 text-center">
+                Choose Your Wing
+              </h1>
+              <p className="text-gray-500 mb-10 text-center text-sm">
+                Select the industry wing that matches your career goals.
+              </p>
+
+              {/* Form */}
+              <form onSubmit={handleContinue} className="w-full">
+                <div className="space-y-3 mb-8">
+                  {wings.map((wing) => (
+                    <div
+                      key={wing.id}
+                      className={`flex items-start gap-4 p-4 border rounded-lg cursor-pointer transition-all ${selectedWing === wing.id
+                        ? 'border-yellow-600 bg-yellow-50'
+                        : 'border-gray-200 bg-white hover:border-gray-300'
+                        }`}
+                      onClick={() => handleWingSelect(wing.id)}
+                    >
+                      <div className={`w-12 h-12 rounded-lg flex items-center justify-center text-xl shadow-sm transition-colors ${selectedWing === wing.id ? 'bg-yellow-600 text-white' : 'bg-gray-50'
+                        }`}>
+                        {wing.icon}
+                      </div>
+
+                      <div className="flex-1">
+                        <h3 className={`text-sm font-semibold ${selectedWing === wing.id ? 'text-gray-900' : 'text-gray-700'}`}>
+                          {wing.title}
+                        </h3>
+                        <p className="text-xs text-gray-500 mt-0.5">
+                          {wing.students.toLocaleString()} Students Enrolled
+                        </p>
+
+                        <div className="flex items-center gap-2 mt-2">
+                          {renderStars(wing.rating)}
+                          <span className="text-[10px] font-medium text-yellow-600 uppercase tracking-wider">Top Wing</span>
+                        </div>
+                      </div>
+
+                      {selectedWing === wing.id && (
+                        <CheckCircle className="w-5 h-5 text-yellow-600" />
+                      )}
+                    </div>
+                  ))}
+                </div>
+
+                {error && <p className="mb-4 text-xs font-medium text-red-500 text-center">{error}</p>}
+
+                <button
+                  type="submit"
+                  className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-all active:scale-95"
+                >
+                  Continue to Payment
+                </button>
+
+                {/* Progress dots */}
+                <div className="flex justify-center gap-2 pt-6">
+                  <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
+                  <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
+                  <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
+                  <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
+                </div>
+              </form>
+
+              {/* Footer */}
+              <div className="text-sm text-gray-500 mt-8">
+                © Umbrella Academy 2025
               </div>
             </div>
-
-            {/* Title */}
-            <h1 className="text-3xl font-semibold text-gray-900 mb-2 text-center">
-              Choose Your Wing
-            </h1>
-            <p className="text-gray-500 mb-10 text-center text-sm">
-              Select the industry wing that matches your career goals.
-            </p>
-
-            {/* Form */}
-            <form onSubmit={handleContinue} className="w-full">
-              <div className="space-y-3 mb-8">
-                {wings.map((wing) => (
-                  <div
-                    key={wing.id}
-                    className={`flex items-start gap-4 p-4 border rounded-lg cursor-pointer transition-all ${selectedWing === wing.id
-                      ? 'border-yellow-600 bg-yellow-50'
-                      : 'border-gray-200 bg-white hover:border-gray-300'
-                      }`}
-                    onClick={() => handleWingSelect(wing.id)}
-                  >
-                    <div className={`w-12 h-12 rounded-lg flex items-center justify-center text-xl shadow-sm transition-colors ${selectedWing === wing.id ? 'bg-yellow-600 text-white' : 'bg-gray-50'
-                      }`}>
-                      {wing.icon}
-                    </div>
-
-                    <div className="flex-1">
-                      <h3 className={`text-sm font-semibold ${selectedWing === wing.id ? 'text-gray-900' : 'text-gray-700'}`}>
-                        {wing.title}
-                      </h3>
-                      <p className="text-xs text-gray-500 mt-0.5">
-                        {wing.students.toLocaleString()} Students Enrolled
-                      </p>
-
-                      <div className="flex items-center gap-2 mt-2">
-                        {renderStars(wing.rating)}
-                        <span className="text-[10px] font-medium text-yellow-600 uppercase tracking-wider">Top Wing</span>
-                      </div>
-                    </div>
-
-                    {selectedWing === wing.id && (
-                      <CheckCircle className="w-5 h-5 text-yellow-600" />
-                    )}
-                  </div>
-                ))}
-              </div>
-
-              {error && <p className="mb-4 text-xs font-medium text-red-500 text-center">{error}</p>}
-
-              <button
-                type="submit"
-                className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-all active:scale-95"
-              >
-                Continue to Payment
-              </button>
-
-              {/* Progress dots */}
-              <div className="flex justify-center gap-2 pt-6">
-                <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
-                <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
-                <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
-                <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
-              </div>
-            </form>
           </div>
-        </div>
-
-        {/* Footer */}
-        <div className="text-sm text-gray-500">
-          © Umbrella Academy 2025
-        </div>
-      </div>
-
-      {/* Right side - Image */}
-      <div className="hidden lg:block flex-[1] relative overflow-hidden">
-        <Image
-          src="/auth/login/image.png"
-          alt="Wing selection"
-          fill
-          className="object-cover object-center scale-105"
-          priority
-          quality={100}
-        />
+        </main>
       </div>
     </div>
   );

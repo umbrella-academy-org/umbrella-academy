@@ -13,6 +13,12 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
   const [showNewUserGuide, setShowNewUserGuide] = useState(false);
   // Dev toggle for new user simulation (for development only)
   const [devNewUserMode, setDevNewUserMode] = useState(false);
+  
+  // Initialize dev mode from localStorage
+  useEffect(() => {
+    const savedDevMode = localStorage.getItem('devNewUserMode') === 'true';
+    setDevNewUserMode(savedDevMode);
+  }, []);
   const { navigate } = useNavigationWithLoading();
   const { user, logout } = useAuth();
 
@@ -293,22 +299,7 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
           {
             icon: <Map className="w-5 h-5" />,
             label: 'Roadmap',
-            href: (() => {
-              // Check if user has completed roadmap creation
-              const hasRoadmap = typeof window !== 'undefined' ? localStorage.getItem('hasRoadmap') === 'true' : false;
-              const paymentCompleted = typeof window !== 'undefined' ? localStorage.getItem('paymentCompleted') === 'true' : false;
-              
-              // If no roadmap and no payment, start from availability
-              if (!hasRoadmap && !paymentCompleted) {
-                return '/post-signup/availability';
-              }
-              // If payment completed but no roadmap, go to roadmap creation
-              if (paymentCompleted && !hasRoadmap) {
-                return '/post-signup/roadmap';
-              }
-              // If roadmap exists, go to roadmap page
-              return '/post-signup/roadmap';
-            })()
+            href: '/dashboard/student/roadmap'
           },
           {
             icon: <Bell className="w-5 h-5" />,
@@ -318,35 +309,22 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
           {
             icon: <Video className="w-5 h-5" />,
             label: 'Live Session',
-            href: (() => {
-              // Check if user has completed roadmap creation
-              const hasRoadmap = typeof window !== 'undefined' ? localStorage.getItem('hasRoadmap') === 'true' : false;
-              const paymentCompleted = typeof window !== 'undefined' ? localStorage.getItem('paymentCompleted') === 'true' : false;
-              
-              // If no roadmap creation completed, redirect to start of flow
-              if (!hasRoadmap && !paymentCompleted) {
-                return '/post-signup/availability';
-              }
-              return '/post-signup/live-session';
-            })()
+            href: '/dashboard/student/live-session'
           },
           {
             icon: <CreditCard className="w-5 h-5" />,
             label: 'Subscription',
-            href: (() => {
-              // Always redirect subscription to roadmap creation flow
-              return '/post-signup/roadmap';
-            })()
+            href: '/dashboard/student/subscription'
           },
           {
             icon: <HelpCircle className="w-5 h-5" />,
             label: 'Support',
-            href: '/post-signup/support'
+            href: '/dashboard/student/support'
           },
           {
             icon: <MessageSquare className="w-5 h-5" />,
             label: 'Feedback',
-            href: '/post-signup/feedback'
+            href: '/dashboard/student/feedback'
           },
           {
             icon: <Settings className="w-5 h-5" />,
@@ -542,8 +520,18 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
             <div className="mb-4">
               <button
                 onClick={() => {
-                  setDevNewUserMode(!devNewUserMode);
-                  if (!devNewUserMode) {
+                  const newDevMode = !devNewUserMode;
+                  setDevNewUserMode(newDevMode);
+                  
+                  // Store in localStorage
+                  localStorage.setItem('devNewUserMode', newDevMode.toString());
+                  
+                  // Dispatch event for student dashboard to listen
+                  window.dispatchEvent(new CustomEvent('devModeChanged', {
+                    detail: { isDevMode: newDevMode }
+                  }));
+                  
+                  if (newDevMode) {
                     // Reset all progress when enabling dev mode
                     localStorage.removeItem('availabilitySet');
                     localStorage.removeItem('selectedWing');

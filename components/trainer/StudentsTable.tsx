@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react';
 import { Mail, Calendar, TrendingUp, TrendingDown } from 'lucide-react';
 import DataTable from '@/components/ui/DataTable';
+import StudentReportForm from '@/components/trainer/StudentReportForm';
 
 interface Student {
   id: string;
@@ -28,6 +29,8 @@ interface StudentsTableProps {
 
 export default function StudentsTable({ searchQuery, selectedStatus, selectedCourse }: StudentsTableProps) {
   const [selectedStudents, setSelectedStudents] = useState<any[]>([]);
+  const [showReportForm, setShowReportForm] = useState(false);
+  const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
 
   // Mock student data
   const students: Student[] = [
@@ -125,6 +128,24 @@ export default function StudentsTable({ searchQuery, selectedStatus, selectedCou
     });
   }, [students, searchQuery, selectedStatus, selectedCourse]);
 
+  // Stats for cards
+  const totalStudents = filteredStudents.length;
+  const activeStudents = filteredStudents.filter(s => s.status === 'active').length;
+  const avgProgress = filteredStudents.reduce((acc, s) => acc + s.progress, 0) / filteredStudents.length || 0;
+  const pendingReports = 3; // Mock data
+
+  const handleCreateReport = (student: Student) => {
+    setSelectedStudent(student);
+    setShowReportForm(true);
+  };
+
+  const handleReportSubmit = (report: any) => {
+    console.log('Report submitted:', report);
+    alert('Report submitted successfully! It will be sent to the mentor for review.');
+    setShowReportForm(false);
+    setSelectedStudent(null);
+  };
+
   // Transform data for DataTable
   const tableData = filteredStudents.map(student => ({
     id: student.id,
@@ -186,6 +207,19 @@ export default function StudentsTable({ searchQuery, selectedStatus, selectedCou
       </div>
     ),
     lastActivity: student.lastActivity,
+    actions: (
+      <div className="flex items-center gap-2">
+        <button
+          onClick={() => handleCreateReport(student)}
+          className="px-3 py-1 bg-yellow-600 text-white text-xs rounded hover:bg-yellow-700"
+        >
+          Create Report
+        </button>
+        <button className="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded hover:bg-gray-200">
+          View Details
+        </button>
+      </div>
+    ),
     // Store original data for filtering
     _original: student
   }));
@@ -196,7 +230,8 @@ export default function StudentsTable({ searchQuery, selectedStatus, selectedCou
     { key: 'status', label: 'Status', sortable: true, filterable: true, searchable: false },
     { key: 'progress', label: 'Progress', sortable: true, filterable: false, searchable: false },
     { key: 'sessions', label: 'Sessions', sortable: true, filterable: false, searchable: false },
-    { key: 'lastActivity', label: 'Last Activity', sortable: true, filterable: false, searchable: true }
+    { key: 'lastActivity', label: 'Last Activity', sortable: true, filterable: false, searchable: true },
+    { key: 'actions', label: 'Actions', sortable: false, filterable: false, searchable: false }
   ];
 
   const handleSelectionChange = (selectedItems: any[]) => {
@@ -214,7 +249,66 @@ export default function StudentsTable({ searchQuery, selectedStatus, selectedCou
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
+      {/* Stats Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="bg-white border border-gray-200 rounded-lg p-4">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+              <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
+              </svg>
+            </div>
+            <div>
+              <p className="text-sm text-gray-500">Total Students</p>
+              <p className="text-2xl font-semibold text-gray-900">{totalStudents}</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white border border-gray-200 rounded-lg p-4">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+              <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div>
+              <p className="text-sm text-gray-500">Active Students</p>
+              <p className="text-2xl font-semibold text-gray-900">{activeStudents}</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white border border-gray-200 rounded-lg p-4">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-yellow-100 rounded-lg flex items-center justify-center">
+              <svg className="w-5 h-5 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+              </svg>
+            </div>
+            <div>
+              <p className="text-sm text-gray-500">Avg Progress</p>
+              <p className="text-2xl font-semibold text-gray-900">{Math.round(avgProgress)}%</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white border border-gray-200 rounded-lg p-4">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
+              <svg className="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+            </div>
+            <div>
+              <p className="text-sm text-gray-500">Pending Reports</p>
+              <p className="text-2xl font-semibold text-gray-900">{pendingReports}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Selected Actions */}
       {selectedStudents.length > 0 && (
         <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
@@ -245,6 +339,19 @@ export default function StudentsTable({ searchQuery, selectedStatus, selectedCou
         onFilterChange={handleFilterChange}
         onSearchChange={handleSearchChange}
       />
+
+      {/* Report Form Modal */}
+      {showReportForm && selectedStudent && (
+        <StudentReportForm
+          studentId={selectedStudent.id}
+          studentName={selectedStudent.name}
+          onSubmit={handleReportSubmit}
+          onCancel={() => {
+            setShowReportForm(false);
+            setSelectedStudent(null);
+          }}
+        />
+      )}
     </div>
   );
 }

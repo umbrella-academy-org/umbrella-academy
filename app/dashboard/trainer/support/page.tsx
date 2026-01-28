@@ -5,7 +5,7 @@ import Sidebar from '@/components/dashboard/Sidebar';
 import { useAuth } from '@/contexts';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
 
-export default function MentorSupportPage() {
+export default function TrainerSupportPage() {
   const { user, isAuthenticated, isLoading: authLoading } = useAuth();
   const { navigate } = useNavigationWithLoading();
   const [issueType, setIssueType] = useState('technical');
@@ -14,17 +14,17 @@ export default function MentorSupportPage() {
   const [description, setDescription] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Redirect if not authenticated or not a mentor
+  // Redirect if not authenticated or not a trainer
   useEffect(() => {
     if (!authLoading && !isAuthenticated) {
       navigate('/auth/login');
       return;
     }
 
-    if (!authLoading && user && user.role !== 'mentor') {
+    if (!authLoading && user && user.role !== 'trainer') {
       const dashboardRoutes = {
         'student': '/dashboard/student',
-        'trainer': '/dashboard/trainer',
+        'mentor': '/dashboard/mentor',
         'wing-admin': '/dashboard/wing-admin',
         'umbrella-admin': '/dashboard/umbrella-admin'
       };
@@ -43,7 +43,7 @@ export default function MentorSupportPage() {
     );
   }
 
-  if (!user || user.role !== 'mentor') {
+  if (!user || user.role !== 'trainer') {
     return null;
   }
 
@@ -66,14 +66,14 @@ export default function MentorSupportPage() {
 
   return (
     <div className="flex h-screen bg-white">
-      <Sidebar activeItem="Support" userType="mentor" />
+      <Sidebar activeItem="Support" userType="trainer" />
 
       <div className="flex-1 flex flex-col overflow-hidden">
         <main className="flex-1 overflow-auto p-6">
           <div className="max-w-4xl mx-auto">
             <div className="mb-6">
-              <h1 className="text-2xl font-semibold text-gray-900">Mentor Support Center</h1>
-              <p className="text-gray-600 mt-1">Get help with mentoring tools and student oversight</p>
+              <h1 className="text-2xl font-semibold text-gray-900">Trainer Support Center</h1>
+              <p className="text-gray-600 mt-1">Get help with training tools and student management</p>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -94,11 +94,11 @@ export default function MentorSupportPage() {
                           className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
                         >
                           <option value="technical">Technical Issue</option>
-                          <option value="roadmap-approval">Roadmap Approval</option>
-                          <option value="trainer-coordination">Trainer Coordination</option>
-                          <option value="student-progress">Student Progress</option>
-                          <option value="reporting">Report Review</option>
-                          <option value="payment">Payment/Earnings</option>
+                          <option value="student-management">Student Management</option>
+                          <option value="payment">Payment/Wallet Issue</option>
+                          <option value="scheduling">Scheduling Problem</option>
+                          <option value="reporting">Reporting Tools</option>
+                          <option value="live-session">Live Session Issues</option>
                           <option value="other">Other</option>
                         </select>
                       </div>
@@ -167,7 +167,7 @@ export default function MentorSupportPage() {
                   <div className="space-y-3">
                     <div>
                       <h4 className="text-sm font-medium text-gray-900">Response Time</h4>
-                      <p className="text-sm text-gray-600">Usually within 8 hours</p>
+                      <p className="text-sm text-gray-600">Usually within 12 hours</p>
                     </div>
                     <div>
                       <h4 className="text-sm font-medium text-gray-900">Wing Admin</h4>
@@ -175,37 +175,37 @@ export default function MentorSupportPage() {
                     </div>
                     <div>
                       <h4 className="text-sm font-medium text-gray-900">Support Hours</h4>
-                      <p className="text-sm text-gray-600">24/7 for critical issues</p>
+                      <p className="text-sm text-gray-600">24/7 for urgent issues</p>
                     </div>
                   </div>
                 </div>
 
                 <div className="bg-white border border-gray-200 rounded-lg p-6">
-                  <h3 className="font-semibold text-gray-900 mb-3">Common Mentor Issues</h3>
+                  <h3 className="font-semibold text-gray-900 mb-3">Common Trainer Issues</h3>
                   <div className="space-y-2">
                     <button className="w-full text-left text-sm text-yellow-600 hover:text-yellow-700">
-                      Roadmap approval delays
+                      Student not attending sessions
                     </button>
                     <button className="w-full text-left text-sm text-yellow-600 hover:text-yellow-700">
-                      Trainer report concerns
+                      Payment not received
                     </button>
                     <button className="w-full text-left text-sm text-yellow-600 hover:text-yellow-700">
-                      Student progress tracking
+                      Live session technical issues
                     </button>
                     <button className="w-full text-left text-sm text-yellow-600 hover:text-yellow-700">
-                      Communication with trainers
+                      Report submission problems
                     </button>
                   </div>
                 </div>
 
-                <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                   <div className="flex items-start gap-2">
-                    <svg className="w-5 h-5 text-green-600 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    <svg className="w-5 h-5 text-blue-600 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     <div>
-                      <p className="text-sm font-medium text-green-800">Mentor Resources</p>
-                      <p className="text-sm text-green-700">Access mentoring guidelines and best practices in your mentor dashboard.</p>
+                      <p className="text-sm font-medium text-blue-800">Trainer Resources</p>
+                      <p className="text-sm text-blue-700">Access training materials and best practices in your trainer dashboard.</p>
                     </div>
                   </div>
                 </div>
