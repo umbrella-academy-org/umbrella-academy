@@ -11,7 +11,7 @@ export default function CurrentLessons() {
   
   if (!currentPhase || !currentSession) {
     return (
-      <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+      <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
         <div className="text-center py-6">
           <BookOpen className="w-8 h-8 text-gray-400 mx-auto mb-3" />
           <h3 className="text-sm font-medium text-gray-900 mb-1">No Active Session</h3>
@@ -68,7 +68,7 @@ export default function CurrentLessons() {
   const phaseProgress = totalSessions > 0 ? Math.round((completedSessions / totalSessions) * 100) : 0;
 
   return (
-    <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+    <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
       <div className="mb-4">
         <h3 className="text-base font-semibold text-gray-900">Current Session</h3>
         <p className="text-sm text-gray-500">{currentPhase.title}</p>

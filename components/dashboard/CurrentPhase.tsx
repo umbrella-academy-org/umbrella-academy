@@ -16,7 +16,7 @@ export default function CurrentPhase({ activeRoadmap }: CurrentPhaseProps) {
   // If no active roadmap, show placeholder
   if (!activeRoadmap) {
     return (
-      <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+      <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
         <div className="text-center py-6">
           <Target className="w-8 h-8 text-gray-400 mx-auto mb-3" />
           <h3 className="text-sm font-semibold text-gray-900 mb-2">No Active Phase</h3>
@@ -39,7 +39,7 @@ export default function CurrentPhase({ activeRoadmap }: CurrentPhaseProps) {
 
   if (!currentPhase) {
     return (
-      <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+      <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
         <div className="text-center py-6">
           <Target className="w-8 h-8 text-gray-400 mx-auto mb-3" />
           <h3 className="text-sm font-semibold text-gray-900 mb-2">Roadmap Not Started</h3>
@@ -59,7 +59,7 @@ export default function CurrentPhase({ activeRoadmap }: CurrentPhaseProps) {
 
   return (
     <div 
-      className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 interactive-card animate-fade-in hover:shadow-lg transition-all duration-300"
+      className="bg-white rounded-lg p-4 shadow-sm border border-gray-100 interactive-card animate-fade-in hover:shadow-lg transition-all duration-300"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >

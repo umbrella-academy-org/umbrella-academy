@@ -112,7 +112,7 @@ export default function MonthlySessionsChart({ userType }: MonthlySessionsChartP
   };
 
   return (
-    <div className="bg-white rounded-xl p-3 lg:p-4 shadow-sm border border-gray-100">
+    <div className="bg-white rounded-lg p-3 lg:p-4 shadow-sm border border-gray-100">
       <div className="flex items-center justify-between mb-4 lg:mb-6">
         <div>
           <h3 className="text-sm lg:text-base font-semibold text-gray-900">{getTitle()}</h3>

@@ -4,7 +4,7 @@ import { Plus } from 'lucide-react';
 
 export default function RoadmapHeader() {
   return (
-    <div className="mb-6">
+    <div className="mb-6 w-full">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-semibold text-gray-900">Roadmap Phases</h1>

@@ -106,7 +106,7 @@ export default function StatsCards() {
         {placeholderStats.map((stat, index) => (
           <div 
             key={index} 
-            className="bg-white rounded-xl p-3 lg:p-4 shadow-sm border border-gray-100"
+            className="bg-white rounded-lg p-3 lg:p-4 shadow-sm border border-gray-100"
           >
             <div className="flex items-center justify-between">
               <div className="flex-1">
@@ -133,7 +133,7 @@ export default function StatsCards() {
       {stats.map((stat, index) => (
         <div 
           key={index} 
-          className="bg-white rounded-xl p-3 lg:p-4 shadow-sm border border-gray-100 interactive-card cursor-pointer group animate-slide-up"
+          className="bg-white rounded-lg p-3 lg:p-4 shadow-sm border border-gray-100 interactive-card cursor-pointer group animate-slide-up"
           style={{ animationDelay: `${index * 100}ms` }}
           onMouseEnter={() => setHoveredCard(index)}
           onMouseLeave={() => setHoveredCard(null)}
