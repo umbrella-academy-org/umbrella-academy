@@ -139,7 +139,7 @@ export default function MentorRoadmapApprovalsPage() {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               {/* Roadmap List */}
               <div className="lg:col-span-1">
-                <div className="bg-white rounded-xl shadow-sm border border-gray-100">
+                <div className="bg-white rounded-lg shadow-sm border border-gray-100">
                   <div className="p-4 border-b border-gray-200">
                     <h3 className="font-semibold text-gray-900">Pending Approvals ({pendingRoadmaps.length})</h3>
                   </div>
@@ -176,7 +176,7 @@ export default function MentorRoadmapApprovalsPage() {
               {/* Roadmap Details */}
               <div className="lg:col-span-2">
                 {selectedRoadmapData ? (
-                  <div className="bg-white rounded-xl shadow-sm border border-gray-100">
+                  <div className="bg-white rounded-lg shadow-sm border border-gray-100">
                     {/* Header */}
                     <div className="p-6 border-b border-gray-200">
                       <div className="flex items-start justify-between mb-4">
@@ -283,7 +283,7 @@ export default function MentorRoadmapApprovalsPage() {
                     </div>
                   </div>
                 ) : (
-                  <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-12 text-center">
+                  <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-12 text-center">
                     <div className="text-gray-400 mb-4">
                       <Target className="w-12 h-12 mx-auto" />
                     </div>

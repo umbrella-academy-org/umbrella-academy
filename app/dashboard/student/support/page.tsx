@@ -54,7 +54,7 @@ export default function StudentSupportPage() {
                         {/* Support Actions */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
                             <div className="bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow group">
-                                <div className="w-12 h-12 bg-yellow-50 rounded-xl flex items-center justify-center text-yellow-600 mb-4 group-hover:bg-yellow-600 group-hover:text-white transition-colors">
+                                <div className="w-12 h-12 bg-yellow-50 rounded-lg flex items-center justify-center text-yellow-600 mb-4 group-hover:bg-yellow-600 group-hover:text-white transition-colors">
                                     <Mail className="w-6 h-6" />
                                 </div>
                                 <h3 className="font-semibold text-gray-900 mb-2">Email Support</h3>
@@ -65,7 +65,7 @@ export default function StudentSupportPage() {
                             </div>
 
                             <div className="bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow group">
-                                <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 mb-4 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                                <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center text-blue-600 mb-4 group-hover:bg-blue-600 group-hover:text-white transition-colors">
                                     <MessageCircle className="w-6 h-6" />
                                 </div>
                                 <h3 className="font-semibold text-gray-900 mb-2">Community Discord</h3>
@@ -76,7 +76,7 @@ export default function StudentSupportPage() {
                             </div>
 
                             <div className="bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow group">
-                                <div className="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center text-purple-600 mb-4 group-hover:bg-purple-600 group-hover:text-white transition-colors">
+                                <div className="w-12 h-12 bg-purple-50 rounded-lg flex items-center justify-center text-purple-600 mb-4 group-hover:bg-purple-600 group-hover:text-white transition-colors">
                                     <FileText className="w-6 h-6" />
                                 </div>
                                 <h3 className="font-semibold text-gray-900 mb-2">User Manual</h3>

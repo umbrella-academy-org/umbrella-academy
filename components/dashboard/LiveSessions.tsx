@@ -252,7 +252,7 @@ export default function LiveSessions({ userType }: LiveSessionsProps) {
                   </button>
                 </div>
 
-                <button className={`flex items-center gap-2 px-5 py-2.5 bg-yellow-600 text-white text-xs font-bold rounded-xl hover:bg-yellow-700 transition-all duration-300 shadow-lg shadow-yellow-600/20 active:scale-95 ${hoveredSession === session.id ? 'translate-x-1' : ''
+                <button className={`flex items-center gap-2 px-5 py-2.5 bg-yellow-600 text-white text-xs font-bold rounded-lg hover:bg-yellow-700 transition-all duration-300 shadow-lg shadow-yellow-600/20 active:scale-95 ${hoveredSession === session.id ? 'translate-x-1' : ''
                   }`}>
                   <Play className="w-3 h-3 fill-current" />
                   {session.actions.primary}

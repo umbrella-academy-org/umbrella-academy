@@ -36,7 +36,7 @@ export default function StudentsFilters({
   ];
 
   return (
-    <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 mb-6 animate-fade-in" style={{ animationDelay: '200ms' }}>
+    <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100 mb-6 animate-fade-in" style={{ animationDelay: '200ms' }}>
       <div className="flex flex-col lg:flex-row gap-4">
         {/* Search */}
         <div className="flex-1">

@@ -59,7 +59,7 @@ export default function CurrentPhase({ activeRoadmap }: CurrentPhaseProps) {
 
   return (
     <div 
-      className="bg-white rounded-lg p-4 shadow-sm border border-gray-100 interactive-card animate-fade-in hover:shadow-lg transition-all duration-300"
+      className="bg-white rounded-lg p-4 shadow-sm border border-gray-100  animate-fade-in hover:shadow-lg transition-all duration-300"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >

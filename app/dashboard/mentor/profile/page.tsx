@@ -191,7 +191,7 @@ function SettingsItem({ icon, label, color }: { icon: React.ReactNode, label: st
     return (
         <button className="w-full flex items-center justify-between p-4 rounded-2xl hover:bg-gray-50 transition-all border border-transparent hover:border-gray-100 group">
             <div className="flex items-center gap-4">
-                <div className={`w-10 h-10 rounded-xl flex items-center justify-center group-hover:text-white transition-all duration-300 ${colorClasses}`}>
+                <div className={`w-10 h-10 rounded-lg flex items-center justify-center group-hover:text-white transition-all duration-300 ${colorClasses}`}>
                     {icon}
                 </div>
                 <span className="text-sm font-bold text-gray-700 group-hover:text-gray-900">{label}</span>

@@ -18,7 +18,7 @@ export default function WingAdminSettingsPage() {
 
             <div className="space-y-6">
               {/* Wing Information */}
-              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+              <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Wing Information</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
@@ -41,7 +41,7 @@ export default function WingAdminSettingsPage() {
               </div>
 
               {/* Capacity Settings */}
-              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+              <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Capacity Settings</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
@@ -65,7 +65,7 @@ export default function WingAdminSettingsPage() {
               </div>
 
               {/* Payment Settings */}
-              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+              <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Payment Settings</h3>
                 <div className="space-y-4">
                   <div>

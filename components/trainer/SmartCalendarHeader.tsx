@@ -16,11 +16,11 @@ export default function SmartCalendarHeader() {
         </div>
 
         <div className="flex items-center gap-3">
-          <button className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-100 text-gray-600 text-xs font-bold uppercase   rounded-xl hover:bg-gray-50 hover:border-yellow-200 transition-all duration-300 shadow-sm">
+          <button className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-100 text-gray-600 text-xs font-bold uppercase   rounded-lg hover:bg-gray-50 hover:border-yellow-200 transition-all duration-300 shadow-sm">
             <Filter className="w-3.5 h-3.5" />
             <span className="hidden sm:inline">Filter</span>
           </button>
-          <button className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-100 text-gray-600 text-xs font-bold uppercase   rounded-xl hover:bg-gray-50 hover:border-yellow-200 transition-all duration-300 shadow-sm">
+          <button className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-100 text-gray-600 text-xs font-bold uppercase   rounded-lg hover:bg-gray-50 hover:border-yellow-200 transition-all duration-300 shadow-sm">
             <Download className="w-3.5 h-3.5" />
             <span className="hidden sm:inline">Export</span>
           </button>

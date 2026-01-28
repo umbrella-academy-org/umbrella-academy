@@ -16,7 +16,7 @@ export default function CourseCard({ activeRoadmap }: CourseCardProps) {
   // If no active roadmap, show placeholder
   if (!activeRoadmap) {
     return (
-      <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+      <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
         <div className="text-center py-8">
           <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <Play className="w-6 h-6 text-gray-400" />
@@ -41,7 +41,7 @@ export default function CourseCard({ activeRoadmap }: CourseCardProps) {
 
   return (
     <div 
-      className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 interactive-card animate-fade-in hover:shadow-lg transition-all duration-300"
+      className="bg-white rounded-lg p-4 shadow-sm border border-gray-100  animate-fade-in hover:shadow-lg transition-all duration-300"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >

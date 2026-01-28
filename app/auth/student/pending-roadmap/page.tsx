@@ -33,7 +33,7 @@ export default function StudentRoadmapPendingPage() {
                         Great job creating your learning roadmap! Our experts are now reviewing it to ensure it provides the most effective path for your goals.
                     </p>
 
-                    <div className="bg-gray-50 rounded-xl p-6 w-full mb-8 text-left border border-gray-100">
+                    <div className="bg-gray-50 rounded-lg p-6 w-full mb-8 text-left border border-gray-100">
                         <h3 className="text-sm font-semibold text-gray-900 mb-2 uppercase tracking-wider">Next Steps</h3>
                         <ul className="space-y-3">
                             <li className="flex gap-3 text-sm text-gray-600">

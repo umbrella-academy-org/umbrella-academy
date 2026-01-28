@@ -89,7 +89,7 @@ export default function WingAdminMentorsPage() {
 
             {/* Create Mentor Form */}
             {showCreateForm && (
-              <div className="mb-8 bg-white rounded-xl shadow-lg border border-gray-100 p-8 scale-in transition-all">
+              <div className="mb-8 bg-white rounded-lg shadow-lg border border-gray-100 p-8 scale-in transition-all">
                 <div className="flex items-center justify-between mb-8 pb-4 border-b border-gray-50">
                   <div>
                     <h3 className="text-xl font-semibold text-gray-900">Create New Mentor</h3>
@@ -177,7 +177,7 @@ export default function WingAdminMentorsPage() {
             )}
 
             {/* Mentors List */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+            <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead className="bg-gray-50">

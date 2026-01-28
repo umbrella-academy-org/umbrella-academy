@@ -182,7 +182,7 @@ export default function ScheduledEvents({ userType }: ScheduledEventsProps) {
 
   return (
     <div
-      className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 interactive-card hover:shadow-lg transition-all duration-300 animate-fade-in"
+      className="bg-white rounded-lg p-4 shadow-sm border border-gray-100  hover:shadow-lg transition-all duration-300 animate-fade-in"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >

@@ -20,27 +20,27 @@ export default function UmbrellaAdminSettingsPage() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                             <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8">
                                 <div className="flex items-center gap-4 mb-6">
-                                    <div className="w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center text-red-600">
+                                    <div className="w-12 h-12 bg-red-50 rounded-lg flex items-center justify-center text-red-600">
                                         <Lock className="w-6 h-6" />
                                     </div>
                                     <h3 className="text-xl font-semibold text-gray-900">Security Protocols</h3>
                                 </div>
                                 <div className="space-y-4">
                                     <p className="text-sm text-gray-500">Global MFA requirement and session timeout configurations are managed here.</p>
-                                    <button className="w-full py-3 bg-gray-900 text-white rounded-xl font-medium">Manage Protocols</button>
+                                    <button className="w-full py-3 bg-gray-900 text-white rounded-lg font-medium">Manage Protocols</button>
                                 </div>
                             </div>
 
                             <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8">
                                 <div className="flex items-center gap-4 mb-6">
-                                    <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600">
+                                    <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center text-blue-600">
                                         <Globe className="w-6 h-6" />
                                     </div>
                                     <h3 className="text-xl font-semibold text-gray-900">Global Localization</h3>
                                 </div>
                                 <div className="space-y-4">
                                     <p className="text-sm text-gray-500">Default currencies (RWF, USD) and timezones for all academy operations.</p>
-                                    <button className="w-full py-3 bg-gray-100 text-gray-900 rounded-xl font-medium">Configure Localization</button>
+                                    <button className="w-full py-3 bg-gray-100 text-gray-900 rounded-lg font-medium">Configure Localization</button>
                                 </div>
                             </div>
                         </div>

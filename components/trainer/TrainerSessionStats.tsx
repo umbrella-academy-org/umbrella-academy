@@ -67,7 +67,7 @@ export default function TrainerSessionStats() {
             style={{ animationDelay: `${index * 100}ms` }}
           >
             <div className="flex items-center justify-between mb-4">
-              <div className="p-2 bg-white rounded-xl shadow-sm group-hover:scale-110 transition-transform">
+              <div className="p-2 bg-white rounded-lg shadow-sm group-hover:scale-110 transition-transform">
                 {stat.icon}
               </div>
               <div className="text-right">

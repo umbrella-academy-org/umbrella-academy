@@ -34,7 +34,7 @@ export default function SessionStats({ onUpcomingClick }: SessionStatsProps) {
           onClick={stat.clickable ? onUpcomingClick : undefined}
         >
           <div className="flex items-center gap-4">
-            <div className={`w-12 h-12 ${stat.bgColor} rounded-xl flex items-center justify-center transition-transform duration-500 group-hover:scale-110`}>
+            <div className={`w-12 h-12 ${stat.bgColor} rounded-lg flex items-center justify-center transition-transform duration-500 group-hover:scale-110`}>
               {stat.icon}
             </div>
             <div>

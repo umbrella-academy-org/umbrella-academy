@@ -77,7 +77,7 @@ export default function CalendarGrid({ selectedDateRange, onDateRangeChange }: C
       days.push(
         <button
           key={day}
-          className={`w-10 h-10 text-sm rounded-xl transition-all flex flex-col items-center justify-center relative ${isSelected
+          className={`w-10 h-10 text-sm rounded-lg transition-all flex flex-col items-center justify-center relative ${isSelected
             ? 'bg-yellow-600 text-white font-bold shadow-lg shadow-yellow-600/20 active:scale-95'
             : 'text-gray-700 hover:bg-gray-50 hover:text-yellow-600'
             }`}
@@ -108,7 +108,7 @@ export default function CalendarGrid({ selectedDateRange, onDateRangeChange }: C
   };
 
   return (
-    <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+    <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
       {/* Left side - Date Range Selector */}
       <div className="grid grid-cols-2 gap-6">
         <div>

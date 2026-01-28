@@ -35,11 +35,11 @@ export default function CalendarInfo() {
 
           {/* Quick Stats Grid */}
           <div className="grid grid-cols-2 gap-4">
-            <div className="bg-gray-50 p-3 rounded-xl border border-gray-100">
+            <div className="bg-gray-50 p-3 rounded-lg border border-gray-100">
               <p className="text-[10px] text-gray-400 font-bold uppercase   mb-1">Sessions</p>
               <p className="text-lg font-bold text-gray-900">12/18</p>
             </div>
-            <div className="bg-gray-50 p-3 rounded-xl border border-gray-100">
+            <div className="bg-gray-50 p-3 rounded-lg border border-gray-100">
               <p className="text-[10px] text-gray-400 font-bold uppercase   mb-1">Avg. Grade</p>
               <p className="text-lg font-bold text-gray-900">8.5</p>
             </div>
@@ -58,7 +58,7 @@ export default function CalendarInfo() {
         </div>
 
         {/* Action Button */}
-        <button className="w-full mt-6 py-3 bg-yellow-600 text-white text-xs font-bold rounded-xl hover:bg-gray-800 transition-all active:scale-[0.98] shadow-lg shadow-gray-200">
+        <button className="w-full mt-6 py-3 bg-yellow-600 text-white text-xs font-bold rounded-lg hover:bg-gray-800 transition-all active:scale-[0.98] shadow-lg shadow-gray-200">
           View Full Roadmap
         </button>
       </div>

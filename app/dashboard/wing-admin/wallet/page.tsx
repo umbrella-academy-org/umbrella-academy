@@ -46,7 +46,7 @@ export default function WingAdminWalletPage() {
 
             {/* Wallet Balance */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-              <div className="bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-xl p-6 text-white">
+              <div className="bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-lg p-6 text-white">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-yellow-100 text-sm">Available Balance</p>
@@ -56,7 +56,7 @@ export default function WingAdminWalletPage() {
                 </div>
               </div>
 
-              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+              <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-gray-500 text-sm">This Month</p>
@@ -66,7 +66,7 @@ export default function WingAdminWalletPage() {
                 </div>
               </div>
 
-              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+              <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-gray-500 text-sm">Total Withdrawn</p>
@@ -85,7 +85,7 @@ export default function WingAdminWalletPage() {
             </div>
 
             {/* Transaction History */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100">
+            <div className="bg-white rounded-lg shadow-sm border border-gray-100">
               <div className="p-6 border-b border-gray-200">
                 <h3 className="text-lg font-semibold text-gray-900">Transaction History</h3>
               </div>

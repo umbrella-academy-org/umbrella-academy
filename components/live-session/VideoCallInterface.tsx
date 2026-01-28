@@ -124,7 +124,7 @@ export default function VideoCallInterface({
         </button>
         
         {/* Other Participant Video */}
-        <div className="w-28 h-20 lg:w-40 lg:h-28 bg-gray-800 rounded-xl overflow-hidden border-2 border-white shadow-xl">
+        <div className="w-28 h-20 lg:w-40 lg:h-28 bg-gray-800 rounded-lg overflow-hidden border-2 border-white shadow-xl">
           <div className="w-full h-full bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
             {/* Participant avatar */}
             <div className="w-12 h-12 lg:w-16 lg:h-16 bg-blue-500 rounded-full flex items-center justify-center overflow-hidden">

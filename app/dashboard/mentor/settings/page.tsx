@@ -34,7 +34,7 @@ export default function MentorSettingsPage() {
                                         <button
                                             key={item.id}
                                             onClick={() => setActiveSection(item.id)}
-                                            className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeSection === item.id
+                                            className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all ${activeSection === item.id
                                                 ? 'bg-yellow-600 text-white shadow-md'
                                                 : 'text-gray-600 hover:bg-white hover:text-gray-900 border border-transparent hover:border-gray-100'
                                                 }`}
@@ -45,7 +45,7 @@ export default function MentorSettingsPage() {
                                     ))}
                                     <button
                                         onClick={() => logout()}
-                                        className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-red-500 hover:bg-red-50 transition-all mt-4"
+                                        className="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-red-500 hover:bg-red-50 transition-all mt-4"
                                     >
                                         <LogOut className="w-4 h-4" />
                                         Sign Out

@@ -334,11 +334,11 @@ body {
 }
 
 /* Interactive States */
-.interactive-card {
+. {
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.interactive-card:hover {
+.:hover {
   transform: translateY(-8px) scale(1.01);
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
 }

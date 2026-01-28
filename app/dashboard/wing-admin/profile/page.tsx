@@ -25,7 +25,7 @@ export default function WingAdminProfilePage() {
                 <main className="flex-1 p-4 lg:p-8 overflow-y-auto bg-gray-50/30">
                     <div className="max-w-5xl mx-auto animate-fade-in">
                         {/* Profile Header Card */}
-                        <div className="bg-white rounded-[2rem] border border-gray-100 shadow-xl shadow-gray-200/50 overflow-hidden mb-8 interactive-card">
+                        <div className="bg-white rounded-[2rem] border border-gray-100 shadow-xl shadow-gray-200/50 overflow-hidden mb-8 ">
                             <div className="h-48 bg-gradient-to-br from-orange-400 via-orange-500 to-red-600 relative overflow-hidden">
                                 {/* Decorative Abstract Shapes */}
                                 <div className="absolute top-0 left-0 w-full h-full opacity-20">
@@ -67,7 +67,7 @@ export default function WingAdminProfilePage() {
 
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                             <div className="lg:col-span-2 space-y-8 animate-slide-up">
-                                <div className="bg-white rounded-[2rem] border border-gray-100 shadow-xl shadow-gray-200/30 p-10 interactive-card">
+                                <div className="bg-white rounded-[2rem] border border-gray-100 shadow-xl shadow-gray-200/30 p-10 ">
                                     <h3 className="text-xl font-bold text-gray-900 mb-8 flex items-center gap-3">
                                         <User className="text-orange-500 w-6 h-6" />
                                         Administrator Details
@@ -90,7 +90,7 @@ export default function WingAdminProfilePage() {
                                     </div>
                                 </div>
 
-                                <div className="bg-white rounded-[2rem] border border-gray-100 shadow-xl shadow-gray-200/30 p-10 interactive-card">
+                                <div className="bg-white rounded-[2rem] border border-gray-100 shadow-xl shadow-gray-200/30 p-10 ">
                                     <h3 className="text-xl font-bold text-gray-900 mb-8">Wing Stats Oversight</h3>
                                     <div className="grid grid-cols-2 gap-6">
                                         <div className="p-8 bg-gray-900 rounded-[2rem] text-white relative overflow-hidden group">
@@ -140,7 +140,7 @@ function ManagementItem({ icon, label }: { icon: React.ReactNode, label: string 
     return (
         <button className="w-full flex items-center justify-between p-4 rounded-2xl hover:bg-orange-50 transition-all group border border-transparent hover:border-orange-100">
             <div className="flex items-center gap-4">
-                <div className="w-10 h-10 bg-gray-50 rounded-xl flex items-center justify-center text-gray-400 group-hover:bg-orange-600 group-hover:text-white transition-all shadow-sm">
+                <div className="w-10 h-10 bg-gray-50 rounded-lg flex items-center justify-center text-gray-400 group-hover:bg-orange-600 group-hover:text-white transition-all shadow-sm">
                     {icon}
                 </div>
                 <span className="text-sm font-bold text-gray-700 group-hover:text-orange-900">{label}</span>

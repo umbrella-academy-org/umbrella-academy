@@ -103,7 +103,7 @@ export default function MentorActivityFeed() {
                     <h2 className="text-xl font-bold text-gray-900    ">Mentor Activities</h2>
                     <p className="text-xs text-gray-500 mt-1 font-medium">Track your students' progress and requests</p>
                 </div>
-                <button className="p-2 hover:bg-gray-50 rounded-xl transition-colors">
+                <button className="p-2 hover:bg-gray-50 rounded-lg transition-colors">
                     <MoreHorizontal className="w-5 h-5 text-gray-400" />
                 </button>
             </div>

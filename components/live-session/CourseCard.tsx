@@ -57,7 +57,7 @@ export default function CourseCard({ user, userType = 'student' }: CourseCardPro
           </p>
 
           {/* Combined Trainer Section */}
-          <div className="flex items-center gap-4 bg-gray-50 p-4 rounded-xl border border-gray-100 group/mentor transition-all duration-300">
+          <div className="flex items-center gap-4 bg-gray-50 p-4 rounded-lg border border-gray-100 group/mentor transition-all duration-300">
             <div className="w-10 h-10 rounded-lg bg-yellow-600 flex items-center justify-center p-0.5 shadow-sm">
               <div className="w-full h-full bg-white rounded-md flex items-center justify-center overflow-hidden">
                 <User className="w-5 h-5 text-gray-900" />

@@ -66,7 +66,7 @@ export default function RoadmapCreation({ roadmap, onRoadmapCreated }: RoadmapCr
 
   if (step === 'payment') {
     return (
-      <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-100 text-center">
+      <div className="bg-white rounded-lg p-8 shadow-sm border border-gray-100 text-center">
         <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
           <CreditCard className="w-8 h-8 text-blue-600" />
         </div>
@@ -79,7 +79,7 @@ export default function RoadmapCreation({ roadmap, onRoadmapCreated }: RoadmapCr
 
   if (step === 'creating') {
     return (
-      <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-100 text-center">
+      <div className="bg-white rounded-lg p-8 shadow-sm border border-gray-100 text-center">
         <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
           <Clock className="w-8 h-8 text-yellow-600" />
         </div>
@@ -92,7 +92,7 @@ export default function RoadmapCreation({ roadmap, onRoadmapCreated }: RoadmapCr
 
   if (step === 'completed') {
     return (
-      <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-100 text-center">
+      <div className="bg-white rounded-lg p-8 shadow-sm border border-gray-100 text-center">
         <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
           <CheckCircle className="w-8 h-8 text-green-600" />
         </div>
@@ -105,7 +105,7 @@ export default function RoadmapCreation({ roadmap, onRoadmapCreated }: RoadmapCr
   const totalSessions = roadmap.phases.reduce((total, phase) => total + phase.sessions.length, 0);
 
   return (
-    <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+    <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
       <div className="mb-6">
         <h3 className="text-xl font-semibold text-gray-900 mb-2">Create Your Learning Roadmap</h3>
         <p className="text-gray-600">Start your personalized learning journey with {roadmap.title}</p>

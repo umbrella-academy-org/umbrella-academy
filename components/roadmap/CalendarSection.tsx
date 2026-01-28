@@ -106,7 +106,7 @@ export default function CalendarSection({ selectedDateRange, onDateRangeChange }
   return (
     <div className="space-y-4">
       {/* Upcoming Activity */}
-      <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+      <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
             <Calendar className="w-4 h-4 text-gray-400" />
@@ -123,7 +123,7 @@ export default function CalendarSection({ selectedDateRange, onDateRangeChange }
       </div>
 
       {/* Calendar Grid */}
-      <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+      <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
         <div className="grid grid-cols-2 gap-6">
           <div>
             <div className="space-y-3">

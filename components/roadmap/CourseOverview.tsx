@@ -43,7 +43,7 @@ export default function CourseOverview() {
           </div>
 
           <div className="relative">
-            <div className="w-12 h-12 rounded-xl overflow-hidden shadow-sm border border-white">
+            <div className="w-12 h-12 rounded-lg overflow-hidden shadow-sm border border-white">
               <div className="w-full h-full bg-gradient-to-br from-yellow-100 to-yellow-200 flex items-center justify-center">
                 <User className="w-6 h-6 text-yellow-700" />
               </div>

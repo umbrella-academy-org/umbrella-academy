@@ -56,7 +56,7 @@ export default function NoRoadmapState() {
           {features.map((feature, index) => {
             const Icon = feature.icon;
             return (
-              <div key={index} className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+              <div key={index} className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
                 <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-4">
                   <Icon className="w-6 h-6 text-yellow-600" />
                 </div>
@@ -68,7 +68,7 @@ export default function NoRoadmapState() {
         </div>
 
         {/* CTA Section */}
-        <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-100 text-center">
+        <div className="bg-white rounded-lg p-8 shadow-sm border border-gray-100 text-center">
           <h2 className="text-xl font-semibold text-gray-900 mb-4">
             Ready to Complete Your Setup?
           </h2>

@@ -69,7 +69,7 @@ export default function UmbrellaAdminWingsPage() {
               <p className="text-gray-600">Monitor and manage all wings across the system</p>
             </div>
 
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+            <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead className="bg-gray-50">

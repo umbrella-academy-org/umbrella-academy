@@ -32,7 +32,7 @@ export default function StudentProfilePage() {
                 <main className="flex-1 p-4 lg:p-8 overflow-y-auto bg-gray-50/30">
                     <div className="max-w-5xl mx-auto animate-fade-in">
                         {/* Profile Header Card */}
-                        <div className="bg-white rounded-[2rem] border border-gray-100 shadow-xl shadow-gray-200/50 overflow-hidden mb-8 interactive-card">
+                        <div className="bg-white rounded-[2rem] border border-gray-100 shadow-xl shadow-gray-200/50 overflow-hidden mb-8 ">
                             <div className="h-48 bg-gradient-to-br from-yellow-400 via-yellow-500 to-orange-500 relative overflow-hidden">
                                 {/* Decorative Abstract Shapes */}
                                 <div className="absolute top-0 left-0 w-full h-full opacity-20">
@@ -105,7 +105,7 @@ export default function StudentProfilePage() {
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                             {/* Left Column - Personal Info */}
                             <div className="lg:col-span-2 space-y-8 animate-slide-up">
-                                <div className="bg-white rounded-[2rem] border border-gray-100 shadow-xl shadow-gray-200/30 p-10 interactive-card">
+                                <div className="bg-white rounded-[2rem] border border-gray-100 shadow-xl shadow-gray-200/30 p-10 ">
                                     <div className="flex items-center justify-between mb-8">
                                         <div className="flex items-center gap-4">
                                             <div className="w-12 h-12 bg-gray-50 rounded-2xl flex items-center justify-center text-gray-600">
@@ -199,7 +199,7 @@ export default function StudentProfilePage() {
                                     </div>
                                 </div>
 
-                                <div className="bg-white rounded-[2rem] border border-gray-100 shadow-xl shadow-gray-200/30 p-10 interactive-card">
+                                <div className="bg-white rounded-[2rem] border border-gray-100 shadow-xl shadow-gray-200/30 p-10 ">
                                     <div className="flex items-center gap-4 mb-8">
                                         <div className="w-12 h-12 bg-gray-50 rounded-2xl flex items-center justify-center text-gray-600">
                                             <Shield className="w-6 h-6" />
@@ -233,7 +233,7 @@ export default function StudentProfilePage() {
 
                             {/* Right Column - Preferences & Support */}
                             <div className="space-y-8 animate-slide-up [animation-delay:200ms]">
-                                <div className="bg-white rounded-[2rem] border border-gray-100 shadow-xl shadow-gray-200/30 p-8 interactive-card">
+                                <div className="bg-white rounded-[2rem] border border-gray-100 shadow-xl shadow-gray-200/30 p-8 ">
                                     <h3 className="text-xl font-bold text-gray-900 mb-8 flex items-center gap-3">
                                         <Settings className="w-5 h-5 text-gray-400" />
                                         Account Settings
@@ -302,7 +302,7 @@ function SettingsItem({ icon, label, color }: { icon: React.ReactNode, label: st
     return (
         <button className="w-full flex items-center justify-between p-4 rounded-2xl hover:bg-gray-50 transition-all border border-transparent hover:border-gray-100 group">
             <div className="flex items-center gap-4">
-                <div className={`w-10 h-10 rounded-xl flex items-center justify-center group-hover:text-white transition-all duration-300 ${colorClasses}`}>
+                <div className={`w-10 h-10 rounded-lg flex items-center justify-center group-hover:text-white transition-all duration-300 ${colorClasses}`}>
                     {icon}
                 </div>
                 <span className="text-[15px] font-bold text-gray-700 group-hover:text-gray-900">{label}</span>

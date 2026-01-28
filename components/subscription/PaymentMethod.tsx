@@ -4,7 +4,7 @@ import { CreditCard, Mail } from 'lucide-react';
 
 export default function PaymentMethod() {
   return (
-    <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+    <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
       <div className="mb-6">
         <h3 className="text-lg font-semibold text-gray-900 mb-2">Payment method</h3>
         <p className="text-sm text-gray-600 mb-6">Change how you pay for your plan.</p>

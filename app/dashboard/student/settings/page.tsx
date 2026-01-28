@@ -48,7 +48,7 @@ export default function StudentSettingsPage() {
                                         <button
                                             key={item.id}
                                             onClick={() => setActiveSection(item.id)}
-                                            className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeSection === item.id
+                                            className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all ${activeSection === item.id
                                                 ? 'bg-yellow-600 text-white shadow-md'
                                                 : 'text-gray-600 hover:bg-white hover:text-gray-900 border border-transparent hover:border-gray-100'
                                                 }`}
@@ -59,7 +59,7 @@ export default function StudentSettingsPage() {
                                     ))}
                                     <button
                                         onClick={() => logout()}
-                                        className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-red-500 hover:bg-red-50 transition-all mt-4"
+                                        className="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-red-500 hover:bg-red-50 transition-all mt-4"
                                     >
                                         <LogOut className="w-4 h-4" />
                                         Sign Out
@@ -138,7 +138,7 @@ export default function StudentSettingsPage() {
                                                     { id: 'roadmapUpdates', title: 'Roadmap Progress', desc: 'Get updates when your trainer approves or comments on your roadmap.' },
                                                     { id: 'marketingEmail', title: 'Marketing Communications', desc: 'Receive newsletters and special offers from Umbrella Academy.' }
                                                 ].map((pref) => (
-                                                    <div key={pref.id} className="flex items-center justify-between p-4 hover:bg-gray-50 rounded-xl transition-all border border-transparent hover:border-gray-50">
+                                                    <div key={pref.id} className="flex items-center justify-between p-4 hover:bg-gray-50 rounded-lg transition-all border border-transparent hover:border-gray-50">
                                                         <div>
                                                             <h4 className="text-sm font-semibold text-gray-900">{pref.title}</h4>
                                                             <p className="text-xs text-gray-500 mt-0.5">{pref.desc}</p>
@@ -159,7 +159,7 @@ export default function StudentSettingsPage() {
                                         <div className="space-y-8">
                                             <h3 className="text-lg font-semibold text-gray-900 mb-6">Visual Preferences</h3>
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                                <button className="flex items-center justify-between p-4 rounded-xl border-2 border-yellow-600 bg-yellow-50 text-yellow-600 shadow-sm">
+                                                <button className="flex items-center justify-between p-4 rounded-lg border-2 border-yellow-600 bg-yellow-50 text-yellow-600 shadow-sm">
                                                     <div className="flex items-center gap-3">
                                                         <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center border border-yellow-100">
                                                             <Globe className="w-5 h-5" />
@@ -173,7 +173,7 @@ export default function StudentSettingsPage() {
                                                         <Check className="w-3 h-3 text-white" />
                                                     </div>
                                                 </button>
-                                                <button className="flex items-center justify-between p-4 rounded-xl border-2 border-gray-100 bg-white text-gray-400 hover:border-gray-200 transition-all opacity-50 grayscale">
+                                                <button className="flex items-center justify-between p-4 rounded-lg border-2 border-gray-100 bg-white text-gray-400 hover:border-gray-200 transition-all opacity-50 grayscale">
                                                     <div className="flex items-center gap-3">
                                                         <div className="w-10 h-10 rounded-lg bg-gray-900 flex items-center justify-center border border-gray-800">
                                                             <Moon className="w-5 h-5 text-gray-400" />
