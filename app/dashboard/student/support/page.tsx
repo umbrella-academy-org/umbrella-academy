@@ -31,9 +31,9 @@ export default function StudentSupportPage() {
         <div className="flex h-screen bg-white">
             <Sidebar activeItem="Support" userType="student" />
 
-            <div className="flex-1 flex flex-col min-w-0">
+            <div className="flex-1 flex flex-col ">
                 <main className="flex-1 p-4 lg:p-8 overflow-y-auto bg-gray-50/30">
-                    <div className="max-w-5xl mx-auto">
+                    <div className="max-w-full mx-auto">
                         {/* Hero Section */}
                         <div className="mb-12">
                             <h1 className="text-3xl font-semibold text-gray-900 mb-2">Support Center</h1>
@@ -46,14 +46,14 @@ export default function StudentSupportPage() {
                                     placeholder="Search articles, topics, help..."
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
-                                    className="w-full pl-12 pr-4 py-4 bg-white border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent shadow-sm transition-all"
+                                    className="w-full pl-12 pr-4 py-4 bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent shadow-sm transition-all"
                                 />
                             </div>
                         </div>
 
                         {/* Support Actions */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                            <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow group">
+                            <div className="bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow group">
                                 <div className="w-12 h-12 bg-yellow-50 rounded-xl flex items-center justify-center text-yellow-600 mb-4 group-hover:bg-yellow-600 group-hover:text-white transition-colors">
                                     <Mail className="w-6 h-6" />
                                 </div>
@@ -64,7 +64,7 @@ export default function StudentSupportPage() {
                                 </a>
                             </div>
 
-                            <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow group">
+                            <div className="bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow group">
                                 <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 mb-4 group-hover:bg-blue-600 group-hover:text-white transition-colors">
                                     <MessageCircle className="w-6 h-6" />
                                 </div>
@@ -75,7 +75,7 @@ export default function StudentSupportPage() {
                                 </button>
                             </div>
 
-                            <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow group">
+                            <div className="bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow group">
                                 <div className="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center text-purple-600 mb-4 group-hover:bg-purple-600 group-hover:text-white transition-colors">
                                     <FileText className="w-6 h-6" />
                                 </div>
@@ -88,7 +88,7 @@ export default function StudentSupportPage() {
                         </div>
 
                         {/* FAQs */}
-                        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8">
+                        <div className="bg-white rounded-lg border border-gray-100 shadow-sm p-8">
                             <h2 className="text-xl font-semibold text-gray-900 mb-6">Frequently Asked Questions</h2>
                             <div className="space-y-6">
                                 {faqs.map((faq, i) => (

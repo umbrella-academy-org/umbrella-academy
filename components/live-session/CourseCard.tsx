@@ -45,7 +45,7 @@ export default function CourseCard({ user, userType = 'student' }: CourseCardPro
               </button>
               <a
                 href="/dashboard/student/live-session/call"
-                className="px-6 py-3 bg-yellow-600 text-white text-sm font-semibold rounded-lg hover:bg-yellow-700 transition-all duration-300 active:scale-95 shadow-sm"
+                className="px-6 py-3 bg-yellow-600 text-white text-sm  rounded-lg hover:bg-yellow-700 transition-all duration-300 active:scale-95 shadow-sm"
               >
                 Join Live Sync
               </a>

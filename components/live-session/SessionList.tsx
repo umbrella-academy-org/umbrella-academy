@@ -108,7 +108,7 @@ export default function SessionList({ activeTab }: SessionListProps) {
                         <div className="flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
                             <div className="flex items-center gap-5 flex-1 w-full">
                                 {/* Type Icon */}
-                                <div className={`w-14 h-14 rounded-xl flex items-center justify-center shadow-sm ${session.type === 'live' ? 'bg-red-50 text-red-600' :
+                                <div className={`w-14 h-14 rounded-lg flex items-center justify-center shadow-sm ${session.type === 'live' ? 'bg-red-50 text-red-600' :
                                     session.type === 'mentoring' ? 'bg-yellow-50 text-yellow-600' :
                                         'bg-green-50 text-green-600'
                                     }`}>
@@ -141,16 +141,16 @@ export default function SessionList({ activeTab }: SessionListProps) {
                                 {session.status === 'live' ? (
                                     <button
                                         onClick={() => router.push('/dashboard/student/live-session/call')}
-                                        className="flex-1 md:flex-none px-8 py-3 bg-red-600 text-white text-sm font-semibold rounded-lg hover:bg-red-700 shadow-md transition-all active:scale-95 animate-pulse"
+                                        className="flex-1 md:flex-none px-8 py-3 bg-red-600 text-white text-sm rounded-lg hover:bg-red-700 shadow-md transition-all active:scale-95 animate-pulse"
                                     >
                                         Join Meeting
                                     </button>
                                 ) : session.status === 'upcoming' ? (
-                                    <button className="flex-1 md:flex-none px-8 py-3 bg-yellow-600 text-white text-sm font-semibold rounded-lg hover:bg-yellow-700 shadow-md transition-all active:scale-95">
+                                    <button className="flex-1 md:flex-none px-8 py-3 bg-yellow-600 text-white text-sm rounded-lg hover:bg-yellow-700 shadow-md transition-all active:scale-95">
                                         Register Session
                                     </button>
                                 ) : (
-                                    <button className="flex-1 md:flex-none px-8 py-3 bg-white border border-gray-200 text-gray-600 text-sm font-semibold rounded-lg hover:bg-gray-50 transition-all active:scale-95">
+                                    <button className="flex-1 md:flex-none px-8 py-3 bg-white border border-gray-200 text-gray-600 text-sm rounded-lg hover:bg-gray-50 transition-all active:scale-95">
                                         Watch Recording
                                     </button>
                                 )}
