@@ -3,13 +3,22 @@
 import Sidebar from '@/components/dashboard/Sidebar';
 import WalletTransactionsTable from '@/components/wing-admin/WalletTransactionsTable';
 
+interface WalletTransaction {
+  id: number;
+  type: 'income' | 'withdrawal';
+  description: string;
+  amount: number;
+  date: string;
+  status: string;
+}
+
 import { CreditCard, TrendingUp, Download, ArrowUpRight } from 'lucide-react';
 
 export default function WingAdminWalletPage() {
-  const transactions = [
+  const transactions: WalletTransaction[] = [
     {
       id: 1,
-      type: 'income',
+      type: 'income' as const,
       description: 'Student Payment - Alice Johnson',
       amount: 175.00,
       date: '2024-01-22',
@@ -17,7 +26,7 @@ export default function WingAdminWalletPage() {
     },
     {
       id: 2,
-      type: 'withdrawal',
+      type: 'withdrawal' as const,
       description: 'Withdrawal to Bank Account',
       amount: -500.00,
       date: '2024-01-20',
@@ -25,7 +34,7 @@ export default function WingAdminWalletPage() {
     },
     {
       id: 3,
-      type: 'income',
+      type: 'income' as const,
       description: 'Student Payment - Bob Wilson',
       amount: 175.00,
       date: '2024-01-19',

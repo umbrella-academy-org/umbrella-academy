@@ -8,7 +8,7 @@ interface WalletTransaction {
   id: number;
   type: 'income' | 'withdrawal';
   description: string;
-  amount: number;
+  amount: number; // Can be negative for withdrawals
   date: string;
   status: string;
 }
@@ -41,9 +41,9 @@ export default function WalletTransactionsTable({ transactions }: WalletTransact
     ),
     amount: (
       <div className={`text-sm font-medium ${
-        transaction.type === 'income' ? 'text-green-600' : 'text-red-600'
+        transaction.amount >= 0 ? 'text-green-600' : 'text-red-600'
       }`}>
-        {transaction.type === 'income' ? '+' : '-'}RWF {Math.abs(transaction.amount).toLocaleString()}
+        {transaction.amount >= 0 ? '+' : ''}RWF {transaction.amount.toLocaleString()}
       </div>
     ),
     date: (
