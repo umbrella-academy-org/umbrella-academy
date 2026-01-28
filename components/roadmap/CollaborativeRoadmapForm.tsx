@@ -27,17 +27,19 @@ interface RoadmapFormData {
 }
 
 interface CollaborativeRoadmapFormProps {
-  sessionId: string;
-  trainerId: string;
-  studentId: string;
-  onSave: (roadmapData: RoadmapFormData) => void;
+  sessionId?: string;
+  trainerId?: string;
+  studentId?: string;
+  onSave?: (roadmapData: RoadmapFormData) => void;
+  onRoadmapCreated?: () => void;
 }
 
 export default function CollaborativeRoadmapForm({ 
   sessionId, 
   trainerId, 
   studentId, 
-  onSave 
+  onSave,
+  onRoadmapCreated
 }: CollaborativeRoadmapFormProps) {
   const [formData, setFormData] = useState<RoadmapFormData>({
     studentGoals: [''],
@@ -169,7 +171,13 @@ export default function CollaborativeRoadmapForm({
     
     localStorage.setItem('hasRoadmap', 'true');
     localStorage.setItem('roadmapData', JSON.stringify(cleanedData));
-    onSave(cleanedData);
+    
+    if (onSave) {
+      onSave(cleanedData);
+    }
+    if (onRoadmapCreated) {
+      onRoadmapCreated();
+    }
   };
 
   return (

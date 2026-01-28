@@ -5,16 +5,16 @@ import { CreditCard, Phone, CheckCircle, AlertCircle } from 'lucide-react';
 
 interface MoMoPaymentProps {
   amount: number;
-  wingId: string;
-  studentId: string;
-  onPaymentSuccess: (transactionId: string) => void;
-  onPaymentError: (error: string) => void;
+  wingId?: string;
+  studentId?: string;
+  onPaymentSuccess: (transactionId?: string) => void;
+  onPaymentError?: (error: string) => void;
 }
 
 export default function MoMoPayment({
   amount,
-  wingId,
-  studentId,
+  wingId = 'default-wing',
+  studentId = 'default-student',
   onPaymentSuccess,
   onPaymentError
 }: MoMoPaymentProps) {
@@ -71,7 +71,9 @@ export default function MoMoPayment({
       setPaymentStatus('error');
       const errorMsg = error instanceof Error ? error.message : 'Payment processing failed';
       setErrorMessage(errorMsg);
-      onPaymentError(errorMsg);
+      if (onPaymentError) {
+        onPaymentError(errorMsg);
+      }
     } finally {
       setIsProcessing(false);
     }

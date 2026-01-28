@@ -24,17 +24,32 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
 
   // Get completion status for new user steps
   const getNewUserSteps = () => {
+    const hasAvailability = localStorage.getItem('availabilitySet');
     const hasSelectedWing = localStorage.getItem('selectedWing');
+    const hasCompletedPayment = localStorage.getItem('paymentCompleted');
     const hasCreatedRoadmap = localStorage.getItem('hasRoadmap');
-    const hasBookedSession = localStorage.getItem('hasBookedSession');
     
     return [
+      {
+        id: 'availability',
+        label: 'Set Availability',
+        completed: !!hasAvailability,
+        href: '/post-signup/availability',
+        description: 'Choose your learning hours'
+      },
       {
         id: 'wing',
         label: 'Choose Your Wing',
         completed: !!hasSelectedWing,
-        href: '/wing-explorer',
+        href: '/post-signup/choose-wing',
         description: 'Select your industry focus'
+      },
+      {
+        id: 'payment',
+        label: 'Complete Payment',
+        completed: !!hasCompletedPayment,
+        href: '/post-signup/payment',
+        description: 'Pay for wing access'
       },
       {
         id: 'roadmap',
@@ -42,13 +57,6 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
         completed: !!hasCreatedRoadmap,
         href: '/post-signup/roadmap',
         description: 'Plan your learning journey'
-      },
-      {
-        id: 'session',
-        label: 'Book First Live Session',
-        completed: !!hasBookedSession,
-        href: '/post-signup/live-session',
-        description: 'Schedule with a trainer'
       }
     ];
   };
@@ -56,12 +64,11 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
   // Check if user is new and what steps they've completed
   useEffect(() => {
     const newUserFlag = localStorage.getItem('isNewUser');
-    const hasSelectedWing = localStorage.getItem('selectedWing');
     const hasCreatedRoadmap = localStorage.getItem('hasRoadmap');
     
     if ((newUserFlag === 'true' || devNewUserMode) && currentUserType === 'student') {
       setIsNewUser(true);
-      setShowNewUserGuide(!hasSelectedWing || !hasCreatedRoadmap);
+      setShowNewUserGuide(!hasCreatedRoadmap);
     } else {
       setIsNewUser(false);
       setShowNewUserGuide(false);
@@ -286,7 +293,22 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
           {
             icon: <Map className="w-5 h-5" />,
             label: 'Roadmap',
-            href: '/post-signup/roadmap'
+            href: (() => {
+              // Check if user has completed roadmap creation
+              const hasRoadmap = typeof window !== 'undefined' ? localStorage.getItem('hasRoadmap') === 'true' : false;
+              const paymentCompleted = typeof window !== 'undefined' ? localStorage.getItem('paymentCompleted') === 'true' : false;
+              
+              // If no roadmap and no payment, start from availability
+              if (!hasRoadmap && !paymentCompleted) {
+                return '/post-signup/availability';
+              }
+              // If payment completed but no roadmap, go to roadmap creation
+              if (paymentCompleted && !hasRoadmap) {
+                return '/post-signup/roadmap';
+              }
+              // If roadmap exists, go to roadmap page
+              return '/post-signup/roadmap';
+            })()
           },
           {
             icon: <Bell className="w-5 h-5" />,
@@ -296,12 +318,25 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
           {
             icon: <Video className="w-5 h-5" />,
             label: 'Live Session',
-            href: '/post-signup/live-session'
+            href: (() => {
+              // Check if user has completed roadmap creation
+              const hasRoadmap = typeof window !== 'undefined' ? localStorage.getItem('hasRoadmap') === 'true' : false;
+              const paymentCompleted = typeof window !== 'undefined' ? localStorage.getItem('paymentCompleted') === 'true' : false;
+              
+              // If no roadmap creation completed, redirect to start of flow
+              if (!hasRoadmap && !paymentCompleted) {
+                return '/post-signup/availability';
+              }
+              return '/post-signup/live-session';
+            })()
           },
           {
             icon: <CreditCard className="w-5 h-5" />,
             label: 'Subscription',
-            href: '/post-signup/subscription'
+            href: (() => {
+              // Always redirect subscription to roadmap creation flow
+              return '/post-signup/roadmap';
+            })()
           },
           {
             icon: <HelpCircle className="w-5 h-5" />,
@@ -506,7 +541,17 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
             {/* Dev Toggle */}
             <div className="mb-4">
               <button
-                onClick={() => setDevNewUserMode(!devNewUserMode)}
+                onClick={() => {
+                  setDevNewUserMode(!devNewUserMode);
+                  if (!devNewUserMode) {
+                    // Reset all progress when enabling dev mode
+                    localStorage.removeItem('availabilitySet');
+                    localStorage.removeItem('selectedWing');
+                    localStorage.removeItem('paymentCompleted');
+                    localStorage.removeItem('hasRoadmap');
+                    localStorage.setItem('isNewUser', 'true');
+                  }
+                }}
                 className={`w-full px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
                   devNewUserMode 
                     ? 'bg-yellow-600 text-white' 
@@ -522,27 +567,15 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
               <div className="bg-gray-800 rounded-lg p-4">
                 <div className="flex items-center gap-2 mb-3">
                   <AlertCircle className="w-4 h-4 text-yellow-600" />
-                  <span className="text-sm font-medium text-white">Getting Started</span>
+                  <span className="text-sm font-medium text-white">Finish Setting Your Account</span>
                 </div>
-                <div className="space-y-2">
-                  {getNewUserSteps().map((step) => (
-                    <div key={step.id} className="flex items-center gap-2">
-                      {step.completed ? (
-                        <CheckCircle className="w-4 h-4 text-green-500" />
-                      ) : (
-                        <div className="w-4 h-4 border-2 border-gray-600 rounded-full" />
-                      )}
-                      <button
-                        onClick={() => navigate(step.href)}
-                        className={`text-xs ${
-                          step.completed ? 'text-gray-400' : 'text-yellow-600 hover:text-yellow-500'
-                        }`}
-                      >
-                        {step.label}
-                      </button>
-                    </div>
-                  ))}
-                </div>
+                <p className="text-xs text-gray-400 mb-3">Complete your profile setup to start learning</p>
+                <button
+                  onClick={() => navigate('/post-signup/availability')}
+                  className="w-full bg-yellow-600 text-white px-3 py-2 rounded-lg text-xs font-medium hover:bg-yellow-700 transition-colors"
+                >
+                  Continue Setup
+                </button>
               </div>
             )}
           </div>
