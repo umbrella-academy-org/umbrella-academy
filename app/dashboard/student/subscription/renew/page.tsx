@@ -28,18 +28,16 @@ export default function RenewSubscriptionPage() {
   };
 
   return (
-    <div className="flex h-screen bg-white">
+    <div className="flex h-screen bg-white w-full">
       {/* Sidebar - Fixed */}
       <Sidebar activeItem="Subscription" />
 
       {/* Main Content - Scrollable */}
-      <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
+      <div className="w-full flex flex-col overflow-hidden lg:ml-0">
         {/* Renew Content - Scrollable */}
-        <main className="flex-1 overflow-auto">
-          <div className="p-3 lg:p-4">
-            {/* Renew Header */}
-            <RenewHeader />
-
+        <main className="w-full overflow-auto">
+          <div className="w-full p-3 lg:p-4">
+          
             {/* Back Button */}
             <div className="mt-4 lg:mt-6 mb-4 lg:mb-6">
               <a
@@ -51,7 +49,7 @@ export default function RenewSubscriptionPage() {
             </div>
 
             {/* Payment Method Form */}
-            <div className="max-w-4xl">
+            <div className="max-w-full">
               <PaymentMethodForm
                 formData={formData}
                 onInputChange={handleInputChange}

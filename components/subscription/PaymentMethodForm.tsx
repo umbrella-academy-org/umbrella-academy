@@ -20,7 +20,7 @@ interface PaymentMethodFormProps {
 
 export default function PaymentMethodForm({ formData, onInputChange }: PaymentMethodFormProps) {
   return (
-    <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-100 border-dashed border-blue-300">
+    <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-100 border-dashed border-blue-300 flex-col">
       {/* Header */}
       <div className="text-center mb-8">
         <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-4">
