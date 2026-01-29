@@ -139,7 +139,7 @@ export default function StudentRoadmapPage() {
               <h3 className="text-lg font-medium text-gray-900 mb-2">No Active Roadmap</h3>
               <p className="text-gray-600 mb-4">Create your learning roadmap to get started</p>
               <button
-                onClick={() => navigate('/post-signup/roadmap')}
+                onClick={() => navigate('/dashboard/student/roadmap/create')}
                 className="px-6 py-3 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700"
               >
                 Create Roadmap
