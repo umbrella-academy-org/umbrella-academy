@@ -7,7 +7,10 @@ import {
     Camera, Edit2, Check, X, Phone, Globe,
     BookOpen, ChevronRight, Settings, ExternalLink,
     Bookmark, MessageSquare, Star, Clock, Trophy,
-    TrendingUp, Award
+    TrendingUp, Award, Zap, Target, Brain,
+    Link as LinkIcon, Linkedin, Github, Twitter,
+    Sparkles, GraduationCap, Flame, Layout, Video,
+    Users, CalendarDays
 } from 'lucide-react';
 import { useAuth } from '@/contexts';
 import Image from 'next/image';
@@ -16,215 +19,214 @@ import { StudentUser } from '@/types';
 export default function StudentProfilePage() {
     const { user } = useAuth();
     const studentUser = user?.role === 'student' ? user as StudentUser : null;
-    const [isEditing, setIsEditing] = useState(false);
-    const [activeTab, setActiveTab] = useState('About');
+    const [activeTab, setActiveTab] = useState('Overview');
 
-    // Mock data for new layout elements if not in user object
-    const [profileData, setProfileData] = useState({
+    // Data tailored for Live Session based E-Learning
+    const profileData = {
         name: user?.name || 'Jane Mukamana',
-        role: 'Software Engineering Student',
+        role: 'Software Engineering Trainee',
         email: user?.email || 'jane.mukamana@student.umbrella.rw',
         phone: '+250 788 000 000',
         location: 'Kigali, Rwanda',
-        website: 'www.janemukamana.me',
-        bio: user?.profileData?.bio || 'Passionate learner focused on Full Stack Development and AI implementation.',
-        wing: user?.wingId || 'Tech Companies Wing',
+        portfolio: 'janemukamana.dev',
+        bio: user?.profileData?.bio || 'Dedicated trainee focusing on live collaborative sessions and practical software implementation within the Umbrella Tech Wing.',
+        wing: user?.wingId?.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) || 'Tech Companies Wing',
         joinDate: user?.joinDate || 'Sep 2024',
-        gender: 'Female',
-        birthday: 'June 5, 2002',
-        ranking: 8.6,
-        skills: user?.profileData?.skills || ['HTML', 'CSS', 'JavaScript', 'React', 'Node.js', 'UI/UX'],
-        experience: [
-            { id: 1, title: 'Frontend Basics', organization: 'Academy Core', status: 'Primary', period: 'Phase 1 - Completed' },
-            { id: 2, title: 'React Mastery', organization: 'Tech Wing', status: 'Secondary', period: 'Phase 2 - In Progress' }
+        sessionsAttended: 42,
+        attendanceRate: '94%',
+        totalHours: 142,
+        engagementScore: 88,
+        skills: [
+            { name: 'React Architecture', level: 'Advanced', color: 'bg-blue-500' },
+            { name: 'Node.js Systems', level: 'Intermediate', color: 'bg-green-600' },
+            { name: 'TypeScript', level: 'Intermediate', color: 'bg-blue-600' },
+            { name: 'UI/UX Principles', level: 'Advanced', color: 'bg-purple-500' },
+        ],
+        liveRoadmap: [
+            { title: 'Core JavaScript', status: 'Completed', date: 'Oct 2024' },
+            { title: 'React & State Management', status: 'In Progress', date: 'Ongoing' },
+            { title: 'Full Stack Integration', status: 'Upcoming', date: 'Dec 2024' },
         ]
-    });
-
-    const handleSave = () => {
-        setIsEditing(false);
     };
 
     return (
         <div className="flex h-screen bg-[#FDFDFC]">
             <Sidebar activeItem="Profile" userType="student" />
 
-            <div className="items-center w-full flex flex-col min-w-0 overflow-hidden text-gray-900">
-                <main className="flex overflow-y-auto">
-                    <div className="max-w-full mx-auto p-2 space-y-8 animate-fade-in">
-                        {/* Profile Header Block */}
-                        <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden mb-8">
-                            <div className="h-44 bg-gradient-to-r from-yellow-500 via-orange-500 to-yellow-600 relative">
-                                <div className="absolute inset-0 opacity-20 interaction-none">
-                                    <div className="absolute top-0 left-0 w-64 h-64 bg-white rounded-full blur-3xl -ml-32 -mt-32" />
-                                    <div className="absolute bottom-0 right-0 w-64 h-64 bg-orange-200 rounded-full blur-3xl -mr-32 -mb-32" />
-                                </div>
-                                <button className="absolute top-4 right-4 p-2 bg-white/20 backdrop-blur-md rounded-lg text-white hover:bg-white/30 transition-all z-10">
+            <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+                <main className="flex-1 overflow-y-auto">
+                    {/* Header Banner - Rounded LG */}
+                    <div className="max-w-[1400px] mx-auto px-6 pt-6">
+                        <div className="relative h-60 w-full rounded-lg overflow-hidden shadow-sm border border-gray-100">
+                            <Image
+                                src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop"
+                                alt="Cover"
+                                fill
+                                className="object-cover opacity-90"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-r from-gray-900/40 to-transparent" />
+                            <div className="absolute top-4 right-4">
+                                <button className="p-2 bg-white/20 backdrop-blur-md rounded-lg text-white hover:bg-white/30 transition-all border border-white/20">
                                     <Camera className="w-5 h-5" />
                                 </button>
                             </div>
+                        </div>
 
-                            <div className="px-8 pb-4">
-                                <div className="flex flex-col md:flex-row gap-6">
-                                    {/* Profile Avatar Container */}
-                                    <div className="relative -mt-20">
-                                        <div className="w-40 h-40 rounded-2xl bg-white p-1 border border-gray-100 shadow-2xl overflow-hidden group">
-                                            {user?.avatar ? (
-                                                <Image src={user.avatar} alt="Avatar" width={160} height={160} className="w-full h-full object-cover rounded-lg transition-transform duration-500 group-hover:scale-110" />
-                                            ) : (
-                                                <div className="w-full h-full bg-gradient-to-br from-yellow-50 to-yellow-100 flex items-center justify-center text-yellow-700 text-5xl font-black rounded-lg">
-                                                    {profileData.name.charAt(0)}
-                                                </div>
-                                            )}
+                        {/* Profile Info Overlap */}
+                        <div className="flex flex-col md:flex-row items-end gap-6 -mt-16 px-8 relative z-10">
+                            <div className="relative">
+                                <div className="w-32 h-32 rounded-lg bg-white p-1 shadow-xl border border-gray-100">
+                                    {user?.avatar ? (
+                                        <Image src={user.avatar} alt="Avatar" width={128} height={128} className="w-full h-full object-cover rounded-lg" />
+                                    ) : (
+                                        <div className="w-full h-full bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center text-white text-4xl font-black rounded-lg">
+                                            {profileData.name.charAt(0)}
                                         </div>
-                                        <div className="absolute bottom-2 right-2 w-5 h-5 bg-green-500 border-4 border-white rounded-full" title="Online" />
+                                    )}
+                                </div>
+                                <div className="absolute bottom-2 right-2 w-4 h-4 bg-green-500 border-2 border-white rounded-full" />
+                            </div>
+
+                            <div className="flex-1 pb-2">
+                                <div className="flex flex-wrap items-center justify-between gap-4">
+                                    <div className="space-y-1">
+                                        <h1 className="text-3xl font-bold text-gray-900">{profileData.name}</h1>
+                                        <div className="flex items-center gap-4 text-sm font-medium text-gray-500">
+                                            <span className="flex items-center gap-1.5"><MapPin className="w-4 h-4 text-yellow-600" /> {profileData.location}</span>
+                                            <span className="flex items-center gap-1.5 text-yellow-700 font-bold"><Zap className="w-4 h-4" /> {profileData.role}</span>
+                                        </div>
                                     </div>
-
-                                    {/* Identity Details */}
-                                    <div className="flex-1 mt-4">
-                                        <div className="flex flex-wrap items-start justify-between gap-4">
-                                            <div>
-                                                <div className="flex items-center gap-3">
-                                                    <h1 className="text-3xl font-bold text-gray-900 tracking-tight">{profileData.name}</h1>
-                                                    <div className="flex items-center gap-1 text-gray-400">
-                                                        <MapPin className="w-4 h-4" />
-                                                        <span className="text-sm font-medium">{profileData.location}</span>
-                                                    </div>
-                                                </div>
-                                                <p className="text-yellow-600 font-bold mt-1 text-lg">{profileData.role}</p>
-
-                                                <div className="mt-4 flex items-center gap-8">
-                                                    <div className="flex flex-col">
-                                                        <span className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-1">Rankings</span>
-                                                        <div className="flex items-center gap-2">
-                                                            <span className="text-2xl font-black text-gray-900 leading-none">{profileData.ranking}</span>
-                                                            <div className="flex gap-0.5">
-                                                                {[1, 2, 3, 4, 5].map((star) => (
-                                                                    <Star key={star} className={`w-4 h-4 ${star <= 4 ? 'fill-yellow-500 text-yellow-500' : 'text-gray-200'}`} />
-                                                                ))}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="flex items-center gap-3">
-                                                <button className="flex items-center gap-2 px-5 py-2.5 border border-gray-200 rounded-lg text-sm font-bold text-gray-700 hover:bg-gray-50 hover:border-gray-300 transition-all active:scale-95">
-                                                    <MessageSquare className="w-4 h-4" /> Send message
-                                                </button>
-                                                <button className="flex items-center gap-2 px-5 py-2.5 bg-blue-50 border border-blue-100 rounded-lg text-sm font-bold text-blue-600 hover:bg-blue-100 transition-all active:scale-95">
-                                                    <Check className="w-4 h-4" /> Contacts
-                                                </button>
-                                                <button className="text-gray-400 hover:text-red-500 transition-colors px-2 font-bold text-sm">
-                                                    Report user
-                                                </button>
-                                            </div>
-                                        </div>
-
-                                        <div className="mt-10 flex items-center gap-8">
-                                            <button
-                                                onClick={() => setActiveTab('Timeline')}
-                                                className={`flex items-center gap-2 py-3 px-1 border-b-2 font-bold text-sm transition-all ${activeTab === 'Timeline' ? 'border-yellow-600 text-yellow-600' : 'border-transparent text-gray-400 hover:text-gray-600'}`}
-                                            >
-                                                <TrendingUp className="w-4 h-4" /> Timeline
-                                            </button>
-                                            <button
-                                                onClick={() => setActiveTab('About')}
-                                                className={`flex items-center gap-2 py-3 px-1 border-b-2 font-bold text-sm transition-all ${activeTab === 'About' ? 'border-yellow-600 text-yellow-600' : 'border-transparent text-gray-400 hover:text-gray-600'}`}
-                                            >
-                                                <User className="w-4 h-4" /> About
-                                            </button>
-                                        </div>
+                                    <div className="flex items-center gap-3">
+                                        <button className="px-5 py-2.5 bg-yellow-600 text-white font-bold rounded-lg hover:bg-yellow-700 transition-all shadow-md active:scale-95 text-sm">
+                                            Edit Details
+                                        </button>
+                                        <button className="p-2.5 bg-white border border-gray-200 text-gray-600 rounded-lg hover:bg-gray-50 shadow-sm transition-all">
+                                            <Settings className="w-5 h-5" />
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pb-12 px-10">
-                            {/* Left Column */}
-                            <div className="lg:col-span-4 space-y-10">
-                                {/* Wing/Academy Section */}
-                                <div className="space-y-6">
-                                    <h3 className="text-[12px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-100 pb-2">Academy Path</h3>
-                                    <div className="space-y-8">
-                                        {profileData.experience.map((exp) => (
-                                            <div key={exp.id} className="flex gap-4 group">
-                                                <div className="w-12 h-12 rounded-lg bg-gray-50 border border-gray-100 flex items-center justify-center flex-shrink-0 group-hover:bg-yellow-50 group-hover:border-yellow-100 transition-all">
-                                                    <BookOpen className="w-6 h-6 text-gray-400 group-hover:text-yellow-600" />
+                    {/* Stats Grid - Rounded LG */}
+                    <div className="max-w-[1400px] mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6 mt-10">
+                        <SimpleStat icon={<Video className="w-5 h-5" />} label="Live Sessions" value={profileData.sessionsAttended} color="text-blue-600" />
+                        <SimpleStat icon={<Users className="w-5 h-5" />} label="Attendance" value={profileData.attendanceRate} color="text-green-600" />
+                        <SimpleStat icon={<Clock className="w-5 h-5" />} label="Live Hours" value={profileData.totalHours} color="text-orange-600" />
+                        <SimpleStat icon={<TrendingUp className="w-5 h-5" />} label="Engagement" value={`${profileData.engagementScore}%`} color="text-purple-600" />
+                    </div>
+
+                    <div className="max-w-[1400px] mx-auto p-6 grid grid-cols-1 lg:grid-cols-3 gap-8 pb-20">
+                        {/* Sidebar Column */}
+                        <div className="space-y-8">
+                            {/* Navigation */}
+                            <div className="bg-white rounded-lg border border-gray-100 shadow-sm p-2">
+                                {['Overview', 'Live Roadmap', 'Resources', 'Account Settings'].map((tab) => (
+                                    <button
+                                        key={tab}
+                                        onClick={() => setActiveTab(tab)}
+                                        className={`w-full flex items-center justify-between p-3.5 rounded-lg text-sm font-bold transition-all ${activeTab === tab ? 'bg-yellow-50 text-yellow-800' : 'text-gray-500 hover:bg-gray-50'}`}
+                                    >
+                                        <span className="flex items-center gap-3">
+                                            {tab === 'Overview' && <Layout className="w-4.5 h-4.5" />}
+                                            {tab === 'Live Roadmap' && <CalendarDays className="w-4.5 h-4.5" />}
+                                            {tab === 'Resources' && <BookOpen className="w-4.5 h-4.5" />}
+                                            {tab === 'Account Settings' && <Settings className="w-4.5 h-4.5" />}
+                                            {tab}
+                                        </span>
+                                        <ChevronRight className="w-4 h-4 opacity-40" />
+                                    </button>
+                                ))}
+                            </div>
+
+                            {/* Bio Block */}
+                            <div className="bg-white rounded-lg border border-gray-100 shadow-sm p-8 space-y-4">
+                                <h3 className="text-xs font-black text-gray-400 uppercase tracking-widest">About Me</h3>
+                                <p className="text-sm font-medium text-gray-600 leading-relaxed italic">{profileData.bio}</p>
+                                <div className="flex gap-2 pt-2">
+                                    <SocialLink icon={<Linkedin className="w-4 h-4" />} />
+                                    <SocialLink icon={<Github className="w-4 h-4" />} />
+                                    <SocialLink icon={<Globe className="w-4 h-4" />} />
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Main Content Column */}
+                        <div className="lg:col-span-2 space-y-8">
+
+                            {/* Live Session Roadmap */}
+                            <div className="bg-white rounded-lg border border-gray-100 shadow-sm p-8 space-y-8">
+                                <div className="flex items-center justify-between">
+                                    <h3 className="text-xl font-bold text-gray-900">Live Session Roadmap</h3>
+                                    <span className="text-[10px] font-black text-yellow-600 uppercase bg-yellow-50 px-2.5 py-1 rounded-full border border-yellow-100">Active Wing: {profileData.wing}</span>
+                                </div>
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    {profileData.liveRoadmap.map((item, i) => (
+                                        <div key={i} className={`p-5 rounded-lg border ${item.status === 'Completed' ? 'bg-green-50/30 border-green-100' : item.status === 'In Progress' ? 'bg-blue-50/30 border-blue-100' : 'bg-gray-50/30 border-gray-100'}`}>
+                                            <div className="flex items-center justify-between mb-3">
+                                                <span className={`text-[9px] font-black uppercase px-2 py-0.5 rounded ${item.status === 'Completed' ? 'bg-green-100 text-green-700' : item.status === 'In Progress' ? 'bg-blue-100 text-blue-700' : 'bg-gray-200 text-gray-600'}`}>{item.status}</span>
+                                                <Clock className="w-3.5 h-3.5 text-gray-400" />
+                                            </div>
+                                            <h4 className="font-bold text-gray-800 text-sm mb-1">{item.title}</h4>
+                                            <p className="text-[10px] text-gray-500 font-bold">{item.date}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Technical Arsenal & Info Grid */}
+                            <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
+                                <div className="md:col-span-3 bg-white rounded-lg border border-gray-100 shadow-sm p-8 space-y-6">
+                                    <h3 className="text-xl font-bold text-gray-900">Technical Arsenal</h3>
+                                    <div className="space-y-5">
+                                        {profileData.skills.map((skill) => (
+                                            <div key={skill.name} className="space-y-2">
+                                                <div className="flex items-center justify-between text-xs font-bold">
+                                                    <span className="text-gray-700">{skill.name}</span>
+                                                    <span className="text-gray-400 uppercase">{skill.level}</span>
                                                 </div>
-                                                <div className="flex-1">
-                                                    <div className="flex items-center justify-between gap-2">
-                                                        <h4 className="font-bold text-gray-900 group-hover:text-yellow-700 transition-colors">{exp.title}</h4>
-                                                        <span className={`text-[10px] px-2 py-0.5 rounded-full font-black uppercase tracking-wider ${exp.status === 'Primary' ? 'bg-blue-50 text-blue-600' : 'bg-gray-100 text-gray-600'}`}>
-                                                            {exp.status}
-                                                        </span>
-                                                    </div>
-                                                    <p className="text-xs font-bold text-gray-500 mt-1">{exp.period}</p>
-                                                    <p className="text-xs font-medium text-gray-400 mt-0.5">{exp.organization}</p>
+                                                <div className="h-1.5 w-full bg-gray-50 rounded-full overflow-hidden">
+                                                    <div
+                                                        className={`h-full ${skill.color} transition-all duration-1000`}
+                                                        style={{ width: skill.level === 'Advanced' ? '85%' : '60%' }}
+                                                    />
                                                 </div>
                                             </div>
                                         ))}
                                     </div>
                                 </div>
 
-                                {/* Skills Section */}
-                                <div className="space-y-6">
-                                    <h3 className="text-[12px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-100 pb-2">Core Skills</h3>
-                                    <div className="flex flex-wrap gap-2">
-                                        {profileData.skills.map((skill, idx) => (
-                                            <span key={idx} className="px-3 py-1.5 bg-white border border-gray-100 rounded-lg text-xs font-bold text-gray-600 hover:border-yellow-600 hover:text-yellow-600 hover:bg-yellow-50/50 transition-all cursor-default">
-                                                {skill}
-                                            </span>
-                                        ))}
+                                <div className="md:col-span-2 bg-white rounded-lg border border-gray-100 shadow-sm p-8 space-y-6">
+                                    <h3 className="text-xl font-bold text-gray-900">Contact Details</h3>
+                                    <div className="space-y-6">
+                                        <MiniInfo label="Academy Email" value={profileData.email} icon={<Mail className="w-4 h-4" />} />
+                                        <MiniInfo label="Phone Number" value={profileData.phone} icon={<Phone className="w-4 h-4" />} />
+                                        <MiniInfo label="Join Date" value={profileData.joinDate} icon={<Calendar className="w-4 h-4" />} />
                                     </div>
                                 </div>
                             </div>
 
-                            {/* Right Column (Personal Information) */}
-                            <div className="lg:col-span-8 space-y-12">
-                                {/* Contact Info */}
-                                <section className="space-y-8">
-                                    <h3 className="text-[12px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-100 pb-2">Contact Information</h3>
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-16">
-                                        <InfoItem label="Phone:" value={profileData.phone} isLink />
-                                        <InfoItem label="Address:" value={profileData.location} />
-                                        <InfoItem label="E-mail:" value={profileData.email} isLink />
-                                        <InfoItem label="Site:" value={profileData.website} isLink />
+                            {/* Preferences Recap */}
+                            <div className="bg-gray-900 rounded-lg p-8 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
+                                <div className="space-y-2">
+                                    <h4 className="text-lg font-bold">Trainee Academic Preferences</h4>
+                                    <p className="text-gray-400 text-sm font-medium">Your current session availability and learning style</p>
+                                </div>
+                                <div className="flex gap-10">
+                                    <div className="text-center">
+                                        <p className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-1">Time Slot</p>
+                                        <p className="text-sm font-bold text-yellow-400">{studentUser?.availability?.preferredTimeSlots ? studentUser.availability.preferredTimeSlots[0] : 'None'}</p>
                                     </div>
-                                </section>
-
-                                {/* Basic Info */}
-                                <section className="space-y-8">
-                                    <h3 className="text-[12px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-100 pb-2">Basic Information</h3>
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-16">
-                                        <InfoItem label="Birthday:" value={profileData.birthday} />
-                                        <InfoItem label="Gender:" value={profileData.gender} />
-                                        <InfoItem label="Joining Date:" value={profileData.joinDate} />
-                                        <InfoItem label="Status:" value="Active Student" />
+                                    <div className="text-center">
+                                        <p className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-1">Weekly Commitment</p>
+                                        <p className="text-sm font-bold text-yellow-400">{studentUser?.availability?.weeklyAvailableHours || 20} Hours</p>
                                     </div>
-                                </section>
-
-                                {/* Learning Info */}
-                                <section className="space-y-8">
-                                    <h3 className="text-[12px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-100 pb-2">Learning Experience</h3>
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-16">
-                                        <InfoItem
-                                            label="Learning Pace:"
-                                            value={studentUser?.learningPreferences?.pace ? (studentUser.learningPreferences.pace.charAt(0).toUpperCase() + studentUser.learningPreferences.pace.slice(1)) : 'Medium'}
-                                        />
-                                        <InfoItem
-                                            label="Preferred Slot:"
-                                            value={studentUser?.availability?.preferredTimeSlots ? studentUser.availability.preferredTimeSlots.map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(', ') : 'Morning, Evening'}
-                                        />
-                                        <InfoItem
-                                            label="Weekly Commitment:"
-                                            value={`${studentUser?.availability?.weeklyAvailableHours || 20} Hours`}
-                                        />
-                                        <InfoItem
-                                            label="Learning Style:"
-                                            value={studentUser?.learningPreferences?.style ? (studentUser.learningPreferences.style.charAt(0).toUpperCase() + studentUser.learningPreferences.style.slice(1)) : 'Visual'}
-                                        />
+                                    <div className="text-center">
+                                        <p className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-1">Learning Pace</p>
+                                        <p className="text-sm font-bold text-yellow-400">{studentUser?.learningPreferences?.pace || 'Standard'}</p>
                                     </div>
-                                </section>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -234,13 +236,33 @@ export default function StudentProfilePage() {
     );
 }
 
-function InfoItem({ label, value, isLink = false }: { label: string, value: string, isLink?: boolean }) {
+function SimpleStat({ icon, label, value, color }: { icon: React.ReactNode, label: string, value: string | number, color: string }) {
     return (
-        <div className="flex gap-2 min-h-[1.5rem] group">
-            <span className="w-1/3 text-sm font-bold text-gray-400 group-hover:text-gray-500 transition-colors uppercase tracking-tight">{label}</span>
-            <span className={`w-2/3 text-sm font-black tracking-tight ${isLink ? 'text-blue-600 hover:text-blue-700 hover:underline cursor-pointer' : 'text-gray-900'}`}>
-                {value}
+        <div className="p-6 bg-white rounded-lg border border-gray-100 shadow-sm flex flex-col items-center justify-center text-center space-y-2 group hover:border-yellow-200 transition-all">
+            <div className={`p-2.5 rounded-lg bg-gray-50 group-hover:bg-yellow-50 transition-colors ${color}`}>
+                {icon}
+            </div>
+            <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">{label}</p>
+            <p className="text-2xl font-black text-gray-900">{value}</p>
+        </div>
+    );
+}
+
+function SocialLink({ icon }: { icon: React.ReactNode }) {
+    return (
+        <button className="p-2.5 bg-gray-50 text-gray-400 rounded-lg border border-gray-100 hover:bg-yellow-50 hover:text-yellow-600 transition-all active:scale-95">
+            {icon}
+        </button>
+    );
+}
+
+function MiniInfo({ label, value, icon }: { label: string, value: string, icon: React.ReactNode }) {
+    return (
+        <div className="space-y-1.5 flex flex-col">
+            <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest flex items-center gap-2">
+                {icon} {label}
             </span>
+            <span className="text-sm font-bold text-gray-800 break-all">{value}</span>
         </div>
     );
 }
