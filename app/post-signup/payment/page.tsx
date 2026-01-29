@@ -11,7 +11,7 @@ export default function PaymentPage() {
   const handlePaymentSuccess = () => {
     console.log('Payment completed successfully');
     localStorage.setItem('paymentCompleted', 'true');
-    router.push('/post-signup/roadmap');
+    router.push('/post-signup/choose-trainer');
   };
 
   return (
@@ -77,6 +77,7 @@ export default function PaymentPage() {
                 <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
                 <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
                 <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
+                <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
                 <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
               </div>
 

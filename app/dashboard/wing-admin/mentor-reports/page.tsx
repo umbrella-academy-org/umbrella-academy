@@ -1,0 +1,443 @@
+'use client';
+
+import { useState } from 'react';
+import Sidebar from '@/components/dashboard/Sidebar';
+import { Eye, Download, MessageSquare, CheckCircle, AlertTriangle, Target, TrendingUp, Users, FileText } from 'lucide-react';
+
+interface MentorReport {
+  id: string;
+  mentorId: string;
+  mentorName: string;
+  mentorAvatar: string;
+  reportType: 'monthly' | 'quarterly' | 'incident' | 'performance';
+  period: string;
+  trainersOverview: string;
+  studentsProgress: string;
+  keyAchievements: string;
+  challenges: string;
+  recommendations: string;
+  metrics: {
+    totalTrainers: number;
+    activeStudents: number;
+    completionRate: number;
+    satisfactionScore: number;
+  };
+  submittedAt: string;
+  status: 'pending' | 'reviewed' | 'approved';
+  wingAdminNotes?: string;
+}
+
+export default function WingAdminMentorReportsPage() {
+  const [selectedReport, setSelectedReport] = useState<string | null>(null);
+  const [filterStatus, setFilterStatus] = useState('all');
+  const [filterType, setFilterType] = useState('all');
+  const [adminNotes, setAdminNotes] = useState('');
+
+  const reports: MentorReport[] = [
+    {
+      id: 'mr-1',
+      mentorId: 'mentor-1',
+      mentorName: 'Dr. Sarah Wilson',
+      mentorAvatar: 'SW',
+      reportType: 'monthly',
+      period: 'January 2024',
+      trainersOverview: 'All 3 trainers are performing excellently. Sarah and Emma have exceeded their student capacity targets, while Michael is maintaining consistent quality with his backend specialization students.',
+      studentsProgress: 'Overall student progress is strong with 89% completion rate. 45 students are actively enrolled across all trainers. Notable improvements in JavaScript and React comprehension.',
+      keyAchievements: 'Successfully onboarded 2 new trainers, achieved 95% student satisfaction score, completed 156 training sessions, launched advanced React curriculum.',
+      challenges: 'High demand for backend training exceeding current capacity. Some students struggling with advanced JavaScript concepts. Need additional resources for database training.',
+      recommendations: 'Recruit 1 additional backend trainer, develop supplementary JavaScript resources, consider database specialization track, implement peer learning sessions.',
+      metrics: {
+        totalTrainers: 3,
+        activeStudents: 45,
+        completionRate: 89,
+        satisfactionScore: 95
+      },
+      submittedAt: '2024-01-31T17:00:00Z',
+      status: 'pending'
+    },
+    {
+      id: 'mr-2',
+      mentorId: 'mentor-1',
+      mentorName: 'Dr. Sarah Wilson',
+      mentorAvatar: 'SW',
+      reportType: 'quarterly',
+      period: 'Q4 2023',
+      trainersOverview: 'Quarter ended with strong trainer performance across the board. All trainers met their KPIs and student satisfaction remained high.',
+      studentsProgress: 'Quarterly cohort of 67 students with 91% completion rate. Strong performance in frontend technologies, moderate progress in backend concepts.',
+      keyAchievements: 'Launched new curriculum modules, achieved record student enrollment, maintained 4.8/5 trainer ratings, successful career placement for 78% of graduates.',
+      challenges: 'Scaling challenges with increased enrollment, need for more specialized training tracks, resource allocation for advanced topics.',
+      recommendations: 'Expand trainer team, develop specialized tracks, invest in advanced learning resources, implement mentorship program.',
+      metrics: {
+        totalTrainers: 3,
+        activeStudents: 67,
+        completionRate: 91,
+        satisfactionScore: 96
+      },
+      submittedAt: '2023-12-31T18:00:00Z',
+      status: 'approved',
+      wingAdminNotes: 'Excellent quarterly performance. Approved budget increase for trainer expansion and resource development.'
+    },
+    {
+      id: 'mr-3',
+      mentorId: 'mentor-2',
+      mentorName: 'Prof. Michael Chen',
+      mentorAvatar: 'MC',
+      reportType: 'incident',
+      period: 'January 15, 2024',
+      trainersOverview: 'Incident involving trainer availability conflict during peak session hours. Resolved through schedule adjustment and backup trainer assignment.',
+      studentsProgress: 'Minimal impact on student progress due to quick resolution. All affected sessions were rescheduled within 24 hours.',
+      keyAchievements: 'Quick incident resolution, maintained student satisfaction, implemented backup trainer protocol.',
+      challenges: 'Need better trainer scheduling system, backup trainer availability during peak hours.',
+      recommendations: 'Implement automated scheduling system, maintain pool of backup trainers, create incident response protocol.',
+      metrics: {
+        totalTrainers: 4,
+        activeStudents: 52,
+        completionRate: 87,
+        satisfactionScore: 92
+      },
+      submittedAt: '2024-01-16T09:30:00Z',
+      status: 'reviewed',
+      wingAdminNotes: 'Good incident handling. Approved implementation of automated scheduling system.'
+    }
+  ];
+
+  const filteredReports = reports.filter(report => {
+    const statusMatch = filterStatus === 'all' || report.status === filterStatus;
+    const typeMatch = filterType === 'all' || report.reportType === filterType;
+    return statusMatch && typeMatch;
+  });
+
+  const selectedReportData = reports.find(r => r.id === selectedReport);
+
+  const handleStatusUpdate = (reportId: string, newStatus: 'reviewed' | 'approved') => {
+    console.log(`Updating report ${reportId} status to ${newStatus}`);
+    // Handle status update logic
+  };
+
+  const handleAddNotes = (reportId: string) => {
+    console.log(`Adding notes to report ${reportId}:`, adminNotes);
+    // Handle adding admin notes
+    setAdminNotes('');
+  };
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'pending': return 'bg-yellow-100 text-yellow-800';
+      case 'reviewed': return 'bg-blue-100 text-blue-800';
+      case 'approved': return 'bg-green-100 text-green-800';
+      default: return 'bg-gray-100 text-gray-800';
+    }
+  };
+
+  const getReportTypeColor = (type: string) => {
+    switch (type) {
+      case 'monthly': return 'bg-blue-100 text-blue-800';
+      case 'quarterly': return 'bg-purple-100 text-purple-800';
+      case 'incident': return 'bg-red-100 text-red-800';
+      case 'performance': return 'bg-green-100 text-green-800';
+      default: return 'bg-gray-100 text-gray-800';
+    }
+  };
+
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  };
+
+  // Calculate summary stats
+  const totalReports = reports.length;
+  const pendingReports = reports.filter(r => r.status === 'pending').length;
+  const avgCompletionRate = Math.round(reports.reduce((sum, r) => sum + r.metrics.completionRate, 0) / reports.length);
+  const avgSatisfactionScore = Math.round(reports.reduce((sum, r) => sum + r.metrics.satisfactionScore, 0) / reports.length);
+
+  return (
+    <div className="flex h-screen bg-white">
+      <Sidebar activeItem="Mentor Reports" userType="wing-admin" />
+
+      <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
+        <main className="flex-1 overflow-auto">
+          <div className="p-3 lg:p-6">
+            <div className="mb-8">
+              <h1 className="text-2xl font-semibold text-gray-900 mb-1">Mentor Reports</h1>
+              <p className="text-sm text-gray-500">Review and manage reports submitted by mentors in your wing.</p>
+            </div>
+
+            {/* Summary Stats */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+              <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">Total Reports</p>
+                    <p className="text-2xl font-bold text-gray-900">{totalReports}</p>
+                  </div>
+                  <FileText className="w-8 h-8 text-blue-500" />
+                </div>
+              </div>
+              <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">Pending Review</p>
+                    <p className="text-2xl font-bold text-gray-900">{pendingReports}</p>
+                  </div>
+                  <AlertTriangle className="w-8 h-8 text-yellow-500" />
+                </div>
+              </div>
+              <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">Avg Completion</p>
+                    <p className="text-2xl font-bold text-gray-900">{avgCompletionRate}%</p>
+                  </div>
+                  <TrendingUp className="w-8 h-8 text-green-500" />
+                </div>
+              </div>
+              <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">Avg Satisfaction</p>
+                    <p className="text-2xl font-bold text-gray-900">{avgSatisfactionScore}%</p>
+                  </div>
+                  <Users className="w-8 h-8 text-purple-500" />
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {/* Reports List */}
+              <div className="lg:col-span-1">
+                <div className="bg-white rounded-lg shadow-sm border border-gray-100">
+                  <div className="p-4 border-b border-gray-200">
+                    <h3 className="font-semibold text-gray-900 mb-4">Reports ({filteredReports.length})</h3>
+                    
+                    {/* Filters */}
+                    <div className="space-y-3">
+                      <div>
+                        <label className="block text-xs font-medium text-gray-600 mb-1">Status</label>
+                        <select
+                          value={filterStatus}
+                          onChange={(e) => setFilterStatus(e.target.value)}
+                          className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-600"
+                        >
+                          <option value="all">All Status</option>
+                          <option value="pending">Pending</option>
+                          <option value="reviewed">Reviewed</option>
+                          <option value="approved">Approved</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-xs font-medium text-gray-600 mb-1">Type</label>
+                        <select
+                          value={filterType}
+                          onChange={(e) => setFilterType(e.target.value)}
+                          className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-600"
+                        >
+                          <option value="all">All Types</option>
+                          <option value="monthly">Monthly</option>
+                          <option value="quarterly">Quarterly</option>
+                          <option value="incident">Incident</option>
+                          <option value="performance">Performance</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="divide-y divide-gray-200 max-h-96 overflow-y-auto">
+                    {filteredReports.map((report) => (
+                      <div
+                        key={report.id}
+                        className={`p-4 cursor-pointer hover:bg-gray-50 transition-colors ${selectedReport === report.id ? 'bg-yellow-50 border-r-4 border-yellow-600' : ''
+                          }`}
+                        onClick={() => setSelectedReport(report.id)}
+                      >
+                        <div className="flex items-start justify-between mb-2">
+                          <div className="flex items-center gap-2">
+                            <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold text-xs">
+                              {report.mentorAvatar}
+                            </div>
+                            <div>
+                              <h4 className="font-medium text-gray-900 text-sm">{report.mentorName}</h4>
+                              <p className="text-xs text-gray-500">{report.period}</p>
+                            </div>
+                          </div>
+                          <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(report.status)}`}>
+                            {report.status}
+                          </span>
+                        </div>
+                        
+                        <div className="flex items-center justify-between">
+                          <span className={`px-2 py-1 rounded text-xs font-medium ${getReportTypeColor(report.reportType)}`}>
+                            {report.reportType}
+                          </span>
+                          <span className="text-xs text-gray-500">{formatDate(report.submittedAt)}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Report Details */}
+              <div className="lg:col-span-2">
+                {selectedReportData ? (
+                  <div className="bg-white rounded-lg shadow-sm border border-gray-100">
+                    {/* Header */}
+                    <div className="p-6 border-b border-gray-200">
+                      <div className="flex items-start justify-between mb-4">
+                        <div className="flex items-center gap-3">
+                          <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold">
+                            {selectedReportData.mentorAvatar}
+                          </div>
+                          <div>
+                            <h2 className="text-xl font-semibold text-gray-900">{selectedReportData.mentorName}</h2>
+                            <div className="flex items-center gap-2 mt-1">
+                              <span className={`px-3 py-1 rounded-full text-sm font-medium ${getReportTypeColor(selectedReportData.reportType)}`}>
+                                {selectedReportData.reportType.charAt(0).toUpperCase() + selectedReportData.reportType.slice(1)} Report
+                              </span>
+                              <span className="text-lg font-semibold text-gray-900">{selectedReportData.period}</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          {selectedReportData.status === 'pending' && (
+                            <>
+                              <button
+                                onClick={() => handleStatusUpdate(selectedReportData.id, 'reviewed')}
+                                className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm"
+                              >
+                                <Eye className="w-4 h-4" />
+                                Mark Reviewed
+                              </button>
+                              <button
+                                onClick={() => handleStatusUpdate(selectedReportData.id, 'approved')}
+                                className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm"
+                              >
+                                <CheckCircle className="w-4 h-4" />
+                                Approve
+                              </button>
+                            </>
+                          )}
+                          <button className="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors text-sm">
+                            <Download className="w-4 h-4" />
+                            Export
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Metrics */}
+                      <div className="grid grid-cols-4 gap-4 p-4 bg-gray-50 rounded-lg">
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-blue-600">{selectedReportData.metrics.totalTrainers}</div>
+                          <div className="text-sm text-blue-600">Trainers</div>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-green-600">{selectedReportData.metrics.activeStudents}</div>
+                          <div className="text-sm text-green-600">Students</div>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-purple-600">{selectedReportData.metrics.completionRate}%</div>
+                          <div className="text-sm text-purple-600">Completion</div>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-yellow-600">{selectedReportData.metrics.satisfactionScore}%</div>
+                          <div className="text-sm text-yellow-600">Satisfaction</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Report Content */}
+                    <div className="p-6 space-y-6">
+                      <div>
+                        <h3 className="font-semibold text-gray-900 mb-3">Trainers Overview</h3>
+                        <p className="text-gray-700">{selectedReportData.trainersOverview}</p>
+                      </div>
+
+                      <div>
+                        <h3 className="font-semibold text-gray-900 mb-3">Students Progress</h3>
+                        <p className="text-gray-700">{selectedReportData.studentsProgress}</p>
+                      </div>
+
+                      {selectedReportData.keyAchievements && (
+                        <div>
+                          <h3 className="flex items-center gap-2 font-semibold text-gray-900 mb-3">
+                            <CheckCircle className="w-5 h-5 text-green-500" />
+                            Key Achievements
+                          </h3>
+                          <p className="text-gray-700">{selectedReportData.keyAchievements}</p>
+                        </div>
+                      )}
+
+                      {selectedReportData.challenges && (
+                        <div>
+                          <h3 className="flex items-center gap-2 font-semibold text-gray-900 mb-3">
+                            <AlertTriangle className="w-5 h-5 text-orange-500" />
+                            Challenges & Issues
+                          </h3>
+                          <p className="text-gray-700">{selectedReportData.challenges}</p>
+                        </div>
+                      )}
+
+                      {selectedReportData.recommendations && (
+                        <div>
+                          <h3 className="flex items-center gap-2 font-semibold text-gray-900 mb-3">
+                            <Target className="w-5 h-5 text-blue-500" />
+                            Recommendations
+                          </h3>
+                          <p className="text-gray-700">{selectedReportData.recommendations}</p>
+                        </div>
+                      )}
+
+                      {/* Admin Notes */}
+                      <div className="border-t pt-6">
+                        <h3 className="flex items-center gap-2 font-semibold text-gray-900 mb-3">
+                          <MessageSquare className="w-5 h-5 text-purple-500" />
+                          Wing Admin Notes
+                        </h3>
+                        {selectedReportData.wingAdminNotes ? (
+                          <div className="p-4 bg-purple-50 rounded-lg border border-purple-200 mb-4">
+                            <p className="text-purple-800">{selectedReportData.wingAdminNotes}</p>
+                          </div>
+                        ) : (
+                          <p className="text-gray-500 text-sm mb-4">No admin notes yet.</p>
+                        )}
+                        
+                        <div className="flex gap-3">
+                          <textarea
+                            value={adminNotes}
+                            onChange={(e) => setAdminNotes(e.target.value)}
+                            placeholder="Add your notes or feedback..."
+                            rows={3}
+                            className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
+                          />
+                          <button
+                            onClick={() => handleAddNotes(selectedReportData.id)}
+                            className="px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors"
+                            disabled={!adminNotes.trim()}
+                          >
+                            Add Notes
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-12 text-center">
+                    <div className="text-gray-400 mb-4">
+                      <FileText className="w-12 h-12 mx-auto" />
+                    </div>
+                    <h3 className="text-lg font-medium text-gray-900 mb-2">Select a Report</h3>
+                    <p className="text-gray-600">Choose a report from the list to review the details</p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  );
+}
