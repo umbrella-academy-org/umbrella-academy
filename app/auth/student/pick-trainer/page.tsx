@@ -16,6 +16,10 @@ interface Trainer {
   experience: string;
   students: number;
   availability: string[]; // ['morning', 'afternoon', etc.]
+  availableTimeSlots: {
+    day: string;
+    times: string[];
+  }[];
   location: string;
   bio: string;
   education: string[];
@@ -55,6 +59,14 @@ export default function PickTrainerPage() {
       experience: '8 years',
       students: 156,
       availability: ['morning', 'afternoon'],
+      availableTimeSlots: [
+        { day: 'Monday', times: ['9:00 AM', '10:00 AM', '2:00 PM', '3:00 PM'] },
+        { day: 'Tuesday', times: ['8:00 AM', '11:00 AM', '1:00 PM'] },
+        { day: 'Wednesday', times: ['9:00 AM', '2:00 PM', '4:00 PM'] },
+        { day: 'Thursday', times: ['10:00 AM', '3:00 PM'] },
+        { day: 'Friday', times: ['9:00 AM', '1:00 PM', '2:00 PM'] },
+        { day: 'Saturday', times: ['10:00 AM', '11:00 AM'] }
+      ],
       location: 'Kigali, Rwanda',
       bio: 'Experienced full-stack developer with 8+ years building scalable applications. Passionate about mentoring and helping developers grow their careers.',
       education: ['BS Computer Science - University of Rwanda', 'AWS Solutions Architect Certification'],
@@ -77,6 +89,15 @@ export default function PickTrainerPage() {
       experience: '6 years',
       students: 203,
       availability: ['evening', 'night'],
+      availableTimeSlots: [
+        { day: 'Monday', times: ['6:00 PM', '7:00 PM', '8:00 PM'] },
+        { day: 'Tuesday', times: ['5:00 PM', '7:00 PM', '9:00 PM'] },
+        { day: 'Wednesday', times: ['6:00 PM', '8:00 PM'] },
+        { day: 'Thursday', times: ['5:00 PM', '7:00 PM', '8:00 PM'] },
+        { day: 'Friday', times: ['6:00 PM', '9:00 PM'] },
+        { day: 'Saturday', times: ['7:00 PM', '8:00 PM'] },
+        { day: 'Sunday', times: ['6:00 PM', '7:00 PM'] }
+      ],
       location: 'Kigali, Rwanda',
       bio: 'Frontend architect specializing in React and modern design systems. Love creating beautiful, accessible user interfaces.',
       education: ['MS Software Engineering - AUCA', 'Frontend Development Bootcamp'],
@@ -99,6 +120,15 @@ export default function PickTrainerPage() {
       experience: '10 years',
       students: 124,
       availability: ['afternoon', 'evening'],
+      availableTimeSlots: [
+        { day: 'Monday', times: ['1:00 PM', '3:00 PM', '6:00 PM'] },
+        { day: 'Tuesday', times: ['2:00 PM', '4:00 PM', '7:00 PM'] },
+        { day: 'Wednesday', times: ['1:00 PM', '5:00 PM'] },
+        { day: 'Thursday', times: ['3:00 PM', '6:00 PM', '7:00 PM'] },
+        { day: 'Friday', times: ['2:00 PM', '4:00 PM'] },
+        { day: 'Saturday', times: ['1:00 PM', '3:00 PM'] },
+        { day: 'Sunday', times: ['2:00 PM', '5:00 PM'] }
+      ],
       location: 'Kigali, Rwanda',
       bio: 'DevOps engineer with 10+ years experience in cloud infrastructure and automation. Expert in AWS, Docker, and Kubernetes.',
       education: ['MS Computer Engineering - NUR', 'AWS Solutions Architect Professional'],
@@ -220,6 +250,22 @@ export default function PickTrainerPage() {
                         <div className="flex items-center gap-1">
                           <Clock className="w-3.5 h-3.5 text-gray-400" />
                           <span className="text-xs text-gray-700">{trainer.experience}</span>
+                        </div>
+                      </div>
+
+                      {/* Next Available Times */}
+                      <div className="mb-3">
+                        <p className="text-xs font-medium text-gray-600 mb-1">Next Available:</p>
+                        <div className="text-xs text-gray-600">
+                          {trainer.availableTimeSlots.slice(0, 2).map((slot, index) => (
+                            <div key={index}>
+                              <span className="font-medium text-gray-700">{slot.day}:</span>
+                              <span className="ml-1">
+                                {slot.times.slice(0, 2).join(', ')}
+                                {slot.times.length > 2 && ` +${slot.times.length - 2} more`}
+                              </span>
+                            </div>
+                          ))}
                         </div>
                       </div>
 
@@ -423,6 +469,25 @@ export default function PickTrainerPage() {
                     <span key={index} className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">
                       {lang}
                     </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Availability Schedule */}
+              <div className="mb-6">
+                <h4 className="font-semibold text-gray-900 mb-2">Weekly Availability</h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {viewingProfile.availableTimeSlots.map((slot, index) => (
+                    <div key={index} className="p-3 bg-gray-50 rounded-lg">
+                      <div className="font-medium text-gray-900 text-sm mb-1">{slot.day}</div>
+                      <div className="flex flex-wrap gap-1">
+                        {slot.times.map((time, timeIndex) => (
+                          <span key={timeIndex} className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded">
+                            {time}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
                   ))}
                 </div>
               </div>
