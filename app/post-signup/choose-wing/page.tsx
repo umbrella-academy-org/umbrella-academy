@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { CheckCircle } from 'lucide-react';
+import { CheckCircle, Star, X, Users, BookOpen, Clock, Zap, TrendingUp, Shield } from 'lucide-react';
 import Sidebar from '@/components/dashboard/Sidebar';
 
 interface Wing {
@@ -32,13 +32,14 @@ interface Wing {
 export default function ChooseWingPage() {
   const router = useRouter();
   const [selectedWing, setSelectedWing] = useState('');
+  const [viewingWing, setViewingWing] = useState<Wing | null>(null);
   const [error, setError] = useState('');
 
   const wings: Wing[] = [
     {
       id: 'tech-companies',
       title: 'Tech Companies Wing',
-      description: 'Learn with technology sector companies and startups',
+      description: 'Learn with technology sector companies and startups. Focus on building real-world software, scaling systems, and mastering modern tech stacks used in the industry.',
       icon: '💻',
       rating: 4.8,
       students: 1250,
@@ -47,24 +48,9 @@ export default function ChooseWingPage() {
         total: 24,
         available: 18,
         topTrainers: [
-          {
-            name: 'Sarah Johnson',
-            avatar: 'SJ',
-            specialization: 'Full Stack Development',
-            rating: 4.9
-          },
-          {
-            name: 'Michael Chen',
-            avatar: 'MC',
-            specialization: 'Backend Engineering',
-            rating: 4.8
-          },
-          {
-            name: 'Emma Williams',
-            avatar: 'EW',
-            specialization: 'Frontend & UI/UX',
-            rating: 4.9
-          }
+          { name: 'Sarah Johnson', avatar: 'SJ', specialization: 'Full Stack Development', rating: 4.9 },
+          { name: 'Michael Chen', avatar: 'MC', specialization: 'Backend Engineering', rating: 4.8 },
+          { name: 'Emma Williams', avatar: 'EW', specialization: 'Frontend & UI/UX', rating: 4.9 }
         ]
       },
       specializations: ['Web Development', 'Mobile Apps', 'Cloud Computing', 'DevOps', 'AI/ML'],
@@ -75,7 +61,7 @@ export default function ChooseWingPage() {
     {
       id: 'business-companies',
       title: 'Business Companies Wing',
-      description: 'Business consulting and enterprise solutions',
+      description: 'Business consulting and enterprise solutions. Learn to manage projects, analyze data, and drive growth for established firms and consulting agencies.',
       icon: '💼',
       rating: 4.6,
       students: 890,
@@ -84,24 +70,9 @@ export default function ChooseWingPage() {
         total: 18,
         available: 14,
         topTrainers: [
-          {
-            name: 'Dr. Alice Mukamana',
-            avatar: 'AM',
-            specialization: 'Business Strategy',
-            rating: 4.8
-          },
-          {
-            name: 'James Wilson',
-            avatar: 'JW',
-            specialization: 'Digital Marketing',
-            rating: 4.7
-          },
-          {
-            name: 'Grace Uwimana',
-            avatar: 'GU',
-            specialization: 'Project Management',
-            rating: 4.9
-          }
+          { name: 'Dr. Alice Mukamana', avatar: 'AM', specialization: 'Business Strategy', rating: 4.8 },
+          { name: 'James Wilson', avatar: 'JW', specialization: 'Digital Marketing', rating: 4.7 },
+          { name: 'Grace Uwimana', avatar: 'GU', specialization: 'Project Management', rating: 4.9 }
         ]
       },
       specializations: ['Business Analysis', 'Digital Marketing', 'Project Management', 'Data Analytics', 'Consulting'],
@@ -112,7 +83,7 @@ export default function ChooseWingPage() {
     {
       id: 'hotels',
       title: 'Hotels Wing',
-      description: 'Hospitality and tourism industry training',
+      description: 'Hospitality and tourism industry training. Master the art of guest services, hotel management, and international tourism operations.',
       icon: '🏨',
       rating: 4.5,
       students: 675,
@@ -121,24 +92,9 @@ export default function ChooseWingPage() {
         total: 15,
         available: 12,
         topTrainers: [
-          {
-            name: 'Marie Uwimana',
-            avatar: 'MU',
-            specialization: 'Hotel Management',
-            rating: 4.7
-          },
-          {
-            name: 'Robert Kayitare',
-            avatar: 'RK',
-            specialization: 'Tourism Operations',
-            rating: 4.6
-          },
-          {
-            name: 'Linda Mutesi',
-            avatar: 'LM',
-            specialization: 'Customer Service',
-            rating: 4.8
-          }
+          { name: 'Marie Uwimana', avatar: 'MU', specialization: 'Hotel Management', rating: 4.7 },
+          { name: 'Robert Kayitare', avatar: 'RK', specialization: 'Tourism Operations', rating: 4.6 },
+          { name: 'Linda Mutesi', avatar: 'LM', specialization: 'Customer Service', rating: 4.8 }
         ]
       },
       specializations: ['Hotel Management', 'Tourism Operations', 'Customer Service', 'Event Planning', 'Food & Beverage'],
@@ -161,40 +117,26 @@ export default function ChooseWingPage() {
       return;
     }
 
-    console.log('Selected wing:', selectedWing);
-    // Store selected wing
     localStorage.setItem('selectedWing', selectedWing);
     router.push('/post-signup/payment');
-  };
-
-  const renderStars = (rating: number) => {
-    return (
-      <div className="flex items-center gap-1">
-        {[...Array(5)].map((_, i) => (
-          <svg key={i} className={`w-3 h-3 ${i < Math.floor(rating) ? 'text-yellow-400' : 'text-gray-200'}`} fill="currentColor" viewBox="0 0 20 20">
-            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-          </svg>
-        ))}
-      </div>
-    );
   };
 
   return (
     <div className="flex h-screen bg-white">
       <Sidebar activeItem="Roadmap" userType="student" />
-      
+
       <div className="flex-1 flex flex-col overflow-hidden">
         <main className="flex-1 overflow-auto flex items-center justify-center bg-gray-50 p-4">
-          <div className="max-w-md w-full">
+          <div className="w-full">
             {/* Go back button */}
             <button
               onClick={() => router.push('/post-signup/availability')}
-              className="flex items-center gap-2 text-gray-400 hover:text-gray-900 mb-8 transition-colors group"
+              className="flex items-center gap-2 text-gray-600hover:text-gray-900 mb-8 transition-colors group"
             >
               <svg className="w-5 h-5 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M15 19l-7-7 7-7" />
               </svg>
-              <span className="text-xs font-black uppercase">Go back</span>
+              <span className="text-xs font-black ">Go back</span>
             </button>
 
             <div className="text-center">
@@ -215,112 +157,67 @@ export default function ChooseWingPage() {
                 Select the industry wing that matches your career goals.
               </p>
 
-              {/* Form */}
-              <form onSubmit={handleContinue} className="w-full">
-                <div className="space-y-4 mb-8">
-                  {wings.map((wing) => (
-                    <div
-                      key={wing.id}
-                      className={`border rounded-lg cursor-pointer transition-all ${selectedWing === wing.id
-                        ? 'border-yellow-600 bg-yellow-50'
-                        : 'border-gray-200 bg-white hover:border-gray-300'
-                        }`}
-                      onClick={() => handleWingSelect(wing.id)}
-                    >
-                      {/* Wing Header */}
-                      <div className="flex items-start gap-4 p-4">
-                        <div className={`w-12 h-12 rounded-lg flex items-center justify-center text-xl shadow-sm transition-colors ${selectedWing === wing.id ? 'bg-yellow-600 text-white' : 'bg-gray-50'
-                          }`}>
-                          {wing.icon}
-                        </div>
+              {/* Wing Selection List */}
+              <form onSubmit={handleContinue} className="w-full max-w-2xl mx-auto">
+                <div className="space-y-4 mb-10">
+                  {wings.map((wing) => {
+                    const isSelected = selectedWing === wing.id;
+                    return (
+                      <div
+                        key={wing.id}
+                        className={`border rounded-lg transition-all duration-300 overflow-hidden ${isSelected
+                          ? 'border-yellow-600 bg-yellow-50 shadow-md ring-1 ring-yellow-600/20'
+                          : 'border-gray-200 bg-white hover:border-gray-300'
+                          }`}
+                      >
+                        <div className="p-5 flex items-center gap-5">
+                          <div className={`w-14 h-14 rounded-lg flex items-center justify-center text-2xl shadow-sm transition-all ${isSelected ? 'bg-yellow-600 text-white' : 'bg-gray-50 text-gray-400'}`}>
+                            {wing.icon}
+                          </div>
 
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-start justify-between mb-2">
-                            <div className="min-w-0 flex-1">
-                              <h3 className={`text-sm font-semibold truncate ${selectedWing === wing.id ? 'text-gray-900' : 'text-gray-700'}`}>
+                          <div className="flex-1 text-left min-w-0">
+                            <div className="flex items-center justify-between mb-1">
+                              <h3 className={`text-sm font-semibold truncate ${isSelected ? 'text-gray-900' : 'text-gray-700'}`}>
                                 {wing.title}
                               </h3>
-                              <p className="text-xs text-gray-500 mt-0.5 truncate">
-                                {wing.students.toLocaleString()} Students • {wing.mentors} Mentors • {wing.trainers.total} Trainers
-                              </p>
+                              {isSelected && <CheckCircle className="w-5 h-5 text-yellow-600" />}
                             </div>
-                            {selectedWing === wing.id && (
-                              <CheckCircle className="w-5 h-5 text-yellow-600 flex-shrink-0 ml-2" />
-                            )}
-                          </div>
 
-                          <div className="flex items-center gap-2 mb-3">
-                            {renderStars(wing.rating)}
-                            <span className="text-[10px] font-medium text-yellow-600 uppercase tracking-wider">
-                              {wing.successRate}% Success Rate
-                            </span>
-                          </div>
-
-                          {/* Pricing */}
-                          <div className="flex items-center justify-between mb-3">
-                            <span className="text-lg font-bold text-gray-900">
-                              RWF {wing.monthlyPrice.toLocaleString()}/year
-                            </span>
-                            <span className="text-xs text-gray-500 whitespace-nowrap ml-2">
-                              {wing.averageCompletionTime}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Wing Details */}
-                      <div className="px-4 pb-4">
-                        {/* Specializations */}
-                        <div className="mb-3">
-                          <p className="text-xs font-medium text-gray-600 mb-2">Specializations:</p>
-                          <div className="flex flex-wrap gap-1.5">
-                            {wing.specializations.slice(0, 3).map((spec, index) => (
-                              <span key={index} className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-full whitespace-nowrap">
-                                {spec}
-                              </span>
-                            ))}
-                            {wing.specializations.length > 3 && (
-                              <span className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-full whitespace-nowrap">
-                                +{wing.specializations.length - 3} more
-                              </span>
-                            )}
-                          </div>
-                        </div>
-
-                        {/* Top Trainers */}
-                        <div className="mb-3">
-                          <p className="text-xs font-medium text-gray-600 mb-2">Top Trainers:</p>
-                          <div className="space-y-2">
-                            {wing.trainers.topTrainers.map((trainer, index) => (
-                              <div key={index} className="flex items-center gap-2 bg-gray-50 rounded-lg px-2 py-1.5">
-                                <div className="w-6 h-6 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-semibold text-xs flex-shrink-0">
-                                  {trainer.avatar}
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center gap-4">
+                                <div className="flex items-center gap-1">
+                                  <Star className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />
+                                  <span className="text-xs font-black text-gray-700">{wing.rating}</span>
                                 </div>
-                                <div className="flex-1 min-w-0">
-                                  <p className="text-xs font-medium text-gray-900 truncate">{trainer.name}</p>
-                                  <p className="text-xs text-gray-500 truncate">{trainer.specialization}</p>
-                                </div>
-                                <div className="flex items-center gap-1 flex-shrink-0">
-                                  {renderStars(trainer.rating)}
-                                  <span className="text-xs text-gray-500">({trainer.rating})</span>
-                                </div>
+                                <span className="text-sm font-black text-gray-900 tracking-tight">
+                                  RWF {wing.monthlyPrice.toLocaleString()}/yr
+                                </span>
                               </div>
-                            ))}
+
+                              <div className="flex items-center gap-3">
+                                <button
+                                  type="button"
+                                  onClick={() => handleWingSelect(wing.id)}
+                                  className={`px-4 py-1.5 rounded text-xs font-black  transition-all ${isSelected
+                                    ? 'bg-yellow-600 text-white shadow-lg'
+                                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+                                >
+                                  {isSelected ? 'Selected' : 'Select'}
+                                </button>
+                                <button
+                                  type="button"
+                                  onClick={() => setViewingWing(wing)}
+                                  className="px-4 py-1.5 rounded text-xs font-black  border border-gray-200 text-gray-600 hover:text-gray-900 transition-all"
+                                >
+                                  Details
+                                </button>
+                              </div>
+                            </div>
                           </div>
                         </div>
-
-                        {/* Availability */}
-                        <div className="flex flex-col sm:flex-row sm:items-center justify-between text-xs gap-1">
-                          <span className="text-gray-600">
-                            <span className="font-medium text-green-600">{wing.trainers.available}</span> of {wing.trainers.total} trainers available
-                          </span>
-                          <span className="text-gray-500 whitespace-nowrap">
-                            Avg completion: {wing.averageCompletionTime}
-                          </span>
-                        </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
 
                 {error && <p className="mb-4 text-xs font-medium text-red-500 text-center">{error}</p>}
@@ -350,6 +247,121 @@ export default function ChooseWingPage() {
           </div>
         </main>
       </div>
+
+      {/* Wing Details Modal */}
+      {viewingWing && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-in fade-in duration-300">
+          <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl animate-in zoom-in-95 duration-200">
+            {/* Header */}
+            <div className="flex items-center justify-between p-8 border-b border-gray-100 sticky top-0 bg-white z-10">
+              <div className="flex items-center gap-5">
+                <div className="w-14 h-14 bg-yellow-50 rounded-lg flex items-center justify-center text-3xl shadow-sm border border-yellow-100">
+                  {viewingWing.icon}
+                </div>
+                <div>
+                  <h2 className="text-xl font-black text-gray-900  ">{viewingWing.title}</h2>
+                  <div className="flex items-center gap-3 mt-1">
+                    <div className="flex items-center gap-1">
+                      <Star className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />
+                      <span className="text-sm font-black text-gray-700">{viewingWing.rating}</span>
+                    </div>
+                    <span className="text-xs font-semibold text-gray-600  border-l border-gray-200 pl-3">
+                      {viewingWing.successRate}% Success Rate
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <button
+                onClick={() => setViewingWing(null)}
+                className="p-2 hover:bg-gray-100 rounded-lg transition-colors text-gray-400"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+
+            {/* Content */}
+            <div className="p-10 space-y-10">
+              <div className="space-y-4">
+                <h4 className="text-sm font-semibold text-gray-600  border-b border-gray-100 pb-2">Wing Description</h4>
+                <p className="text-sm font-bold text-gray-600 leading-relaxed italic">
+                  "{viewingWing.description}"
+                </p>
+              </div>
+
+              <div className="grid grid-cols-2 gap-10">
+                <div className="space-y-4">
+                  <h4 className="text-xs font-black text-gray-600 border-b border-gray-100 pb-2">Focus Areas</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {viewingWing.specializations.map((spec, index) => (
+                      <span key={index} className="px-3 py-1.5 bg-gray-50 border border-gray-100 text-gray-600 text-sm font-black  rounded shadow-sm">
+                        {spec}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <h4 className=" font-semibold text-gray-600 border-b border-gray-100 pb-2">Experience Stats</h4>
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-semibold text-gray-500  flex items-center gap-2"><Users className="w-3 h-3" /> Students</span>
+                      <span className="text-sm text-gray-900">{viewingWing.students.toLocaleString()}</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-semibold text-gray-500  flex items-center gap-2"><Clock className="w-3 h-3" /> Duration</span>
+                      <span className="text-sm text-gray-900">{viewingWing.averageCompletionTime}</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-semibold text-gray-500  flex items-center gap-2"><Shield className="w-3 h-3" /> Mentors</span>
+                      <span className="text-sm text-gray-900">{viewingWing.mentors} Experts</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-6">
+                <h4 className="text-xs font-black text-gray-600 border-b border-gray-100 pb-2">Top Live Trainers</h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {viewingWing.trainers.topTrainers.map((trainer, index) => (
+                    <div key={index} className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg border border-gray-100 group hover:border-yellow-200 transition-all">
+                      <div className="w-10 h-10 bg-white shadow-sm rounded-lg flex items-center justify-center text-sm font-black text-yellow-700 border border-gray-100 group-hover:scale-110 transition-transform">
+                        {trainer.avatar}
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-s font-black text-gray-900  tracking-tight">{trainer.name}</p>
+                        <p className="text-xs font-bold text-gray-600 leading-tight mt-0.5">{trainer.specialization}</p>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
+                        <span className="text-[10px] font-black text-gray-700">{trainer.rating}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex gap-4 pt-4 border-t border-gray-50">
+                <button
+                  onClick={() => {
+                    handleWingSelect(viewingWing.id);
+                    setViewingWing(null);
+                  }}
+                  className="flex-1 bg-yellow-600 text-white py-4 rounded-lg text-sm font-black   hover:bg-yellow-700 transition-all shadow-lg active:scale-95"
+                >
+                  Apply to this Wing
+                </button>
+                <button
+                  onClick={() => setViewingWing(null)}
+                  className="px-8 py-4 border border-gray-200 text-gray-600 rounded-lg text-sm font-black  hover:text-gray-900 hover:border-gray-300 transition-all"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
