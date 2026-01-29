@@ -15,6 +15,10 @@ interface Trainer {
   experience: string;
   location: string;
   availability: string;
+  availableTimeSlots: {
+    day: string;
+    times: string[];
+  }[];
   students: number;
   specialties: string[];
   bio: string;
@@ -47,6 +51,14 @@ export default function ChooseTrainerPage() {
       experience: '8+ years',
       location: 'Kigali, Rwanda',
       availability: 'Available now',
+      availableTimeSlots: [
+        { day: 'Monday', times: ['9:00 AM', '2:00 PM', '4:00 PM'] },
+        { day: 'Tuesday', times: ['10:00 AM', '3:00 PM'] },
+        { day: 'Wednesday', times: ['9:00 AM', '1:00 PM', '5:00 PM'] },
+        { day: 'Thursday', times: ['11:00 AM', '2:00 PM'] },
+        { day: 'Friday', times: ['9:00 AM', '4:00 PM'] },
+        { day: 'Saturday', times: ['10:00 AM'] }
+      ],
       students: 45,
       specialties: ['React', 'Node.js', 'TypeScript', 'AWS'],
       bio: 'Passionate full-stack developer with 8+ years of experience building scalable web applications. I specialize in modern JavaScript frameworks and cloud technologies. I love mentoring developers and helping them achieve their career goals.',
@@ -68,6 +80,14 @@ export default function ChooseTrainerPage() {
       experience: '6+ years',
       location: 'Kigali, Rwanda',
       availability: 'Available tomorrow',
+      availableTimeSlots: [
+        { day: 'Monday', times: ['1:00 PM', '3:00 PM', '6:00 PM'] },
+        { day: 'Tuesday', times: ['2:00 PM', '4:00 PM', '7:00 PM'] },
+        { day: 'Wednesday', times: ['1:00 PM', '5:00 PM'] },
+        { day: 'Thursday', times: ['3:00 PM', '6:00 PM'] },
+        { day: 'Friday', times: ['2:00 PM', '4:00 PM'] },
+        { day: 'Sunday', times: ['10:00 AM', '2:00 PM'] }
+      ],
       students: 32,
       specialties: ['Python', 'Django', 'PostgreSQL', 'Docker'],
       bio: 'Experienced software engineer with a focus on backend development and system architecture. I have worked with startups and enterprise companies, building robust and scalable systems.',
@@ -89,6 +109,15 @@ export default function ChooseTrainerPage() {
       experience: '5+ years',
       location: 'Kigali, Rwanda',
       availability: 'Available now',
+      availableTimeSlots: [
+        { day: 'Monday', times: ['8:00 AM', '11:00 AM', '3:00 PM'] },
+        { day: 'Tuesday', times: ['9:00 AM', '1:00 PM', '4:00 PM'] },
+        { day: 'Wednesday', times: ['8:00 AM', '2:00 PM'] },
+        { day: 'Thursday', times: ['10:00 AM', '3:00 PM', '5:00 PM'] },
+        { day: 'Friday', times: ['9:00 AM', '1:00 PM'] },
+        { day: 'Saturday', times: ['11:00 AM', '2:00 PM'] },
+        { day: 'Sunday', times: ['10:00 AM'] }
+      ],
       students: 38,
       specialties: ['Figma', 'React', 'CSS', 'Design Systems'],
       bio: 'Creative designer and frontend developer who bridges the gap between design and code. I help students learn both design principles and modern frontend development.',
@@ -201,7 +230,7 @@ export default function ChooseTrainerPage() {
                         }`}
                     >
                       {/* Avatar */}
-                      <div className={`w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold text-sm ${selectedTrainer === trainer.id ? 'bg-yellow-600' : 'bg-gradient-to-br from-blue-500 to-blue-600'
+                      <div className={`w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold text-sm ${selectedTrainer === trainer.id ? 'bg-yellow-600' : 'bg-gradient-to-br from-yellow-500 to-yellow-600'
                         }`}>
                         {trainer.avatar}
                       </div>
@@ -247,6 +276,22 @@ export default function ChooseTrainerPage() {
                           )}
                         </div>
 
+                        {/* Availability Times */}
+                        <div className="mb-3">
+                          <p className="text-xs font-medium text-gray-600 mb-1">Next Available:</p>
+                          <div className="flex flex-wrap gap-1">
+                            {trainer.availableTimeSlots.slice(0, 2).map((slot, index) => (
+                              <div key={index} className="text-xs">
+                                <span className="font-medium text-gray-700">{slot.day}:</span>
+                                <span className="text-gray-600 ml-1">
+                                  {slot.times.slice(0, 2).join(', ')}
+                                  {slot.times.length > 2 && ` +${slot.times.length - 2} more`}
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-4">
                             <button
@@ -262,7 +307,7 @@ export default function ChooseTrainerPage() {
                             <button
                               type="button"
                               onClick={() => handleViewProfile(trainer)}
-                              className="flex items-center gap-1 px-3 py-1 text-xs text-blue-600 hover:text-blue-700 border border-blue-200 rounded hover:border-blue-300 transition-colors"
+                              className="flex items-center gap-1 px-3 py-1 text-xs text-yellow-600 hover:text-yellow-700 border border-yellow-200 rounded hover:border-yellow-300 transition-colors"
                             >
                               <Eye className="w-3 h-3" />
                               View Profile
@@ -312,7 +357,7 @@ export default function ChooseTrainerPage() {
 
       {/* Profile Modal */}
       {viewingProfile && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
             {/* Modal Header */}
             <div className="flex items-center justify-between p-6 border-b">
@@ -329,7 +374,7 @@ export default function ChooseTrainerPage() {
             <div className="p-6">
               {/* Trainer Header */}
               <div className="flex items-start gap-4 mb-6">
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-semibold text-lg">
+                <div className="w-16 h-16 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-full flex items-center justify-center text-white font-semibold text-lg">
                   {viewingProfile.avatar}
                 </div>
                 <div className="flex-1">
@@ -389,7 +434,7 @@ export default function ChooseTrainerPage() {
                 <h4 className="font-semibold text-gray-900 mb-2">Specialties</h4>
                 <div className="flex flex-wrap gap-2">
                   {viewingProfile.specialties.map((specialty, index) => (
-                    <span key={index} className="px-3 py-1 bg-blue-100 text-blue-700 text-sm rounded-full">
+                    <span key={index} className="px-3 py-1 bg-yellow-100 text-yellow-700 text-sm rounded-full">
                       {specialty}
                     </span>
                   ))}
@@ -429,6 +474,25 @@ export default function ChooseTrainerPage() {
                     <span key={index} className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">
                       {lang}
                     </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Availability Schedule */}
+              <div className="mb-6">
+                <h4 className="font-semibold text-gray-900 mb-2">Weekly Availability</h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {viewingProfile.availableTimeSlots.map((slot, index) => (
+                    <div key={index} className="p-3 bg-gray-50 rounded-lg">
+                      <div className="font-medium text-gray-900 text-sm mb-1">{slot.day}</div>
+                      <div className="flex flex-wrap gap-1">
+                        {slot.times.map((time, timeIndex) => (
+                          <span key={timeIndex} className="px-2 py-1 bg-yellow-100 text-yellow-700 text-xs rounded">
+                            {time}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
                   ))}
                 </div>
               </div>

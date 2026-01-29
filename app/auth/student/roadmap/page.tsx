@@ -1,7 +1,6 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import Sidebar from '@/components/dashboard/Sidebar';
 
 import RoadmapBuilder from '@/components/roadmap/RoadmapBuilder';
 import { useRoadmap } from '@/lib/hooks/useRoadmap';

@@ -20,7 +20,7 @@ export default function PaymentPage() {
       
       <div className="flex-1 flex flex-col overflow-hidden">
         <main className="flex-1 overflow-auto flex items-center justify-center bg-gray-50">
-          <div className="max-w-md w-full p-8">
+          <div className="w-full p-8">
             {/* Go back button */}
             <button
               onClick={() => router.push('/post-signup/choose-wing')}

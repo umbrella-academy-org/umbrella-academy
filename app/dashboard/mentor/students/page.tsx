@@ -23,17 +23,7 @@ export default function MentorStudentsPage() {
             {/* Students Header */}
             <StudentsHeader />
 
-            {/* Students Filters */}
-            <div className="animate-fade-in" style={{ animationDelay: '100ms' }}>
-              <StudentsFilters
-                searchQuery={searchQuery}
-                onSearchChange={setSearchQuery}
-                selectedStatus={selectedStatus}
-                onStatusChange={setSelectedStatus}
-                selectedCourse={selectedCourse}
-                onCourseChange={setSelectedCourse}
-              />
-            </div>
+         
 
             {/* Students Table */}
             <div className="animate-fade-in" style={{ animationDelay: '200ms' }}>
