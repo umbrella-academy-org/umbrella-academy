@@ -245,18 +245,18 @@ export default function ChooseWingPage() {
                         {wing.icon}
                       </div>
 
-                      <div className="flex-1">
+                      <div className="flex-1 min-w-0">
                         <div className="flex items-start justify-between mb-2">
-                          <div>
-                            <h3 className={`text-sm font-semibold ${selectedWing === wing.id ? 'text-gray-900' : 'text-gray-700'}`}>
+                          <div className="min-w-0 flex-1">
+                            <h3 className={`text-sm font-semibold truncate ${selectedWing === wing.id ? 'text-gray-900' : 'text-gray-700'}`}>
                               {wing.title}
                             </h3>
-                            <p className="text-xs text-gray-500 mt-0.5">
+                            <p className="text-xs text-gray-500 mt-0.5 truncate">
                               {wing.students.toLocaleString()} Students • {wing.mentors} Mentors • {wing.trainers.total} Trainers
                             </p>
                           </div>
                           {selectedWing === wing.id && (
-                            <CheckCircle className="w-5 h-5 text-yellow-600" />
+                            <CheckCircle className="w-5 h-5 text-yellow-600 flex-shrink-0 ml-2" />
                           )}
                         </div>
 
@@ -272,7 +272,7 @@ export default function ChooseWingPage() {
                           <span className="text-lg font-bold text-gray-900">
                             RWF {wing.monthlyPrice.toLocaleString()}/year
                           </span>
-                          <span className="text-xs text-gray-500">
+                          <span className="text-xs text-gray-500 whitespace-nowrap ml-2">
                             {wing.averageCompletionTime}
                           </span>
                         </div>
@@ -284,14 +284,14 @@ export default function ChooseWingPage() {
                       {/* Specializations */}
                       <div className="mb-3">
                         <p className="text-xs font-medium text-gray-600 mb-2">Specializations:</p>
-                        <div className="flex flex-wrap gap-1">
+                        <div className="flex flex-wrap gap-1.5">
                           {wing.specializations.slice(0, 3).map((spec, index) => (
-                            <span key={index} className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-full">
+                            <span key={index} className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-full whitespace-nowrap">
                               {spec}
                             </span>
                           ))}
                           {wing.specializations.length > 3 && (
-                            <span className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-full">
+                            <span className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-full whitespace-nowrap">
                               +{wing.specializations.length - 3} more
                             </span>
                           )}
@@ -301,18 +301,19 @@ export default function ChooseWingPage() {
                       {/* Top Trainers */}
                       <div className="mb-3">
                         <p className="text-xs font-medium text-gray-600 mb-2">Top Trainers:</p>
-                        <div className="flex items-center gap-2">
+                        <div className="space-y-2">
                           {wing.trainers.topTrainers.map((trainer, index) => (
-                            <div key={index} className="flex items-center gap-2 bg-gray-50 rounded-lg px-2 py-1">
-                              <div className="w-6 h-6 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-semibold text-xs">
+                            <div key={index} className="flex items-center gap-2 bg-gray-50 rounded-lg px-2 py-1.5">
+                              <div className="w-6 h-6 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-semibold text-xs flex-shrink-0">
                                 {trainer.avatar}
                               </div>
-                              <div>
-                                <p className="text-xs font-medium text-gray-900">{trainer.name}</p>
-                                <div className="flex items-center gap-1">
-                                  {renderStars(trainer.rating)}
-                                  <span className="text-xs text-gray-500">({trainer.rating})</span>
-                                </div>
+                              <div className="flex-1 min-w-0">
+                                <p className="text-xs font-medium text-gray-900 truncate">{trainer.name}</p>
+                                <p className="text-xs text-gray-500 truncate">{trainer.specialization}</p>
+                              </div>
+                              <div className="flex items-center gap-1 flex-shrink-0">
+                                {renderStars(trainer.rating)}
+                                <span className="text-xs text-gray-500">({trainer.rating})</span>
                               </div>
                             </div>
                           ))}
@@ -320,11 +321,11 @@ export default function ChooseWingPage() {
                       </div>
 
                       {/* Availability */}
-                      <div className="flex items-center justify-between text-xs">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between text-xs gap-1">
                         <span className="text-gray-600">
                           <span className="font-medium text-green-600">{wing.trainers.available}</span> of {wing.trainers.total} trainers available
                         </span>
-                        <span className="text-gray-500">
+                        <span className="text-gray-500 whitespace-nowrap">
                           Avg completion: {wing.averageCompletionTime}
                         </span>
                       </div>
