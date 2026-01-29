@@ -128,6 +128,11 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
             href: '/dashboard/trainer/live-session'
           },
           {
+            icon: <AlertCircle className="w-5 h-5" />,
+            label: 'Reports',
+            href: '/dashboard/trainer/reports'
+          },
+          {
             icon: <CreditCard className="w-5 h-5" />,
             label: 'Wallet',
             href: '/dashboard/trainer/wallet'
@@ -160,6 +165,21 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
             icon: <User className="w-5 h-5" />,
             label: 'My Students',
             href: '/dashboard/mentor/students'
+          },
+          {
+            icon: <CheckCircle className="w-5 h-5" />,
+            label: 'Trainer Approvals',
+            href: '/dashboard/mentor/trainer-approvals'
+          },
+          {
+            icon: <AlertCircle className="w-5 h-5" />,
+            label: 'Trainer Reports',
+            href: '/dashboard/mentor/reports'
+          },
+          {
+            icon: <AlertCircle className="w-5 h-5" />,
+            label: 'Mentor Reports',
+            href: '/dashboard/mentor/mentor-reports'
           },
           {
             icon: <Map className="w-5 h-5" />,
@@ -215,6 +235,11 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
             href: '/dashboard/wing-admin/trainers'
           },
           {
+            icon: <AlertCircle className="w-5 h-5" />,
+            label: 'Mentor Reports',
+            href: '/dashboard/wing-admin/mentor-reports'
+          },
+          {
             icon: <Calendar className="w-5 h-5" />,
             label: 'Student Activity',
             href: '/dashboard/wing-admin/students'
@@ -256,6 +281,11 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
             icon: <User className="w-5 h-5" />,
             label: 'Users',
             href: '/dashboard/umbrella-admin/users'
+          },
+          {
+            icon: <HelpCircle className="w-5 h-5" />,
+            label: 'Feedback & Support',
+            href: '/dashboard/umbrella-admin/feedback-support'
           },
           {
             icon: <CreditCard className="w-5 h-5" />,

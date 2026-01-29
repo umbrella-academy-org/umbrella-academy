@@ -38,6 +38,37 @@ export default function RoadmapPage() {
 
   // Check if roadmap already exists
   const savedRoadmap = typeof window !== 'undefined' ? localStorage.getItem('hasRoadmap') === 'true' : false;
+  
+  // Get selected trainer info
+  const selectedTrainerData = typeof window !== 'undefined' ? localStorage.getItem('selectedTrainer') : null;
+  const selectedTrainer = selectedTrainerData ? JSON.parse(selectedTrainerData) : null;
+  
+  // Get selected wing info
+  const selectedWingId = typeof window !== 'undefined' ? localStorage.getItem('selectedWing') : null;
+  const getWingDetails = (wingId: string) => {
+    const wings = {
+      'tech-companies': {
+        title: 'Tech Companies Wing',
+        description: 'Technology sector companies and startups',
+        icon: '💻',
+        color: 'blue'
+      },
+      'business-companies': {
+        title: 'Business Companies Wing', 
+        description: 'Business consulting and enterprise solutions',
+        icon: '💼',
+        color: 'green'
+      },
+      'hotels': {
+        title: 'Hotels Wing',
+        description: 'Hospitality and tourism industry training',
+        icon: '🏨',
+        color: 'purple'
+      }
+    };
+    return wings[wingId as keyof typeof wings] || null;
+  };
+  const selectedWing = selectedWingId ? getWingDetails(selectedWingId) : null;
 
   const handleAddPhase = () => {
     if (newPhase.title && newPhase.description && newPhase.duration) {
@@ -113,7 +144,42 @@ export default function RoadmapPage() {
           {/* Header */}
           <div className="mb-8">
             <h1 className="text-3xl font-bold text-gray-900 mb-2">Create Your Learning Roadmap</h1>
-            <p className="text-gray-600">Define your learning goals and break them down into manageable phases</p>
+            <p className="text-gray-600 mb-4">Define your learning goals and break them down into manageable phases</p>
+            
+            {/* Selected Wing and Trainer Info */}
+            <div className="space-y-3">
+              {/* Selected Wing Info */}
+              {selectedWing && (
+                <div className={`bg-${selectedWing.color}-50 border border-${selectedWing.color}-200 rounded-lg p-4`}>
+                  <div className="flex items-center gap-3">
+                    <div className="text-2xl">{selectedWing.icon}</div>
+                    <div>
+                      <p className={`text-sm text-${selectedWing.color}-800`}>
+                        <span className="font-medium">Your Wing:</span> {selectedWing.title}
+                      </p>
+                      <p className={`text-xs text-${selectedWing.color}-600`}>{selectedWing.description}</p>
+                    </div>
+                  </div>
+                </div>
+              )}
+              
+              {/* Selected Trainer Info */}
+              {selectedTrainer && (
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-semibold text-sm">
+                      {selectedTrainer.avatar}
+                    </div>
+                    <div>
+                      <p className="text-sm text-blue-800">
+                        <span className="font-medium">Your Trainer:</span> {selectedTrainer.name}
+                      </p>
+                      <p className="text-xs text-blue-600">{selectedTrainer.title}</p>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Roadmap Title */}
