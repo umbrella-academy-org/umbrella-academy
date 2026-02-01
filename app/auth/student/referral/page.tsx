@@ -26,7 +26,7 @@ export default function ReferralPage() {
     }
     console.log('Selected source:', selectedSource);
     // Navigate to availability page
-    router.push('/auth/student/availability');
+    router.push('/auth/student/payment');
   };
 
   return (

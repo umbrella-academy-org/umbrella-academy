@@ -31,7 +31,7 @@ export default function SignupPage() {
           {/* Role Selection */}
           <div className="w-full space-y-4">
             <button
-              onClick={() => router.push('/auth/student/signup')}
+              onClick={() => router.push('/auth/student/profile')}
               className="w-full p-6 border-2 border-gray-200 rounded-lg hover:border-yellow-600 hover:bg-yellow-50 transition-colors text-left"
             >
               <div className="flex items-center gap-4">
