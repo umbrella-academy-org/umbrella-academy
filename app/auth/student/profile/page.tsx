@@ -11,7 +11,7 @@ export default function ProfilePage() {
     lastName: '',
     gender: '',
     dateOfBirth: '',
-    country: '',
+    email: '',
     phoneCode: '+250',
     phoneNumber: '',
   });
@@ -20,7 +20,7 @@ export default function ProfilePage() {
     lastName: '',
     gender: '',
     dateOfBirth: '',
-    country: '',
+    email: '',
     phoneNumber: '',
   });
 
@@ -36,7 +36,7 @@ export default function ProfilePage() {
       lastName: '',
       gender: '',
       dateOfBirth: '',
-      country: '',
+      email: '',
       phoneNumber: '',
     };
     
@@ -44,7 +44,7 @@ export default function ProfilePage() {
     if (!formData.lastName) newErrors.lastName = 'Last name is required';
     if (!formData.gender) newErrors.gender = 'Please select your gender';
     if (!formData.dateOfBirth) newErrors.dateOfBirth = 'Date of birth is required';
-    if (!formData.country) newErrors.country = 'Please select your country';
+    if (!formData.email) newErrors.email = 'Email is required';
     if (!formData.phoneNumber) newErrors.phoneNumber = 'Phone number is required';
     
     setErrors(newErrors);
@@ -54,7 +54,7 @@ export default function ProfilePage() {
     }
     
     console.log('Profile data:', formData);
-    router.push('/dashboard/student');
+    router.push('/auth/verify');
   };
 
   return (
@@ -175,28 +175,21 @@ export default function ProfilePage() {
 
               {/* Select Country */}
               <div>
-                <label htmlFor="country" className="block text-sm font-medium text-gray-700 mb-2">
-                  Select Country
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                  Enter your email
                 </label>
-                <select
-                  id="country"
-                  value={formData.country}
-                  onChange={(e) => handleChange('country', e.target.value)}
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="eg. johndoe@example.com"
+                  value={formData.email}
+                  onChange={(e) => handleChange('email', e.target.value)}
                   className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white text-gray-900 ${
-                    errors.country ? 'border-red-500' : 'border-gray-300'
+                    errors.email ? 'border-red-500' : 'border-gray-300'
                   }`}
                   required
-                >
-                  <option value="">No country selected</option>
-                  <option value="us">United States</option>
-                  <option value="uk">United Kingdom</option>
-                  <option value="ca">Canada</option>
-                  <option value="rw">Rwanda</option>
-                  <option value="ke">Kenya</option>
-                  <option value="ug">Uganda</option>
-                  <option value="tz">Tanzania</option>
-                </select>
-                {errors.country && <p className="mt-1 text-sm text-red-500">{errors.country}</p>}
+                />
+                {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email}</p>}
               </div>
 
               {/* Phone Number */}

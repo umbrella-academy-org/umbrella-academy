@@ -118,7 +118,7 @@ export default function PaymentPage() {
     console.log('Payment data:', paymentData);
     // Process payment and complete onboarding
     localStorage.setItem('paymentCompleted', 'true');
-    router.push('/auth/student/roadmap');
+    router.push('/dashboard/student');
   };
 
   const getCardType = (cardNumber: string) => {

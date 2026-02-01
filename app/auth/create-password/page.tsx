@@ -43,7 +43,7 @@ export default function CreatePasswordPage() {
     if (userType === 'trainer') {
       router.push('/auth/trainer/profile');
     } else {
-      router.push('/auth/student/profile');
+      router.push('/auth/student/education-level');
     }
   };
 
