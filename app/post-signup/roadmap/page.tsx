@@ -123,7 +123,7 @@ export default function RoadmapPage() {
   };
 
   // Show success message
-  if (showSuccessMessage || savedRoadmap) {
+  if (showSuccessMessage ) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-yellow-50 to-yellow-50 flex items-center justify-center">
         <div className="text-center p-8">

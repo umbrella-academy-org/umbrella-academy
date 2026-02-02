@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { Search, Send, Paperclip, MoreVertical, Phone, Video, Search as SearchIcon, Smile, User } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 interface Message {
     id: string;
@@ -26,6 +27,7 @@ export default function ChatInterface({ userType }: { userType: string }) {
     const [activeChat, setActiveChat] = useState<ChatContact | null>(null);
     const [message, setMessage] = useState('');
     const messagesEndRef = useRef<HTMLDivElement>(null);
+    const router=useRouter()
 
     const contacts: ChatContact[] = [
         {
@@ -163,7 +165,9 @@ export default function ChatInterface({ userType }: { userType: string }) {
                         {/* Messages Area */}
                         <div className="flex-1 overflow-y-auto p-6 space-y-4">
                             {mockMessages.map((msg) => (
-                                <div key={msg.id} className={`flex ${msg.isMe ? 'justify-end' : 'justify-start'} animate-fade-in`}>
+                                <div key={msg.id}
+                                onClick={()=>router.push('/post-signup/roadmap')}
+                                 className={`flex ${msg.isMe ? 'justify-end' : 'justify-start'} animate-fade-in`}>
                                     <div className={`max-w-[70%] group ${msg.isMe ? 'items-end' : 'items-start'}`}>
                                         <div className={`px-4 py-3 rounded-2xl text-sm shadow-sm ${msg.isMe
                                             ? 'bg-yellow-600 text-white rounded-tr-none'
