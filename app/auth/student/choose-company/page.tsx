@@ -26,7 +26,6 @@ interface Wing {
   specializations: string[];
   averageCompletionTime: string;
   successRate: number;
-  monthlyPrice: number;
 }
 
 export default function ChooseWingPage() {
@@ -38,7 +37,7 @@ export default function ChooseWingPage() {
   const wings: Wing[] = [
     {
       id: 'programming',
-      title: 'Programming & Development',
+      title: 'Winners',
       description: 'Learn to build software, websites, and apps',
       icon: '💻',
       rating: 4.5,
@@ -65,11 +64,10 @@ export default function ChooseWingPage() {
       specializations: ['Web Development', 'Mobile Apps', 'Cloud Computing', 'DevOps'],
       averageCompletionTime: '8-12 months',
       successRate: 94,
-      monthlyPrice: 75000
     },
     {
       id: 'design',
-      title: 'UI/UX Design',
+      title: 'Figma',
       description: 'Create beautiful and user-friendly interfaces',
       icon: '🎨',
       rating: 4.3,
@@ -96,11 +94,10 @@ export default function ChooseWingPage() {
       specializations: ['UI Design', 'UX Research', 'Prototyping', 'Design Systems'],
       averageCompletionTime: '6-10 months',
       successRate: 91,
-      monthlyPrice: 65000
     },
     {
       id: 'data-science',
-      title: 'Data Science & Analytics',
+      title: 'Cargo',
       description: 'Analyze data and build machine learning models',
       icon: '📊',
       rating: 4.6,
@@ -127,11 +124,10 @@ export default function ChooseWingPage() {
       specializations: ['Machine Learning', 'Data Analytics', 'Python', 'Statistics'],
       averageCompletionTime: '10-14 months',
       successRate: 89,
-      monthlyPrice: 80000
     },
     {
       id: 'cybersecurity',
-      title: 'Cybersecurity',
+      title: 'TryHackMe',
       description: 'Protect systems and networks from threats',
       icon: '🔒',
       rating: 4.4,
@@ -158,7 +154,6 @@ export default function ChooseWingPage() {
       specializations: ['Network Security', 'Ethical Hacking', 'Risk Assessment', 'Compliance'],
       averageCompletionTime: '8-12 months',
       successRate: 87,
-      monthlyPrice: 70000
     }
   ];
 
@@ -178,7 +173,7 @@ export default function ChooseWingPage() {
     console.log('Selected wing:', selectedWing);
     // Store selected wing
     localStorage.setItem('selectedWing', selectedWing);
-    router.push('/auth/student/choose-company');
+    router.push('/auth/student/payment');
   };
 
   const renderStars = (rating: number) => {
@@ -196,7 +191,7 @@ export default function ChooseWingPage() {
   return (
     <div className="flex h-screen bg-white">
       {/* Left side - Form */}
-       <div className="flex-[2] flex flex-col overflow-hidden">
+      <div className="flex-[2] flex flex-col overflow-hidden">
         <main className="flex-1 overflow-auto flex items-center justify-center bg-gray-50 p-4">
           <div className="w-full">
             {/* Go back button */}
@@ -248,9 +243,10 @@ export default function ChooseWingPage() {
 
                           <div className="flex-1 text-left min-w-0">
                             <div className="flex items-center justify-between mb-1">
-                              <h3 className={`text-sm font-semibold truncate ${isSelected ? 'text-gray-900' : 'text-gray-700'}`}>
+                              <h3 className={`font-semibold  ${isSelected ? 'text-gray-900' : 'text-gray-800'}`}>
                                 {wing.title}
                               </h3>
+
                               {isSelected && <CheckCircle className="w-5 h-5 text-yellow-600" />}
                             </div>
 
@@ -260,9 +256,12 @@ export default function ChooseWingPage() {
                                   <Star className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />
                                   <span className="text-xs font-black text-gray-700">{wing.rating}</span>
                                 </div>
-                                <span className="text-sm font-black text-gray-900 tracking-tight">
-                                  RWF {wing.monthlyPrice.toLocaleString()}/yr
-                                </span>
+
+                              </div>
+                              <div className=''>
+                                <div className={`text-sm   ${isSelected ? 'text-gray-900' : 'text-gray-700'}`}>
+                                  {wing.description}
+                                </div>
                               </div>
 
                               <div className="flex items-center gap-3">

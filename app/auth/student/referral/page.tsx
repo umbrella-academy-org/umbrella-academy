@@ -25,8 +25,8 @@ export default function ReferralPage() {
       return;
     }
     console.log('Selected source:', selectedSource);
-    // Navigate to availability page
-    router.push('/auth/student/payment');
+    // Navigate to availabilityr page
+    router.push('/auth/student/choose-wing');
   };
 
   return (
