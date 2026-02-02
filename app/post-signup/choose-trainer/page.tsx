@@ -154,7 +154,7 @@ export default function ChooseTrainerPage() {
 
     const trainer = trainers.find(t => t.id === selectedTrainer);
     console.log('Selected trainer:', trainer);
-    
+
     // Store selected trainer
     localStorage.setItem('selectedTrainer', JSON.stringify(trainer));
     router.push('/post-signup/roadmap');
@@ -182,177 +182,135 @@ export default function ChooseTrainerPage() {
   return (
     <div className="flex h-screen bg-white">
       <Sidebar activeItem="Roadmap" userType="student" />
-      
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <main className="flex-1 overflow-auto flex items-center justify-center bg-gray-50">
-          <div className="max-w-2xl w-full p-8">
-            {/* Go back button */}
-            <button
-              onClick={() => router.push('/post-signup/payment')}
-              className="flex items-center gap-2 text-gray-400 hover:text-gray-900 mb-8 transition-colors group"
-            >
-              <svg className="w-5 h-5 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M15 19l-7-7 7-7" />
-              </svg>
-              <span className="text-xs font-black uppercase">Go back</span>
-            </button>
 
-            <div className="text-center">
-              {/* Logo */}
-              <div className="mb-8">
-                <div className="w-16 h-16 bg-yellow-600 rounded-2xl flex items-center justify-center shadow-lg shadow-yellow-600/20 mx-auto">
-                  <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" />
-                  </svg>
-                </div>
-              </div>
+      <div className="flex-1 flex flex-col justify-between p-8 pb-20 w-full overflow-y-auto bg-white">
+        <div className="flex flex-col flex-1 w-full">
+          <button
+            onClick={() => window.history.back()}
+            className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-8 transition-colors"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+            Go back
+          </button>
 
-              {/* Title */}
-              <h1 className="text-3xl font-semibold text-gray-900 mb-2">
-                Choose Your Trainer
-              </h1>
-              <p className="text-gray-500 mb-2 text-sm">
-                Select a trainer from the {getWingTitle(selectedWing || '')} to guide your learning journey.
-              </p>
-              <p className="text-xs text-gray-400 mb-8">
-                Click "View Profile" to see detailed information about each trainer.
-              </p>
-
-              {/* Form */}
-              <form onSubmit={handleContinue} className="w-full">
-                <div className="space-y-4 mb-8">
-                  {trainers.map((trainer) => (
-                    <div
-                      key={trainer.id}
-                      className={`flex items-start gap-4 p-4 border rounded-lg transition-all ${selectedTrainer === trainer.id
-                        ? 'border-yellow-600 bg-yellow-50'
-                        : 'border-gray-200 bg-white hover:border-gray-300'
-                        }`}
-                    >
-                      {/* Avatar */}
-                      <div className={`w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold text-sm ${selectedTrainer === trainer.id ? 'bg-yellow-600' : 'bg-gradient-to-br from-yellow-500 to-yellow-600'
-                        }`}>
-                        {trainer.avatar}
-                      </div>
-
-                      {/* Trainer Info */}
-                      <div className="flex-1 text-left">
-                        <div className="flex items-start justify-between mb-2">
-                          <div>
-                            <h3 className="font-semibold text-gray-900">{trainer.name}</h3>
-                            <p className="text-sm text-gray-600">{trainer.title}</p>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            {renderStars(trainer.rating)}
-                            <span className="text-xs text-gray-500">({trainer.reviewCount})</span>
-                          </div>
-                        </div>
-
-                        <div className="flex items-center gap-4 text-xs text-gray-500 mb-3">
-                          <div className="flex items-center gap-1">
-                            <Clock className="w-3 h-3" />
-                            <span>{trainer.experience}</span>
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <Users className="w-3 h-3" />
-                            <span>{trainer.students} students</span>
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <MapPin className="w-3 h-3" />
-                            <span>{trainer.location}</span>
-                          </div>
-                        </div>
-
-                        <div className="flex flex-wrap gap-1 mb-3">
-                          {trainer.specialties.slice(0, 3).map((specialty, index) => (
-                            <span key={index} className="px-2 py-1 bg-gray-100 text-xs text-gray-600 rounded">
-                              {specialty}
-                            </span>
-                          ))}
-                          {trainer.specialties.length > 3 && (
-                            <span className="px-2 py-1 bg-gray-100 text-xs text-gray-600 rounded">
-                              +{trainer.specialties.length - 3} more
-                            </span>
-                          )}
-                        </div>
-
-                        {/* Availability Times */}
-                        <div className="mb-3">
-                          <p className="text-xs font-medium text-gray-600 mb-1">Next Available:</p>
-                          <div className="flex flex-wrap gap-1">
-                            {trainer.availableTimeSlots.slice(0, 2).map((slot, index) => (
-                              <div key={index} className="text-xs">
-                                <span className="font-medium text-gray-700">{slot.day}:</span>
-                                <span className="text-gray-600 ml-1">
-                                  {slot.times.slice(0, 2).join(', ')}
-                                  {slot.times.length > 2 && ` +${slot.times.length - 2} more`}
-                                </span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-4">
-                            <button
-                              type="button"
-                              onClick={() => handleTrainerSelect(trainer.id)}
-                              className={`px-3 py-1 text-xs rounded transition-colors ${selectedTrainer === trainer.id
-                                ? 'bg-yellow-600 text-white'
-                                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                                }`}
-                            >
-                              {selectedTrainer === trainer.id ? 'Selected' : 'Select'}
-                            </button>
-                            <button
-                              type="button"
-                              onClick={() => handleViewProfile(trainer)}
-                              className="flex items-center gap-1 px-3 py-1 text-xs text-yellow-600 hover:text-yellow-700 border border-yellow-200 rounded hover:border-yellow-300 transition-colors"
-                            >
-                              <Eye className="w-3 h-3" />
-                              View Profile
-                            </button>
-                          </div>
-                          <div className="text-right">
-                            <div className="text-sm font-semibold text-gray-900">{trainer.hourlyRate}</div>
-                            <div className="text-xs text-green-600">{trainer.availability}</div>
-                          </div>
-                        </div>
-                      </div>
-
-                      {selectedTrainer === trainer.id && (
-                        <CheckCircle className="w-5 h-5 text-yellow-600 mt-1" />
-                      )}
-                    </div>
-                  ))}
-                </div>
-
-                {error && <p className="mb-4 text-xs font-medium text-red-500 text-center">{error}</p>}
-
-                <button
-                  type="submit"
-                  className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-all active:scale-95"
-                >
-                  Continue to Roadmap Creation
-                </button>
-
-                {/* Progress dots */}
-                <div className="flex justify-center gap-2 pt-6">
-                  <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
-                  <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
-                  <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
-                  <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
-                  <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
-                </div>
-              </form>
-
-              {/* Footer */}
-              <div className="text-sm text-gray-500 mt-8">
-                © Umbrella Academy 2025
+          <div className="flex flex-col items-center justify-center flex-1">
+            <div className="mb-8">
+              <div className="w-16 h-16 bg-yellow-600 rounded-2xl flex items-center justify-center shadow-lg shadow-yellow-600/20">
+                <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" />
+                </svg>
               </div>
             </div>
+
+            <h1 className="text-3xl font-semibold text-gray-900 mb-2">
+              Pick your Mentor
+            </h1>
+            <p className="text-gray-500 mb-2 text-center">
+              Choose a senior mentor to guide your career development.
+            </p>
+            <p className="text-xs text-gray-400 mb-10 text-center">
+              Click "View Profile" to see detailed information about each mentor.
+            </p>
+
+            <form onSubmit={handleContinue} className="w-full">
+              <div className="space-y-4 mb-8">
+                {trainers.map((mentor) => (
+                  <div
+                    key={mentor.id}
+                    className={`flex items-start gap-4 p-4 border rounded-lg transition-all ${selectedTrainer === mentor.id
+                      ? 'border-yellow-600 bg-yellow-50'
+                      : 'border-gray-200 bg-white hover:border-gray-300'
+                      }`}
+                  >
+                    <div className={`w-14 h-14 rounded-full flex items-center justify-center text-white font-semibold flex-shrink-0 ${selectedTrainer === mentor.id ? 'bg-yellow-600' : 'bg-gradient-to-br from-yellow-500 to-yellow-600'
+                      }`}>
+                      {mentor.avatar}
+                    </div>
+
+                    <div className="flex-1">
+                      <div className="flex items-start justify-between mb-2">
+                        <div>
+                          <h3 className="text-sm font-semibold text-gray-900">
+                            {mentor.name}
+                          </h3>
+                          <p className="text-xs text-gray-500">
+                            {mentor.title}
+                          </p>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          {renderStars(mentor.rating)}
+                          <span className="text-xs text-gray-500">({mentor.reviewCount})</span>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-4 mb-3">
+                        <div className="flex items-center gap-1">
+                          <Users className="w-3.5 h-3.5 text-gray-400" />
+                          <span className="text-xs text-gray-700">{mentor.students} mentees</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Clock className="w-3.5 h-3.5 text-gray-400" />
+                          <span className="text-xs text-gray-700">{mentor.experience}</span>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <button
+                            type="button"
+                            onClick={() => setSelectedTrainer(mentor.id)}
+                            className={`px-3 py-1 text-xs rounded transition-colors ${selectedTrainer === mentor.id
+                              ? 'bg-yellow-600 text-white'
+                              : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                              }`}
+                          >
+                            {selectedTrainer === mentor.id ? 'Selected' : 'Select'}
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => handleViewProfile(mentor)}
+                            className="flex items-center gap-1 px-3 py-1 text-xs text-blue-600 hover:text-blue-700 border border-blue-200 rounded hover:border-blue-300 transition-colors"
+                          >
+                            <Eye className="w-3 h-3" />
+                            View Profile
+                          </button>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-xs font-semibold text-gray-900">{mentor.hourlyRate}</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {selectedTrainer === mentor.id && (
+                      <CheckCircle className="w-5 h-5 text-yellow-600" />
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              {error && <p className="mb-4 text-xs font-medium text-red-500 text-center">{error}</p>}
+
+              <button
+                type="submit"
+                className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-colors"
+              >
+                Continue to Pick Trainer
+              </button>
+
+              <div className="flex justify-center gap-2 pt-6">
+                {[1, 2, 3, 4, 5, 6, 7].map((i) => (
+                  <div key={i} className={`h-2 rounded-full transition-all ${i === 5 ? 'w-8 bg-yellow-600' : 'w-2 bg-gray-300'}`}></div>
+                ))}
+              </div>
+            </form>
           </div>
-        </main>
+        </div>
+
+        <div className="text-sm text-gray-500 text-center mt-8">
+          © Dreamize 2025
+        </div>
       </div>
 
       {/* Profile Modal */}
