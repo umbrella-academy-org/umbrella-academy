@@ -7,10 +7,22 @@ import { useRouter } from 'next/navigation';
 export default function TrainerEducationPage() {
   const router = useRouter();
   const [education, setEducation] = useState({
+    level: '',
     title: '',
     school: '',
     year: '',
   });
+
+  const educationLevels = [
+    "High School Diploma",
+    "Associate Degree",
+    "Bachelor's Degree", 
+    "Master's Degree",
+    "Doctoral Degree (PhD)",
+    "Professional Degree",
+    "Certificate/Diploma",
+    "Some College (No Degree)"
+  ];
 
   const handleContinue = (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,7 +33,7 @@ export default function TrainerEducationPage() {
   return (
     <div className="flex h-screen">
       {/* Left side - Form */}
-      <div className="flex flex-[2] flex-col justify-between p-8 bg-white">
+      <div className="flex flex-[2] flex-col justify-between p-8 bg-white overflow-auto">
         <div className="flex flex-col flex-1 max-w-md mx-auto w-full">
           {/* Go back button */}
           <button
@@ -54,6 +66,23 @@ export default function TrainerEducationPage() {
 
             {/* Form */}
             <form onSubmit={handleContinue} className="w-full space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Education Level</label>
+                <select
+                  value={education.level}
+                  onChange={(e) => setEducation({ ...education, level: e.target.value })}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 appearance-none bg-white"
+                  required
+                >
+                  <option value="">Select your highest education level</option>
+                  {educationLevels.map((level, index) => (
+                    <option key={index} value={level}>
+                      {level}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Degree / Certification Title</label>
                 <input

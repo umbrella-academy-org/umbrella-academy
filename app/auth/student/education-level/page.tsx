@@ -10,11 +10,14 @@ export default function EducationLevelPage() {
   const [selectedLevel, setSelectedLevel] = useState('');
 
   const educationLevels = [
+    "High School Diploma",
+    "Associate Degree",
+    "Bachelor's Degree", 
     "Master's Degree",
-    "Master's Degree",
-    "Master's Degree",
-    "Master's Degree",
-    "Master's Degree",
+    "Doctoral Degree (PhD)",
+    "Professional Degree",
+    "Certificate/Diploma",
+    "Some College (No Degree)"
   ];
 
   const handleContinue = (e: React.FormEvent) => {

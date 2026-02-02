@@ -2,7 +2,7 @@
 
 import Sidebar from '@/components/dashboard/Sidebar';
 import TrainersTable from '@/components/wing-admin/TrainersTable';
-
+import { Users, UserCheck, UserX, TrendingUp } from 'lucide-react';
 
 export default function WingAdminTrainersPage() {
   const trainers = [
@@ -35,6 +35,13 @@ export default function WingAdminTrainersPage() {
     }
   ];
 
+  // Calculate summary stats
+  const totalTrainers = trainers.length;
+  const activeTrainers = trainers.filter(t => t.status === 'active').length;
+  const totalCapacity = trainers.reduce((sum, t) => sum + t.capacity, 0);
+  const totalAssigned = trainers.reduce((sum, t) => sum + t.assigned, 0);
+  const utilizationRate = Math.round((totalAssigned / totalCapacity) * 100);
+
   return (
     <div className="flex h-screen bg-white">
       <Sidebar activeItem="Trainers" userType="wing-admin" />
@@ -45,6 +52,46 @@ export default function WingAdminTrainersPage() {
             <div className="mb-6">
               <h1 className="text-2xl font-semibold text-gray-900 mb-2">Trainer Management</h1>
               <p className="text-gray-600">Monitor trainer capacity and assignments</p>
+            </div>
+
+            {/* Summary Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+              <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">Total Trainers</p>
+                    <p className="text-2xl font-bold text-gray-900">{totalTrainers}</p>
+                  </div>
+                  <Users className="w-8 h-8 text-blue-500" />
+                </div>
+              </div>
+              <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">Active Trainers</p>
+                    <p className="text-2xl font-bold text-gray-900">{activeTrainers}</p>
+                  </div>
+                  <UserCheck className="w-8 h-8 text-green-500" />
+                </div>
+              </div>
+              <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">Total Capacity</p>
+                    <p className="text-2xl font-bold text-gray-900">{totalCapacity}</p>
+                  </div>
+                  <UserX className="w-8 h-8 text-purple-500" />
+                </div>
+              </div>
+              <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">Utilization Rate</p>
+                    <p className="text-2xl font-bold text-gray-900">{utilizationRate}%</p>
+                  </div>
+                  <TrendingUp className="w-8 h-8 text-yellow-500" />
+                </div>
+              </div>
             </div>
 
             <TrainersTable trainers={trainers} />

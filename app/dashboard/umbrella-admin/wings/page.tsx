@@ -2,7 +2,7 @@
 
 import Sidebar from '@/components/dashboard/Sidebar';
 import WingsTable from '@/components/umbrella-admin/WingsTable';
-
+import { Building2, Users, DollarSign, TrendingUp } from 'lucide-react';
 
 export default function UmbrellaAdminWingsPage() {
   const wings = [
@@ -14,7 +14,8 @@ export default function UmbrellaAdminWingsPage() {
       students: 324,
       trainers: 12,
       revenue: 12450,
-      status: 'active'
+      status: 'active',
+      company: 'TechCorp Inc.'
     },
     {
       id: 2,
@@ -24,7 +25,8 @@ export default function UmbrellaAdminWingsPage() {
       students: 287,
       trainers: 10,
       revenue: 10230,
-      status: 'active'
+      status: 'active',
+      company: 'Creative Solutions Ltd.'
     },
     {
       id: 3,
@@ -34,7 +36,8 @@ export default function UmbrellaAdminWingsPage() {
       students: 256,
       trainers: 9,
       revenue: 9180,
-      status: 'active'
+      status: 'active',
+      company: 'Marketing Pro LLC'
     },
     {
       id: 4,
@@ -44,7 +47,8 @@ export default function UmbrellaAdminWingsPage() {
       students: 198,
       trainers: 7,
       revenue: 7890,
-      status: 'active'
+      status: 'active',
+      company: 'DataTech Solutions'
     },
     {
       id: 5,
@@ -54,9 +58,16 @@ export default function UmbrellaAdminWingsPage() {
       students: 182,
       trainers: 6,
       revenue: 5480,
-      status: 'maintenance'
+      status: 'maintenance',
+      company: 'Business Excellence Corp.'
     }
   ];
+
+  // Calculate summary stats
+  const totalWings = wings.length;
+  const activeWings = wings.filter(w => w.status === 'active').length;
+  const totalStudents = wings.reduce((sum, w) => sum + w.students, 0);
+  const totalRevenue = wings.reduce((sum, w) => sum + w.revenue, 0);
 
   return (
     <div className="flex h-screen bg-white">
@@ -68,6 +79,46 @@ export default function UmbrellaAdminWingsPage() {
             <div className="mb-6">
               <h1 className="text-2xl font-semibold text-gray-900 mb-2">Wings Management</h1>
               <p className="text-gray-600">Monitor and manage all wings across the system</p>
+            </div>
+
+            {/* Summary Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+              <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">Total Wings</p>
+                    <p className="text-2xl font-bold text-gray-900">{totalWings}</p>
+                  </div>
+                  <Building2 className="w-8 h-8 text-blue-500" />
+                </div>
+              </div>
+              <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">Active Wings</p>
+                    <p className="text-2xl font-bold text-gray-900">{activeWings}</p>
+                  </div>
+                  <TrendingUp className="w-8 h-8 text-green-500" />
+                </div>
+              </div>
+              <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">Total Students</p>
+                    <p className="text-2xl font-bold text-gray-900">{totalStudents.toLocaleString()}</p>
+                  </div>
+                  <Users className="w-8 h-8 text-purple-500" />
+                </div>
+              </div>
+              <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">Total Revenue</p>
+                    <p className="text-2xl font-bold text-gray-900">RWF {totalRevenue.toLocaleString()}</p>
+                  </div>
+                  <DollarSign className="w-8 h-8 text-yellow-500" />
+                </div>
+              </div>
             </div>
 
             <WingsTable wings={wings} />

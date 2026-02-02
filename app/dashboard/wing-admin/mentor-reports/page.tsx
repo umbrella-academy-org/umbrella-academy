@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
-import { Eye, Download, MessageSquare, CheckCircle, AlertTriangle, Target, TrendingUp, Users, FileText } from 'lucide-react';
+import { Eye, Download, MessageSquare, CheckCircle, AlertTriangle, Target, TrendingUp, Users, FileText, X } from 'lucide-react';
 
 interface MentorReport {
   id: string;
@@ -207,237 +207,284 @@ export default function WingAdminMentorReportsPage() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              {/* Reports List */}
-              <div className="lg:col-span-1">
-                <div className="bg-white rounded-lg shadow-sm border border-gray-100">
-                  <div className="p-4 border-b border-gray-200">
-                    <h3 className="font-semibold text-gray-900 mb-4">Reports ({filteredReports.length})</h3>
-                    
-                    {/* Filters */}
-                    <div className="space-y-3">
-                      <div>
-                        <label className="block text-xs font-medium text-gray-600 mb-1">Status</label>
-                        <select
-                          value={filterStatus}
-                          onChange={(e) => setFilterStatus(e.target.value)}
-                          className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-600"
-                        >
-                          <option value="all">All Status</option>
-                          <option value="pending">Pending</option>
-                          <option value="reviewed">Reviewed</option>
-                          <option value="approved">Approved</option>
-                        </select>
-                      </div>
-                      <div>
-                        <label className="block text-xs font-medium text-gray-600 mb-1">Type</label>
-                        <select
-                          value={filterType}
-                          onChange={(e) => setFilterType(e.target.value)}
-                          className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-600"
-                        >
-                          <option value="all">All Types</option>
-                          <option value="monthly">Monthly</option>
-                          <option value="quarterly">Quarterly</option>
-                          <option value="incident">Incident</option>
-                          <option value="performance">Performance</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
+            <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+              <div className="p-4 border-b border-gray-200">
+                <div className="flex items-center justify-between">
+                  <h3 className="font-semibold text-gray-900">Reports ({filteredReports.length})</h3>
                   
-                  <div className="divide-y divide-gray-200 max-h-96 overflow-y-auto">
-                    {filteredReports.map((report) => (
-                      <div
-                        key={report.id}
-                        className={`p-4 cursor-pointer hover:bg-gray-50 transition-colors ${selectedReport === report.id ? 'bg-yellow-50 border-r-4 border-yellow-600' : ''
-                          }`}
-                        onClick={() => setSelectedReport(report.id)}
+                  {/* Filters */}
+                  <div className="flex gap-3">
+                    <div>
+                      <select
+                        value={filterStatus}
+                        onChange={(e) => setFilterStatus(e.target.value)}
+                        className="px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-600"
                       >
-                        <div className="flex items-start justify-between mb-2">
-                          <div className="flex items-center gap-2">
-                            <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold text-xs">
-                              {report.mentorAvatar}
-                            </div>
-                            <div>
-                              <h4 className="font-medium text-gray-900 text-sm">{report.mentorName}</h4>
-                              <p className="text-xs text-gray-500">{report.period}</p>
-                            </div>
-                          </div>
-                          <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(report.status)}`}>
-                            {report.status}
-                          </span>
-                        </div>
-                        
-                        <div className="flex items-center justify-between">
-                          <span className={`px-2 py-1 rounded text-xs font-medium ${getReportTypeColor(report.reportType)}`}>
-                            {report.reportType}
-                          </span>
-                          <span className="text-xs text-gray-500">{formatDate(report.submittedAt)}</span>
-                        </div>
-                      </div>
-                    ))}
+                        <option value="all">All Status</option>
+                        <option value="pending">Pending</option>
+                        <option value="reviewed">Reviewed</option>
+                        <option value="approved">Approved</option>
+                      </select>
+                    </div>
+                    <div>
+                      <select
+                        value={filterType}
+                        onChange={(e) => setFilterType(e.target.value)}
+                        className="px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-600"
+                      >
+                        <option value="all">All Types</option>
+                        <option value="monthly">Monthly</option>
+                        <option value="quarterly">Quarterly</option>
+                        <option value="incident">Incident</option>
+                        <option value="performance">Performance</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
               </div>
-
-              {/* Report Details */}
-              <div className="lg:col-span-2">
-                {selectedReportData ? (
-                  <div className="bg-white rounded-lg shadow-sm border border-gray-100">
-                    {/* Header */}
-                    <div className="p-6 border-b border-gray-200">
-                      <div className="flex items-start justify-between mb-4">
-                        <div className="flex items-center gap-3">
-                          <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold">
-                            {selectedReportData.mentorAvatar}
+              
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead className="bg-gray-50">
+                    <tr>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Report Title
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Mentor
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Type
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Period
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Status
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Submitted
+                      </th>
+                      <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Actions
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="bg-white divide-y divide-gray-200">
+                    {filteredReports.map((report) => (
+                      <tr key={report.id} className="hover:bg-gray-50">
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="text-sm font-medium text-gray-900">
+                            {report.reportType.charAt(0).toUpperCase() + report.reportType.slice(1)} Report - {report.period}
                           </div>
-                          <div>
-                            <h2 className="text-xl font-semibold text-gray-900">{selectedReportData.mentorName}</h2>
-                            <div className="flex items-center gap-2 mt-1">
-                              <span className={`px-3 py-1 rounded-full text-sm font-medium ${getReportTypeColor(selectedReportData.reportType)}`}>
-                                {selectedReportData.reportType.charAt(0).toUpperCase() + selectedReportData.reportType.slice(1)} Report
-                              </span>
-                              <span className="text-lg font-semibold text-gray-900">{selectedReportData.period}</span>
+                          <div className="text-sm text-gray-500">
+                            {report.metrics.totalTrainers} trainers, {report.metrics.activeStudents} students
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="flex items-center">
+                            <div className="flex-shrink-0 h-8 w-8">
+                              <div className="h-8 w-8 rounded-full bg-purple-100 flex items-center justify-center">
+                                <span className="text-xs font-medium text-purple-800">
+                                  {report.mentorAvatar}
+                                </span>
+                              </div>
+                            </div>
+                            <div className="ml-3">
+                              <div className="text-sm font-medium text-gray-900">{report.mentorName}</div>
                             </div>
                           </div>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          {selectedReportData.status === 'pending' && (
-                            <>
-                              <button
-                                onClick={() => handleStatusUpdate(selectedReportData.id, 'reviewed')}
-                                className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm"
-                              >
-                                <Eye className="w-4 h-4" />
-                                Mark Reviewed
-                              </button>
-                              <button
-                                onClick={() => handleStatusUpdate(selectedReportData.id, 'approved')}
-                                className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm"
-                              >
-                                <CheckCircle className="w-4 h-4" />
-                                Approve
-                              </button>
-                            </>
-                          )}
-                          <button className="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors text-sm">
-                            <Download className="w-4 h-4" />
-                            Export
-                          </button>
-                        </div>
-                      </div>
-
-                      {/* Metrics */}
-                      <div className="grid grid-cols-4 gap-4 p-4 bg-gray-50 rounded-lg">
-                        <div className="text-center">
-                          <div className="text-2xl font-bold text-blue-600">{selectedReportData.metrics.totalTrainers}</div>
-                          <div className="text-sm text-blue-600">Trainers</div>
-                        </div>
-                        <div className="text-center">
-                          <div className="text-2xl font-bold text-green-600">{selectedReportData.metrics.activeStudents}</div>
-                          <div className="text-sm text-green-600">Students</div>
-                        </div>
-                        <div className="text-center">
-                          <div className="text-2xl font-bold text-purple-600">{selectedReportData.metrics.completionRate}%</div>
-                          <div className="text-sm text-purple-600">Completion</div>
-                        </div>
-                        <div className="text-center">
-                          <div className="text-2xl font-bold text-yellow-600">{selectedReportData.metrics.satisfactionScore}%</div>
-                          <div className="text-sm text-yellow-600">Satisfaction</div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Report Content */}
-                    <div className="p-6 space-y-6">
-                      <div>
-                        <h3 className="font-semibold text-gray-900 mb-3">Trainers Overview</h3>
-                        <p className="text-gray-700">{selectedReportData.trainersOverview}</p>
-                      </div>
-
-                      <div>
-                        <h3 className="font-semibold text-gray-900 mb-3">Students Progress</h3>
-                        <p className="text-gray-700">{selectedReportData.studentsProgress}</p>
-                      </div>
-
-                      {selectedReportData.keyAchievements && (
-                        <div>
-                          <h3 className="flex items-center gap-2 font-semibold text-gray-900 mb-3">
-                            <CheckCircle className="w-5 h-5 text-green-500" />
-                            Key Achievements
-                          </h3>
-                          <p className="text-gray-700">{selectedReportData.keyAchievements}</p>
-                        </div>
-                      )}
-
-                      {selectedReportData.challenges && (
-                        <div>
-                          <h3 className="flex items-center gap-2 font-semibold text-gray-900 mb-3">
-                            <AlertTriangle className="w-5 h-5 text-orange-500" />
-                            Challenges & Issues
-                          </h3>
-                          <p className="text-gray-700">{selectedReportData.challenges}</p>
-                        </div>
-                      )}
-
-                      {selectedReportData.recommendations && (
-                        <div>
-                          <h3 className="flex items-center gap-2 font-semibold text-gray-900 mb-3">
-                            <Target className="w-5 h-5 text-blue-500" />
-                            Recommendations
-                          </h3>
-                          <p className="text-gray-700">{selectedReportData.recommendations}</p>
-                        </div>
-                      )}
-
-                      {/* Admin Notes */}
-                      <div className="border-t pt-6">
-                        <h3 className="flex items-center gap-2 font-semibold text-gray-900 mb-3">
-                          <MessageSquare className="w-5 h-5 text-purple-500" />
-                          Wing Admin Notes
-                        </h3>
-                        {selectedReportData.wingAdminNotes ? (
-                          <div className="p-4 bg-purple-50 rounded-lg border border-purple-200 mb-4">
-                            <p className="text-purple-800">{selectedReportData.wingAdminNotes}</p>
-                          </div>
-                        ) : (
-                          <p className="text-gray-500 text-sm mb-4">No admin notes yet.</p>
-                        )}
-                        
-                        <div className="flex gap-3">
-                          <textarea
-                            value={adminNotes}
-                            onChange={(e) => setAdminNotes(e.target.value)}
-                            placeholder="Add your notes or feedback..."
-                            rows={3}
-                            className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
-                          />
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${getReportTypeColor(report.reportType)}`}>
+                            {report.reportType.charAt(0).toUpperCase() + report.reportType.slice(1)}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                          {report.period}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(report.status)}`}>
+                            {report.status}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                          {formatDate(report.submittedAt)}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                           <button
-                            onClick={() => handleAddNotes(selectedReportData.id)}
-                            className="px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors"
-                            disabled={!adminNotes.trim()}
+                            onClick={() => setSelectedReport(report.id)}
+                            className="text-blue-600 hover:text-blue-900 p-1 hover:bg-blue-50 rounded"
+                            title="View Details"
                           >
-                            Add Notes
+                            <Eye className="w-4 h-4" />
                           </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-12 text-center">
-                    <div className="text-gray-400 mb-4">
-                      <FileText className="w-12 h-12 mx-auto" />
-                    </div>
-                    <h3 className="text-lg font-medium text-gray-900 mb-2">Select a Report</h3>
-                    <p className="text-gray-600">Choose a report from the list to review the details</p>
-                  </div>
-                )}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
+
+              {filteredReports.length === 0 && (
+                <div className="text-center py-12 text-gray-500">
+                  <FileText className="w-12 h-12 mx-auto mb-4 text-gray-300" />
+                  <p>No reports found</p>
+                </div>
+              )}
             </div>
           </div>
         </main>
       </div>
+
+      {/* Report Details Modal */}
+      {selectedReportData && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between p-6 border-b border-gray-200">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold">
+                  {selectedReportData.mentorAvatar}
+                </div>
+                <div>
+                  <h2 className="text-xl font-semibold text-gray-900">{selectedReportData.mentorName}</h2>
+                  <div className="flex items-center gap-2 mt-1">
+                    <span className={`px-3 py-1 rounded-full text-sm font-medium ${getReportTypeColor(selectedReportData.reportType)}`}>
+                      {selectedReportData.reportType.charAt(0).toUpperCase() + selectedReportData.reportType.slice(1)} Report
+                    </span>
+                    <span className="text-lg font-semibold text-gray-900">{selectedReportData.period}</span>
+                  </div>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                {selectedReportData.status === 'pending' && (
+                  <>
+                    <button
+                      onClick={() => handleStatusUpdate(selectedReportData.id, 'reviewed')}
+                      className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm"
+                    >
+                      <Eye className="w-4 h-4" />
+                      Mark Reviewed
+                    </button>
+                    <button
+                      onClick={() => handleStatusUpdate(selectedReportData.id, 'approved')}
+                      className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm"
+                    >
+                      <CheckCircle className="w-4 h-4" />
+                      Approve
+                    </button>
+                  </>
+                )}
+                <button 
+                  onClick={() => setSelectedReport(null)}
+                  className="text-gray-400 hover:text-gray-600 p-2 hover:bg-gray-100 rounded-full"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-6 overflow-y-auto max-h-[calc(90vh-200px)]">
+              {/* Metrics */}
+              <div className="grid grid-cols-4 gap-4 p-4 bg-gray-50 rounded-lg mb-6">
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-blue-600">{selectedReportData.metrics.totalTrainers}</div>
+                  <div className="text-sm text-blue-600">Trainers</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-green-600">{selectedReportData.metrics.activeStudents}</div>
+                  <div className="text-sm text-green-600">Students</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-purple-600">{selectedReportData.metrics.completionRate}%</div>
+                  <div className="text-sm text-purple-600">Completion</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-yellow-600">{selectedReportData.metrics.satisfactionScore}%</div>
+                  <div className="text-sm text-yellow-600">Satisfaction</div>
+                </div>
+              </div>
+
+              {/* Report Content */}
+              <div className="space-y-6">
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-3">Trainers Overview</h3>
+                  <p className="text-gray-700 bg-gray-50 p-4 rounded-lg">{selectedReportData.trainersOverview}</p>
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-3">Students Progress</h3>
+                  <p className="text-gray-700 bg-blue-50 p-4 rounded-lg border-l-4 border-blue-400">{selectedReportData.studentsProgress}</p>
+                </div>
+
+                {selectedReportData.keyAchievements && (
+                  <div>
+                    <h3 className="flex items-center gap-2 font-semibold text-gray-900 mb-3">
+                      <CheckCircle className="w-5 h-5 text-green-500" />
+                      Key Achievements
+                    </h3>
+                    <p className="text-gray-700 bg-green-50 p-4 rounded-lg border-l-4 border-green-400">{selectedReportData.keyAchievements}</p>
+                  </div>
+                )}
+
+                {selectedReportData.challenges && (
+                  <div>
+                    <h3 className="flex items-center gap-2 font-semibold text-gray-900 mb-3">
+                      <AlertTriangle className="w-5 h-5 text-orange-500" />
+                      Challenges & Issues
+                    </h3>
+                    <p className="text-gray-700 bg-orange-50 p-4 rounded-lg border-l-4 border-orange-400">{selectedReportData.challenges}</p>
+                  </div>
+                )}
+
+                {selectedReportData.recommendations && (
+                  <div>
+                    <h3 className="flex items-center gap-2 font-semibold text-gray-900 mb-3">
+                      <Target className="w-5 h-5 text-blue-500" />
+                      Recommendations
+                    </h3>
+                    <p className="text-gray-700 bg-blue-50 p-4 rounded-lg border-l-4 border-blue-400">{selectedReportData.recommendations}</p>
+                  </div>
+                )}
+
+                {/* Admin Notes */}
+                <div className="border-t pt-6">
+                  <h3 className="flex items-center gap-2 font-semibold text-gray-900 mb-3">
+                    <MessageSquare className="w-5 h-5 text-purple-500" />
+                    Wing Admin Notes
+                  </h3>
+                  {selectedReportData.wingAdminNotes ? (
+                    <div className="p-4 bg-purple-50 rounded-lg border border-purple-200 mb-4">
+                      <p className="text-purple-800">{selectedReportData.wingAdminNotes}</p>
+                    </div>
+                  ) : (
+                    <p className="text-gray-500 text-sm mb-4">No admin notes yet.</p>
+                  )}
+                  
+                  <div className="flex gap-3">
+                    <textarea
+                      value={adminNotes}
+                      onChange={(e) => setAdminNotes(e.target.value)}
+                      placeholder="Add your notes or feedback..."
+                      rows={3}
+                      className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
+                    />
+                    <button
+                      onClick={() => handleAddNotes(selectedReportData.id)}
+                      className="px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors"
+                      disabled={!adminNotes.trim()}
+                    >
+                      Add Notes
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

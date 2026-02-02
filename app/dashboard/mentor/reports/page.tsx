@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
 import { useAuth } from '@/contexts';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
+import { Eye, X, CheckCircle, XCircle, FileText } from 'lucide-react';
 
 interface TrainerReport {
   id: string;
@@ -34,7 +35,8 @@ interface TrainerReport {
 export default function MentorReportsPage() {
   const { user, isAuthenticated, isLoading: authLoading } = useAuth();
   const { navigate } = useNavigationWithLoading();
-  const [selectedReport, setSelectedReport] = useState<TrainerReport | null>(null);
+  const [selectedReportId, setSelectedReportId] = useState<string | null>(null);
+  const [showReportModal, setShowReportModal] = useState(false);
   const [mentorNotes, setMentorNotes] = useState('');
   const [filterStatus, setFilterStatus] = useState('all');
 
@@ -62,6 +64,29 @@ export default function MentorReportsPage() {
       roadmapUpdates: 'Completed React Basics module',
       submittedAt: '2024-01-15T18:00:00Z',
       status: 'pending-review'
+    },
+    {
+      id: '2',
+      studentId: '2',
+      studentName: 'Bob Smith',
+      trainerId: '2',
+      trainerName: 'Sarah Trainer',
+      reportType: 'session',
+      sessionDate: '2024-01-14',
+      duration: '45 minutes',
+      topicsCovered: 'JavaScript ES6 Features',
+      studentPerformance: 'Excellent grasp of arrow functions and destructuring',
+      ratings: {
+        progress: 5,
+        attendance: 5,
+        engagement: 5
+      },
+      challenges: 'Minor confusion with async/await',
+      recommendations: 'Practice with Promise chains',
+      nextSteps: 'Introduction to React fundamentals',
+      roadmapUpdates: 'Completed JavaScript Advanced module',
+      submittedAt: '2024-01-14T17:30:00Z',
+      status: 'approved'
     }
   ]);
 
@@ -79,9 +104,39 @@ export default function MentorReportsPage() {
     return <div>Access denied</div>;
   }
 
+  const handleViewReport = (reportId: string) => {
+    setSelectedReportId(reportId);
+    setShowReportModal(true);
+  };
+
+  const closeReportModal = () => {
+    setShowReportModal(false);
+    setSelectedReportId(null);
+  };
+
+  const selectedReport = reports.find(r => r.id === selectedReportId);
+
   const handleReportAction = (reportId: string, action: 'approve' | 'reject' | 'request-revision') => {
     // Handle report action logic here
     console.log(`${action} report ${reportId}`);
+  };
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'pending-review': return 'bg-yellow-100 text-yellow-800';
+      case 'approved': return 'bg-green-100 text-green-800';
+      case 'needs-revision': return 'bg-orange-100 text-orange-800';
+      case 'rejected': return 'bg-red-100 text-red-800';
+      default: return 'bg-gray-100 text-gray-800';
+    }
+  };
+
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric'
+    });
   };
 
   const filteredReports = filterStatus === 'all' 
@@ -110,64 +165,238 @@ export default function MentorReportsPage() {
             </select>
           </div>
 
-          {/* Reports List */}
-          <div className="grid gap-6">
-            {filteredReports.map((report) => (
-              <div key={report.id} className="bg-white rounded-lg shadow-md p-6">
-                <div className="flex justify-between items-start mb-4">
-                  <div>
-                    <h3 className="text-xl font-semibold">{report.studentName}</h3>
-                    <p className="text-gray-600">Trainer: {report.trainerName}</p>
-                    <p className="text-gray-600">Session Date: {report.sessionDate}</p>
-                  </div>
-                  <span className={`px-3 py-1 rounded-full text-sm ${
-                    report.status === 'pending-review' ? 'bg-yellow-100 text-yellow-800' :
-                    report.status === 'approved' ? 'bg-green-100 text-green-800' :
-                    report.status === 'needs-revision' ? 'bg-orange-100 text-orange-800' :
-                    'bg-red-100 text-red-800'
-                  }`}>
-                    {report.status.replace('-', ' ').toUpperCase()}
-                  </span>
-                </div>
-                
-                <div className="grid md:grid-cols-2 gap-4 mb-4">
-                  <div>
-                    <h4 className="font-medium mb-2">Topics Covered</h4>
-                    <p className="text-gray-700">{report.topicsCovered}</p>
-                  </div>
-                  <div>
-                    <h4 className="font-medium mb-2">Performance</h4>
-                    <p className="text-gray-700">{report.studentPerformance}</p>
-                  </div>
-                </div>
+          {/* Reports Table */}
+          <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+            <div className="p-4 border-b border-gray-200">
+              <h3 className="font-semibold text-gray-900">Reports ({filteredReports.length})</h3>
+            </div>
+            
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Report Title
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Student
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Trainer
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Session Date
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Status
+                    </th>
+                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Actions
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {filteredReports.map((report) => (
+                    <tr key={report.id} className="hover:bg-gray-50">
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm font-medium text-gray-900">
+                          Session Report - {report.topicsCovered.split(',')[0]}
+                        </div>
+                        <div className="text-sm text-gray-500">
+                          Submitted {formatDate(report.submittedAt)}
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm font-medium text-gray-900">{report.studentName}</div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm font-medium text-gray-900">{report.trainerName}</div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        {formatDate(report.sessionDate)}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(report.status)}`}>
+                          {report.status.replace('-', ' ').toUpperCase()}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                        <button
+                          onClick={() => handleViewReport(report.id)}
+                          className="text-blue-600 hover:text-blue-900 p-1 hover:bg-blue-50 rounded"
+                          title="View Details"
+                        >
+                          <Eye className="w-4 h-4" />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
 
-                {report.status === 'pending-review' && (
-                  <div className="flex gap-2 mt-4">
-                    <button 
-                      onClick={() => handleReportAction(report.id, 'approve')}
-                      className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
-                    >
-                      Approve
-                    </button>
-                    <button 
-                      onClick={() => handleReportAction(report.id, 'request-revision')}
-                      className="px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700"
-                    >
-                      Request Revision
-                    </button>
-                    <button 
-                      onClick={() => handleReportAction(report.id, 'reject')}
-                      className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
-                    >
-                      Reject
-                    </button>
-                  </div>
-                )}
+            {filteredReports.length === 0 && (
+              <div className="text-center py-12 text-gray-500">
+                <FileText className="w-12 h-12 mx-auto mb-4 text-gray-300" />
+                <p>No reports found</p>
               </div>
-            ))}
+            )}
           </div>
         </div>
       </div>
+
+      {/* Report Details Modal */}
+      {showReportModal && selectedReport && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between p-6 border-b border-gray-200">
+              <div>
+                <h2 className="text-xl font-semibold text-gray-900">Trainer Report Details</h2>
+                <p className="text-sm text-gray-600 mt-1">{selectedReport.studentName} - {selectedReport.trainerName}</p>
+              </div>
+              <button
+                onClick={closeReportModal}
+                className="text-gray-400 hover:text-gray-600 p-2 hover:bg-gray-100 rounded-full"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-6 overflow-y-auto max-h-[calc(90vh-200px)]">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {/* Left Column */}
+                <div className="space-y-6">
+                  {/* Session Info */}
+                  <div>
+                    <h3 className="font-semibold text-gray-900 mb-3">Session Information</h3>
+                    <div className="space-y-2 text-sm">
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Student:</span>
+                        <span className="text-gray-900">{selectedReport.studentName}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Trainer:</span>
+                        <span className="text-gray-900">{selectedReport.trainerName}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Date:</span>
+                        <span className="text-gray-900">{formatDate(selectedReport.sessionDate)}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Duration:</span>
+                        <span className="text-gray-900">{selectedReport.duration}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Topics Covered */}
+                  <div>
+                    <h3 className="font-semibold text-gray-900 mb-3">Topics Covered</h3>
+                    <p className="text-gray-700 bg-gray-50 p-4 rounded-lg">{selectedReport.topicsCovered}</p>
+                  </div>
+
+                  {/* Student Performance */}
+                  <div>
+                    <h3 className="font-semibold text-gray-900 mb-3">Student Performance</h3>
+                    <p className="text-gray-700 bg-green-50 p-4 rounded-lg border-l-4 border-green-400">{selectedReport.studentPerformance}</p>
+                  </div>
+
+                  {/* Ratings */}
+                  <div>
+                    <h3 className="font-semibold text-gray-900 mb-3">Ratings</h3>
+                    <div className="grid grid-cols-3 gap-4">
+                      <div className="text-center p-3 bg-blue-50 rounded-lg">
+                        <div className="text-2xl font-bold text-blue-600">{selectedReport.ratings.progress}</div>
+                        <div className="text-xs text-blue-600">Progress</div>
+                      </div>
+                      <div className="text-center p-3 bg-green-50 rounded-lg">
+                        <div className="text-2xl font-bold text-green-600">{selectedReport.ratings.attendance}</div>
+                        <div className="text-xs text-green-600">Attendance</div>
+                      </div>
+                      <div className="text-center p-3 bg-purple-50 rounded-lg">
+                        <div className="text-2xl font-bold text-purple-600">{selectedReport.ratings.engagement}</div>
+                        <div className="text-xs text-purple-600">Engagement</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right Column */}
+                <div className="space-y-6">
+                  {/* Challenges */}
+                  {selectedReport.challenges && (
+                    <div>
+                      <h3 className="font-semibold text-gray-900 mb-3">Challenges</h3>
+                      <p className="text-gray-700 bg-orange-50 p-4 rounded-lg border-l-4 border-orange-400">{selectedReport.challenges}</p>
+                    </div>
+                  )}
+
+                  {/* Recommendations */}
+                  {selectedReport.recommendations && (
+                    <div>
+                      <h3 className="font-semibold text-gray-900 mb-3">Recommendations</h3>
+                      <p className="text-gray-700 bg-blue-50 p-4 rounded-lg border-l-4 border-blue-400">{selectedReport.recommendations}</p>
+                    </div>
+                  )}
+
+                  {/* Next Steps */}
+                  {selectedReport.nextSteps && (
+                    <div>
+                      <h3 className="font-semibold text-gray-900 mb-3">Next Steps</h3>
+                      <p className="text-gray-700 bg-purple-50 p-4 rounded-lg border-l-4 border-purple-400">{selectedReport.nextSteps}</p>
+                    </div>
+                  )}
+
+                  {/* Roadmap Updates */}
+                  {selectedReport.roadmapUpdates && (
+                    <div>
+                      <h3 className="font-semibold text-gray-900 mb-3">Roadmap Updates</h3>
+                      <p className="text-gray-700 bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-400">{selectedReport.roadmapUpdates}</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="flex items-center justify-end gap-3 p-6 border-t border-gray-200 bg-gray-50">
+              {selectedReport.status === 'pending-review' && (
+                <>
+                  <button
+                    onClick={() => handleReportAction(selectedReport.id, 'request-revision')}
+                    className="flex items-center gap-2 px-4 py-2 text-orange-700 bg-orange-100 rounded-lg hover:bg-orange-200 transition-colors"
+                  >
+                    <FileText className="w-4 h-4" />
+                    Request Revision
+                  </button>
+                  <button
+                    onClick={() => handleReportAction(selectedReport.id, 'reject')}
+                    className="flex items-center gap-2 px-4 py-2 text-red-700 bg-red-100 rounded-lg hover:bg-red-200 transition-colors"
+                  >
+                    <XCircle className="w-4 h-4" />
+                    Reject
+                  </button>
+                  <button
+                    onClick={() => handleReportAction(selectedReport.id, 'approve')}
+                    className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+                  >
+                    <CheckCircle className="w-4 h-4" />
+                    Approve
+                  </button>
+                </>
+              )}
+              <button
+                onClick={closeReportModal}
+                className="px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
