@@ -33,7 +33,7 @@ export default function StudentAvailabilityPage() {
         // Store availability data
         localStorage.setItem('availabilitySet', 'true');
         localStorage.setItem('availabilityData', JSON.stringify({ hoursPerDay, timeSlots }));
-        router.push('/post-signup/choose-wing');
+        router.push('/post-signup/choose-trainer');
     };
 
     return (

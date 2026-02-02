@@ -139,7 +139,7 @@ export default function RoadmapPage() {
   return (
     <div className="h-screen bg-gray-50 flex flex-col lg:flex-row overflow-hidden">
       {/* Left Side - Roadmap Creation */}
-      <div className="flex-1 p-4 lg:p-6 overflow-y-auto">
+      <div className="flex-1 p-4 lg:p-6 overflow-y-auto h-full mt-10">
         <div className="max-w-2xl mx-auto">
           {/* Header */}
           <div className="mb-6 lg:mb-8">
@@ -320,7 +320,7 @@ export default function RoadmapPage() {
       </div>
 
       {/* Right Side - Video Call Interface */}
-      <div className="w-full lg:w-1/2 bg-gray-900 min-h-[400px] lg:min-h-screen">
+      <div className="w-full lg:w-1/2 bg-gray-900 min-h-[400px] lg:min-h-screen py-10">
         <VideoCallInterface
           isCallActive={isCallActive}
           isMuted={isMuted}
