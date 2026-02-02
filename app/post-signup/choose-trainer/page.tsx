@@ -157,7 +157,7 @@ export default function ChooseTrainerPage() {
 
     // Store selected trainer
     localStorage.setItem('selectedTrainer', JSON.stringify(trainer));
-    router.push('/post-signup/roadmap');
+    router.push('/dashboard/student/chat');
   };
 
   const renderStars = (rating: number) => {

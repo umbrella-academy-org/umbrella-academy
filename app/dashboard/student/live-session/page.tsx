@@ -23,7 +23,7 @@ export default function LiveSessionPage() {
       <Sidebar activeItem="Live Session" userType="student" />
 
       {/* Main Content - Scrollable */}
-      <div className="flex flex-col overflow-hidden lg:ml-0">
+      <div className="flex flex-1 flex-col overflow-hidden lg:ml-0">
         {/* Live Session Content - Scrollable */}
         <main className="flex overflow-auto bg-gray-50/30">
           <div className="w-full mx-auto p-4 lg:p-8">
