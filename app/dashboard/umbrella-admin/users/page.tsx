@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
 
-import { Plus } from 'lucide-react';
+import { Plus, Users, UserCheck, Shield, GraduationCap } from 'lucide-react';
 import UsersTable from '@/components/umbrella-admin/UsersTable';
 
 export default function UmbrellaAdminUsersPage() {
@@ -155,6 +155,10 @@ export default function UmbrellaAdminUsersPage() {
     return colors[role as keyof typeof colors] || 'bg-gray-100 text-gray-800';
   };
 
+  // Calculate summary stats
+  const totalUsers = students.length + trainers.length + mentors.length + admins.length;
+  const activeUsers = [...students, ...trainers, ...mentors, ...admins].filter(u => u.status === 'active').length;
+
   return (
     <div className="flex h-screen bg-white">
       <Sidebar activeItem="Users" userType="umbrella-admin" />
@@ -172,6 +176,46 @@ export default function UmbrellaAdminUsersPage() {
                   <Plus className="w-4 h-4" />
                   Add User
                 </button>
+              </div>
+            </div>
+
+            {/* Summary Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+              <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">Total Users</p>
+                    <p className="text-2xl font-bold text-gray-900">{totalUsers}</p>
+                  </div>
+                  <Users className="w-8 h-8 text-blue-500" />
+                </div>
+              </div>
+              <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">Active Users</p>
+                    <p className="text-2xl font-bold text-gray-900">{activeUsers}</p>
+                  </div>
+                  <UserCheck className="w-8 h-8 text-green-500" />
+                </div>
+              </div>
+              <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">Students</p>
+                    <p className="text-2xl font-bold text-gray-900">{students.length}</p>
+                  </div>
+                  <GraduationCap className="w-8 h-8 text-purple-500" />
+                </div>
+              </div>
+              <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">Staff</p>
+                    <p className="text-2xl font-bold text-gray-900">{trainers.length + mentors.length + admins.length}</p>
+                  </div>
+                  <Shield className="w-8 h-8 text-yellow-500" />
+                </div>
               </div>
             </div>
 

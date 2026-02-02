@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
 
-import { Plus, CheckCircle, XCircle } from 'lucide-react';
+import { Plus, CheckCircle, XCircle, Users, UserCheck, Star, Award } from 'lucide-react';
 import MentorsTable from '@/components/wing-admin/MentorsTable';
 
 export default function WingAdminMentorsPage() {
@@ -65,6 +65,12 @@ export default function WingAdminMentorsPage() {
     setFormData({ name: '', email: '', expertise: '', maxStudents: 15 });
   };
 
+  // Calculate summary stats
+  const totalMentors = mentors.length;
+  const activeMentors = mentors.filter(m => m.status === 'active').length;
+  const totalStudents = mentors.reduce((sum, m) => sum + m.currentStudents, 0);
+  const avgRating = (mentors.reduce((sum, m) => sum + m.rating, 0) / mentors.length).toFixed(1);
+
   return (
     <div className="flex h-screen bg-white">
       <Sidebar activeItem="Mentors" userType="wing-admin" />
@@ -85,6 +91,46 @@ export default function WingAdminMentorsPage() {
                   <Plus className="w-4 h-4" />
                   Add New Mentor
                 </button>
+              </div>
+            </div>
+
+            {/* Summary Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+              <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">Total Mentors</p>
+                    <p className="text-2xl font-bold text-gray-900">{totalMentors}</p>
+                  </div>
+                  <Users className="w-8 h-8 text-blue-500" />
+                </div>
+              </div>
+              <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">Active Mentors</p>
+                    <p className="text-2xl font-bold text-gray-900">{activeMentors}</p>
+                  </div>
+                  <UserCheck className="w-8 h-8 text-green-500" />
+                </div>
+              </div>
+              <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">Students Mentored</p>
+                    <p className="text-2xl font-bold text-gray-900">{totalStudents}</p>
+                  </div>
+                  <Award className="w-8 h-8 text-purple-500" />
+                </div>
+              </div>
+              <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">Average Rating</p>
+                    <p className="text-2xl font-bold text-gray-900">{avgRating}</p>
+                  </div>
+                  <Star className="w-8 h-8 text-yellow-500" />
+                </div>
               </div>
             </div>
 
