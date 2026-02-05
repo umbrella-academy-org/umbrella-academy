@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { CheckCircle, Clock, Shield, Star, Users, X } from 'lucide-react';
+import { ArrowRight, CheckCircle, Clock, Shield, Star, Users, X } from 'lucide-react';
 
 interface Wing {
   id: string;
@@ -37,134 +37,95 @@ export default function ChooseWingPage() {
 
   const wings: Wing[] = [
     {
-      id: 'programming',
-      title: 'Programming & Development',
-      description: 'Learn to build software, websites, and apps',
-      icon: '💻',
-      rating: 4.5,
-      students: 1250,
-      mentors: 8,
+      id: 'software-engineering',
+      title: 'Software Engineering',
+      description: 'Master the art of building scalable enterprise systems. From cloud-native architecture to full-stack mastery, gain the technical edge needed to lead in the modern tech landscape.',
+      icon: '🚀',
+      rating: 4.9,
+      students: 2450,
+      mentors: 12,
       trainers: {
-        total: 24,
+        total: 32,
+        available: 24,
+        topTrainers: [
+          { name: 'Dr. Sarah Chen', avatar: 'SC', specialization: 'Distributed Systems', rating: 4.9 },
+          { name: 'Marcus Rodriguez', avatar: 'MR', specialization: 'Cloud Architecture', rating: 4.8 }
+        ]
+      },
+      specializations: ['Distributed Systems', 'Cloud Native', 'DevOps Elite', 'Full-stack JS'],
+      averageCompletionTime: '6-9 months',
+      successRate: 98,
+      monthlyPrice: 85000
+    },
+    {
+      id: 'ux-innovation',
+      title: 'UX & Product Innovation',
+      description: 'Go beyond interfaces. Design immersive digital ecosystems using psychology-driven UX, motion design, and strategic product thinking that users love.',
+      icon: '🎨',
+      rating: 4.8,
+      students: 1820,
+      mentors: 10,
+      trainers: {
+        total: 22,
+        available: 15,
+        topTrainers: [
+          { name: 'Elena Frost', avatar: 'EF', specialization: 'Interaction Design', rating: 4.9 },
+          { name: 'David Okafor', avatar: 'DO', specialization: 'User Research', rating: 4.7 }
+        ]
+      },
+      specializations: ['Behavioral UX', 'Motion Systems', 'Product Strategy', 'Design Ops'],
+      averageCompletionTime: '5-7 months',
+      successRate: 95,
+      monthlyPrice: 72000
+    },
+    {
+      id: 'ai-intelligence',
+      title: 'AI & Data Intelligence',
+      description: 'Harness the power of neural networks and big data. Build intelligent systems that predict, automate, and solve complex global challenges at scale.',
+      icon: '🧠',
+      rating: 4.9,
+      students: 1560,
+      mentors: 15,
+      trainers: {
+        total: 28,
         available: 18,
         topTrainers: [
-          {
-            name: 'Sarah Johnson',
-            avatar: 'SJ',
-            specialization: 'Full Stack Development',
-            rating: 4.9
-          },
-          {
-            name: 'Michael Chen',
-            avatar: 'MC',
-            specialization: 'Backend Engineering',
-            rating: 4.8
-          }
+          { name: 'Prof. Julian Voss', avatar: 'JV', specialization: 'Deep Learning', rating: 5.0 },
+          { name: 'Ami Tanaka', avatar: 'AT', specialization: 'NLP Systems', rating: 4.8 }
         ]
       },
-      specializations: ['Web Development', 'Mobile Apps', 'Cloud Computing', 'DevOps'],
+      specializations: ['Machine Learning', 'Neural Networks', 'Big Data Ops', 'Ethical AI'],
       averageCompletionTime: '8-12 months',
-      successRate: 94,
-      monthlyPrice: 75000
+      successRate: 92,
+      monthlyPrice: 95000
     },
     {
-      id: 'design',
-      title: 'UI/UX Design',
-      description: 'Create beautiful and user-friendly interfaces',
-      icon: '🎨',
-      rating: 4.3,
-      students: 890,
-      mentors: 6,
+      id: 'cyber-resilience',
+      title: 'Cyber Resilience & Trust',
+      description: 'Defend the digital frontier. Master offensive security, advanced cryptography, and zero-trust architectures to protect global infrastructure from emerging threats.',
+      icon: '�️',
+      rating: 4.7,
+      students: 980,
+      mentors: 8,
       trainers: {
-        total: 15,
+        total: 18,
         available: 12,
         topTrainers: [
-          {
-            name: 'Emma Williams',
-            avatar: 'EW',
-            specialization: 'UI/UX Design',
-            rating: 4.9
-          },
-          {
-            name: 'David Kim',
-            avatar: 'DK',
-            specialization: 'Product Design',
-            rating: 4.7
-          }
+          { name: 'Sam "Viper" Wright', avatar: 'SW', specialization: 'Ethical Hacking', rating: 4.9 },
+          { name: 'Lisa Ray', avatar: 'LR', specialization: 'Cryptography', rating: 4.8 }
         ]
       },
-      specializations: ['UI Design', 'UX Research', 'Prototyping', 'Design Systems'],
-      averageCompletionTime: '6-10 months',
-      successRate: 91,
-      monthlyPrice: 65000
-    },
-    {
-      id: 'data-science',
-      title: 'Data Science & Analytics',
-      description: 'Analyze data and build machine learning models',
-      icon: '📊',
-      rating: 4.6,
-      students: 675,
-      mentors: 5,
-      trainers: {
-        total: 12,
-        available: 9,
-        topTrainers: [
-          {
-            name: 'Dr. Alice Chen',
-            avatar: 'AC',
-            specialization: 'Machine Learning',
-            rating: 4.8
-          },
-          {
-            name: 'Robert Wilson',
-            avatar: 'RW',
-            specialization: 'Data Analytics',
-            rating: 4.7
-          }
-        ]
-      },
-      specializations: ['Machine Learning', 'Data Analytics', 'Python', 'Statistics'],
-      averageCompletionTime: '10-14 months',
+      specializations: ['Penetration Testing', 'Risk Governance', 'Network Defense', 'Cloud Security'],
+      averageCompletionTime: '7-10 months',
       successRate: 89,
-      monthlyPrice: 80000
-    },
-    {
-      id: 'cybersecurity',
-      title: 'Cybersecurity',
-      description: 'Protect systems and networks from threats',
-      icon: '🔒',
-      rating: 4.4,
-      students: 450,
-      mentors: 4,
-      trainers: {
-        total: 10,
-        available: 7,
-        topTrainers: [
-          {
-            name: 'James Security',
-            avatar: 'JS',
-            specialization: 'Network Security',
-            rating: 4.6
-          },
-          {
-            name: 'Lisa Guard',
-            avatar: 'LG',
-            specialization: 'Ethical Hacking',
-            rating: 4.8
-          }
-        ]
-      },
-      specializations: ['Network Security', 'Ethical Hacking', 'Risk Assessment', 'Compliance'],
-      averageCompletionTime: '8-12 months',
-      successRate: 87,
-      monthlyPrice: 70000
+      monthlyPrice: 78000
     }
   ];
 
   const handleWingSelect = (wingId: string) => {
     setSelectedWing(wingId);
     setError('');
+    router.push('/auth/student/choose-company');
   };
 
   const handleContinue = (e: React.FormEvent) => {
@@ -194,130 +155,123 @@ export default function ChooseWingPage() {
   };
 
   return (
-    <div className="flex h-screen bg-white">
-      {/* Left side - Form */}
-       <div className="flex-[2] flex flex-col overflow-hidden">
-        <main className="flex-1 overflow-auto flex items-center justify-center bg-gray-50 p-4">
-          <div className="w-full">
-            {/* Go back button */}
+    <div className="h-screen bg-gray-50 flex flex-col overflow-hidden">
+      <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 overflow-y-auto">
+        <div className="w-full max-w-4xl mx-auto">
+          {/* Go back button */}
+          <div className="mb-12">
             <button
               onClick={() => router.push('/post-signup/availability')}
-              className="flex items-center gap-2 text-gray-600hover:text-gray-900 mb-8 transition-colors group"
+              className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors group"
             >
               <svg className="w-5 h-5 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M15 19l-7-7 7-7" />
               </svg>
-              <span className="text-xs font-black ">Go back</span>
+              <span className="text-xs font-black uppercase tracking-widest">Go back</span>
             </button>
+          </div>
 
-            <div className="text-center">
-              {/* Logo */}
-              <div className="mb-8">
-                <div className="w-16 h-16 bg-yellow-600 rounded-2xl flex items-center justify-center shadow-lg shadow-yellow-600/20 mx-auto">
-                  <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" />
-                  </svg>
-                </div>
-              </div>
-
-              {/* Title */}
-              <h1 className="text-3xl font-semibold text-gray-900 mb-2 text-center">
-                Choose Your Wing
-              </h1>
-              <p className="text-gray-500 mb-10 text-center text-sm">
-                Select the industry wing that matches your career goals.
-              </p>
-
-              {/* Wing Selection List */}
-              <form onSubmit={handleContinue} className="w-full max-w-2xl mx-auto">
-                <div className="space-y-4 mb-10">
-                  {wings.map((wing) => {
-                    const isSelected = selectedWing === wing.id;
-                    return (
-                      <div
-                        key={wing.id}
-                        className={`border rounded-lg transition-all duration-300 overflow-hidden ${isSelected
-                          ? 'border-yellow-600 bg-yellow-50 shadow-md ring-1 ring-yellow-600/20'
-                          : 'border-gray-200 bg-white hover:border-gray-300'
-                          }`}
-                      >
-                        <div className="p-5 flex items-center gap-5">
-                          <div className={`w-14 h-14 rounded-lg flex items-center justify-center text-2xl shadow-sm transition-all ${isSelected ? 'bg-yellow-600 text-white' : 'bg-gray-50 text-gray-400'}`}>
-                            {wing.icon}
-                          </div>
-
-                          <div className="flex-1 text-left min-w-0">
-                            <div className="flex items-center justify-between mb-1">
-                              <h3 className={`text-sm font-semibold truncate ${isSelected ? 'text-gray-900' : 'text-gray-700'}`}>
-                                {wing.title}
-                              </h3>
-                              {isSelected && <CheckCircle className="w-5 h-5 text-yellow-600" />}
-                            </div>
-
-                            <div className="flex items-center justify-between">
-                              <div className="flex items-center gap-4">
-                                <div className="flex items-center gap-1">
-                                  <Star className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />
-                                  <span className="text-xs font-black text-gray-700">{wing.rating}</span>
-                                </div>
-                                <span className="text-sm font-black text-gray-900 tracking-tight">
-                                  RWF {wing.monthlyPrice.toLocaleString()}/yr
-                                </span>
-                              </div>
-
-                              <div className="flex items-center gap-3">
-                                <button
-                                  type="button"
-                                  onClick={() => handleWingSelect(wing.id)}
-                                  className={`px-4 py-1.5 rounded text-xs font-black  transition-all ${isSelected
-                                    ? 'bg-yellow-600 text-white shadow-lg'
-                                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
-                                >
-                                  {isSelected ? 'Selected' : 'Select'}
-                                </button>
-                                <button
-                                  type="button"
-                                  onClick={() => setViewingWing(wing)}
-                                  className="px-4 py-1.5 rounded text-xs font-black  border border-gray-200 text-gray-600 hover:text-gray-900 transition-all"
-                                >
-                                  Details
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-
-                {error && <p className="mb-4 text-xs font-medium text-red-500 text-center">{error}</p>}
-
-                <button
-                  type="submit"
-                  className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-all active:scale-95"
-                >
-                  Continue to Payment
-                </button>
-
-                {/* Progress dots */}
-                <div className="flex justify-center gap-2 pt-6">
-                  <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
-                  <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
-                  <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
-                  <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
-                  <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
-                </div>
-              </form>
-
-              {/* Footer */}
-              <div className="text-sm text-gray-500 mt-8">
-                © Umbrella Academy 2025
+          <div className="text-center">
+            {/* Logo */}
+            <div className="mb-10">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-yellow-600 rounded-[2rem] flex items-center justify-center shadow-xl shadow-yellow-600/20 mx-auto transform -rotate-6">
+                <svg className="w-10 h-10 sm:w-12 sm:h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" />
+                </svg>
               </div>
             </div>
+
+            {/* Title */}
+            <div className="mb-12">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 mb-4 tracking-tight">
+                Choose Your Wing
+              </h1>
+              <p className="text-slate-500 max-w-xl mx-auto text-sm sm:text-base font-medium leading-relaxed">
+                Select the specialized industry wing that aligns with your professional ambitions and terminal goals.
+              </p>
+            </div>
+            {/* Wing Selection List */}
+            <form onSubmit={handleContinue} className="w-full">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-16">
+                {wings.map((wing) => {
+                  const isSelected = selectedWing === wing.id;
+                  return (
+                    <div
+                      key={wing.id}
+                      onClick={() => handleWingSelect(wing.id)}
+                      className={`relative p-8 rounded-3xl text-left transition-all duration-300 cursor-pointer group hover:scale-[1.03] ${isSelected
+                        ? 'bg-white border-2 border-yellow-600 shadow-2xl shadow-yellow-600/10'
+                        : 'bg-white border border-slate-100 shadow-sm hover:shadow-xl hover:border-yellow-200'
+                        }`}
+                    >
+                      {/* Top Icon Section */}
+                      <div className="flex justify-between items-start mb-6">
+                        <div className={`w-12 h-12 rounded-2xl flex items-center justify-center text-2xl shadow-inner transition-all duration-500 ${isSelected ? 'bg-yellow-600 text-white rotate-6' : 'bg-slate-50 text-slate-400 group-hover:bg-yellow-50 group-hover:text-yellow-600 group-hover:rotate-6'
+                          }`}>
+                          {wing.icon}
+                        </div>
+                        {isSelected && (
+                          <div className="bg-yellow-600 text-white p-1 rounded-full animate-in zoom-in-50 duration-500">
+                            <CheckCircle className="w-4 h-4" />
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Content Section */}
+                      <div className="mb-8">
+                        <h3 className={`text-xl font-black tracking-tight mb-3 transition-colors ${isSelected ? 'text-yellow-800' : 'text-slate-800'}`}>
+                          {wing.title}
+                        </h3>
+                        <p className={`text-sm leading-relaxed font-medium transition-colors ${isSelected ? 'text-slate-600' : 'text-slate-500'}`}>
+                          {wing.description}
+                        </p>
+                      </div>
+
+                      {/* Bottom Action Section */}
+                      <div className="flex items-center">
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setViewingWing(wing);
+                          }}
+                          className={`flex items-center gap-3 text-sm font-black transition-all group/btn ${isSelected ? 'text-yellow-600' : 'text-slate-400 group-hover:text-yellow-600'
+                            }`}
+                        >
+                          <span className="uppercase tracking-widest text-[10px]">Learn more</span>
+                          <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${isSelected ? 'bg-yellow-600 text-white translate-x-1 shadow-lg shadow-yellow-600/20' : 'bg-slate-50 text-slate-400 group-hover/btn:bg-yellow-600 group-hover/btn:text-white group-hover/btn:translate-x-1 group-hover/btn:shadow-lg group-hover/btn:shadow-yellow-600/20'
+                            }`}>
+                            <ArrowRight className="w-4 h-4" />
+                          </div>
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {error && <p className="mb-4 text-xs font-medium text-red-500 text-center">{error}</p>}
+
+
+
+              {/* Progress dots */}
+              <div className="flex justify-center gap-2 pt-6">
+                <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
+                <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
+                <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
+                <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
+                <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
+              </div>
+            </form>
+
+            {/* Footer */}
+            <div className="text-sm text-gray-500 mt-8">
+              © Umbrella Academy 2025
+            </div>
           </div>
-        </main>
-      </div>
+        </div>
+      </main>
+
 
       {/* Wing Details Modal */}
       {viewingWing && (
@@ -433,17 +387,7 @@ export default function ChooseWingPage() {
           </div>
         </div>
       )}
-      {/* Right side - Image */}
-      <div className="hidden lg:block flex-[1] relative overflow-hidden">
-        <Image
-          src="/auth/login/image.png"
-          alt="Lake house reflection"
-          fill
-          className="object-cover object-center scale-105"
-          priority
-          quality={100}
-        />
-      </div>
+
     </div>
   );
 }

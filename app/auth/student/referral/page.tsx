@@ -7,7 +7,7 @@ import { Share2, CheckCircle } from 'lucide-react';
 
 export default function ReferralPage() {
   const router = useRouter();
-  const [selectedSource, setSelectedSource] = useState('');
+  const [selectedSource, setSelectedSource] = useState<string[]>([]);
 
   const sources = [
     'YouTube',
@@ -20,7 +20,7 @@ export default function ReferralPage() {
 
   const handleContinue = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!selectedSource) {
+    if (selectedSource.length === 0) {
       alert('Please select where you heard about us');
       return;
     }
@@ -69,25 +69,25 @@ export default function ReferralPage() {
               {sources.map((source, index) => (
                 <label
                   key={index}
-                  className={`flex items-center gap-4 p-4 border rounded-lg cursor-pointer transition-all ${selectedSource === source
+                  className={`flex items-center gap-4 p-4 border rounded-lg cursor-pointer transition-all ${selectedSource.includes(source)
                     ? 'border-yellow-600 bg-yellow-50'
                     : 'border-gray-200 bg-white hover:border-gray-300'
                     }`}
                 >
-                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${selectedSource === source ? 'bg-yellow-600 text-white' : 'bg-gray-100 text-gray-400'
+                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${selectedSource.includes(source) ? 'bg-yellow-600 text-white' : 'bg-gray-100 text-gray-400'
                     }`}>
                     <Share2 className="w-4 h-4" />
                   </div>
-                  <span className={`flex-1 text-sm font-medium ${selectedSource === source ? 'text-gray-900' : 'text-gray-600'}`}>{source}</span>
+                  <span className={`flex-1 text-sm font-medium ${selectedSource.includes(source) ? 'text-gray-900' : 'text-gray-600'}`}>{source}</span>
                   <input
                     type="radio"
                     name="source"
                     value={source}
-                    checked={selectedSource === source}
-                    onChange={(e) => setSelectedSource(e.target.value)}
+                    checked={selectedSource.includes(source)}
+                    onChange={(e) => setSelectedSource((prev) => [...prev, e.target.value])}
                     className="hidden"
                   />
-                  {selectedSource === source && (
+                  {selectedSource.includes(source) && (
                     <CheckCircle className="w-5 h-5 text-yellow-600" />
                   )}
                 </label>
