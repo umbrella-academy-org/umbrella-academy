@@ -1,16 +1,14 @@
 // User-related type definitions
 
-// User-related type definitions
-
-export type UserType = 'student' | 'trainer' | 'mentor' | 'wing-admin' | 'umbrella-admin';
+export type UserType = 'student' | 'trainer' | 'mentor' | 'field-admin' | 'umbrella-admin';
 
 export interface BaseUser {
   id: string;
   name: string;
   email: string;
   role: UserType;
-  wingId: string; // Required - every user must belong to exactly one wing
-  wing: string; // Wing identifier for compatibility
+  fieldId: string; // Required - every user must belong to exactly one field
+  field: string; // Field identifier for compatibility
   status: 'active' | 'inactive' | 'suspended' | 'paused';
   joinDate: string;
   avatar?: string;
@@ -26,8 +24,8 @@ export interface BaseUser {
 
 export interface StudentUser extends BaseUser {
   role: 'student';
-  wingId: string; // Required wing assignment
-  wing: string; // Wing identifier for compatibility
+  fieldId: string; // Required field assignment
+  field: string; // Field identifier for compatibility
   availability: {
     weeklyAvailableHours: number;
     preferredSessionDuration: number; // in hours
@@ -42,8 +40,8 @@ export interface StudentUser extends BaseUser {
 
 export interface TrainerUser extends BaseUser {
   role: 'trainer';
-  wingId: string; // Required wing assignment
-  wing: string; // Wing identifier for compatibility
+  fieldId: string; // Required field assignment
+  field: string; // Field identifier for compatibility
   availability: {
     weeklyAvailableHours: number;
     maxStudentsPerSession: number;
@@ -60,8 +58,8 @@ export interface TrainerUser extends BaseUser {
 
 export interface MentorUser extends BaseUser {
   role: 'mentor';
-  wingId: string; // Required wing assignment
-  wing: string; // Wing identifier for compatibility
+  fieldId: string; // Required field assignment
+  field: string; // Field identifier for compatibility
   expertise: string[];
   experience: {
     yearsOfExperience: number;
@@ -69,10 +67,10 @@ export interface MentorUser extends BaseUser {
   };
 }
 
-export interface AdminUser extends Omit<BaseUser, 'wingId' | 'wing'> {
-  role: 'wing-admin' | 'umbrella-admin';
-  wingId?: string; // Optional for umbrella-admin, required for wing-admin
-  wing?: string; // Wing identifier for compatibility
+export interface AdminUser extends Omit<BaseUser, 'fieldId' | 'field'> {
+  role: 'field-admin' | 'umbrella-admin';
+  fieldId?: string; // Optional for umbrella-admin, required for field-admin
+  field?: string; // Field identifier for compatibility
   permissions: string[];
 }
 

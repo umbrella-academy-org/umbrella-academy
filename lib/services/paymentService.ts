@@ -7,17 +7,17 @@ const mockPayments: Payment[] = [
   {
     id: 'payment_001',
     studentId: 'user_001',
-    wingId: 'tech-companies',
+    fieldId: 'tech-companies',
     amount: 50000, // RWF
     currency: 'RWF',
     paymentMethod: 'momo',
     momoTransactionId: 'momo_tx_001',
     status: 'completed',
     revenueDistribution: {
-      wingShare: 32500, // 65%
+      fieldShare: 32500, // 65%
       academyShare: 12500, // 25%
       processingFee: 5000, // 10%
-      wingId: 'tech-companies',
+      fieldId: 'tech-companies',
       transactionId: 'payment_001'
     },
     createdAt: new Date('2024-12-01T10:00:00Z'),
@@ -26,17 +26,17 @@ const mockPayments: Payment[] = [
   {
     id: 'payment_002',
     studentId: 'user_003',
-    wingId: 'business-companies',
+    fieldId: 'business-companies',
     amount: 75000, // RWF
     currency: 'RWF',
     paymentMethod: 'momo',
     momoTransactionId: 'momo_tx_002',
     status: 'completed',
     revenueDistribution: {
-      wingShare: 48750, // 65%
+      fieldShare: 48750, // 65%
       academyShare: 18750, // 25%
       processingFee: 7500, // 10%
-      wingId: 'business-companies',
+      fieldId: 'business-companies',
       transactionId: 'payment_002'
     },
     createdAt: new Date('2024-12-05T14:30:00Z'),
@@ -50,26 +50,26 @@ export class PaymentService {
    */
   static async processMoMoPayment(
     studentId: string,
-    wingId: string,
+    fieldId: string,
     amount: number,
     momoDetails: MoMoPaymentData
   ): Promise<Payment | null> {
     try {
       // Simulate MoMo API call
       const momoTransactionId = await this.callMoMoAPI(momoDetails);
-      
+
       if (!momoTransactionId) {
         return null; // Payment failed
       }
 
       // Calculate revenue distribution
-      const revenueDistribution = this.calculateRevenueDistribution(amount, wingId);
+      const revenueDistribution = this.calculateRevenueDistribution(amount, fieldId);
 
       // Create payment record
       const payment: Payment = {
         id: `payment_${Date.now()}`,
         studentId,
-        wingId,
+        fieldId,
         amount,
         currency: 'RWF',
         paymentMethod: 'momo',
@@ -89,18 +89,18 @@ export class PaymentService {
   }
 
   /**
-   * Calculate revenue distribution (65% wing, 25% academy, 10% processing)
+   * Calculate revenue distribution (65% field, 25% academy, 10% processing)
    */
-  private static calculateRevenueDistribution(amount: number, wingId: string): RevenueDistribution {
-    const wingShare = Math.round(amount * 0.65);
+  private static calculateRevenueDistribution(amount: number, fieldId: string): RevenueDistribution {
+    const fieldShare = Math.round(amount * 0.65);
     const academyShare = Math.round(amount * 0.25);
-    const processingFee = amount - wingShare - academyShare; // Remaining amount
+    const processingFee = amount - fieldShare - academyShare; // Remaining amount
 
     return {
-      wingShare,
+      fieldShare,
       academyShare,
       processingFee,
-      wingId,
+      fieldId,
       transactionId: `payment_${Date.now()}`
     };
   }
@@ -111,12 +111,12 @@ export class PaymentService {
   private static async callMoMoAPI(momoDetails: MoMoPaymentData): Promise<string | null> {
     // Simulate API delay
     await new Promise(resolve => setTimeout(resolve, 2000));
-    
+
     // Simulate success/failure (90% success rate)
     if (Math.random() > 0.1) {
       return `momo_tx_${Date.now()}`;
     }
-    
+
     return null; // Payment failed
   }
 
@@ -135,37 +135,37 @@ export class PaymentService {
   }
 
   /**
-   * Get payments by wing ID
+   * Get payments by field ID
    */
-  static async getPaymentsByWing(wingId: string): Promise<Payment[]> {
-    return mockPayments.filter(payment => payment.wingId === wingId);
+  static async getPaymentsByField(fieldId: string): Promise<Payment[]> {
+    return mockPayments.filter(payment => payment.fieldId === fieldId);
   }
 
   /**
-   * Get payment statistics for a wing
+   * Get payment statistics for a field
    */
-  static async getWingPaymentStatistics(wingId: string): Promise<{
+  static async getFieldPaymentStatistics(fieldId: string): Promise<{
     totalPayments: number;
     totalRevenue: number;
-    wingRevenue: number;
+    fieldRevenue: number;
     academyRevenue: number;
     processingFees: number;
     averagePayment: number;
     completedPayments: number;
     failedPayments: number;
   }> {
-    const payments = mockPayments.filter(payment => payment.wingId === wingId);
+    const payments = mockPayments.filter(payment => payment.fieldId === fieldId);
     const completedPayments = payments.filter(p => p.status === 'completed');
-    
+
     const totalRevenue = completedPayments.reduce((sum, p) => sum + p.amount, 0);
-    const wingRevenue = completedPayments.reduce((sum, p) => sum + p.revenueDistribution.wingShare, 0);
+    const fieldRevenue = completedPayments.reduce((sum, p) => sum + p.revenueDistribution.fieldShare, 0);
     const academyRevenue = completedPayments.reduce((sum, p) => sum + p.revenueDistribution.academyShare, 0);
     const processingFees = completedPayments.reduce((sum, p) => sum + p.revenueDistribution.processingFee, 0);
 
     return {
       totalPayments: payments.length,
       totalRevenue,
-      wingRevenue,
+      fieldRevenue,
       academyRevenue,
       processingFees,
       averagePayment: completedPayments.length > 0 ? totalRevenue / completedPayments.length : 0,
@@ -180,29 +180,29 @@ export class PaymentService {
   static async getOverallPaymentStatistics(): Promise<{
     totalRevenue: number;
     totalAcademyRevenue: number;
-    totalWingRevenue: number;
+    totalFieldRevenue: number;
     totalProcessingFees: number;
-    paymentsByWing: Record<string, number>;
+    paymentsByField: Record<string, number>;
   }> {
     const completedPayments = mockPayments.filter(p => p.status === 'completed');
-    
+
     const totalRevenue = completedPayments.reduce((sum, p) => sum + p.amount, 0);
     const totalAcademyRevenue = completedPayments.reduce((sum, p) => sum + p.revenueDistribution.academyShare, 0);
-    const totalWingRevenue = completedPayments.reduce((sum, p) => sum + p.revenueDistribution.wingShare, 0);
+    const totalFieldRevenue = completedPayments.reduce((sum, p) => sum + p.revenueDistribution.fieldShare, 0);
     const totalProcessingFees = completedPayments.reduce((sum, p) => sum + p.revenueDistribution.processingFee, 0);
 
-    // Group payments by wing
-    const paymentsByWing: Record<string, number> = {};
+    // Group payments by field
+    const paymentsByField: Record<string, number> = {};
     completedPayments.forEach(payment => {
-      paymentsByWing[payment.wingId] = (paymentsByWing[payment.wingId] || 0) + payment.amount;
+      paymentsByField[payment.fieldId] = (paymentsByField[payment.fieldId] || 0) + payment.amount;
     });
 
     return {
       totalRevenue,
       totalAcademyRevenue,
-      totalWingRevenue,
+      totalFieldRevenue,
       totalProcessingFees,
-      paymentsByWing
+      paymentsByField
     };
   }
 
@@ -261,18 +261,18 @@ export class PaymentService {
   }
 
   /**
-   * Get payment history for a date range
+   * Get payment history for a field range
    */
   static async getPaymentHistory(
-    wingId?: string,
+    fieldId?: string,
     startDate?: Date,
     endDate?: Date
   ): Promise<Payment[]> {
     let payments = mockPayments;
 
-    // Filter by wing if specified
-    if (wingId) {
-      payments = payments.filter(p => p.wingId === wingId);
+    // Filter by field if specified
+    if (fieldId) {
+      payments = payments.filter(p => p.fieldId === fieldId);
     }
 
     // Filter by date range if specified

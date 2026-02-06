@@ -2,14 +2,11 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { User, UserType } from '@/types';
-import { 
-  mockUsers, 
-  getStudents, 
-  getTrainers, 
-  getMentors, 
-  getWingAdmins,
-  getUsersByWing,
-  getUserById 
+import {
+  mockUsers,
+  getFieldAdmins,
+  getUsersByField,
+  getUserById
 } from '@/data';
 import { useAuth } from './AuthContext';
 
@@ -18,11 +15,11 @@ interface UserContextType {
   students: User[];
   trainers: User[];
   mentors: User[];
-  wingAdmins: User[];
+  fieldAdmins: User[];
   isLoading: boolean;
   error: string | null;
   getUsersByRole: (role: UserType) => User[];
-  getUsersByWingId: (wingId: string) => User[];
+  getUsersByFieldId: (fieldId: string) => User[];
   getUserByIdFromContext: (id: string) => User | undefined;
   refreshUsers: () => Promise<void>;
 }
@@ -51,21 +48,21 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       } else if (currentUser.role === 'umbrella-admin') {
         // Umbrella admin can see all users
         filteredUsers = mockUsers;
-      } else if (currentUser.role === 'wing-admin') {
-        // Wing admin can see users in their wing
-        filteredUsers = mockUsers.filter(user => 
-          user.wing === currentUser.wing || user.role === 'umbrella-admin'
+      } else if (currentUser.role === 'field-admin') {
+        // Field admin can see users in their field
+        filteredUsers = mockUsers.filter(user =>
+          user.fieldId === currentUser.fieldId || user.role === 'umbrella-admin'
         );
       } else if (currentUser.role === 'mentor') {
-        // Mentors can see students and trainers in their wing
-        filteredUsers = mockUsers.filter(user => 
-          user.wing === currentUser.wing && 
+        // Mentors can see students and trainers in their field
+        filteredUsers = mockUsers.filter(user =>
+          user.fieldId === currentUser.fieldId &&
           ['student', 'trainer'].includes(user.role)
         );
       } else if (currentUser.role === 'trainer') {
-        // Trainers can see students in their wing
-        filteredUsers = mockUsers.filter(user => 
-          user.wing === currentUser.wing && user.role === 'student'
+        // Trainers can see students in their field
+        filteredUsers = mockUsers.filter(user =>
+          user.fieldId === currentUser.fieldId && user.role === 'student'
         );
       } else {
         // Students can only see themselves
@@ -94,18 +91,18 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   const students = users.filter(user => user.role === 'student');
   const trainers = users.filter(user => user.role === 'trainer');
   const mentors = users.filter(user => user.role === 'mentor');
-  const wingAdmins = users.filter(user => user.role === 'wing-admin');
+  const fieldAdmins = users.filter(user => user.role === 'field-admin');
 
   const getUsersByRole = (role: UserType): User[] => {
     return users.filter(user => user.role === role);
   };
 
-  const getUsersByWingId = (wingId: string): User[] => {
+  const getUsersByFieldId = (fieldId: string): User[] => {
     // Check permission
-    if (!hasPermission('view_wing_analytics') && currentUser?.wing !== wingId) {
+    if (!hasPermission('view_field_analytics') && currentUser?.fieldId !== fieldId) {
       return [];
     }
-    return users.filter(user => user.wing === wingId);
+    return users.filter(user => user.fieldId === fieldId);
   };
 
   const getUserByIdFromContext = (id: string): User | undefined => {
@@ -121,11 +118,11 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     students,
     trainers,
     mentors,
-    wingAdmins,
+    fieldAdmins,
     isLoading,
     error,
     getUsersByRole,
-    getUsersByWingId,
+    getUsersByFieldId,
     getUserByIdFromContext,
     refreshUsers
   };

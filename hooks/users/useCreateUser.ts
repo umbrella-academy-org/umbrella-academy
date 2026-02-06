@@ -6,7 +6,8 @@ interface CreateUserData {
   name: string;
   email: string;
   role: UserType;
-  wing?: string;
+  fieldId?: string;
+  field?: string;
 }
 
 interface UseCreateUserReturn {
@@ -27,7 +28,7 @@ export function useCreateUser(): UseCreateUserReturn {
 
     try {
       // Check permissions
-      if (!hasPermission('manage_wing') && !hasPermission('manage_system')) {
+      if (!hasPermission('manage_field') && !hasPermission('manage_system')) {
         throw new Error('Insufficient permissions to create users');
       }
 
@@ -42,15 +43,18 @@ export function useCreateUser(): UseCreateUserReturn {
 
       // Create user with proper type handling
       let newUser: User;
-      
+
+      const fieldId = data.fieldId || '';
+      const field = data.field || '';
+
       if (data.role === 'student') {
         newUser = {
           id: `user_${Date.now()}`,
           name: data.name,
           email: data.email,
           role: 'student',
-          wingId: data.wing || '',
-          wing: data.wing || '',
+          fieldId,
+          field,
           status: 'active',
           joinDate: new Date().toISOString().split('T')[0],
           avatar: `https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face`,
@@ -79,8 +83,8 @@ export function useCreateUser(): UseCreateUserReturn {
           name: data.name,
           email: data.email,
           role: 'trainer',
-          wingId: data.wing || '',
-          wing: data.wing || '',
+          fieldId,
+          field,
           status: 'active',
           joinDate: new Date().toISOString().split('T')[0],
           avatar: `https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face`,
@@ -111,8 +115,8 @@ export function useCreateUser(): UseCreateUserReturn {
           name: data.name,
           email: data.email,
           role: 'mentor',
-          wingId: data.wing || '',
-          wing: data.wing || '',
+          fieldId,
+          field,
           status: 'active',
           joinDate: new Date().toISOString().split('T')[0],
           avatar: `https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face`,
@@ -137,8 +141,8 @@ export function useCreateUser(): UseCreateUserReturn {
           name: data.name,
           email: data.email,
           role: data.role,
-          wingId: data.wing,
-          wing: data.wing,
+          fieldId: fieldId,
+          field: field,
           status: 'active',
           joinDate: new Date().toISOString().split('T')[0],
           avatar: `https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face`,
@@ -150,7 +154,7 @@ export function useCreateUser(): UseCreateUserReturn {
           createdAt: new Date(),
           lastLogin: new Date(),
           isActive: true,
-          permissions: data.role === 'umbrella-admin' ? ['manage_system', 'manage_wing', 'manage_users'] : ['manage_wing', 'manage_users']
+          permissions: data.role === 'umbrella-admin' ? ['manage_system', 'manage_field', 'manage_users'] : ['manage_field', 'manage_users']
         };
       }
 

@@ -15,7 +15,7 @@ interface Trainer {
   expertise: string[];
   rating: number;
   avatar: string;
-  wingId: string;
+  fieldId: string;
 }
 
 interface TrainerAvailabilityProps {
@@ -27,7 +27,7 @@ export default function TrainerAvailability({ onBookSession }: TrainerAvailabili
   const [selectedTrainer, setSelectedTrainer] = useState<string | null>(null);
   const [selectedTimeSlot, setSelectedTimeSlot] = useState<string | null>(null);
 
-  // Mock data - in real app, would filter by user's wing
+  // Mock data - in real app, would filter by user's field
   const trainers: Trainer[] = [
     {
       id: 'trainer1',
@@ -35,7 +35,7 @@ export default function TrainerAvailability({ onBookSession }: TrainerAvailabili
       expertise: ['Software Engineering', 'AI/ML', 'Cloud Computing'],
       rating: 4.9,
       avatar: '/avatars/sarah.jpg',
-      wingId: 'tech'
+      fieldId: 'tech'
     },
     {
       id: 'trainer2',
@@ -43,7 +43,7 @@ export default function TrainerAvailability({ onBookSession }: TrainerAvailabili
       expertise: ['Product Management', 'DevOps', 'System Design'],
       rating: 4.8,
       avatar: '/avatars/michael.jpg',
-      wingId: 'tech'
+      fieldId: 'tech'
     }
   ];
 
@@ -93,11 +93,10 @@ export default function TrainerAvailability({ onBookSession }: TrainerAvailabili
           {trainers.map((trainer) => (
             <div
               key={trainer.id}
-              className={`p-4 border rounded-lg cursor-pointer transition-colors ${
-                selectedTrainer === trainer.id
+              className={`p-4 border rounded-lg cursor-pointer transition-colors ${selectedTrainer === trainer.id
                   ? 'border-yellow-600 bg-yellow-50'
                   : 'border-gray-200 hover:border-gray-300'
-              }`}
+                }`}
               onClick={() => setSelectedTrainer(trainer.id)}
             >
               <div className="flex items-center gap-3">
@@ -130,13 +129,12 @@ export default function TrainerAvailability({ onBookSession }: TrainerAvailabili
                 key={slot.id}
                 disabled={!slot.available}
                 onClick={() => setSelectedTimeSlot(slot.id)}
-                className={`p-3 border rounded-lg text-sm font-medium transition-colors ${
-                  !slot.available
+                className={`p-3 border rounded-lg text-sm font-medium transition-colors ${!slot.available
                     ? 'border-gray-200 bg-gray-100 text-gray-400 cursor-not-allowed'
                     : selectedTimeSlot === slot.id
-                    ? 'border-yellow-600 bg-yellow-50 text-yellow-600'
-                    : 'border-gray-200 hover:border-gray-300 text-gray-700'
-                }`}
+                      ? 'border-yellow-600 bg-yellow-50 text-yellow-600'
+                      : 'border-gray-200 hover:border-gray-300 text-gray-700'
+                  }`}
               >
                 <div className="flex items-center justify-center gap-2">
                   <Clock className="w-4 h-4" />

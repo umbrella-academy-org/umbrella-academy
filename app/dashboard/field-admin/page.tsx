@@ -9,10 +9,10 @@ import ScheduledEvents from '@/components/dashboard/ScheduledEvents';
 import Calendar from '@/components/dashboard/Calendar';
 import { useAuth, useRoadmaps, useUsers, useFinancial } from '@/contexts';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
-import { getWingDashboardStats, getWalletsByType } from '@/data';
+import { getFieldDashboardStats, getWalletsByType } from '@/data';
 import { Users, GraduationCap, DollarSign, TrendingUp, Settings, Eye, Wallet } from 'lucide-react';
 
-export default function WingAdminDashboard() {
+export default function FieldAdminDashboard() {
   const { user, isAuthenticated, isLoading: authLoading } = useAuth();
   const { studentRoadmaps, isLoading: roadmapsLoading } = useRoadmaps();
   const { users, isLoading: usersLoading } = useUsers();
@@ -20,14 +20,14 @@ export default function WingAdminDashboard() {
   const { navigate } = useNavigationWithLoading();
   const [selectedDateRange, setSelectedDateRange] = useState('This month');
 
-  // Redirect if not authenticated or not a wing admin
+  // Redirect if not authenticated or not a field admin
   useEffect(() => {
     if (!authLoading && !isAuthenticated) {
       navigate('/auth/login');
       return;
     }
 
-    if (!authLoading && user && user.role !== 'wing-admin') {
+    if (!authLoading && user && user.role !== 'field-admin') {
       // Redirect to appropriate dashboard based on role
       const dashboardRoutes = {
         'student': '/dashboard/student',
@@ -35,7 +35,7 @@ export default function WingAdminDashboard() {
         'mentor': '/dashboard/mentor',
         'umbrella-admin': '/dashboard/umbrella-admin'
       };
-      navigate(dashboardRoutes[user.role] || '/');
+      navigate(dashboardRoutes[user.role as keyof typeof dashboardRoutes] || '/');
     }
   }, [authLoading, isAuthenticated, user, navigate]);
 
@@ -63,30 +63,31 @@ export default function WingAdminDashboard() {
     );
   }
 
-  // Don't render if user is not authenticated or not a wing admin
-  if (!user || user.role !== 'wing-admin') {
+  // Don't render if user is not authenticated or not a field admin
+  if (!user || user.role !== 'field-admin') {
     return null;
   }
 
-  // Get wing-specific data
-  const wingUsers = users.filter(u => u.wing === user.wing);
-  const wingStudents = wingUsers.filter(u => u.role === 'student');
-  const wingTrainers = wingUsers.filter(u => u.role === 'trainer');
-  const wingMentors = wingUsers.filter(u => u.role === 'mentor');
+  // Get field-specific data
+  const fieldUsers = users.filter(u => u.fieldId === user.fieldId);
+  const fieldStudents = fieldUsers.filter(u => u.role === 'student');
+  const fieldTrainers = fieldUsers.filter(u => u.role === 'trainer');
+  const fieldMentors = fieldUsers.filter(u => u.role === 'mentor');
 
-  const wingRoadmaps = studentRoadmaps.filter(roadmap =>
-    wingStudents.some(student => student.id === roadmap.studentId)
+  const fieldRoadmaps = studentRoadmaps.filter(roadmap =>
+    fieldStudents.some(student => student.id === roadmap.studentId)
   );
 
-  const wingWallets = getWalletsByType('wing');
-  const wingWallet = wingWallets.find((w: any) => w.ownerId === user.wing);
-  const wingStats = getWingDashboardStats(user.wing || '');
+  const fieldWallets = getWalletsByType('field');
+  const fieldWallet = fieldWallets.find((w: any) => w.ownerId === user.fieldId);
+  const fieldStats = getFieldDashboardStats(user.fieldId || '');
 
-  const activeRoadmaps = wingRoadmaps.filter(r => r.status === 'active');
-  const completedRoadmaps = wingRoadmaps.filter(r => r.status === 'completed');
+  const activeRoadmaps = fieldRoadmaps.filter(r => r.status === 'active');
+  const completedRoadmaps = fieldRoadmaps.filter(r => r.status === 'completed');
+
   return (
     <div className="flex h-screen bg-white">
-      <Sidebar activeItem="Home" userType="wing-admin" />
+      <Sidebar activeItem="Home" userType="field-admin" />
 
       <div className="flex-1 flex flex-col min-w-0">
         <main className="flex-1 p-3 sm:p-4 lg:p-6 overflow-y-auto">
@@ -97,11 +98,11 @@ export default function WingAdminDashboard() {
                 Welcome back, {user.name.split(' ')[0]} 👑
               </h1>
               <p className="text-sm sm:text-base text-gray-600">
-                Manage and oversee your wing operations and performance.
+                Manage and oversee your field operations and performance.
               </p>
             </div>
 
-            {/* Wing Stats Cards */}
+            {/* Field Stats Cards */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4 mb-4 sm:mb-6 lg:mb-8">
               <div className="bg-white rounded-lg p-3 lg:p-4 shadow-sm border border-gray-100  hover:shadow-lg transition-all duration-300 animate-slide-up">
                 <div className="flex items-center gap-3">
@@ -110,7 +111,7 @@ export default function WingAdminDashboard() {
                   </div>
                   <div>
                     <p className="text-xs font-medium text-gray-600">Students</p>
-                    <p className="text-lg lg:text-xl font-bold text-gray-900">{wingStudents.length}</p>
+                    <p className="text-lg lg:text-xl font-bold text-gray-900">{fieldStudents.length}</p>
                   </div>
                 </div>
               </div>
@@ -122,7 +123,7 @@ export default function WingAdminDashboard() {
                   </div>
                   <div>
                     <p className="text-xs font-medium text-gray-600">Trainers</p>
-                    <p className="text-lg lg:text-xl font-bold text-gray-900">{wingTrainers.length}</p>
+                    <p className="text-lg lg:text-xl font-bold text-gray-900">{fieldTrainers.length}</p>
                   </div>
                 </div>
               </div>
@@ -133,9 +134,9 @@ export default function WingAdminDashboard() {
                     <DollarSign className="w-5 h-5 text-yellow-600" />
                   </div>
                   <div>
-                    <p className="text-xs font-medium text-gray-600">Wing Wallet</p>
+                    <p className="text-xs font-medium text-gray-600">Field Wallet</p>
                     <p className="text-lg lg:text-xl font-bold text-gray-900">
-                      {(wingWallet?.balance || 0).toLocaleString()} RWF
+                      {(fieldWallet?.balance || 0).toLocaleString()} RWF
                     </p>
                   </div>
                 </div>
@@ -158,16 +159,16 @@ export default function WingAdminDashboard() {
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 sm:gap-6 lg:gap-8">
               {/* Left Column - Main Content */}
               <div className="lg:col-span-3 space-y-4 sm:space-y-6 lg:space-y-8">
-                {/* Wing Overview Chart */}
+                {/* Field Overview Chart */}
                 <div className="animate-fade-in" style={{ animationDelay: '400ms' }}>
-                  <MonthlySessionsChart userType="wing-admin" />
+                  <MonthlySessionsChart userType="field-admin" />
                 </div>
 
-                {/* Wing Roadmaps Overview */}
+                {/* Field Roadmaps Overview */}
                 <div className="animate-fade-in" style={{ animationDelay: '500ms' }}>
                   <TotalRoadmaps
-                    roadmaps={wingRoadmaps}
-                    userType="wing-admin"
+                    roadmaps={fieldRoadmaps}
+                    userType="field-admin"
                   />
                 </div>
 
@@ -176,7 +177,7 @@ export default function WingAdminDashboard() {
                   <Calendar
                     selectedDateRange={selectedDateRange}
                     onDateRangeChange={setSelectedDateRange}
-                    userType="wing-admin"
+                    userType="field-admin"
                   />
                 </div>
               </div>
@@ -188,7 +189,7 @@ export default function WingAdminDashboard() {
                   <h3 className="text-sm sm:text-base font-semibold text-gray-900 mb-4">Quick Actions</h3>
                   <div className="space-y-3">
                     <button
-                      onClick={() => navigate('/dashboard/wing-admin/trainers')}
+                      onClick={() => navigate('/dashboard/field-admin/trainers')}
                       className="w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors group"
                     >
                       <div className="flex items-center gap-3">
@@ -201,7 +202,7 @@ export default function WingAdminDashboard() {
                     </button>
 
                     <button
-                      onClick={() => navigate('/dashboard/wing-admin/students')}
+                      onClick={() => navigate('/dashboard/field-admin/students')}
                       className="w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors group"
                     >
                       <div className="flex items-center gap-3">
@@ -214,14 +215,14 @@ export default function WingAdminDashboard() {
                     </button>
 
                     <button
-                      onClick={() => navigate('/dashboard/wing-admin/wallet')}
+                      onClick={() => navigate('/dashboard/field-admin/wallet')}
                       className="w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors group"
                     >
                       <div className="flex items-center gap-3">
                         <Wallet className="w-4 h-4 text-gray-500 group-hover:text-yellow-600" />
                         <div>
-                          <div className="font-medium text-gray-900">Wing Wallet</div>
-                          <div className="text-xs text-gray-500">Manage wing finances</div>
+                          <div className="font-medium text-gray-900">Field Wallet</div>
+                          <div className="text-xs text-gray-500">Manage field finances</div>
                         </div>
                       </div>
                     </button>
@@ -230,7 +231,7 @@ export default function WingAdminDashboard() {
 
                 {/* Scheduled Events */}
                 <div className="animate-slide-up" style={{ animationDelay: '800ms' }}>
-                  <ScheduledEvents userType="wing-admin" />
+                  <ScheduledEvents userType="field-admin" />
                 </div>
               </div>
             </div>

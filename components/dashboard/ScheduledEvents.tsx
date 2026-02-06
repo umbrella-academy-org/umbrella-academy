@@ -86,11 +86,11 @@ export default function ScheduledEvents({ userType }: ScheduledEventsProps) {
             color: 'bg-red-500'
           }
         ];
-      case 'wing-admin':
+      case 'field-admin':
         return [
           {
             id: 1,
-            title: 'Wing Performance Review',
+            title: 'Field Performance Review',
             time: '10:00 AM',
             type: 'review',
             color: 'bg-blue-500'
@@ -121,7 +121,7 @@ export default function ScheduledEvents({ userType }: ScheduledEventsProps) {
           },
           {
             id: 2,
-            title: 'Wings Coordination Meeting',
+            title: 'Fields Coordination Meeting',
             time: '01:00 PM',
             type: 'meeting',
             color: 'bg-blue-500'
@@ -171,8 +171,8 @@ export default function ScheduledEvents({ userType }: ScheduledEventsProps) {
         return 'Mentoring Sessions';
       case 'student':
         return 'Upcoming Classes';
-      case 'wing-admin':
-        return 'Wing Management';
+      case 'field-admin':
+        return 'Field Management';
       case 'umbrella-admin':
         return 'System Events';
       default:

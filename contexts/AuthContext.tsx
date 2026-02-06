@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { User, UserType } from '@/types';
-import { getUserByEmail, mockUsers } from '@/data';
+import { getUserByEmail } from '@/data';
 
 interface AuthContextType {
   user: User | null;
@@ -12,7 +12,7 @@ interface AuthContextType {
   logout: () => void;
   hasRole: (role: UserType) => boolean;
   hasPermission: (permission: string) => boolean;
-  canAccessWing: (wingId: string) => boolean;
+  canAccessField: (fieldId: string) => boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -46,20 +46,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const login = async (email: string, password: string): Promise<boolean> => {
     setIsLoading(true);
-    
+
     try {
       // Simulate API call delay
       await new Promise(resolve => setTimeout(resolve, 1000));
-      
+
       // Find user by email (password validation would be done on backend)
       const foundUser = getUserByEmail(email);
-      
+
       if (foundUser && foundUser.status === 'active') {
         setUser(foundUser);
         localStorage.setItem('umbrella_user', JSON.stringify({ email: foundUser.email }));
         return true;
       }
-      
+
       return false;
     } catch (error) {
       console.error('Login failed:', error);
@@ -86,21 +86,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       'student': ['view_own_roadmap', 'view_own_sessions', 'view_own_subscription'],
       'trainer': ['view_students', 'manage_sessions', 'view_wallet', 'create_assignments'],
       'mentor': ['view_all_students', 'approve_roadmaps', 'manage_courses', 'view_analytics'],
-      'wing-admin': ['manage_wing', 'view_wing_analytics', 'manage_trainers', 'view_wing_wallet'],
-      'umbrella-admin': ['manage_system', 'view_all_analytics', 'manage_wings', 'system_settings']
+      'field-admin': ['manage_field', 'view_field_analytics', 'manage_trainers', 'view_field_wallet'],
+      'umbrella-admin': ['manage_system', 'view_all_analytics', 'manage_fields', 'system_settings']
     };
 
     return permissions[user.role]?.includes(permission) || false;
   };
 
-  const canAccessWing = (wingId: string): boolean => {
+  const canAccessField = (fieldId: string): boolean => {
     if (!user) return false;
-    
-    // Umbrella admin can access all wings
+
+    // Umbrella admin can access all fields
     if (user.role === 'umbrella-admin') return true;
-    
-    // Others can only access their own wing
-    return user.wingId === wingId;
+
+    // Others can only access their own field
+    return user.fieldId === fieldId;
   };
 
   const value: AuthContextType = {
@@ -111,7 +111,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     logout,
     hasRole,
     hasPermission,
-    canAccessWing
+    canAccessField
   };
 
   return (

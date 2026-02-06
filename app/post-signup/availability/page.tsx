@@ -33,13 +33,13 @@ export default function StudentAvailabilityPage() {
         // Store availability data
         localStorage.setItem('availabilitySet', 'true');
         localStorage.setItem('availabilityData', JSON.stringify({ hoursPerDay, timeSlots }));
-        router.push('/post-signup/choose-trainer');
+        router.push('/post-signup/choose-field');
     };
 
     return (
         <div className="flex h-screen bg-white">
             <Sidebar activeItem="Roadmap" userType="student" />
-            
+
             <div className="flex-1 flex flex-col overflow-hidden">
                 <main className="flex-1 overflow-auto flex items-center justify-center bg-gray-50">
                     <div className=" w-full p-8">
@@ -135,7 +135,7 @@ export default function StudentAvailabilityPage() {
                                     type="submit"
                                     className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-colors"
                                 >
-                                    Continue to Wing Selection
+                                    Continue to Field Selection
                                 </button>
 
                                 {/* Progress dots */}

@@ -4,8 +4,8 @@ import { Wallet } from './payment';
 import { StudentRoadmap } from './roadmap';
 import { User } from './user';
 
-// Enhanced Wing interface for wing-based organizational hierarchy
-export interface Wing {
+// Enhanced Field interface for field-based organizational hierarchy
+export interface Field {
   id: string;
   name: string;
   description: string;
@@ -13,12 +13,30 @@ export interface Wing {
   companies: Company[];
   mentors: User[];
   trainers: User[];
+  selectionTrainers?: {
+    total: number;
+    available: number;
+    topTrainers: {
+      name: string;
+      avatar: string;
+      specialization: string;
+      rating: number;
+    }[];
+  };
+  specializations: string[];
   students: User[];
-  revenueShare: number; // 65% for wings
+  revenueShare: number; // 65% for fields
   totalRevenue: number;
   revenue?: number; // Alias for totalRevenue for compatibility
   createdAt: Date;
   isActive: boolean;
+  icon: string;
+  rating: number;
+  successRate: number;
+  studentsCount: number;
+  mentorsCount: number;
+  averageCompletionTime: string;
+  monthlyPrice: number;
   // Legacy fields for backward compatibility
   code?: string;
   adminId?: string;
@@ -27,12 +45,12 @@ export interface Wing {
   settings?: {
     maxStudentsPerTrainer: number;
     minHoursPerWeek: number;
-    wingSharePercentage: number;
+    fieldSharePercentage?: number;
     bankAccount?: string;
   };
 }
 
-// Company interface for wing-based structure
+// Company interface for field-based structure
 export interface Company {
   id: string;
   name: string;
@@ -41,16 +59,24 @@ export interface Company {
   teachingFocus: string[];
   images: string[];
   description: string;
-  wingId: string;
+  fieldId: string;
   isActive: boolean;
   createdAt: Date;
+  rating: number;
+  successRate: number;
+  featured?: boolean;
+  stats?: {
+    alumni: number;
+    hiringRate: number;
+    partnerSince: string;
+  };
 }
 
 export interface Trainer {
   id: string;
   name: string;
   email: string;
-  wingId: string;
+  fieldId: string;
   capacity: number; // hours per week
   assigned: number; // current students
   available: number; // available slots
@@ -64,7 +90,7 @@ export interface Student {
   id: string;
   name: string;
   email: string;
-  wingId: string;
+  fieldId: string;
   trainerId?: string;
   trainerName?: string;
   status: 'active' | 'paused' | 'completed';

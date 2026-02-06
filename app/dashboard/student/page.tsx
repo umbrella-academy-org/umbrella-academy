@@ -21,25 +21,25 @@ export default function StudentDashboard() {
 
   // Check if dev mode is enabled from sidebar
   const [isNewUserMode, setIsNewUserMode] = useState(false);
-  
+
   useEffect(() => {
     const checkDevMode = () => {
       // Listen for dev mode changes from sidebar
       const devModeEvent = (event: CustomEvent) => {
         setIsNewUserMode(event.detail.isDevMode);
       };
-      
+
       window.addEventListener('devModeChanged', devModeEvent as EventListener);
-      
+
       // Check initial state
       const initialDevMode = localStorage.getItem('devNewUserMode') === 'true';
       setIsNewUserMode(initialDevMode);
-      
+
       return () => {
         window.removeEventListener('devModeChanged', devModeEvent as EventListener);
       };
     };
-    
+
     checkDevMode();
   }, []);
 
@@ -55,10 +55,10 @@ export default function StudentDashboard() {
       const dashboardRoutes = {
         'trainer': '/dashboard/trainer',
         'mentor': '/dashboard/mentor',
-        'wing-admin': '/dashboard/wing-admin',
+        'field-admin': '/dashboard/field-admin',
         'umbrella-admin': '/dashboard/umbrella-admin'
       };
-      navigate(dashboardRoutes[user.role] || '/');
+      navigate(dashboardRoutes[user.role as keyof typeof dashboardRoutes] || '/');
     }
   }, [authLoading, isAuthenticated, user, navigate]);
 
@@ -160,7 +160,7 @@ export default function StudentDashboard() {
                   { label: 'Learning Progress', value: '0%', icon: 'BookOpen' },
                   { label: 'Completed Sessions', value: '0', icon: 'Target' },
                   { label: 'Active Roadmaps', value: '0', icon: 'Map' },
-                  { label: 'Wing Status', value: 'Not Selected', icon: 'Building' }
+                  { label: 'Field Status', value: 'Not Selected', icon: 'Building' }
                 ].map((stat, index) => (
                   <div key={index} className="bg-white border border-gray-200 rounded-lg p-4">
                     <div className="flex items-center gap-3">

@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { CheckCircle, Star, X, Users, BookOpen, Clock, Zap, TrendingUp, Shield } from 'lucide-react';
 import Sidebar from '@/components/dashboard/Sidebar';
 
-interface Wing {
+interface Field {
   id: string;
   title: string;
   description: string;
@@ -29,16 +29,16 @@ interface Wing {
   monthlyPrice: number;
 }
 
-export default function ChooseWingPage() {
+export default function ChooseFieldPage() {
   const router = useRouter();
-  const [selectedWing, setSelectedWing] = useState('');
-  const [viewingWing, setViewingWing] = useState<Wing | null>(null);
+  const [selectedField, setSelectedField] = useState('');
+  const [viewingField, setViewingField] = useState<Field | null>(null);
   const [error, setError] = useState('');
 
-  const wings: Wing[] = [
+  const fields: Field[] = [
     {
       id: 'tech-companies',
-      title: 'Tech Companies Wing',
+      title: 'Tech Companies Field',
       description: 'Learn with technology sector companies and startups. Focus on building real-world software, scaling systems, and mastering modern tech stacks used in the industry.',
       icon: '💻',
       rating: 4.8,
@@ -60,7 +60,7 @@ export default function ChooseWingPage() {
     },
     {
       id: 'business-companies',
-      title: 'Business Companies Wing',
+      title: 'Business Companies Field',
       description: 'Business consulting and enterprise solutions. Learn to manage projects, analyze data, and drive growth for established firms and consulting agencies.',
       icon: '💼',
       rating: 4.6,
@@ -82,7 +82,7 @@ export default function ChooseWingPage() {
     },
     {
       id: 'hotels',
-      title: 'Hotels Wing',
+      title: 'Hotels Field',
       description: 'Hospitality and tourism industry training. Master the art of guest services, hotel management, and international tourism operations.',
       icon: '🏨',
       rating: 4.5,
@@ -104,20 +104,20 @@ export default function ChooseWingPage() {
     }
   ];
 
-  const handleWingSelect = (wingId: string) => {
-    setSelectedWing(wingId);
+  const handleFieldSelect = (fieldId: string) => {
+    setSelectedField(fieldId);
     setError('');
   };
 
   const handleContinue = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!selectedWing) {
-      setError('Please select a wing to continue');
+    if (!selectedField) {
+      setError('Please select a field to continue');
       return;
     }
 
-    localStorage.setItem('selectedWing', selectedWing);
+    localStorage.setItem('selectedField', selectedField);
     router.push('/post-signup/payment');
   };
 
@@ -151,20 +151,20 @@ export default function ChooseWingPage() {
 
               {/* Title */}
               <h1 className="text-3xl font-semibold text-gray-900 mb-2 text-center">
-                Choose Your Wing
+                Choose Your Field
               </h1>
               <p className="text-gray-500 mb-10 text-center text-sm">
-                Select the industry wing that matches your career goals.
+                Select the industry field that matches your career goals.
               </p>
 
-              {/* Wing Selection List */}
+              {/* Field Selection List */}
               <form onSubmit={handleContinue} className="w-full max-w-2xl mx-auto">
                 <div className="space-y-4 mb-10">
-                  {wings.map((wing) => {
-                    const isSelected = selectedWing === wing.id;
+                  {fields.map((field) => {
+                    const isSelected = selectedField === field.id;
                     return (
                       <div
-                        key={wing.id}
+                        key={field.id}
                         className={`border rounded-lg transition-all duration-300 overflow-hidden ${isSelected
                           ? 'border-yellow-600 bg-yellow-50 shadow-md ring-1 ring-yellow-600/20'
                           : 'border-gray-200 bg-white hover:border-gray-300'
@@ -172,13 +172,13 @@ export default function ChooseWingPage() {
                       >
                         <div className="p-5 flex items-center gap-5">
                           <div className={`w-14 h-14 rounded-lg flex items-center justify-center text-2xl shadow-sm transition-all ${isSelected ? 'bg-yellow-600 text-white' : 'bg-gray-50 text-gray-400'}`}>
-                            {wing.icon}
+                            {field.icon}
                           </div>
 
                           <div className="flex-1 text-left min-w-0">
                             <div className="flex items-center justify-between mb-1">
                               <h3 className={`text-sm font-semibold truncate ${isSelected ? 'text-gray-900' : 'text-gray-700'}`}>
-                                {wing.title}
+                                {field.title}
                               </h3>
                               {isSelected && <CheckCircle className="w-5 h-5 text-yellow-600" />}
                             </div>
@@ -187,17 +187,17 @@ export default function ChooseWingPage() {
                               <div className="flex items-center gap-4">
                                 <div className="flex items-center gap-1">
                                   <Star className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />
-                                  <span className="text-xs font-black text-gray-700">{wing.rating}</span>
+                                  <span className="text-xs font-black text-gray-700">{field.rating}</span>
                                 </div>
                                 <span className="text-sm font-black text-gray-900 tracking-tight">
-                                  RWF {wing.monthlyPrice.toLocaleString()}/yr
+                                  RWF {field.monthlyPrice.toLocaleString()}/yr
                                 </span>
                               </div>
 
                               <div className="flex items-center gap-3">
                                 <button
                                   type="button"
-                                  onClick={() => handleWingSelect(wing.id)}
+                                  onClick={() => handleFieldSelect(field.id)}
                                   className={`px-4 py-1.5 rounded text-xs font-black  transition-all ${isSelected
                                     ? 'bg-yellow-600 text-white shadow-lg'
                                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
@@ -206,7 +206,7 @@ export default function ChooseWingPage() {
                                 </button>
                                 <button
                                   type="button"
-                                  onClick={() => setViewingWing(wing)}
+                                  onClick={() => setViewingField(field)}
                                   className="px-4 py-1.5 rounded text-xs font-black  border border-gray-200 text-gray-600 hover:text-gray-900 transition-all"
                                 >
                                   Details
@@ -248,31 +248,31 @@ export default function ChooseWingPage() {
         </main>
       </div>
 
-      {/* Wing Details Modal */}
-      {viewingWing && (
+      {/* Field Details Modal */}
+      {viewingField && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-in fade-in duration-300">
           <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl animate-in zoom-in-95 duration-200">
             {/* Header */}
             <div className="flex items-center justify-between p-8 border-b border-gray-100 sticky top-0 bg-white z-10">
               <div className="flex items-center gap-5">
                 <div className="w-14 h-14 bg-yellow-50 rounded-lg flex items-center justify-center text-3xl shadow-sm border border-yellow-100">
-                  {viewingWing.icon}
+                  {viewingField.icon}
                 </div>
                 <div>
-                  <h2 className="text-xl font-black text-gray-900  ">{viewingWing.title}</h2>
+                  <h2 className="text-xl font-black text-gray-900  ">{viewingField.title}</h2>
                   <div className="flex items-center gap-3 mt-1">
                     <div className="flex items-center gap-1">
                       <Star className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />
-                      <span className="text-sm font-black text-gray-700">{viewingWing.rating}</span>
+                      <span className="text-sm font-black text-gray-700">{viewingField.rating}</span>
                     </div>
                     <span className="text-xs font-semibold text-gray-600  border-l border-gray-200 pl-3">
-                      {viewingWing.successRate}% Success Rate
+                      {viewingField.successRate}% Success Rate
                     </span>
                   </div>
                 </div>
               </div>
               <button
-                onClick={() => setViewingWing(null)}
+                onClick={() => setViewingField(null)}
                 className="p-2 hover:bg-gray-100 rounded-lg transition-colors text-gray-400"
               >
                 <X className="w-6 h-6" />
@@ -282,9 +282,9 @@ export default function ChooseWingPage() {
             {/* Content */}
             <div className="p-10 space-y-10">
               <div className="space-y-4">
-                <h4 className="text-sm font-semibold text-gray-600  border-b border-gray-100 pb-2">Wing Description</h4>
+                <h4 className="text-sm font-semibold text-gray-600  border-b border-gray-100 pb-2">Field Description</h4>
                 <p className="text-sm font-bold text-gray-600 leading-relaxed italic">
-                  "{viewingWing.description}"
+                  "{viewingField.description}"
                 </p>
               </div>
 
@@ -292,7 +292,7 @@ export default function ChooseWingPage() {
                 <div className="space-y-4">
                   <h4 className="text-xs font-black text-gray-600 border-b border-gray-100 pb-2">Focus Areas</h4>
                   <div className="flex flex-wrap gap-2">
-                    {viewingWing.specializations.map((spec, index) => (
+                    {viewingField.specializations.map((spec, index) => (
                       <span key={index} className="px-3 py-1.5 bg-gray-50 border border-gray-100 text-gray-600 text-sm font-black  rounded shadow-sm">
                         {spec}
                       </span>
@@ -305,15 +305,15 @@ export default function ChooseWingPage() {
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
                       <span className="text-sm font-semibold text-gray-500  flex items-center gap-2"><Users className="w-3 h-3" /> Students</span>
-                      <span className="text-sm text-gray-900">{viewingWing.students.toLocaleString()}</span>
+                      <span className="text-sm text-gray-900">{viewingField.students.toLocaleString()}</span>
                     </div>
                     <div className="flex items-center justify-between">
                       <span className="text-sm font-semibold text-gray-500  flex items-center gap-2"><Clock className="w-3 h-3" /> Duration</span>
-                      <span className="text-sm text-gray-900">{viewingWing.averageCompletionTime}</span>
+                      <span className="text-sm text-gray-900">{viewingField.averageCompletionTime}</span>
                     </div>
                     <div className="flex items-center justify-between">
                       <span className="text-sm font-semibold text-gray-500  flex items-center gap-2"><Shield className="w-3 h-3" /> Mentors</span>
-                      <span className="text-sm text-gray-900">{viewingWing.mentors} Experts</span>
+                      <span className="text-sm text-gray-900">{viewingField.mentors} Experts</span>
                     </div>
                   </div>
                 </div>
@@ -322,7 +322,7 @@ export default function ChooseWingPage() {
               <div className="space-y-6">
                 <h4 className="text-xs font-black text-gray-600 border-b border-gray-100 pb-2">Top Live Trainers</h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {viewingWing.trainers.topTrainers.map((trainer, index) => (
+                  {viewingField.trainers.topTrainers.map((trainer, index) => (
                     <div key={index} className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg border border-gray-100 group hover:border-yellow-200 transition-all">
                       <div className="w-10 h-10 bg-white shadow-sm rounded-lg flex items-center justify-center text-sm font-black text-yellow-700 border border-gray-100 group-hover:scale-110 transition-transform">
                         {trainer.avatar}
@@ -344,15 +344,15 @@ export default function ChooseWingPage() {
               <div className="flex gap-4 pt-4 border-t border-gray-50">
                 <button
                   onClick={() => {
-                    handleWingSelect(viewingWing.id);
-                    setViewingWing(null);
+                    handleFieldSelect(viewingField.id);
+                    setViewingField(null);
                   }}
                   className="flex-1 bg-yellow-600 text-white py-4 rounded-lg text-sm font-black   hover:bg-yellow-700 transition-all shadow-lg active:scale-95"
                 >
-                  Apply to this Wing
+                  Apply to this Field
                 </button>
                 <button
-                  onClick={() => setViewingWing(null)}
+                  onClick={() => setViewingField(null)}
                   className="px-8 py-4 border border-gray-200 text-gray-600 rounded-lg text-sm font-black  hover:text-gray-900 hover:border-gray-300 transition-all"
                 >
                   Close

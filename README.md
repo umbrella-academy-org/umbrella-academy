@@ -1,36 +1,113 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌂 Umbrella Academy LMS
 
-## Getting Started
+> A high-performance, industry-aligned Learning Management System (LMS) designed to bridge the gap between education and industry through a unique "Wing-based" organizational structure.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🌟 Overview
+
+Umbrella Academy is a sophisticated LMS platform that organizes students, trainers, and mentors into specialized **Wings** based on industry sectors. This model ensures that learning is highly focused, industry-relevant, and directly connected to real-world corporate needs.
+
+Built with **Next.js 15**, **React 19**, and **Tailwind CSS 4**, the platform provides a seamless, high-performance experience for all users, from students tracking their learning roadmaps to global administrators monitoring system health.
+
+## 🏗️ Core Concept: The "Wing" Structure
+
+Unlike traditional LMS platforms, Umbrella Academy uses a hierarchical organizational model:
+
+- **Wings**: Major industry sectors (e.g., Tech, Business, Hospitality).
+- **Companies**: Real-world partners linked to specific Wings that define teaching focus and career opportunities.
+- **Roadmaps**: Industry-specific learning journeys tailored to the needs of the Wing's sector.
+
+## 👥 Multi-Role Ecosystem
+
+The platform features a robust Role-Based Access Control (RBAC) system with dedicated dashboards for five user types:
+
+| Role | Responsibility |
+| :--- | :--- |
+| **Student** | Accesses industry roadmaps, tracks progress, and manages referrals. |
+| **Trainer** | Manages courses, conducts training, and monitors student performance. |
+| **Mentor** | Provides high-level guidance and industry insights to students. |
+| **Wing Admin** | Manages a specific industry sector, oversees trainers, and handles wing-specific finances. |
+| **Umbrella Admin** | Global system oversight, infrastructure monitoring, and platform-wide financial management. |
+
+## 🚀 Key Features
+
+- **🎯 Industry-Specific Roadmaps**: Custom-built learning paths that adapt to the user's chosen Wing and progress.
+- **� Integrated Chat System**: Direct communication channels between students, mentors, and trainers for collaborative learning.
+- **📅 Interactive Calendar**: Schedule and track training sessions, mentoring hours, and industry workshops.
+- **🎥 Live Learning Sessions**: Integrated support for real-time workshops and virtual classroom experiences.
+- **�💰 Integrated Financial System**: Real-time tracking of revenue shares, wing budgets, and transparent transaction logs.
+- **📊 Real-time System Monitoring**: Live metrics on system health, API response times, and user engagement for admins.
+- **💳 Subscription & Enrollment**: Sophisticated management of student subscriptions and wing enterprise plans.
+- **📱 Responsive Industry Dashboards**: Premium user interfaces optimized for all industry roles and mobile devices.
+- **🤝 Referral & Reward System**: Built-in mechanism to incentivize growth and community engagement.
+
+## 🛠️ Tech Stack
+
+- **Framework**: [Next.js 15+](https://nextjs.org/) (App Router)
+- **Library**: [React 19](https://react.dev/)
+- **Styling**: [Tailwind CSS 4.0](https://tailwindcss.com/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **State Management**: React Context API
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Font**: Geist Sans & Geist Mono
+
+## 📁 Project Structure
+
+```text
+├── app/                  # Next.js App Router routes & layouts
+│   ├── auth/             # Authentication pages (Login, Signup, etc.)
+│   ├── dashboard/        # Role-specific dashboards
+│   └── post-signup/      # Onboarding flows
+├── components/           # Reusable UI components
+├── contexts/             # Global state (Auth, Financial, Roadmap, System)
+├── data/                 # Mock datasets and static content
+├── hooks/                # Custom React hooks
+├── lib/                  # Utility functions and shared libraries
+├── public/               # Static assets
+├── types/                # TypeScript interfaces and types
+└── tailwind.config.ts    # Tailwind CSS configuration
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Getting Started
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Prerequisites
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Node.js 18.x or later
+- pnpm (recommended) or npm
 
-## Learn More
+### Installation
 
-To learn more about Next.js, take a look at the following resources:
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-repo/umbrella-academy.git
+   cd umbrella-academy
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. Install dependencies:
+   ```bash
+   pnpm install
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. Run the development server:
+   ```bash
+   pnpm dev
+   ```
 
-## Deploy on Vercel
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🚢 Deployment
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The project is optimized for deployment on the **Vercel Platform** for the best performance and Next.js feature support.
+
+```bash
+pnpm build
+```
+
+---
+
+## 📄 License
+
+This project is private and confidential. Unauthorized copying of this file, via any medium, is strictly prohibited. Proprietary and confidential.
+
+© 2024 Umbrella Academy. All rights reserved.

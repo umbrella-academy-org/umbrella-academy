@@ -37,8 +37,8 @@ export default function ChooseTrainerPage() {
   const [viewingProfile, setViewingProfile] = useState<Trainer | null>(null);
   const [error, setError] = useState('');
 
-  // Get selected wing from localStorage
-  const selectedWing = typeof window !== 'undefined' ? localStorage.getItem('selectedWing') : '';
+  // Get selected field from localStorage
+  const selectedField = typeof window !== 'undefined' ? localStorage.getItem('selectedField') : '';
 
   const trainers: Trainer[] = [
     {
@@ -170,13 +170,13 @@ export default function ChooseTrainerPage() {
     );
   };
 
-  const getWingTitle = (wingId: string) => {
-    const wingTitles: { [key: string]: string } = {
-      'tech-companies': 'Tech Companies Wing',
-      'business-companies': 'Business Companies Wing',
-      'hotels': 'Hotels Wing'
+  const getFieldTitle = (fieldId: string) => {
+    const fieldTitles: { [key: string]: string } = {
+      'tech-companies': 'Tech Companies Field',
+      'business-companies': 'Business Companies Field',
+      'hotels': 'Hotels Field'
     };
-    return wingTitles[wingId] || 'Selected Wing';
+    return fieldTitles[fieldId] || 'Selected Field';
   };
 
   return (

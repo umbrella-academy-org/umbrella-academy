@@ -2,13 +2,13 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Wallet, Transaction, Subscription } from '@/types';
-import { 
-  mockWallets, 
-  mockTransactions, 
+import {
+  mockWallets,
+  mockTransactions,
   mockSubscriptions,
   getWalletByOwnerId,
   getWalletsByType,
-  getTransactionsByType 
+  getTransactionsByType
 } from '@/data';
 import { useAuth } from './AuthContext';
 
@@ -62,13 +62,13 @@ export function FinancialProvider({ children }: { children: React.ReactNode }) {
         filteredWallets = mockWallets;
         filteredTransactions = mockTransactions;
         filteredSubscriptions = mockSubscriptions;
-      } else if (currentUser.role === 'wing-admin') {
-        // Wing admin can see wing wallet and related transactions
-        filteredWallets = mockWallets.filter(wallet => 
-          wallet.ownerId === currentUser.wing || wallet.ownerType === 'umbrella'
+      } else if (currentUser.role === 'field-admin') {
+        // Field admin can see field wallet and related transactions
+        filteredWallets = mockWallets.filter(wallet =>
+          wallet.ownerId === currentUser.fieldId || wallet.ownerType === 'umbrella'
         );
         filteredTransactions = mockTransactions.filter(transaction =>
-          transaction.reference?.includes(currentUser.wing || '') ||
+          transaction.reference?.includes(currentUser.fieldId || '') ||
           transaction.type === 'income'
         );
         filteredSubscriptions = mockSubscriptions; // Can see all subscriptions for analytics
@@ -86,7 +86,7 @@ export function FinancialProvider({ children }: { children: React.ReactNode }) {
       } else if (currentUser.role === 'student') {
         // Students can see their subscription info only
         filteredWallets = [];
-        filteredTransactions = mockTransactions.filter(t => 
+        filteredTransactions = mockTransactions.filter(t =>
           t.type === 'payment' && t.reference?.includes('PAY')
         );
         filteredSubscriptions = mockSubscriptions.filter(sub => sub.planId === 'plan_basic'); // Mock: student's subscription
@@ -126,13 +126,13 @@ export function FinancialProvider({ children }: { children: React.ReactNode }) {
 
   const getUserTransactions = (): Transaction[] => {
     if (!currentUser) return [];
-    
+
     if (currentUser.role === 'trainer') {
       return userWallet?.transactions || [];
     } else if (currentUser.role === 'student') {
       return transactions.filter(t => t.type === 'payment');
     }
-    
+
     return transactions;
   };
 
@@ -145,30 +145,30 @@ export function FinancialProvider({ children }: { children: React.ReactNode }) {
 
   const getTotalBalance = (): number => {
     if (!currentUser) return 0;
-    
+
     if (currentUser.role === 'umbrella-admin') {
       return wallets.reduce((total, wallet) => total + wallet.balance, 0);
-    } else if (currentUser.role === 'wing-admin') {
-      const wingWallet = wallets.find(w => w.ownerId === currentUser.wing);
-      return wingWallet?.balance || 0;
+    } else if (currentUser.role === 'field-admin') {
+      const fieldWallet = wallets.find(w => w.ownerId === currentUser.fieldId);
+      return fieldWallet?.balance || 0;
     } else if (currentUser.role === 'trainer') {
       return userWallet?.balance || 0;
     }
-    
+
     return 0;
   };
 
   const getMonthlyRevenue = (): number => {
     const currentMonth = new Date().getMonth();
     const currentYear = new Date().getFullYear();
-    
+
     return transactions
       .filter(t => {
         const transactionDate = new Date(t.date);
-        return t.type === 'payment' && 
-               t.status === 'completed' &&
-               transactionDate.getMonth() === currentMonth &&
-               transactionDate.getFullYear() === currentYear;
+        return t.type === 'payment' &&
+          t.status === 'completed' &&
+          transactionDate.getMonth() === currentMonth &&
+          transactionDate.getFullYear() === currentYear;
       })
       .reduce((total, t) => total + t.amount, 0);
   };
