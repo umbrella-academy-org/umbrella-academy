@@ -4,19 +4,24 @@ import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
 import { User, Mail, Shield, Bell, Calendar, MapPin, Camera, Edit2, Check, X, Phone, Globe, BookOpen, Award, Zap, ChevronRight, Settings, Users, Star } from 'lucide-react';
 import { useAuth } from '@/contexts';
+import { MentorUser } from '@/types';
 
 export default function MentorProfilePage() {
     const { user } = useAuth();
     const [isEditing, setIsEditing] = useState(false);
+
+    // Cast user to MentorUser if available to access role-specific fields
+    const mentorUser = user as MentorUser;
+
     const [profileData, setProfileData] = useState({
         name: user?.name || 'Dr. Alex Rodriguez',
         email: user?.email || 'a.rodriguez@dreamize.rw',
         phone: '+250 788 555 666',
         location: 'Kigali, Rwanda',
-        bio: 'Academic Director and Senior Mentor. Overseeing instructional quality and roadmap integrity for the Software Engineering wing.',
+        bio: 'Academic Director and Senior Mentor. Overseeing instructional quality and roadmap integrity for the Software Engineering field.',
         expertise: ['Curriculum Design', 'Educational Leadership', 'Quality Assurance', 'Strategic Mentorship'],
         experience: '15+ Years',
-        wing: user?.wingId || 'Software Engineering',
+        field: mentorUser?.fieldId || 'Software Engineering',
         joinDate: user?.joinDate || 'Jan 2022'
     });
 
@@ -62,7 +67,7 @@ export default function MentorProfilePage() {
                                             </div>
                                             <p className="text-gray-500 font-semibold flex items-center gap-2 mt-2">
                                                 <Zap className="w-4.5 h-4.5 text-yellow-600" />
-                                                <span className="text-gray-600 text-sm">{profileData.wing} Wing</span>
+                                                <span className="text-gray-600 text-sm capitalize">{profileData.field.replace(/-/g, ' ')} Field</span>
                                                 <span className="w-1 h-1 bg-gray-300 rounded-full" />
                                                 <span className="text-gray-400 text-sm">Senior Mentor</span>
                                             </p>

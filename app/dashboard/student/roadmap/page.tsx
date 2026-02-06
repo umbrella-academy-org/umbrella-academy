@@ -18,10 +18,10 @@ export default function StudentRoadmapPage() {
     }
 
     if (!authLoading && user && user.role !== 'student') {
-      const dashboardRoutes = {
+      const dashboardRoutes: Record<string, string> = {
         'trainer': '/dashboard/trainer',
         'mentor': '/dashboard/mentor',
-        'wing-admin': '/dashboard/wing-admin',
+        'field-admin': '/dashboard/field-admin',
         'umbrella-admin': '/dashboard/umbrella-admin'
       };
       navigate(dashboardRoutes[user.role] || '/');
@@ -117,8 +117,8 @@ export default function StudentRoadmapPage() {
                         <div className="text-right">
                           <span className="text-sm font-medium text-gray-900">{phase.status === 'completed' ? 100 : phase.status === 'active' ? 50 : 0}%</span>
                           <div className="w-20 h-2 bg-gray-200 rounded-full mt-1">
-                            <div 
-                              className="h-2 bg-yellow-600 rounded-full" 
+                            <div
+                              className="h-2 bg-yellow-600 rounded-full"
                               style={{ width: `${phase.status === 'completed' ? 100 : phase.status === 'active' ? 50 : 0}%` }}
                             ></div>
                           </div>

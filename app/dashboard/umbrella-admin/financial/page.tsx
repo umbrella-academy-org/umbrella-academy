@@ -7,11 +7,11 @@ import { TrendingUp, DollarSign, CreditCard, PieChart } from 'lucide-react';
 
 export default function UmbrellaAdminFinancialPage() {
   const transactions = [
-    { id: 1, description: 'Student Payment - Alice Johnson', wing: 'Programming', amount: 500, umbrellaShare: 325, date: '2024-01-22' },
-    { id: 2, description: 'Student Payment - Bob Wilson', wing: 'Design', amount: 450, umbrellaShare: 292.5, date: '2024-01-22' },
-    { id: 3, description: 'Student Payment - Carol Davis', wing: 'Marketing', amount: 400, umbrellaShare: 260, date: '2024-01-21' },
-    { id: 4, description: 'Student Payment - David Wilson', wing: 'Data Science', amount: 550, umbrellaShare: 357.5, date: '2024-01-21' },
-    { id: 5, description: 'Student Payment - Eva Martinez', wing: 'Business', amount: 380, umbrellaShare: 247, date: '2024-01-20' }
+    { id: 1, description: 'Student Payment - Alice Johnson', field: 'Programming', amount: 500, umbrellaShare: 325, date: '2024-01-22' },
+    { id: 2, description: 'Student Payment - Bob Wilson', field: 'Design', amount: 450, umbrellaShare: 292.5, date: '2024-01-22' },
+    { id: 3, description: 'Student Payment - Carol Davis', field: 'Marketing', amount: 400, umbrellaShare: 260, date: '2024-01-21' },
+    { id: 4, description: 'Student Payment - David Wilson', field: 'Data Science', amount: 550, umbrellaShare: 357.5, date: '2024-01-21' },
+    { id: 5, description: 'Student Payment - Eva Martinez', field: 'Business', amount: 380, umbrellaShare: 247, date: '2024-01-20' }
   ];
   return (
     <div className="flex h-screen bg-white">
@@ -50,7 +50,7 @@ export default function UmbrellaAdminFinancialPage() {
               <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-gray-500 text-sm">Wings Share (35%)</p>
+                    <p className="text-gray-500 text-sm">Fields Share (35%)</p>
                     <p className="text-2xl font-bold text-gray-900">RWF 23,745,000</p>
                   </div>
                   <CreditCard className="w-8 h-8 text-blue-500" />
@@ -68,34 +68,34 @@ export default function UmbrellaAdminFinancialPage() {
               </div>
             </div>
 
-            {/* Wing Revenue Breakdown */}
+            {/* Field Revenue Breakdown */}
             <div className="bg-white rounded-lg shadow-sm border border-gray-100 mb-6">
               <div className="p-6 border-b border-gray-200">
-                <h3 className="text-lg font-semibold text-gray-900">Revenue by Wing</h3>
+                <h3 className="text-lg font-semibold text-gray-900">Revenue by Field</h3>
               </div>
               <div className="p-6">
                 <div className="space-y-4">
                   {[
-                    { name: 'Programming Wing', revenue: 12450, share: 27.5, growth: '+15%' },
-                    { name: 'Design Wing', revenue: 10230, share: 22.6, growth: '+8%' },
-                    { name: 'Marketing Wing', revenue: 9180, share: 20.3, growth: '+12%' },
-                    { name: 'Data Science Wing', revenue: 7890, share: 17.4, growth: '+18%' },
-                    { name: 'Business Wing', revenue: 5480, share: 12.1, growth: '+5%' }
-                  ].map((wing, index) => (
+                    { name: 'Programming Field', revenue: 12450, share: 27.5, growth: '+15%' },
+                    { name: 'Design Field', revenue: 10230, share: 22.6, growth: '+8%' },
+                    { name: 'Marketing Field', revenue: 9180, share: 20.3, growth: '+12%' },
+                    { name: 'Data Science Field', revenue: 7890, share: 17.4, growth: '+18%' },
+                    { name: 'Business Field', revenue: 5480, share: 12.1, growth: '+5%' }
+                  ].map((field, index) => (
                     <div key={index} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                       <div className="flex-1">
-                        <div className="font-medium text-gray-900">{wing.name}</div>
-                        <div className="text-sm text-gray-500">{wing.share}% of total revenue</div>
+                        <div className="font-medium text-gray-900">{field.name}</div>
+                        <div className="text-sm text-gray-500">{field.share}% of total revenue</div>
                       </div>
                       <div className="flex items-center gap-4">
                         <div className="text-right">
-                          <div className="font-semibold text-gray-900">€{wing.revenue.toLocaleString()}</div>
-                          <div className="text-sm text-green-600">{wing.growth}</div>
+                          <div className="font-semibold text-gray-900">RWF {field.revenue.toLocaleString()}</div>
+                          <div className="text-sm text-green-600">{field.growth}</div>
                         </div>
                         <div className="w-16 bg-gray-200 rounded-full h-2">
                           <div
                             className="bg-yellow-600 h-2 rounded-full"
-                            style={{ width: `${wing.share * 4}%` }}
+                            style={{ width: `${field.share * 4}%` }}
                           ></div>
                         </div>
                       </div>

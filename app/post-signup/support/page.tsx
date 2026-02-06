@@ -22,8 +22,8 @@ export default function StudentSupportPage() {
             answer: "Your roadmap can only be modified with your trainer's approval. Click on the Roadmap tab and select 'Request Adjustment'."
         },
         {
-            question: "Can I switch my wing after starting?",
-            answer: "Wing changes require administrative review. Please contact support via the email link below to initiate this process."
+            question: "Can I switch my field after starting?",
+            answer: "Field changes require administrative review. Please contact support via the email link below to initiate this process."
         }
     ];
 

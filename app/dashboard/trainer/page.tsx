@@ -30,10 +30,10 @@ export default function TrainerDashboard() {
 
     if (!authLoading && user && user.role !== 'trainer') {
       // Redirect to appropriate dashboard based on role
-      const dashboardRoutes = {
+      const dashboardRoutes: Record<string, string> = {
         'student': '/dashboard/student',
         'mentor': '/dashboard/mentor',
-        'wing-admin': '/dashboard/wing-admin',
+        'field-admin': '/dashboard/field-admin',
         'umbrella-admin': '/dashboard/umbrella-admin'
       };
       navigate(dashboardRoutes[user.role] || '/');
@@ -77,7 +77,7 @@ export default function TrainerDashboard() {
 
   // Get trainer-specific data
   const trainerStudents = students.filter(student =>
-    student.wing === user.wing // In real app, would filter by assigned trainer
+    student.fieldId === user.fieldId // In real app, would filter by assigned trainer
   );
 
   const trainerStudentRoadmaps = studentRoadmaps.filter(roadmap =>

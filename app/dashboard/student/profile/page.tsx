@@ -29,8 +29,8 @@ export default function StudentProfilePage() {
         phone: '+250 788 000 000',
         location: 'Kigali, Rwanda',
         portfolio: 'janemukamana.dev',
-        bio: user?.profileData?.bio || 'Dedicated trainee focusing on live collaborative sessions and practical software implementation within the Umbrella Tech Wing.',
-        wing: user?.wingId?.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) || 'Tech Companies Wing',
+        bio: user?.profileData?.bio || 'Dedicated trainee focusing on live collaborative sessions and practical software implementation within the Umbrella Tech Field.',
+        field: user?.fieldId?.replace(/-/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase()) || 'Tech Companies Field',
         joinDate: user?.joinDate || 'Sep 2024',
         sessionsAttended: 42,
         attendanceRate: '94%',
@@ -159,7 +159,7 @@ export default function StudentProfilePage() {
                             <div className="bg-white rounded-lg border border-gray-100 shadow-sm p-8 space-y-8">
                                 <div className="flex items-center justify-between">
                                     <h3 className="text-xl font-bold text-gray-900">Live Session Roadmap</h3>
-                                    <span className="text-[10px] font-black text-yellow-600 uppercase bg-yellow-50 px-2.5 py-1 rounded-full border border-yellow-100">Active Wing: {profileData.wing}</span>
+                                    <span className="text-[10px] font-black text-yellow-600 uppercase bg-yellow-50 px-2.5 py-1 rounded-full border border-yellow-100">Active Field: {profileData.field}</span>
                                 </div>
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                     {profileData.liveRoadmap.map((item, i) => (

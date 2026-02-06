@@ -4,14 +4,14 @@ import Sidebar from '@/components/dashboard/Sidebar';
 
 import ChatInterface from '@/components/chat/ChatInterface';
 
-export default function WingAdminChatPage() {
+export default function FieldAdminChatPage() {
     return (
         <div className="flex h-screen bg-white">
-            <Sidebar activeItem="Chat" userType="wing-admin" />
+            <Sidebar activeItem="Chat" userType="field-admin" />
 
             <div className="flex-1 flex flex-col min-w-0">
                 <main className="flex-1 overflow-hidden bg-gray-50/30">
-                    <ChatInterface userType="wing-admin" />
+                    <ChatInterface userType="field-admin" />
                 </main>
             </div>
         </div>

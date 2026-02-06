@@ -3,7 +3,6 @@
 import { Field, Company, User } from '@/types';
 import {
     mockFields,
-    mockCompanies,
     getFieldById,
     getActiveFields,
     getCompaniesByField,

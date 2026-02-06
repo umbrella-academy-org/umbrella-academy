@@ -84,7 +84,7 @@ export default function UmbrellaAdminProfilePage() {
                                             <div className="relative z-10">
                                                 <p className="text-xs font-semibold text-yellow-400 mb-4">Network Integrity</p>
                                                 <p className="text-2xl font-black text-yellow-900 mb-2  ">Healthy</p>
-                                                <p className="text-xs text-yellow-700/60 font-semibold   ">All Wings Operational</p>
+                                                <p className="text-xs text-yellow-700/60 font-semibold   ">All Fields Operational</p>
                                             </div>
                                             <Activity className="absolute bottom-4 right-4 w-12 h-12 text-yellow-200/50 transform group-hover:scale-110 transition-transform duration-500" />
                                         </div>
@@ -118,7 +118,7 @@ export default function UmbrellaAdminProfilePage() {
 
                                 <div className="p-8 bg-gradient-to-br from-yellow-600 to-yellow-800 rounded-lg text-white shadow-2xl shadow-yellow-600/30 group">
                                     <h4 className="text-lg font-black mb-2">Emergency Protocols</h4>
-                                    <p className="text-yellow-100 text-xs font-medium mb-6 leading-relaxed opacity-80">Access high-security overrides and wing shutdown controls.</p>
+                                    <p className="text-yellow-100 text-xs font-medium mb-6 leading-relaxed opacity-80">Access high-security overrides and field shutdown controls.</p>
                                     <button className="w-full py-3.5 bg-white/20 hover:bg-white/30 backdrop-blur-md rounded-[1.2rem] font-black text-sm transition-all flex items-center justify-center gap-2 group">
                                         Open Protocol Hub
                                         <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

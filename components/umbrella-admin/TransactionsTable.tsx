@@ -7,7 +7,7 @@ import DataTable from '@/components/ui/DataTable';
 interface Transaction {
   id: number;
   description: string;
-  wing: string;
+  field: string;
   amount: number;
   umbrellaShare: number;
   date: string;
@@ -29,7 +29,7 @@ export default function TransactionsTable({ transactions }: TransactionsTablePro
         <div className="text-sm text-gray-500">ID: {transaction.id}</div>
       </div>
     ),
-    wing: transaction.wing,
+    field: (transaction as any).field || (transaction as any).wing,
     amount: (
       <div className="flex items-center gap-2">
         <DollarSign className="w-4 h-4 text-gray-400" />
@@ -54,7 +54,7 @@ export default function TransactionsTable({ transactions }: TransactionsTablePro
 
   const columns = [
     { key: 'transaction', label: 'Transaction', sortable: true, filterable: true, searchable: true },
-    { key: 'wing', label: 'Wing', sortable: true, filterable: true, searchable: true },
+    { key: 'field', label: 'Field', sortable: true, filterable: true, searchable: true },
     { key: 'amount', label: 'Amount', sortable: true, filterable: false, searchable: false },
     { key: 'umbrellaShare', label: 'Umbrella Share', sortable: true, filterable: false, searchable: false },
     { key: 'date', label: 'Date', sortable: true, filterable: false, searchable: false }

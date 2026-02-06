@@ -37,14 +37,13 @@ export default function UsersTable({ selectedTab, data }: UsersTableProps) {
             ),
             rollNo: user.rollNo || 'N/A',
             contact: user.phone || 'N/A',
-            wing: user.wingName || 'Unassigned',
+            field: user.fieldName || user.field || user.wingName || user.wing || 'Unassigned',
             trainer: user.trainerName || 'Unassigned',
             status: (
-              <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                user.status === 'active' ? 'bg-green-100 text-green-800' :
-                user.status === 'inactive' ? 'bg-gray-100 text-gray-800' :
-                'bg-yellow-100 text-yellow-800'
-              }`}>
+              <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${user.status === 'active' ? 'bg-green-100 text-green-800' :
+                  user.status === 'inactive' ? 'bg-gray-100 text-gray-800' :
+                    'bg-yellow-100 text-yellow-800'
+                }`}>
                 {user.status}
               </span>
             ),
@@ -70,16 +69,15 @@ export default function UsersTable({ selectedTab, data }: UsersTableProps) {
                 </div>
               </div>
             ),
-            wing: user.wingName || 'Unassigned',
+            field: user.fieldName || user.field || user.wingName || user.wing || 'Unassigned',
             specialization: user.specialization || 'General',
-            capacity: `${user.capacity || 0} students`,
-            experience: `${user.experience || 0} years`,
+            capacity: `${user.capacity || user.students || 0} students`,
+            experience: `${user.experience || 0}`,
             status: (
-              <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                user.status === 'active' ? 'bg-green-100 text-green-800' :
-                user.status === 'inactive' ? 'bg-gray-100 text-gray-800' :
-                'bg-yellow-100 text-yellow-800'
-              }`}>
+              <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${user.status === 'active' ? 'bg-green-100 text-green-800' :
+                  user.status === 'inactive' ? 'bg-gray-100 text-gray-800' :
+                    'bg-yellow-100 text-yellow-800'
+                }`}>
                 {user.status}
               </span>
             ),
@@ -105,16 +103,15 @@ export default function UsersTable({ selectedTab, data }: UsersTableProps) {
                 </div>
               </div>
             ),
-            wing: user.wingName || 'Unassigned',
-            expertise: user.expertise || 'General',
-            students: `${user.studentCount || 0}/${user.maxStudents || 0}`,
-            experience: `${user.experience || 0} years`,
+            field: user.fieldName || user.field || user.wingName || user.wing || 'Unassigned',
+            expertise: user.expertise || user.specialization || 'General',
+            students: `${user.studentCount || user.students || 0}/${user.maxStudents || 25}`,
+            experience: `${user.experience || 0}`,
             status: (
-              <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                user.status === 'active' ? 'bg-green-100 text-green-800' :
-                user.status === 'inactive' ? 'bg-gray-100 text-gray-800' :
-                'bg-yellow-100 text-yellow-800'
-              }`}>
+              <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${user.status === 'active' ? 'bg-green-100 text-green-800' :
+                  user.status === 'inactive' ? 'bg-gray-100 text-gray-800' :
+                    'bg-yellow-100 text-yellow-800'
+                }`}>
                 {user.status}
               </span>
             ),
@@ -140,16 +137,15 @@ export default function UsersTable({ selectedTab, data }: UsersTableProps) {
                 </div>
               </div>
             ),
-            wing: user.wingName || 'All Wings',
+            field: user.fieldName || user.field || user.wingName || user.wing || 'All Fields',
             role: user.role || 'Admin',
             permissions: user.permissions || 'Standard',
             joinDate: user.joinDate || 'N/A',
             status: (
-              <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                user.status === 'active' ? 'bg-green-100 text-green-800' :
-                user.status === 'inactive' ? 'bg-gray-100 text-gray-800' :
-                'bg-yellow-100 text-yellow-800'
-              }`}>
+              <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${user.status === 'active' ? 'bg-green-100 text-green-800' :
+                  user.status === 'inactive' ? 'bg-gray-100 text-gray-800' :
+                    'bg-yellow-100 text-yellow-800'
+                }`}>
                 {user.status}
               </span>
             ),
@@ -175,7 +171,7 @@ export default function UsersTable({ selectedTab, data }: UsersTableProps) {
           { key: 'student', label: 'Student', sortable: true, filterable: true, searchable: true },
           { key: 'rollNo', label: 'Roll No.', sortable: true, filterable: false, searchable: true },
           { key: 'contact', label: 'Contact', sortable: false, filterable: false, searchable: true },
-          { key: 'wing', label: 'Wing', sortable: true, filterable: true, searchable: true },
+          { key: 'field', label: 'Field', sortable: true, filterable: true, searchable: true },
           { key: 'trainer', label: 'Trainer', sortable: true, filterable: true, searchable: true },
           { key: 'status', label: 'Status', sortable: true, filterable: true, searchable: false },
           { key: 'actions', label: 'Actions', sortable: false, filterable: false, searchable: false }
@@ -184,7 +180,7 @@ export default function UsersTable({ selectedTab, data }: UsersTableProps) {
       case 'trainers':
         return [
           { key: 'trainer', label: 'Trainer', sortable: true, filterable: true, searchable: true },
-          { key: 'wing', label: 'Wing', sortable: true, filterable: true, searchable: true },
+          { key: 'field', label: 'Field', sortable: true, filterable: true, searchable: true },
           { key: 'specialization', label: 'Specialization', sortable: true, filterable: true, searchable: true },
           { key: 'capacity', label: 'Capacity', sortable: true, filterable: false, searchable: false },
           { key: 'experience', label: 'Experience', sortable: true, filterable: false, searchable: false },
@@ -195,7 +191,7 @@ export default function UsersTable({ selectedTab, data }: UsersTableProps) {
       case 'mentors':
         return [
           { key: 'mentor', label: 'Mentor', sortable: true, filterable: true, searchable: true },
-          { key: 'wing', label: 'Wing', sortable: true, filterable: true, searchable: true },
+          { key: 'field', label: 'Field', sortable: true, filterable: true, searchable: true },
           { key: 'expertise', label: 'Expertise', sortable: true, filterable: true, searchable: true },
           { key: 'students', label: 'Students', sortable: true, filterable: false, searchable: false },
           { key: 'experience', label: 'Experience', sortable: true, filterable: false, searchable: false },
@@ -206,7 +202,7 @@ export default function UsersTable({ selectedTab, data }: UsersTableProps) {
       case 'admins':
         return [
           { key: 'administrator', label: 'Administrator', sortable: true, filterable: true, searchable: true },
-          { key: 'wing', label: 'Wing', sortable: true, filterable: true, searchable: true },
+          { key: 'field', label: 'Field', sortable: true, filterable: true, searchable: true },
           { key: 'role', label: 'Role', sortable: true, filterable: true, searchable: true },
           { key: 'permissions', label: 'Permissions', sortable: true, filterable: true, searchable: false },
           { key: 'joinDate', label: 'Join Date', sortable: true, filterable: false, searchable: false },

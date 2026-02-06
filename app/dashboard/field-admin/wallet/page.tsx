@@ -13,7 +13,7 @@ interface Transaction {
   status: 'completed' | 'pending' | 'processing';
 }
 
-export default function WingAdminWalletPage() {
+export default function FieldAdminWalletPage() {
   const [currentBalance] = useState(3675000);
   const [monthlyIncome] = useState(1837500);
   const [totalWithdrawn] = useState(13125000);
@@ -30,7 +30,7 @@ export default function WingAdminWalletPage() {
     {
       id: '2',
       type: 'withdrawal',
-      description: 'Wing Operations Withdrawal',
+      description: 'Field Operations Withdrawal',
       amount: '-RWF 500,000',
       date: 'Jan 20, 2026',
       status: 'completed'
@@ -89,21 +89,21 @@ export default function WingAdminWalletPage() {
 
   return (
     <div className="flex h-screen bg-white">
-      <Sidebar activeItem="Wallet" userType="wing-admin" />
+      <Sidebar activeItem="Wallet" userType="field-admin" />
 
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
         <main className="flex-1 overflow-auto">
           <div className="p-3 lg:p-6">
             <div className="mb-8">
-              <h1 className="text-2xl font-semibold text-gray-900 mb-1">Wing Wallet</h1>
-              <p className="text-sm text-gray-500">Manage your wing's finances and withdrawals</p>
+              <h1 className="text-2xl font-semibold text-gray-900 mb-1">Field Wallet</h1>
+              <p className="text-sm text-gray-500">Manage your field's finances and withdrawals</p>
             </div>
 
             {/* Balance Cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
               <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg p-6 text-white">
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-lg font-semibold">Wing Balance</h3>
+                  <h3 className="text-lg font-semibold">Field Balance</h3>
                   <DollarSign className="w-8 h-8 opacity-80" />
                 </div>
                 <div className="text-3xl font-bold mb-2">RWF {currentBalance.toLocaleString()}</div>
@@ -133,8 +133,8 @@ export default function WingAdminWalletPage() {
             <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6 mb-8">
               <div className="flex items-center justify-between mb-4">
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900">Wing Operations</h3>
-                  <p className="text-sm text-gray-600">Manage wing finances and operational expenses</p>
+                  <h3 className="text-lg font-semibold text-gray-900">Field Operations</h3>
+                  <p className="text-sm text-gray-600">Manage field finances and operational expenses</p>
                 </div>
                 <button className="px-6 py-2.5 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors">
                   Request Withdrawal
@@ -147,7 +147,7 @@ export default function WingAdminWalletPage() {
               <div className="flex items-center justify-between p-6 border-b border-gray-200">
                 <div>
                   <h3 className="text-lg font-semibold text-gray-900">Recent Transactions</h3>
-                  <p className="text-sm text-gray-600 mt-1">Wing revenue and operational expenses</p>
+                  <p className="text-sm text-gray-600 mt-1">Field revenue and operational expenses</p>
                 </div>
                 <button className="flex items-center gap-2 text-gray-600 hover:text-gray-900 font-medium text-sm">
                   <Download className="w-4 h-4" />
@@ -171,10 +171,9 @@ export default function WingAdminWalletPage() {
                       <tr key={transaction.id} className="hover:bg-gray-50">
                         <td className="py-4 px-6">
                           <div className="flex items-center gap-3">
-                            <div className={`w-8 h-8 rounded flex items-center justify-center shrink-0 ${
-                              transaction.type === 'income' ? 'bg-green-100' :
-                              transaction.type === 'withdrawal' ? 'bg-red-100' : 'bg-orange-100'
-                            }`}>
+                            <div className={`w-8 h-8 rounded flex items-center justify-center shrink-0 ${transaction.type === 'income' ? 'bg-green-100' :
+                                transaction.type === 'withdrawal' ? 'bg-red-100' : 'bg-orange-100'
+                              }`}>
                               {getTransactionIcon(transaction.type)}
                             </div>
                             <span className="text-sm text-gray-900 font-medium">{transaction.description}</span>
@@ -183,9 +182,8 @@ export default function WingAdminWalletPage() {
                         <td className="py-4 px-6 text-sm text-gray-600">{transaction.date}</td>
                         <td className="py-4 px-6">{getStatusBadge(transaction.status)}</td>
                         <td className="py-4 px-6">
-                          <span className={`text-sm font-medium ${
-                            transaction.amount.startsWith('+') ? 'text-green-600' : 'text-red-600'
-                          }`}>
+                          <span className={`text-sm font-medium ${transaction.amount.startsWith('+') ? 'text-green-600' : 'text-red-600'
+                            }`}>
                             {transaction.amount}
                           </span>
                         </td>

@@ -20,7 +20,7 @@ export default function PaymentPage() {
           <div className="w-full p-8">
             {/* Go back button */}
             <button
-              onClick={() => router.push('/post-signup/choose-wing')}
+              onClick={() => router.push('/post-signup/choose-field')}
               className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-8"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -44,14 +44,14 @@ export default function PaymentPage() {
                 Complete Payment
               </h1>
               <p className="text-gray-500 mb-8 text-center">
-                Pay with MoMo to unlock your wing access and start creating your roadmap.
+                Pay with MoMo to unlock your field access and start creating your roadmap.
               </p>
 
               {/* Pricing */}
               <div className="w-full p-4 bg-gray-50 rounded-lg border mb-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="font-medium text-gray-900">Wing Explorer Plan</h3>
+                    <h3 className="font-medium text-gray-900">Field Explorer Plan</h3>
                     <p className="text-sm text-gray-600">Annual subscription with full access</p>
                   </div>
                   <div className="text-right">

@@ -9,8 +9,9 @@ import ScheduledEvents from '@/components/dashboard/ScheduledEvents';
 import Calendar from '@/components/dashboard/Calendar';
 import { useAuth, useRoadmaps, useUsers, useFinancial } from '@/contexts';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
-import { getDashboardStats, mockWings, getWalletsByType } from '@/data';
+import { getDashboardStats, mockFields, getWalletsByType } from '@/data';
 import { Building2, Users, DollarSign, Activity, Settings, Eye, BarChart3, Shield } from 'lucide-react';
+import { User, Field } from '@/types';
 
 export default function UmbrellaAdminDashboard() {
   const { user, isAuthenticated, isLoading: authLoading } = useAuth();
@@ -29,11 +30,11 @@ export default function UmbrellaAdminDashboard() {
 
     if (!authLoading && user && user.role !== 'umbrella-admin') {
       // Redirect to appropriate dashboard based on role
-      const dashboardRoutes = {
+      const dashboardRoutes: Record<string, string> = {
         'student': '/dashboard/student',
         'trainer': '/dashboard/trainer',
         'mentor': '/dashboard/mentor',
-        'wing-admin': '/dashboard/wing-admin'
+        'field-admin': '/dashboard/field-admin'
       };
       navigate(dashboardRoutes[user.role] || '/');
     }
@@ -73,23 +74,27 @@ export default function UmbrellaAdminDashboard() {
   const umbrellaWallets = getWalletsByType('umbrella');
   const totalRevenue = umbrellaWallets.reduce((sum: number, wallet: any) => sum + wallet.balance, 0);
 
-  // Calculate wing performance data
-  const wingPerformance = mockWings.map(wing => {
-    const wingUsers = users.filter(u => u.wing === wing.id);
-    const wingStudents = wingUsers.filter(u => u.role === 'student');
-    const wingRoadmaps = studentRoadmaps.filter(r =>
-      wingStudents.some(s => s.id === r.studentId)
+  // Calculate field performance data
+  const fieldPerformance = mockFields.map((field: Field) => {
+    const fieldUsers = users.filter((u: User) => {
+      if ('fieldId' in u) return u.fieldId === field.id;
+      return false;
+    });
+    const fieldStudents = fieldUsers.filter(u => u.role === 'student');
+    const fieldRoadmaps = studentRoadmaps.filter(r =>
+      fieldStudents.some(s => s.id === r.studentId)
     );
-    const completionRate = wingRoadmaps.length > 0
-      ? Math.round(wingRoadmaps.filter(r => r.status === 'completed').length / wingRoadmaps.length * 100)
+    const completionRate = fieldRoadmaps.length > 0
+      ? Math.round(fieldRoadmaps.filter(r => r.status === 'completed').length / fieldRoadmaps.length * 100)
       : 0;
 
     return {
-      ...wing,
-      studentsCount: wingStudents.length,
+      ...field,
+      studentsCount: fieldStudents.length,
       performance: Math.max(completionRate, 75 + Math.random() * 20) // Ensure reasonable performance
     };
   });
+
   return (
     <div className="flex h-screen bg-white">
       <Sidebar activeItem="Home" userType="umbrella-admin" />
@@ -115,8 +120,8 @@ export default function UmbrellaAdminDashboard() {
                     <Building2 className="w-5 h-5 text-blue-600" />
                   </div>
                   <div>
-                    <p className="text-xs font-medium text-gray-600">Total Wings</p>
-                    <p className="text-lg lg:text-xl font-bold text-gray-900">{systemStats.totalWings}</p>
+                    <p className="text-xs font-medium text-gray-600">Total Fields</p>
+                    <p className="text-lg lg:text-xl font-bold text-gray-900">{systemStats.totalFields}</p>
                   </div>
                 </div>
               </div>
@@ -169,26 +174,26 @@ export default function UmbrellaAdminDashboard() {
                   <MonthlySessionsChart userType="umbrella-admin" />
                 </div>
 
-                {/* Wings Performance */}
+                {/* Fields Performance */}
                 <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100 animate-fade-in" style={{ animationDelay: '500ms' }}>
-                  <h3 className="text-sm sm:text-base font-semibold text-gray-900 mb-4">Wings Performance</h3>
+                  <h3 className="text-sm sm:text-base font-semibold text-gray-900 mb-4">Fields Performance</h3>
                   <div className="space-y-3">
-                    {wingPerformance.map((wing, index) => (
-                      <div key={wing.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                    {fieldPerformance.map((field, index) => (
+                      <div key={field.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
                         <div className="flex-1">
-                          <div className="font-medium text-gray-900 text-sm">{wing.name}</div>
+                          <div className="font-medium text-gray-900 text-sm">{field.name}</div>
                           <div className="text-xs text-gray-500">
-                            {wing.studentsCount} students • {wing.revenue?.toLocaleString()} RWF
+                            {field.studentsCount} students • {field.totalRevenue?.toLocaleString()} RWF
                           </div>
                         </div>
                         <div className="flex items-center gap-3">
                           <div className="w-16 bg-gray-200 rounded-full h-2">
                             <div
                               className="bg-yellow-600 h-2 rounded-full transition-all duration-1000"
-                              style={{ width: `${wing.performance}%` }}
+                              style={{ width: `${field.performance}%` }}
                             ></div>
                           </div>
-                          <span className="text-xs font-medium text-gray-900 w-8">{Math.round(wing.performance)}%</span>
+                          <span className="text-xs font-medium text-gray-900 w-8">{Math.round(field.performance)}%</span>
                         </div>
                       </div>
                     ))}
@@ -212,14 +217,14 @@ export default function UmbrellaAdminDashboard() {
                   <h3 className="text-sm sm:text-base font-semibold text-gray-900 mb-4">Quick Actions</h3>
                   <div className="space-y-3">
                     <button
-                      onClick={() => navigate('/dashboard/umbrella-admin/wings')}
+                      onClick={() => navigate('/dashboard/umbrella-admin/fields')}
                       className="w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors group"
                     >
                       <div className="flex items-center gap-3">
                         <Building2 className="w-4 h-4 text-gray-500 group-hover:text-yellow-600" />
                         <div>
-                          <div className="font-medium text-gray-900 text-sm">Manage Wings</div>
-                          <div className="text-xs text-gray-500">View all wing performance</div>
+                          <div className="font-medium text-gray-900 text-sm">Manage Fields</div>
+                          <div className="text-xs text-gray-500">View all field performance</div>
                         </div>
                       </div>
                     </button>

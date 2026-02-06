@@ -26,7 +26,7 @@ export default function ReferralPage() {
     }
     console.log('Selected source:', selectedSource);
     // Navigate to availabilityr page
-    router.push('/auth/student/choose-wing');
+    router.push('/auth/student/choose-field');
   };
 
   return (

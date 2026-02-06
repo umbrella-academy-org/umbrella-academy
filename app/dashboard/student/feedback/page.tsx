@@ -22,10 +22,10 @@ export default function StudentFeedbackPage() {
     }
 
     if (!authLoading && user && user.role !== 'student') {
-      const dashboardRoutes = {
+      const dashboardRoutes: Record<string, string> = {
         'trainer': '/dashboard/trainer',
         'mentor': '/dashboard/mentor',
-        'wing-admin': '/dashboard/wing-admin',
+        'field-admin': '/dashboard/field-admin',
         'umbrella-admin': '/dashboard/umbrella-admin'
       };
       navigate(dashboardRoutes[user.role] || '/');
@@ -81,7 +81,7 @@ export default function StudentFeedbackPage() {
               <div className="lg:col-span-2">
                 <div className="bg-white border border-gray-200 rounded-lg p-6">
                   <h2 className="text-lg font-semibold text-gray-900 mb-4">Submit Feedback</h2>
-                  
+
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>

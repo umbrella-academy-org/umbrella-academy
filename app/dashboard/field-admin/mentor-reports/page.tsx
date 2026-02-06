@@ -24,10 +24,10 @@ interface MentorReport {
   };
   submittedAt: string;
   status: 'pending' | 'reviewed' | 'approved';
-  wingAdminNotes?: string;
+  fieldAdminNotes?: string;
 }
 
-export default function WingAdminMentorReportsPage() {
+export default function FieldAdminMentorReportsPage() {
   const [selectedReport, setSelectedReport] = useState<string | null>(null);
   const [filterStatus, setFilterStatus] = useState('all');
   const [filterType, setFilterType] = useState('all');
@@ -75,7 +75,7 @@ export default function WingAdminMentorReportsPage() {
       },
       submittedAt: '2023-12-31T18:00:00Z',
       status: 'approved',
-      wingAdminNotes: 'Excellent quarterly performance. Approved budget increase for trainer expansion and resource development.'
+      fieldAdminNotes: 'Excellent quarterly performance. Approved budget increase for trainer expansion and resource development.'
     },
     {
       id: 'mr-3',
@@ -97,7 +97,7 @@ export default function WingAdminMentorReportsPage() {
       },
       submittedAt: '2024-01-16T09:30:00Z',
       status: 'reviewed',
-      wingAdminNotes: 'Good incident handling. Approved implementation of automated scheduling system.'
+      fieldAdminNotes: 'Good incident handling. Approved implementation of automated scheduling system.'
     }
   ];
 
@@ -157,14 +157,14 @@ export default function WingAdminMentorReportsPage() {
 
   return (
     <div className="flex h-screen bg-white">
-      <Sidebar activeItem="Mentor Reports" userType="wing-admin" />
+      <Sidebar activeItem="Mentor Reports" userType="field-admin" />
 
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
         <main className="flex-1 overflow-auto">
           <div className="p-3 lg:p-6">
             <div className="mb-8">
               <h1 className="text-2xl font-semibold text-gray-900 mb-1">Mentor Reports</h1>
-              <p className="text-sm text-gray-500">Review and manage reports submitted by mentors in your wing.</p>
+              <p className="text-sm text-gray-500">Review and manage reports submitted by mentors in your field.</p>
             </div>
 
             {/* Summary Stats */}
@@ -211,7 +211,7 @@ export default function WingAdminMentorReportsPage() {
               <div className="p-4 border-b border-gray-200">
                 <div className="flex items-center justify-between">
                   <h3 className="font-semibold text-gray-900">Reports ({filteredReports.length})</h3>
-                  
+
                   {/* Filters */}
                   <div className="flex gap-3">
                     <div>
@@ -242,7 +242,7 @@ export default function WingAdminMentorReportsPage() {
                   </div>
                 </div>
               </div>
-              
+
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead className="bg-gray-50">
@@ -376,7 +376,7 @@ export default function WingAdminMentorReportsPage() {
                     </button>
                   </>
                 )}
-                <button 
+                <button
                   onClick={() => setSelectedReport(null)}
                   className="text-gray-400 hover:text-gray-600 p-2 hover:bg-gray-100 rounded-full"
                 >
@@ -453,16 +453,16 @@ export default function WingAdminMentorReportsPage() {
                 <div className="border-t pt-6">
                   <h3 className="flex items-center gap-2 font-semibold text-gray-900 mb-3">
                     <MessageSquare className="w-5 h-5 text-purple-500" />
-                    Wing Admin Notes
+                    Field Admin Notes
                   </h3>
-                  {selectedReportData.wingAdminNotes ? (
+                  {selectedReportData.fieldAdminNotes ? (
                     <div className="p-4 bg-purple-50 rounded-lg border border-purple-200 mb-4">
-                      <p className="text-purple-800">{selectedReportData.wingAdminNotes}</p>
+                      <p className="text-purple-800">{selectedReportData.fieldAdminNotes}</p>
                     </div>
                   ) : (
                     <p className="text-gray-500 text-sm mb-4">No admin notes yet.</p>
                   )}
-                  
+
                   <div className="flex gap-3">
                     <textarea
                       value={adminNotes}

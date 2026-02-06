@@ -4,7 +4,7 @@ import Sidebar from '@/components/dashboard/Sidebar';
 import TrainersTable from '@/components/wing-admin/TrainersTable';
 import { Users, UserCheck, UserX, TrendingUp } from 'lucide-react';
 
-export default function WingAdminTrainersPage() {
+export default function FieldAdminTrainersPage() {
   const trainers = [
     {
       id: 1,
@@ -44,7 +44,7 @@ export default function WingAdminTrainersPage() {
 
   return (
     <div className="flex h-screen bg-white">
-      <Sidebar activeItem="Trainers" userType="wing-admin" />
+      <Sidebar activeItem="Trainers" userType="field-admin" />
 
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
         <main className="flex-1 overflow-auto">

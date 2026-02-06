@@ -4,10 +4,15 @@ import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
 import { User, Mail, Shield, Bell, Calendar, MapPin, Camera, Edit2, Check, X, Phone, Globe, BookOpen, Briefcase, Award, ChevronRight, Settings, Star, Zap } from 'lucide-react';
 import { useAuth } from '@/contexts';
+import { TrainerUser } from '@/types';
 
 export default function TrainerProfilePage() {
     const { user } = useAuth();
     const [isEditing, setIsEditing] = useState(false);
+
+    // Cast user to TrainerUser if available
+    const trainerUser = user as TrainerUser;
+
     const [profileData, setProfileData] = useState({
         name: user?.name || 'Demi Wilkinson',
         email: user?.email || 'd.wilkinson@dreamize.rw',
@@ -16,7 +21,7 @@ export default function TrainerProfilePage() {
         bio: 'Senior Software Engineer with 8+ years of experience in React, Node.js and Cloud Architecture. Passionate about mentoring the next generation of African developers.',
         expertise: ['Full Stack Development', 'Cloud Architecture', 'React & Next.js', 'System Design'],
         experience: '8+ Years',
-        wing: user?.wingId || 'Software Engineering',
+        field: trainerUser?.fieldId || 'Software Engineering',
         joinDate: user?.joinDate || 'Jan 2023'
     });
 
@@ -62,7 +67,7 @@ export default function TrainerProfilePage() {
                                             </div>
                                             <p className="text-gray-500 font-semibold flex items-center gap-2 mt-1.5">
                                                 <Briefcase className="w-4.5 h-4.5 text-yellow-600" />
-                                                <span className="text-gray-600">{profileData.wing} Wing</span>
+                                                <span className="text-gray-600 capitalize">{profileData.field.replace(/-/g, ' ')} Field</span>
                                                 <span className="w-1 h-1 bg-gray-300 rounded-full" />
                                                 <span className="text-gray-400">Senior Instructor</span>
                                             </p>
@@ -271,7 +276,7 @@ export default function TrainerProfilePage() {
                                     <div className="space-y-3">
                                         <SettingsItem icon={<Shield className="w-4.5 h-4.5" />} label="Security Settings" color="yellow" />
                                         <SettingsItem icon={<Bell className="w-4.5 h-4.5" />} label="Teaching Alerts" color="blue" />
-                                        <SettingsItem icon={<Globe className="w-4.5 h-4.5" />} label="Wing Visibility" color="purple" />
+                                        <SettingsItem icon={<Globe className="w-4.5 h-4.5" />} label="Field Visibility" color="purple" />
                                     </div>
                                 </div>
 

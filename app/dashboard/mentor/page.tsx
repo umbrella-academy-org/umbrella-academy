@@ -29,10 +29,10 @@ export default function MentorDashboard() {
 
     if (!authLoading && user && user.role !== 'mentor') {
       // Redirect to appropriate dashboard based on role
-      const dashboardRoutes = {
+      const dashboardRoutes: Record<string, string> = {
         'student': '/dashboard/student',
         'trainer': '/dashboard/trainer',
-        'wing-admin': '/dashboard/wing-admin',
+        'field-admin': '/dashboard/field-admin',
         'umbrella-admin': '/dashboard/umbrella-admin'
       };
       navigate(dashboardRoutes[user.role] || '/');
