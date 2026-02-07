@@ -139,8 +139,8 @@ export default function MentorReportsPage() {
     });
   };
 
-  const filteredReports = filterStatus === 'all' 
-    ? reports 
+  const filteredReports = filterStatus === 'all'
+    ? reports
     : reports.filter(report => report.status === filterStatus);
 
   return (
@@ -149,11 +149,11 @@ export default function MentorReportsPage() {
       <div className="flex-1 p-8">
         <div className="max-w-6xl mx-auto">
           <h1 className="text-3xl font-bold text-gray-900 mb-8">Trainer Reports</h1>
-          
+
           {/* Filter Controls */}
           <div className="mb-6">
-            <select 
-              value={filterStatus} 
+            <select
+              value={filterStatus}
               onChange={(e) => setFilterStatus(e.target.value)}
               className="px-4 py-2 border border-gray-300 rounded-lg"
             >
@@ -170,27 +170,27 @@ export default function MentorReportsPage() {
             <div className="p-4 border-b border-gray-200">
               <h3 className="font-semibold text-gray-900">Reports ({filteredReports.length})</h3>
             </div>
-            
+
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead className="bg-gray-50">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500  ">
                       Report Title
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500  ">
                       Student
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500  ">
                       Trainer
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500  ">
                       Session Date
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500  ">
                       Status
                     </th>
-                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500  ">
                       Actions
                     </th>
                   </tr>

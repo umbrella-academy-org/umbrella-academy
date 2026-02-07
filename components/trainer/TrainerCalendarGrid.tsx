@@ -20,11 +20,11 @@ interface Session {
   status: 'confirmed' | 'pending' | 'cancelled';
 }
 
-export default function TrainerCalendarGrid({ 
-  selectedDate, 
-  onDateSelect, 
-  viewMode, 
-  onViewModeChange 
+export default function TrainerCalendarGrid({
+  selectedDate,
+  onDateSelect,
+  viewMode,
+  onViewModeChange
 }: TrainerCalendarGridProps) {
   const [currentDate, setCurrentDate] = useState(selectedDate);
 
@@ -86,15 +86,15 @@ export default function TrainerCalendarGrid({
     const daysInMonth = getDaysInMonth(currentDate);
     const firstDay = getFirstDayOfMonth(currentDate);
     const today = new Date();
-    const isCurrentMonth = currentDate.getMonth() === today.getMonth() && 
-                          currentDate.getFullYear() === today.getFullYear();
-    
+    const isCurrentMonth = currentDate.getMonth() === today.getMonth() &&
+      currentDate.getFullYear() === today.getFullYear();
+
     const days = [];
-    
+
     // Previous month's trailing days
     const prevMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 0);
     const prevMonthDays = prevMonth.getDate();
-    
+
     for (let i = firstDay - 1; i >= 0; i--) {
       days.push(
         <div
@@ -105,29 +105,27 @@ export default function TrainerCalendarGrid({
         </div>
       );
     }
-    
+
     // Current month days
     for (let day = 1; day <= daysInMonth; day++) {
       const isToday = isCurrentMonth && day === today.getDate();
-      const isSelected = selectedDate.getDate() === day && 
-                        selectedDate.getMonth() === currentDate.getMonth() &&
-                        selectedDate.getFullYear() === currentDate.getFullYear();
-      
+      const isSelected = selectedDate.getDate() === day &&
+        selectedDate.getMonth() === currentDate.getMonth() &&
+        selectedDate.getFullYear() === currentDate.getFullYear();
+
       // Mock sessions for certain days
       const daySessions = day === 15 ? sessions : day === 20 ? [sessions[0]] : [];
-      
+
       days.push(
         <div
           key={day}
           onClick={() => onDateSelect(new Date(currentDate.getFullYear(), currentDate.getMonth(), day))}
-          className={`min-h-[120px] p-2 border border-gray-200 cursor-pointer transition-all duration-200 hover:bg-gray-50 ${
-            isSelected ? 'bg-yellow-50 border-yellow-300' : 'bg-white'
-          } ${isToday ? 'ring-2 ring-blue-500' : ''}`}
+          className={`min-h-[120px] p-2 border border-gray-200 cursor-pointer transition-all duration-200 hover:bg-gray-50 ${isSelected ? 'bg-yellow-50 border-yellow-300' : 'bg-white'
+            } ${isToday ? 'ring-2 ring-blue-500' : ''}`}
         >
           <div className="flex items-center justify-between mb-2">
-            <span className={`text-sm font-medium ${
-              isToday ? 'text-blue-600' : isSelected ? 'text-yellow-600' : 'text-gray-900'
-            }`}>
+            <span className={`text-sm font-medium ${isToday ? 'text-blue-600' : isSelected ? 'text-yellow-600' : 'text-gray-900'
+              }`}>
               {day}
             </span>
             {daySessions.length > 0 && (
@@ -136,19 +134,18 @@ export default function TrainerCalendarGrid({
               </button>
             )}
           </div>
-          
+
           {/* Sessions */}
           <div className="space-y-1">
             {daySessions.slice(0, 3).map((session, index) => (
               <div
                 key={session.id}
-                className={`text-xs p-1.5 rounded text-white truncate ${
-                  session.status === 'confirmed' 
-                    ? 'bg-green-500' 
-                    : session.status === 'pending'
-                      ? 'bg-yellow-500'
-                      : 'bg-red-500'
-                }`}
+                className={`text-xs p-1.5 rounded text-white truncate ${session.status === 'confirmed'
+                  ? 'bg-green-500'
+                  : session.status === 'pending'
+                    ? 'bg-yellow-500'
+                    : 'bg-red-500'
+                  }`}
               >
                 <div className="flex items-center gap-1">
                   <Clock className="w-2.5 h-2.5" />
@@ -166,7 +163,7 @@ export default function TrainerCalendarGrid({
         </div>
       );
     }
-    
+
     // Next month's leading days
     const remainingCells = 42 - days.length;
     for (let day = 1; day <= remainingCells; day++) {
@@ -179,7 +176,7 @@ export default function TrainerCalendarGrid({
         </div>
       );
     }
-    
+
     return days;
   };
 
@@ -214,17 +211,16 @@ export default function TrainerCalendarGrid({
               <button
                 key={mode}
                 onClick={() => onViewModeChange(mode)}
-                className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all duration-200 ${
-                  viewMode === mode
-                    ? 'bg-white text-gray-900 shadow-sm'
-                    : 'text-gray-600 hover:text-gray-900'
-                }`}
+                className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all duration-200 ${viewMode === mode
+                  ? 'bg-white text-gray-900 shadow-sm'
+                  : 'text-gray-600 hover:text-gray-900'
+                  }`}
               >
                 {mode.charAt(0).toUpperCase() + mode.slice(1)}
               </button>
             ))}
           </div>
-          
+
           <button className="px-3 py-2 bg-yellow-600 text-white text-sm font-medium rounded-lg hover:bg-yellow-700 transition-all duration-200 interactive-button">
             <Plus className="w-4 h-4 mr-1" />
             Add Session
@@ -242,7 +238,7 @@ export default function TrainerCalendarGrid({
             </div>
           ))}
         </div>
-        
+
         {/* Calendar Days */}
         <div className="grid grid-cols-7 gap-0 border border-gray-200 rounded-lg overflow-hidden">
           {renderCalendarDays()}
@@ -265,7 +261,7 @@ export default function TrainerCalendarGrid({
             <span className="text-gray-600">Cancelled</span>
           </div>
         </div>
-        
+
         <div className="text-sm text-gray-500">
           Click on any day to schedule a session
         </div>

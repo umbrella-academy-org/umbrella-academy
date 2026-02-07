@@ -298,7 +298,7 @@ export default function ChooseTrainerPage() {
                 type="submit"
                 className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-colors"
               >
-                Continue to Pick Trainer
+                Chat with your Trainer
               </button>
 
               <div className="flex justify-center gap-2 pt-6">

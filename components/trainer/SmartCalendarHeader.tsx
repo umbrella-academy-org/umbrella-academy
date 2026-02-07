@@ -16,11 +16,11 @@ export default function SmartCalendarHeader() {
         </div>
 
         <div className="flex items-center gap-3">
-          <button className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-100 text-gray-600 text-xs font-bold uppercase   rounded-lg hover:bg-gray-50 hover:border-yellow-200 transition-all duration-300 shadow-sm">
+          <button className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-100 text-gray-600 text-xs font-bold    rounded-lg hover:bg-gray-50 hover:border-yellow-200 transition-all duration-300 shadow-sm">
             <Filter className="w-3.5 h-3.5" />
             <span className="hidden sm:inline">Filter</span>
           </button>
-          <button className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-100 text-gray-600 text-xs font-bold uppercase   rounded-lg hover:bg-gray-50 hover:border-yellow-200 transition-all duration-300 shadow-sm">
+          <button className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-100 text-gray-600 text-xs font-bold    rounded-lg hover:bg-gray-50 hover:border-yellow-200 transition-all duration-300 shadow-sm">
             <Download className="w-3.5 h-3.5" />
             <span className="hidden sm:inline">Export</span>
           </button>
@@ -37,7 +37,7 @@ export default function SmartCalendarHeader() {
         ].map((stat, i) => (
           <div key={i} className="bg-white rounded-lg p-4 text-center shadow-sm border border-gray-100/50">
             <div className="text-xl font-black text-gray-900  ">{stat.value}</div>
-            <div className="text-[10px] font-bold text-gray-400 uppercase   mt-1">{stat.label}</div>
+            <div className="text-[10px] font-bold text-gray-400    mt-1">{stat.label}</div>
           </div>
         ))}
       </div>

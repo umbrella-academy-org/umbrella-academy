@@ -56,7 +56,7 @@ export default function TrainerReportsPage() {
       lastSession: '2024-01-20'
     },
     {
-      id: 'st-2', 
+      id: 'st-2',
       name: 'Bob Smith',
       avatar: 'BS',
       course: 'React Fundamentals',
@@ -160,27 +160,27 @@ export default function TrainerReportsPage() {
               <div className="p-4 border-b border-gray-200">
                 <h3 className="font-semibold text-gray-900">Recent Reports ({reports.length})</h3>
               </div>
-              
+
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead className="bg-gray-50">
                     <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500  ">
                         Report Title
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500  ">
                         Student
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500  ">
                         Session Date
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500  ">
                         Duration
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500  ">
                         Status
                       </th>
-                      <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-right text-xs font-medium text-gray-500  ">
                         Actions
                       </th>
                     </tr>

@@ -45,7 +45,7 @@ export default function MentorAvailabilityPage() {
                         <svg className="w-5 h-5 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M15 19l-7-7 7-7" />
                         </svg>
-                        <span className="text-xs font-black uppercase  ">Go back</span>
+                        <span className="text-xs font-black   ">Go back</span>
                     </button>
 
                     <div className="flex flex-col items-center justify-center flex-1">

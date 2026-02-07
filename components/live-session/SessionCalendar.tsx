@@ -98,7 +98,7 @@ export default function SessionCalendar({ selectedDateRange, onDateRangeChange }
         <div className="mt-4">
           <div className="grid grid-cols-7 gap-1 mb-2">
             {weekDays.map((day) => (
-              <div key={day} className="text-center text-[10px] font-semibold text-gray-400 uppercase tracking-wider py-2">
+              <div key={day} className="text-center text-[10px] font-semibold text-gray-400   py-2">
                 {day}
               </div>
             ))}

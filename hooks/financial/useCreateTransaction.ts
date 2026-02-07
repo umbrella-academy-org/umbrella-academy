@@ -27,8 +27,8 @@ export function useCreateTransaction(): UseCreateTransactionReturn {
 
     try {
       // Check permissions based on transaction type
-      const canCreateTransaction = 
-        hasPermission('manage_system') || 
+      const canCreateTransaction =
+        hasPermission('manage_system') ||
         hasPermission('view_wallet') ||
         (data.type === 'payment' && currentUser?.role === 'student');
 

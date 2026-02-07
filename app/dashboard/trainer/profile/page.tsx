@@ -50,7 +50,7 @@ export default function TrainerProfilePage() {
                                 <div className="flex flex-col md:flex-row md:items-end -mt-16 gap-8">
                                     <div className="relative group">
                                         <div className="w-32 h-32 rounded-full bg-white p-1.5 shadow-2xl shadow-yellow-200/50 transform group-hover:scale-105 transition-all duration-500">
-                                            <div className="w-full h-full bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-full flex items-center justify-center text-yellow-700 text-4xl font-extrabold border border-yellow-200 uppercase  er">
+                                            <div className="w-full h-full bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-full flex items-center justify-center text-yellow-700 text-4xl font-extrabold border border-yellow-200   er">
                                                 {profileData.name.split(' ').map(n => n[0]).join('')}
                                             </div>
                                         </div>
@@ -63,7 +63,7 @@ export default function TrainerProfilePage() {
                                         <div>
                                             <div className="flex items-center gap-3">
                                                 <h1 className="text-3xl font-semibold text-gray-900  ">{profileData.name}</h1>
-                                                <div className="px-2.5 py-1 bg-yellow-50 text-yellow-700 border border-yellow-100 rounded-full text-[10px] font-semibold uppercase tracking-wider">CERTIFIED TRAINER</div>
+                                                <div className="px-2.5 py-1 bg-yellow-50 text-yellow-700 border border-yellow-100 rounded-full text-[10px] font-semibold  ">CERTIFIED TRAINER</div>
                                             </div>
                                             <p className="text-gray-500 font-semibold flex items-center gap-2 mt-1.5">
                                                 <Briefcase className="w-4.5 h-4.5 text-yellow-600" />
@@ -117,7 +117,7 @@ export default function TrainerProfilePage() {
 
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
                                         <div className="space-y-2">
-                                            <label className="text-xs font-semibold text-gray-400 uppercase tracking-[0.2em] ml-1">Full Name</label>
+                                            <label className="text-xs font-semibold text-gray-400   ml-1">Full Name</label>
                                             {isEditing ? (
                                                 <input
                                                     type="text"
@@ -132,7 +132,7 @@ export default function TrainerProfilePage() {
                                             )}
                                         </div>
                                         <div className="space-y-2">
-                                            <label className="text-xs font-semibold text-gray-400 uppercase tracking-[0.2em] ml-1">Email Address</label>
+                                            <label className="text-xs font-semibold text-gray-400   ml-1">Email Address</label>
                                             {isEditing ? (
                                                 <input
                                                     type="email"
@@ -148,7 +148,7 @@ export default function TrainerProfilePage() {
                                             )}
                                         </div>
                                         <div className="space-y-2">
-                                            <label className="text-xs font-semibold text-gray-400 uppercase tracking-[0.2em] ml-1">Phone Number</label>
+                                            <label className="text-xs font-semibold text-gray-400   ml-1">Phone Number</label>
                                             {isEditing ? (
                                                 <input
                                                     type="text"
@@ -164,7 +164,7 @@ export default function TrainerProfilePage() {
                                             )}
                                         </div>
                                         <div className="space-y-2">
-                                            <label className="text-xs font-semibold text-gray-400 uppercase tracking-[0.2em] ml-1">Location</label>
+                                            <label className="text-xs font-semibold text-gray-400   ml-1">Location</label>
                                             {isEditing ? (
                                                 <input
                                                     type="text"
@@ -181,7 +181,7 @@ export default function TrainerProfilePage() {
                                         </div>
                                     </div>
                                     <div className="mt-10 pt-10 border-t border-gray-50">
-                                        <label className="block text-xs font-semibold text-gray-400 uppercase tracking-[0.2em] ml-1 mb-4">Professional Bio</label>
+                                        <label className="block text-xs font-semibold text-gray-400   ml-1 mb-4">Professional Bio</label>
                                         {isEditing ? (
                                             <textarea
                                                 value={profileData.bio}
@@ -207,10 +207,10 @@ export default function TrainerProfilePage() {
 
                                     <div className="space-y-8">
                                         <div>
-                                            <label className="block text-xs font-semibold text-gray-400 uppercase tracking-[0.2em] ml-1 mb-4">Top Skills & Specialties</label>
+                                            <label className="block text-xs font-semibold text-gray-400   ml-1 mb-4">Top Skills & Specialties</label>
                                             <div className="flex flex-wrap gap-3">
                                                 {profileData.expertise.map((skill, i) => (
-                                                    <span key={i} className="px-4 py-2 bg-yellow-50 text-yellow-700 border border-yellow-100 rounded-lg text-xs font-semibold uppercase tracking-wider shadow-sm">
+                                                    <span key={i} className="px-4 py-2 bg-yellow-50 text-yellow-700 border border-yellow-100 rounded-lg text-xs font-semibold   shadow-sm">
                                                         {skill}
                                                     </span>
                                                 ))}
@@ -228,7 +228,7 @@ export default function TrainerProfilePage() {
                                                     <Zap className="w-7 h-7" />
                                                 </div>
                                                 <div>
-                                                    <p className="text-xs font-semibold text-yellow-800/60 uppercase   mb-1">Experience</p>
+                                                    <p className="text-xs font-semibold text-yellow-800/60    mb-1">Experience</p>
                                                     <p className="text-lg font-semibold text-gray-900">{profileData.experience}</p>
                                                 </div>
                                             </div>
@@ -255,11 +255,11 @@ export default function TrainerProfilePage() {
                                     </h3>
                                     <div className="space-y-4">
                                         <div className="p-6 bg-gray-50 rounded-lg border border-gray-100 flex justify-between items-center group hover:bg-white hover:shadow-lg transition-all">
-                                            <span className="text-sm text-gray-500 font-semibold uppercase tracking-wider">Students</span>
+                                            <span className="text-sm text-gray-500 font-semibold  ">Students</span>
                                             <span className="text-2xl font-semibold text-gray-900">124</span>
                                         </div>
                                         <div className="p-6 bg-gray-50 rounded-lg border border-gray-100 flex justify-between items-center group hover:bg-white hover:shadow-lg transition-all border-l-4 border-l-yellow-500">
-                                            <span className="text-sm text-gray-500 font-semibold uppercase tracking-wider">Avg. Rating</span>
+                                            <span className="text-sm text-gray-500 font-semibold  ">Avg. Rating</span>
                                             <div className="flex items-center gap-2">
                                                 <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
                                                 <span className="text-2xl font-semibold text-gray-900">4.9</span>
@@ -282,7 +282,7 @@ export default function TrainerProfilePage() {
 
                                 <div className="bg-gray-900 rounded-lg p-8 text-white relative overflow-hidden group">
                                     <div className="relative z-10 text-center">
-                                        <div className="inline-flex items-center gap-2 px-3 py-1 bg-yellow-500/20 text-yellow-400 rounded-full text-[10px] font-semibold tracking-[0.2em] mb-4 uppercase">
+                                        <div className="inline-flex items-center gap-2 px-3 py-1 bg-yellow-500/20 text-yellow-400 rounded-full text-[10px] font-semibold  mb-4 ">
                                             <Shield className="w-3 h-3" />
                                             Identity Verified
                                         </div>

@@ -51,7 +51,7 @@ export default function StudentAvailabilityPage() {
                             <svg className="w-5 h-5 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M15 19l-7-7 7-7" />
                             </svg>
-                            <span className="text-xs font-black uppercase">Go back</span>
+                            <span className="text-xs font-black ">Go back</span>
                         </button>
 
                         <div className="text-center">
@@ -135,7 +135,7 @@ export default function StudentAvailabilityPage() {
                                     type="submit"
                                     className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-colors"
                                 >
-                                    Continue to Field Selection
+                                    Continue to Choose Trainer
                                 </button>
 
                                 {/* Progress dots */}

@@ -7,7 +7,7 @@ export default function UpcomingSessions() {
     <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
       <div className="flex items-center justify-between mb-6">
         <h3 className="text-lg font-bold text-gray-900  ">Upcoming Sessions</h3>
-        <button className="text-yellow-600 hover:text-yellow-700 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 transition-colors">
+        <button className="text-yellow-600 hover:text-yellow-700 text-xs font-bold   flex items-center gap-1.5 transition-colors">
           <Edit className="w-3.5 h-3.5" />
           Customize
         </button>
@@ -45,8 +45,8 @@ export default function UpcomingSessions() {
 
             <div className="flex-1 -mt-1">
               <div className="flex items-center justify-between mb-1">
-                <span className="text-[10px] font-bold text-gray-400 uppercase  ">{session.time}</span>
-                <span className={`text-[9px] font-black uppercase  er px-1.5 py-0.5 rounded ${session.status === 'active' ? 'bg-blue-50 text-blue-600' :
+                <span className="text-[10px] font-bold text-gray-400   ">{session.time}</span>
+                <span className={`text-[9px] font-black   er px-1.5 py-0.5 rounded ${session.status === 'active' ? 'bg-blue-50 text-blue-600' :
                   session.status === 'urgent' ? 'bg-green-50 text-green-600' :
                     'bg-yellow-50 text-yellow-600'
                   }`}>

@@ -39,7 +39,7 @@ export default function SessionTabs({ activeTab, onTabChange }: SessionTabsProps
       </div>
 
       <div className="pr-4 hidden md:block">
-        <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider  ">Session Status</p>
+        <p className="text-xs font-semibold text-gray-400    ">Session Status</p>
       </div>
     </div>
 

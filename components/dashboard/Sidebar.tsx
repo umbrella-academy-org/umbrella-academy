@@ -463,7 +463,7 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
             </div>
             <div className="min-w-0">
               <div className="font-bold text-lg text-white leading-tight truncate">Umbrella Academy</div>
-              <div className="text-xs font-medium text-gray-400 mt-0.5 uppercase  ">{userInfo.displayName}</div>
+              <div className="text-xs font-medium text-gray-400 mt-0.5   ">{userInfo.displayName}</div>
             </div>
           </div>
         </div>
@@ -571,8 +571,8 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
                   }
                 }}
                 className={`w-full px-3 py-2 rounded-lg text-xs font-medium transition-colors ${devNewUserMode
-                    ? 'bg-yellow-600 text-white'
-                    : 'bg-gray-800 text-gray-400 hover:text-white'
+                  ? 'bg-yellow-600 text-white'
+                  : 'bg-gray-800 text-gray-400 hover:text-white'
                   }`}
               >
                 DEV: {devNewUserMode ? 'New User Mode ON' : 'New User Mode OFF'}

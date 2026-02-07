@@ -114,16 +114,16 @@ export default function StudentsTable({ searchQuery, selectedStatus, selectedCou
   // Filter students based on search and filters
   const filteredStudents = useMemo(() => {
     return students.filter(student => {
-      const matchesSearch = searchQuery === '' || 
+      const matchesSearch = searchQuery === '' ||
         student.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         student.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
         student.course.toLowerCase().includes(searchQuery.toLowerCase());
-      
+
       const matchesStatus = selectedStatus === 'all' || student.status === selectedStatus;
-      
-      const matchesCourse = selectedCourse === 'all' || 
+
+      const matchesCourse = selectedCourse === 'all' ||
         student.course.toLowerCase().includes(selectedCourse.replace('-', ' '));
-      
+
       return matchesSearch && matchesStatus && matchesCourse;
     });
   }, [students, searchQuery, selectedStatus, selectedCourse]);
@@ -173,27 +173,26 @@ export default function StudentsTable({ searchQuery, selectedStatus, selectedCou
       </div>
     ),
     status: (
-      <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
-        student.status === 'active' ? 'bg-green-100 text-green-800' :
+      <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${student.status === 'active' ? 'bg-green-100 text-green-800' :
         student.status === 'inactive' ? 'bg-gray-100 text-gray-800' :
-        student.status === 'completed' ? 'bg-blue-100 text-blue-800' :
-        'bg-yellow-100 text-yellow-800'
-      }`}>
+          student.status === 'completed' ? 'bg-blue-100 text-blue-800' :
+            'bg-yellow-100 text-yellow-800'
+        }`}>
         ● {student.status.charAt(0).toUpperCase() + student.status.slice(1)}
       </span>
     ),
     progress: (
       <div className="flex items-center gap-2">
         <div className="flex-1 bg-gray-200 rounded-full h-2 w-20">
-          <div 
+          <div
             className="bg-gradient-to-r from-yellow-500 to-yellow-600 h-2 rounded-full transition-all duration-500"
             style={{ width: `${student.progress}%` }}
           />
         </div>
         <span className="text-sm font-medium text-gray-900">{student.progress}%</span>
         {student.trend === 'up' ? <TrendingUp className="w-3 h-3 text-green-500" /> :
-         student.trend === 'down' ? <TrendingDown className="w-3 h-3 text-red-500" /> :
-         <div className="w-3 h-3 bg-gray-400 rounded-full" />}
+          student.trend === 'down' ? <TrendingDown className="w-3 h-3 text-red-500" /> :
+            <div className="w-3 h-3 bg-gray-400 rounded-full" />}
       </div>
     ),
     sessions: (
