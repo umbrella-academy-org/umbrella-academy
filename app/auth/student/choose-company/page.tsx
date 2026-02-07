@@ -158,14 +158,14 @@ export default function ChooseCompanyPage() {
               })}
             </div>
 
-            {error && <p className="mb-8 text-sm font-bold text-red-500 text-center animate-bounce">{error}</p>}
+            {error && <p className="mb-8 text-sm font-semibold text-red-500 text-center animate-bounce">{error}</p>}
 
             {/* Main Action Call */}
             <div className="flex flex-col items-center gap-8">
               <button
                 type="submit"
                 disabled={!selectedCompanyId}
-                className={`w-full max-w-sm py-4 px-8 rounded-lg   transition-all duration-300 transform active:scale-95 ${selectedCompanyId
+                className={`w-full max-w-sm py-3 px-8 rounded-lg   transition-all duration-300 transform active:scale-95 ${selectedCompanyId
                   ? 'bg-yellow-600 text-white shadow-xl shadow-yellow-600/20 hover:bg-yellow-700 hover:-translate-y-1'
                   : 'bg-yellow-600 text-slate-500 cursor-not-allowed opacity-50'
                   }`}

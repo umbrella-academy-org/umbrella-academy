@@ -172,7 +172,7 @@ export default function FieldAdminWalletPage() {
                         <td className="py-4 px-6">
                           <div className="flex items-center gap-3">
                             <div className={`w-8 h-8 rounded flex items-center justify-center shrink-0 ${transaction.type === 'income' ? 'bg-green-100' :
-                                transaction.type === 'withdrawal' ? 'bg-red-100' : 'bg-orange-100'
+                              transaction.type === 'withdrawal' ? 'bg-red-100' : 'bg-orange-100'
                               }`}>
                               {getTransactionIcon(transaction.type)}
                             </div>

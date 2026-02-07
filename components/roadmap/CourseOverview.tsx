@@ -17,7 +17,7 @@ export default function CourseOverview() {
 
           <div>
             <div className="flex items-center gap-2 mb-1">
-              <span className="px-2 py-0.5 bg-yellow-100 text-yellow-700 text-[10px] font-bold uppercase tracking-wider rounded-md">
+              <span className="px-2 py-0.5 bg-yellow-100 text-yellow-700 text-[10px] font-bold   rounded-md">
                 Active Roadmap
               </span>
               <div className="flex items-center gap-1">
@@ -37,7 +37,7 @@ export default function CourseOverview() {
         {/* Mentor Section */}
         <div className="flex items-center gap-4 bg-gray-50 px-5 py-3 rounded-lg border border-gray-100 group/mentor hover:bg-white hover:shadow-md transition-all duration-300">
           <div className="text-right">
-            <p className="text-[10px] text-gray-400 uppercase font-bold   mb-0.5">Your Mentor</p>
+            <p className="text-[10px] text-gray-400  font-bold   mb-0.5">Your Mentor</p>
             <p className="text-sm font-bold text-gray-900   mb-1">Demi Wilkinson</p>
             <p className="text-[11px] text-gray-500 font-medium">Principal Engineer</p>
           </div>

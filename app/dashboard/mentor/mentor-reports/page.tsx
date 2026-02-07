@@ -213,7 +213,7 @@ export default function MentorWingReportsPage() {
               <div className="p-4 border-b border-gray-200">
                 <div className="flex items-center justify-between">
                   <h3 className="font-semibold text-gray-900">Wing Reports ({filteredReports.length})</h3>
-                  
+
                   {/* Filters */}
                   <div className="flex gap-3">
                     <div>
@@ -244,30 +244,30 @@ export default function MentorWingReportsPage() {
                   </div>
                 </div>
               </div>
-              
+
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead className="bg-gray-50">
                     <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500  ">
                         Report Title
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500  ">
                         Wing
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500  ">
                         Type
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500  ">
                         Period
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500  ">
                         Completion Rate
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500  ">
                         Status
                       </th>
-                      <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-right text-xs font-medium text-gray-500  ">
                         Actions
                       </th>
                     </tr>
@@ -298,8 +298,8 @@ export default function MentorWingReportsPage() {
                           <div className="flex items-center">
                             <div className="text-sm font-medium text-gray-900">{report.completionRate}%</div>
                             <div className="ml-2 w-16 bg-gray-200 rounded-full h-2">
-                              <div 
-                                className="bg-green-500 h-2 rounded-full" 
+                              <div
+                                className="bg-green-500 h-2 rounded-full"
                                 style={{ width: `${report.completionRate}%` }}
                               ></div>
                             </div>
@@ -351,7 +351,7 @@ export default function MentorWingReportsPage() {
                   <span className="text-lg font-semibold text-gray-900">{selectedReport.period}</span>
                 </div>
               </div>
-              <button 
+              <button
                 onClick={closeReportModal}
                 className="text-gray-400 hover:text-gray-600 p-2 hover:bg-gray-100 rounded-full"
               >

@@ -134,17 +134,16 @@ export default function DataTable({
               {columns.map((column) => (
                 <th
                   key={column.key}
-                  className={`px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider ${
-                    column.sortable ? 'cursor-pointer hover:bg-gray-100' : ''
-                  }`}
+                  className={`px-4 py-3 text-left text-xs font-medium text-gray-500   ${column.sortable ? 'cursor-pointer hover:bg-gray-100' : ''
+                    }`}
                   style={{ width: column.width }}
                   onClick={() => column.sortable && handleSort(column.key)}
                 >
                   <div className="flex items-center gap-2">
                     {column.label}
                     {column.sortable && sortConfig?.key === column.key && (
-                      sortConfig.direction === 'asc' ? 
-                        <ChevronUp className="w-4 h-4" /> : 
+                      sortConfig.direction === 'asc' ?
+                        <ChevronUp className="w-4 h-4" /> :
                         <ChevronDown className="w-4 h-4" />
                     )}
                   </div>

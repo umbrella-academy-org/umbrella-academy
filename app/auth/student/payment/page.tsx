@@ -20,7 +20,7 @@ export default function PaymentPage() {
           <div className="w-full p-8">
             {/* Go back button */}
             <button
-              onClick={() => router.push('/post-signup/choose-field')}
+              onClick={() => router.back()}
               className="flex items-center gap-2 text-gray-600 mt-50 hover:text-gray-900 mb-8"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

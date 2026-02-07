@@ -27,7 +27,7 @@ export default function ChatInterface({ userType }: { userType: string }) {
     const [activeChat, setActiveChat] = useState<ChatContact | null>(null);
     const [message, setMessage] = useState('');
     const messagesEndRef = useRef<HTMLDivElement>(null);
-    const router=useRouter()
+    const router = useRouter()
 
     const contacts: ChatContact[] = [
         {
@@ -146,7 +146,7 @@ export default function ChatInterface({ userType }: { userType: string }) {
                                 </div>
                                 <div>
                                     <h3 className="font-bold text-gray-900 text-sm">{activeChat.name}</h3>
-                                    <p className="text-[10px] text-gray-500 font-medium uppercase  ">{activeChat.role} • {activeChat.online ? 'Online' : 'Away'}</p>
+                                    <p className="text-[10px] text-gray-500 font-medium   ">{activeChat.role} • {activeChat.online ? 'Online' : 'Away'}</p>
                                 </div>
                             </div>
                             <div className="flex items-center gap-2">
@@ -166,8 +166,8 @@ export default function ChatInterface({ userType }: { userType: string }) {
                         <div className="flex-1 overflow-y-auto p-6 space-y-4">
                             {mockMessages.map((msg) => (
                                 <div key={msg.id}
-                                onClick={()=>router.push('/post-signup/roadmap')}
-                                 className={`flex ${msg.isMe ? 'justify-end' : 'justify-start'} animate-fade-in`}>
+                                    onClick={() => router.push('/post-signup/roadmap')}
+                                    className={`flex ${msg.isMe ? 'justify-end' : 'justify-start'} animate-fade-in`}>
                                     <div className={`max-w-[70%] group ${msg.isMe ? 'items-end' : 'items-start'}`}>
                                         <div className={`px-4 py-3 rounded-2xl text-sm shadow-sm ${msg.isMe
                                             ? 'bg-yellow-600 text-white rounded-tr-none'

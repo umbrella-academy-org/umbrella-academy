@@ -50,7 +50,7 @@ export default function MentorProfilePage() {
                                 <div className="flex flex-col md:flex-row md:items-end -mt-16 gap-20">
                                     <div className="relative group">
                                         <div className="w-32 h-32 rounded-full bg-white p-1.5 shadow-2xl shadow-yellow-200/50 transform group-hover:scale-105 transition-all duration-500">
-                                            <div className="w-full h-full bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-full flex items-center justify-center text-yellow-700 text-4xl font-extrabold border border-yellow-200 uppercase">
+                                            <div className="w-full h-full bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-full flex items-center justify-center text-yellow-700 text-4xl font-extrabold border border-yellow-200 ">
                                                 {profileData.name.split(' ').map(n => n[0]).join('')}
                                             </div>
                                         </div>
@@ -63,7 +63,7 @@ export default function MentorProfilePage() {
                                         <div className=''>
                                             <div className="flex items-center gap-3">
                                                 <h1 className="text-2xl font-semibold text-gray-900  ">{profileData.name}</h1>
-                                                <div className="px-2 py-1 bg-yellow-50 text-yellow-700 border border-yellow-100 rounded-full text-[10px] font-black uppercase tracking-wider">ACADEMIC DIRECTOR</div>
+                                                <div className="px-2 py-1 bg-yellow-50 text-yellow-700 border border-yellow-100 rounded-full text-[10px] font-black  ">ACADEMIC DIRECTOR</div>
                                             </div>
                                             <p className="text-gray-500 font-semibold flex items-center gap-2 mt-2">
                                                 <Zap className="w-4.5 h-4.5 text-yellow-600" />
@@ -117,14 +117,14 @@ export default function MentorProfilePage() {
                                             </div>
                                         </div>
                                         <div className="space-y-2">
-                                            <label className="text-xs font-semibold text-gray-400 uppercase tracking-[0.2em] ml-1">Role Status</label>
+                                            <label className="text-xs font-semibold text-gray-400   ml-1">Role Status</label>
                                             <div className="px-5 py-3.5 bg-green-50/50 border border-green-100 rounded-[1.2rem] flex items-center gap-2">
                                                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                                                <p className="text-green-700 font-semibold text-xs uppercase  ">Active Member</p>
+                                                <p className="text-green-700 font-semibold text-xs   ">Active Member</p>
                                             </div>
                                         </div>
                                         <div className="space-y-2">
-                                            <label className="text-xs font-semibold text-gray-400 uppercase tracking-[0.2em] ml-1">Work Location</label>
+                                            <label className="text-xs font-semibold text-gray-400   ml-1">Work Location</label>
                                             <div className="px-5 py-3.5 bg-gray-50/50 border border-transparent rounded-[1.2rem] flex items-center justify-between">
                                                 <p className="text-gray-900 font-semibold">{profileData.location}</p>
                                                 <MapPin className="w-4 h-4 text-gray-300" />
@@ -133,7 +133,7 @@ export default function MentorProfilePage() {
                                     </div>
 
                                     <div className="mt-10 pt-10 border-t border-gray-50">
-                                        <label className="block text-xs font-bold text-gray-400 uppercase tracking-[0.2em] ml-1 mb-4">Focus & Mission</label>
+                                        <label className="block text-xs font-bold text-gray-400   ml-1 mb-4">Focus & Mission</label>
                                         <div className="p-6 bg-gray-50/50 rounded-lg border border-transparent shadow-inner">
                                             <p className="text-gray-700 font-medium leading-relaxed italic">"{profileData.bio}"</p>
                                         </div>
@@ -156,7 +156,7 @@ export default function MentorProfilePage() {
                                                 </div>
                                                 <div className="space-y-1">
                                                     <p className="text-lg font-semibold text-gray-900">Supervised Trainers</p>
-                                                    <p className="text-xs text-blue-800/60 font-bold uppercase  ">Profile Approval Access</p>
+                                                    <p className="text-xs text-blue-800/60 font-bold   ">Profile Approval Access</p>
                                                 </div>
                                             </div>
                                             <span className="text-3xl font-black text-blue-600">24</span>
@@ -169,7 +169,7 @@ export default function MentorProfilePage() {
                                                 </div>
                                                 <div className="space-y-1">
                                                     <p className="text-lg font-semibold text-gray-900">Active Roadmaps</p>
-                                                    <p className="text-xs text-purple-800/60 font-bold uppercase  ">Quality Assurance Flow</p>
+                                                    <p className="text-xs text-purple-800/60 font-bold   ">Quality Assurance Flow</p>
                                                 </div>
                                             </div>
                                             <span className="text-3xl font-black text-purple-600">182</span>

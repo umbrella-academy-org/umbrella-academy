@@ -142,7 +142,7 @@ export default function StudentProfilePage() {
 
                             {/* Bio Block */}
                             <div className="bg-white rounded-lg border border-gray-100 shadow-sm p-8 space-y-4">
-                                <h3 className="text-xs font-black text-gray-400 uppercase tracking-widest">About Me</h3>
+                                <h3 className="text-xs font-black text-gray-400  ">About Me</h3>
                                 <p className="text-sm font-medium text-gray-600 leading-relaxed italic">{profileData.bio}</p>
                                 <div className="flex gap-2 pt-2">
                                     <SocialLink icon={<Linkedin className="w-4 h-4" />} />
@@ -159,13 +159,13 @@ export default function StudentProfilePage() {
                             <div className="bg-white rounded-lg border border-gray-100 shadow-sm p-8 space-y-8">
                                 <div className="flex items-center justify-between">
                                     <h3 className="text-xl font-bold text-gray-900">Live Session Roadmap</h3>
-                                    <span className="text-[10px] font-black text-yellow-600 uppercase bg-yellow-50 px-2.5 py-1 rounded-full border border-yellow-100">Active Field: {profileData.field}</span>
+                                    <span className="text-[10px] font-black text-yellow-600  bg-yellow-50 px-2.5 py-1 rounded-full border border-yellow-100">Active Field: {profileData.field}</span>
                                 </div>
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                     {profileData.liveRoadmap.map((item, i) => (
                                         <div key={i} className={`p-5 rounded-lg border ${item.status === 'Completed' ? 'bg-green-50/30 border-green-100' : item.status === 'In Progress' ? 'bg-blue-50/30 border-blue-100' : 'bg-gray-50/30 border-gray-100'}`}>
                                             <div className="flex items-center justify-between mb-3">
-                                                <span className={`text-[9px] font-black uppercase px-2 py-0.5 rounded ${item.status === 'Completed' ? 'bg-green-100 text-green-700' : item.status === 'In Progress' ? 'bg-blue-100 text-blue-700' : 'bg-gray-200 text-gray-600'}`}>{item.status}</span>
+                                                <span className={`text-[9px] font-black  px-2 py-0.5 rounded ${item.status === 'Completed' ? 'bg-green-100 text-green-700' : item.status === 'In Progress' ? 'bg-blue-100 text-blue-700' : 'bg-gray-200 text-gray-600'}`}>{item.status}</span>
                                                 <Clock className="w-3.5 h-3.5 text-gray-400" />
                                             </div>
                                             <h4 className="font-bold text-gray-800 text-sm mb-1">{item.title}</h4>
@@ -184,7 +184,7 @@ export default function StudentProfilePage() {
                                             <div key={skill.name} className="space-y-2">
                                                 <div className="flex items-center justify-between text-xs font-bold">
                                                     <span className="text-gray-700">{skill.name}</span>
-                                                    <span className="text-gray-400 uppercase">{skill.level}</span>
+                                                    <span className="text-gray-400 ">{skill.level}</span>
                                                 </div>
                                                 <div className="h-1.5 w-full bg-gray-50 rounded-full overflow-hidden">
                                                     <div
@@ -215,15 +215,15 @@ export default function StudentProfilePage() {
                                 </div>
                                 <div className="flex gap-10">
                                     <div className="text-center">
-                                        <p className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-1">Time Slot</p>
+                                        <p className="text-[10px] font-black text-gray-500   mb-1">Time Slot</p>
                                         <p className="text-sm font-bold text-yellow-400">{studentUser?.availability?.preferredTimeSlots ? studentUser.availability.preferredTimeSlots[0] : 'None'}</p>
                                     </div>
                                     <div className="text-center">
-                                        <p className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-1">Weekly Commitment</p>
+                                        <p className="text-[10px] font-black text-gray-500   mb-1">Weekly Commitment</p>
                                         <p className="text-sm font-bold text-yellow-400">{studentUser?.availability?.weeklyAvailableHours || 20} Hours</p>
                                     </div>
                                     <div className="text-center">
-                                        <p className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-1">Learning Pace</p>
+                                        <p className="text-[10px] font-black text-gray-500   mb-1">Learning Pace</p>
                                         <p className="text-sm font-bold text-yellow-400">{studentUser?.learningPreferences?.pace || 'Standard'}</p>
                                     </div>
                                 </div>
@@ -242,7 +242,7 @@ function SimpleStat({ icon, label, value, color }: { icon: React.ReactNode, labe
             <div className={`p-2.5 rounded-lg bg-gray-50 group-hover:bg-yellow-50 transition-colors ${color}`}>
                 {icon}
             </div>
-            <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">{label}</p>
+            <p className="text-[10px] font-black text-gray-400  ">{label}</p>
             <p className="text-2xl font-black text-gray-900">{value}</p>
         </div>
     );
@@ -259,7 +259,7 @@ function SocialLink({ icon }: { icon: React.ReactNode }) {
 function MiniInfo({ label, value, icon }: { label: string, value: string, icon: React.ReactNode }) {
     return (
         <div className="space-y-1.5 flex flex-col">
-            <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest flex items-center gap-2">
+            <span className="text-[10px] font-black text-gray-400   flex items-center gap-2">
                 {icon} {label}
             </span>
             <span className="text-sm font-bold text-gray-800 break-all">{value}</span>

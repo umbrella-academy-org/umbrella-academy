@@ -54,7 +54,7 @@ export const getPasswordStrength = (password: string) => {
     hasMinLength: password.length >= 8,
     hasSpecialChar: /[!@#$%^&*(),.?":{}|<>]/.test(password),
     hasNumber: /\d/.test(password),
-    hasUpperCase: /[A-Z]/.test(password),
+    has: /[A-Z]/.test(password),
     hasLowerCase: /[a-z]/.test(password),
   };
 };
