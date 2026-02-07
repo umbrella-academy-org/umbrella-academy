@@ -23,7 +23,7 @@ export function CTA() {
         }} />
       </div>
 
-      <div className="max-w-5xl mx-auto relative z-10">
+      <div className="max-w-full mx-auto relative z-10">
         <div className="text-center space-y-8 animate-fade-in">
           {/* Badge */}
           <div className="inline-flex items-center space-x-2 px-4 py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/20">

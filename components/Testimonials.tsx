@@ -57,7 +57,7 @@ export function Testimonials() {
       {/* Background Decoration */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-96 bg-[#ca8a04]/5 rounded-full blur-3xl -z-10" />
 
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-full mx-auto">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
           <div>
