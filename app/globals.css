@@ -391,23 +391,31 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Custom Scrollbar */
+/* Hide Scrollbars - All Browsers */
+/* Chrome, Safari, Edge, Opera */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 0px;
+  height: 0px;
+  display: none;
 }
 
 ::-webkit-scrollbar-track {
-  background: #fdfdfd;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #e5e7eb;
-  border-radius: 10px;
+  background: transparent;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #d1d5db;
+/* Firefox */
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* IE and Edge Legacy */
+* {
+  -ms-overflow-style: none;
 }
 
 input {
