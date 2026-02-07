@@ -41,7 +41,7 @@ export default function ChooseCompanyPage() {
           {/* Go back button */}
           <div className="mb-12">
             <button
-              onClick={() => router.push('/auth/student/choose-field')}
+              onClick={() => router.back()}
               className="flex items-center gap-2 text-gray-400 hover:text-gray-900 transition-all group"
             >
               <svg className="w-5 h-5 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -62,7 +62,7 @@ export default function ChooseCompanyPage() {
             </div>
 
             {/* Title */}
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 mb-4 ">
+            <h1 className="text-2xl font-semibold text-slate-900 mb-4 ">
               Select Your Partner Company
             </h1>
             <p className="text-slate-500 max-w-2xl mx-auto text-sm sm:text-base font-medium leading-relaxed">

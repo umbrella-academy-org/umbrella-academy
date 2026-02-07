@@ -42,7 +42,7 @@ export default function ChooseFieldPage() {
           {/* Go back button */}
           <div className="mb-12">
             <button
-              onClick={() => router.push('/post-signup/availability')}
+            onClick={() => router.back()}
               className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors group"
             >
               <svg className="w-5 h-5 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -64,7 +64,7 @@ export default function ChooseFieldPage() {
 
             {/* Title */}
             <div className="mb-12">
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 mb-4 ">
+              <h1 className="text-2xl font-semibold text-black mb-4 ">
                 Choose Your Field
               </h1>
               <p className="text-slate-500 max-w-xl mx-auto text-sm sm:text-base font-medium leading-relaxed">

@@ -36,7 +36,7 @@ export default function ForgotPasswordPage() {
         <div className="flex flex-col items-center justify-center flex-1 max-w-md mx-auto w-full">
           {/* Back button */}
           <button
-            onClick={() => router.push('/auth/login')}
+            onClick={() => router.back()}
             className="self-start flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-8"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
