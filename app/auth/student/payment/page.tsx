@@ -16,7 +16,7 @@ export default function PaymentPage() {
     <div className="flex h-screen">
       {/* Left side - Form */}
       <div className="flex-2 flex flex-col overflow-hidden items-center bg-white">
-        <main className="overflow-auto flex items-center justify-center bg-gray-50 max-w-2xl">
+        <main className="overflow-auto flex items-center justify-center bg-white max-w-2xl">
           <div className="w-full p-8">
             {/* Go back button */}
             <button
