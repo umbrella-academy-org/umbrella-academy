@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { Home, Calendar, Map, Bell, Video, CreditCard, HelpCircle, MessageSquare, X, Settings, Menu, User, LogOut, AlertCircle, CheckCircle } from 'lucide-react';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
 import { useAuth } from '@/contexts';
-import { SidebarProps, SidebarItem, UserType } from '@/types';
+import { SidebarProps, SidebarItem } from '@/types';
 
 export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps) {
   const [currentActive, setCurrentActive] = useState(activeItem);
@@ -13,7 +13,7 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
   const [showNewUserGuide, setShowNewUserGuide] = useState(false);
   // Dev toggle for new user simulation (for development only)
   const [devNewUserMode, setDevNewUserMode] = useState(false);
-  
+
   // Initialize dev mode from localStorage
   useEffect(() => {
     const savedDevMode = localStorage.getItem('devNewUserMode') === 'true';
@@ -31,10 +31,10 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
   // Get completion status for new user steps
   const getNewUserSteps = () => {
     const hasAvailability = localStorage.getItem('availabilitySet');
-    const hasSelectedWing = localStorage.getItem('selectedWing');
+    const hasSelectedField = localStorage.getItem('selectedField');
     const hasCompletedPayment = localStorage.getItem('paymentCompleted');
     const hasCreatedRoadmap = localStorage.getItem('hasRoadmap');
-    
+
     return [
       {
         id: 'availability',
@@ -44,10 +44,10 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
         description: 'Choose your learning hours'
       },
       {
-        id: 'wing',
-        label: 'Choose Your Wing',
-        completed: !!hasSelectedWing,
-        href: '/post-signup/choose-wing',
+        id: 'field',
+        label: 'Choose Your Field',
+        completed: !!hasSelectedField,
+        href: '/post-signup/choose-field',
         description: 'Select your industry focus'
       },
       {
@@ -55,7 +55,7 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
         label: 'Complete Payment',
         completed: !!hasCompletedPayment,
         href: '/post-signup/payment',
-        description: 'Pay for wing access'
+        description: 'Pay for field access'
       },
       {
         id: 'roadmap',
@@ -71,7 +71,7 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
   useEffect(() => {
     const newUserFlag = localStorage.getItem('isNewUser');
     const hasCreatedRoadmap = localStorage.getItem('hasRoadmap');
-    
+
     if ((newUserFlag === 'true' || devNewUserMode) && currentUserType === 'student') {
       setIsNewUser(true);
       setShowNewUserGuide(!hasCreatedRoadmap);
@@ -207,52 +207,52 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
             href: '/dashboard/mentor/settings'
           }
         ];
-      case 'wing-admin':
+      case 'field-admin':
         return [
           {
             icon: <Home className="w-5 h-5" />,
             label: 'Home',
-            href: '/dashboard/wing-admin'
+            href: '/dashboard/field-admin'
           },
           {
             icon: <User className="w-5 h-5" />,
             label: 'Profile',
-            href: '/dashboard/wing-admin/profile'
+            href: '/dashboard/field-admin/profile'
           },
           {
             icon: <MessageSquare className="w-5 h-5" />,
             label: 'Chat',
-            href: '/dashboard/wing-admin/chat'
+            href: '/dashboard/field-admin/chat'
           },
           {
             icon: <User className="w-5 h-5" />,
             label: 'Mentors',
-            href: '/dashboard/wing-admin/mentors'
+            href: '/dashboard/field-admin/mentors'
           },
           {
             icon: <User className="w-5 h-5" />,
             label: 'Trainers',
-            href: '/dashboard/wing-admin/trainers'
+            href: '/dashboard/field-admin/trainers'
           },
           {
             icon: <AlertCircle className="w-5 h-5" />,
             label: 'Mentor Reports',
-            href: '/dashboard/wing-admin/mentor-reports'
+            href: '/dashboard/field-admin/mentor-reports'
           },
           {
             icon: <Calendar className="w-5 h-5" />,
             label: 'Student Activity',
-            href: '/dashboard/wing-admin/students'
+            href: '/dashboard/field-admin/students'
           },
           {
             icon: <CreditCard className="w-5 h-5" />,
-            label: 'Wing Wallet',
-            href: '/dashboard/wing-admin/wallet'
+            label: 'Field Wallet',
+            href: '/dashboard/field-admin/wallet'
           },
           {
             icon: <Settings className="w-5 h-5" />,
             label: 'Settings',
-            href: '/dashboard/wing-admin/settings'
+            href: '/dashboard/field-admin/settings'
           }
         ];
       case 'umbrella-admin':
@@ -274,8 +274,8 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
           },
           {
             icon: <Map className="w-5 h-5" />,
-            label: 'Wings',
-            href: '/dashboard/umbrella-admin/wings'
+            label: 'Fields',
+            href: '/dashboard/umbrella-admin/fields'
           },
           {
             icon: <User className="w-5 h-5" />,
@@ -386,18 +386,18 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
           renewLabel: 'View Students',
           renewHref: '/dashboard/mentor/students'
         };
-      case 'wing-admin':
+      case 'field-admin':
         return {
-          displayName: 'Wing Admin',
+          displayName: 'Field Admin',
           progressLabel: '24 Students',
           progressValue: 85,
-          renewLabel: 'Manage Wing',
-          renewHref: '/dashboard/wing-admin/settings'
+          renewLabel: 'Manage Field',
+          renewHref: '/dashboard/field-admin/settings'
         };
       case 'umbrella-admin':
         return {
           displayName: 'System Admin',
-          progressLabel: '5 Wings',
+          progressLabel: '5 Fields',
           progressValue: 95,
           renewLabel: 'System Health',
           renewHref: '/dashboard/umbrella-admin/system'
@@ -552,29 +552,28 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
                 onClick={() => {
                   const newDevMode = !devNewUserMode;
                   setDevNewUserMode(newDevMode);
-                  
+
                   // Store in localStorage
                   localStorage.setItem('devNewUserMode', newDevMode.toString());
-                  
+
                   // Dispatch event for student dashboard to listen
                   window.dispatchEvent(new CustomEvent('devModeChanged', {
                     detail: { isDevMode: newDevMode }
                   }));
-                  
+
                   if (newDevMode) {
                     // Reset all progress when enabling dev mode
                     localStorage.removeItem('availabilitySet');
-                    localStorage.removeItem('selectedWing');
+                    localStorage.removeItem('selectedField');
                     localStorage.removeItem('paymentCompleted');
                     localStorage.removeItem('hasRoadmap');
                     localStorage.setItem('isNewUser', 'true');
                   }
                 }}
-                className={`w-full px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
-                  devNewUserMode 
-                    ? 'bg-yellow-600 text-white' 
+                className={`w-full px-3 py-2 rounded-lg text-xs font-medium transition-colors ${devNewUserMode
+                    ? 'bg-yellow-600 text-white'
                     : 'bg-gray-800 text-gray-400 hover:text-white'
-                }`}
+                  }`}
               >
                 DEV: {devNewUserMode ? 'New User Mode ON' : 'New User Mode OFF'}
               </button>

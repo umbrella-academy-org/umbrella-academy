@@ -9,7 +9,7 @@ interface FeedbackItem {
   type: 'feedback' | 'support' | 'complaint' | 'suggestion';
   userId: string;
   userName: string;
-  userRole: 'student' | 'trainer' | 'mentor' | 'wing-admin';
+  userRole: 'student' | 'trainer' | 'mentor' | 'field-admin';
   userAvatar: string;
   subject: string;
   message: string;
@@ -99,7 +99,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
       type: 'support',
       userId: 'user-5',
       userName: 'James Wilson',
-      userRole: 'wing-admin',
+      userRole: 'field-admin',
       userAvatar: 'JW',
       subject: 'Mentor Report Export Issues',
       message: 'I\'m unable to export mentor reports to PDF format. The export button appears to work but no file is generated. This is affecting my ability to share reports with upper management. I\'ve tried different browsers with the same result.',
@@ -131,11 +131,11 @@ export default function UmbrellaAdminFeedbackSupportPage() {
     const typeMatch = filterType === 'all' || item.type === filterType;
     const statusMatch = filterStatus === 'all' || item.status === filterStatus;
     const priorityMatch = filterPriority === 'all' || item.priority === filterPriority;
-    const searchMatch = searchQuery === '' || 
+    const searchMatch = searchQuery === '' ||
       item.subject.toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.userName.toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.message.toLowerCase().includes(searchQuery.toLowerCase());
-    
+
     return typeMatch && statusMatch && priorityMatch && searchMatch;
   });
 
@@ -192,7 +192,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
       case 'student': return 'bg-blue-500';
       case 'trainer': return 'bg-green-500';
       case 'mentor': return 'bg-purple-500';
-      case 'wing-admin': return 'bg-orange-500';
+      case 'field-admin': return 'bg-orange-500';
       default: return 'bg-gray-500';
     }
   };
@@ -223,7 +223,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
   const urgentItems = feedbackItems.filter(item => item.priority === 'urgent').length;
   const avgRating = feedbackItems
     .filter(item => item.rating)
-    .reduce((sum, item) => sum + (item.rating || 0), 0) / 
+    .reduce((sum, item) => sum + (item.rating || 0), 0) /
     feedbackItems.filter(item => item.rating).length;
 
   return (
@@ -284,7 +284,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
                 <div className="bg-white rounded-lg shadow-sm border border-gray-100">
                   <div className="p-4 border-b border-gray-200">
                     <h3 className="font-semibold text-gray-900 mb-4">Items ({filteredItems.length})</h3>
-                    
+
                     {/* Search */}
                     <div className="relative mb-4">
                       <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
@@ -296,7 +296,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
                         className="w-full pl-10 pr-4 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-600"
                       />
                     </div>
-                    
+
                     {/* Filters */}
                     <div className="space-y-3">
                       <div>
@@ -343,7 +343,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
                       </div>
                     </div>
                   </div>
-                  
+
                   <div className="divide-y divide-gray-200 max-h-96 overflow-y-auto">
                     {filteredItems.map((item) => (
                       <div
@@ -366,10 +366,10 @@ export default function UmbrellaAdminFeedbackSupportPage() {
                             {item.priority}
                           </span>
                         </div>
-                        
+
                         <h5 className="font-medium text-gray-900 text-sm mb-1 line-clamp-1">{item.subject}</h5>
                         <p className="text-xs text-gray-600 line-clamp-2 mb-2">{item.message}</p>
-                        
+
                         <div className="flex items-center justify-between">
                           <span className={`px-2 py-1 rounded text-xs font-medium ${getTypeColor(item.type)}`}>
                             {item.type}
@@ -482,7 +482,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
                         ) : (
                           <p className="text-gray-500 text-sm mb-4">No response yet.</p>
                         )}
-                        
+
                         <div className="flex gap-3">
                           <textarea
                             value={adminResponse}

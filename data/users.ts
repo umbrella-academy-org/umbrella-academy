@@ -9,7 +9,7 @@ export const mockUsers: User[] = [
     name: 'Jane Mukamana',
     email: 'jane.mukamana@student.umbrella.rw',
     role: 'student',
-    wingId: 'tech-companies', // Required wing assignment
+    fieldId: 'software-engineering', // Updated to match field IDs
     status: 'active',
     joinDate: '2024-09-15',
     avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face',
@@ -37,7 +37,7 @@ export const mockUsers: User[] = [
     name: 'Eric Nshimiyimana',
     email: 'eric.nshimiyimana@student.umbrella.rw',
     role: 'student',
-    wingId: 'tech-companies',
+    fieldId: 'software-engineering',
     status: 'active',
     joinDate: '2024-08-22',
     avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
@@ -65,7 +65,7 @@ export const mockUsers: User[] = [
     name: 'Grace Uwimana',
     email: 'grace.uwimana@student.umbrella.rw',
     role: 'student',
-    wingId: 'business-companies',
+    fieldId: 'ux-innovation',
     status: 'active',
     joinDate: '2024-10-01',
     avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face',
@@ -93,7 +93,7 @@ export const mockUsers: User[] = [
     name: 'David Habimana',
     email: 'david.habimana@student.umbrella.rw',
     role: 'student',
-    wingId: 'hotels',
+    fieldId: 'ai-intelligence',
     status: 'paused',
     joinDate: '2024-07-10',
     avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
@@ -123,7 +123,7 @@ export const mockUsers: User[] = [
     name: 'Sarah Ingabire',
     email: 'sarah.ingabire@trainer.umbrella.rw',
     role: 'trainer',
-    wingId: 'tech-companies',
+    fieldId: 'software-engineering',
     status: 'active',
     joinDate: '2023-03-15',
     avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop&crop=face',
@@ -153,7 +153,7 @@ export const mockUsers: User[] = [
     name: 'Jean Baptiste Nzeyimana',
     email: 'jean.nzeyimana@trainer.umbrella.rw',
     role: 'trainer',
-    wingId: 'tech-companies',
+    fieldId: 'ai-intelligence',
     status: 'active',
     joinDate: '2023-01-20',
     avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face',
@@ -185,7 +185,7 @@ export const mockUsers: User[] = [
     name: 'David Nkurunziza',
     email: 'david.nkurunziza@mentor.umbrella.rw',
     role: 'mentor',
-    wingId: 'tech-companies',
+    fieldId: 'software-engineering',
     status: 'active',
     joinDate: '2022-06-10',
     avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
@@ -208,7 +208,7 @@ export const mockUsers: User[] = [
     name: 'Alice Mukamazimpaka',
     email: 'alice.mukamazimpaka@mentor.umbrella.rw',
     role: 'mentor',
-    wingId: 'business-companies',
+    fieldId: 'ux-innovation',
     status: 'active',
     joinDate: '2022-08-15',
     avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face',
@@ -227,32 +227,32 @@ export const mockUsers: User[] = [
     }
   } as MentorUser,
 
-  // Wing Admins
+  // Field Admins
   {
     id: 'user_301',
     name: 'Marie Uwimana',
     email: 'marie.uwimana@admin.umbrella.rw',
-    role: 'wing-admin',
-    wingId: 'tech-companies',
+    role: 'field-admin',
+    fieldId: 'software-engineering',
     status: 'active',
     joinDate: '2022-01-15',
     avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face',
     profileData: {
-      bio: 'Experienced administrator specializing in tech wing operations and team management',
+      bio: 'Experienced administrator specializing in tech field operations and team management',
       skills: ['Team Management', 'Operations', 'Strategic Planning', 'Performance Analysis'],
       experience: '12 years in educational administration and technology sector management'
     },
     createdAt: new Date('2022-01-15'),
     lastLogin: new Date('2024-12-09'),
     isActive: true,
-    permissions: ['manage_wing', 'view_reports', 'manage_trainers', 'manage_students']
+    permissions: ['manage_field', 'view_reports', 'manage_trainers', 'manage_students']
   } as AdminUser,
   {
     id: 'user_302',
     name: 'Paul Kagame Jr',
     email: 'paul.kagame@admin.umbrella.rw',
-    role: 'wing-admin',
-    wingId: 'business-companies',
+    role: 'field-admin',
+    fieldId: 'ux-innovation',
     status: 'active',
     joinDate: '2022-02-20',
     avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
@@ -264,7 +264,7 @@ export const mockUsers: User[] = [
     createdAt: new Date('2022-02-20'),
     lastLogin: new Date('2024-12-08'),
     isActive: true,
-    permissions: ['manage_wing', 'view_reports', 'manage_trainers', 'manage_students']
+    permissions: ['manage_field', 'view_reports', 'manage_trainers', 'manage_students']
   } as AdminUser,
 
   // Umbrella Admin
@@ -277,71 +277,71 @@ export const mockUsers: User[] = [
     joinDate: '2022-01-01',
     avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
     profileData: {
-      bio: 'System administrator overseeing all wing operations and platform management',
+      bio: 'System administrator overseeing all field operations and platform management',
       skills: ['System Administration', 'Platform Management', 'Data Analytics', 'Strategic Oversight'],
       experience: '20 years in educational technology and system administration'
     },
     createdAt: new Date('2022-01-01'),
     lastLogin: new Date('2024-12-09'),
     isActive: true,
-    permissions: ['manage_system', 'manage_wings', 'manage_users', 'view_all_reports', 'financial_management']
+    permissions: ['manage_system', 'manage_fields', 'manage_users', 'view_all_reports', 'financial_management']
   } as AdminUser
 ];
 
 // Helper functions to get users by role
-export const getStudents = (): StudentUser[] => 
+export const getStudents = (): StudentUser[] =>
   mockUsers.filter(user => user.role === 'student') as StudentUser[];
 
-export const getTrainers = (): TrainerUser[] => 
+export const getTrainers = (): TrainerUser[] =>
   mockUsers.filter(user => user.role === 'trainer') as TrainerUser[];
 
-export const getMentors = (): MentorUser[] => 
+export const getMentors = (): MentorUser[] =>
   mockUsers.filter(user => user.role === 'mentor') as MentorUser[];
 
-export const getWingAdmins = (): AdminUser[] => 
-  mockUsers.filter(user => user.role === 'wing-admin') as AdminUser[];
+export const getFieldAdmins = (): AdminUser[] =>
+  mockUsers.filter(user => user.role === 'field-admin') as AdminUser[];
 
-export const getUmbrellaAdmins = (): AdminUser[] => 
+export const getUmbrellaAdmins = (): AdminUser[] =>
   mockUsers.filter(user => user.role === 'umbrella-admin') as AdminUser[];
 
-// Get users by wing - core functionality for wing-based organization
-export const getUsersByWing = (wingId: string): User[] => 
-  mockUsers.filter(user => user.wingId === wingId);
+// Get users by field - core functionality for field-based organization
+export const getUsersByField = (fieldId: string): User[] =>
+  mockUsers.filter(user => user.fieldId === fieldId);
 
-export const getStudentsByWing = (wingId: string): StudentUser[] => 
-  mockUsers.filter(user => user.role === 'student' && user.wingId === wingId) as StudentUser[];
+export const getStudentsByField = (fieldId: string): StudentUser[] =>
+  mockUsers.filter(user => user.role === 'student' && user.fieldId === fieldId) as StudentUser[];
 
-export const getTrainersByWing = (wingId: string): TrainerUser[] => 
-  mockUsers.filter(user => user.role === 'trainer' && user.wingId === wingId) as TrainerUser[];
+export const getTrainersByField = (fieldId: string): TrainerUser[] =>
+  mockUsers.filter(user => user.role === 'trainer' && user.fieldId === fieldId) as TrainerUser[];
 
-export const getMentorsByWing = (wingId: string): MentorUser[] => 
-  mockUsers.filter(user => user.role === 'mentor' && user.wingId === wingId) as MentorUser[];
+export const getMentorsByField = (fieldId: string): MentorUser[] =>
+  mockUsers.filter(user => user.role === 'mentor' && user.fieldId === fieldId) as MentorUser[];
 
 // Get user by ID
-export const getUserById = (id: string): User | undefined => 
+export const getUserById = (id: string): User | undefined =>
   mockUsers.find(user => user.id === id);
 
 // Get user by email
-export const getUserByEmail = (email: string): User | undefined => 
+export const getUserByEmail = (email: string): User | undefined =>
   mockUsers.find(user => user.email === email);
 
-// Wing assignment functions
-export const assignUserToWing = (userId: string, wingId: string): boolean => {
+// Field assignment functions
+export const assignUserToField = (userId: string, fieldId: string): boolean => {
   const userIndex = mockUsers.findIndex(user => user.id === userId);
   if (userIndex === -1) return false;
-  
-  mockUsers[userIndex].wingId = wingId;
+
+  mockUsers[userIndex].fieldId = fieldId;
   return true;
 };
 
-// Validate wing-based access control
-export const validateWingAccess = (userId: string, resourceWingId: string): boolean => {
+// Validate field-based access control
+export const validateFieldAccess = (userId: string, resourceFieldId: string): boolean => {
   const user = getUserById(userId);
   if (!user) return false;
-  
-  // Umbrella admins have access to all wings
+
+  // Umbrella admins have access to all fields
   if (user.role === 'umbrella-admin') return true;
-  
-  // All other users can only access resources in their wing
-  return user.wingId === resourceWingId;
+
+  // All other users can only access resources in their field
+  return user.fieldId === resourceFieldId;
 };

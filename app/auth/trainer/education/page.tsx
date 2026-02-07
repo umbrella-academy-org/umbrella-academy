@@ -16,7 +16,7 @@ export default function TrainerEducationPage() {
   const educationLevels = [
     "High School Diploma",
     "Associate Degree",
-    "Bachelor's Degree", 
+    "Bachelor's Degree",
     "Master's Degree",
     "Doctoral Degree (PhD)",
     "Professional Degree",
@@ -27,7 +27,7 @@ export default function TrainerEducationPage() {
   const handleContinue = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Trainer education:', education);
-    router.push('/auth/trainer/choose-wing');
+    router.push('/auth/trainer/choose-field');
   };
 
   return (

@@ -4,7 +4,7 @@ import Sidebar from '@/components/dashboard/Sidebar';
 import StudentsTable from '@/components/wing-admin/StudentsTable';
 
 
-export default function WingAdminStudentsPage() {
+export default function FieldAdminStudentsPage() {
   const students = [
     {
       id: 1,
@@ -37,7 +37,7 @@ export default function WingAdminStudentsPage() {
 
   return (
     <div className="flex h-screen bg-white">
-      <Sidebar activeItem="Student Activity" userType="wing-admin" />
+      <Sidebar activeItem="Student Activity" userType="field-admin" />
 
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
         <main className="flex-1 overflow-auto">

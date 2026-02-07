@@ -2,16 +2,16 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { SystemMetric, SystemAlert } from '@/types';
-import { 
-  mockSystemMetrics, 
-  mockSystemAlerts, 
+import {
+  mockSystemMetrics,
+  mockSystemAlerts,
   mockSystemStats,
   getHealthyMetrics,
   getWarningMetrics,
   getErrorMetrics,
   getRecentAlerts,
   getCriticalAlerts,
-  getSystemHealthScore 
+  getSystemHealthScore
 } from '@/data';
 import { useAuth } from './AuthContext';
 
@@ -55,8 +55,8 @@ export function SystemProvider({ children }: { children: React.ReactNode }) {
         return;
       }
 
-      // Only umbrella admins and wing admins can see system data
-      if (!hasPermission('manage_system') && !hasPermission('view_wing_analytics')) {
+      // Only umbrella admins and field admins can see system data
+      if (!hasPermission('manage_system') && !hasPermission('view_field_analytics')) {
         setMetrics([]);
         setAlerts([]);
         setHealthScore(0);
@@ -70,12 +70,12 @@ export function SystemProvider({ children }: { children: React.ReactNode }) {
         // Umbrella admin can see all system metrics and alerts
         filteredMetrics = mockSystemMetrics;
         filteredAlerts = mockSystemAlerts;
-      } else if (currentUser.role === 'wing-admin') {
-        // Wing admin can see limited system metrics
-        filteredMetrics = mockSystemMetrics.filter(metric => 
+      } else if (currentUser.role === 'field-admin') {
+        // Field admin can see limited system metrics
+        filteredMetrics = mockSystemMetrics.filter(metric =>
           ['Active Users', 'API Response Time', 'Video Streaming', 'Payment Gateway'].includes(metric.name)
         );
-        filteredAlerts = mockSystemAlerts.filter(alert => 
+        filteredAlerts = mockSystemAlerts.filter(alert =>
           alert.severity !== 'high' || alert.type !== 'error'
         );
       }
@@ -96,7 +96,7 @@ export function SystemProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (currentUser) {
       loadSystemData();
-      
+
       // Set up real-time updates for system monitoring
       const interval = setInterval(() => {
         if (hasPermission('manage_system')) {
@@ -132,7 +132,7 @@ export function SystemProvider({ children }: { children: React.ReactNode }) {
   };
 
   const getCriticalAlertsFromContext = (): SystemAlert[] => {
-    return alerts.filter(alert => 
+    return alerts.filter(alert =>
       alert.type === 'error' || (alert.type === 'warning' && alert.severity === 'high')
     );
   };

@@ -28,18 +28,18 @@ export interface Transaction {
 export interface Wallet {
   id: string;
   ownerId: string;
-  ownerType: 'trainer' | 'wing' | 'umbrella';
+  ownerType: 'trainer' | 'field' | 'umbrella';
   balance: number;
   currency: Currency;
   transactions: Transaction[];
 }
 
-// Enhanced Payment Models for Wing-Based System
+// Enhanced Payment Models for Field-Based System
 
 export interface Payment {
   id: string;
   studentId: string;
-  wingId: string;
+  fieldId: string;
   amount: number;
   currency: Currency;
   paymentMethod: 'momo'; // Only MoMo payments allowed
@@ -51,10 +51,10 @@ export interface Payment {
 }
 
 export interface RevenueDistribution {
-  wingShare: number; // 65%
+  fieldShare: number; // 65%
   academyShare: number; // 25%
   processingFee: number; // 10%
-  wingId: string;
+  fieldId: string;
   transactionId: string;
 }
 
@@ -69,7 +69,7 @@ export interface MoMoPaymentData {
 // Payment Processing Interface Props
 export interface PaymentProcessorProps {
   amount: number;
-  wingId: string;
+  fieldId: string;
   studentId: string;
   paymentMethod: 'momo';
   momoDetails: MoMoPaymentData;

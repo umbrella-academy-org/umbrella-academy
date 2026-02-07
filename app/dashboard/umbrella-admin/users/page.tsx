@@ -19,7 +19,7 @@ export default function UmbrellaAdminUsersPage() {
       dateOfBirth: '1995-03-15',
       rollNumber: 'STU001',
       class: 'Advanced',
-      wing: 'Programming Wing',
+      field: 'Programming Field',
       trainer: 'John Smith',
       mentor: 'Mike Wilson',
       status: 'active',
@@ -35,7 +35,7 @@ export default function UmbrellaAdminUsersPage() {
       dateOfBirth: '1993-07-22',
       rollNumber: 'STU002',
       class: 'Intermediate',
-      wing: 'Design Wing',
+      field: 'Design Field',
       trainer: 'Sarah Johnson',
       mentor: 'Emily Davis',
       status: 'active',
@@ -51,7 +51,7 @@ export default function UmbrellaAdminUsersPage() {
       dateOfBirth: '1996-11-08',
       rollNumber: 'STU003',
       class: 'Beginner',
-      wing: 'Marketing Wing',
+      field: 'Marketing Field',
       trainer: 'Mike Wilson',
       mentor: 'David Brown',
       status: 'paused',
@@ -66,7 +66,7 @@ export default function UmbrellaAdminUsersPage() {
       name: 'John Smith',
       email: 'john@example.com',
       phone: '+1 234 567 8904',
-      wing: 'Programming Wing',
+      field: 'Programming Field',
       specialization: 'Full-Stack Development',
       experience: '5 years',
       students: 15,
@@ -80,7 +80,7 @@ export default function UmbrellaAdminUsersPage() {
       name: 'Sarah Johnson',
       email: 'sarah@example.com',
       phone: '+1 234 567 8905',
-      wing: 'Design Wing',
+      field: 'Design Field',
       specialization: 'UI/UX Design',
       experience: '4 years',
       students: 12,
@@ -97,7 +97,7 @@ export default function UmbrellaAdminUsersPage() {
       name: 'Mike Wilson',
       email: 'mike@example.com',
       phone: '+1 234 567 8906',
-      wing: 'Programming Wing',
+      field: 'Programming Field',
       expertise: 'Software Architecture',
       experience: '8 years',
       students: 25,
@@ -110,7 +110,7 @@ export default function UmbrellaAdminUsersPage() {
       name: 'Emily Davis',
       email: 'emily@example.com',
       phone: '+1 234 567 8907',
-      wing: 'Design Wing',
+      field: 'Design Field',
       expertise: 'Design Strategy',
       experience: '6 years',
       students: 20,
@@ -126,9 +126,9 @@ export default function UmbrellaAdminUsersPage() {
       name: 'David Brown',
       email: 'david@example.com',
       phone: '+1 234 567 8908',
-      wing: 'Business Wing',
-      role: 'Wing Administrator',
-      permissions: 'Wing Management',
+      field: 'Business Field',
+      role: 'Field Administrator',
+      permissions: 'Field Management',
       status: 'active',
       joinDate: '2023-08-01',
       avatar: '/api/placeholder/40/40'
@@ -149,7 +149,7 @@ export default function UmbrellaAdminUsersPage() {
       student: 'bg-blue-100 text-blue-800',
       trainer: 'bg-green-100 text-green-800',
       mentor: 'bg-purple-100 text-purple-800',
-      'wing-admin': 'bg-yellow-100 text-yellow-800',
+      'field-admin': 'bg-yellow-100 text-yellow-800',
       'umbrella-admin': 'bg-red-100 text-red-800'
     };
     return colors[role as keyof typeof colors] || 'bg-gray-100 text-gray-800';
@@ -231,8 +231,8 @@ export default function UmbrellaAdminUsersPage() {
                   key={tab.key}
                   onClick={() => setSelectedTab(tab.key as any)}
                   className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${selectedTab === tab.key
-                      ? 'border-yellow-600 text-yellow-600'
-                      : 'border-transparent text-gray-500 hover:text-gray-700'
+                    ? 'border-yellow-600 text-yellow-600'
+                    : 'border-transparent text-gray-500 hover:text-gray-700'
                     }`}
                 >
                   {tab.label} ({tab.count})

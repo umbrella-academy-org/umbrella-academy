@@ -20,7 +20,7 @@ export default function RoadmapPage() {
   const [isCreatingPhase, setIsCreatingPhase] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  
+
   // New phase form state
   const [newPhase, setNewPhase] = useState({
     title: '',
@@ -28,7 +28,7 @@ export default function RoadmapPage() {
     duration: '',
     durationType: 'hours' as 'hours' | 'days' | 'weeks'
   });
-  
+
   // Video call state
   const [isCallActive] = useState(true);
   const [isMuted, setIsMuted] = useState(false);
@@ -38,37 +38,37 @@ export default function RoadmapPage() {
 
   // Check if roadmap already exists
   const savedRoadmap = typeof window !== 'undefined' ? localStorage.getItem('hasRoadmap') === 'true' : false;
-  
+
   // Get selected trainer info
   const selectedTrainerData = typeof window !== 'undefined' ? localStorage.getItem('selectedTrainer') : null;
   const selectedTrainer = selectedTrainerData ? JSON.parse(selectedTrainerData) : null;
-  
-  // Get selected wing info
-  const selectedWingId = typeof window !== 'undefined' ? localStorage.getItem('selectedWing') : null;
-  const getWingDetails = (wingId: string) => {
-    const wings = {
+
+  // Get selected field info
+  const selectedFieldId = typeof window !== 'undefined' ? localStorage.getItem('selectedField') : null;
+  const getFieldDetails = (fieldId: string) => {
+    const fields = {
       'tech-companies': {
-        title: 'Tech Companies Wing',
+        title: 'Tech Companies Field',
         description: 'Technology sector companies and startups',
         icon: '💻',
         color: 'yellow'
       },
       'business-companies': {
-        title: 'Business Companies Wing', 
+        title: 'Business Companies Field',
         description: 'Business consulting and enterprise solutions',
         icon: '💼',
         color: 'yellow'
       },
       'hotels': {
-        title: 'Hotels Wing',
+        title: 'Hotels Field',
         description: 'Hospitality and tourism industry training',
         icon: '🏨',
         color: 'purple'
       }
     };
-    return wings[wingId as keyof typeof wings] || null;
+    return fields[fieldId as keyof typeof fields] || null;
   };
-  const selectedWing = selectedWingId ? getWingDetails(selectedWingId) : null;
+  const selectedField = selectedFieldId ? getFieldDetails(selectedFieldId) : null;
 
   const handleAddPhase = () => {
     if (newPhase.title && newPhase.description && newPhase.duration) {
@@ -80,7 +80,7 @@ export default function RoadmapPage() {
         durationType: newPhase.durationType,
         status: 'pending'
       };
-      
+
       setPhases([...phases, phase]);
       setNewPhase({ title: '', description: '', duration: '', durationType: 'hours' });
       setIsCreatingPhase(false);
@@ -93,25 +93,25 @@ export default function RoadmapPage() {
 
   const handleSubmitRoadmap = async () => {
     if (!roadmapTitle || phases.length === 0) return;
-    
+
     setIsSubmitting(true);
-    
+
     // Simulate API call and session scheduling
     await new Promise(resolve => setTimeout(resolve, 2000));
-    
+
     // Save roadmap data
     const roadmapData = {
       title: roadmapTitle,
       phases: phases,
       createdAt: new Date().toISOString()
     };
-    
+
     localStorage.setItem('hasRoadmap', 'true');
     localStorage.setItem('roadmapData', JSON.stringify(roadmapData));
-    
+
     setIsSubmitting(false);
     setShowSuccessMessage(true);
-    
+
     // Redirect after 3 seconds
     setTimeout(() => {
       window.location.href = '/dashboard/student';
@@ -123,7 +123,7 @@ export default function RoadmapPage() {
   };
 
   // Show success message
-  if (showSuccessMessage ) {
+  if (showSuccessMessage) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-yellow-50 to-yellow-50 flex items-center justify-center">
         <div className="text-center p-8">
@@ -145,8 +145,8 @@ export default function RoadmapPage() {
           <div className="mb-6 lg:mb-8">
             <h1 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-2">Create Your Learning Roadmap</h1>
             <p className="text-gray-600 mb-4">Define your learning goals and break them down into manageable phases</p>
-            
-          
+
+
           </div>
 
           {/* Roadmap Title */}
@@ -184,14 +184,14 @@ export default function RoadmapPage() {
                   {index < phases.length - 1 && (
                     <div className="absolute left-6 top-16 w-0.5 h-16 bg-gray-300"></div>
                   )}
-                  
+
                   {/* Phase card */}
                   <div className="flex items-start gap-3 lg:gap-4 mb-6 lg:mb-8">
                     {/* Timeline dot */}
                     <div className="flex-shrink-0 w-10 h-10 lg:w-12 lg:h-12 bg-yellow-100 rounded-full flex items-center justify-center border-4 border-white shadow-sm">
                       <span className="text-yellow-600 font-semibold text-xs lg:text-sm">{index + 1}</span>
                     </div>
-                    
+
                     {/* Phase content */}
                     <div className="flex-1 bg-gray-50 rounded-lg p-3 lg:p-4 border border-gray-200 min-w-0">
                       <div className="flex flex-col sm:flex-row sm:items-start justify-between mb-2 gap-2">
@@ -209,7 +209,7 @@ export default function RoadmapPage() {
                         <span>{getDurationText(phase.duration, phase.durationType)}</span>
                       </div>
                     </div>
-                    
+
                     {/* Arrow connector - hidden on mobile */}
                     {index < phases.length - 1 && (
                       <div className="hidden sm:flex flex-shrink-0 mt-6">
@@ -236,7 +236,7 @@ export default function RoadmapPage() {
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent text-sm lg:text-base"
                     />
                   </div>
-                  
+
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
                     <textarea
@@ -247,7 +247,7 @@ export default function RoadmapPage() {
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent text-sm lg:text-base resize-none"
                     />
                   </div>
-                  
+
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">Duration</label>
@@ -272,7 +272,7 @@ export default function RoadmapPage() {
                       </select>
                     </div>
                   </div>
-                  
+
                   <div className="flex flex-col sm:flex-row gap-3">
                     <button
                       onClick={handleAddPhase}
@@ -328,7 +328,7 @@ export default function RoadmapPage() {
           callDuration={callDuration}
           onMuteToggle={() => setIsMuted(!isMuted)}
           onVideoToggle={() => setIsVideoOn(!isVideoOn)}
-          onEndCall={() => {}}
+          onEndCall={() => { }}
           onFullscreenToggle={() => setIsFullscreen(!isFullscreen)}
           isFullscreen={isFullscreen}
         />

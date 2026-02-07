@@ -1,21 +1,21 @@
 // User management service - Data access layer for user operations
 
 import { User, StudentUser, TrainerUser, MentorUser, AdminUser } from '@/types';
-import { 
+import {
   mockUsers,
   getStudents,
   getTrainers,
   getMentors,
-  getWingAdmins,
+  getFieldAdmins,
   getUmbrellaAdmins,
-  getUsersByWing,
-  getStudentsByWing,
-  getTrainersByWing,
-  getMentorsByWing,
+  getUsersByField,
+  getStudentsByField,
+  getTrainersByField,
+  getMentorsByField,
   getUserById,
   getUserByEmail,
-  assignUserToWing,
-  validateWingAccess
+  assignUserToField,
+  validateFieldAccess
 } from '@/data/users';
 
 export class UserService {
@@ -51,8 +51,8 @@ export class UserService {
         return getTrainers();
       case 'mentor':
         return getMentors();
-      case 'wing-admin':
-        return getWingAdmins();
+      case 'field-admin':
+        return getFieldAdmins();
       case 'umbrella-admin':
         return getUmbrellaAdmins();
       default:
@@ -61,31 +61,31 @@ export class UserService {
   }
 
   /**
-   * Get users by wing ID
+   * Get users by field ID
    */
-  static async getUsersByWing(wingId: string): Promise<User[]> {
-    return getUsersByWing(wingId);
+  static async getUsersByField(fieldId: string): Promise<User[]> {
+    return getUsersByField(fieldId);
   }
 
   /**
-   * Get students by wing ID
+   * Get students by field ID
    */
-  static async getStudentsByWing(wingId: string): Promise<StudentUser[]> {
-    return getStudentsByWing(wingId);
+  static async getStudentsByField(fieldId: string): Promise<StudentUser[]> {
+    return getStudentsByField(fieldId);
   }
 
   /**
-   * Get trainers by wing ID
+   * Get trainers by field ID
    */
-  static async getTrainersByWing(wingId: string): Promise<TrainerUser[]> {
-    return getTrainersByWing(wingId);
+  static async getTrainersByField(fieldId: string): Promise<TrainerUser[]> {
+    return getTrainersByField(fieldId);
   }
 
   /**
-   * Get mentors by wing ID
+   * Get mentors by field ID
    */
-  static async getMentorsByWing(wingId: string): Promise<MentorUser[]> {
-    return getMentorsByWing(wingId);
+  static async getMentorsByField(fieldId: string): Promise<MentorUser[]> {
+    return getMentorsByField(fieldId);
   }
 
   /**
@@ -130,26 +130,26 @@ export class UserService {
   }
 
   /**
-   * Assign user to wing
+   * Assign user to field
    */
-  static async assignUserToWing(userId: string, wingId: string): Promise<boolean> {
-    return assignUserToWing(userId, wingId);
+  static async assignUserToField(userId: string, fieldId: string): Promise<boolean> {
+    return assignUserToField(userId, fieldId);
   }
 
   /**
-   * Validate wing-based access control
+   * Validate field-based access control
    */
-  static async validateWingAccess(userId: string, resourceWingId: string): Promise<boolean> {
-    return validateWingAccess(userId, resourceWingId);
+  static async validateFieldAccess(userId: string, resourceFieldId: string): Promise<boolean> {
+    return validateFieldAccess(userId, resourceFieldId);
   }
 
   /**
-   * Get available trainers for a wing
+   * Get available trainers for a field
    */
-  static async getAvailableTrainers(wingId: string): Promise<TrainerUser[]> {
-    const trainers = getTrainersByWing(wingId);
-    return trainers.filter(trainer => 
-      trainer.status === 'active' && 
+  static async getAvailableTrainers(fieldId: string): Promise<TrainerUser[]> {
+    const trainers = getTrainersByField(fieldId);
+    return trainers.filter(trainer =>
+      trainer.status === 'active' &&
       trainer.isActive
     );
   }
@@ -157,26 +157,26 @@ export class UserService {
   /**
    * Search users by name or email
    */
-  static async searchUsers(query: string, wingId?: string): Promise<User[]> {
+  static async searchUsers(query: string, fieldId?: string): Promise<User[]> {
     let users = mockUsers;
-    
-    // Filter by wing if specified
-    if (wingId) {
-      users = getUsersByWing(wingId);
+
+    // Filter by field if specified
+    if (fieldId) {
+      users = getUsersByField(fieldId);
     }
 
     // Search by name or email
     const searchQuery = query.toLowerCase();
-    return users.filter(user => 
+    return users.filter(user =>
       user.name.toLowerCase().includes(searchQuery) ||
       user.email.toLowerCase().includes(searchQuery)
     );
   }
 
   /**
-   * Get user statistics for a wing
+   * Get user statistics for a field
    */
-  static async getWingUserStatistics(wingId: string): Promise<{
+  static async getFieldUserStatistics(fieldId: string): Promise<{
     totalUsers: number;
     students: number;
     trainers: number;
@@ -184,8 +184,8 @@ export class UserService {
     activeUsers: number;
     inactiveUsers: number;
   }> {
-    const users = getUsersByWing(wingId);
-    
+    const users = getUsersByField(fieldId);
+
     return {
       totalUsers: users.length,
       students: users.filter(u => u.role === 'student').length,
@@ -199,7 +199,7 @@ export class UserService {
   /**
    * Validate user registration data
    */
-  static async validateRegistration(email: string, wingId?: string): Promise<{
+  static async validateRegistration(email: string, fieldId?: string): Promise<{
     isValid: boolean;
     errors: string[];
   }> {

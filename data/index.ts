@@ -3,18 +3,18 @@
 // User data
 export * from './users';
 
-// Wing data
-export { mockWings, getWingById, getWingByCode, getActiveWings, getTotalStudents, getTotalTrainers } from './wings';
-export { getTotalRevenue as getWingsTotalRevenue } from './wings';
+// Field data (formerly Wing)
+export { mockFields, getFieldById, getFieldByCode, getActiveFields, getTotalStudents, getTotalTrainers } from './fields';
+export { getTotalRevenue as getFieldsTotalRevenue } from './fields';
 
 // Roadmap data (replaces course data)
 export * from './courses'; // Keep for live sessions
 export * from './roadmaps';
 
 // Transaction and wallet data
-export { 
-  mockTransactions, 
-  mockWallets, 
+export {
+  mockTransactions,
+  mockWallets,
   mockSubscriptions,
   getWalletByOwnerId,
   getWalletsByType,
@@ -22,7 +22,7 @@ export {
   getTransactionsByStatus,
   getSubscriptionsByStatus,
   getTotalTrainerPayouts,
-  getTotalWingRevenue,
+  getTotalFieldRevenue,
   getUmbrellaRevenue
 } from './transactions';
 export { getTotalRevenue as getTransactionsTotalRevenue } from './transactions';
@@ -35,7 +35,7 @@ export * from './system';
 
 // Combined data helpers
 import { mockUsers } from './users';
-import { mockWings } from './wings';
+import { mockFields } from './fields';
 import { mockRoadmaps, mockStudentRoadmaps } from './roadmaps';
 import { mockSystemStats } from './system';
 
@@ -44,35 +44,35 @@ export const getDashboardStats = () => ({
   totalStudents: mockUsers.filter(u => u.role === 'student').length,
   totalTrainers: mockUsers.filter(u => u.role === 'trainer').length,
   totalMentors: mockUsers.filter(u => u.role === 'mentor').length,
-  totalWings: mockWings.length,
-  activeWings: mockWings.filter(w => w.status === 'active').length,
+  totalFields: mockFields.length,
+  activeFields: mockFields.filter(f => f.status === 'active').length,
   totalRoadmaps: mockRoadmaps.length,
   activeRoadmaps: mockStudentRoadmaps.filter(r => r.status === 'active').length,
-  totalRevenue: mockWings.reduce((sum, wing) => sum + wing.totalRevenue, 0),
+  totalRevenue: mockFields.reduce((sum, field) => sum + field.totalRevenue, 0),
   systemHealth: mockSystemStats.systemUptime
 });
 
-export const getWingDashboardStats = (wingId: string) => {
-  const wing = mockWings.find(w => w.id === wingId);
-  const wingUsers = mockUsers.filter(u => u.wingId === wingId);
-  const wingRoadmaps = mockStudentRoadmaps.filter(r => 
-    mockUsers.find(u => u.id === r.studentId)?.wingId === wingId
+export const getFieldDashboardStats = (fieldId: string) => {
+  const field = mockFields.find(f => f.id === fieldId);
+  const fieldUsers = mockUsers.filter(u => u.fieldId === fieldId);
+  const fieldRoadmaps = mockStudentRoadmaps.filter(r =>
+    mockUsers.find(u => u.id === r.studentId)?.fieldId === fieldId
   );
-  
+
   return {
-    wingName: wing?.name || 'Unknown Wing',
-    totalStudents: wingUsers.filter(u => u.role === 'student').length,
-    totalTrainers: wingUsers.filter(u => u.role === 'trainer').length,
-    activeRoadmaps: wingRoadmaps.filter(r => r.status === 'active').length,
-    wingRevenue: wing?.totalRevenue || 0,
-    wingStatus: wing?.status || 'inactive'
+    fieldName: field?.name || 'Unknown Field',
+    totalStudents: fieldUsers.filter(u => u.role === 'student').length,
+    totalTrainers: fieldUsers.filter(u => u.role === 'trainer').length,
+    activeRoadmaps: fieldRoadmaps.filter(r => r.status === 'active').length,
+    fieldRevenue: field?.totalRevenue || 0,
+    fieldStatus: field?.status || 'inactive'
   };
 };
 
 export const getTrainerDashboardStats = (trainerId: string) => {
   const trainerStudents = mockUsers.filter(u => u.role === 'student'); // In real app, filter by trainerId
   const trainerRoadmaps = mockStudentRoadmaps.filter(r => r.status === 'active'); // In real app, filter by trainer
-  
+
   return {
     totalStudents: trainerStudents.length,
     activeRoadmaps: trainerRoadmaps.length,
@@ -85,10 +85,10 @@ export const getTrainerDashboardStats = (trainerId: string) => {
 
 export const getMentorDashboardStats = (mentorId: string) => {
   const mentorRoadmaps = mockRoadmaps.filter(r => r.mentorId === mentorId);
-  const mentorStudentRoadmaps = mockStudentRoadmaps.filter(r => 
+  const mentorStudentRoadmaps = mockStudentRoadmaps.filter(r =>
     r.roadmap.mentorId === mentorId
   );
-  
+
   return {
     totalRoadmaps: mentorRoadmaps.length,
     totalStudents: mentorStudentRoadmaps.length,

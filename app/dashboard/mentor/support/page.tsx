@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
 import { useAuth } from '@/contexts';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
+import { MentorUser } from '@/types';
 
 export default function MentorSupportPage() {
   const { user, isAuthenticated, isLoading: authLoading } = useAuth();
@@ -22,10 +23,10 @@ export default function MentorSupportPage() {
     }
 
     if (!authLoading && user && user.role !== 'mentor') {
-      const dashboardRoutes = {
+      const dashboardRoutes: Record<string, string> = {
         'student': '/dashboard/student',
         'trainer': '/dashboard/trainer',
-        'wing-admin': '/dashboard/wing-admin',
+        'field-admin': '/dashboard/field-admin',
         'umbrella-admin': '/dashboard/umbrella-admin'
       };
       navigate(dashboardRoutes[user.role] || '/');
@@ -47,6 +48,8 @@ export default function MentorSupportPage() {
     return null;
   }
 
+  const mentorUser = user as MentorUser;
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -61,7 +64,7 @@ export default function MentorSupportPage() {
     setPriority('medium');
     setIsSubmitting(false);
 
-    alert('Support ticket submitted successfully! Your wing admin will review it shortly.');
+    alert('Support ticket submitted successfully! Your field admin will review it shortly.');
   };
 
   return (
@@ -81,7 +84,7 @@ export default function MentorSupportPage() {
               <div className="lg:col-span-2">
                 <div className="bg-white border border-gray-200 rounded-lg p-6">
                   <h2 className="text-lg font-semibold text-gray-900 mb-4">Submit Support Ticket</h2>
-                  
+
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
@@ -170,8 +173,8 @@ export default function MentorSupportPage() {
                       <p className="text-sm text-gray-600">Usually within 8 hours</p>
                     </div>
                     <div>
-                      <h4 className="text-sm font-medium text-gray-900">Wing Admin</h4>
-                      <p className="text-sm text-gray-600">{user.wing || 'Not assigned'}</p>
+                      <h4 className="text-sm font-medium text-gray-900">Field Focus</h4>
+                      <p className="text-sm text-gray-600 capitalize">{(mentorUser.fieldId || 'Not assigned').replace(/-/g, ' ')}</p>
                     </div>
                     <div>
                       <h4 className="text-sm font-medium text-gray-900">Support Hours</h4>

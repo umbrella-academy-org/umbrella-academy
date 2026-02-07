@@ -79,7 +79,7 @@ export const mockTransactions: Transaction[] = [
     currency: 'RWF',
     date: '2024-12-01T18:00:00Z',
     status: 'completed',
-    reference: 'WNG-201-2024-11'
+    reference: 'FLD-201-2024-11'
   },
 
   // Umbrella revenue
@@ -127,11 +127,11 @@ export const mockWallets: Wallet[] = [
     transactions: []
   },
 
-  // Wing wallets
+  // Field wallets
   {
     id: 'wallet_201',
     ownerId: 'kigali-central',
-    ownerType: 'wing',
+    ownerType: 'field',
     balance: 427500, // RWF
     currency: 'RWF',
     transactions: [
@@ -140,16 +140,16 @@ export const mockWallets: Wallet[] = [
   },
   {
     id: 'wallet_202',
-    ownerId: 'northern-wing',
-    ownerType: 'wing',
+    ownerId: 'northern-field',
+    ownerType: 'field',
     balance: 288000, // RWF
     currency: 'RWF',
     transactions: []
   },
   {
     id: 'wallet_203',
-    ownerId: 'southern-wing',
-    ownerType: 'wing',
+    ownerId: 'southern-field',
+    ownerType: 'field',
     balance: 252000, // RWF
     currency: 'RWF',
     transactions: []
@@ -217,36 +217,36 @@ export const mockSubscriptions: Subscription[] = [
 ];
 
 // Helper functions
-export const getWalletByOwnerId = (ownerId: string) => 
+export const getWalletByOwnerId = (ownerId: string) =>
   mockWallets.find(wallet => wallet.ownerId === ownerId);
 
-export const getWalletsByType = (ownerType: 'trainer' | 'wing' | 'umbrella') => 
+export const getWalletsByType = (ownerType: 'trainer' | 'field' | 'umbrella') =>
   mockWallets.filter(wallet => wallet.ownerType === ownerType);
 
-export const getTransactionsByType = (type: 'income' | 'withdrawal' | 'payment') => 
+export const getTransactionsByType = (type: 'income' | 'withdrawal' | 'payment') =>
   mockTransactions.filter(transaction => transaction.type === type);
 
-export const getTransactionsByStatus = (status: 'pending' | 'completed' | 'failed') => 
+export const getTransactionsByStatus = (status: 'pending' | 'completed' | 'failed') =>
   mockTransactions.filter(transaction => transaction.status === status);
 
-export const getSubscriptionsByStatus = (status: 'active' | 'cancelled' | 'expired') => 
+export const getSubscriptionsByStatus = (status: 'active' | 'cancelled' | 'expired') =>
   mockSubscriptions.filter(subscription => subscription.status === status);
 
-export const getTotalRevenue = () => 
+export const getTotalRevenue = () =>
   mockTransactions
     .filter(t => t.type === 'payment' && t.status === 'completed')
     .reduce((total, t) => total + t.amount, 0);
 
-export const getTotalTrainerPayouts = () => 
+export const getTotalTrainerPayouts = () =>
   mockTransactions
     .filter(t => t.type === 'income' && t.status === 'completed')
     .reduce((total, t) => total + t.amount, 0);
 
-export const getTotalWingRevenue = () => 
+export const getTotalFieldRevenue = () =>
   mockWallets
-    .filter(w => w.ownerType === 'wing')
+    .filter(w => w.ownerType === 'field')
     .reduce((total, w) => total + w.balance, 0);
 
-export const getUmbrellaRevenue = () => 
+export const getUmbrellaRevenue = () =>
   mockWallets
     .find(w => w.ownerType === 'umbrella')?.balance || 0;

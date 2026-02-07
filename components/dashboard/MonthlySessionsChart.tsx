@@ -41,7 +41,7 @@ export default function MonthlySessionsChart({ userType }: MonthlySessionsChartP
           { day: 'Sat', sessions: 1 },
           { day: 'Sun', sessions: 0 }
         ];
-      case 'wing-admin':
+      case 'field-admin':
         return [
           { day: 'Mon', sessions: 15 },
           { day: 'Tue', sessions: 18 },
@@ -85,8 +85,8 @@ export default function MonthlySessionsChart({ userType }: MonthlySessionsChartP
         return 'Mentoring Sessions';
       case 'student':
         return 'Learning Sessions';
-      case 'wing-admin':
-        return 'Wing Activities';
+      case 'field-admin':
+        return 'Field Activities';
       case 'umbrella-admin':
         return 'System Activities';
       default:
@@ -102,10 +102,10 @@ export default function MonthlySessionsChart({ userType }: MonthlySessionsChartP
         return 'Monitor your mentoring activities and student interactions';
       case 'student':
         return 'View your learning sessions and study time';
-      case 'wing-admin':
-        return 'Track wing-wide activities and performance metrics';
+      case 'field-admin':
+        return 'Track field-wide activities and performance metrics';
       case 'umbrella-admin':
-        return 'Monitor system-wide activities across all wings';
+        return 'Monitor system-wide activities across all fields';
       default:
         return 'Track how you interact with sessions over time';
     }
@@ -155,7 +155,7 @@ export default function MonthlySessionsChart({ userType }: MonthlySessionsChartP
                 </div>
               ))}
             </div>
-            
+
             {/* X-axis labels */}
             <div className="flex justify-between px-2 mt-2">
               {chartData.map((data) => (

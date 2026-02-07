@@ -2,8 +2,8 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Roadmap, StudentRoadmap, LiveSession } from '@/types';
-import { 
-  mockRoadmaps, 
+import {
+  mockRoadmaps,
   mockStudentRoadmaps,
   getRoadmapById,
   getRoadmapsByStudent,
@@ -49,22 +49,22 @@ export function RoadmapProvider({ children }: { children: React.ReactNode }) {
 
       if (currentUser.role === 'student') {
         // Students can only see their own roadmaps
-        filteredRoadmaps = mockRoadmaps.filter(roadmap => 
+        filteredRoadmaps = mockRoadmaps.filter(roadmap =>
           roadmap.studentId === currentUser.id
         );
       } else if (currentUser.role === 'trainer') {
         // Trainers can see roadmaps they helped create or are assigned to
-        filteredRoadmaps = mockRoadmaps.filter(roadmap => 
+        filteredRoadmaps = mockRoadmaps.filter(roadmap =>
           roadmap.trainerId === currentUser.id
         );
       } else if (currentUser.role === 'mentor') {
         // Mentors can see roadmaps they need to approve or have approved
-        filteredRoadmaps = mockRoadmaps.filter(roadmap => 
+        filteredRoadmaps = mockRoadmaps.filter(roadmap =>
           roadmap.mentorId === currentUser.id
         );
-      } else if (currentUser.role === 'wing-admin') {
-        // Wing admins can see roadmaps of students in their wing
-        filteredRoadmaps = mockRoadmaps; // Would filter by wing
+      } else if (currentUser.role === 'field-admin') {
+        // Field admins can see roadmaps of students in their field
+        filteredRoadmaps = mockRoadmaps; // Would filter by field
       } else if (currentUser.role === 'umbrella-admin') {
         // Umbrella admin can see all roadmaps
         filteredRoadmaps = mockRoadmaps;
@@ -91,22 +91,22 @@ export function RoadmapProvider({ children }: { children: React.ReactNode }) {
 
       if (currentUser.role === 'student') {
         // Students can only see their own enrollment records
-        filteredStudentRoadmaps = mockStudentRoadmaps.filter(roadmap => 
+        filteredStudentRoadmaps = mockStudentRoadmaps.filter(roadmap =>
           roadmap.studentId === currentUser.id
         );
       } else if (currentUser.role === 'trainer') {
         // Trainers can see student roadmaps they're involved with
-        filteredStudentRoadmaps = mockStudentRoadmaps.filter(roadmap => 
+        filteredStudentRoadmaps = mockStudentRoadmaps.filter(roadmap =>
           roadmap.roadmap.trainerId === currentUser.id
         );
       } else if (currentUser.role === 'mentor') {
         // Mentors can see student roadmaps they need to approve or have approved
-        filteredStudentRoadmaps = mockStudentRoadmaps.filter(roadmap => 
+        filteredStudentRoadmaps = mockStudentRoadmaps.filter(roadmap =>
           roadmap.roadmap.mentorId === currentUser.id
         );
-      } else if (currentUser.role === 'wing-admin') {
-        // Wing admins can see student roadmaps in their wing
-        filteredStudentRoadmaps = mockStudentRoadmaps; // Would filter by wing
+      } else if (currentUser.role === 'field-admin') {
+        // Field admins can see student roadmaps in their field
+        filteredStudentRoadmaps = mockStudentRoadmaps; // Would filter by field
       } else if (currentUser.role === 'umbrella-admin') {
         // Umbrella admin can see all student roadmaps
         filteredStudentRoadmaps = mockStudentRoadmaps;
@@ -163,8 +163,8 @@ export function RoadmapProvider({ children }: { children: React.ReactNode }) {
   };
 
   const getUpcomingLiveSessions = (): LiveSession[] => {
-    return liveSessions.filter(session => 
-      session.status === 'scheduled' && 
+    return liveSessions.filter(session =>
+      session.status === 'scheduled' &&
       new Date(session.scheduledAt) > new Date()
     );
   };

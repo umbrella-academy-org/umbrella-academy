@@ -5,21 +5,21 @@ import Sidebar from '@/components/dashboard/Sidebar';
 import { User, Mail, Shield, Bell, Calendar, MapPin, Camera, Edit2, Check, X, Phone, Globe, BookOpen, Award, Zap, Briefcase, Settings, ChevronRight, Layout, Users } from 'lucide-react';
 import { useAuth } from '@/contexts';
 
-export default function WingAdminProfilePage() {
+export default function FieldAdminProfilePage() {
     const { user } = useAuth();
     const [isEditing, setIsEditing] = useState(false);
     const [profileData] = useState({
         name: user?.name || 'John Doe',
         email: user?.email || 'j.doe@dreamize.rw',
         location: 'Kigali, Rwanda',
-        bio: 'Wing Administrator responsible for the Software Engineering department. Overseeing 50+ trainers and 500+ students.',
-        wing: user?.wingId || 'Software Engineering',
+        bio: 'Field Administrator responsible for the department oversight. Overseeing 50+ trainers and 500+ students.',
+        field: user?.fieldId || 'Software Engineering',
         joinDate: user?.joinDate || 'Jan 2021'
     });
 
     return (
         <div className="flex h-screen bg-[#FDFDFC]">
-            <Sidebar activeItem="Profile" userType="wing-admin" />
+            <Sidebar activeItem="Profile" userType="field-admin" />
 
             <div className="flex-1 flex flex-col min-w-0">
                 <main className="flex-1 p-4 lg:p-8 overflow-y-auto bg-gray-50/30">
@@ -51,11 +51,11 @@ export default function WingAdminProfilePage() {
                                         <div>
                                             <div className="flex items-center gap-3">
                                                 <h1 className="text-3xl font-black text-gray-900  ">{profileData.name}</h1>
-                                                <div className="px-2.5 py-1 bg-yellow-50 text-yellow-700 border border-yellow-100 rounded-full text-[10px] font-black  tracking-wider">WING COMMANDER</div>
+                                                <div className="px-2.5 py-1 bg-yellow-50 text-yellow-700 border border-yellow-100 rounded-full text-[10px] font-black  tracking-wider">FIELD COMMANDER</div>
                                             </div>
                                             <p className="text-gray-500 font-semibold flex items-center gap-2 mt-1.5">
                                                 <Briefcase className="w-4.5 h-4.5 text-yellow-600" />
-                                                <span className="text-gray-600">{profileData.wing} Wing</span>
+                                                <span className="text-gray-600 capitalize">{profileData.field.replace(/-/g, ' ')} Field</span>
                                                 <span className="w-1 h-1 bg-gray-300 rounded-full" />
                                                 <span className="text-gray-400">Department Admin</span>
                                             </p>
@@ -84,14 +84,14 @@ export default function WingAdminProfilePage() {
                                             </div>
                                         </div>
                                         <div className="p-6 bg-yellow-50/50 rounded-lg border border-yellow-100">
-                                            <label className="text-[10px] font-black text-yellow-800/60    mb-4 block">Wing Mission</label>
+                                            <label className="text-[10px] font-black text-yellow-800/60    mb-4 block">Field Mission</label>
                                             <p className="text-gray-700 font-medium leading-relaxed italic">"{profileData.bio}"</p>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div className="bg-white rounded-lg border border-gray-100 shadow-xl shadow-gray-200/30 p-10 ">
-                                    <h3 className="text-xl font-semibold text-gray-900 mb-8">Wing Stats Oversight</h3>
+                                    <h3 className="text-xl font-semibold text-gray-900 mb-8">Field Stats Oversight</h3>
                                     <div className="grid grid-cols-2 gap-6">
                                         <div className="p-8 bg-gray-900 rounded-lg text-white relative overflow-hidden group">
                                             <Users className="w-8 h-8 text-yellow-500 mb-4 transform group-hover:scale-110 transition-transform" />
@@ -111,16 +111,16 @@ export default function WingAdminProfilePage() {
                                 <div className="bg-white rounded-lg border border-gray-100 shadow-xl shadow-gray-200/30 p-8">
                                     <h3 className="text-xl font-semibold text-gray-900 mb-8">Management</h3>
                                     <div className="space-y-4">
-                                        <ManagementItem icon={<Layout className="w-5 h-5" />} label="Wing Dashboard" />
+                                        <ManagementItem icon={<Layout className="w-5 h-5" />} label="Field Dashboard" />
                                         <ManagementItem icon={<Users className="w-5 h-5" />} label="Staff Directory" />
-                                        <ManagementItem icon={<Settings className="w-5 h-5" />} label="Wing Settings" />
+                                        <ManagementItem icon={<Settings className="w-5 h-5" />} label="Field Settings" />
                                     </div>
                                 </div>
 
                                 <div className="p-8 bg-gray-900 rounded-lg text-white shadow-2xl shadow-gray-900/40 relative overflow-hidden group">
                                     <div className="relative z-10">
-                                        <h4 className="text-xl font-black mb-2  ">Wing Support</h4>
-                                        <p className="text-gray-400 text-xs font-medium mb-6 leading-relaxed">Need help managing your wing? Contact system admin.</p>
+                                        <h4 className="text-xl font-black mb-2  ">Field Support</h4>
+                                        <p className="text-gray-400 text-xs font-medium mb-6 leading-relaxed">Need help managing your field? Contact system admin.</p>
                                         <button className="w-full py-4 bg-yellow-600 hover:bg-yellow-500 rounded-[1.2rem] font-black text-sm transition-all shadow-xl shadow-yellow-600/20">
                                             Get Support
                                         </button>

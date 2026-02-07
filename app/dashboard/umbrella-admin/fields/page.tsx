@@ -1,14 +1,14 @@
 'use client';
 
 import Sidebar from '@/components/dashboard/Sidebar';
-import WingsTable from '@/components/umbrella-admin/WingsTable';
+import FieldsTable from '@/components/umbrella-admin/FieldsTable';
 import { Building2, Users, DollarSign, TrendingUp } from 'lucide-react';
 
-export default function UmbrellaAdminWingsPage() {
-  const wings = [
+export default function UmbrellaAdminFieldsPage() {
+  const fields = [
     {
       id: 1,
-      name: 'Programming Wing',
+      name: 'Programming Field',
       code: 'PROG-001',
       admin: 'John Smith',
       students: 324,
@@ -19,7 +19,7 @@ export default function UmbrellaAdminWingsPage() {
     },
     {
       id: 2,
-      name: 'Design Wing',
+      name: 'Design Field',
       code: 'DESIGN-002',
       admin: 'Sarah Johnson',
       students: 287,
@@ -30,7 +30,7 @@ export default function UmbrellaAdminWingsPage() {
     },
     {
       id: 3,
-      name: 'Marketing Wing',
+      name: 'Marketing Field',
       code: 'MARK-003',
       admin: 'Mike Wilson',
       students: 256,
@@ -41,7 +41,7 @@ export default function UmbrellaAdminWingsPage() {
     },
     {
       id: 4,
-      name: 'Data Science Wing',
+      name: 'Data Science Field',
       code: 'DATA-004',
       admin: 'Emily Davis',
       students: 198,
@@ -52,7 +52,7 @@ export default function UmbrellaAdminWingsPage() {
     },
     {
       id: 5,
-      name: 'Business Wing',
+      name: 'Business Field',
       code: 'BIZ-005',
       admin: 'David Brown',
       students: 182,
@@ -64,21 +64,21 @@ export default function UmbrellaAdminWingsPage() {
   ];
 
   // Calculate summary stats
-  const totalWings = wings.length;
-  const activeWings = wings.filter(w => w.status === 'active').length;
-  const totalStudents = wings.reduce((sum, w) => sum + w.students, 0);
-  const totalRevenue = wings.reduce((sum, w) => sum + w.revenue, 0);
+  const totalFields = fields.length;
+  const activeFields = fields.filter(f => f.status === 'active').length;
+  const totalStudents = fields.reduce((sum, f) => sum + f.students, 0);
+  const totalRevenue = fields.reduce((sum, f) => sum + f.revenue, 0);
 
   return (
     <div className="flex h-screen bg-white">
-      <Sidebar activeItem="Wings" userType="umbrella-admin" />
+      <Sidebar activeItem="Fields" userType="umbrella-admin" />
 
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
         <main className="flex-1 overflow-auto">
           <div className="p-3 lg:p-4">
             <div className="mb-6">
-              <h1 className="text-2xl font-semibold text-gray-900 mb-2">Wings Management</h1>
-              <p className="text-gray-600">Monitor and manage all wings across the system</p>
+              <h1 className="text-2xl font-semibold text-gray-900 mb-2">Fields Management</h1>
+              <p className="text-gray-600">Monitor and manage all fields across the system</p>
             </div>
 
             {/* Summary Cards */}
@@ -86,8 +86,8 @@ export default function UmbrellaAdminWingsPage() {
               <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-gray-600">Total Wings</p>
-                    <p className="text-2xl font-bold text-gray-900">{totalWings}</p>
+                    <p className="text-sm font-medium text-gray-600">Total Fields</p>
+                    <p className="text-2xl font-bold text-gray-900">{totalFields}</p>
                   </div>
                   <Building2 className="w-8 h-8 text-blue-500" />
                 </div>
@@ -95,8 +95,8 @@ export default function UmbrellaAdminWingsPage() {
               <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-gray-600">Active Wings</p>
-                    <p className="text-2xl font-bold text-gray-900">{activeWings}</p>
+                    <p className="text-sm font-medium text-gray-600">Active Fields</p>
+                    <p className="text-2xl font-bold text-gray-900">{activeFields}</p>
                   </div>
                   <TrendingUp className="w-8 h-8 text-green-500" />
                 </div>
@@ -121,7 +121,7 @@ export default function UmbrellaAdminWingsPage() {
               </div>
             </div>
 
-            <WingsTable wings={wings} />
+            <FieldsTable fields={fields} />
           </div>
         </main>
       </div>

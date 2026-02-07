@@ -7,7 +7,8 @@ interface UpdateUserData {
   name?: string;
   email?: string;
   status?: 'active' | 'inactive' | 'suspended' | 'paused';
-  wing?: string;
+  fieldId?: string;
+  field?: string;
 }
 
 interface UseUpdateUserReturn {
@@ -28,9 +29,9 @@ export function useUpdateUser(): UseUpdateUserReturn {
 
     try {
       // Check permissions
-      const canManageUsers = hasPermission('manage_wing') || hasPermission('manage_system');
+      const canManageUsers = hasPermission('manage_field') || hasPermission('manage_system');
       const isOwnProfile = currentUser?.id === data.id;
-      
+
       if (!canManageUsers && !isOwnProfile) {
         throw new Error('Insufficient permissions to update user');
       }

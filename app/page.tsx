@@ -10,12 +10,13 @@ export default function Home() {
 
   // Redirect authenticated users to their dashboard
   useEffect(() => {
+
     if (isAuthenticated && user) {
-      const dashboardRoutes = {
+      const dashboardRoutes: Record<string, string> = {
         'student': '/dashboard/student',
         'trainer': '/dashboard/trainer',
         'mentor': '/dashboard/mentor',
-        'wing-admin': '/dashboard/wing-admin',
+        'field-admin': '/dashboard/field-admin',
         'umbrella-admin': '/dashboard/umbrella-admin'
       };
       navigate(dashboardRoutes[user.role]);
