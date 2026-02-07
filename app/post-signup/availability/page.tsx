@@ -135,7 +135,7 @@ export default function StudentAvailabilityPage() {
                                     type="submit"
                                     className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-colors"
                                 >
-                                    Continue to Field Selection
+                                    Continue to Choose Trainer
                                 </button>
 
                                 {/* Progress dots */}
