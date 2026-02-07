@@ -13,7 +13,7 @@ export function Hero() {
       <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-[#ca8a04]/5 rounded-full blur-3xl -z-10" />
       <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-[#fbbf24]/5 rounded-full blur-3xl -z-10" />
 
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-full mx-auto">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <div className="space-y-8 animate-fade-in">

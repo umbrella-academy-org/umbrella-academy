@@ -36,7 +36,7 @@ const steps = [
 export function HowItWorks() {
   return (
     <section id="how-it-works" className="py-24 px-4 sm:px-6 lg:px-8 bg-linear-to-br from-gray-50 to-white">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-full mx-auto">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-20 animate-fade-in">
           <div>
