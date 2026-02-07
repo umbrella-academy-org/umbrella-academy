@@ -1,4 +1,5 @@
 import { Target, Zap, Users, Award, TrendingUp, CheckCircle2 } from "lucide-react";
+import { useReveal } from "@/hooks/system/useReveal";
 
 const benefits = [
   {
@@ -34,16 +35,18 @@ const benefits = [
 ];
 
 export function Benefits() {
+  const { ref, isVisible } = useReveal();
+
   return (
     <section className="py-24 px-4 sm:px-6 lg:px-8 bg-white relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-[#ca8a04]/5 rounded-full blur-3xl -z-10" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#fbbf24]/5 rounded-full blur-3xl -z-10" />
 
-      <div className="max-w-full mx-auto">
+      <div ref={ref} className="max-w-full mx-auto">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left - Image */}
-          <div className="relative animate-fade-in">
+          <div className={`relative ${isVisible ? 'animate-fade-in' : 'opacity-0'}`}>
             <div className="relative rounded-2xl overflow-hidden shadow-2xl border-2 border-gray-200">
               <img
                 src="https://images.unsplash.com/photo-1758691736975-9f7f643d178e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkaXZlcnNlJTIwdGVhbSUyMGNvbGxhYm9yYXRpb258ZW58MXx8fHwxNzcwMzI4NjIzfDA&ixlib=rb-4.1.0&q=80&w=1080"
@@ -80,7 +83,7 @@ export function Benefits() {
           </div>
 
           {/* Right - Benefits */}
-          <div className="animate-fade-in animation-delay-300">
+          <div className={`${isVisible ? 'animate-fade-in' : 'opacity-0'} animation-delay-300`}>
             <span className="inline-block px-4 py-2 bg-[#ca8a04]/10 text-[#ca8a04] rounded-full text-sm font-medium mb-4 border border-[#ca8a04]/20">
               Why Choose Us
             </span>

@@ -1,4 +1,5 @@
 import { BookOpen, Users, Target, TrendingUp, Shield, Award } from "lucide-react";
+import { useReveal } from "@/hooks/system/useReveal";
 
 const features = [
   {
@@ -40,12 +41,14 @@ const features = [
 ];
 
 export function Features() {
+  const { ref, isVisible } = useReveal();
+
   return (
     <section id="features" className="py-24 px-4 sm:px-6 lg:px-8 bg-white">
-      <div className="max-w-full mx-auto">
+      <div ref={ref} className="max-w-full mx-auto">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="animate-fade-in">
+        <div className={`text-center max-w-3xl mx-auto mb-16 reveal ${isVisible ? 'visible' : ''}`}>
+          <div>
             <span className="inline-block px-4 py-2 bg-[#ca8a04]/10 text-[#ca8a04] rounded-full text-sm font-medium mb-4 border border-[#ca8a04]/20">
               Features
             </span>
@@ -66,7 +69,7 @@ export function Features() {
             return (
               <div
                 key={index}
-                className={`group relative bg-white rounded-2xl border-2 border-gray-200 p-8 hover:shadow-xl hover:border-[#ca8a04]/30 transition-all duration-300 animate-fade-in ${delays[index]}`}
+                className={`group relative bg-white rounded-2xl border-2 border-gray-200 p-8 hover:shadow-xl hover:border-[#ca8a04]/30 transition-all duration-300 ${isVisible ? 'animate-fade-in' : 'opacity-0'} ${delays[index]}`}
               >
                 {/* Icon */}
                 <div
