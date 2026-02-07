@@ -2,9 +2,11 @@
 
 import { ArrowRight, Sparkles } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useReveal } from "@/hooks/system/useReveal";
 
 export function CTA() {
   const router = useRouter();
+  const { ref, isVisible } = useReveal();
 
   return (
     <section className="py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
@@ -23,8 +25,8 @@ export function CTA() {
         }} />
       </div>
 
-      <div className="max-w-full mx-auto relative z-10">
-        <div className="text-center space-y-8 animate-fade-in">
+      <div ref={ref} className="max-w-full mx-auto relative z-10">
+        <div className={`text-center space-y-8 reveal ${isVisible ? 'visible' : ''}`}>
           {/* Badge */}
           <div className="inline-flex items-center space-x-2 px-4 py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/20">
             <Sparkles className="w-4 h-4 text-[#fbbf24]" />

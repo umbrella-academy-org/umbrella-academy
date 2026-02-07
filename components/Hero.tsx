@@ -16,7 +16,7 @@ export function Hero() {
       <div className="max-w-full mx-auto">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
-          <div className="space-y-8 animate-fade-in">
+          <div className="space-y-8 animate-fade-in-left">
             <div className="inline-flex items-center space-x-2 px-4 py-2 bg-[#ca8a04]/10 border border-[#ca8a04]/20 rounded-full">
               <span className="w-2 h-2 bg-[#ca8a04] rounded-full animate-pulse" />
               <span className="text-sm text-[#ca8a04] font-medium">Next-Gen Learning Platform</span>
@@ -50,15 +50,15 @@ export function Hero() {
 
             {/* Stats */}
             <div className="grid grid-cols-3 gap-8 pt-8 border-t border-gray-200">
-              <div>
+              <div className="animate-slide-up animation-delay-300">
                 <div className="text-3xl font-bold text-[#ca8a04]">50K+</div>
                 <div className="text-sm text-gray-600">Active Students</div>
               </div>
-              <div>
+              <div className="animate-slide-up animation-delay-400">
                 <div className="text-3xl font-bold text-[#fbbf24]">1K+</div>
                 <div className="text-sm text-gray-600">Expert Trainers</div>
               </div>
-              <div>
+              <div className="animate-slide-up animation-delay-500">
                 <div className="text-3xl font-bold text-black">95%</div>
                 <div className="text-sm text-gray-600">Success Rate</div>
               </div>
@@ -66,7 +66,7 @@ export function Hero() {
           </div>
 
           {/* Right Content - Image */}
-          <div className="relative animate-fade-in animation-delay-200">
+          <div className="relative animate-fade-in-right animation-delay-200">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-200">
               <img
                 src="https://images.unsplash.com/photo-1753613648191-4771cf76f034?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBzdHVkZW50JTIwbGVhcm5pbmclMjBvbmxpbmV8ZW58MXx8fHwxNzcwMzI4NjIzfDA&ixlib=rb-4.1.0&q=80&w=1080"

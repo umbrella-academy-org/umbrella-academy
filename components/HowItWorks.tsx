@@ -1,4 +1,5 @@
 import { Layers, Building2, CreditCard, GraduationCap, BarChart3 } from "lucide-react";
+import { useReveal } from "@/hooks/system/useReveal";
 
 const steps = [
   {
@@ -34,11 +35,13 @@ const steps = [
 ];
 
 export function HowItWorks() {
+  const { ref, isVisible } = useReveal();
+
   return (
     <section id="how-it-works" className="py-24 px-4 sm:px-6 lg:px-8 bg-linear-to-br from-gray-50 to-white">
-      <div className="max-w-full mx-auto">
+      <div ref={ref} className="max-w-full mx-auto">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-20 animate-fade-in">
+        <div className={`text-center max-w-3xl mx-auto mb-20 reveal ${isVisible ? 'visible' : ''}`}>
           <div>
             <span className="inline-block px-4 py-2 bg-white text-[#ca8a04] rounded-full text-sm font-medium mb-4 shadow-sm border border-gray-200">
               How It Works
@@ -64,7 +67,7 @@ export function HowItWorks() {
               return (
                 <div
                   key={index}
-                  className={`relative animate-fade-in ${delays[index]}`}
+                  className={`relative ${isVisible ? 'animate-fade-in' : 'opacity-0'} ${delays[index]}`}
                 >
                   <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-gray-200 hover:border-[#ca8a04]/30 h-full">
                     {/* Step Number */}

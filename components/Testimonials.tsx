@@ -1,4 +1,5 @@
 import { Star, Quote } from "lucide-react"
+import { useReveal } from "@/hooks/system/useReveal";
 
 const testimonials = [
   {
@@ -52,14 +53,16 @@ const testimonials = [
 ];
 
 export function Testimonials() {
+  const { ref, isVisible } = useReveal();
+
   return (
     <section className="py-24 px-4 sm:px-6 lg:px-8 bg-linear-to-br from-gray-50 to-white relative overflow-hidden">
       {/* Background Decoration */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-96 bg-[#ca8a04]/5 rounded-full blur-3xl -z-10" />
 
-      <div className="max-w-full mx-auto">
+      <div ref={ref} className="max-w-full mx-auto">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
+        <div className={`text-center max-w-3xl mx-auto mb-16 reveal ${isVisible ? 'visible' : ''}`}>
           <div>
             <span className="inline-block px-4 py-2 bg-white text-[#ca8a04] rounded-full text-sm font-medium mb-4 shadow-sm border border-gray-200">
               Success Stories
@@ -80,7 +83,7 @@ export function Testimonials() {
             return (
               <div
                 key={index}
-                className={`bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-gray-200 hover:border-[#ca8a04]/30 relative animate-fade-in ${delays[index]}`}
+                className={`bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-gray-200 hover:border-[#ca8a04]/30 relative ${isVisible ? 'animate-fade-in' : 'opacity-0'} ${delays[index]}`}
               >
                 {/* Quote Icon */}
                 <div className="absolute -top-3 -right-3 w-12 h-12 bg-[#fbbf24] rounded-full flex items-center justify-center shadow-lg">

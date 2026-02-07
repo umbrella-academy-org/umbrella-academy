@@ -1,4 +1,5 @@
 import { Code, Film, Briefcase, ArrowRight } from "lucide-react";
+import { useReveal } from "@/hooks/system/useReveal";
 
 const companies = [
   {
@@ -40,12 +41,14 @@ const additionalFields = [
 ];
 
 export function Companies() {
+  const { ref, isVisible } = useReveal();
+
   return (
     <section id="programs" className="py-24 px-4 sm:px-6 lg:px-8 bg-linear-to-br from-gray-50 to-white">
-      <div className="max-w-full mx-auto">
+      <div ref={ref} className="max-w-full mx-auto">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="animate-fade-in">
+        <div className={`text-center max-w-3xl mx-auto mb-16 reveal ${isVisible ? 'visible' : ''}`}>
+          <div>
             <span className="inline-block px-4 py-2 bg-white text-[#ca8a04] rounded-full text-sm font-medium mb-4 shadow-sm border border-gray-200">
               Learning Companies
             </span>
@@ -66,7 +69,7 @@ export function Companies() {
             return (
               <div
                 key={index}
-                className={`group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-gray-200 hover:border-[#ca8a04]/30 animate-fade-in ${delays[index]}`}
+                className={`group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-gray-200 hover:border-[#ca8a04]/30 ${isVisible ? 'animate-fade-in' : 'opacity-0'} ${delays[index]}`}
               >
                 {/* Background Image */}
                 <div className="relative h-48 overflow-hidden">
