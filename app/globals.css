@@ -271,6 +271,30 @@ body {
   }
 }
 
+@keyframes slide-x {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(30px);
+  }
+}
+
+@keyframes slide-y {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(30px);
+  }
+}
+
 /* Animation Classes */
 .animate-fade-in {
   animation: fade-in 0.8s ease-out forwards;
@@ -296,8 +320,12 @@ body {
   animation: bounce-subtle 2s infinite;
 }
 
-.animate-pulse-glow {
-  animation: pulse-glow 2s infinite;
+.animate-slide-x {
+  animation: slide-x 10s ease-in-out infinite;
+}
+
+.animate-slide-y {
+  animation: slide-y 10s ease-in-out infinite;
 }
 
 .animate-shimmer {

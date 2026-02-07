@@ -18,7 +18,7 @@ export function Hero() {
           {/* Left Content */}
           <div className="space-y-8 animate-fade-in-left">
             <div className="inline-flex items-center space-x-2 px-4 py-2 bg-[#ca8a04]/10 border border-[#ca8a04]/20 rounded-full">
-              <span className="w-2 h-2 bg-[#ca8a04] rounded-full animate-pulse" />
+              <span className="w-2 h-2 bg-[#ca8a04] rounded-full" />
               <span className="text-sm text-[#ca8a04] font-medium">Next-Gen Learning Platform</span>
             </div>
 
