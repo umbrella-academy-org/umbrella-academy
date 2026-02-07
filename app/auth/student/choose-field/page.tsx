@@ -48,7 +48,7 @@ export default function ChooseFieldPage() {
               <svg className="w-5 h-5 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M15 19l-7-7 7-7" />
               </svg>
-              <span className="text-xs font-black uppercase tracking-widest">Go back</span>
+              <span className="text-xs font-black  ">Go back</span>
             </button>
           </div>
 
@@ -64,7 +64,7 @@ export default function ChooseFieldPage() {
 
             {/* Title */}
             <div className="mb-12">
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 mb-4 tracking-tight">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 mb-4 ">
                 Choose Your Field
               </h1>
               <p className="text-slate-500 max-w-xl mx-auto text-sm sm:text-base font-medium leading-relaxed">
@@ -97,7 +97,7 @@ export default function ChooseFieldPage() {
                       {/* Content Section */}
                       <div className="mb-8">
                         <div className='flex justify-between items-start'>
-                          <h3 className={`text-xl font-black tracking-tight mb-3 transition-colors ${isSelected ? 'text-yellow-800' : 'text-slate-800'}`}>
+                          <h3 className={`text-xl font-black  mb-3 transition-colors ${isSelected ? 'text-yellow-800' : 'text-slate-800'}`}>
                             {field.name}
                           </h3>
                           <div className={`w-10 h-10 rounded-lg flex items-center justify-center text-xl shadow-inner transition-all duration-500 ${isSelected ? 'bg-yellow-600 text-white rotate-6' : 'bg-slate-50 text-slate-400 group-hover:bg-yellow-50 group-hover:text-yellow-600 group-hover:rotate-6'
@@ -121,7 +121,7 @@ export default function ChooseFieldPage() {
                           className={`flex items-center gap-3 text-sm font-black transition-all group/btn ${isSelected ? 'text-yellow-600' : 'text-slate-400 group-hover:text-yellow-600'
                             }`}
                         >
-                          <span className="uppercase tracking-widest text-[10px]">Learn more</span>
+                          <span className="  text-[10px]">Learn more</span>
                           <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${isSelected ? 'bg-yellow-600 text-white translate-x-1 shadow-lg shadow-yellow-600/20' : 'bg-slate-50 text-slate-400 group-hover/btn:bg-yellow-600 group-hover/btn:text-white group-hover/btn:translate-x-1 group-hover/btn:shadow-lg group-hover/btn:shadow-yellow-600/20'
                             }`}>
                             <ArrowRight className="w-4 h-4" />
@@ -233,7 +233,7 @@ export default function ChooseFieldPage() {
                         {trainer.avatar}
                       </div>
                       <div className="flex-1">
-                        <p className="text-s font-black text-gray-900 tracking-tight">{trainer.name}</p>
+                        <p className="text-s font-black text-gray-900 ">{trainer.name}</p>
                         <p className="text-xs font-bold text-gray-600 leading-tight mt-0.5">{trainer.specialization}</p>
                       </div>
                       <div className="flex items-center gap-1">

@@ -42,11 +42,11 @@ export default function StudentAvailabilityPage() {
 
             <div className="flex-1 flex flex-col overflow-hidden">
                 <main className="flex-1 overflow-auto flex items-center justify-center bg-gray-50">
-                    <div className=" w-full p-8">
+                    <div className="max-w-2xl w-full p-8">
                         {/* Go back button */}
                         <button
                             onClick={() => router.push('/dashboard/student')}
-                            className="flex items-center gap-2 text-gray-400 hover:text-gray-900 mb-8 transition-colors group"
+                            className="flex items-center gap-2 text-gray-400 hover:text-gray-900 mt-50 transition-colors group"
                         >
                             <svg className="w-5 h-5 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M15 19l-7-7 7-7" />

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { CheckCircle, Star, MapPin, Clock, Users, Award, Eye, X } from 'lucide-react';
 import Sidebar from '@/components/dashboard/Sidebar';
+import Image from 'next/image';
 
 interface Trainer {
   id: string;
@@ -45,7 +46,7 @@ export default function ChooseTrainerPage() {
       id: 'trainer-1',
       name: 'Sarah Johnson',
       title: 'Senior Full Stack Developer',
-      avatar: 'SJ',
+      avatar: 'https://images.unsplash.com/photo-1769537939289-0136bab92f39?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDN8cVBZc0R6dkpPWWN8fGVufDB8fHx8fA%3D%3D',
       rating: 4.9,
       reviewCount: 127,
       experience: '8+ years',
@@ -74,7 +75,7 @@ export default function ChooseTrainerPage() {
       id: 'trainer-2',
       name: 'Michael Chen',
       title: 'Senior Software Engineer',
-      avatar: 'MC',
+      avatar: 'https://images.unsplash.com/photo-1769537939289-0136bab92f39?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDN8cVBZc0R6dkpPWWN8fGVufDB8fHx8fA%3D%3D',
       rating: 4.8,
       reviewCount: 89,
       experience: '6+ years',
@@ -103,7 +104,7 @@ export default function ChooseTrainerPage() {
       id: 'trainer-3',
       name: 'Emma Williams',
       title: 'UI/UX Designer & Frontend Developer',
-      avatar: 'EW',
+      avatar: 'https://images.unsplash.com/photo-1769537939289-0136bab92f39?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDN8cVBZc0R6dkpPWWN8fGVufDB8fHx8fA%3D%3D',
       rating: 4.7,
       reviewCount: 156,
       experience: '5+ years',
@@ -183,8 +184,8 @@ export default function ChooseTrainerPage() {
     <div className="flex h-screen bg-white">
       <Sidebar activeItem="Roadmap" userType="student" />
 
-      <div className="flex-1 flex flex-col justify-between p-8 pb-20 w-full overflow-y-auto bg-white">
-        <div className="flex flex-col flex-1 w-full">
+      <div className="flex-1 flex flex-col justify-between p-8 pb-20 w-full overflow-y-auto bg-white items-center">
+        <div className="flex flex-col flex-1 max-w-2xl">
           <button
             onClick={() => window.history.back()}
             className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-8 transition-colors"
@@ -224,9 +225,10 @@ export default function ChooseTrainerPage() {
                       : 'border-gray-200 bg-white hover:border-gray-300'
                       }`}
                   >
-                    <div className={`w-14 h-14 rounded-full flex items-center justify-center text-white font-semibold flex-shrink-0 ${selectedTrainer === mentor.id ? 'bg-yellow-600' : 'bg-gradient-to-br from-yellow-500 to-yellow-600'
+                    <div className={`overflow-hidden w-14 h-14 rounded-full flex items-center justify-center text-white font-semibold ${selectedTrainer === mentor.id ? 'bg-yellow-600' : 'bg-gradient-to-br from-yellow-500 to-yellow-600'
                       }`}>
-                      {mentor.avatar}
+                      <Image src={mentor.avatar} alt={mentor.name} width={64} height={64} 
+                      className='object-cover w-14 h-14'/>
                     </div>
 
                     <div className="flex-1">
@@ -332,8 +334,9 @@ export default function ChooseTrainerPage() {
             <div className="p-6">
               {/* Trainer Header */}
               <div className="flex items-start gap-4 mb-6">
-                <div className="w-16 h-16 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-full flex items-center justify-center text-white font-semibold text-lg">
-                  {viewingProfile.avatar}
+                <div className="w-14 h-14 overflow-hidden bg-linear-to-br from-yellow-500 to-yellow-600 rounded-full flex items-center  text-white font-semibold text-lg">
+                  <Image src={viewingProfile.avatar} alt="Profile" width={64} height={64}
+                  className='object-cover w-14 h-14' />
                 </div>
                 <div className="flex-1">
                   <h3 className="text-xl font-semibold text-gray-900">{viewingProfile.name}</h3>
@@ -356,7 +359,6 @@ export default function ChooseTrainerPage() {
                   </div>
                 </div>
                 <div className="text-right">
-                  <div className="text-lg font-semibold text-gray-900">{viewingProfile.hourlyRate}</div>
                   <div className="text-sm text-green-600">{viewingProfile.availability}</div>
                 </div>
               </div>
