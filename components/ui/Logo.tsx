@@ -1,17 +1,56 @@
-import React from 'react';
+import { Umbrella } from "lucide-react";
 
 interface LogoProps {
+  variant?: 'light' | 'dark';
+  size?: 'sm' | 'md' | 'lg';
   className?: string;
+  subTitle?: string;
+  showBackground?: boolean;
 }
 
-export default function Logo({ className = 'mb-8' }: LogoProps) {
+export function Logo({ variant = 'light', size = 'md', className = '', subTitle, showBackground = false }: LogoProps) {
+  const isDark = variant === 'dark';
+
+  const iconSizes = {
+    sm: "w-8 h-8",
+    md: "w-10 h-10",
+    lg: "w-16 h-16"
+  };
+
+  const umbrellaSizes = {
+    sm: "w-5 h-5",
+    md: "w-6 h-6",
+    lg: "w-10 h-10"
+  };
+
+  const textSizes = {
+    sm: {
+      main: "text-base",
+      sub: "text-[10px]"
+    },
+    md: {
+      main: "text-lg",
+      sub: "text-xs"
+    },
+    lg: {
+      main: "text-2xl",
+      sub: "text-sm"
+    }
+  };
+
   return (
-    <div className={className}>
-      <div className="w-16 h-16 bg-yellow-600 rounded-2xl flex items-center justify-center">
-        <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" />
-        </svg>
+    <div className={`flex items-center space-x-3 ${className}`}>
+      <div className={`${iconSizes[size]} ${showBackground ? 'bg-white shadow-md shadow-black/5' : 'bg-transparent'} rounded-lg flex items-center justify-center shrink-0`}>
+        <Umbrella className={`${umbrellaSizes[size]} text-[#ca8a04]`} />
       </div>
-    </div>
+      <div className="flex flex-col leading-tight">
+        <span className={`${textSizes[size].main} font-bold ${isDark ? 'text-white' : 'text-black'} tracking-wide uppercase`}>
+          Umbrella
+        </span>
+        <span className={`${textSizes[size].sub} font-medium text-[#ca8a04] tracking-wider uppercase`}>
+          {subTitle || "Academy"}
+        </span>
+      </div>
+    </div >
   );
 }

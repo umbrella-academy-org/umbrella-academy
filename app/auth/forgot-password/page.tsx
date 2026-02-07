@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { Logo } from '@/components/ui/Logo';
 
 export default function ForgotPasswordPage() {
   const router = useRouter();
@@ -12,7 +13,7 @@ export default function ForgotPasswordPage() {
   const handleContinue = (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
-    
+
     if (!email) {
       setError('Email is required');
       return;
@@ -21,7 +22,7 @@ export default function ForgotPasswordPage() {
       setError('Please enter a valid email address');
       return;
     }
-    
+
     console.log('Reset password for:', email);
     // Store email and flow type for verification
     localStorage.setItem('resetEmail', email);
@@ -32,7 +33,7 @@ export default function ForgotPasswordPage() {
   return (
     <div className="flex h-screen">
       {/* Left side - Form */}
-      <div className="flex flex-[2] flex-col justify-between p-8 bg-white">
+      <div className="flex flex-2 flex-col justify-between p-8 bg-white">
         <div className="flex flex-col items-center justify-center flex-1 max-w-md mx-auto w-full">
           {/* Back button */}
           <button
@@ -45,13 +46,8 @@ export default function ForgotPasswordPage() {
             Go back
           </button>
 
-          {/* Logo */}
           <div className="mb-8">
-            <div className="w-16 h-16 bg-yellow-600 rounded-2xl flex items-center justify-center">
-              <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" />
-              </svg>
-            </div>
+            <Logo size="lg" />
           </div>
 
           {/* Title */}
@@ -77,9 +73,8 @@ export default function ForgotPasswordPage() {
                   setError('');
                 }}
                 placeholder="Enter your email"
-                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${
-                  error ? 'border-red-500' : 'border-gray-300'
-                }`}
+                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${error ? 'border-red-500' : 'border-gray-300'
+                  }`}
                 required
               />
               {error && <p className="mt-2 text-sm text-red-500">{error}</p>}
@@ -109,7 +104,7 @@ export default function ForgotPasswordPage() {
       </div>
 
       {/* Right side - Image */}
-      <div className="hidden lg:block flex-[1] relative overflow-hidden">
+      <div className="hidden lg:block flex-1 relative overflow-hidden">
         <Image
           src="/auth/login/image.png"
           alt="Sunset with flowers"

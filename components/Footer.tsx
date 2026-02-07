@@ -1,4 +1,5 @@
-import { Facebook, Twitter, Linkedin, Instagram, Mail, Phone, MapPin, Umbrella } from "lucide-react";
+import { Facebook, Twitter, Linkedin, Instagram, Mail, Phone, MapPin } from "lucide-react";
+import { Logo } from "./ui/Logo";
 
 export function Footer() {
   return (
@@ -7,15 +8,7 @@ export function Footer() {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
           <div className="space-y-4">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
-                <Umbrella className="w-6 h-6 text-[#ca8a04]" />
-              </div>
-              <div className="flex flex-col leading-tight">
-                <span className="text-lg font-bold text-white tracking-wide">UMBRELLA</span>
-                <span className="text-xs font-medium text-[#ca8a04] tracking-wider">ACADEMY</span>
-              </div>
-            </div>
+            <Logo variant="dark" showBackground={false} />
             <p className="text-sm text-gray-400 leading-relaxed">
               Structured learning platform connecting students with expert trainers and mentors across multiple fields.
             </p>
