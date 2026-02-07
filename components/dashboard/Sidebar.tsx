@@ -441,7 +441,7 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
 
       {/* Sidebar */}
       <div className={`
-        fixed lg:static inset-y-0 left-0 z-50 w-64 bg-gray-900 text-white flex flex-col h-screen overflow-y-scroll
+        fixed lg:static inset-y-0 left-0 z-50 w-64 pb-20 bg-gray-900 text-white flex flex-col h-screen overflow-y-scroll
         transform transition-transform duration-300 ease-in-out lg:transform-none
         ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
       `}>
@@ -454,7 +454,7 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
         </button>
 
         {/* Logo */}
-        <div className="p-4 lg:p-8 border-b border-gray-800/50">
+        <div className="p-4 lg:p-8  border-b border-gray-800/50">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 bg-[#D1A02C] rounded-lg flex items-center justify-center shadow-lg shadow-black/20 flex-shrink-0">
               <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
