@@ -15,13 +15,13 @@ export default function PaymentPage() {
   return (
     <div className="flex h-screen">
       {/* Left side - Form */}
-      <div className="flex-[2] flex flex-col overflow-hidden">
-        <main className="flex-1 overflow-auto flex items-center justify-center bg-gray-50">
+      <div className="flex-2 flex flex-col overflow-hidden items-center bg-white">
+        <main className="overflow-auto flex items-center justify-center bg-gray-50 max-w-2xl">
           <div className="w-full p-8">
             {/* Go back button */}
             <button
               onClick={() => router.push('/post-signup/choose-field')}
-              className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-8"
+              className="flex items-center gap-2 text-gray-600 mt-50 hover:text-gray-900 mb-8"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
