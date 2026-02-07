@@ -3,6 +3,7 @@
 import { Menu, X, Umbrella } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { Logo } from "./ui/Logo";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,17 +13,8 @@ export function Header() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm transition-all duration-300">
       <nav className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
           <div className="flex items-center">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-black rounded-lg flex items-center justify-center">
-                <Umbrella className="w-6 h-6 text-[#ca8a04]" />
-              </div>
-              <div className="flex flex-col leading-tight">
-                <span className="text-lg font-bold text-black tracking-wide uppercase">Umbrella</span>
-                <span className="text-xs font-medium text-[#ca8a04] tracking-wider uppercase">Academy</span>
-              </div>
-            </div>
+            <Logo />
           </div>
 
           {/* Desktop Navigation */}

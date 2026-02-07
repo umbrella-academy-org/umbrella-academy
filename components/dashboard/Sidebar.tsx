@@ -5,6 +5,7 @@ import { Home, Calendar, Map, Bell, Video, CreditCard, HelpCircle, MessageSquare
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
 import { useAuth } from '@/contexts';
 import { SidebarProps, SidebarItem } from '@/types';
+import { Logo } from '../ui/Logo';
 
 export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps) {
   const [currentActive, setCurrentActive] = useState(activeItem);
@@ -454,18 +455,8 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
         </button>
 
         {/* Logo */}
-        <div className="p-4 lg:p-8  border-b border-gray-800/50">
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-[#D1A02C] rounded-lg flex items-center justify-center shadow-lg shadow-black/20 flex-shrink-0">
-              <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" />
-              </svg>
-            </div>
-            <div className="min-w-0">
-              <div className="font-bold text-lg text-white leading-tight truncate">Umbrella Academy</div>
-              <div className="text-xs font-medium text-gray-400 mt-0.5   ">{userInfo.displayName}</div>
-            </div>
-          </div>
+        <div className="p-4 lg:p-8 border-b border-gray-800/50">
+          <Logo variant="dark" subTitle={userInfo.displayName} showBackground={false} />
         </div>
 
         {/* Navigation */}

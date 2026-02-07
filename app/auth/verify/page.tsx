@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { Logo } from '@/components/ui/Logo';
 
 export default function VerifyPage() {
   const router = useRouter();
@@ -61,7 +62,7 @@ export default function VerifyPage() {
       return;
     }
     console.log('OTP:', otpValue);
-    
+
     // Check if this is a password reset flow
     const authFlow = typeof window !== 'undefined' ? localStorage.getItem('authFlow') : null;
     if (authFlow === 'reset-password') {
@@ -85,7 +86,7 @@ export default function VerifyPage() {
   return (
     <div className="flex h-screen">
       {/* Left side - Form */}
-      <div className="flex flex-[2] flex-col justify-between p-8 bg-white">
+      <div className="flex flex-2 flex-col justify-between p-8 bg-white">
         <div className="flex flex-col flex-1 max-w-md mx-auto w-full">
           {/* Go back button */}
           <button
@@ -99,13 +100,8 @@ export default function VerifyPage() {
           </button>
 
           <div className="flex flex-col items-center justify-center flex-1">
-            {/* Logo */}
             <div className="mb-8">
-              <div className="w-16 h-16 bg-yellow-600 rounded-2xl flex items-center justify-center">
-                <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" />
-                </svg>
-              </div>
+              <Logo size="lg" />
             </div>
 
             {/* Title */}
@@ -116,8 +112,8 @@ export default function VerifyPage() {
               Enter the 6-digit code we sent to your email.
             </p>
             <p className="text-yellow-600 text-sm mb-8">
-              ({typeof window !== 'undefined' ? 
-                localStorage.getItem('signupEmail') || localStorage.getItem('resetEmail') || 'johndoe@example.com' 
+              ({typeof window !== 'undefined' ?
+                localStorage.getItem('signupEmail') || localStorage.getItem('resetEmail') || 'johndoe@example.com'
                 : 'johndoe@example.com'})
             </p>
 
@@ -135,9 +131,8 @@ export default function VerifyPage() {
                     onChange={(e) => handleChange(index, e.target.value)}
                     onKeyDown={(e) => handleKeyDown(index, e)}
                     onPaste={handlePaste}
-                    className={`w-12 h-14 text-center text-xl font-semibold border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 ${
-                      error ? 'border-red-500' : 'border-gray-300'
-                    }`}
+                    className={`w-12 h-14 text-center text-xl font-semibold border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 ${error ? 'border-red-500' : 'border-gray-300'
+                      }`}
                   />
                 ))}
               </div>
@@ -186,7 +181,7 @@ export default function VerifyPage() {
       </div>
 
       {/* Right side - Image */}
-      <div className="hidden lg:block flex-[1] relative overflow-hidden">
+      <div className="hidden lg:block flex-1 relative overflow-hidden">
         <Image
           src="/auth/login/image.png"
           alt="Mountain road"

@@ -13,6 +13,7 @@ import { Benefits } from "@/components/Benefits";
 import { Testimonials } from "@/components/Testimonials";
 import { CTA } from "@/components/CTA";
 import { Footer } from "@/components/Footer";
+import { Logo } from "@/components/ui/Logo";
 
 export default function Home() {
   const { navigate } = useNavigationWithLoading();
@@ -37,14 +38,7 @@ export default function Home() {
   if (isLoading) {
     return (
       <div className="flex h-screen items-center justify-center bg-white">
-        <div className="text-center">
-          <div className="w-16 h-16 bg-yellow-600 rounded-2xl flex items-center justify-center mb-4 mx-auto animate-pulse">
-            <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" />
-            </svg>
-          </div>
-          <p className="text-gray-600">Loading...</p>
-        </div>
+        <Logo size="lg" />
       </div>
     );
   }
