@@ -45,6 +45,9 @@ export function Footer() {
                 <a href="#programs" className="text-sm hover:text-[#fbbf24] transition-colors">Programs</a>
               </li>
               <li>
+                <a href="/blog" className="text-sm hover:text-[#fbbf24] transition-colors">Blog</a>
+              </li>
+              <li>
                 <a href="#" className="text-sm hover:text-[#fbbf24] transition-colors">Pricing</a>
               </li>
             </ul>

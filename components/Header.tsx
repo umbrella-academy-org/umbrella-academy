@@ -44,6 +44,9 @@ export function Header() {
               <a href="#about" className={`text-sm font-bold tracking-widest  transition-colors ${isScrolled ? "text-white/70 hover:text-[#ca8a04]" : "text-white/80 hover:text-white"}`}>
                 About
               </a>
+              <a href="/blog" className={`text-sm font-bold tracking-widest  transition-colors ${isScrolled ? "text-white/70 hover:text-[#ca8a04]" : "text-white/80 hover:text-white"}`}>
+                Blog
+              </a>
             </div>
           </div>
 
@@ -99,6 +102,7 @@ export function Header() {
             <a href="#how-it-works" onClick={() => setIsMenuOpen(false)} className="text-4xl font-black tracking-tighter hover:text-[#ca8a04] transition-colors">PROCESS</a>
             <a href="#programs" onClick={() => setIsMenuOpen(false)} className="text-4xl font-black tracking-tighter hover:text-[#ca8a04] transition-colors">PROGRAMS</a>
             <a href="#about" onClick={() => setIsMenuOpen(false)} className="text-4xl font-black tracking-tighter hover:text-[#ca8a04] transition-colors">ABOUT</a>
+            <a href="/blog" onClick={() => setIsMenuOpen(false)} className="text-4xl font-black tracking-tighter hover:text-[#ca8a04] transition-colors">BLOG</a>
 
             <div className="pt-8 flex flex-col space-y-4 w-full max-w-xs transition-all duration-700">
               <button
