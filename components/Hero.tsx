@@ -2,106 +2,108 @@
 
 import { ArrowRight, PlayCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+
+const CATEGORIES = ["FILM", "TELEVISION", "GAMES", "COMMERCIALS"];
 
 export function Hero() {
   const router = useRouter();
+  const [scrollY, setScrollY] = useState(0);
+  const [catIndex, setCatIndex] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", handleScroll);
+
+    const interval = setInterval(() => {
+      setCatIndex((prev) => (prev + 1) % CATEGORIES.length);
+    }, 3000);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      clearInterval(interval);
+    };
+  }, []);
 
   return (
-    <section className="relative pt-24 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden bg-white">
-      {/* Background Gradient */}
-      <div className="absolute inset-0 bg-linear-to-br from-gray-50 via-white to-gray-50 -z-10" />
-      <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-[#ca8a04]/5 rounded-full blur-3xl -z-10" />
-      <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-[#fbbf24]/5 rounded-full blur-3xl -z-10" />
+    <section className="relative h-screen flex flex-col items-center justify-center overflow-hidden bg-black text-white mt-20">
+      {/* Dynamic Background Image */}
+      <div
+        className="absolute inset-0 z-0 opacity-40 transition-transform duration-[2000ms] ease-out scale-110"
+        style={{
+          transform: `translateY(${scrollY * 0.2}px) scale(${1.1 + scrollY * 0.0001})`,
+        }}
+      >
+        <img
+          src="/nfts_inspired_hero_bg_1770538732614.png"
+          alt="Cinematic production studio"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-linear-to-b from-black via-transparent to-black" />
+      </div>
 
-      <div className="max-w-full mx-auto">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left Content */}
-          <div className="space-y-8 animate-fade-in-left">
-            <div className="inline-flex items-center space-x-2 px-4 py-2 bg-[#ca8a04]/10 border border-[#ca8a04]/20 rounded-full">
-              <span className="w-2 h-2 bg-[#ca8a04] rounded-full" />
-              <span className="text-sm text-[#ca8a04] font-medium">Next-Gen Learning Platform</span>
-            </div>
+      {/* Main Content */}
+      <div className="relative z-10 w-full max-w-[1800px] mx-auto px-6 sm:px-10 lg:px-16 flex flex-col items-start space-y-8 md:space-y-12">
+        <div className="space-y-4">
 
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
-              <span className="text-black">Structured Learning.</span>
-              <br />
-              <span className="text-[#ca8a04]">Real Skills.</span>
-              <br />
-              <span className="text-black">Real Growth.</span>
-            </h1>
 
-            <p className="text-xl text-gray-600 leading-relaxed max-w-xl">
-              Join Umbrella Academy LMS and learn from industry trainers, guided by expert mentors, inside structured learning companies.
-            </p>
+          <h1 className="text-5xl font-black  leading-[0.85]  transition-all duration-700">
+            KICKSTART <br />
+            <span className="text-white">YOUR</span> <br />
+            <span className="text-[#ca8a04] transition-all duration-500 inline-block">
+              {CATEGORIES[catIndex]}
+            </span> <br />
+            CAREER.
+          </h1>
+        </div>
 
-            <div className="flex flex-col sm:flex-row gap-4">
-              <button
-                onClick={() => router.push("/auth/signup")}
-                className="group px-8 py-4 bg-[#ca8a04] text-white rounded-lg hover:bg-[#a16207] hover:shadow-xl transition-all duration-300 flex items-center justify-center space-x-2 font-medium"
-              >
-                <span>Get Started</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </button>
-              <button className="group px-8 py-4 bg-white border-2 border-gray-300 text-gray-700 rounded-lg hover:border-[#ca8a04] hover:text-[#ca8a04] transition-all duration-300 flex items-center justify-center space-x-2 font-medium">
-                <PlayCircle className="w-5 h-5" />
-                <span>Explore Programs</span>
-              </button>
-            </div>
+        <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8 w-full md:w-auto animate-slide-up">
+          <button
+            onClick={() => router.push("/auth/signup")}
+            className="group w-full md:w-auto px-8 md:px-12 py-4 md:py-6 bg-white text-black rounded-none hover:bg-[#ca8a04] hover:text-white transition-all duration-500 flex items-center justify-center space-x-4 font-black text-lg md:text-xl  active:scale-95"
+          >
+            <span>JOIN THE ACADEMY</span>
+            <ArrowRight className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-2 transition-transform" />
+          </button>
 
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-8 pt-8 border-t border-gray-200">
-              <div className="animate-slide-up animation-delay-300">
-                <div className="text-3xl font-bold text-[#ca8a04]">50K+</div>
-                <div className="text-sm text-gray-600">Active Students</div>
-              </div>
-              <div className="animate-slide-up animation-delay-400">
-                <div className="text-3xl font-bold text-[#fbbf24]">1K+</div>
-                <div className="text-sm text-gray-600">Expert Trainers</div>
-              </div>
-              <div className="animate-slide-up animation-delay-500">
-                <div className="text-3xl font-bold text-black">95%</div>
-                <div className="text-sm text-gray-600">Success Rate</div>
-              </div>
-            </div>
-          </div>
+          <button
+            
+            className="group w-full md:w-auto px-8 md:px-12 py-4 md:py-6 bg-transparent border-2 border-white/20 text-white rounded-none hover:border-[#ca8a04] hover:bg-[#ca8a04]/10 transition-all duration-500 flex items-center justify-center space-x-3 font-bold text-base md:text-lg tracking-tight active:scale-95"
+          >
+            <PlayCircle className="w-5 h-5 md:w-6 md:h-6 text-[#ca8a04]" />
+            <span>EXPLORE SHOWCASE</span>
+          </button>
+        </div>
+      </div>
 
-          {/* Right Content - Image */}
-          <div className="relative animate-fade-in-right animation-delay-200">
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-200">
-              <img
-                src="https://images.unsplash.com/photo-1753613648191-4771cf76f034?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBzdHVkZW50JTIwbGVhcm5pbmclMjBvbmxpbmV8ZW58MXx8fHwxNzcwMzI4NjIzfDA&ixlib=rb-4.1.0&q=80&w=1080"
-                alt="Students learning online"
-                className="w-full h-auto"
-              />
-              <div className="absolute inset-0 bg-linear-to-t from-[#ca8a04]/20 to-transparent" />
-            </div>
+      {/* Progress Indicator for categories */}
+      <div className="absolute left-10 md:left-20 bottom-20 flex flex-col space-y-4">
+        {CATEGORIES.map((_, i) => (
+          <div
+            key={i}
+            className={`h-1 transition-all duration-500 ${i === catIndex ? 'w-20 bg-[#ca8a04]' : 'w-8 bg-white/20'}`}
+          />
+        ))}
+      </div>
 
-            {/* Floating Cards */}
-            <div className="absolute -bottom-6 -left-6 bg-white rounded-xl shadow-xl p-4 border border-gray-200 animate-slide-up animation-delay-500">
-              <div className="flex items-center space-x-3">
-                <div className="w-12 h-12 bg-[#ca8a04] rounded-lg flex items-center justify-center font-bold text-white text-xl">
-                  ✓
-                </div>
-                <div>
-                  <div className="font-bold text-gray-900">Certificate Ready</div>
-                  <div className="text-sm text-gray-500">Industry Recognized</div>
-                </div>
-              </div>
-            </div>
-
-            <div className="absolute -top-6 -right-6 bg-white rounded-xl shadow-xl p-4 border border-gray-200 animate-slide-up animation-delay-700">
-              <div className="flex items-center space-x-3">
-                <div className="w-12 h-12 bg-[#fbbf24] rounded-lg flex items-center justify-center font-bold text-white text-xl">
-                  ⚡
-                </div>
-                <div>
-                  <div className="font-bold text-gray-900">Live Sessions</div>
-                  <div className="text-sm text-gray-500">Interactive Learning</div>
-                </div>
-              </div>
-            </div>
+      {/* Scroll Hint */}
+      <div
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 cursor-pointer opacity-50 hover:opacity-100 transition-all"
+        onClick={() => {
+          document.getElementById('brand-marquee')?.scrollIntoView({ behavior: 'smooth' });
+        }}
+      >
+        <div className="flex flex-col items-center space-y-2">
+          <span className="text-[10px]  tracking-[0.4em] font-black text-white/50">Our Credits</span>
+          <div className="w-px h-16 bg-white/20 relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-full bg-[#ca8a04] animate-slide-y" />
           </div>
         </div>
+      </div>
+
+      {/* Side Label */}
+      <div className="absolute right-10 top-1/2 -translate-y-1/2 rotate-90 origin-right hidden lg:block">
+        <span className="text-xs font-black tracking-[0.5em]  text-white/20">ESTABLISHED MCMLXXI</span>
       </div>
     </section>
   );

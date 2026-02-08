@@ -5,10 +5,12 @@ import { useAuth } from '@/contexts';
 import { useEffect } from 'react';
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
-import { Features } from "@/components/Features";
+import { BrandsMarquee } from "@/components/BrandsMarquee";
+import { CategoriesGrid } from "@/components/CategoriesGrid";
+import { FeaturedPrograms } from "@/components/FeaturedPrograms";
+import { NewsHighlights } from "@/components/NewsHighlights";
 import { HowItWorks } from "@/components/HowItWorks";
 import { PlatformRoles } from "@/components/PlatformRoles";
-import { Companies } from "@/components/Companies";
 import { Benefits } from "@/components/Benefits";
 import { Testimonials } from "@/components/Testimonials";
 import { CTA } from "@/components/CTA";
@@ -44,14 +46,20 @@ export default function Home() {
   }
 
   return (
-    <div className="h-screen bg-white overflow-y-scroll">
+    <div className="bg-white h-screen overflow-auto">
       <Header />
       <main>
-        <Hero />
-        <Features />
+        <div id="hero">
+          <Hero />
+        </div>
+        <div id="brand-marquee">
+          <BrandsMarquee />
+        </div>
+        <CategoriesGrid />
+        <FeaturedPrograms />
+        <NewsHighlights />
         <HowItWorks />
         <PlatformRoles />
-        <Companies />
         <Benefits />
         <Testimonials />
         <CTA />

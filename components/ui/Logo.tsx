@@ -2,14 +2,22 @@ import { Umbrella } from "lucide-react";
 
 interface LogoProps {
   variant?: 'light' | 'dark';
+  inverted?: boolean;
   size?: 'sm' | 'md' | 'lg';
   className?: string;
   subTitle?: string;
   showBackground?: boolean;
 }
 
-export function Logo({ variant = 'light', size = 'md', className = '', subTitle, showBackground = false }: LogoProps) {
-  const isDark = variant === 'dark';
+export function Logo({
+  variant = 'light',
+  inverted,
+  size = 'md',
+  className = '',
+  subTitle,
+  showBackground = false
+}: LogoProps) {
+  const isDark = inverted ?? variant === 'dark';
 
   const iconSizes = {
     sm: "w-8 h-8",
@@ -44,10 +52,10 @@ export function Logo({ variant = 'light', size = 'md', className = '', subTitle,
         <Umbrella className={`${umbrellaSizes[size]} text-[#ca8a04]`} />
       </div>
       <div className="flex flex-col leading-tight">
-        <span className={`${textSizes[size].main} font-bold ${isDark ? 'text-white' : 'text-black'} tracking-wide uppercase`}>
+        <span className={`${textSizes[size].main} font-bold ${isDark ? 'text-white' : 'text-black'} tracking-wide `}>
           Umbrella
         </span>
-        <span className={`${textSizes[size].sub} font-medium text-[#ca8a04] tracking-wider uppercase`}>
+        <span className={`${textSizes[size].sub} font-medium text-[#ca8a04] tracking-wider `}>
           {subTitle || "Academy"}
         </span>
       </div>
