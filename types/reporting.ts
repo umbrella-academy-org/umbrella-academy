@@ -5,7 +5,7 @@ export interface StudentReport {
   trainerId: string;
   studentId: string;
   mentorId: string;
-  wingId: string;
+  fieldId: string;
   reportType: 'progress' | 'roadmap_update' | 'session_summary';
   content: {
     achievements: string[];
@@ -23,8 +23,8 @@ export interface StudentReport {
 export interface SupportTicket {
   id: string;
   userId: string;
-  wingId: string;
-  wingAdminId?: string;
+  fieldId: string;
+  fieldAdminId?: string;
   title: string;
   description: string;
   category: 'technical' | 'billing' | 'content' | 'other';

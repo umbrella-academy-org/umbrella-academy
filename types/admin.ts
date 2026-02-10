@@ -2,7 +2,7 @@
 
 import { Wallet } from './payment';
 import { StudentRoadmap } from './roadmap';
-import { User } from './user';
+import { StudentUser, TrainerUser, User } from './user';
 
 // Enhanced Field interface for field-based organizational hierarchy
 export interface Field {
@@ -12,7 +12,7 @@ export interface Field {
   industry: string;
   companies: Company[];
   mentors: User[];
-  trainers: User[];
+  trainers: TrainerUser[];
   selectionTrainers?: {
     total: number;
     available: number;
@@ -24,7 +24,7 @@ export interface Field {
     }[];
   };
   specializations: string[];
-  students: User[];
+  students: StudentUser[];
   revenueShare: number; // 65% for fields
   totalRevenue: number;
   revenue?: number; // Alias for totalRevenue for compatibility
@@ -70,31 +70,4 @@ export interface Company {
     hiringRate: number;
     partnerSince: string;
   };
-}
-
-export interface Trainer {
-  id: string;
-  name: string;
-  email: string;
-  fieldId: string;
-  capacity: number; // hours per week
-  assigned: number; // current students
-  available: number; // available slots
-  status: 'active' | 'full' | 'inactive';
-  rating?: number;
-  totalSessions?: number;
-  wallet: Wallet;
-}
-
-export interface Student {
-  id: string;
-  name: string;
-  email: string;
-  fieldId: string;
-  trainerId?: string;
-  trainerName?: string;
-  status: 'active' | 'paused' | 'completed';
-  progress: number;
-  lastSession?: string;
-  roadmap?: StudentRoadmap;
 }

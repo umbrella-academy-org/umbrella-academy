@@ -32,6 +32,8 @@ export * from './roadmaps';
 
 // System monitoring data
 export * from './system';
+export * from './payments';
+export * from './onboarding-sessions';
 
 // Combined data helpers
 import { mockUsers } from './users';
