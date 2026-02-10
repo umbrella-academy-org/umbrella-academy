@@ -1,106 +1,49 @@
 // Live session management service - Data access layer for session operations
 
-import { CollaborativeSession, RoadmapFormData } from '@/types';
-
-// Mock session data
-const mockSessions: CollaborativeSession[] = [
-  {
-    id: 'session_001',
-    trainerId: 'user_101',
-    studentId: 'user_001',
-    wingId: 'tech-companies',
-    scheduledAt: new Date('2024-12-10T10:00:00Z'),
-    status: 'scheduled',
-    duration: 120, // 2 hours in minutes
-    createdAt: new Date('2024-12-09T15:30:00Z')
-  },
-  {
-    id: 'session_002',
-    trainerId: 'user_102',
-    studentId: 'user_002',
-    wingId: 'tech-companies',
-    scheduledAt: new Date('2024-12-09T14:00:00Z'),
-    status: 'completed',
-    duration: 90,
-    notes: 'Completed roadmap creation for mobile development track',
-    roadmapData: {
-      studentGoals: ['Learn React Native', 'Build mobile apps', 'Understand cross-platform development'],
-      learningPath: [
-        {
-          id: 'module_001',
-          title: 'React Native Fundamentals',
-          description: 'Introduction to React Native development',
-          estimatedHours: 40,
-          prerequisites: ['JavaScript', 'React'],
-          resources: [
-            {
-              id: 'resource_001',
-              title: 'React Native Documentation',
-              type: 'document',
-              url: 'https://reactnative.dev/docs/getting-started',
-              description: 'Official React Native documentation'
-            }
-          ],
-          order: 1
-        }
-      ],
-      timeline: [
-        {
-          id: 'timeline_001',
-          moduleId: 'module_001',
-          startDate: new Date('2024-12-15'),
-          endDate: new Date('2025-01-15'),
-          milestones: ['Setup development environment', 'Build first app', 'Deploy to simulator'],
-          status: 'pending'
-        }
-      ],
-      assessmentCriteria: ['Build functional mobile app', 'Demonstrate navigation', 'Implement state management']
-    },
-    createdAt: new Date('2024-12-08T10:00:00Z')
-  }
-];
+import { OnboardingSession, RoadmapFormData } from '@/types';
+import { mockOnboardingSessions as mockSessions } from '@/data/onboarding-sessions';
 
 export class SessionService {
   /**
    * Get all sessions
    */
-  static async getAllSessions(): Promise<CollaborativeSession[]> {
+  static async getAllSessions(): Promise<OnboardingSession[]> {
     return mockSessions;
   }
 
   /**
    * Get session by ID
    */
-  static async getSessionById(id: string): Promise<CollaborativeSession | null> {
+  static async getSessionById(id: string): Promise<OnboardingSession | null> {
     return mockSessions.find(session => session.id === id) || null;
   }
 
   /**
    * Get sessions by trainer ID
    */
-  static async getSessionsByTrainer(trainerId: string): Promise<CollaborativeSession[]> {
+  static async getSessionsByTrainer(trainerId: string): Promise<OnboardingSession[]> {
     return mockSessions.filter(session => session.trainerId === trainerId);
   }
 
   /**
    * Get sessions by student ID
    */
-  static async getSessionsByStudent(studentId: string): Promise<CollaborativeSession[]> {
+  static async getSessionsByStudent(studentId: string): Promise<OnboardingSession[]> {
     return mockSessions.filter(session => session.studentId === studentId);
   }
 
   /**
-   * Get sessions by wing ID
+   * Get sessions by field ID
    */
-  static async getSessionsByWing(wingId: string): Promise<CollaborativeSession[]> {
-    return mockSessions.filter(session => session.wingId === wingId);
+  static async getSessionsByField(fieldId: string): Promise<OnboardingSession[]> {
+    return mockSessions.filter(session => session.fieldId === fieldId);
   }
 
   /**
    * Create a new live session
    */
-  static async createSession(sessionData: Omit<CollaborativeSession, 'id' | 'createdAt' | 'status'>): Promise<CollaborativeSession> {
-    const newSession: CollaborativeSession = {
+  static async createSession(sessionData: Omit<OnboardingSession, 'id' | 'createdAt' | 'status'>): Promise<OnboardingSession> {
+    const newSession: OnboardingSession = {
       ...sessionData,
       id: `session_${Date.now()}`,
       status: 'scheduled',
@@ -114,7 +57,7 @@ export class SessionService {
   /**
    * Update session information
    */
-  static async updateSession(id: string, updates: Partial<CollaborativeSession>): Promise<CollaborativeSession | null> {
+  static async updateSession(id: string, updates: Partial<OnboardingSession>): Promise<OnboardingSession | null> {
     const sessionIndex = mockSessions.findIndex(session => session.id === id);
     if (sessionIndex === -1) return null;
 
@@ -125,7 +68,7 @@ export class SessionService {
   /**
    * Start a live session
    */
-  static async startSession(id: string, screenSharingUrl?: string): Promise<CollaborativeSession | null> {
+  static async startSession(id: string, screenSharingUrl?: string): Promise<OnboardingSession | null> {
     const session = await this.updateSession(id, {
       status: 'in_progress',
       screenSharingUrl
@@ -137,10 +80,10 @@ export class SessionService {
    * Complete a live session with roadmap data
    */
   static async completeSession(
-    id: string, 
-    roadmapData: RoadmapFormData, 
+    id: string,
+    roadmapData: RoadmapFormData,
     notes?: string
-  ): Promise<CollaborativeSession | null> {
+  ): Promise<OnboardingSession | null> {
     const session = await this.updateSession(id, {
       status: 'completed',
       roadmapData,
@@ -152,7 +95,7 @@ export class SessionService {
   /**
    * Cancel a live session
    */
-  static async cancelSession(id: string, reason?: string): Promise<CollaborativeSession | null> {
+  static async cancelSession(id: string, reason?: string): Promise<OnboardingSession | null> {
     const session = await this.updateSession(id, {
       status: 'cancelled',
       notes: reason
@@ -164,7 +107,7 @@ export class SessionService {
    * Get available time slots for a trainer
    */
   static async getAvailableTimeSlots(
-    trainerId: string, 
+    trainerId: string,
     date: Date
   ): Promise<Array<{ start: Date; end: Date; available: boolean }>> {
     // Mock implementation - in real app, this would check trainer availability and existing bookings
@@ -175,12 +118,12 @@ export class SessionService {
     for (let i = 0; i < 8; i++) { // 8 time slots (9 AM to 5 PM)
       const start = new Date(baseDate);
       start.setHours(9 + i);
-      
+
       const end = new Date(start);
       end.setHours(start.getHours() + 1);
 
       // Check if slot is already booked
-      const isBooked = mockSessions.some(session => 
+      const isBooked = mockSessions.some(session =>
         session.trainerId === trainerId &&
         session.scheduledAt.getTime() === start.getTime() &&
         session.status !== 'cancelled'
@@ -202,14 +145,14 @@ export class SessionService {
   static async bookSession(
     trainerId: string,
     studentId: string,
-    wingId: string,
+    fieldId: string,
     scheduledAt: Date,
     duration: number = 120
-  ): Promise<CollaborativeSession | null> {
+  ): Promise<OnboardingSession | null> {
     // Check if trainer is available at the requested time
     const availableSlots = await this.getAvailableTimeSlots(trainerId, scheduledAt);
     const requestedHour = scheduledAt.getHours();
-    const isAvailable = availableSlots.some(slot => 
+    const isAvailable = availableSlots.some(slot =>
       slot.start.getHours() === requestedHour && slot.available
     );
 
@@ -220,16 +163,16 @@ export class SessionService {
     return this.createSession({
       trainerId,
       studentId,
-      wingId,
+      fieldId,
       scheduledAt,
       duration
     });
   }
 
   /**
-   * Get session statistics for a wing
+   * Get session statistics for a field
    */
-  static async getWingSessionStatistics(wingId: string): Promise<{
+  static async getFieldSessionStatistics(fieldId: string): Promise<{
     totalSessions: number;
     scheduledSessions: number;
     completedSessions: number;
@@ -237,10 +180,10 @@ export class SessionService {
     inProgressSessions: number;
     averageDuration: number;
   }> {
-    const sessions = mockSessions.filter(session => session.wingId === wingId);
-    
+    const sessions = mockSessions.filter(session => session.fieldId === fieldId);
+
     const completedSessions = sessions.filter(s => s.status === 'completed');
-    const averageDuration = completedSessions.length > 0 
+    const averageDuration = completedSessions.length > 0
       ? completedSessions.reduce((sum, s) => sum + s.duration, 0) / completedSessions.length
       : 0;
 
@@ -257,16 +200,16 @@ export class SessionService {
   /**
    * Get upcoming sessions for a user
    */
-  static async getUpcomingSessions(userId: string, role: 'trainer' | 'student'): Promise<CollaborativeSession[]> {
+  static async getUpcomingSessions(userId: string, role: 'trainer' | 'student'): Promise<OnboardingSession[]> {
     const now = new Date();
     const sessions = mockSessions.filter(session => {
-      const isUserSession = role === 'trainer' 
-        ? session.trainerId === userId 
+      const isUserSession = role === 'trainer'
+        ? session.trainerId === userId
         : session.studentId === userId;
-      
-      return isUserSession && 
-             session.scheduledAt > now && 
-             session.status === 'scheduled';
+
+      return isUserSession &&
+        session.scheduledAt > now &&
+        session.status === 'scheduled';
     });
 
     return sessions.sort((a, b) => a.scheduledAt.getTime() - b.scheduledAt.getTime());

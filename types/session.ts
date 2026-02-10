@@ -1,10 +1,10 @@
 // Live session and collaborative roadmap creation type definitions
 
-export interface CollaborativeSession {
+export interface OnboardingSession {
   id: string;
   trainerId: string;
   studentId: string;
-  wingId: string;
+  fieldId: string;
   scheduledAt: Date;
   status: 'scheduled' | 'in_progress' | 'completed' | 'cancelled';
   screenSharingUrl?: string;

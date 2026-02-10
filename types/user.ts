@@ -1,4 +1,4 @@
-// User-related type definitions
+import { Wallet } from './payment';
 
 export type UserType = 'student' | 'trainer' | 'mentor' | 'field-admin' | 'umbrella-admin';
 
@@ -32,6 +32,10 @@ export interface StudentUser extends BaseUser {
     preferredTimeSlots: ('morning' | 'afternoon' | 'evening')[];
     preferredDays: ('monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday')[];
   };
+  // Progress tracking from admin dashboard
+  progress?: number;
+  lastSession?: string;
+  roadmapId?: string; // ID for easier lookup
   learningPreferences: {
     pace: 'slow' | 'medium' | 'fast';
     style: 'visual' | 'auditory' | 'kinesthetic' | 'mixed';
@@ -53,7 +57,15 @@ export interface TrainerUser extends BaseUser {
   experience: {
     yearsOfExperience: number;
     specializations: string[];
+
   };
+  // Capacity and wallet from admin dashboard
+  capacity?: number; // hours per week
+  assigned?: number; // current students
+  available?: number; // available slots
+  rating?: number;
+  totalSessions?: number;
+  wallet?: Wallet;
 }
 
 export interface MentorUser extends BaseUser {

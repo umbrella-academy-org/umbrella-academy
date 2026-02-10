@@ -70,11 +70,11 @@ export const mockTransactions: Transaction[] = [
     reference: 'WTH-103-2024-12'
   },
 
-  // Wing revenue
+  // Field revenue
   {
     id: 'txn_201',
     type: 'income',
-    description: 'Wing share - November 2024',
+    description: 'Field share - November 2024',
     amount: 427500, // RWF (15% of total revenue)
     currency: 'RWF',
     date: '2024-12-01T18:00:00Z',
