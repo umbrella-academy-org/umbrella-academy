@@ -175,7 +175,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref
   ) => {
-    const { isDark, reducedMotion } = useTheme();
+    const { theme, mode, isDark, reducedMotion } = useTheme();
     
     // Determine if this is an icon-only button
     const isIconOnly = icon?.position === 'only';

@@ -196,8 +196,17 @@ export function ThemeProvider({
 export function useTheme(): ThemeContextType {
   const context = useContext(ThemeContext);
   
+  // Provide default values during SSR or when context is not available
   if (context === undefined) {
-    throw new Error('useTheme must be used within a ThemeProvider');
+    return {
+      theme: themes.light,
+      mode: 'light',
+      setMode: () => {},
+      toggleTheme: () => {},
+      isDark: false,
+      reducedMotion: false,
+      updateTheme: () => {},
+    };
   }
   
   return context;
