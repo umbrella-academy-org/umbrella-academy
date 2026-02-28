@@ -1,113 +1,19 @@
 'use client';
 
-import {
-  ArrowRight,
-  Award,
-  BookOpen,
-  Camera,
-  Clock,
-  Code,
-  Eye,
-  Globe,
-  GraduationCap,
-  Heart,
-  MapPin,
-  MessageSquare,
-  Monitor,
-  Play,
-  Shield,
-  Sparkles,
-  Star,
-  Target,
-  Trophy,
-  TrendingUp,
-  Users,
-  X,
-  Zap
-} from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { ArrowRight, Award, BookOpen, Camera, Clock, Code, Eye, Globe, GraduationCap, Heart, MapPin, MessageSquare, Monitor, Play, Shield, Sparkles, Star, Target, Trophy, TrendingUp, Users, X, Zap } from 'lucide-react';
+import { Button } from '@/components/ui/Button';
 import { Logo } from '@/components/ui/Logo';
 import Image from 'next/image';
 import { useState } from 'react';
+import { dashboardData } from '@/data/dashboard';
 
 export default function Home() {
   const [selectedVideo, setSelectedVideo] = useState<number | null>(null);
-
-  const courses = [
-    {
-      title: 'Full-Stack Web Development',
-      company: 'Dreamize Africa',
-      duration: '12 weeks',
-      students: '150+ enrolled',
-      rating: 4.9,
-      level: 'Beginner to Advanced',
-      price: '$299',
-      image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=250&fit=crop&crop=center'
-    },
-    {
-      title: 'DevOps & Cloud Architecture',
-      company: 'Dreamize Africa',
-      duration: '10 weeks',
-      students: '120+ enrolled',
-      rating: 4.8,
-      level: 'Intermediate',
-      price: '$349',
-      image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=250&fit=crop&crop=center'
-    },
-    {
-      title: 'Mobile App Development',
-      company: 'Dreamize Africa',
-      duration: '8 weeks',
-      students: '90+ enrolled',
-      rating: 4.7,
-      level: 'Intermediate',
-      price: '$279',
-      image: 'https://images.unsplash.com/photo-1512941937669-90a1ac587c9c?w=400&h=250&fit=crop&crop=center'
-    },
-    {
-      title: 'Video Production Mastery',
-      company: 'Green Land Film & TV',
-      duration: '6 weeks',
-      students: '75+ enrolled',
-      rating: 4.9,
-      level: 'Beginner',
-      price: '$199',
-      image: 'https://images.unsplash.com/photo-1596724686228-3a9f7b0bb3b1?w=400&h=250&fit=crop&crop=center'
-    }
-  ];
-
-  const videos = [
-    {
-      title: 'From Beginner to Tech Professional',
-      speaker: 'James Chen',
-      role: 'Full-Stack Developer at TechCorp',
-      duration: '5:32',
-      image: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=400&h=225&fit=crop&crop=center',
-      views: '2.4K views',
-      videoId: 'dQw4w9WgXcQ'
-    },
-    {
-      title: 'My Creative Journey in Film & Video',
-      speaker: 'Zara Mohamed',
-      role: 'Video Producer at Creative Studios',
-      duration: '6:45',
-      image: 'https://images.unsplash.com/photo-1596724686228-3a9f7b0bb3b1?w=400&h=225&fit=crop&crop=center',
-      views: '1.8K views',
-      videoId: 'jNQXAC9IVRw'
-    },
-    {
-      title: 'Building My Dream Career in Tech',
-      speaker: 'Aisha Patel',
-      role: 'DevOps Engineer at CloudTech',
-      duration: '4:28',
-      image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=225&fit=crop&crop=center',
-      views: '3.1K views',
-      videoId: '9bZkp7q19f0'
-    }
-  ];
+  
+  const { videos, courses, stats, features, journeySteps, navigation, hero } = dashboardData;
 
   return (
-    <div className="w-full bg-white text-black">
+    <div className="w-full bg-white text-black h-screen overflow-y-auto">
       {/* Video Modal */}
       {selectedVideo !== null && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
@@ -142,21 +48,28 @@ export default function Home() {
             </div>
 
             <div className="hidden md:flex items-center gap-8">
-              <a href="#journey" className="text-sm font-medium hover:text-gray-700 transition-colors text-black">Journey</a>
-              <a href="#fields" className="text-sm font-medium hover:text-gray-700 transition-colors text-black">Fields</a>
-              <a href="#courses" className="text-sm font-medium hover:text-gray-700 transition-colors text-black">Courses</a>
-              <a href="#features" className="text-sm font-medium hover:text-gray-700 transition-colors text-black">Features</a>
-              <a href="#testimonials" className="text-sm font-medium hover:text-gray-700 transition-colors text-black">Reviews</a>
-              <a href="#videos" className="text-sm font-medium hover:text-gray-700 transition-colors text-black">Videos</a>
+              {navigation.main.map((item) => (
+                <a key={item.href} href={item.href} className="text-sm font-medium hover:text-gray-700 transition-colors text-black">
+                  {item.label}
+                </a>
+              ))}
             </div>
 
             <div className="flex items-center gap-4">
-              <a href="/auth/login" className="text-sm font-medium hover:text-gray-700 transition-colors text-black">
-                Sign In
-              </a>
-              <a href="/auth/signup" className="gap-2 bg-black text-white hover:bg-gray-800 px-4 py-2 rounded-lg inline-flex items-center">
-                Start Learning <ArrowRight className="h-4 w-4" />
-              </a>
+              {navigation.auth.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className={
+                    item.variant === 'primary'
+                      ? 'gap-2 bg-black text-white hover:bg-gray-800 px-4 py-2 rounded-lg inline-flex items-center'
+                      : 'text-sm font-medium hover:text-gray-700 transition-colors text-black'
+                  }
+                >
+                  {item.label}
+                  {item.variant === 'primary' && <ArrowRight className="h-4 w-4" />}
+                </a>
+              ))}
             </div>
           </div>
         </div>
@@ -174,54 +87,50 @@ export default function Home() {
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div>
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-100 border border-gray-300 mb-6">
-                <Sparkles className="h-4 w-4 text-gray-700" />
-                <span className="text-sm font-medium text-gray-800">Transform Your Future</span>
+                {hero.badge.icon === 'sparkles' && <Sparkles className="h-4 w-4 text-gray-700" />}
+                <span className="text-sm font-medium text-gray-800">{hero.badge.text}</span>
               </div>
-              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl text-balance leading-tight text-black">
-                Learn from Industry Experts
+              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl text-balance leading-tight text-amber-600">
+                {hero.title}
               </h1>
               <p className="mt-6 text-lg sm:text-xl text-gray-600 text-balance leading-relaxed">
-                Discover world-class learning programs across technology, visual communication, and more. Connect with expert mentors and accelerate your growth.
+                {hero.subtitle}
               </p>
               <div className="mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-4">
-                <a href="/auth/signup" className="w-full sm:w-auto gap-2 shadow-lg hover:shadow-xl bg-black text-white hover:bg-gray-800 px-6 py-3 rounded-lg inline-flex items-center justify-center">
-                  Explore Programs <ArrowRight className="h-5 w-5" />
-                </a>
-                <a href="/auth/signup" className="w-full sm:w-auto border-gray-300 text-gray-800 hover:bg-gray-100 px-6 py-3 rounded-lg inline-flex items-center justify-center">
-                  Watch Demo
-                </a>
+                {hero.ctas.map((cta, index) => (
+                  <a
+                    key={index}
+                    href={cta.href}
+                    className={
+                      cta.variant === 'primary'
+                        ? 'w-full sm:w-auto gap-2 shadow-lg hover:shadow-xl bg-black text-white hover:bg-gray-800 px-6 py-3 rounded-lg inline-flex items-center justify-center'
+                        : 'w-full sm:w-auto border-gray-300 text-gray-800 hover:bg-gray-100 px-6 py-3 rounded-lg inline-flex items-center justify-center'
+                    }
+                  >
+                    {cta.label}
+                    {cta.variant === 'primary' && cta.icon === 'arrow-right' && <ArrowRight className="h-5 w-5" />}
+                  </a>
+                ))}
               </div>
 
               {/* Stats */}
               <div className="mt-12 grid grid-cols-3 gap-6 pt-8 border-t border-gray-300">
-                <div>
-                  <p className="text-2xl font-bold text-black">500+</p>
-                  <p className="text-sm text-gray-600 mt-1">Active Learners</p>
-                </div>
-                <div>
-                  <p className="text-2xl font-bold text-black">50+</p>
-                  <p className="text-sm text-gray-600 mt-1">Expert Mentors</p>
-                </div>
-                <div>
-                  <p className="text-2xl font-bold text-black">95%</p>
-                  <p className="text-sm text-gray-600 mt-1">Success Rate</p>
-                </div>
+                {stats.slice(0, 3).map((stat, index) => (
+                  <div key={index}>
+                    <p className="text-2xl font-bold text-black">{stat.value}</p>
+                    <p className="text-sm text-gray-600 mt-1">{stat.label}</p>
+                  </div>
+                ))}
               </div>
 
               {/* Visual Trust Indicators */}
               <div className="mt-8 flex flex-wrap gap-4">
-                <div className="flex items-center gap-2 text-sm text-gray-600">
-                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                  <span>Industry-recognized certificates</span>
-                </div>
-                <div className="flex items-center gap-2 text-sm text-gray-600">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                  <span>1-on-1 mentorship</span>
-                </div>
-                <div className="flex items-center gap-2 text-sm text-gray-600">
-                  <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                  <span>Job placement assistance</span>
-                </div>
+                {features.slice(0, 3).map((feature, index) => (
+                  <div key={index} className="flex items-center gap-2 text-sm text-gray-600">
+                    <div className={`w-2 h-2 bg-${feature.color}-500 rounded-full`}></div>
+                    <span>{feature.title}</span>
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -292,51 +201,17 @@ export default function Home() {
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              {
-                icon: <Target className="h-8 w-8" />,
-                title: 'Choose Your Field',
-                description: 'Select from technology, visual communication, or other specializations.',
-                color: 'from-gray-50 to-white',
-                borderColor: 'border-gray-200',
-                iconBg: 'bg-gradient-to-br from-black to-gray-800 text-white',
-                hoverBg: 'hover:from-gray-100 hover:to-gray-50'
-              },
-              {
-                icon: <Users className="h-8 w-8" />,
-                title: 'Pick a Company',
-                description: 'Browse and enroll in programs from leading companies and institutions.',
-                color: 'from-gray-50 to-white',
-                borderColor: 'border-gray-200',
-                iconBg: 'bg-gradient-to-br from-black to-gray-800 text-white',
-                hoverBg: 'hover:from-gray-100 hover:to-gray-50'
-              },
-              {
-                icon: <BookOpen className="h-8 w-8" />,
-                title: 'Meet Your Mentor',
-                description: 'Connect with experienced professionals who guide your learning.',
-                color: 'from-gray-50 to-white',
-                borderColor: 'border-gray-200',
-                iconBg: 'bg-gradient-to-br from-black to-gray-800 text-white',
-                hoverBg: 'hover:from-gray-100 hover:to-gray-50'
-              },
-              {
-                icon: <Zap className="h-8 w-8" />,
-                title: 'Master Your Skills',
-                description: 'Gain practical expertise through mentored projects and real-world challenges.',
-                color: 'from-gray-50 to-white',
-                borderColor: 'border-gray-200',
-                iconBg: 'bg-gradient-to-br from-black to-gray-800 text-white',
-                hoverBg: 'hover:from-gray-100 hover:to-gray-50'
-              }
-            ].map((step, idx) => (
-              <div key={idx} className={`group relative cursor-pointer transform transition-all duration-500 hover:scale-105 hover:-translate-y-2`}>
+            {journeySteps.map((step, idx) => (
+              <div key={step.id} className={`group relative cursor-pointer transform transition-all duration-500 hover:scale-105 hover:-translate-y-2`}>
                 <div className={`absolute inset-0 bg-gradient-to-r ${step.color} ${step.borderColor} rounded-2xl shadow-lg group-hover:shadow-2xl transition-all duration-300`}></div>
                 <div className={`relative bg-gradient-to-br ${step.color} ${step.hoverBg} rounded-2xl p-6 border ${step.borderColor} shadow-lg group-hover:shadow-2xl transition-all duration-300`}>
                   <div className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-gray-200/50 to-transparent rounded-full -mr-12 -mt-12 opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
 
                   <div className={`relative flex items-center justify-center h-16 w-16 rounded-2xl ${step.iconBg} mb-6 shadow-xl group-hover:rotate-6 transition-transform duration-300`}>
-                    {step.icon}
+                    {step.icon === 'target' && <Target className="h-8 w-8" />}
+                    {step.icon === 'users' && <Users className="h-8 w-8" />}
+                    {step.icon === 'book-open' && <BookOpen className="h-8 w-8" />}
+                    {step.icon === 'zap' && <Zap className="h-8 w-8" />}
                   </div>
 
                   <div className="flex items-start gap-3 mb-4">
@@ -645,7 +520,7 @@ export default function Home() {
           {/* Browse All Courses */}
           <div className="mt-12 text-center">
             <p className="text-gray-600 mb-4">Looking for more courses?</p>
-            <Button size="lg" variant="outline" className="gap-2 border-gray-300 text-gray-800 hover:bg-gray-100">
+            <Button size="lg" variant="secondary" className="gap-2 border-gray-300 text-gray-800 hover:bg-gray-100">
               Browse All Courses <ArrowRight className="h-5 w-5" />
             </Button>
           </div>
