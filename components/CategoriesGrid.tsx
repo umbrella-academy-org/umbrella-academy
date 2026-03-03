@@ -15,7 +15,7 @@ const categories = [
         title: "Television",
         icon: Film,
         image: "/visual_audio_category_bg_1770538848275.png",
-        color: "bg-[#ca8a04]"
+        color: "bg-[#525252]"
     },
     {
         title: "Games",
@@ -40,7 +40,7 @@ export function CategoriesGrid() {
             <div ref={ref} className="max-w-full mx-auto">
                 <div className={`mb-16 reveal ${isVisible ? 'visible' : ''}`}>
                     <h3 className="text-4xl md:text-6xl lg:text-8xl font-black tracking-tighter text-black leading-none ">
-                        WHAT ARE YOU <br /> <span className="text-[#ca8a04]">INTERESTED IN?</span>
+                        WHAT ARE YOU <br /> <span className="text-[#525252]">INTERESTED IN?</span>
                     </h3>
                 </div>
 

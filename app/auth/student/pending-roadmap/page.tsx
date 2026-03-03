@@ -14,15 +14,15 @@ export default function StudentRoadmapPendingPage() {
                 <div className="flex flex-col items-center justify-center flex-1 max-w-md mx-auto w-full text-center">
                     {/* Logo */}
                     <div className="mb-8">
-                        <div className="w-16 h-16 bg-yellow-600 rounded-2xl flex items-center justify-center">
+                        <div className="w-16 h-16 bg-gray-600 rounded-2xl flex items-center justify-center">
                             <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" />
                             </svg>
                         </div>
                     </div>
 
-                    <div className="w-20 h-20 bg-yellow-50 rounded-full flex items-center justify-center mb-6">
-                        <FileCheck className="w-10 h-10 text-yellow-600" />
+                    <div className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mb-6">
+                        <FileCheck className="w-10 h-10 text-gray-600" />
                     </div>
 
                     {/* Title */}
@@ -37,15 +37,15 @@ export default function StudentRoadmapPendingPage() {
                         <h3 className="text-sm font-semibold text-gray-900 mb-2  ">Next Steps</h3>
                         <ul className="space-y-3">
                             <li className="flex gap-3 text-sm text-gray-600">
-                                <div className="w-1.5 h-1.5 rounded-full bg-yellow-600 mt-1.5 flex-shrink-0"></div>
+                                <div className="w-1.5 h-1.5 rounded-full bg-gray-600 mt-1.5 flex-shrink-0"></div>
                                 <span>A trainer will review your proposed learning phases.</span>
                             </li>
                             <li className="flex gap-3 text-sm text-gray-600">
-                                <div className="w-1.5 h-1.5 rounded-full bg-yellow-600 mt-1.5 flex-shrink-0"></div>
+                                <div className="w-1.5 h-1.5 rounded-full bg-gray-600 mt-1.5 flex-shrink-0"></div>
                                 <span>You will be notified once it's approved or if adjustments are suggested.</span>
                             </li>
                             <li className="flex gap-3 text-sm text-gray-600">
-                                <div className="w-1.5 h-1.5 rounded-full bg-yellow-600 mt-1.5 flex-shrink-0"></div>
+                                <div className="w-1.5 h-1.5 rounded-full bg-gray-600 mt-1.5 flex-shrink-0"></div>
                                 <span>Once approved, your dashboard will be fully activated.</span>
                             </li>
                         </ul>
@@ -53,7 +53,7 @@ export default function StudentRoadmapPendingPage() {
 
                     <button
                         onClick={() => router.push('/dashboard/student')}
-                        className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-colors"
+                        className="w-full bg-gray-600 text-white py-3 rounded-lg font-medium hover:bg-gray-700 transition-colors"
                     >
                         Go to Dashboard
                     </button>

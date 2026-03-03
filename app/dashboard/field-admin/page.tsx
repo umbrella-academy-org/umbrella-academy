@@ -106,8 +106,8 @@ export default function FieldAdminDashboard() {
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4 mb-4 sm:mb-6 lg:mb-8">
               <div className="bg-white rounded-lg p-3 lg:p-4 shadow-sm border border-gray-100  hover:shadow-lg transition-all duration-300 animate-slide-up">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-blue-100 rounded-lg">
-                    <Users className="w-5 h-5 text-blue-600" />
+                  <div className="p-2 bg-gray-100 rounded-lg">
+                    <Users className="w-5 h-5 text-gray-600" />
                   </div>
                   <div>
                     <p className="text-xs font-medium text-gray-600">Students</p>
@@ -118,8 +118,8 @@ export default function FieldAdminDashboard() {
 
               <div className="bg-white rounded-lg p-3 lg:p-4 shadow-sm border border-gray-100  hover:shadow-lg transition-all duration-300 animate-slide-up" style={{ animationDelay: '100ms' }}>
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-green-100 rounded-lg">
-                    <GraduationCap className="w-5 h-5 text-green-600" />
+                  <div className="p-2 bg-gray-100 rounded-lg">
+                    <GraduationCap className="w-5 h-5 text-gray-600" />
                   </div>
                   <div>
                     <p className="text-xs font-medium text-gray-600">Trainers</p>
@@ -130,8 +130,8 @@ export default function FieldAdminDashboard() {
 
               <div className="bg-white rounded-lg p-3 lg:p-4 shadow-sm border border-gray-100  hover:shadow-lg transition-all duration-300 animate-slide-up" style={{ animationDelay: '200ms' }}>
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-yellow-100 rounded-lg">
-                    <DollarSign className="w-5 h-5 text-yellow-600" />
+                  <div className="p-2 bg-gray-100 rounded-lg">
+                    <DollarSign className="w-5 h-5 text-gray-600" />
                   </div>
                   <div>
                     <p className="text-xs font-medium text-gray-600">Field Wallet</p>
@@ -144,8 +144,8 @@ export default function FieldAdminDashboard() {
 
               <div className="bg-white rounded-lg p-3 lg:p-4 shadow-sm border border-gray-100  hover:shadow-lg transition-all duration-300 animate-slide-up" style={{ animationDelay: '300ms' }}>
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-purple-100 rounded-lg">
-                    <TrendingUp className="w-5 h-5 text-purple-600" />
+                  <div className="p-2 bg-gray-100 rounded-lg">
+                    <TrendingUp className="w-5 h-5 text-gray-600" />
                   </div>
                   <div>
                     <p className="text-xs font-medium text-gray-600">Active Roadmaps</p>
@@ -193,7 +193,7 @@ export default function FieldAdminDashboard() {
                       className="w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors group"
                     >
                       <div className="flex items-center gap-3">
-                        <Settings className="w-4 h-4 text-gray-500 group-hover:text-yellow-600" />
+                        <Settings className="w-4 h-4 text-gray-500 group-hover:text-gray-600" />
                         <div>
                           <div className="font-medium text-gray-900">Manage Trainers</div>
                           <div className="text-xs text-gray-500">View trainer capacity & assignments</div>
@@ -206,7 +206,7 @@ export default function FieldAdminDashboard() {
                       className="w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors group"
                     >
                       <div className="flex items-center gap-3">
-                        <Eye className="w-4 h-4 text-gray-500 group-hover:text-yellow-600" />
+                        <Eye className="w-4 h-4 text-gray-500 group-hover:text-gray-600" />
                         <div>
                           <div className="font-medium text-gray-900">Student Activity</div>
                           <div className="text-xs text-gray-500">Monitor learning progress</div>
@@ -219,7 +219,7 @@ export default function FieldAdminDashboard() {
                       className="w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors group"
                     >
                       <div className="flex items-center gap-3">
-                        <Wallet className="w-4 h-4 text-gray-500 group-hover:text-yellow-600" />
+                        <Wallet className="w-4 h-4 text-gray-500 group-hover:text-gray-600" />
                         <div>
                           <div className="font-medium text-gray-900">Field Wallet</div>
                           <div className="text-xs text-gray-500">Manage field finances</div>

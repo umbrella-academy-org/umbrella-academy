@@ -80,11 +80,11 @@ export default function TransactionHistory() {
   const getTransactionIcon = (type: string) => {
     switch (type) {
       case 'earning':
-        return <ArrowDownLeft className="w-4 h-4 text-green-600" />;
+        return <ArrowDownLeft className="w-4 h-4 text-gray-600" />;
       case 'withdrawal':
-        return <ArrowUpRight className="w-4 h-4 text-red-600" />;
+        return <ArrowUpRight className="w-4 h-4 text-gray-600" />;
       case 'bonus':
-        return <ArrowDownLeft className="w-4 h-4 text-yellow-600" />;
+        return <ArrowDownLeft className="w-4 h-4 text-gray-600" />;
       default:
         return <ArrowDownLeft className="w-4 h-4 text-gray-600" />;
     }
@@ -94,19 +94,19 @@ export default function TransactionHistory() {
     switch (status) {
       case 'completed':
         return (
-          <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+          <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
             ✓ Completed
           </span>
         );
       case 'pending':
         return (
-          <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+          <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
             ⏳ Pending
           </span>
         );
       case 'processing':
         return (
-          <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+          <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
             🔄 Processing
           </span>
         );
@@ -155,8 +155,8 @@ export default function TransactionHistory() {
                 <td className="py-4 px-4">
                   <div className="flex items-center gap-3">
                     <div className={`w-8 h-8 rounded flex items-center justify-center flex-shrink-0 ${
-                      transaction.type === 'earning' ? 'bg-green-100' :
-                      transaction.type === 'withdrawal' ? 'bg-red-100' : 'bg-yellow-100'
+                      transaction.type === 'earning' ? 'bg-gray-100' :
+                      transaction.type === 'withdrawal' ? 'bg-gray-100' : 'bg-gray-100'
                     }`}>
                       {getTransactionIcon(transaction.type)}
                     </div>
@@ -174,7 +174,7 @@ export default function TransactionHistory() {
                 </td>
                 <td className="py-4 px-4">
                   <span className={`text-sm font-medium ${
-                    transaction.amount.startsWith('+') ? 'text-green-600' : 'text-red-600'
+                    transaction.amount.startsWith('+') ? 'text-gray-600' : 'text-gray-600'
                   }`}>
                     {transaction.amount}
                   </span>

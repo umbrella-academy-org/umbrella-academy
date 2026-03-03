@@ -86,7 +86,7 @@ export default function FieldAdminMentorsPage() {
                 </div>
                 <button
                   onClick={() => setShowCreateForm(true)}
-                  className="flex items-center gap-2 px-6 py-2.5 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-all font-medium shadow-sm active:scale-95"
+                  className="flex items-center gap-2 px-6 py-2.5 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-all font-medium shadow-sm active:scale-95"
                 >
                   <Plus className="w-4 h-4" />
                   Add New Mentor
@@ -102,7 +102,7 @@ export default function FieldAdminMentorsPage() {
                     <p className="text-sm font-medium text-gray-600">Total Mentors</p>
                     <p className="text-2xl font-bold text-gray-900">{totalMentors}</p>
                   </div>
-                  <Users className="w-8 h-8 text-blue-500" />
+                  <Users className="w-8 h-8 text-gray-500" />
                 </div>
               </div>
               <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
@@ -111,7 +111,7 @@ export default function FieldAdminMentorsPage() {
                     <p className="text-sm font-medium text-gray-600">Active Mentors</p>
                     <p className="text-2xl font-bold text-gray-900">{activeMentors}</p>
                   </div>
-                  <UserCheck className="w-8 h-8 text-green-500" />
+                  <UserCheck className="w-8 h-8 text-gray-500" />
                 </div>
               </div>
               <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
@@ -120,7 +120,7 @@ export default function FieldAdminMentorsPage() {
                     <p className="text-sm font-medium text-gray-600">Students Mentored</p>
                     <p className="text-2xl font-bold text-gray-900">{totalStudents}</p>
                   </div>
-                  <Award className="w-8 h-8 text-purple-500" />
+                  <Award className="w-8 h-8 text-gray-500" />
                 </div>
               </div>
               <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
@@ -129,7 +129,7 @@ export default function FieldAdminMentorsPage() {
                     <p className="text-sm font-medium text-gray-600">Average Rating</p>
                     <p className="text-2xl font-bold text-gray-900">{avgRating}</p>
                   </div>
-                  <Star className="w-8 h-8 text-yellow-500" />
+                  <Star className="w-8 h-8 text-gray-500" />
                 </div>
               </div>
             </div>
@@ -158,7 +158,7 @@ export default function FieldAdminMentorsPage() {
                         type="text"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 transition-all"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 transition-all"
                         placeholder="eg. Dr. John Smith"
                         required
                       />
@@ -169,7 +169,7 @@ export default function FieldAdminMentorsPage() {
                         type="email"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 transition-all"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 transition-all"
                         placeholder="eg. john.smith@academy.com"
                         required
                       />
@@ -182,7 +182,7 @@ export default function FieldAdminMentorsPage() {
                       type="text"
                       value={formData.expertise}
                       onChange={(e) => setFormData({ ...formData, expertise: e.target.value })}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 transition-all"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 transition-all"
                       placeholder="eg. JavaScript, React, System Architecture"
                       required
                     />
@@ -197,7 +197,7 @@ export default function FieldAdminMentorsPage() {
                       type="number"
                       value={formData.maxStudents}
                       onChange={(e) => setFormData({ ...formData, maxStudents: parseInt(e.target.value) })}
-                      className="w-24 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 text-center font-bold"
+                      className="w-24 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 text-center font-bold"
                       min="5"
                       max="100"
                       required
@@ -207,7 +207,7 @@ export default function FieldAdminMentorsPage() {
                   <div className="flex gap-4 pt-4">
                     <button
                       type="submit"
-                      className="flex-1 bg-yellow-600 text-white px-6 py-3.5 rounded-lg font-semibold hover:bg-yellow-700 transition-all shadow-md active:scale-95"
+                      className="flex-1 bg-gray-600 text-white px-6 py-3.5 rounded-lg font-semibold hover:bg-gray-700 transition-all shadow-md active:scale-95"
                     >
                       Verify and Activate Mentor
                     </button>

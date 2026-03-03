@@ -9,28 +9,28 @@ export default function StudentsHeader() {
       label: 'Total Students',
       value: '24',
       change: '+3 this month',
-      color: 'text-blue-600 bg-blue-100'
+      color: 'text-gray-600 bg-gray-100'
     },
     {
       icon: <TrendingUp className="w-5 h-5" />,
       label: 'Active Students',
       value: '18',
       change: '+2 this week',
-      color: 'text-green-600 bg-green-100'
+      color: 'text-gray-600 bg-gray-100'
     },
     {
       icon: <Clock className="w-5 h-5" />,
       label: 'Avg. Progress',
       value: '67%',
       change: '+5% vs last month',
-      color: 'text-yellow-600 bg-yellow-100'
+      color: 'text-gray-600 bg-gray-100'
     },
     {
       icon: <Star className="w-5 h-5" />,
       label: 'Completion Rate',
       value: '89%',
       change: '+12% improvement',
-      color: 'text-purple-600 bg-purple-100'
+      color: 'text-gray-600 bg-gray-100'
     }
   ];
 
@@ -67,7 +67,7 @@ export default function StudentsHeader() {
               <p className="text-xl lg:text-2xl font-bold text-gray-900 mb-1">
                 {stat.value}
               </p>
-              <p className="text-xs text-green-600 font-medium">
+              <p className="text-xs text-gray-600 font-medium">
                 {stat.change}
               </p>
             </div>

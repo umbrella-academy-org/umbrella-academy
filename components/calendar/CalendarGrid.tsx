@@ -78,13 +78,13 @@ export default function CalendarGrid({ selectedDateRange, onDateRangeChange }: C
         <button
           key={day}
           className={`w-10 h-10 text-sm rounded-lg transition-all flex flex-col items-center justify-center relative ${isSelected
-            ? 'bg-yellow-600 text-white font-bold shadow-lg shadow-yellow-600/20 active:scale-95'
-            : 'text-gray-700 hover:bg-gray-50 hover:text-yellow-600'
+            ? 'bg-gray-600 text-white font-bold shadow-lg shadow-gray-600/20 active:scale-95'
+            : 'text-gray-700 hover:bg-gray-50 hover:text-gray-600'
             }`}
         >
           <span>{day}</span>
           {hasLiveSession && (
-            <span className={`w-1 h-1 rounded-full absolute bottom-1.5 ${isSelected ? 'bg-white' : 'bg-yellow-500'
+            <span className={`w-1 h-1 rounded-full absolute bottom-1.5 ${isSelected ? 'bg-white' : 'bg-gray-500'
               }`}></span>
           )}
         </button>

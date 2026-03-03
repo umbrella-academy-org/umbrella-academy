@@ -73,16 +73,16 @@ export default function ForgotPasswordPage() {
                   setError('');
                 }}
                 placeholder="Enter your email"
-                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${error ? 'border-red-500' : 'border-gray-300'
+                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${error ? 'border-gray-500' : 'border-gray-300'
                   }`}
                 required
               />
-              {error && <p className="mt-2 text-sm text-red-500">{error}</p>}
+              {error && <p className="mt-2 text-sm text-gray-500">{error}</p>}
             </div>
 
             <button
               type="submit"
-              className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-colors"
+              className="w-full bg-gray-600 text-white py-3 rounded-lg font-medium hover:bg-gray-700 transition-colors"
             >
               Continue
             </button>
@@ -91,7 +91,7 @@ export default function ForgotPasswordPage() {
           {/* Remember password link */}
           <p className="mt-6 text-sm text-gray-600">
             Remember password?{' '}
-            <a href="/auth/login" className="text-yellow-600 hover:text-yellow-700 font-medium">
+            <a href="/auth/login" className="text-gray-600 hover:text-gray-700 font-medium">
               Sign In
             </a>
           </p>

@@ -49,7 +49,7 @@ export default function StudentSettingsPage() {
                                             key={item.id}
                                             onClick={() => setActiveSection(item.id)}
                                             className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all ${activeSection === item.id
-                                                ? 'bg-yellow-600 text-white shadow-md'
+                                                ? 'bg-gray-600 text-white shadow-md'
                                                 : 'text-gray-600 hover:bg-white hover:text-gray-900 border border-transparent hover:border-gray-100'
                                                 }`}
                                         >
@@ -59,7 +59,7 @@ export default function StudentSettingsPage() {
                                     ))}
                                     <button
                                         onClick={() => logout()}
-                                        className="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-red-500 hover:bg-red-50 transition-all mt-4"
+                                        className="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-500 hover:bg-gray-50 transition-all mt-4"
                                     >
                                         <LogOut className="w-4 h-4" />
                                         Sign Out
@@ -82,7 +82,7 @@ export default function StudentSettingsPage() {
                                                             <input
                                                                 type="password"
                                                                 placeholder="••••••••"
-                                                                className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-yellow-600 outline-none transition-all"
+                                                                className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-gray-600 outline-none transition-all"
                                                             />
                                                         </div>
                                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -91,7 +91,7 @@ export default function StudentSettingsPage() {
                                                                 <input
                                                                     type="password"
                                                                     placeholder="••••••••"
-                                                                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-yellow-600 outline-none transition-all"
+                                                                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-gray-600 outline-none transition-all"
                                                                 />
                                                             </div>
                                                             <div>
@@ -99,12 +99,12 @@ export default function StudentSettingsPage() {
                                                                 <input
                                                                     type="password"
                                                                     placeholder="••••••••"
-                                                                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-yellow-600 outline-none transition-all"
+                                                                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-gray-600 outline-none transition-all"
                                                                 />
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <button className="px-6 py-2.5 bg-yellow-600 text-white rounded-lg font-semibold hover:bg-yellow-700 shadow-md active:scale-95 transition-all">
+                                                    <button className="px-6 py-2.5 bg-gray-600 text-white rounded-lg font-semibold hover:bg-gray-700 shadow-md active:scale-95 transition-all">
                                                         Update Password
                                                     </button>
                                                 </div>
@@ -118,7 +118,7 @@ export default function StudentSettingsPage() {
                                                     </div>
                                                     <button
                                                         onClick={() => setSecurity({ ...security, twoFactor: !security.twoFactor })}
-                                                        className={`w-12 h-6 rounded-full transition-all relative ${security.twoFactor ? 'bg-green-500' : 'bg-gray-200'}`}
+                                                        className={`w-12 h-6 rounded-full transition-all relative ${security.twoFactor ? 'bg-gray-500' : 'bg-gray-200'}`}
                                                     >
                                                         <div className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-all ${security.twoFactor ? 'left-7' : 'left-1'}`} />
                                                     </button>
@@ -145,7 +145,7 @@ export default function StudentSettingsPage() {
                                                         </div>
                                                         <button
                                                             onClick={() => setNotifications({ ...notifications, [pref.id]: !notifications[pref.id as keyof typeof notifications] })}
-                                                            className={`w-12 h-6 rounded-full transition-all relative flex-shrink-0 ${notifications[pref.id as keyof typeof notifications] ? 'bg-yellow-600' : 'bg-gray-200'}`}
+                                                            className={`w-12 h-6 rounded-full transition-all relative flex-shrink-0 ${notifications[pref.id as keyof typeof notifications] ? 'bg-gray-600' : 'bg-gray-200'}`}
                                                         >
                                                             <div className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-all ${notifications[pref.id as keyof typeof notifications] ? 'left-7' : 'left-1'}`} />
                                                         </button>
@@ -159,9 +159,9 @@ export default function StudentSettingsPage() {
                                         <div className="space-y-8">
                                             <h3 className="text-lg font-semibold text-gray-900 mb-6">Visual Preferences</h3>
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                                <button className="flex items-center justify-between p-4 rounded-lg border-2 border-yellow-600 bg-yellow-50 text-yellow-600 shadow-sm">
+                                                <button className="flex items-center justify-between p-4 rounded-lg border-2 border-gray-600 bg-gray-50 text-gray-600 shadow-sm">
                                                     <div className="flex items-center gap-3">
-                                                        <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center border border-yellow-100">
+                                                        <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center border border-gray-100">
                                                             <Globe className="w-5 h-5" />
                                                         </div>
                                                         <div className="text-left">
@@ -169,7 +169,7 @@ export default function StudentSettingsPage() {
                                                             <p className="text-[10px] font-medium opacity-70">Best for daytime learning</p>
                                                         </div>
                                                     </div>
-                                                    <div className="w-5 h-5 rounded-full bg-yellow-600 flex items-center justify-center">
+                                                    <div className="w-5 h-5 rounded-full bg-gray-600 flex items-center justify-center">
                                                         <Check className="w-3 h-3 text-white" />
                                                     </div>
                                                 </button>

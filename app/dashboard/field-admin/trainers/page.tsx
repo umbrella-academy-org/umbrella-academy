@@ -62,7 +62,7 @@ export default function FieldAdminTrainersPage() {
                     <p className="text-sm font-medium text-gray-600">Total Trainers</p>
                     <p className="text-2xl font-bold text-gray-900">{totalTrainers}</p>
                   </div>
-                  <Users className="w-8 h-8 text-blue-500" />
+                  <Users className="w-8 h-8 text-gray-500" />
                 </div>
               </div>
               <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
@@ -71,7 +71,7 @@ export default function FieldAdminTrainersPage() {
                     <p className="text-sm font-medium text-gray-600">Active Trainers</p>
                     <p className="text-2xl font-bold text-gray-900">{activeTrainers}</p>
                   </div>
-                  <UserCheck className="w-8 h-8 text-green-500" />
+                  <UserCheck className="w-8 h-8 text-gray-500" />
                 </div>
               </div>
               <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
@@ -80,7 +80,7 @@ export default function FieldAdminTrainersPage() {
                     <p className="text-sm font-medium text-gray-600">Total Capacity</p>
                     <p className="text-2xl font-bold text-gray-900">{totalCapacity}</p>
                   </div>
-                  <UserX className="w-8 h-8 text-purple-500" />
+                  <UserX className="w-8 h-8 text-gray-500" />
                 </div>
               </div>
               <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
@@ -89,7 +89,7 @@ export default function FieldAdminTrainersPage() {
                     <p className="text-sm font-medium text-gray-600">Utilization Rate</p>
                     <p className="text-2xl font-bold text-gray-900">{utilizationRate}%</p>
                   </div>
-                  <TrendingUp className="w-8 h-8 text-yellow-500" />
+                  <TrendingUp className="w-8 h-8 text-gray-500" />
                 </div>
               </div>
             </div>

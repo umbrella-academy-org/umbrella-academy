@@ -5,28 +5,28 @@ import { Calendar, Clock, Users, Target } from 'lucide-react';
 export default function CalendarInfo() {
   const calendarStats = [
     {
-      icon: <Calendar className="w-5 h-5 text-blue-600" />,
+      icon: <Calendar className="w-5 h-5 text-gray-600" />,
       label: 'Total Sessions',
       value: '24',
       change: '+12%',
       changeType: 'positive' as const
     },
     {
-      icon: <Clock className="w-5 h-5 text-green-600" />,
+      icon: <Clock className="w-5 h-5 text-gray-600" />,
       label: 'Hours Taught',
       value: '48h',
       change: '+8%',
       changeType: 'positive' as const
     },
     {
-      icon: <Users className="w-5 h-5 text-purple-600" />,
+      icon: <Users className="w-5 h-5 text-gray-600" />,
       label: 'Active Students',
       value: '18',
       change: '+3',
       changeType: 'positive' as const
     },
     {
-      icon: <Target className="w-5 h-5 text-orange-600" />,
+      icon: <Target className="w-5 h-5 text-gray-600" />,
       label: 'Completion Rate',
       value: '94%',
       change: '+2%',
@@ -38,7 +38,7 @@ export default function CalendarInfo() {
     <div className="bg-white rounded-lg border border-gray-200 p-6">
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-lg font-semibold text-gray-900">Calendar Overview</h2>
-        <button className="text-sm text-yellow-600 hover:text-yellow-700 font-medium">
+        <button className="text-sm text-gray-600 hover:text-gray-700 font-medium">
           View Details
         </button>
       </div>
@@ -57,7 +57,7 @@ export default function CalendarInfo() {
             <div className="flex items-center justify-between">
               <span className="text-xl font-bold text-gray-900">{stat.value}</span>
               <span className={`text-xs font-medium ${
-                stat.changeType === 'positive' ? 'text-green-600' : 'text-red-600'
+                stat.changeType === 'positive' ? 'text-gray-600' : 'text-gray-600'
               }`}>
                 {stat.change}
               </span>
@@ -73,7 +73,7 @@ export default function CalendarInfo() {
         </div>
         <div className="mt-2 w-full bg-gray-200 rounded-full h-2">
           <div 
-            className="bg-yellow-600 h-2 rounded-full transition-all duration-500"
+            className="bg-gray-600 h-2 rounded-full transition-all duration-500"
             style={{ width: '78%' }}
           />
         </div>

@@ -159,19 +159,19 @@ export default function UmbrellaAdminFeedbackSupportPage() {
 
   const getTypeColor = (type: string) => {
     switch (type) {
-      case 'feedback': return 'bg-green-100 text-green-800';
-      case 'support': return 'bg-blue-100 text-blue-800';
-      case 'complaint': return 'bg-red-100 text-red-800';
-      case 'suggestion': return 'bg-purple-100 text-purple-800';
+      case 'feedback': return 'bg-gray-100 text-gray-800';
+      case 'support': return 'bg-gray-100 text-gray-800';
+      case 'complaint': return 'bg-gray-100 text-gray-800';
+      case 'suggestion': return 'bg-gray-100 text-gray-800';
       default: return 'bg-gray-100 text-gray-800';
     }
   };
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'open': return 'bg-yellow-100 text-yellow-800';
-      case 'in-progress': return 'bg-blue-100 text-blue-800';
-      case 'resolved': return 'bg-green-100 text-green-800';
+      case 'open': return 'bg-gray-100 text-gray-800';
+      case 'in-progress': return 'bg-gray-100 text-gray-800';
+      case 'resolved': return 'bg-gray-100 text-gray-800';
       case 'closed': return 'bg-gray-100 text-gray-800';
       default: return 'bg-gray-100 text-gray-800';
     }
@@ -180,19 +180,19 @@ export default function UmbrellaAdminFeedbackSupportPage() {
   const getPriorityColor = (priority: string) => {
     switch (priority) {
       case 'low': return 'bg-gray-100 text-gray-800';
-      case 'medium': return 'bg-yellow-100 text-yellow-800';
-      case 'high': return 'bg-orange-100 text-orange-800';
-      case 'urgent': return 'bg-red-100 text-red-800';
+      case 'medium': return 'bg-gray-100 text-gray-800';
+      case 'high': return 'bg-gray-100 text-gray-800';
+      case 'urgent': return 'bg-gray-100 text-gray-800';
       default: return 'bg-gray-100 text-gray-800';
     }
   };
 
   const getRoleColor = (role: string) => {
     switch (role) {
-      case 'student': return 'bg-blue-500';
-      case 'trainer': return 'bg-green-500';
-      case 'mentor': return 'bg-purple-500';
-      case 'field-admin': return 'bg-orange-500';
+      case 'student': return 'bg-gray-500';
+      case 'trainer': return 'bg-gray-500';
+      case 'mentor': return 'bg-gray-500';
+      case 'field-admin': return 'bg-gray-500';
       default: return 'bg-gray-500';
     }
   };
@@ -211,7 +211,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
     return (
       <div className="flex items-center gap-1">
         {[...Array(5)].map((_, i) => (
-          <Star key={i} className={`w-4 h-4 ${i < rating ? 'text-yellow-400 fill-current' : 'text-gray-200'}`} />
+          <Star key={i} className={`w-4 h-4 ${i < rating ? 'text-gray-400 fill-current' : 'text-gray-200'}`} />
         ))}
       </div>
     );
@@ -246,7 +246,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
                     <p className="text-sm font-medium text-gray-600">Total Items</p>
                     <p className="text-2xl font-bold text-gray-900">{totalItems}</p>
                   </div>
-                  <MessageSquare className="w-8 h-8 text-blue-500" />
+                  <MessageSquare className="w-8 h-8 text-gray-500" />
                 </div>
               </div>
               <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
@@ -255,7 +255,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
                     <p className="text-sm font-medium text-gray-600">Open Items</p>
                     <p className="text-2xl font-bold text-gray-900">{openItems}</p>
                   </div>
-                  <Clock className="w-8 h-8 text-yellow-500" />
+                  <Clock className="w-8 h-8 text-gray-500" />
                 </div>
               </div>
               <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
@@ -264,7 +264,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
                     <p className="text-sm font-medium text-gray-600">Urgent Items</p>
                     <p className="text-2xl font-bold text-gray-900">{urgentItems}</p>
                   </div>
-                  <AlertCircle className="w-8 h-8 text-red-500" />
+                  <AlertCircle className="w-8 h-8 text-gray-500" />
                 </div>
               </div>
               <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
@@ -273,7 +273,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
                     <p className="text-sm font-medium text-gray-600">Avg Rating</p>
                     <p className="text-2xl font-bold text-gray-900">{avgRating.toFixed(1)}</p>
                   </div>
-                  <Star className="w-8 h-8 text-yellow-500" />
+                  <Star className="w-8 h-8 text-gray-500" />
                 </div>
               </div>
             </div>
@@ -293,7 +293,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         placeholder="Search items..."
-                        className="w-full pl-10 pr-4 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-600"
+                        className="w-full pl-10 pr-4 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-600"
                       />
                     </div>
 
@@ -304,7 +304,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
                         <select
                           value={filterType}
                           onChange={(e) => setFilterType(e.target.value)}
-                          className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-600"
+                          className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-600"
                         >
                           <option value="all">All Types</option>
                           <option value="feedback">Feedback</option>
@@ -318,7 +318,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
                         <select
                           value={filterStatus}
                           onChange={(e) => setFilterStatus(e.target.value)}
-                          className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-600"
+                          className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-600"
                         >
                           <option value="all">All Status</option>
                           <option value="open">Open</option>
@@ -332,7 +332,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
                         <select
                           value={filterPriority}
                           onChange={(e) => setFilterPriority(e.target.value)}
-                          className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-600"
+                          className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-600"
                         >
                           <option value="all">All Priority</option>
                           <option value="low">Low</option>
@@ -348,7 +348,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
                     {filteredItems.map((item) => (
                       <div
                         key={item.id}
-                        className={`p-4 cursor-pointer hover:bg-gray-50 transition-colors ${selectedItem === item.id ? 'bg-yellow-50 border-r-4 border-yellow-600' : ''
+                        className={`p-4 cursor-pointer hover:bg-gray-50 transition-colors ${selectedItem === item.id ? 'bg-gray-50 border-r-4 border-gray-600' : ''
                           }`}
                         onClick={() => setSelectedItem(item.id)}
                       >
@@ -415,7 +415,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
                           {selectedItemData.status === 'open' && (
                             <button
                               onClick={() => handleStatusUpdate(selectedItemData.id, 'in-progress')}
-                              className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm"
+                              className="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors text-sm"
                             >
                               <Clock className="w-4 h-4" />
                               Start Progress
@@ -424,7 +424,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
                           {selectedItemData.status === 'in-progress' && (
                             <button
                               onClick={() => handleStatusUpdate(selectedItemData.id, 'resolved')}
-                              className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm"
+                              className="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors text-sm"
                             >
                               <CheckCircle className="w-4 h-4" />
                               Mark Resolved
@@ -472,12 +472,12 @@ export default function UmbrellaAdminFeedbackSupportPage() {
                       {/* Admin Response */}
                       <div className="border-t pt-6">
                         <h3 className="flex items-center gap-2 font-semibold text-gray-900 mb-3">
-                          <MessageCircle className="w-5 h-5 text-blue-500" />
+                          <MessageCircle className="w-5 h-5 text-gray-500" />
                           Admin Response
                         </h3>
                         {selectedItemData.adminResponse ? (
-                          <div className="p-4 bg-blue-50 rounded-lg border border-blue-200 mb-4">
-                            <p className="text-blue-800">{selectedItemData.adminResponse}</p>
+                          <div className="p-4 bg-gray-50 rounded-lg border border-gray-200 mb-4">
+                            <p className="text-gray-800">{selectedItemData.adminResponse}</p>
                           </div>
                         ) : (
                           <p className="text-gray-500 text-sm mb-4">No response yet.</p>
@@ -489,11 +489,11 @@ export default function UmbrellaAdminFeedbackSupportPage() {
                             onChange={(e) => setAdminResponse(e.target.value)}
                             placeholder="Write your response..."
                             rows={3}
-                            className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
+                            className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent"
                           />
                           <button
                             onClick={() => handleAddResponse(selectedItemData.id)}
-                            className="px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors"
+                            className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
                             disabled={!adminResponse.trim()}
                           >
                             Send Response

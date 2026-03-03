@@ -15,22 +15,22 @@ export default function MentorWalletBalance() {
         </div>
         
         <div className="grid grid-cols-2 gap-4 mb-4">
-          <div className="bg-yellow-50 rounded-lg p-4">
+          <div className="bg-gray-50 rounded-lg p-4">
             <div className="flex items-center gap-2 mb-2">
-              <DollarSign className="w-4 h-4 text-yellow-600" />
-              <span className="text-sm font-medium text-yellow-800">This Month</span>
+              <DollarSign className="w-4 h-4 text-gray-600" />
+              <span className="text-sm font-medium text-gray-800">This Month</span>
             </div>
-            <div className="text-xl font-bold text-yellow-900">RWF 35,000</div>
-            <div className="text-xs text-yellow-700">+12% vs last month</div>
+            <div className="text-xl font-bold text-gray-900">RWF 35,000</div>
+            <div className="text-xs text-gray-700">+12% vs last month</div>
           </div>
           
-          <div className="bg-green-50 rounded-lg p-4">
+          <div className="bg-gray-50 rounded-lg p-4">
             <div className="flex items-center gap-2 mb-2">
-              <TrendingUp className="w-4 h-4 text-green-600" />
-              <span className="text-sm font-medium text-green-800">Total Earned</span>
+              <TrendingUp className="w-4 h-4 text-gray-600" />
+              <span className="text-sm font-medium text-gray-800">Total Earned</span>
             </div>
-            <div className="text-xl font-bold text-green-900">RWF 650,000</div>
-            <div className="text-xs text-green-700">All time earnings</div>
+            <div className="text-xl font-bold text-gray-900">RWF 650,000</div>
+            <div className="text-xs text-gray-700">All time earnings</div>
           </div>
         </div>
 
@@ -43,11 +43,11 @@ export default function MentorWalletBalance() {
             </span>
           </div>
           <div className="w-full bg-gray-200 rounded-full h-2">
-            <div className="bg-yellow-600 h-2 rounded-full" style={{ width: '90%' }}></div>
+            <div className="bg-gray-600 h-2 rounded-full" style={{ width: '90%' }}></div>
           </div>
         </div>
 
-        <button className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-colors">
+        <button className="w-full bg-gray-600 text-white py-3 rounded-lg font-medium hover:bg-gray-700 transition-colors">
           Request Withdrawal
         </button>
       </div>

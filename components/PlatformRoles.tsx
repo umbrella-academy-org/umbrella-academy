@@ -18,7 +18,7 @@ const roles = [
     subtitle: "Program Supervisor",
     description: "Oversee learning programs, guide students, and coordinate with trainers.",
     features: ["Program Oversight", "Student Guidance", "Quality Assurance", "Performance Review"],
-    color: "bg-[#ca8a04]",
+    color: "bg-[#525252]",
   },
   {
     icon: Presentation,
@@ -34,7 +34,7 @@ const roles = [
     subtitle: "Aspiring Professional",
     description: "Access structured learning paths, engage with trainers, and track progress.",
     features: ["Course Access", "Progress Tracking", "Certification", "Community Support"],
-    color: "bg-[#ca8a04]",
+    color: "bg-[#525252]",
   },
 ];
 
@@ -46,7 +46,7 @@ export function PlatformRoles() {
       <div ref={ref} className="max-w-full mx-auto">
         <div className={`mb-16 reveal ${isVisible ? 'visible' : ''}`}>
           <h3 className="text-4xl md:text-6xl lg:text-8xl font-black tracking-tighter text-black leading-none ">
-            BUILT FOR <br /> <span className="text-[#ca8a04]">EVERYONE</span>
+            BUILT FOR <br /> <span className="text-[#525252]">EVERYONE</span>
           </h3>
         </div>
 
@@ -65,7 +65,7 @@ export function PlatformRoles() {
                   </div>
                   <div className="space-y-2">
                     <h4 className="text-3xl font-black  tracking-tighter text-black">{role.title}</h4>
-                    <p className="text-[10px] font-black text-[#ca8a04] tracking-[0.3em] ">{role.subtitle}</p>
+                    <p className="text-[10px] font-black text-[#525252] tracking-[0.3em] ">{role.subtitle}</p>
                   </div>
                   <p className="text-sm text-gray-400 font-light leading-relaxed">
                     {role.description}
@@ -75,7 +75,7 @@ export function PlatformRoles() {
                 <ul className="space-y-3 mt-8">
                   {role.features.map((feature, idx) => (
                     <li key={idx} className="flex items-center space-x-3 text-[10px] font-bold text-gray-500  tracking-widest">
-                      <div className="w-1 h-1 bg-[#ca8a04] rounded-full" />
+                      <div className="w-1 h-1 bg-[#525252] rounded-full" />
                       <span>{feature}</span>
                     </li>
                   ))}

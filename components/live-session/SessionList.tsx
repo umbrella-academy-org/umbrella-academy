@@ -78,9 +78,9 @@ export default function SessionList({ activeTab }: SessionListProps) {
 
     const getStatusStyle = (status: Session['status']) => {
         switch (status) {
-            case 'live': return 'bg-red-50 text-red-600 border-red-100';
-            case 'upcoming': return 'bg-blue-50 text-blue-600 border-blue-100';
-            case 'completed': return 'bg-green-50 text-green-600 border-green-100';
+            case 'live': return 'bg-gray-50 text-gray-600 border-gray-100';
+            case 'upcoming': return 'bg-gray-50 text-gray-600 border-gray-100';
+            case 'completed': return 'bg-gray-50 text-gray-600 border-gray-100';
             default: return 'bg-gray-50 text-gray-600 border-gray-100';
         }
     };
@@ -99,18 +99,18 @@ export default function SessionList({ activeTab }: SessionListProps) {
                         key={session.id}
                         onMouseEnter={() => setHoveredId(session.id)}
                         onMouseLeave={() => setHoveredId(null)}
-                        className="bg-white rounded-lg p-5 border border-gray-100 shadow-sm hover:border-yellow-200 hover:shadow-md transition-all duration-300 group relative overflow-hidden"
+                        className="bg-white rounded-lg p-5 border border-gray-100 shadow-sm hover:border-gray-200 hover:shadow-md transition-all duration-300 group relative overflow-hidden"
                     >
                         {/* Background Accent */}
-                        <div className={`absolute top-0 right-0 w-48 h-48 rounded-full -mr-24 -mt-24 opacity-0 group-hover:opacity-10 transition-opacity duration-500 blur-3xl ${session.status === 'live' ? 'bg-red-500' : 'bg-yellow-400'
+                        <div className={`absolute top-0 right-0 w-48 h-48 rounded-full -mr-24 -mt-24 opacity-0 group-hover:opacity-10 transition-opacity duration-500 blur-3xl ${session.status === 'live' ? 'bg-gray-500' : 'bg-gray-400'
                             }`}></div>
 
                         <div className="flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
                             <div className="flex items-center gap-5 flex-1 w-full">
                                 {/* Type Icon */}
-                                <div className={`w-14 h-14 rounded-lg flex items-center justify-center shadow-sm ${session.type === 'live' ? 'bg-red-50 text-red-600' :
-                                    session.type === 'mentoring' ? 'bg-yellow-50 text-yellow-600' :
-                                        'bg-green-50 text-green-600'
+                                <div className={`w-14 h-14 rounded-lg flex items-center justify-center shadow-sm ${session.type === 'live' ? 'bg-gray-50 text-gray-600' :
+                                    session.type === 'mentoring' ? 'bg-gray-50 text-gray-600' :
+                                        'bg-gray-50 text-gray-600'
                                     }`}>
                                     {session.type === 'live' ? <Video className="w-7 h-7" /> :
                                         session.type === 'mentoring' ? <Play className="w-7 h-7" /> :
@@ -127,7 +127,7 @@ export default function SessionList({ activeTab }: SessionListProps) {
                                             {session.time}
                                         </span>
                                     </div>
-                                    <h3 className={`text-lg font-semibold text-gray-700 transition-colors duration-300 ${hoveredId === session.id ? 'text-yellow-600' : ''
+                                    <h3 className={`text-lg font-semibold text-gray-700 transition-colors duration-300 ${hoveredId === session.id ? 'text-gray-600' : ''
                                         }`}>
                                         {session.title}
                                     </h3>
@@ -141,12 +141,12 @@ export default function SessionList({ activeTab }: SessionListProps) {
                                 {session.status === 'live' ? (
                                     <button
                                         onClick={() => router.push('/post-signup/live-session/call')}
-                                        className="flex-1 md:flex-none px-8 py-3 bg-red-600 text-white text-sm rounded-lg hover:bg-red-700 shadow-md transition-all active:scale-95 animate-pulse"
+                                        className="flex-1 md:flex-none px-8 py-3 bg-gray-600 text-white text-sm rounded-lg hover:bg-gray-700 shadow-md transition-all active:scale-95 animate-pulse"
                                     >
                                         Join Meeting
                                     </button>
                                 ) : session.status === 'upcoming' ? (
-                                    <button className="flex-1 md:flex-none px-8 py-3 bg-yellow-600 text-white text-sm rounded-lg hover:bg-yellow-700 shadow-md transition-all active:scale-95">
+                                    <button className="flex-1 md:flex-none px-8 py-3 bg-gray-600 text-white text-sm rounded-lg hover:bg-gray-700 shadow-md transition-all active:scale-95">
                                         Register Session
                                     </button>
                                 ) : (

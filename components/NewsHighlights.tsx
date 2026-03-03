@@ -41,10 +41,10 @@ export function NewsHighlights() {
                             <div className="absolute inset-0 bg-linear-to-t from-black via-black/40 to-transparent" />
 
                             <div className="relative z-10 space-y-6">
-                                <span className="text-[10px] font-black tracking-[0.5em] text-[#ca8a04] ">
+                                <span className="text-[10px] font-black tracking-[0.5em] text-[#525252] ">
                                     {item.tag}
                                 </span>
-                                <h3 className="text-3xl md:text-5xl font-black tracking-tighter  leading-none group-hover:text-[#ca8a04] transition-colors">
+                                <h3 className="text-3xl md:text-5xl font-black tracking-tighter  leading-none group-hover:text-[#525252] transition-colors">
                                     {item.title}
                                 </h3>
                                 <p className="text-gray-400 max-w-md font-light">

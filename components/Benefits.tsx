@@ -40,8 +40,8 @@ export function Benefits() {
   return (
     <section className="py-24 px-4 sm:px-6 lg:px-8 bg-white relative overflow-hidden">
       {/* Background Elements */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-[#ca8a04]/5 rounded-full blur-3xl -z-10" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#fbbf24]/5 rounded-full blur-3xl -z-10" />
+      <div className="absolute top-0 right-0 w-96 h-96 bg-[#525252]/5 rounded-full blur-3xl -z-10" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#737373]/5 rounded-full blur-3xl -z-10" />
 
       <div ref={ref} className="max-w-full mx-auto">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -53,13 +53,13 @@ export function Benefits() {
                 alt="Team collaboration"
                 className="w-full h-auto"
               />
-              <div className="absolute inset-0 bg-linear-to-t from-[#ca8a04]/30 to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-[#525252]/30 to-transparent" />
             </div>
 
             {/* Floating Stats */}
             <div className="absolute -bottom-6 -right-6 bg-white rounded-xl shadow-2xl p-6 border-2 border-gray-200 animate-slide-up animation-delay-500">
               <div className="flex items-center space-x-4">
-                <div className="w-16 h-16 bg-[#ca8a04] rounded-xl flex items-center justify-center">
+                <div className="w-16 h-16 bg-[#525252] rounded-xl flex items-center justify-center">
                   <span className="text-3xl text-white">🎓</span>
                 </div>
                 <div>
@@ -71,7 +71,7 @@ export function Benefits() {
 
             <div className="absolute -top-6 -left-6 bg-white rounded-xl shadow-2xl p-6 border-2 border-gray-200 animate-slide-up animation-delay-700">
               <div className="flex items-center space-x-4">
-                <div className="w-16 h-16 bg-[#fbbf24] rounded-xl flex items-center justify-center text-white">
+                <div className="w-16 h-16 bg-[#737373] rounded-xl flex items-center justify-center text-white">
                   <span className="text-3xl">⭐</span>
                 </div>
                 <div>
@@ -84,11 +84,11 @@ export function Benefits() {
 
           {/* Right - Benefits */}
           <div className={`${isVisible ? 'animate-fade-in' : 'opacity-0'} animation-delay-300`}>
-            <span className="inline-block px-4 py-2 bg-[#ca8a04]/10 text-[#ca8a04] rounded-full text-sm font-medium mb-4 border border-[#ca8a04]/20">
+            <span className="inline-block px-4 py-2 bg-[#525252]/10 text-[#525252] rounded-full text-sm font-medium mb-4 border border-[#525252]/20">
               Why Choose Us
             </span>
             <h2 className="text-4xl md:text-5xl font-bold text-black mb-6">
-              Transform Your <span className="text-[#ca8a04]">Future</span>
+              Transform Your <span className="text-[#525252]">Future</span>
             </h2>
             <p className="text-xl text-gray-600 mb-8">
               Join thousands of students who have accelerated their careers with our comprehensive learning platform.
@@ -97,7 +97,7 @@ export function Benefits() {
             <div className="space-y-6">
               {benefits.map((benefit, index) => {
                 const Icon = benefit.icon;
-                const colors = ["#ca8a04", "#fbbf24", "#000000", "#ca8a04", "#fbbf24", "#000000"];
+                const colors = ["#525252", "#737373", "#000000", "#525252", "#737373", "#000000"];
                 const delays = ["animation-delay-100", "animation-delay-200", "animation-delay-300", "animation-delay-400", "animation-delay-500", "animation-delay-600"];
                 return (
                   <div

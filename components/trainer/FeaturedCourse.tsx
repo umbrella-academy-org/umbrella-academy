@@ -31,7 +31,7 @@ export default function FeaturedCourse({ selectedCourse, onCourseSelect }: Featu
       <div className="flex flex-col lg:flex-row gap-6">
         {/* Course Image */}
         <div className="lg:w-80 flex-shrink-0">
-          <div className="relative h-48 lg:h-full bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg overflow-hidden">
+          <div className="relative h-48 lg:h-full bg-gradient-to-br from-gray-500 to-gray-600 rounded-lg overflow-hidden">
             <div className="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center">
               <div className="text-center text-white">
                 <BookOpen className="w-16 h-16 mx-auto mb-4" />
@@ -60,7 +60,7 @@ export default function FeaturedCourse({ selectedCourse, onCourseSelect }: Featu
                 {[...Array(5)].map((_, i) => (
                   <Star 
                     key={i} 
-                    className={`w-4 h-4 ${i < 4 ? 'text-yellow-400 fill-current' : 'text-gray-300'}`} 
+                    className={`w-4 h-4 ${i < 4 ? 'text-gray-400 fill-current' : 'text-gray-300'}`} 
                   />
                 ))}
               </div>
@@ -97,7 +97,7 @@ export default function FeaturedCourse({ selectedCourse, onCourseSelect }: Featu
           {/* Instructor Info */}
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-orange-400 rounded-full flex items-center justify-center">
+              <div className="w-10 h-10 bg-gray-400 rounded-full flex items-center justify-center">
                 <span className="text-sm font-medium text-white">OW</span>
               </div>
               <div>
@@ -110,7 +110,7 @@ export default function FeaturedCourse({ selectedCourse, onCourseSelect }: Featu
               <button className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
                 Details
               </button>
-              <button className="px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors">
+              <button className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors">
                 Enroll
               </button>
             </div>

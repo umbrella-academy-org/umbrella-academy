@@ -51,19 +51,19 @@ export default function RoadmapPage() {
         title: 'Tech Companies Field',
         description: 'Technology sector companies and startups',
         icon: '💻',
-        color: 'yellow'
+        color: 'gray'
       },
       'business-companies': {
         title: 'Business Companies Field',
         description: 'Business consulting and enterprise solutions',
         icon: '💼',
-        color: 'yellow'
+        color: 'gray'
       },
       'hotels': {
         title: 'Hotels Field',
         description: 'Hospitality and tourism industry training',
         icon: '🏨',
-        color: 'purple'
+        color: 'gray'
       }
     };
     return fields[fieldId as keyof typeof fields] || null;
@@ -125,12 +125,12 @@ export default function RoadmapPage() {
   // Show success message
   if (showSuccessMessage) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-yellow-50 to-yellow-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-50 flex items-center justify-center">
         <div className="text-center p-8">
-          <CheckCircle className="w-16 h-16 text-yellow-500 mx-auto mb-4" />
+          <CheckCircle className="w-16 h-16 text-gray-500 mx-auto mb-4" />
           <h1 className="text-2xl font-bold text-gray-900 mb-2">Roadmap Created Successfully!</h1>
           <p className="text-gray-600 mb-4">Please wait for your roadmap to be approved by your mentor.</p>
-          <div className="animate-spin w-6 h-6 border-2 border-yellow-500 border-t-transparent rounded-full mx-auto"></div>
+          <div className="animate-spin w-6 h-6 border-2 border-gray-500 border-t-transparent rounded-full mx-auto"></div>
         </div>
       </div>
     );
@@ -159,7 +159,7 @@ export default function RoadmapPage() {
               value={roadmapTitle}
               onChange={(e) => setRoadmapTitle(e.target.value)}
               placeholder="e.g., Full Stack Developer, Data Scientist, Mobile App Developer"
-              className="w-full px-3 lg:px-4 py-2 lg:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent text-sm lg:text-base"
+              className="w-full px-3 lg:px-4 py-2 lg:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm lg:text-base"
             />
           </div>
 
@@ -169,7 +169,7 @@ export default function RoadmapPage() {
               <h2 className="text-lg lg:text-xl font-semibold text-gray-900">Learning Phases</h2>
               <button
                 onClick={() => setIsCreatingPhase(true)}
-                className="flex items-center justify-center gap-2 px-3 lg:px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors text-sm lg:text-base"
+                className="flex items-center justify-center gap-2 px-3 lg:px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors text-sm lg:text-base"
               >
                 <Plus className="w-4 h-4" />
                 Add Phase
@@ -188,8 +188,8 @@ export default function RoadmapPage() {
                   {/* Phase card */}
                   <div className="flex items-start gap-3 lg:gap-4 mb-6 lg:mb-8">
                     {/* Timeline dot */}
-                    <div className="flex-shrink-0 w-10 h-10 lg:w-12 lg:h-12 bg-yellow-100 rounded-full flex items-center justify-center border-4 border-white shadow-sm">
-                      <span className="text-yellow-600 font-semibold text-xs lg:text-sm">{index + 1}</span>
+                    <div className="flex-shrink-0 w-10 h-10 lg:w-12 lg:h-12 bg-gray-100 rounded-full flex items-center justify-center border-4 border-white shadow-sm">
+                      <span className="text-gray-600 font-semibold text-xs lg:text-sm">{index + 1}</span>
                     </div>
 
                     {/* Phase content */}
@@ -198,7 +198,7 @@ export default function RoadmapPage() {
                         <h3 className="font-semibold text-gray-900 text-sm lg:text-base">{phase.title}</h3>
                         <button
                           onClick={() => handleRemovePhase(phase.id)}
-                          className="text-red-500 hover:text-red-700 text-xs lg:text-sm self-start"
+                          className="text-gray-500 hover:text-gray-700 text-xs lg:text-sm self-start"
                         >
                           Remove
                         </button>
@@ -233,7 +233,7 @@ export default function RoadmapPage() {
                       value={newPhase.title}
                       onChange={(e) => setNewPhase({ ...newPhase, title: e.target.value })}
                       placeholder="e.g., Learn React Fundamentals"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent text-sm lg:text-base"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm lg:text-base"
                     />
                   </div>
 
@@ -244,7 +244,7 @@ export default function RoadmapPage() {
                       onChange={(e) => setNewPhase({ ...newPhase, description: e.target.value })}
                       placeholder="Describe what will be covered in this phase"
                       rows={3}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent text-sm lg:text-base resize-none"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm lg:text-base resize-none"
                     />
                   </div>
 
@@ -256,7 +256,7 @@ export default function RoadmapPage() {
                         value={newPhase.duration}
                         onChange={(e) => setNewPhase({ ...newPhase, duration: e.target.value })}
                         placeholder="e.g., 4"
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent text-sm lg:text-base"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm lg:text-base"
                       />
                     </div>
                     <div>
@@ -264,7 +264,7 @@ export default function RoadmapPage() {
                       <select
                         value={newPhase.durationType}
                         onChange={(e) => setNewPhase({ ...newPhase, durationType: e.target.value as 'hours' | 'days' | 'weeks' })}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent text-sm lg:text-base"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm lg:text-base"
                       >
                         <option value="hours">Hours</option>
                         <option value="days">Days</option>
@@ -276,7 +276,7 @@ export default function RoadmapPage() {
                   <div className="flex flex-col sm:flex-row gap-3">
                     <button
                       onClick={handleAddPhase}
-                      className="px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors text-sm lg:text-base"
+                      className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors text-sm lg:text-base"
                     >
                       Add Phase
                     </button>
@@ -304,7 +304,7 @@ export default function RoadmapPage() {
             <button
               onClick={handleSubmitRoadmap}
               disabled={!roadmapTitle || phases.length === 0 || isSubmitting}
-              className="w-full sm:w-auto px-6 lg:px-8 py-2 lg:py-3 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2 text-sm lg:text-base"
+              className="w-full sm:w-auto px-6 lg:px-8 py-2 lg:py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2 text-sm lg:text-base"
             >
               {isSubmitting ? (
                 <>

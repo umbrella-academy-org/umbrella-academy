@@ -21,21 +21,21 @@ export default function ScheduledEvents({ userType }: ScheduledEventsProps) {
             title: 'Training Session - React Basics',
             time: '09:00 AM',
             type: 'training',
-            color: 'bg-blue-500'
+            color: 'bg-gray-500'
           },
           {
             id: 2,
             title: 'Student Progress Review',
             time: '02:30 PM',
             type: 'review',
-            color: 'bg-green-500'
+            color: 'bg-gray-500'
           },
           {
             id: 3,
             title: 'Weekly Team Meeting',
             time: '04:00 PM',
             type: 'meeting',
-            color: 'bg-purple-500'
+            color: 'bg-gray-500'
           }
         ];
       case 'mentor':
@@ -45,21 +45,21 @@ export default function ScheduledEvents({ userType }: ScheduledEventsProps) {
             title: 'Roadmap Review Session',
             time: '10:00 AM',
             type: 'review',
-            color: 'bg-green-500'
+            color: 'bg-gray-500'
           },
           {
             id: 2,
             title: 'Student Check-in Call',
             time: '01:00 PM',
             type: 'mentoring',
-            color: 'bg-blue-500'
+            color: 'bg-gray-500'
           },
           {
             id: 3,
             title: 'Course Planning Meeting',
             time: '03:30 PM',
             type: 'planning',
-            color: 'bg-orange-500'
+            color: 'bg-gray-500'
           }
         ];
       case 'student':
@@ -69,21 +69,21 @@ export default function ScheduledEvents({ userType }: ScheduledEventsProps) {
             title: 'JavaScript Fundamentals',
             time: '09:00 AM',
             type: 'lesson',
-            color: 'bg-blue-500'
+            color: 'bg-gray-500'
           },
           {
             id: 2,
             title: 'Mentor Check-in',
             time: '02:00 PM',
             type: 'mentoring',
-            color: 'bg-green-500'
+            color: 'bg-gray-500'
           },
           {
             id: 3,
             title: 'Project Submission',
             time: '05:00 PM',
             type: 'deadline',
-            color: 'bg-red-500'
+            color: 'bg-gray-500'
           }
         ];
       case 'field-admin':
@@ -93,21 +93,21 @@ export default function ScheduledEvents({ userType }: ScheduledEventsProps) {
             title: 'Field Performance Review',
             time: '10:00 AM',
             type: 'review',
-            color: 'bg-blue-500'
+            color: 'bg-gray-500'
           },
           {
             id: 2,
             title: 'Trainer Coordination Meeting',
             time: '02:30 PM',
             type: 'meeting',
-            color: 'bg-purple-500'
+            color: 'bg-gray-500'
           },
           {
             id: 3,
             title: 'Monthly Financial Report',
             time: '04:00 PM',
             type: 'report',
-            color: 'bg-yellow-500'
+            color: 'bg-gray-500'
           }
         ];
       case 'umbrella-admin':
@@ -117,21 +117,21 @@ export default function ScheduledEvents({ userType }: ScheduledEventsProps) {
             title: 'System Health Check',
             time: '09:00 AM',
             type: 'system',
-            color: 'bg-green-500'
+            color: 'bg-gray-500'
           },
           {
             id: 2,
             title: 'Fields Coordination Meeting',
             time: '01:00 PM',
             type: 'meeting',
-            color: 'bg-blue-500'
+            color: 'bg-gray-500'
           },
           {
             id: 3,
             title: 'Quarterly Board Review',
             time: '03:30 PM',
             type: 'review',
-            color: 'bg-purple-500'
+            color: 'bg-gray-500'
           }
         ];
       default:
@@ -141,21 +141,21 @@ export default function ScheduledEvents({ userType }: ScheduledEventsProps) {
             title: 'Team Standup Meeting',
             time: '09:00 AM',
             type: 'meeting',
-            color: 'bg-blue-500'
+            color: 'bg-gray-500'
           },
           {
             id: 2,
             title: 'Code Review Session',
             time: '02:30 PM',
             type: 'review',
-            color: 'bg-green-500'
+            color: 'bg-gray-500'
           },
           {
             id: 3,
             title: 'Client Presentation',
             time: '04:00 PM',
             type: 'presentation',
-            color: 'bg-purple-500'
+            color: 'bg-gray-500'
           }
         ];
     }
@@ -188,13 +188,13 @@ export default function ScheduledEvents({ userType }: ScheduledEventsProps) {
     >
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-3">
-          <div className={`p-2 bg-yellow-100 rounded-lg transition-all duration-300 ${isHovered ? 'scale-110 animate-pulse-glow' : ''
+          <div className={`p-2 bg-gray-100 rounded-lg transition-all duration-300 ${isHovered ? 'scale-110 animate-pulse-glow' : ''
             }`}>
-            <Bell className={`w-4 h-4 text-yellow-600 transition-all duration-300 ${isHovered ? 'animate-bounce-subtle' : ''
+            <Bell className={`w-4 h-4 text-gray-600 transition-all duration-300 ${isHovered ? 'animate-bounce-subtle' : ''
               }`} />
           </div>
           <div>
-            <h3 className={`text-sm sm:text-base font-semibold text-gray-900 transition-colors duration-200 ${isHovered ? 'text-yellow-600' : ''
+            <h3 className={`text-sm sm:text-base font-semibold text-gray-900 transition-colors duration-200 ${isHovered ? 'text-gray-600' : ''
               }`}>
               {getTitle()}
             </h3>
@@ -204,7 +204,7 @@ export default function ScheduledEvents({ userType }: ScheduledEventsProps) {
             </div>
           </div>
         </div>
-        <button className={`text-yellow-600 hover:text-yellow-700 text-xs font-medium flex items-center gap-1 transition-all duration-200 ${isHovered ? 'transform translate-x-1' : ''
+        <button className={`text-gray-600 hover:text-gray-700 text-xs font-medium flex items-center gap-1 transition-all duration-200 ${isHovered ? 'transform translate-x-1' : ''
           }`}>
           <span className="hidden sm:inline">Full calendar view</span>
           <span className="sm:hidden">View all</span>
@@ -223,7 +223,7 @@ export default function ScheduledEvents({ userType }: ScheduledEventsProps) {
           >
             <div className={`w-2 h-2 rounded-full ${event.color} group-hover:scale-150 transition-transform duration-200`}></div>
             <div className="flex-1 min-w-0">
-              <p className="text-xs font-medium text-gray-900 truncate group-hover:text-yellow-600 transition-colors">
+              <p className="text-xs font-medium text-gray-900 truncate group-hover:text-gray-600 transition-colors">
                 {event.title}
               </p>
               <div className="flex items-center gap-1 text-xs text-gray-500">
@@ -231,7 +231,7 @@ export default function ScheduledEvents({ userType }: ScheduledEventsProps) {
                 <span>{event.time}</span>
               </div>
             </div>
-            <ChevronRight className="w-3 h-3 text-gray-400 group-hover:text-yellow-600 group-hover:translate-x-1 transition-all duration-200" />
+            <ChevronRight className="w-3 h-3 text-gray-400 group-hover:text-gray-600 group-hover:translate-x-1 transition-all duration-200" />
           </div>
         ))}
       </div>
@@ -247,8 +247,8 @@ export default function ScheduledEvents({ userType }: ScheduledEventsProps) {
 
       {/* Notification Indicator */}
       {isHovered && (
-        <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-pulse-glow">
-          <div className="absolute inset-0 bg-red-500 rounded-full animate-ping"></div>
+        <div className="absolute -top-1 -right-1 w-3 h-3 bg-gray-500 rounded-full animate-pulse-glow">
+          <div className="absolute inset-0 bg-gray-500 rounded-full animate-ping"></div>
         </div>
       )}
     </div>

@@ -38,8 +38,8 @@ export default function TransactionsTable({ transactions }: TransactionsTablePro
     ),
     umbrellaShare: (
       <div className="flex items-center gap-2">
-        <DollarSign className="w-4 h-4 text-green-500" />
-        <span className="text-sm font-medium text-green-600">RWF {transaction.umbrellaShare.toLocaleString()}</span>
+        <DollarSign className="w-4 h-4 text-gray-500" />
+        <span className="text-sm font-medium text-gray-600">RWF {transaction.umbrellaShare.toLocaleString()}</span>
       </div>
     ),
     date: (
@@ -76,16 +76,16 @@ export default function TransactionsTable({ transactions }: TransactionsTablePro
     <div className="space-y-4">
       {/* Selected Actions */}
       {selectedTransactions.length > 0 && (
-        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+        <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
           <div className="flex items-center justify-between">
-            <span className="text-sm font-medium text-yellow-800">
+            <span className="text-sm font-medium text-gray-800">
               {selectedTransactions.length} transaction{selectedTransactions.length > 1 ? 's' : ''} selected
             </span>
             <div className="flex items-center gap-2">
               <button className="px-3 py-1.5 text-xs font-medium text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
                 Export Selected
               </button>
-              <button className="px-3 py-1.5 text-xs font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors">
+              <button className="px-3 py-1.5 text-xs font-medium text-white bg-gray-600 rounded-lg hover:bg-gray-700 transition-colors">
                 Generate Report
               </button>
             </div>

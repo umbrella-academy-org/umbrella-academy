@@ -37,10 +37,10 @@ export default function StudentProfilePage() {
         totalHours: 142,
         engagementScore: 88,
         skills: [
-            { name: 'React Architecture', level: 'Advanced', color: 'bg-blue-500' },
-            { name: 'Node.js Systems', level: 'Intermediate', color: 'bg-green-600' },
-            { name: 'TypeScript', level: 'Intermediate', color: 'bg-blue-600' },
-            { name: 'UI/UX Principles', level: 'Advanced', color: 'bg-purple-500' },
+            { name: 'React Architecture', level: 'Advanced', color: 'bg-gray-500' },
+            { name: 'Node.js Systems', level: 'Intermediate', color: 'bg-gray-600' },
+            { name: 'TypeScript', level: 'Intermediate', color: 'bg-gray-600' },
+            { name: 'UI/UX Principles', level: 'Advanced', color: 'bg-gray-500' },
         ],
         liveRoadmap: [
             { title: 'Core JavaScript', status: 'Completed', date: 'Oct 2024' },
@@ -79,12 +79,12 @@ export default function StudentProfilePage() {
                                     {user?.avatar ? (
                                         <Image src={user.avatar} alt="Avatar" width={128} height={128} className="w-full h-full object-cover rounded-lg" />
                                     ) : (
-                                        <div className="w-full h-full bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center text-white text-4xl font-black rounded-lg">
+                                        <div className="w-full h-full bg-gradient-to-br from-gray-400 to-gray-600 flex items-center justify-center text-white text-4xl font-black rounded-lg">
                                             {profileData.name.charAt(0)}
                                         </div>
                                     )}
                                 </div>
-                                <div className="absolute bottom-2 right-2 w-4 h-4 bg-green-500 border-2 border-white rounded-full" />
+                                <div className="absolute bottom-2 right-2 w-4 h-4 bg-gray-500 border-2 border-white rounded-full" />
                             </div>
 
                             <div className="flex-1 pb-2">
@@ -92,12 +92,12 @@ export default function StudentProfilePage() {
                                     <div className="space-y-1">
                                         <h1 className="text-3xl font-bold text-gray-900">{profileData.name}</h1>
                                         <div className="flex items-center gap-4 text-sm font-medium text-gray-500">
-                                            <span className="flex items-center gap-1.5"><MapPin className="w-4 h-4 text-yellow-600" /> {profileData.location}</span>
-                                            <span className="flex items-center gap-1.5 text-yellow-700 font-bold"><Zap className="w-4 h-4" /> {profileData.role}</span>
+                                            <span className="flex items-center gap-1.5"><MapPin className="w-4 h-4 text-gray-600" /> {profileData.location}</span>
+                                            <span className="flex items-center gap-1.5 text-gray-700 font-bold"><Zap className="w-4 h-4" /> {profileData.role}</span>
                                         </div>
                                     </div>
                                     <div className="flex items-center gap-3">
-                                        <button className="px-5 py-2.5 bg-yellow-600 text-white font-bold rounded-lg hover:bg-yellow-700 transition-all shadow-md active:scale-95 text-sm">
+                                        <button className="px-5 py-2.5 bg-gray-600 text-white font-bold rounded-lg hover:bg-gray-700 transition-all shadow-md active:scale-95 text-sm">
                                             Edit Details
                                         </button>
                                         <button className="p-2.5 bg-white border border-gray-200 text-gray-600 rounded-lg hover:bg-gray-50 shadow-sm transition-all">
@@ -111,10 +111,10 @@ export default function StudentProfilePage() {
 
                     {/* Stats Grid - Rounded LG */}
                     <div className="max-w-[1400px] mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6 mt-10">
-                        <SimpleStat icon={<Video className="w-5 h-5" />} label="Live Sessions" value={profileData.sessionsAttended} color="text-blue-600" />
-                        <SimpleStat icon={<Users className="w-5 h-5" />} label="Attendance" value={profileData.attendanceRate} color="text-green-600" />
-                        <SimpleStat icon={<Clock className="w-5 h-5" />} label="Live Hours" value={profileData.totalHours} color="text-orange-600" />
-                        <SimpleStat icon={<TrendingUp className="w-5 h-5" />} label="Engagement" value={`${profileData.engagementScore}%`} color="text-purple-600" />
+                        <SimpleStat icon={<Video className="w-5 h-5" />} label="Live Sessions" value={profileData.sessionsAttended} color="text-gray-600" />
+                        <SimpleStat icon={<Users className="w-5 h-5" />} label="Attendance" value={profileData.attendanceRate} color="text-gray-600" />
+                        <SimpleStat icon={<Clock className="w-5 h-5" />} label="Live Hours" value={profileData.totalHours} color="text-gray-600" />
+                        <SimpleStat icon={<TrendingUp className="w-5 h-5" />} label="Engagement" value={`${profileData.engagementScore}%`} color="text-gray-600" />
                     </div>
 
                     <div className="max-w-[1400px] mx-auto p-6 grid grid-cols-1 lg:grid-cols-3 gap-8 pb-20">
@@ -126,7 +126,7 @@ export default function StudentProfilePage() {
                                     <button
                                         key={tab}
                                         onClick={() => setActiveTab(tab)}
-                                        className={`w-full flex items-center justify-between p-3.5 rounded-lg text-sm font-bold transition-all ${activeTab === tab ? 'bg-yellow-50 text-yellow-800' : 'text-gray-500 hover:bg-gray-50'}`}
+                                        className={`w-full flex items-center justify-between p-3.5 rounded-lg text-sm font-bold transition-all ${activeTab === tab ? 'bg-gray-50 text-gray-800' : 'text-gray-500 hover:bg-gray-50'}`}
                                     >
                                         <span className="flex items-center gap-3">
                                             {tab === 'Overview' && <Layout className="w-4.5 h-4.5" />}
@@ -159,13 +159,13 @@ export default function StudentProfilePage() {
                             <div className="bg-white rounded-lg border border-gray-100 shadow-sm p-8 space-y-8">
                                 <div className="flex items-center justify-between">
                                     <h3 className="text-xl font-bold text-gray-900">Live Session Roadmap</h3>
-                                    <span className="text-[10px] font-black text-yellow-600  bg-yellow-50 px-2.5 py-1 rounded-full border border-yellow-100">Active Field: {profileData.field}</span>
+                                    <span className="text-[10px] font-black text-gray-600  bg-gray-50 px-2.5 py-1 rounded-full border border-gray-100">Active Field: {profileData.field}</span>
                                 </div>
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                     {profileData.liveRoadmap.map((item, i) => (
-                                        <div key={i} className={`p-5 rounded-lg border ${item.status === 'Completed' ? 'bg-green-50/30 border-green-100' : item.status === 'In Progress' ? 'bg-blue-50/30 border-blue-100' : 'bg-gray-50/30 border-gray-100'}`}>
+                                        <div key={i} className={`p-5 rounded-lg border ${item.status === 'Completed' ? 'bg-gray-50/30 border-gray-100' : item.status === 'In Progress' ? 'bg-gray-50/30 border-gray-100' : 'bg-gray-50/30 border-gray-100'}`}>
                                             <div className="flex items-center justify-between mb-3">
-                                                <span className={`text-[9px] font-black  px-2 py-0.5 rounded ${item.status === 'Completed' ? 'bg-green-100 text-green-700' : item.status === 'In Progress' ? 'bg-blue-100 text-blue-700' : 'bg-gray-200 text-gray-600'}`}>{item.status}</span>
+                                                <span className={`text-[9px] font-black  px-2 py-0.5 rounded ${item.status === 'Completed' ? 'bg-gray-100 text-gray-700' : item.status === 'In Progress' ? 'bg-gray-100 text-gray-700' : 'bg-gray-200 text-gray-600'}`}>{item.status}</span>
                                                 <Clock className="w-3.5 h-3.5 text-gray-400" />
                                             </div>
                                             <h4 className="font-bold text-gray-800 text-sm mb-1">{item.title}</h4>
@@ -216,15 +216,15 @@ export default function StudentProfilePage() {
                                 <div className="flex gap-10">
                                     <div className="text-center">
                                         <p className="text-[10px] font-black text-gray-500   mb-1">Time Slot</p>
-                                        <p className="text-sm font-bold text-yellow-400">{studentUser?.availability?.preferredTimeSlots ? studentUser.availability.preferredTimeSlots[0] : 'None'}</p>
+                                        <p className="text-sm font-bold text-gray-400">{studentUser?.availability?.preferredTimeSlots ? studentUser.availability.preferredTimeSlots[0] : 'None'}</p>
                                     </div>
                                     <div className="text-center">
                                         <p className="text-[10px] font-black text-gray-500   mb-1">Weekly Commitment</p>
-                                        <p className="text-sm font-bold text-yellow-400">{studentUser?.availability?.weeklyAvailableHours || 20} Hours</p>
+                                        <p className="text-sm font-bold text-gray-400">{studentUser?.availability?.weeklyAvailableHours || 20} Hours</p>
                                     </div>
                                     <div className="text-center">
                                         <p className="text-[10px] font-black text-gray-500   mb-1">Learning Pace</p>
-                                        <p className="text-sm font-bold text-yellow-400">{studentUser?.learningPreferences?.pace || 'Standard'}</p>
+                                        <p className="text-sm font-bold text-gray-400">{studentUser?.learningPreferences?.pace || 'Standard'}</p>
                                     </div>
                                 </div>
                             </div>
@@ -238,8 +238,8 @@ export default function StudentProfilePage() {
 
 function SimpleStat({ icon, label, value, color }: { icon: React.ReactNode, label: string, value: string | number, color: string }) {
     return (
-        <div className="p-6 bg-white rounded-lg border border-gray-100 shadow-sm flex flex-col items-center justify-center text-center space-y-2 group hover:border-yellow-200 transition-all">
-            <div className={`p-2.5 rounded-lg bg-gray-50 group-hover:bg-yellow-50 transition-colors ${color}`}>
+        <div className="p-6 bg-white rounded-lg border border-gray-100 shadow-sm flex flex-col items-center justify-center text-center space-y-2 group hover:border-gray-200 transition-all">
+            <div className={`p-2.5 rounded-lg bg-gray-50 group-hover:bg-gray-50 transition-colors ${color}`}>
                 {icon}
             </div>
             <p className="text-[10px] font-black text-gray-400  ">{label}</p>
@@ -250,7 +250,7 @@ function SimpleStat({ icon, label, value, color }: { icon: React.ReactNode, labe
 
 function SocialLink({ icon }: { icon: React.ReactNode }) {
     return (
-        <button className="p-2.5 bg-gray-50 text-gray-400 rounded-lg border border-gray-100 hover:bg-yellow-50 hover:text-yellow-600 transition-all active:scale-95">
+        <button className="p-2.5 bg-gray-50 text-gray-400 rounded-lg border border-gray-100 hover:bg-gray-50 hover:text-gray-600 transition-all active:scale-95">
             {icon}
         </button>
     );

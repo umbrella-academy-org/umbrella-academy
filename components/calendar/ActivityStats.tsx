@@ -9,26 +9,26 @@ export default function ActivityStats() {
       title: "Today's Activity",
       value: "Javascript Env Setup",
       status: "In Progress",
-      color: "text-orange-600"
+      color: "text-gray-600"
     },
     {
       icon: <Clock className="w-6 h-6" />,
       title: "Time Remaining For Mentorship",
       value: "8 Months",
       progress: 75,
-      color: "text-blue-600"
+      color: "text-gray-600"
     },
     {
       icon: <Users className="w-6 h-6" />,
       title: "Attendance Score",
       value: "30/40",
-      color: "text-green-600"
+      color: "text-gray-600"
     },
     {
       icon: <Target className="w-6 h-6" />,
       title: "Missed Sessions",
       value: "2",
-      color: "text-red-600"
+      color: "text-gray-600"
     }
   ];
 
@@ -47,14 +47,14 @@ export default function ActivityStats() {
             <p className="text-lg font-bold text-gray-900 mb-2">{stat.value}</p>
             
             {stat.status && (
-              <span className="text-xs text-orange-600 font-medium">{stat.status}</span>
+              <span className="text-xs text-gray-600 font-medium">{stat.status}</span>
             )}
             
             {stat.progress && (
               <div className="mt-2">
                 <div className="w-full bg-gray-200 rounded-full h-2">
                   <div 
-                    className="bg-blue-500 h-2 rounded-full transition-all duration-300" 
+                    className="bg-gray-500 h-2 rounded-full transition-all duration-300" 
                     style={{ width: `${stat.progress}%` }}
                   ></div>
                 </div>

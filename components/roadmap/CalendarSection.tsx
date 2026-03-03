@@ -78,7 +78,7 @@ export default function CalendarSection({ selectedDateRange, onDateRangeChange }
           key={day}
           className={`w-8 h-8 text-xs rounded-full transition-colors flex items-center justify-center ${
             isSelected
-              ? 'bg-yellow-600 text-white font-medium'
+              ? 'bg-gray-600 text-white font-medium'
               : 'text-gray-700 hover:bg-gray-100'
           }`}
         >
@@ -115,7 +115,7 @@ export default function CalendarSection({ selectedDateRange, onDateRangeChange }
               <p className="text-xs text-gray-500">2 Activities Pending</p>
             </div>
           </div>
-          <button className="text-yellow-600 hover:text-yellow-700 text-xs font-medium flex items-center gap-1">
+          <button className="text-gray-600 hover:text-gray-700 text-xs font-medium flex items-center gap-1">
             Edit
             <Edit className="w-3 h-3" />
           </button>

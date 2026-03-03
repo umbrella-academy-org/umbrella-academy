@@ -27,8 +27,8 @@ export default function FieldsTable({ fields }: FieldsTableProps) {
     id: field.id,
     field: (
       <div className="flex items-center">
-        <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3">
-          <Building2 className="w-5 h-5 text-blue-600" />
+        <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mr-3">
+          <Building2 className="w-5 h-5 text-gray-600" />
         </div>
         <div>
           <div className="text-sm font-medium text-gray-900">{field.name}</div>
@@ -51,21 +51,21 @@ export default function FieldsTable({ fields }: FieldsTableProps) {
     ),
     revenue: (
       <div className="flex items-center gap-2">
-        <DollarSign className="w-4 h-4 text-green-500" />
+        <DollarSign className="w-4 h-4 text-gray-500" />
         <span className="text-sm font-medium text-gray-900">RWF {field.revenue.toLocaleString()}</span>
       </div>
     ),
     status: (
       <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${field.status === 'active'
-          ? 'bg-green-100 text-green-800'
-          : 'bg-yellow-100 text-yellow-800'
+          ? 'bg-gray-100 text-gray-800'
+          : 'bg-gray-100 text-gray-800'
         }`}>
         {field.status}
       </span>
     ),
     actions: (
       <div className="text-sm font-medium">
-        <button className="text-yellow-600 hover:text-yellow-700 mr-3">
+        <button className="text-gray-600 hover:text-gray-700 mr-3">
           View Details
         </button>
         <button className="text-gray-600 hover:text-gray-700">
@@ -103,16 +103,16 @@ export default function FieldsTable({ fields }: FieldsTableProps) {
     <div className="space-y-4">
       {/* Selected Actions */}
       {selectedFields.length > 0 && (
-        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+        <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
           <div className="flex items-center justify-between">
-            <span className="text-sm font-medium text-yellow-800">
+            <span className="text-sm font-medium text-gray-800">
               {selectedFields.length} field{selectedFields.length > 1 ? 's' : ''} selected
             </span>
             <div className="flex items-center gap-2">
               <button className="px-3 py-1.5 text-xs font-medium text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
                 Export Data
               </button>
-              <button className="px-3 py-1.5 text-xs font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition-colors">
+              <button className="px-3 py-1.5 text-xs font-medium text-white bg-gray-600 rounded-lg hover:bg-gray-700 transition-colors">
                 Suspend Selected
               </button>
             </div>

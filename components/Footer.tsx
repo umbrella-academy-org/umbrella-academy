@@ -13,16 +13,16 @@ export function Footer() {
               Structured learning platform connecting students with expert trainers and mentors across multiple fields.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="w-10 h-10 bg-gray-900 rounded-lg flex items-center justify-center hover:bg-[#ca8a04] transition-colors">
+              <a href="#" className="w-10 h-10 bg-gray-900 rounded-lg flex items-center justify-center hover:bg-[#525252] transition-colors">
                 <Facebook className="w-5 h-5" />
               </a>
-              <a href="#" className="w-10 h-10 bg-gray-900 rounded-lg flex items-center justify-center hover:bg-[#ca8a04] transition-colors">
+              <a href="#" className="w-10 h-10 bg-gray-900 rounded-lg flex items-center justify-center hover:bg-[#525252] transition-colors">
                 <Twitter className="w-5 h-5" />
               </a>
-              <a href="#" className="w-10 h-10 bg-gray-900 rounded-lg flex items-center justify-center hover:bg-[#ca8a04] transition-colors">
+              <a href="#" className="w-10 h-10 bg-gray-900 rounded-lg flex items-center justify-center hover:bg-[#525252] transition-colors">
                 <Linkedin className="w-5 h-5" />
               </a>
-              <a href="#" className="w-10 h-10 bg-gray-900 rounded-lg flex items-center justify-center hover:bg-[#ca8a04] transition-colors">
+              <a href="#" className="w-10 h-10 bg-gray-900 rounded-lg flex items-center justify-center hover:bg-[#525252] transition-colors">
                 <Instagram className="w-5 h-5" />
               </a>
             </div>
@@ -33,22 +33,22 @@ export function Footer() {
             <h3 className="text-white font-bold mb-4">Quick Links</h3>
             <ul className="space-y-3">
               <li>
-                <a href="#" className="text-sm hover:text-[#fbbf24] transition-colors">About Us</a>
+                <a href="#" className="text-sm hover:text-[#737373] transition-colors">About Us</a>
               </li>
               <li>
-                <a href="#features" className="text-sm hover:text-[#fbbf24] transition-colors">Features</a>
+                <a href="#features" className="text-sm hover:text-[#737373] transition-colors">Features</a>
               </li>
               <li>
-                <a href="#how-it-works" className="text-sm hover:text-[#fbbf24] transition-colors">How It Works</a>
+                <a href="#how-it-works" className="text-sm hover:text-[#737373] transition-colors">How It Works</a>
               </li>
               <li>
-                <a href="#programs" className="text-sm hover:text-[#fbbf24] transition-colors">Programs</a>
+                <a href="#programs" className="text-sm hover:text-[#737373] transition-colors">Programs</a>
               </li>
               <li>
-                <a href="/blog" className="text-sm hover:text-[#fbbf24] transition-colors">Blog</a>
+                <a href="/blog" className="text-sm hover:text-[#737373] transition-colors">Blog</a>
               </li>
               <li>
-                <a href="#" className="text-sm hover:text-[#fbbf24] transition-colors">Pricing</a>
+                <a href="#" className="text-sm hover:text-[#737373] transition-colors">Pricing</a>
               </li>
             </ul>
           </div>
@@ -58,19 +58,19 @@ export function Footer() {
             <h3 className="text-white font-bold mb-4">Programs</h3>
             <ul className="space-y-3">
               <li>
-                <a href="#" className="text-sm hover:text-[#fbbf24] transition-colors">Technology & IT</a>
+                <a href="#" className="text-sm hover:text-[#737373] transition-colors">Technology & IT</a>
               </li>
               <li>
-                <a href="#" className="text-sm hover:text-[#fbbf24] transition-colors">Business & Management</a>
+                <a href="#" className="text-sm hover:text-[#737373] transition-colors">Business & Management</a>
               </li>
               <li>
-                <a href="#" className="text-sm hover:text-[#fbbf24] transition-colors">Creative Arts</a>
+                <a href="#" className="text-sm hover:text-[#737373] transition-colors">Creative Arts</a>
               </li>
               <li>
-                <a href="#" className="text-sm hover:text-[#fbbf24] transition-colors">Design & UX</a>
+                <a href="#" className="text-sm hover:text-[#737373] transition-colors">Design & UX</a>
               </li>
               <li>
-                <a href="#" className="text-sm hover:text-[#fbbf24] transition-colors">Data Science</a>
+                <a href="#" className="text-sm hover:text-[#737373] transition-colors">Data Science</a>
               </li>
             </ul>
           </div>
@@ -80,15 +80,15 @@ export function Footer() {
             <h3 className="text-white font-bold mb-4">Contact Us</h3>
             <ul className="space-y-3">
               <li className="flex items-start space-x-3">
-                <MapPin className="w-5 h-5 text-[#fbbf24] shrink-0 mt-0.5" />
+                <MapPin className="w-5 h-5 text-[#737373] shrink-0 mt-0.5" />
                 <span className="text-sm">123 Learning Street, Education City, EC 12345</span>
               </li>
               <li className="flex items-start space-x-3">
-                <Phone className="w-5 h-5 text-[#fbbf24] shrink-0 mt-0.5" />
+                <Phone className="w-5 h-5 text-[#737373] shrink-0 mt-0.5" />
                 <span className="text-sm">+1 (555) 123-4567</span>
               </li>
               <li className="flex items-start space-x-3">
-                <Mail className="w-5 h-5 text-[#fbbf24] shrink-0 mt-0.5" />
+                <Mail className="w-5 h-5 text-[#737373] shrink-0 mt-0.5" />
                 <span className="text-sm">hello@umbrellaacademy.com</span>
               </li>
             </ul>
@@ -102,9 +102,9 @@ export function Footer() {
               © 2026 Umbrella Academy LMS. All rights reserved.
             </div>
             <div className="flex space-x-6 text-sm">
-              <a href="#" className="text-gray-400 hover:text-[#fbbf24] transition-colors">Privacy Policy</a>
-              <a href="#" className="text-gray-400 hover:text-[#fbbf24] transition-colors">Terms of Service</a>
-              <a href="#" className="text-gray-400 hover:text-[#fbbf24] transition-colors">Cookie Policy</a>
+              <a href="#" className="text-gray-400 hover:text-[#737373] transition-colors">Privacy Policy</a>
+              <a href="#" className="text-gray-400 hover:text-[#737373] transition-colors">Terms of Service</a>
+              <a href="#" className="text-gray-400 hover:text-[#737373] transition-colors">Cookie Policy</a>
             </div>
           </div>
         </div>

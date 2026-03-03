@@ -26,8 +26,8 @@ export default function UsersTable({ selectedTab, data }: UsersTableProps) {
             ...baseData,
             student: (
               <div className="flex items-center">
-                <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3">
-                  <GraduationCap className="w-5 h-5 text-blue-600" />
+                <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mr-3">
+                  <GraduationCap className="w-5 h-5 text-gray-600" />
                 </div>
                 <div>
                   <div className="text-sm font-medium text-gray-900">{user.name}</div>
@@ -40,16 +40,16 @@ export default function UsersTable({ selectedTab, data }: UsersTableProps) {
             field: user.fieldName || user.field || user.wingName || user.wing || 'Unassigned',
             trainer: user.trainerName || 'Unassigned',
             status: (
-              <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${user.status === 'active' ? 'bg-green-100 text-green-800' :
+              <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${user.status === 'active' ? 'bg-gray-100 text-gray-800' :
                   user.status === 'inactive' ? 'bg-gray-100 text-gray-800' :
-                    'bg-yellow-100 text-yellow-800'
+                    'bg-gray-100 text-gray-800'
                 }`}>
                 {user.status}
               </span>
             ),
             actions: (
               <div className="text-sm font-medium">
-                <button className="text-yellow-600 hover:text-yellow-700 mr-3">View</button>
+                <button className="text-gray-600 hover:text-gray-700 mr-3">View</button>
                 <button className="text-gray-600 hover:text-gray-700">Edit</button>
               </div>
             )
@@ -60,8 +60,8 @@ export default function UsersTable({ selectedTab, data }: UsersTableProps) {
             ...baseData,
             trainer: (
               <div className="flex items-center">
-                <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mr-3">
-                  <User className="w-5 h-5 text-green-600" />
+                <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mr-3">
+                  <User className="w-5 h-5 text-gray-600" />
                 </div>
                 <div>
                   <div className="text-sm font-medium text-gray-900">{user.name}</div>
@@ -74,16 +74,16 @@ export default function UsersTable({ selectedTab, data }: UsersTableProps) {
             capacity: `${user.capacity || user.students || 0} students`,
             experience: `${user.experience || 0}`,
             status: (
-              <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${user.status === 'active' ? 'bg-green-100 text-green-800' :
+              <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${user.status === 'active' ? 'bg-gray-100 text-gray-800' :
                   user.status === 'inactive' ? 'bg-gray-100 text-gray-800' :
-                    'bg-yellow-100 text-yellow-800'
+                    'bg-gray-100 text-gray-800'
                 }`}>
                 {user.status}
               </span>
             ),
             actions: (
               <div className="text-sm font-medium">
-                <button className="text-yellow-600 hover:text-yellow-700 mr-3">View</button>
+                <button className="text-gray-600 hover:text-gray-700 mr-3">View</button>
                 <button className="text-gray-600 hover:text-gray-700">Edit</button>
               </div>
             )
@@ -94,8 +94,8 @@ export default function UsersTable({ selectedTab, data }: UsersTableProps) {
             ...baseData,
             mentor: (
               <div className="flex items-center">
-                <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center mr-3">
-                  <Users className="w-5 h-5 text-purple-600" />
+                <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mr-3">
+                  <Users className="w-5 h-5 text-gray-600" />
                 </div>
                 <div>
                   <div className="text-sm font-medium text-gray-900">{user.name}</div>
@@ -108,16 +108,16 @@ export default function UsersTable({ selectedTab, data }: UsersTableProps) {
             students: `${user.studentCount || user.students || 0}/${user.maxStudents || 25}`,
             experience: `${user.experience || 0}`,
             status: (
-              <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${user.status === 'active' ? 'bg-green-100 text-green-800' :
+              <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${user.status === 'active' ? 'bg-gray-100 text-gray-800' :
                   user.status === 'inactive' ? 'bg-gray-100 text-gray-800' :
-                    'bg-yellow-100 text-yellow-800'
+                    'bg-gray-100 text-gray-800'
                 }`}>
                 {user.status}
               </span>
             ),
             actions: (
               <div className="text-sm font-medium">
-                <button className="text-yellow-600 hover:text-yellow-700 mr-3">View</button>
+                <button className="text-gray-600 hover:text-gray-700 mr-3">View</button>
                 <button className="text-gray-600 hover:text-gray-700">Edit</button>
               </div>
             )
@@ -128,8 +128,8 @@ export default function UsersTable({ selectedTab, data }: UsersTableProps) {
             ...baseData,
             administrator: (
               <div className="flex items-center">
-                <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center mr-3">
-                  <Shield className="w-5 h-5 text-red-600" />
+                <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mr-3">
+                  <Shield className="w-5 h-5 text-gray-600" />
                 </div>
                 <div>
                   <div className="text-sm font-medium text-gray-900">{user.name}</div>
@@ -142,16 +142,16 @@ export default function UsersTable({ selectedTab, data }: UsersTableProps) {
             permissions: user.permissions || 'Standard',
             joinDate: user.joinDate || 'N/A',
             status: (
-              <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${user.status === 'active' ? 'bg-green-100 text-green-800' :
+              <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${user.status === 'active' ? 'bg-gray-100 text-gray-800' :
                   user.status === 'inactive' ? 'bg-gray-100 text-gray-800' :
-                    'bg-yellow-100 text-yellow-800'
+                    'bg-gray-100 text-gray-800'
                 }`}>
                 {user.status}
               </span>
             ),
             actions: (
               <div className="text-sm font-medium">
-                <button className="text-yellow-600 hover:text-yellow-700 mr-3">View</button>
+                <button className="text-gray-600 hover:text-gray-700 mr-3">View</button>
                 <button className="text-gray-600 hover:text-gray-700">Edit</button>
               </div>
             )
@@ -231,16 +231,16 @@ export default function UsersTable({ selectedTab, data }: UsersTableProps) {
     <div className="space-y-4">
       {/* Selected Actions */}
       {selectedUsers.length > 0 && (
-        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+        <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
           <div className="flex items-center justify-between">
-            <span className="text-sm font-medium text-yellow-800">
+            <span className="text-sm font-medium text-gray-800">
               {selectedUsers.length} {selectedTab.slice(0, -1)}{selectedUsers.length > 1 ? 's' : ''} selected
             </span>
             <div className="flex items-center gap-2">
               <button className="px-3 py-1.5 text-xs font-medium text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
                 Send Message
               </button>
-              <button className="px-3 py-1.5 text-xs font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition-colors">
+              <button className="px-3 py-1.5 text-xs font-medium text-white bg-gray-600 rounded-lg hover:bg-gray-700 transition-colors">
                 Suspend Selected
               </button>
             </div>

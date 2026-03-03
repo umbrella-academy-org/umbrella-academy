@@ -91,7 +91,7 @@ export default function StudentFeedbackPage() {
                         <select
                           value={feedbackType}
                           onChange={(e) => setFeedbackType(e.target.value)}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent"
                         >
                           <option value="general">General Feedback</option>
                           <option value="trainer">Trainer Experience</option>
@@ -108,7 +108,7 @@ export default function StudentFeedbackPage() {
                         <select
                           value={rating}
                           onChange={(e) => setRating(Number(e.target.value))}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent"
                         >
                           <option value={5}>⭐⭐⭐⭐⭐ Excellent</option>
                           <option value={4}>⭐⭐⭐⭐ Good</option>
@@ -128,7 +128,7 @@ export default function StudentFeedbackPage() {
                         value={subject}
                         onChange={(e) => setSubject(e.target.value)}
                         placeholder="Brief summary of your feedback"
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent"
                         required
                       />
                     </div>
@@ -142,7 +142,7 @@ export default function StudentFeedbackPage() {
                         onChange={(e) => setFeedback(e.target.value)}
                         placeholder="Please share your thoughts, suggestions, or experiences..."
                         rows={6}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent"
                         required
                       />
                     </div>
@@ -151,7 +151,7 @@ export default function StudentFeedbackPage() {
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="px-6 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="px-6 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         {isSubmitting ? 'Submitting...' : 'Submit Feedback'}
                       </button>
@@ -179,14 +179,14 @@ export default function StudentFeedbackPage() {
                   <h3 className="font-semibold text-gray-900 mb-3">Recent Improvements</h3>
                   <div className="space-y-2 text-sm">
                     <div className="flex items-start gap-2">
-                      <div className="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
+                      <div className="w-2 h-2 bg-gray-500 rounded-full mt-2"></div>
                       <div>
                         <p className="font-medium text-gray-900">Enhanced Live Sessions</p>
                         <p className="text-gray-600">Based on your feedback about video quality</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-2">
-                      <div className="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
+                      <div className="w-2 h-2 bg-gray-500 rounded-full mt-2"></div>
                       <div>
                         <p className="font-medium text-gray-900">Better Roadmap Navigation</p>
                         <p className="text-gray-600">Improved based on user suggestions</p>
@@ -195,14 +195,14 @@ export default function StudentFeedbackPage() {
                   </div>
                 </div>
 
-                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
                   <div className="flex items-start gap-2">
-                    <svg className="w-5 h-5 text-yellow-600 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5 text-gray-600 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     <div>
-                      <p className="text-sm font-medium text-yellow-800">Anonymous Feedback</p>
-                      <p className="text-sm text-yellow-700">Your feedback is anonymous and helps improve the platform for everyone.</p>
+                      <p className="text-sm font-medium text-gray-800">Anonymous Feedback</p>
+                      <p className="text-sm text-gray-700">Your feedback is anonymous and helps improve the platform for everyone.</p>
                     </div>
                   </div>
                 </div>

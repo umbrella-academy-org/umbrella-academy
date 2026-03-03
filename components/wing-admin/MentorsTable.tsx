@@ -30,8 +30,8 @@ export default function MentorsTable({ mentors }: MentorsTableProps) {
     id: mentor.id,
     mentor: (
       <div className="flex items-center">
-        <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center mr-3">
-          <User className="w-5 h-5 text-purple-600" />
+        <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mr-3">
+          <User className="w-5 h-5 text-gray-600" />
         </div>
         <div>
           <div className="text-sm font-medium text-gray-900">{mentor.name}</div>
@@ -42,7 +42,7 @@ export default function MentorsTable({ mentors }: MentorsTableProps) {
     expertise: (
       <div className="flex flex-wrap gap-1">
         {mentor.expertise.slice(0, 2).map((skill, index) => (
-          <span key={index} className="inline-flex px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full">
+          <span key={index} className="inline-flex px-2 py-1 text-xs font-medium bg-gray-100 text-gray-800 rounded-full">
             {skill}
           </span>
         ))}
@@ -60,7 +60,7 @@ export default function MentorsTable({ mentors }: MentorsTableProps) {
         </div>
         <div className="w-16 bg-gray-200 rounded-full h-1.5 mt-1">
           <div
-            className="bg-yellow-600 h-1.5 rounded-full"
+            className="bg-gray-600 h-1.5 rounded-full"
             style={{ width: `${(mentor.currentStudents / mentor.maxStudents) * 100}%` }}
           />
         </div>
@@ -69,7 +69,7 @@ export default function MentorsTable({ mentors }: MentorsTableProps) {
     performance: (
       <div>
         <div className="flex items-center gap-2">
-          <Star className="w-4 h-4 text-yellow-500 fill-current" />
+          <Star className="w-4 h-4 text-gray-500 fill-current" />
           <span className="text-sm font-medium text-gray-900">{mentor.rating}</span>
         </div>
         <div className="text-xs text-gray-500">
@@ -78,13 +78,13 @@ export default function MentorsTable({ mentors }: MentorsTableProps) {
       </div>
     ),
     status: (
-      <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+      <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-gray-100 text-gray-800">
         {mentor.status}
       </span>
     ),
     actions: (
       <div className="text-sm font-medium">
-        <button className="text-yellow-600 hover:text-yellow-700 mr-3">
+        <button className="text-gray-600 hover:text-gray-700 mr-3">
           View Details
         </button>
         <button className="text-gray-600 hover:text-gray-700">
@@ -121,16 +121,16 @@ export default function MentorsTable({ mentors }: MentorsTableProps) {
     <div className="space-y-4">
       {/* Selected Actions */}
       {selectedMentors.length > 0 && (
-        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+        <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
           <div className="flex items-center justify-between">
-            <span className="text-sm font-medium text-yellow-800">
+            <span className="text-sm font-medium text-gray-800">
               {selectedMentors.length} mentor{selectedMentors.length > 1 ? 's' : ''} selected
             </span>
             <div className="flex items-center gap-2">
               <button className="px-3 py-1.5 text-xs font-medium text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
                 Send Message
               </button>
-              <button className="px-3 py-1.5 text-xs font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition-colors">
+              <button className="px-3 py-1.5 text-xs font-medium text-white bg-gray-600 rounded-lg hover:bg-gray-700 transition-colors">
                 Deactivate Selected
               </button>
             </div>

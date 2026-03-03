@@ -7,29 +7,29 @@ export default function MentorNotificationStats() {
         {
             label: 'Pending Approvals',
             value: '5',
-            icon: <Map className="w-5 h-5 text-blue-600" />,
-            bgColor: 'bg-blue-50',
+            icon: <Map className="w-5 h-5 text-gray-600" />,
+            bgColor: 'bg-gray-50',
             description: 'Roadmaps awaiting review'
         },
         {
             label: 'New Submissions',
             value: '12',
-            icon: <CheckCircle className="w-5 h-5 text-green-600" />,
-            bgColor: 'bg-green-50',
+            icon: <CheckCircle className="w-5 h-5 text-gray-600" />,
+            bgColor: 'bg-gray-50',
             description: 'Sessions to be reviewed'
         },
         {
             label: 'Sync Requests',
             value: '3',
-            icon: <Clock className="w-5 h-5 text-purple-600" />,
-            bgColor: 'bg-purple-50',
+            icon: <Clock className="w-5 h-5 text-gray-600" />,
+            bgColor: 'bg-gray-50',
             description: 'Meeting invites this week'
         },
         {
             label: 'Avg. Response',
             value: '1.2h',
-            icon: <TrendingUp className="w-5 h-5 text-yellow-600" />,
-            bgColor: 'bg-yellow-50',
+            icon: <TrendingUp className="w-5 h-5 text-gray-600" />,
+            bgColor: 'bg-gray-50',
             description: 'Your mentoring speed'
         }
     ];

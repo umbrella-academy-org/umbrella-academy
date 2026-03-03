@@ -54,7 +54,7 @@ export default function ChooseCompanyPage() {
           <div className="text-center mb-16">
             {/* Logo */}
             <div className="mb-10">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-yellow-600 rounded-xl flex items-center justify-center shadow-xl shadow-yellow-600/20 mx-auto transform -rotate-6">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gray-600 rounded-xl flex items-center justify-center shadow-xl shadow-gray-600/20 mx-auto transform -rotate-6">
                 <svg className="w-10 h-10 sm:w-12 sm:h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" />
                 </svg>
@@ -80,8 +80,8 @@ export default function ChooseCompanyPage() {
                     key={company.id}
                     onClick={() => handleCompanySelect(company.id)}
                     className={`relative flex flex-col rounded-xl overflow-hidden transition-all duration-500 cursor-pointer group h-full ${isSelected
-                      ? 'bg-white border-2 border-yellow-600 shadow-2xl shadow-yellow-600/10 scale-[1.02]'
-                      : 'bg-white border border-slate-100 shadow-sm hover:shadow-2xl hover:border-yellow-200 hover:scale-[1.02]'
+                      ? 'bg-white border-2 border-gray-600 shadow-2xl shadow-gray-600/10 scale-[1.02]'
+                      : 'bg-white border border-slate-100 shadow-sm hover:shadow-2xl hover:border-gray-200 hover:scale-[1.02]'
                       }`}
                   >
                     {/* Featured Image Section */}
@@ -97,14 +97,14 @@ export default function ChooseCompanyPage() {
 
                       {/* Selection Badge */}
                       {isSelected && (
-                        <div className="absolute top-4 right-4 bg-yellow-600 text-white p-2 rounded-full shadow-lg animate-in zoom-in-50 duration-300">
+                        <div className="absolute top-4 right-4 bg-gray-600 text-white p-2 rounded-full shadow-lg animate-in zoom-in-50 duration-300">
                           <CheckCircle className="w-5 h-5" />
                         </div>
                       )}
 
                       {/* Industry Tag */}
                       <div className="absolute bottom-4 left-6">
-                        <span className="px-3 py-1 bg-white/90 backdrop-blur-md rounded-lg text-[10px] font-black   text-yellow-800 shadow-sm">
+                        <span className="px-3 py-1 bg-white/90 backdrop-blur-md rounded-lg text-[10px] font-black   text-gray-800 shadow-sm">
                           {company.fieldId.split('-')[0]}
                         </span>
                       </div>
@@ -113,7 +113,7 @@ export default function ChooseCompanyPage() {
                     {/* Content Section */}
                     <div className="p-8 flex flex-col flex-1">
                       <div className="mb-4">
-                        <h3 className={`text-xl font-black mb-2 transition-colors ${isSelected ? 'text-yellow-800' : 'text-slate-800'
+                        <h3 className={`text-xl font-black mb-2 transition-colors ${isSelected ? 'text-gray-800' : 'text-slate-800'
                           }`}>
                           {company.name}
                         </h3>
@@ -140,13 +140,13 @@ export default function ChooseCompanyPage() {
                             e.stopPropagation();
                             setViewingCompany(company);
                           }}
-                          className={`flex items-center gap-3 text-sm font-black transition-all group/btn ${isSelected ? 'text-yellow-600' : 'text-slate-400 group-hover:text-yellow-600'
+                          className={`flex items-center gap-3 text-sm font-black transition-all group/btn ${isSelected ? 'text-gray-600' : 'text-slate-400 group-hover:text-gray-600'
                             }`}
                         >
                           <span className="text-xs">View Profile</span>
                           <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${isSelected
-                            ? 'bg-yellow-600 text-white translate-x-1 shadow-lg shadow-yellow-600/20'
-                            : 'bg-slate-50 text-slate-400 group-hover/btn:bg-yellow-600 group-hover/btn:text-white group-hover/btn:translate-x-1 group-hover/btn:shadow-lg group-hover/btn:shadow-yellow-600/20'
+                            ? 'bg-gray-600 text-white translate-x-1 shadow-lg shadow-gray-600/20'
+                            : 'bg-slate-50 text-slate-400 group-hover/btn:bg-gray-600 group-hover/btn:text-white group-hover/btn:translate-x-1 group-hover/btn:shadow-lg group-hover/btn:shadow-gray-600/20'
                             }`}>
                             <ArrowRight className="w-4 h-4" />
                           </div>
@@ -158,7 +158,7 @@ export default function ChooseCompanyPage() {
               })}
             </div>
 
-            {error && <p className="mb-8 text-sm font-semibold text-red-500 text-center animate-bounce">{error}</p>}
+            {error && <p className="mb-8 text-sm font-semibold text-gray-500 text-center animate-bounce">{error}</p>}
 
             {/* Main Action Call */}
             <div className="flex flex-col items-center gap-8">
@@ -166,8 +166,8 @@ export default function ChooseCompanyPage() {
                 type="submit"
                 disabled={!selectedCompanyId}
                 className={`w-full max-w-sm py-3 px-8 rounded-lg   transition-all duration-300 transform active:scale-95 ${selectedCompanyId
-                  ? 'bg-yellow-600 text-white shadow-xl shadow-yellow-600/20 hover:bg-yellow-700 hover:-translate-y-1'
-                  : 'bg-yellow-600 text-slate-500 cursor-not-allowed opacity-50'
+                  ? 'bg-gray-600 text-white shadow-xl shadow-gray-600/20 hover:bg-gray-700 hover:-translate-y-1'
+                  : 'bg-gray-600 text-slate-500 cursor-not-allowed opacity-50'
                   }`}
               >
                 Continue to Payment
@@ -175,9 +175,9 @@ export default function ChooseCompanyPage() {
 
               {/* Progress Stepper */}
               <div className="flex justify-center gap-3 items-center">
-                <div className="w-2 h-2 bg-yellow-600/30 rounded-full"></div>
-                <div className="w-8 h-2 bg-yellow-600 rounded-full transition-all duration-500"></div>
-                <div className="w-12 h-2 bg-yellow-600 rounded-full shadow-lg shadow-yellow-600/20"></div>
+                <div className="w-2 h-2 bg-gray-600/30 rounded-full"></div>
+                <div className="w-8 h-2 bg-gray-600 rounded-full transition-all duration-500"></div>
+                <div className="w-12 h-2 bg-gray-600 rounded-full shadow-lg shadow-gray-600/20"></div>
                 <div className="w-2 h-2 bg-slate-200 rounded-full"></div>
                 <div className="w-2 h-2 bg-slate-200 rounded-full"></div>
               </div>
@@ -214,7 +214,7 @@ export default function ChooseCompanyPage() {
                   handleCompanySelect(viewingCompany.id);
                   setViewingCompany(null);
                 }}
-                className="bg-yellow-600 text-white px-6 py-3 rounded-xl text-sm font-black   hover:bg-yellow-700 transition-all shadow-lg shadow-yellow-600/20 active:scale-95"
+                className="bg-gray-600 text-white px-6 py-3 rounded-xl text-sm font-black   hover:bg-gray-700 transition-all shadow-lg shadow-gray-600/20 active:scale-95"
               >
                 Enroll Now
               </button>
@@ -238,7 +238,7 @@ export default function ChooseCompanyPage() {
                   <div className="w-full px-6 lg:px-12 pb-16">
                     <div className="max-w-4xl">
                       <div className="flex items-center gap-3 mb-6">
-                        <span className="px-4 py-2 bg-yellow-600 text-white text-xs font-black   rounded-lg shadow-lg">
+                        <span className="px-4 py-2 bg-gray-600 text-white text-xs font-black   rounded-lg shadow-lg">
                           {viewingCompany.fieldId}
                         </span>
                         <a
@@ -267,19 +267,19 @@ export default function ChooseCompanyPage() {
                 {/* Quick Stats Bar */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20">
                   <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg transition-all">
-                    <div className="text-4xl font-black text-yellow-600 mb-2">98%</div>
+                    <div className="text-4xl font-black text-gray-600 mb-2">98%</div>
                     <div className="text-xs font-black text-slate-400  ">Success Rate</div>
                   </div>
                   <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg transition-all">
-                    <div className="text-4xl font-black text-yellow-600 mb-2">500+</div>
+                    <div className="text-4xl font-black text-gray-600 mb-2">500+</div>
                     <div className="text-xs font-black text-slate-400  ">Graduates</div>
                   </div>
                   <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg transition-all">
-                    <div className="text-4xl font-black text-yellow-600 mb-2">15+</div>
+                    <div className="text-4xl font-black text-gray-600 mb-2">15+</div>
                     <div className="text-xs font-black text-slate-400  ">Years Active</div>
                   </div>
                   <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg transition-all">
-                    <div className="text-4xl font-black text-yellow-600 mb-2">Day 1</div>
+                    <div className="text-4xl font-black text-gray-600 mb-2">Day 1</div>
                     <div className="text-xs font-black text-slate-400  ">Employment</div>
                   </div>
                 </div>
@@ -292,9 +292,9 @@ export default function ChooseCompanyPage() {
                     <section>
                       <div className="mb-8">
                         <h3 className="text-3xl font-black text-slate-900 mb-2">Our Mission</h3>
-                        <div className="w-20 h-1 bg-yellow-600 rounded-full"></div>
+                        <div className="w-20 h-1 bg-gray-600 rounded-full"></div>
                       </div>
-                      <div className="bg-gradient-to-br from-yellow-50 to-white p-8 rounded-2xl border border-yellow-100">
+                      <div className="bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl border border-gray-100">
                         <p className="text-lg text-slate-700 font-medium leading-relaxed mb-6">
                           To bridge the gap between academic learning and industry excellence by providing world-class training experiences that transform students into industry-ready professionals.
                         </p>
@@ -308,7 +308,7 @@ export default function ChooseCompanyPage() {
                     <section>
                       <div className="mb-8">
                         <h3 className="text-3xl font-black text-slate-900 mb-2">Core Values</h3>
-                        <div className="w-20 h-1 bg-yellow-600 rounded-full"></div>
+                        <div className="w-20 h-1 bg-gray-600 rounded-full"></div>
                       </div>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {[
@@ -317,9 +317,9 @@ export default function ChooseCompanyPage() {
                           { title: 'Integrity', desc: 'Building trust through transparency and ethical practices', icon: '🤝' },
                           { title: 'Growth', desc: 'Fostering continuous learning and development', icon: '📈' }
                         ].map((value, idx) => (
-                          <div key={idx} className="bg-white p-6 rounded-2xl border border-slate-200 hover:border-yellow-200 hover:shadow-lg transition-all group">
+                          <div key={idx} className="bg-white p-6 rounded-2xl border border-slate-200 hover:border-gray-200 hover:shadow-lg transition-all group">
                             <div className="text-4xl mb-4">{value.icon}</div>
-                            <h4 className="text-lg font-black text-slate-900 mb-2 group-hover:text-yellow-600 transition-colors">{value.title}</h4>
+                            <h4 className="text-lg font-black text-slate-900 mb-2 group-hover:text-gray-600 transition-colors">{value.title}</h4>
                             <p className="text-sm text-slate-600 font-medium leading-relaxed">{value.desc}</p>
                           </div>
                         ))}
@@ -330,17 +330,17 @@ export default function ChooseCompanyPage() {
                     <section>
                       <div className="mb-8">
                         <h3 className="text-3xl font-black text-slate-900 mb-2">Training Programs</h3>
-                        <div className="w-20 h-1 bg-yellow-600 rounded-full"></div>
+                        <div className="w-20 h-1 bg-gray-600 rounded-full"></div>
                       </div>
                       <div className="space-y-4">
                         {viewingCompany.teachingFocus.map((focus, idx) => (
-                          <div key={idx} className="bg-white p-6 rounded-2xl border border-slate-200 hover:border-yellow-200 hover:shadow-lg transition-all group">
+                          <div key={idx} className="bg-white p-6 rounded-2xl border border-slate-200 hover:border-gray-200 hover:shadow-lg transition-all group">
                             <div className="flex items-start gap-4">
-                              <div className="w-12 h-12 bg-yellow-100 rounded-xl flex items-center justify-center shrink-0 group-hover:bg-yellow-600 transition-all">
-                                <CheckCircle className="w-6 h-6 text-yellow-600 group-hover:text-white transition-colors" />
+                              <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center shrink-0 group-hover:bg-gray-600 transition-all">
+                                <CheckCircle className="w-6 h-6 text-gray-600 group-hover:text-white transition-colors" />
                               </div>
                               <div className="flex-1">
-                                <h4 className="text-lg font-black text-slate-900 mb-2 group-hover:text-yellow-600 transition-colors">{focus}</h4>
+                                <h4 className="text-lg font-black text-slate-900 mb-2 group-hover:text-gray-600 transition-colors">{focus}</h4>
                                 <p className="text-sm text-slate-600 font-medium leading-relaxed">
                                   Comprehensive training module designed to build expertise through practical application and real-world projects.
                                 </p>
@@ -359,17 +359,17 @@ export default function ChooseCompanyPage() {
                     <section>
                       <div className="mb-8">
                         <div className="flex items-center gap-3">
-                          <Trophy className="w-8 h-8 text-yellow-600" />
+                          <Trophy className="w-8 h-8 text-gray-600" />
                           <div>
                             <h3 className="text-3xl font-black text-slate-900">Achievements & Recognition</h3>
-                            <div className="w-20 h-1 bg-yellow-600 rounded-full mt-2"></div>
+                            <div className="w-20 h-1 bg-gray-600 rounded-full mt-2"></div>
                           </div>
                         </div>
                       </div>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {viewingCompany.achievements.map((item, idx) => (
-                          <div key={idx} className="flex items-start gap-4 p-5 bg-gradient-to-br from-yellow-50 to-white border border-yellow-100 rounded-2xl hover:shadow-lg transition-all group">
-                            <div className="w-10 h-10 bg-yellow-600 rounded-full flex items-center justify-center shrink-0 shadow-lg shadow-yellow-600/20">
+                          <div key={idx} className="flex items-start gap-4 p-5 bg-gradient-to-br from-gray-50 to-white border border-gray-100 rounded-2xl hover:shadow-lg transition-all group">
+                            <div className="w-10 h-10 bg-gray-600 rounded-full flex items-center justify-center shrink-0 shadow-lg shadow-gray-600/20">
                               <CheckCircle className="w-5 h-5 text-white" />
                             </div>
                             <span className="text-base font-bold text-slate-700 leading-tight group-hover:text-slate-900 transition-colors">{item}</span>
@@ -382,7 +382,7 @@ export default function ChooseCompanyPage() {
                     <section>
                       <div className="mb-8">
                         <h3 className="text-3xl font-black text-slate-900 mb-2">Facilities & Resources</h3>
-                        <div className="w-20 h-1 bg-yellow-600 rounded-full"></div>
+                        <div className="w-20 h-1 bg-gray-600 rounded-full"></div>
                       </div>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {[
@@ -393,7 +393,7 @@ export default function ChooseCompanyPage() {
                           { title: 'Project Studios', desc: 'Real-world simulation environments' },
                           { title: 'Networking Lounges', desc: 'Connect with industry professionals' }
                         ].map((facility, idx) => (
-                          <div key={idx} className="bg-white p-6 rounded-2xl border border-slate-200 hover:border-yellow-200 hover:shadow-lg transition-all">
+                          <div key={idx} className="bg-white p-6 rounded-2xl border border-slate-200 hover:border-gray-200 hover:shadow-lg transition-all">
                             <h4 className="text-base font-black text-slate-900 mb-2">{facility.title}</h4>
                             <p className="text-sm text-slate-600 font-medium leading-relaxed">{facility.desc}</p>
                           </div>
@@ -405,7 +405,7 @@ export default function ChooseCompanyPage() {
                     <section>
                       <div className="mb-8">
                         <h3 className="text-3xl font-black text-slate-900 mb-2">Student Success Stories</h3>
-                        <div className="w-20 h-1 bg-yellow-600 rounded-full"></div>
+                        <div className="w-20 h-1 bg-gray-600 rounded-full"></div>
                       </div>
                       <div className="space-y-6">
                         {[
@@ -418,7 +418,7 @@ export default function ChooseCompanyPage() {
                               &quot;{testimonial.quote}&quot;
                             </p>
                             <div className="flex items-center gap-4">
-                              <div className="w-12 h-12 bg-yellow-600 rounded-full flex items-center justify-center text-white font-black text-lg">
+                              <div className="w-12 h-12 bg-gray-600 rounded-full flex items-center justify-center text-white font-black text-lg">
                                 {testimonial.name.charAt(0)}
                               </div>
                               <div>
@@ -464,15 +464,15 @@ export default function ChooseCompanyPage() {
                           <div className="space-y-3">
                             <div className="flex justify-between items-center">
                               <span className="text-sm font-medium text-slate-300">Completion Rate</span>
-                              <span className="text-sm font-black text-yellow-500">96%</span>
+                              <span className="text-sm font-black text-gray-500">96%</span>
                             </div>
                             <div className="flex justify-between items-center">
                               <span className="text-sm font-medium text-slate-300">Job Placement</span>
-                              <span className="text-sm font-black text-yellow-500">98%</span>
+                              <span className="text-sm font-black text-gray-500">98%</span>
                             </div>
                             <div className="flex justify-between items-center">
                               <span className="text-sm font-medium text-slate-300">Avg. Starting Salary</span>
-                              <span className="text-sm font-black text-yellow-500">$75K+</span>
+                              <span className="text-sm font-black text-gray-500">$75K+</span>
                             </div>
                           </div>
                         </div>
@@ -483,7 +483,7 @@ export default function ChooseCompanyPage() {
                           handleCompanySelect(viewingCompany.id);
                           setViewingCompany(null);
                         }}
-                        className="w-full mt-8 bg-yellow-600 text-white py-4 rounded-xl text-sm font-black   hover:bg-yellow-700 transition-all shadow-xl shadow-yellow-600/20 active:scale-95"
+                        className="w-full mt-8 bg-gray-600 text-white py-4 rounded-xl text-sm font-black   hover:bg-gray-700 transition-all shadow-xl shadow-gray-600/20 active:scale-95"
                       >
                         Select This Partner
                       </button>
@@ -500,9 +500,9 @@ export default function ChooseCompanyPage() {
                           'Project Coordinator',
                           'Business Analyst'
                         ].map((career, idx) => (
-                          <div key={idx} className="flex items-center gap-3 p-3 bg-slate-50 rounded-xl hover:bg-yellow-50 transition-all group">
-                            <div className="w-8 h-8 bg-yellow-100 rounded-lg flex items-center justify-center group-hover:bg-yellow-600 transition-all">
-                              <span className="text-xs font-black text-yellow-600 group-hover:text-white">{idx + 1}</span>
+                          <div key={idx} className="flex items-center gap-3 p-3 bg-slate-50 rounded-xl hover:bg-gray-50 transition-all group">
+                            <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center group-hover:bg-gray-600 transition-all">
+                              <span className="text-xs font-black text-gray-600 group-hover:text-white">{idx + 1}</span>
                             </div>
                             <span className="text-sm font-bold text-slate-700 group-hover:text-slate-900">{career}</span>
                           </div>
@@ -511,7 +511,7 @@ export default function ChooseCompanyPage() {
                     </div>
 
                     {/* Partnership Benefits */}
-                    <div className="bg-gradient-to-br from-yellow-50 to-white p-8 rounded-2xl border border-yellow-100">
+                    <div className="bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl border border-gray-100">
                       <h4 className="text-xs font-black text-slate-400   mb-6">Partnership Benefits</h4>
                       <div className="space-y-3">
                         {[
@@ -523,7 +523,7 @@ export default function ChooseCompanyPage() {
                           'Alumni Network Access'
                         ].map((benefit, idx) => (
                           <div key={idx} className="flex items-start gap-3">
-                            <CheckCircle className="w-5 h-5 text-yellow-600 mt-0.5 shrink-0" />
+                            <CheckCircle className="w-5 h-5 text-gray-600 mt-0.5 shrink-0" />
                             <span className="text-sm font-bold text-slate-700">{benefit}</span>
                           </div>
                         ))}
@@ -546,7 +546,7 @@ export default function ChooseCompanyPage() {
                         handleCompanySelect(viewingCompany.id);
                         setViewingCompany(null);
                       }}
-                      className="bg-yellow-600 text-white px-8 py-4 rounded-xl text-sm font-black   hover:bg-yellow-700 transition-all shadow-xl shadow-yellow-600/20 active:scale-95"
+                      className="bg-gray-600 text-white px-8 py-4 rounded-xl text-sm font-black   hover:bg-gray-700 transition-all shadow-xl shadow-gray-600/20 active:scale-95"
                     >
                       Enroll with {viewingCompany.name}
                     </button>

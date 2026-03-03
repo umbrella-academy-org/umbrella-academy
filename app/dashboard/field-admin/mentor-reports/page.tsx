@@ -122,19 +122,19 @@ export default function FieldAdminMentorReportsPage() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'pending': return 'bg-yellow-100 text-yellow-800';
-      case 'reviewed': return 'bg-blue-100 text-blue-800';
-      case 'approved': return 'bg-green-100 text-green-800';
+      case 'pending': return 'bg-gray-100 text-gray-800';
+      case 'reviewed': return 'bg-gray-100 text-gray-800';
+      case 'approved': return 'bg-gray-100 text-gray-800';
       default: return 'bg-gray-100 text-gray-800';
     }
   };
 
   const getReportTypeColor = (type: string) => {
     switch (type) {
-      case 'monthly': return 'bg-blue-100 text-blue-800';
-      case 'quarterly': return 'bg-purple-100 text-purple-800';
-      case 'incident': return 'bg-red-100 text-red-800';
-      case 'performance': return 'bg-green-100 text-green-800';
+      case 'monthly': return 'bg-gray-100 text-gray-800';
+      case 'quarterly': return 'bg-gray-100 text-gray-800';
+      case 'incident': return 'bg-gray-100 text-gray-800';
+      case 'performance': return 'bg-gray-100 text-gray-800';
       default: return 'bg-gray-100 text-gray-800';
     }
   };
@@ -175,7 +175,7 @@ export default function FieldAdminMentorReportsPage() {
                     <p className="text-sm font-medium text-gray-600">Total Reports</p>
                     <p className="text-2xl font-bold text-gray-900">{totalReports}</p>
                   </div>
-                  <FileText className="w-8 h-8 text-blue-500" />
+                  <FileText className="w-8 h-8 text-gray-500" />
                 </div>
               </div>
               <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
@@ -184,7 +184,7 @@ export default function FieldAdminMentorReportsPage() {
                     <p className="text-sm font-medium text-gray-600">Pending Review</p>
                     <p className="text-2xl font-bold text-gray-900">{pendingReports}</p>
                   </div>
-                  <AlertTriangle className="w-8 h-8 text-yellow-500" />
+                  <AlertTriangle className="w-8 h-8 text-gray-500" />
                 </div>
               </div>
               <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
@@ -193,7 +193,7 @@ export default function FieldAdminMentorReportsPage() {
                     <p className="text-sm font-medium text-gray-600">Avg Completion</p>
                     <p className="text-2xl font-bold text-gray-900">{avgCompletionRate}%</p>
                   </div>
-                  <TrendingUp className="w-8 h-8 text-green-500" />
+                  <TrendingUp className="w-8 h-8 text-gray-500" />
                 </div>
               </div>
               <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
@@ -202,7 +202,7 @@ export default function FieldAdminMentorReportsPage() {
                     <p className="text-sm font-medium text-gray-600">Avg Satisfaction</p>
                     <p className="text-2xl font-bold text-gray-900">{avgSatisfactionScore}%</p>
                   </div>
-                  <Users className="w-8 h-8 text-purple-500" />
+                  <Users className="w-8 h-8 text-gray-500" />
                 </div>
               </div>
             </div>
@@ -218,7 +218,7 @@ export default function FieldAdminMentorReportsPage() {
                       <select
                         value={filterStatus}
                         onChange={(e) => setFilterStatus(e.target.value)}
-                        className="px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-600"
+                        className="px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-600"
                       >
                         <option value="all">All Status</option>
                         <option value="pending">Pending</option>
@@ -230,7 +230,7 @@ export default function FieldAdminMentorReportsPage() {
                       <select
                         value={filterType}
                         onChange={(e) => setFilterType(e.target.value)}
-                        className="px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-600"
+                        className="px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-600"
                       >
                         <option value="all">All Types</option>
                         <option value="monthly">Monthly</option>
@@ -284,8 +284,8 @@ export default function FieldAdminMentorReportsPage() {
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="flex items-center">
                             <div className="shrink-0 h-8 w-8">
-                              <div className="h-8 w-8 rounded-full bg-purple-100 flex items-center justify-center">
-                                <span className="text-xs font-medium text-purple-800">
+                              <div className="h-8 w-8 rounded-full bg-gray-100 flex items-center justify-center">
+                                <span className="text-xs font-medium text-gray-800">
                                   {report.mentorAvatar}
                                 </span>
                               </div>
@@ -314,7 +314,7 @@ export default function FieldAdminMentorReportsPage() {
                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                           <button
                             onClick={() => setSelectedReport(report.id)}
-                            className="text-blue-600 hover:text-blue-900 p-1 hover:bg-blue-50 rounded"
+                            className="text-gray-600 hover:text-gray-900 p-1 hover:bg-gray-50 rounded"
                             title="View Details"
                           >
                             <Eye className="w-4 h-4" />
@@ -344,7 +344,7 @@ export default function FieldAdminMentorReportsPage() {
             {/* Modal Header */}
             <div className="flex items-center justify-between p-6 border-b border-gray-200">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-linear-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold">
+                <div className="w-12 h-12 bg-linear-to-br from-gray-500 to-gray-600 rounded-full flex items-center justify-center text-white font-semibold">
                   {selectedReportData.mentorAvatar}
                 </div>
                 <div>
@@ -362,14 +362,14 @@ export default function FieldAdminMentorReportsPage() {
                   <>
                     <button
                       onClick={() => handleStatusUpdate(selectedReportData.id, 'reviewed')}
-                      className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm"
+                      className="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors text-sm"
                     >
                       <Eye className="w-4 h-4" />
                       Mark Reviewed
                     </button>
                     <button
                       onClick={() => handleStatusUpdate(selectedReportData.id, 'approved')}
-                      className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm"
+                      className="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors text-sm"
                     >
                       <CheckCircle className="w-4 h-4" />
                       Approve
@@ -390,20 +390,20 @@ export default function FieldAdminMentorReportsPage() {
               {/* Metrics */}
               <div className="grid grid-cols-4 gap-4 p-4 bg-gray-50 rounded-lg mb-6">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-blue-600">{selectedReportData.metrics.totalTrainers}</div>
-                  <div className="text-sm text-blue-600">Trainers</div>
+                  <div className="text-2xl font-bold text-gray-600">{selectedReportData.metrics.totalTrainers}</div>
+                  <div className="text-sm text-gray-600">Trainers</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-green-600">{selectedReportData.metrics.activeStudents}</div>
-                  <div className="text-sm text-green-600">Students</div>
+                  <div className="text-2xl font-bold text-gray-600">{selectedReportData.metrics.activeStudents}</div>
+                  <div className="text-sm text-gray-600">Students</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-purple-600">{selectedReportData.metrics.completionRate}%</div>
-                  <div className="text-sm text-purple-600">Completion</div>
+                  <div className="text-2xl font-bold text-gray-600">{selectedReportData.metrics.completionRate}%</div>
+                  <div className="text-sm text-gray-600">Completion</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-yellow-600">{selectedReportData.metrics.satisfactionScore}%</div>
-                  <div className="text-sm text-yellow-600">Satisfaction</div>
+                  <div className="text-2xl font-bold text-gray-600">{selectedReportData.metrics.satisfactionScore}%</div>
+                  <div className="text-sm text-gray-600">Satisfaction</div>
                 </div>
               </div>
 
@@ -416,48 +416,48 @@ export default function FieldAdminMentorReportsPage() {
 
                 <div>
                   <h3 className="font-semibold text-gray-900 mb-3">Students Progress</h3>
-                  <p className="text-gray-700 bg-blue-50 p-4 rounded-lg border-l-4 border-blue-400">{selectedReportData.studentsProgress}</p>
+                  <p className="text-gray-700 bg-gray-50 p-4 rounded-lg border-l-4 border-gray-400">{selectedReportData.studentsProgress}</p>
                 </div>
 
                 {selectedReportData.keyAchievements && (
                   <div>
                     <h3 className="flex items-center gap-2 font-semibold text-gray-900 mb-3">
-                      <CheckCircle className="w-5 h-5 text-green-500" />
+                      <CheckCircle className="w-5 h-5 text-gray-500" />
                       Key Achievements
                     </h3>
-                    <p className="text-gray-700 bg-green-50 p-4 rounded-lg border-l-4 border-green-400">{selectedReportData.keyAchievements}</p>
+                    <p className="text-gray-700 bg-gray-50 p-4 rounded-lg border-l-4 border-gray-400">{selectedReportData.keyAchievements}</p>
                   </div>
                 )}
 
                 {selectedReportData.challenges && (
                   <div>
                     <h3 className="flex items-center gap-2 font-semibold text-gray-900 mb-3">
-                      <AlertTriangle className="w-5 h-5 text-orange-500" />
+                      <AlertTriangle className="w-5 h-5 text-gray-500" />
                       Challenges & Issues
                     </h3>
-                    <p className="text-gray-700 bg-orange-50 p-4 rounded-lg border-l-4 border-orange-400">{selectedReportData.challenges}</p>
+                    <p className="text-gray-700 bg-gray-50 p-4 rounded-lg border-l-4 border-gray-400">{selectedReportData.challenges}</p>
                   </div>
                 )}
 
                 {selectedReportData.recommendations && (
                   <div>
                     <h3 className="flex items-center gap-2 font-semibold text-gray-900 mb-3">
-                      <Target className="w-5 h-5 text-blue-500" />
+                      <Target className="w-5 h-5 text-gray-500" />
                       Recommendations
                     </h3>
-                    <p className="text-gray-700 bg-blue-50 p-4 rounded-lg border-l-4 border-blue-400">{selectedReportData.recommendations}</p>
+                    <p className="text-gray-700 bg-gray-50 p-4 rounded-lg border-l-4 border-gray-400">{selectedReportData.recommendations}</p>
                   </div>
                 )}
 
                 {/* Admin Notes */}
                 <div className="border-t pt-6">
                   <h3 className="flex items-center gap-2 font-semibold text-gray-900 mb-3">
-                    <MessageSquare className="w-5 h-5 text-purple-500" />
+                    <MessageSquare className="w-5 h-5 text-gray-500" />
                     Field Admin Notes
                   </h3>
                   {selectedReportData.fieldAdminNotes ? (
-                    <div className="p-4 bg-purple-50 rounded-lg border border-purple-200 mb-4">
-                      <p className="text-purple-800">{selectedReportData.fieldAdminNotes}</p>
+                    <div className="p-4 bg-gray-50 rounded-lg border border-gray-200 mb-4">
+                      <p className="text-gray-800">{selectedReportData.fieldAdminNotes}</p>
                     </div>
                   ) : (
                     <p className="text-gray-500 text-sm mb-4">No admin notes yet.</p>
@@ -469,11 +469,11 @@ export default function FieldAdminMentorReportsPage() {
                       onChange={(e) => setAdminNotes(e.target.value)}
                       placeholder="Add your notes or feedback..."
                       rows={3}
-                      className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
+                      className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent"
                     />
                     <button
                       onClick={() => handleAddNotes(selectedReportData.id)}
-                      className="px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors"
+                      className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
                       disabled={!adminNotes.trim()}
                     >
                       Add Notes

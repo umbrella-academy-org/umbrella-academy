@@ -167,10 +167,10 @@ export default function MentorTrainerApprovalsPage() {
 
   const getStatusBadge = (status: string) => {
     const statusConfig = {
-      pending: { color: 'bg-yellow-100 text-yellow-800', label: 'Pending' },
-      under_review: { color: 'bg-blue-100 text-blue-800', label: 'Under Review' },
-      approved: { color: 'bg-green-100 text-green-800', label: 'Approved' },
-      rejected: { color: 'bg-red-100 text-red-800', label: 'Rejected' }
+      pending: { color: 'bg-gray-100 text-gray-800', label: 'Pending' },
+      under_review: { color: 'bg-gray-100 text-gray-800', label: 'Under Review' },
+      approved: { color: 'bg-gray-100 text-gray-800', label: 'Approved' },
+      rejected: { color: 'bg-gray-100 text-gray-800', label: 'Rejected' }
     };
     const config = statusConfig[status as keyof typeof statusConfig] || statusConfig.pending;
     return (
@@ -212,7 +212,7 @@ export default function MentorTrainerApprovalsPage() {
                   placeholder="Search trainers..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600"
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600"
                 />
               </div>
               <div className="relative">
@@ -220,7 +220,7 @@ export default function MentorTrainerApprovalsPage() {
                 <select
                   value={statusFilter}
                   onChange={(e) => setStatusFilter(e.target.value)}
-                  className="pl-10 pr-8 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 bg-white"
+                  className="pl-10 pr-8 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 bg-white"
                 >
                   <option value="all">All Status</option>
                   <option value="pending">Pending</option>
@@ -271,8 +271,8 @@ export default function MentorTrainerApprovalsPage() {
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="flex items-center">
                             <div className="flex-shrink-0 h-10 w-10">
-                              <div className="h-10 w-10 rounded-full bg-yellow-100 flex items-center justify-center">
-                                <span className="text-sm font-medium text-yellow-800">
+                              <div className="h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center">
+                                <span className="text-sm font-medium text-gray-800">
                                   {trainer.name.split(' ').map(n => n[0]).join('')}
                                 </span>
                               </div>
@@ -281,7 +281,7 @@ export default function MentorTrainerApprovalsPage() {
                               <div className="text-sm font-medium text-gray-900">{trainer.name}</div>
                               <div className="text-sm text-gray-500">{trainer.email}</div>
                               <div className="flex items-center gap-1 mt-1">
-                                <Star className="w-3 h-3 text-yellow-400 fill-current" />
+                                <Star className="w-3 h-3 text-gray-400 fill-current" />
                                 <span className="text-xs text-gray-600">{trainer.rating}</span>
                               </div>
                             </div>
@@ -321,7 +321,7 @@ export default function MentorTrainerApprovalsPage() {
                           <div className="flex items-center justify-end gap-2">
                             <button
                               onClick={() => handleViewDetails(trainer.id)}
-                              className="bg-yellow-600 p-1 hover:bg-yellow-700 rounded px-4"
+                              className="bg-gray-600 p-1 hover:bg-gray-700 rounded px-4"
                               title="View Details"
                             >
                               View
@@ -330,7 +330,7 @@ export default function MentorTrainerApprovalsPage() {
 
                             <button
                               onClick={() => handleReject(trainer.id)}
-                              className="bg-red-600 hover:bg-red-900 px-4 py-1 rounded"
+                              className="bg-gray-600 hover:bg-gray-900 px-4 py-1 rounded"
                               title="Reject"
                             >
                               Reject
@@ -362,8 +362,8 @@ export default function MentorTrainerApprovalsPage() {
             <div className="flex items-center justify-between p-6 border-b border-gray-200">
               <div className="flex items-center">
                 <div className="flex-shrink-0 h-12 w-12">
-                  <div className="h-12 w-12 rounded-full bg-yellow-100 flex items-center justify-center">
-                    <span className="text-lg font-medium text-yellow-800">
+                  <div className="h-12 w-12 rounded-full bg-gray-100 flex items-center justify-center">
+                    <span className="text-lg font-medium text-gray-800">
                       {selectedTrainerData.name.split(' ').map(n => n[0]).join('')}
                     </span>
                   </div>
@@ -372,7 +372,7 @@ export default function MentorTrainerApprovalsPage() {
                   <h2 className="text-xl font-semibold text-gray-900">{selectedTrainerData.name}</h2>
                   <p className="text-sm text-gray-600">{selectedTrainerData.email}</p>
                   <div className="flex items-center gap-2 mt-1">
-                    <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                    <Star className="w-4 h-4 text-gray-400 fill-current" />
                     <span className="text-sm text-gray-600">{selectedTrainerData.rating} rating</span>
                     <span className="text-sm text-gray-400">•</span>
                     <span className="text-sm text-gray-600">{selectedTrainerData.wing}</span>
@@ -381,10 +381,10 @@ export default function MentorTrainerApprovalsPage() {
               </div>
               <div className='flex gap-4'>
                 <div className='flex gap-x-2'>
-                  <button className='bg-green-600 px-4 py-1 rounded-lg hover:bg-green-700'>
+                  <button className='bg-gray-600 px-4 py-1 rounded-lg hover:bg-gray-700'>
                     Approve
                   </button>
-                  <button className='bg-red-600 px-4 py-1 rounded-lg hover:bg-red-700'>
+                  <button className='bg-gray-600 px-4 py-1 rounded-lg hover:bg-gray-700'>
                     Reject
                   </button>
                 </div>
@@ -401,21 +401,21 @@ export default function MentorTrainerApprovalsPage() {
             <div className="p-6 overflow-y-auto max-h-[calc(90vh-140px)]">
               {/* Quick Stats */}
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-                <div className="text-center p-4 bg-blue-50 rounded-lg">
-                  <div className="text-2xl font-bold text-blue-600">{selectedTrainerData.experience}</div>
-                  <div className="text-sm text-blue-600">Experience</div>
+                <div className="text-center p-4 bg-gray-50 rounded-lg">
+                  <div className="text-2xl font-bold text-gray-600">{selectedTrainerData.experience}</div>
+                  <div className="text-sm text-gray-600">Experience</div>
                 </div>
-                <div className="text-center p-4 bg-green-50 rounded-lg">
-                  <div className="text-2xl font-bold text-green-600">{selectedTrainerData.proposedCapacity}</div>
-                  <div className="text-sm text-green-600">Max Students</div>
+                <div className="text-center p-4 bg-gray-50 rounded-lg">
+                  <div className="text-2xl font-bold text-gray-600">{selectedTrainerData.proposedCapacity}</div>
+                  <div className="text-sm text-gray-600">Max Students</div>
                 </div>
-                <div className="text-center p-4 bg-purple-50 rounded-lg">
-                  <div className="text-2xl font-bold text-purple-600">€{selectedTrainerData.hourlyRate}</div>
-                  <div className="text-sm text-purple-600">Hourly Rate</div>
+                <div className="text-center p-4 bg-gray-50 rounded-lg">
+                  <div className="text-2xl font-bold text-gray-600">€{selectedTrainerData.hourlyRate}</div>
+                  <div className="text-sm text-gray-600">Hourly Rate</div>
                 </div>
-                <div className="text-center p-4 bg-yellow-50 rounded-lg">
-                  <div className="text-2xl font-bold text-yellow-600">{selectedTrainerData.expertise.length}</div>
-                  <div className="text-sm text-yellow-600">Skills</div>
+                <div className="text-center p-4 bg-gray-50 rounded-lg">
+                  <div className="text-2xl font-bold text-gray-600">{selectedTrainerData.expertise.length}</div>
+                  <div className="text-sm text-gray-600">Skills</div>
                 </div>
               </div>
 
@@ -445,7 +445,7 @@ export default function MentorTrainerApprovalsPage() {
                   {/* Education */}
                   <div>
                     <h3 className="flex items-center gap-2 font-semibold text-gray-900 mb-3">
-                      <BookOpen className="w-5 h-5 text-blue-600" />
+                      <BookOpen className="w-5 h-5 text-gray-600" />
                       Education
                     </h3>
                     <p className="text-gray-700">{selectedTrainerData.education}</p>
@@ -454,7 +454,7 @@ export default function MentorTrainerApprovalsPage() {
                   {/* Availability */}
                   <div>
                     <h3 className="flex items-center gap-2 font-semibold text-gray-900 mb-3">
-                      <Calendar className="w-5 h-5 text-green-600" />
+                      <Calendar className="w-5 h-5 text-gray-600" />
                       Availability
                     </h3>
                     <p className="text-gray-700">{selectedTrainerData.availability}</p>
@@ -477,7 +477,7 @@ export default function MentorTrainerApprovalsPage() {
                     <h3 className="font-semibold text-gray-900 mb-3">Technical Expertise</h3>
                     <div className="flex flex-wrap gap-2">
                       {selectedTrainerData.expertise.map((skill, index) => (
-                        <span key={index} className="inline-flex px-3 py-1 text-sm font-medium bg-blue-100 text-blue-800 rounded-full">
+                        <span key={index} className="inline-flex px-3 py-1 text-sm font-medium bg-gray-100 text-gray-800 rounded-full">
                           {skill}
                         </span>
                       ))}
@@ -493,7 +493,7 @@ export default function MentorTrainerApprovalsPage() {
                     <div className="space-y-3">
                       {selectedTrainerData.previousRoles.map((role, index) => (
                         <div key={index} className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
-                          <div className="w-2 h-2 bg-yellow-600 rounded-full mt-2"></div>
+                          <div className="w-2 h-2 bg-gray-600 rounded-full mt-2"></div>
                           <span className="text-gray-700">{role}</span>
                         </div>
                       ))}
@@ -503,13 +503,13 @@ export default function MentorTrainerApprovalsPage() {
                   {/* Certifications */}
                   <div>
                     <h3 className="flex items-center gap-2 font-semibold text-gray-900 mb-3">
-                      <Award className="w-5 h-5 text-purple-600" />
+                      <Award className="w-5 h-5 text-gray-600" />
                       Certifications
                     </h3>
                     <div className="space-y-2">
                       {selectedTrainerData.certifications.map((cert, index) => (
                         <div key={index} className="flex items-center gap-2 text-gray-700">
-                          <CheckCircle className="w-4 h-4 text-green-500" />
+                          <CheckCircle className="w-4 h-4 text-gray-500" />
                           {cert}
                         </div>
                       ))}
@@ -537,7 +537,7 @@ export default function MentorTrainerApprovalsPage() {
                       href={selectedTrainerData.portfolio}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-yellow-600 hover:text-yellow-700 font-medium break-all"
+                      className="text-gray-600 hover:text-gray-700 font-medium break-all"
                     >
                       {selectedTrainerData.portfolio}
                     </a>
@@ -556,7 +556,7 @@ export default function MentorTrainerApprovalsPage() {
                 {/* Motivation */}
                 <div>
                   <h3 className="font-semibold text-gray-900 mb-3">Motivation</h3>
-                  <p className="text-gray-700 italic bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-400">
+                  <p className="text-gray-700 italic bg-gray-50 p-4 rounded-lg border-l-4 border-gray-400">
                     "{selectedTrainerData.motivation}"
                   </p>
                 </div>
@@ -567,28 +567,28 @@ export default function MentorTrainerApprovalsPage() {
             <div className="flex items-center justify-end gap-3 p-6 border-t border-gray-200 bg-gray-50">
               <button
                 onClick={() => handleSendMessage(selectedTrainerData.id)}
-                className="flex items-center gap-2 px-4 py-2 text-yellow-700 bg-yellow-100 rounded-lg hover:bg-yellow-200 transition-colors"
+                className="flex items-center gap-2 px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
               >
                 <MessageSquare className="w-4 h-4" />
                 Send Message
               </button>
               <button
                 onClick={() => handleRequestChanges(selectedTrainerData.id)}
-                className="flex items-center gap-2 px-4 py-2 text-orange-700 bg-orange-100 rounded-lg hover:bg-orange-200 transition-colors"
+                className="flex items-center gap-2 px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
               >
                 <FileText className="w-4 h-4" />
                 Request Changes
               </button>
               <button
                 onClick={() => handleReject(selectedTrainerData.id)}
-                className="flex items-center gap-2 px-4 py-2 text-red-700 bg-red-100 rounded-lg hover:bg-red-200 transition-colors"
+                className="flex items-center gap-2 px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
               >
                 <XCircle className="w-4 h-4" />
                 Reject
               </button>
               <button
                 onClick={() => handleApprove(selectedTrainerData.id)}
-                className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+                className="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
               >
                 <CheckCircle className="w-4 h-4" />
                 Approve

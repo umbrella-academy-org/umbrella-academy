@@ -127,18 +127,18 @@ export default function MentorWingReportsPage() {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'draft': return 'bg-gray-100 text-gray-800';
-      case 'submitted': return 'bg-yellow-100 text-yellow-800';
-      case 'reviewed': return 'bg-green-100 text-green-800';
+      case 'submitted': return 'bg-gray-100 text-gray-800';
+      case 'reviewed': return 'bg-gray-100 text-gray-800';
       default: return 'bg-gray-100 text-gray-800';
     }
   };
 
   const getReportTypeColor = (type: string) => {
     switch (type) {
-      case 'monthly': return 'bg-blue-100 text-blue-800';
-      case 'quarterly': return 'bg-purple-100 text-purple-800';
-      case 'annual': return 'bg-green-100 text-green-800';
-      case 'incident': return 'bg-red-100 text-red-800';
+      case 'monthly': return 'bg-gray-100 text-gray-800';
+      case 'quarterly': return 'bg-gray-100 text-gray-800';
+      case 'annual': return 'bg-gray-100 text-gray-800';
+      case 'incident': return 'bg-gray-100 text-gray-800';
       default: return 'bg-gray-100 text-gray-800';
     }
   };
@@ -177,7 +177,7 @@ export default function MentorWingReportsPage() {
                     <p className="text-sm font-medium text-gray-600">Total Reports</p>
                     <p className="text-2xl font-bold text-gray-900">{totalReports}</p>
                   </div>
-                  <FileText className="w-8 h-8 text-blue-500" />
+                  <FileText className="w-8 h-8 text-gray-500" />
                 </div>
               </div>
               <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
@@ -186,7 +186,7 @@ export default function MentorWingReportsPage() {
                     <p className="text-sm font-medium text-gray-600">Pending Review</p>
                     <p className="text-2xl font-bold text-gray-900">{pendingReports}</p>
                   </div>
-                  <AlertTriangle className="w-8 h-8 text-yellow-500" />
+                  <AlertTriangle className="w-8 h-8 text-gray-500" />
                 </div>
               </div>
               <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
@@ -195,7 +195,7 @@ export default function MentorWingReportsPage() {
                     <p className="text-sm font-medium text-gray-600">Avg Completion</p>
                     <p className="text-2xl font-bold text-gray-900">{avgCompletionRate}%</p>
                   </div>
-                  <TrendingUp className="w-8 h-8 text-green-500" />
+                  <TrendingUp className="w-8 h-8 text-gray-500" />
                 </div>
               </div>
               <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
@@ -204,7 +204,7 @@ export default function MentorWingReportsPage() {
                     <p className="text-sm font-medium text-gray-600">Avg Satisfaction</p>
                     <p className="text-2xl font-bold text-gray-900">{avgSatisfactionScore}%</p>
                   </div>
-                  <Users className="w-8 h-8 text-purple-500" />
+                  <Users className="w-8 h-8 text-gray-500" />
                 </div>
               </div>
             </div>
@@ -220,7 +220,7 @@ export default function MentorWingReportsPage() {
                       <select
                         value={filterStatus}
                         onChange={(e) => setFilterStatus(e.target.value)}
-                        className="px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-600"
+                        className="px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-600"
                       >
                         <option value="all">All Status</option>
                         <option value="draft">Draft</option>
@@ -232,7 +232,7 @@ export default function MentorWingReportsPage() {
                       <select
                         value={filterType}
                         onChange={(e) => setFilterType(e.target.value)}
-                        className="px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-600"
+                        className="px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-600"
                       >
                         <option value="all">All Types</option>
                         <option value="monthly">Monthly</option>
@@ -299,7 +299,7 @@ export default function MentorWingReportsPage() {
                             <div className="text-sm font-medium text-gray-900">{report.completionRate}%</div>
                             <div className="ml-2 w-16 bg-gray-200 rounded-full h-2">
                               <div
-                                className="bg-green-500 h-2 rounded-full"
+                                className="bg-gray-500 h-2 rounded-full"
                                 style={{ width: `${report.completionRate}%` }}
                               ></div>
                             </div>
@@ -313,7 +313,7 @@ export default function MentorWingReportsPage() {
                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                           <button
                             onClick={() => handleViewReport(report.id)}
-                            className="text-blue-600 hover:text-blue-900 p-1 hover:bg-blue-50 rounded"
+                            className="text-gray-600 hover:text-gray-900 p-1 hover:bg-gray-50 rounded"
                             title="View Details"
                           >
                             <Eye className="w-4 h-4" />
@@ -364,40 +364,40 @@ export default function MentorWingReportsPage() {
               {/* Key Metrics */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4 bg-gray-50 rounded-lg mb-6">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-blue-600">{selectedReport.totalTrainers}</div>
-                  <div className="text-sm text-blue-600">Trainers</div>
+                  <div className="text-2xl font-bold text-gray-600">{selectedReport.totalTrainers}</div>
+                  <div className="text-sm text-gray-600">Trainers</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-green-600">{selectedReport.totalStudents}</div>
-                  <div className="text-sm text-green-600">Students</div>
+                  <div className="text-2xl font-bold text-gray-600">{selectedReport.totalStudents}</div>
+                  <div className="text-sm text-gray-600">Students</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-purple-600">{selectedReport.completionRate}%</div>
-                  <div className="text-sm text-purple-600">Completion</div>
+                  <div className="text-2xl font-bold text-gray-600">{selectedReport.completionRate}%</div>
+                  <div className="text-sm text-gray-600">Completion</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-yellow-600">{selectedReport.satisfactionScore}%</div>
-                  <div className="text-sm text-yellow-600">Satisfaction</div>
+                  <div className="text-2xl font-bold text-gray-600">{selectedReport.satisfactionScore}%</div>
+                  <div className="text-sm text-gray-600">Satisfaction</div>
                 </div>
               </div>
 
               {/* Additional Metrics */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4 bg-blue-50 rounded-lg mb-6">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4 bg-gray-50 rounded-lg mb-6">
                 <div className="text-center">
-                  <div className="text-xl font-bold text-blue-700">{selectedReport.keyMetrics.sessionsCompleted}</div>
-                  <div className="text-xs text-blue-700">Sessions</div>
+                  <div className="text-xl font-bold text-gray-700">{selectedReport.keyMetrics.sessionsCompleted}</div>
+                  <div className="text-xs text-gray-700">Sessions</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-xl font-bold text-green-700">{selectedReport.keyMetrics.averageRating}</div>
-                  <div className="text-xs text-green-700">Avg Rating</div>
+                  <div className="text-xl font-bold text-gray-700">{selectedReport.keyMetrics.averageRating}</div>
+                  <div className="text-xs text-gray-700">Avg Rating</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-xl font-bold text-purple-700">{selectedReport.keyMetrics.retentionRate}%</div>
-                  <div className="text-xs text-purple-700">Retention</div>
+                  <div className="text-xl font-bold text-gray-700">{selectedReport.keyMetrics.retentionRate}%</div>
+                  <div className="text-xs text-gray-700">Retention</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-xl font-bold text-orange-700">{selectedReport.keyMetrics.graduationRate}%</div>
-                  <div className="text-xs text-orange-700">Graduation</div>
+                  <div className="text-xl font-bold text-gray-700">{selectedReport.keyMetrics.graduationRate}%</div>
+                  <div className="text-xs text-gray-700">Graduation</div>
                 </div>
               </div>
 
@@ -410,26 +410,26 @@ export default function MentorWingReportsPage() {
 
                 <div>
                   <h3 className="flex items-center gap-2 font-semibold text-gray-900 mb-3">
-                    <Target className="w-5 h-5 text-green-500" />
+                    <Target className="w-5 h-5 text-gray-500" />
                     Key Achievements
                   </h3>
-                  <p className="text-gray-700 bg-green-50 p-4 rounded-lg border-l-4 border-green-400">{selectedReport.achievements}</p>
+                  <p className="text-gray-700 bg-gray-50 p-4 rounded-lg border-l-4 border-gray-400">{selectedReport.achievements}</p>
                 </div>
 
                 <div>
                   <h3 className="flex items-center gap-2 font-semibold text-gray-900 mb-3">
-                    <AlertTriangle className="w-5 h-5 text-orange-500" />
+                    <AlertTriangle className="w-5 h-5 text-gray-500" />
                     Challenges
                   </h3>
-                  <p className="text-gray-700 bg-orange-50 p-4 rounded-lg border-l-4 border-orange-400">{selectedReport.challenges}</p>
+                  <p className="text-gray-700 bg-gray-50 p-4 rounded-lg border-l-4 border-gray-400">{selectedReport.challenges}</p>
                 </div>
 
                 <div>
                   <h3 className="flex items-center gap-2 font-semibold text-gray-900 mb-3">
-                    <TrendingUp className="w-5 h-5 text-blue-500" />
+                    <TrendingUp className="w-5 h-5 text-gray-500" />
                     Recommendations
                   </h3>
-                  <p className="text-gray-700 bg-blue-50 p-4 rounded-lg border-l-4 border-blue-400">{selectedReport.recommendations}</p>
+                  <p className="text-gray-700 bg-gray-50 p-4 rounded-lg border-l-4 border-gray-400">{selectedReport.recommendations}</p>
                 </div>
               </div>
             </div>

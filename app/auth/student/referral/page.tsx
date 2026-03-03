@@ -48,7 +48,7 @@ export default function ReferralPage() {
           <div className="flex flex-col items-center justify-center flex-1">
             {/* Logo */}
             <div className="mb-8">
-              <div className="w-16 h-16 bg-yellow-600 rounded-2xl flex items-center justify-center shadow-lg shadow-yellow-600/20">
+              <div className="w-16 h-16 bg-gray-600 rounded-2xl flex items-center justify-center shadow-lg shadow-gray-600/20">
                 <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" />
                 </svg>
@@ -70,11 +70,11 @@ export default function ReferralPage() {
                 <label
                   key={index}
                   className={`flex items-center gap-4 p-4 border rounded-lg cursor-pointer transition-all ${selectedSource.includes(source)
-                    ? 'border-yellow-600 bg-yellow-50'
+                    ? 'border-gray-600 bg-gray-50'
                     : 'border-gray-200 bg-white hover:border-gray-300'
                     }`}
                 >
-                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${selectedSource.includes(source) ? 'bg-yellow-600 text-white' : 'bg-gray-100 text-gray-400'
+                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${selectedSource.includes(source) ? 'bg-gray-600 text-white' : 'bg-gray-100 text-gray-400'
                     }`}>
                     <Share2 className="w-4 h-4" />
                   </div>
@@ -88,14 +88,14 @@ export default function ReferralPage() {
                     className="hidden"
                   />
                   {selectedSource.includes(source) && (
-                    <CheckCircle className="w-5 h-5 text-yellow-600" />
+                    <CheckCircle className="w-5 h-5 text-gray-600" />
                   )}
                 </label>
               ))}
 
               <button
                 type="submit"
-                className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-all mt-6"
+                className="w-full bg-gray-600 text-white py-3 rounded-lg font-medium hover:bg-gray-700 transition-all mt-6"
               >
                 Continue
               </button>
@@ -103,7 +103,7 @@ export default function ReferralPage() {
               {/* Progress dots */}
               <div className="flex justify-center gap-2 pt-4">
                 {[1, 2, 3, 4, 5, 6, 7].map((i) => (
-                  <div key={i} className={`h-2 rounded-full transition-all ${i === 4 ? 'w-8 bg-yellow-600' : 'w-2 bg-gray-300'}`}></div>
+                  <div key={i} className={`h-2 rounded-full transition-all ${i === 4 ? 'w-8 bg-gray-600' : 'w-2 bg-gray-300'}`}></div>
                 ))}
               </div>
             </form>

@@ -5,28 +5,28 @@ import { Users, MessageSquare, Star, Target } from 'lucide-react';
 export default function MentorEarningsStats() {
   const stats = [
     {
-      icon: <Users className="w-5 h-5 text-blue-600" />,
+      icon: <Users className="w-5 h-5 text-gray-600" />,
       label: 'Mentees',
       value: '12',
       change: '+2 this month',
       changeType: 'positive'
     },
     {
-      icon: <MessageSquare className="w-5 h-5 text-green-600" />,
+      icon: <MessageSquare className="w-5 h-5 text-gray-600" />,
       label: 'Sessions',
       value: '48',
       change: '+8 this month',
       changeType: 'positive'
     },
     {
-      icon: <Star className="w-5 h-5 text-yellow-600" />,
+      icon: <Star className="w-5 h-5 text-gray-600" />,
       label: 'Avg Rating',
       value: '4.9',
       change: '+0.1 this month',
       changeType: 'positive'
     },
     {
-      icon: <Target className="w-5 h-5 text-purple-600" />,
+      icon: <Target className="w-5 h-5 text-gray-600" />,
       label: 'Goals Achieved',
       value: '34',
       change: '+6 this month',
@@ -46,7 +46,7 @@ export default function MentorEarningsStats() {
               <span className="text-sm font-medium text-gray-700">{stat.label}</span>
             </div>
             <div className="text-2xl font-bold text-gray-900 mb-1">{stat.value}</div>
-            <div className={`text-xs ${stat.changeType === 'positive' ? 'text-green-600' : 'text-red-600'}`}>
+            <div className={`text-xs ${stat.changeType === 'positive' ? 'text-gray-600' : 'text-gray-600'}`}>
               {stat.change}
             </div>
           </div>

@@ -150,20 +150,20 @@ export default function LiveSessions({ userType }: LiveSessionsProps) {
     switch (status) {
       case 'info':
         return (
-          <div className={`${baseClasses} bg-blue-100 ${isHovered ? 'bg-blue-200 scale-110 animate-pulse-glow' : ''}`}>
-            <Monitor className={`w-5 h-5 sm:w-6 sm:h-6 text-blue-600 transition-all duration-300 ${isHovered ? 'scale-110' : ''}`} />
+          <div className={`${baseClasses} bg-gray-100 ${isHovered ? 'bg-gray-200 scale-110 animate-pulse-glow' : ''}`}>
+            <Monitor className={`w-5 h-5 sm:w-6 sm:h-6 text-gray-600 transition-all duration-300 ${isHovered ? 'scale-110' : ''}`} />
           </div>
         );
       case 'warning':
         return (
-          <div className={`${baseClasses} bg-orange-100 ${isHovered ? 'bg-orange-200 scale-110 animate-pulse-glow' : ''}`}>
-            <Video className={`w-5 h-5 sm:w-6 sm:h-6 text-orange-600 transition-all duration-300 ${isHovered ? 'scale-110' : ''}`} />
+          <div className={`${baseClasses} bg-gray-100 ${isHovered ? 'bg-gray-200 scale-110 animate-pulse-glow' : ''}`}>
+            <Video className={`w-5 h-5 sm:w-6 sm:h-6 text-gray-600 transition-all duration-300 ${isHovered ? 'scale-110' : ''}`} />
           </div>
         );
       default:
         return (
-          <div className={`${baseClasses} bg-green-100 ${isHovered ? 'bg-green-200 scale-110 animate-pulse-glow' : ''}`}>
-            <Play className={`w-5 h-5 sm:w-6 sm:h-6 text-green-600 transition-all duration-300 ${isHovered ? 'scale-110' : ''}`} />
+          <div className={`${baseClasses} bg-gray-100 ${isHovered ? 'bg-gray-200 scale-110 animate-pulse-glow' : ''}`}>
+            <Play className={`w-5 h-5 sm:w-6 sm:h-6 text-gray-600 transition-all duration-300 ${isHovered ? 'scale-110' : ''}`} />
           </div>
         );
     }
@@ -173,19 +173,19 @@ export default function LiveSessions({ userType }: LiveSessionsProps) {
     switch (status) {
       case 'info':
         return (
-          <span className="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded-full animate-pulse">
+          <span className="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded-full animate-pulse">
             ● Live Soon
           </span>
         );
       case 'warning':
         return (
-          <span className="px-2 py-1 bg-orange-100 text-orange-700 text-xs font-medium rounded-full animate-pulse">
+          <span className="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded-full animate-pulse">
             ● Scheduled
           </span>
         );
       default:
         return (
-          <span className="px-2 py-1 bg-green-100 text-green-700 text-xs font-medium rounded-full animate-pulse">
+          <span className="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded-full animate-pulse">
             ● Available
           </span>
         );
@@ -204,13 +204,13 @@ export default function LiveSessions({ userType }: LiveSessionsProps) {
       {sessions.map((session, index) => (
         <div
           key={session.id}
-          className="bg-white rounded-lg p-5 shadow-[0_8px_30px_rgb(0,0,0,0.02)] border border-gray-100 group hover:border-yellow-200 transition-all duration-500 relative overflow-hidden"
+          className="bg-white rounded-lg p-5 shadow-[0_8px_30px_rgb(0,0,0,0.02)] border border-gray-100 group hover:border-gray-200 transition-all duration-500 relative overflow-hidden"
           style={{ animationDelay: `${index * 150}ms` }}
           onMouseEnter={() => setHoveredSession(session.id)}
           onMouseLeave={() => setHoveredSession(null)}
         >
           {/* Subtle Background Accent */}
-          <div className="absolute top-0 right-0 w-24 h-24 bg-yellow-50 rounded-full -mr-12 -mt-12 opacity-0 group-hover:opacity-40 transition-opacity duration-500 blur-2xl"></div>
+          <div className="absolute top-0 right-0 w-24 h-24 bg-gray-50 rounded-full -mr-12 -mt-12 opacity-0 group-hover:opacity-40 transition-opacity duration-500 blur-2xl"></div>
 
           <div className="flex flex-col sm:flex-row gap-5 relative z-10">
             {/* Session Icon / Status */}
@@ -228,14 +228,14 @@ export default function LiveSessions({ userType }: LiveSessionsProps) {
                   {getStatusBadge(session.status)}
                 </div>
 
-                <div className={`px-2 py-1 bg-purple-50 text-purple-600 text-[10px] font-bold rounded-md flex items-center gap-1.5 border border-purple-100 transition-transform duration-300 ${hoveredSession === session.id ? 'scale-105' : ''
+                <div className={`px-2 py-1 bg-gray-50 text-gray-600 text-[10px] font-bold rounded-md flex items-center gap-1.5 border border-gray-100 transition-transform duration-300 ${hoveredSession === session.id ? 'scale-105' : ''
                   }`}>
                   <Clock className="w-3 h-3" />
                   <span className="whitespace-nowrap   er">{session.time}</span>
                 </div>
               </div>
 
-              <h3 className={`text-base font-semibold text-gray-900 mb-2 transition-colors duration-300 ${hoveredSession === session.id ? 'text-yellow-600' : ''
+              <h3 className={`text-base font-semibold text-gray-900 mb-2 transition-colors duration-300 ${hoveredSession === session.id ? 'text-gray-600' : ''
                 }`}>
                 {session.title}
               </h3>
@@ -252,7 +252,7 @@ export default function LiveSessions({ userType }: LiveSessionsProps) {
                   </button>
                 </div>
 
-                <button className={`flex items-center gap-2 px-5 py-2.5 bg-yellow-600 text-white text-xs rounded-lg hover:bg-yellow-700 transition-all duration-300 shadow-lg shadow-yellow-600/20 active:scale-95 ${hoveredSession === session.id ? 'translate-x-1' : ''
+                <button className={`flex items-center gap-2 px-5 py-2.5 bg-gray-600 text-white text-xs rounded-lg hover:bg-gray-700 transition-all duration-300 shadow-lg shadow-gray-600/20 active:scale-95 ${hoveredSession === session.id ? 'translate-x-1' : ''
                   }`}>
                   <Play className="w-3 h-3 fill-current" />
                   {session.actions.primary}
@@ -266,11 +266,11 @@ export default function LiveSessions({ userType }: LiveSessionsProps) {
           {session.status === 'info' && (
             <div className="mt-5 pt-4 border-t border-gray-100/60">
               <div className="flex items-center justify-between text-[10px] mb-2 font-bold  ">
-                <span className="text-blue-500   ">Connection window opens in</span>
-                <span className="text-gray-900 bg-blue-50 px-2 py-0.5 rounded border border-blue-100 font-mono">01:45:22</span>
+                <span className="text-gray-500   ">Connection window opens in</span>
+                <span className="text-gray-900 bg-gray-50 px-2 py-0.5 rounded border border-gray-100 font-mono">01:45:22</span>
               </div>
               <div className="w-full bg-gray-50 rounded-full h-1 overflow-hidden border border-gray-100">
-                <div className="bg-gradient-to-r from-blue-500 to-indigo-500 h-1 rounded-full animate-shimmer" style={{ width: '75%' }}></div>
+                <div className="bg-gradient-to-r from-gray-500 to-gray-500 h-1 rounded-full animate-shimmer" style={{ width: '75%' }}></div>
               </div>
             </div>
           )}

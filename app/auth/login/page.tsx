@@ -93,28 +93,28 @@ export default function LoginPage() {
               <button
                 type="button"
                 onClick={() => fillDemoCredentials('student')}
-                className="text-xs px-2 py-1 bg-blue-100 text-blue-700 rounded hover:bg-blue-200 transition-colors"
+                className="text-xs px-2 py-1 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition-colors"
               >
                 Student
               </button>
               <button
                 type="button"
                 onClick={() => fillDemoCredentials('trainer')}
-                className="text-xs px-2 py-1 bg-green-100 text-green-700 rounded hover:bg-green-200 transition-colors"
+                className="text-xs px-2 py-1 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition-colors"
               >
                 Trainer
               </button>
               <button
                 type="button"
                 onClick={() => fillDemoCredentials('mentor')}
-                className="text-xs px-2 py-1 bg-purple-100 text-purple-700 rounded hover:bg-purple-200 transition-colors"
+                className="text-xs px-2 py-1 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition-colors"
               >
                 Mentor
               </button>
               <button
                 type="button"
                 onClick={() => fillDemoCredentials('wing-admin')}
-                className="text-xs px-2 py-1 bg-orange-100 text-orange-700 rounded hover:bg-orange-200 transition-colors"
+                className="text-xs px-2 py-1 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition-colors"
               >
                 Wing Admin
               </button>
@@ -122,7 +122,7 @@ export default function LoginPage() {
             <button
               type="button"
               onClick={() => fillDemoCredentials('umbrella-admin')}
-              className="text-xs px-2 py-1 bg-red-100 text-red-700 rounded hover:bg-red-200 transition-colors mt-2 w-full"
+              className="text-xs px-2 py-1 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition-colors mt-2 w-full"
             >
               Umbrella Admin
             </button>
@@ -143,12 +143,12 @@ export default function LoginPage() {
                   setLocalErrors((prev: { email: string; password: string }) => ({ ...prev, email: '' }));
                 }}
                 placeholder="Enter your email"
-                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${localErrors.email || error ? 'border-red-500' : 'border-gray-300'
+                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${localErrors.email || error ? 'border-gray-500' : 'border-gray-300'
                   }`}
                 required
                 disabled={isLoading}
               />
-              {localErrors.email && <p className="mt-2 text-sm text-red-500">{localErrors.email}</p>}
+              {localErrors.email && <p className="mt-2 text-sm text-gray-500">{localErrors.email}</p>}
             </div>
 
             <div>
@@ -165,7 +165,7 @@ export default function LoginPage() {
                     setLocalErrors(prev => ({ ...prev, password: '' }));
                   }}
                   placeholder="Enter your password"
-                  className={`w-full px-4 py-3 pr-12 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${localErrors.password || error ? 'border-red-500' : 'border-gray-300'
+                  className={`w-full px-4 py-3 pr-12 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${localErrors.password || error ? 'border-gray-500' : 'border-gray-300'
                     }`}
                   required
                   disabled={isLoading}
@@ -188,20 +188,20 @@ export default function LoginPage() {
                   )}
                 </button>
               </div>
-              {localErrors.password && <p className="mt-2 text-sm text-red-500">{localErrors.password}</p>}
+              {localErrors.password && <p className="mt-2 text-sm text-gray-500">{localErrors.password}</p>}
             </div>
 
             {/* Display login error */}
             {error && (
-              <div className="p-3 bg-red-50 border border-red-200 rounded-lg">
-                <p className="text-sm text-red-600">{error}</p>
+              <div className="p-3 bg-gray-50 border border-gray-200 rounded-lg">
+                <p className="text-sm text-gray-600">{error}</p>
               </div>
             )}
 
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-gray-600 text-white py-3 rounded-lg font-medium hover:bg-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? (
                 <div className="flex items-center justify-center">
@@ -222,7 +222,7 @@ export default function LoginPage() {
             Don't have an account?{' '}
             <button
               onClick={() => navigate('/auth/signup')}
-              className="text-yellow-600 hover:text-yellow-700 font-medium"
+              className="text-gray-600 hover:text-gray-700 font-medium"
               disabled={isLoading}
             >
               Sign Up
@@ -233,7 +233,7 @@ export default function LoginPage() {
           <p className="mt-2 text-sm text-gray-600 text-center">
             <button
               onClick={() => navigate('/auth/forgot-password')}
-              className="text-yellow-600 hover:text-yellow-700 font-medium"
+              className="text-gray-600 hover:text-gray-700 font-medium"
               disabled={isLoading}
             >
               Forgot password?

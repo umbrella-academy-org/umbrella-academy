@@ -162,12 +162,12 @@ export default function ChooseFieldPage() {
                       <div
                         key={field.id}
                         className={`border rounded-lg transition-all duration-300 overflow-hidden ${isSelected
-                          ? 'border-yellow-600 bg-yellow-50 shadow-md ring-1 ring-yellow-600/20'
+                          ? 'border-gray-600 bg-gray-50 shadow-md ring-1 ring-gray-600/20'
                           : 'border-gray-200 bg-white hover:border-gray-300'
                           }`}
                       >
                         <div className="p-5 flex items-center gap-5">
-                          <div className={`w-14 h-14 rounded-lg flex items-center justify-center text-2xl shadow-sm transition-all ${isSelected ? 'bg-yellow-600 text-white' : 'bg-gray-50 text-gray-400'}`}>
+                          <div className={`w-14 h-14 rounded-lg flex items-center justify-center text-2xl shadow-sm transition-all ${isSelected ? 'bg-gray-600 text-white' : 'bg-gray-50 text-gray-400'}`}>
                             {field.icon}
                           </div>
 
@@ -176,13 +176,13 @@ export default function ChooseFieldPage() {
                               <h3 className={`text-sm font-semibold truncate ${isSelected ? 'text-gray-900' : 'text-gray-700'}`}>
                                 {field.title}
                               </h3>
-                              {isSelected && <CheckCircle className="w-5 h-5 text-yellow-600" />}
+                              {isSelected && <CheckCircle className="w-5 h-5 text-gray-600" />}
                             </div>
 
                             <div className="flex items-center justify-between">
                               <div className="flex items-center gap-4">
                                 <div className="flex items-center gap-1">
-                                  <Star className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />
+                                  <Star className="w-3.5 h-3.5 fill-gray-400 text-gray-400" />
                                   <span className="text-xs font-black text-gray-700">{field.rating}</span>
                                 </div>
                                 <span className="text-sm font-black text-gray-900 tracking-tight">
@@ -195,7 +195,7 @@ export default function ChooseFieldPage() {
                                   type="button"
                                   onClick={() => handleFieldSelect(field.id)}
                                   className={`px-4 py-1.5 rounded text-xs font-black  transition-all ${isSelected
-                                    ? 'bg-yellow-600 text-white shadow-lg'
+                                    ? 'bg-gray-600 text-white shadow-lg'
                                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
                                 >
                                   {isSelected ? 'Selected' : 'Select'}
@@ -216,19 +216,19 @@ export default function ChooseFieldPage() {
                   })}
                 </div>
 
-                {error && <p className="mb-4 text-xs font-medium text-red-500 text-center">{error}</p>}
+                {error && <p className="mb-4 text-xs font-medium text-gray-500 text-center">{error}</p>}
 
                 <button
                   type="submit"
-                  className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-all active:scale-95"
+                  className="w-full bg-gray-600 text-white py-3 rounded-lg font-medium hover:bg-gray-700 transition-all active:scale-95"
                 >
                   Continue to Payment
                 </button>
 
                 {/* Progress dots */}
                 <div className="flex justify-center gap-2 pt-6">
-                  <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
-                  <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
+                  <div className="w-8 h-2 bg-gray-600 rounded-full"></div>
+                  <div className="w-8 h-2 bg-gray-600 rounded-full"></div>
                   <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
                   <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
                   <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
@@ -251,14 +251,14 @@ export default function ChooseFieldPage() {
             {/* Header */}
             <div className="flex items-center justify-between p-8 border-b border-gray-100 sticky top-0 bg-white z-10">
               <div className="flex items-center gap-5">
-                <div className="w-14 h-14 bg-yellow-50 rounded-lg flex items-center justify-center text-3xl shadow-sm border border-yellow-100">
+                <div className="w-14 h-14 bg-gray-50 rounded-lg flex items-center justify-center text-3xl shadow-sm border border-gray-100">
                   {viewingField.icon}
                 </div>
                 <div>
                   <h2 className="text-xl font-black text-gray-900  ">{viewingField.title}</h2>
                   <div className="flex items-center gap-3 mt-1">
                     <div className="flex items-center gap-1">
-                      <Star className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />
+                      <Star className="w-3.5 h-3.5 fill-gray-400 text-gray-400" />
                       <span className="text-sm font-black text-gray-700">{viewingField.rating}</span>
                     </div>
                     <span className="text-xs font-semibold text-gray-600  border-l border-gray-200 pl-3">
@@ -319,8 +319,8 @@ export default function ChooseFieldPage() {
                 <h4 className="text-xs font-black text-gray-600 border-b border-gray-100 pb-2">Top Live Trainers</h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {viewingField.trainers.topTrainers.map((trainer, index) => (
-                    <div key={index} className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg border border-gray-100 group hover:border-yellow-200 transition-all">
-                      <div className="w-10 h-10 bg-white shadow-sm rounded-lg flex items-center justify-center text-sm font-black text-yellow-700 border border-gray-100 group-hover:scale-110 transition-transform">
+                    <div key={index} className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg border border-gray-100 group hover:border-gray-200 transition-all">
+                      <div className="w-10 h-10 bg-white shadow-sm rounded-lg flex items-center justify-center text-sm font-black text-gray-700 border border-gray-100 group-hover:scale-110 transition-transform">
                         {trainer.avatar}
                       </div>
                       <div className="flex-1">
@@ -328,7 +328,7 @@ export default function ChooseFieldPage() {
                         <p className="text-xs font-bold text-gray-600 leading-tight mt-0.5">{trainer.specialization}</p>
                       </div>
                       <div className="flex items-center gap-1">
-                        <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
+                        <Star className="w-3 h-3 fill-gray-400 text-gray-400" />
                         <span className="text-[10px] font-black text-gray-700">{trainer.rating}</span>
                       </div>
                     </div>
@@ -343,7 +343,7 @@ export default function ChooseFieldPage() {
                     handleFieldSelect(viewingField.id);
                     setViewingField(null);
                   }}
-                  className="flex-1 bg-yellow-600 text-white py-4 rounded-lg text-sm font-black   hover:bg-yellow-700 transition-all shadow-lg active:scale-95"
+                  className="flex-1 bg-gray-600 text-white py-4 rounded-lg text-sm font-black   hover:bg-gray-700 transition-all shadow-lg active:scale-95"
                 >
                   Apply to this Field
                 </button>

@@ -89,7 +89,7 @@ export default function UmbrellaAdminFieldsPage() {
                     <p className="text-sm font-medium text-gray-600">Total Fields</p>
                     <p className="text-2xl font-bold text-gray-900">{totalFields}</p>
                   </div>
-                  <Building2 className="w-8 h-8 text-blue-500" />
+                  <Building2 className="w-8 h-8 text-gray-500" />
                 </div>
               </div>
               <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
@@ -98,7 +98,7 @@ export default function UmbrellaAdminFieldsPage() {
                     <p className="text-sm font-medium text-gray-600">Active Fields</p>
                     <p className="text-2xl font-bold text-gray-900">{activeFields}</p>
                   </div>
-                  <TrendingUp className="w-8 h-8 text-green-500" />
+                  <TrendingUp className="w-8 h-8 text-gray-500" />
                 </div>
               </div>
               <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
@@ -107,7 +107,7 @@ export default function UmbrellaAdminFieldsPage() {
                     <p className="text-sm font-medium text-gray-600">Total Students</p>
                     <p className="text-2xl font-bold text-gray-900">{totalStudents.toLocaleString()}</p>
                   </div>
-                  <Users className="w-8 h-8 text-purple-500" />
+                  <Users className="w-8 h-8 text-gray-500" />
                 </div>
               </div>
               <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
@@ -116,7 +116,7 @@ export default function UmbrellaAdminFieldsPage() {
                     <p className="text-sm font-medium text-gray-600">Total Revenue</p>
                     <p className="text-2xl font-bold text-gray-900">RWF {totalRevenue.toLocaleString()}</p>
                   </div>
-                  <DollarSign className="w-8 h-8 text-yellow-500" />
+                  <DollarSign className="w-8 h-8 text-gray-500" />
                 </div>
               </div>
             </div>

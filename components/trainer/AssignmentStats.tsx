@@ -5,40 +5,40 @@ import { TrendingUp, Clock, Users, CheckCircle, AlertTriangle, FileText } from '
 export default function AssignmentStats() {
   const stats = [
     {
-      icon: <FileText className="w-5 h-5 text-blue-600" />,
+      icon: <FileText className="w-5 h-5 text-gray-600" />,
       title: 'Total Assignments',
       value: '42',
       change: '+3 this week',
       changeType: 'positive' as const,
-      bgColor: 'bg-blue-50',
-      borderColor: 'border-blue-200'
+      bgColor: 'bg-gray-50',
+      borderColor: 'border-gray-200'
     },
     {
-      icon: <CheckCircle className="w-5 h-5 text-green-600" />,
+      icon: <CheckCircle className="w-5 h-5 text-gray-600" />,
       title: 'Completed',
       value: '35',
       change: '83% completion rate',
       changeType: 'positive' as const,
-      bgColor: 'bg-green-50',
-      borderColor: 'border-green-200'
+      bgColor: 'bg-gray-50',
+      borderColor: 'border-gray-200'
     },
     {
-      icon: <Clock className="w-5 h-5 text-orange-600" />,
+      icon: <Clock className="w-5 h-5 text-gray-600" />,
       title: 'Pending Review',
       value: '8',
       change: 'Avg 2.3 days',
       changeType: 'neutral' as const,
-      bgColor: 'bg-orange-50',
-      borderColor: 'border-orange-200'
+      bgColor: 'bg-gray-50',
+      borderColor: 'border-gray-200'
     },
     {
-      icon: <AlertTriangle className="w-5 h-5 text-red-600" />,
+      icon: <AlertTriangle className="w-5 h-5 text-gray-600" />,
       title: 'Overdue',
       value: '3',
       change: '-2 from last week',
       changeType: 'positive' as const,
-      bgColor: 'bg-red-50',
-      borderColor: 'border-red-200'
+      bgColor: 'bg-gray-50',
+      borderColor: 'border-gray-200'
     }
   ];
 
@@ -90,7 +90,7 @@ export default function AssignmentStats() {
               <h3 className="font-semibold text-gray-900 text-sm">{stat.title}</h3>
               <div className={`text-xs font-medium ${
                 stat.changeType === 'positive' 
-                  ? 'text-green-600' 
+                  ? 'text-gray-600' 
                   : 'text-gray-600'
               }`}>
                 {stat.change}
@@ -106,11 +106,11 @@ export default function AssignmentStats() {
         
         <div className="space-y-3">
           {[
-            { grade: 'A (90-100%)', count: 12, percentage: 35, color: 'bg-green-500' },
-            { grade: 'B (80-89%)', count: 15, percentage: 44, color: 'bg-blue-500' },
-            { grade: 'C (70-79%)', count: 6, percentage: 18, color: 'bg-yellow-500' },
-            { grade: 'D (60-69%)', count: 1, percentage: 3, color: 'bg-orange-500' },
-            { grade: 'F (0-59%)', count: 0, percentage: 0, color: 'bg-red-500' }
+            { grade: 'A (90-100%)', count: 12, percentage: 35, color: 'bg-gray-500' },
+            { grade: 'B (80-89%)', count: 15, percentage: 44, color: 'bg-gray-500' },
+            { grade: 'C (70-79%)', count: 6, percentage: 18, color: 'bg-gray-500' },
+            { grade: 'D (60-69%)', count: 1, percentage: 3, color: 'bg-gray-500' },
+            { grade: 'F (0-59%)', count: 0, percentage: 0, color: 'bg-gray-500' }
           ].map((item) => (
             <div key={item.grade} className="flex items-center justify-between">
               <div className="flex items-center gap-3 flex-1">
@@ -135,7 +135,7 @@ export default function AssignmentStats() {
       <div className="bg-white rounded-lg border border-gray-200 p-6">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-semibold text-gray-900">Recent Activity</h3>
-          <button className="text-sm text-yellow-600 hover:text-yellow-700 font-medium">
+          <button className="text-sm text-gray-600 hover:text-gray-700 font-medium">
             View All
           </button>
         </div>
@@ -147,7 +147,7 @@ export default function AssignmentStats() {
               className="flex items-start gap-3 animate-fade-in"
               style={{ animationDelay: `${index * 50}ms` }}
             >
-              <div className="w-2 h-2 bg-yellow-600 rounded-full mt-2 flex-shrink-0" />
+              <div className="w-2 h-2 bg-gray-600 rounded-full mt-2 flex-shrink-0" />
               <div className="flex-1 min-w-0">
                 <p className="text-sm text-gray-900">
                   <span className="font-medium">{activity.action}</span>
@@ -162,7 +162,7 @@ export default function AssignmentStats() {
                 <div className="flex items-center gap-2 mt-1">
                   <p className="text-xs text-gray-500">{activity.time}</p>
                   {activity.grade && (
-                    <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">
+                    <span className="text-xs bg-gray-100 text-gray-800 px-2 py-1 rounded-full">
                       {activity.grade}%
                     </span>
                   )}

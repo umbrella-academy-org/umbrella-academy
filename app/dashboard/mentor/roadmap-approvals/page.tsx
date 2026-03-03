@@ -147,7 +147,7 @@ export default function MentorRoadmapApprovalsPage() {
                     {pendingRoadmaps.map((roadmap) => (
                       <div
                         key={roadmap.id}
-                        className={`p-4 cursor-pointer hover:bg-gray-50 transition-colors ${selectedRoadmap === roadmap.id ? 'bg-yellow-50 border-r-4 border-yellow-600' : ''
+                        className={`p-4 cursor-pointer hover:bg-gray-50 transition-colors ${selectedRoadmap === roadmap.id ? 'bg-gray-50 border-r-4 border-gray-600' : ''
                           }`}
                         onClick={() => setSelectedRoadmap(roadmap.id)}
                       >
@@ -187,20 +187,20 @@ export default function MentorRoadmapApprovalsPage() {
                         <div className="flex items-center gap-2">
                           <button
                             onClick={() => handleApprove(selectedRoadmapData.id)}
-                            className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+                            className="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
                           >
                             <CheckCircle className="w-4 h-4" />
                             Approve
                           </button>
                           <button
                             onClick={() => handleRequestChanges(selectedRoadmapData.id)}
-                            className="flex items-center gap-2 px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors"
+                            className="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
                           >
                             Request Changes
                           </button>
                           <button
                             onClick={() => handleReject(selectedRoadmapData.id)}
-                            className="flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+                            className="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
                           >
                             <XCircle className="w-4 h-4" />
                             Reject
@@ -233,21 +233,21 @@ export default function MentorRoadmapApprovalsPage() {
                     <div className="p-6 border-b border-gray-200">
                       <h3 className="font-semibold text-gray-900 mb-4">Roadmap Summary</h3>
                       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                        <div className="text-center p-3 bg-blue-50 rounded-lg">
-                          <div className="text-2xl font-bold text-blue-600">{selectedRoadmapData.phases.length}</div>
-                          <div className="text-sm text-blue-600">Phases</div>
+                        <div className="text-center p-3 bg-gray-50 rounded-lg">
+                          <div className="text-2xl font-bold text-gray-600">{selectedRoadmapData.phases.length}</div>
+                          <div className="text-sm text-gray-600">Phases</div>
                         </div>
-                        <div className="text-center p-3 bg-green-50 rounded-lg">
-                          <div className="text-2xl font-bold text-green-600">{selectedRoadmapData.totalWeeks}</div>
-                          <div className="text-sm text-green-600">Weeks</div>
+                        <div className="text-center p-3 bg-gray-50 rounded-lg">
+                          <div className="text-2xl font-bold text-gray-600">{selectedRoadmapData.totalWeeks}</div>
+                          <div className="text-sm text-gray-600">Weeks</div>
                         </div>
-                        <div className="text-center p-3 bg-purple-50 rounded-lg">
-                          <div className="text-2xl font-bold text-purple-600">{selectedRoadmapData.totalSessions}</div>
-                          <div className="text-sm text-purple-600">Sessions</div>
+                        <div className="text-center p-3 bg-gray-50 rounded-lg">
+                          <div className="text-2xl font-bold text-gray-600">{selectedRoadmapData.totalSessions}</div>
+                          <div className="text-sm text-gray-600">Sessions</div>
                         </div>
-                        <div className="text-center p-3 bg-yellow-50 rounded-lg">
-                          <div className="text-2xl font-bold text-yellow-600">€{selectedRoadmapData.monthlyPrice}</div>
-                          <div className="text-sm text-yellow-600">Monthly</div>
+                        <div className="text-center p-3 bg-gray-50 rounded-lg">
+                          <div className="text-2xl font-bold text-gray-600">€{selectedRoadmapData.monthlyPrice}</div>
+                          <div className="text-sm text-gray-600">Monthly</div>
                         </div>
                       </div>
                     </div>
@@ -259,7 +259,7 @@ export default function MentorRoadmapApprovalsPage() {
                         {selectedRoadmapData.phases.map((phase, index) => (
                           <div key={phase.id} className="border border-gray-200 rounded-lg p-4">
                             <div className="flex items-start gap-4">
-                              <div className="w-8 h-8 bg-yellow-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                              <div className="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
                                 {index + 1}
                               </div>
                               <div className="flex-1">

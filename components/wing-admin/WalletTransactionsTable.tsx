@@ -26,11 +26,11 @@ export default function WalletTransactionsTable({ transactions }: WalletTransact
     description: (
       <div className="flex items-center">
         <div className={`w-8 h-8 rounded-full flex items-center justify-center mr-3 ${
-          transaction.type === 'income' ? 'bg-green-100' : 'bg-red-100'
+          transaction.type === 'income' ? 'bg-gray-100' : 'bg-gray-100'
         }`}>
           {transaction.type === 'income' ? 
-            <ArrowDownLeft className="w-4 h-4 text-green-600" /> : 
-            <ArrowUpRight className="w-4 h-4 text-red-600" />
+            <ArrowDownLeft className="w-4 h-4 text-gray-600" /> : 
+            <ArrowUpRight className="w-4 h-4 text-gray-600" />
           }
         </div>
         <div>
@@ -41,7 +41,7 @@ export default function WalletTransactionsTable({ transactions }: WalletTransact
     ),
     amount: (
       <div className={`text-sm font-medium ${
-        transaction.amount >= 0 ? 'text-green-600' : 'text-red-600'
+        transaction.amount >= 0 ? 'text-gray-600' : 'text-gray-600'
       }`}>
         {transaction.amount >= 0 ? '+' : ''}RWF {transaction.amount.toLocaleString()}
       </div>
@@ -54,9 +54,9 @@ export default function WalletTransactionsTable({ transactions }: WalletTransact
     ),
     status: (
       <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-        transaction.status === 'completed' ? 'bg-green-100 text-green-800' :
-        transaction.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
-        'bg-red-100 text-red-800'
+        transaction.status === 'completed' ? 'bg-gray-100 text-gray-800' :
+        transaction.status === 'pending' ? 'bg-gray-100 text-gray-800' :
+        'bg-gray-100 text-gray-800'
       }`}>
         {transaction.status}
       </span>
@@ -88,16 +88,16 @@ export default function WalletTransactionsTable({ transactions }: WalletTransact
     <div className="space-y-4">
       {/* Selected Actions */}
       {selectedTransactions.length > 0 && (
-        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+        <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
           <div className="flex items-center justify-between">
-            <span className="text-sm font-medium text-yellow-800">
+            <span className="text-sm font-medium text-gray-800">
               {selectedTransactions.length} transaction{selectedTransactions.length > 1 ? 's' : ''} selected
             </span>
             <div className="flex items-center gap-2">
               <button className="px-3 py-1.5 text-xs font-medium text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
                 Export Selected
               </button>
-              <button className="px-3 py-1.5 text-xs font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors">
+              <button className="px-3 py-1.5 text-xs font-medium text-white bg-gray-600 rounded-lg hover:bg-gray-700 transition-colors">
                 Generate Report
               </button>
             </div>

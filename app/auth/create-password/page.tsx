@@ -66,7 +66,7 @@ export default function CreatePasswordPage() {
           <div className="flex flex-col items-center justify-center flex-1">
             {/* Logo */}
             <div className="mb-8">
-              <div className="w-16 h-16 bg-yellow-600 rounded-2xl flex items-center justify-center">
+              <div className="w-16 h-16 bg-gray-600 rounded-2xl flex items-center justify-center">
                 <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" />
                 </svg>
@@ -98,8 +98,8 @@ export default function CreatePasswordPage() {
                       setErrors(prev => ({ ...prev, password: '' }));
                     }}
                     placeholder="••••••••"
-                    className={`w-full px-4 py-3 pr-12 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${
-                      errors.password ? 'border-red-500' : 'border-gray-300'
+                    className={`w-full px-4 py-3 pr-12 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${
+                      errors.password ? 'border-gray-500' : 'border-gray-300'
                     }`}
                     required
                   />
@@ -120,7 +120,7 @@ export default function CreatePasswordPage() {
                     )}
                   </button>
                 </div>
-                {errors.password && <p className="mt-2 text-sm text-red-500">{errors.password}</p>}
+                {errors.password && <p className="mt-2 text-sm text-gray-500">{errors.password}</p>}
               </div>
 
               {/* Confirm Password field */}
@@ -138,8 +138,8 @@ export default function CreatePasswordPage() {
                       setErrors(prev => ({ ...prev, confirmPassword: '' }));
                     }}
                     placeholder="••••••••"
-                    className={`w-full px-4 py-3 pr-12 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${
-                      errors.confirmPassword ? 'border-red-500' : 'border-gray-300'
+                    className={`w-full px-4 py-3 pr-12 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${
+                      errors.confirmPassword ? 'border-gray-500' : 'border-gray-300'
                     }`}
                     required
                   />
@@ -160,14 +160,14 @@ export default function CreatePasswordPage() {
                     )}
                   </button>
                 </div>
-                {errors.confirmPassword && <p className="mt-2 text-sm text-red-500">{errors.confirmPassword}</p>}
+                {errors.confirmPassword && <p className="mt-2 text-sm text-gray-500">{errors.confirmPassword}</p>}
               </div>
 
               {/* Password requirements */}
               <div className="space-y-2 py-2">
                 <div className="flex items-center gap-2">
                   <div className={`w-5 h-5 rounded-full flex items-center justify-center ${
-                    hasSpecialChar ? 'bg-green-500' : 'bg-gray-300'
+                    hasSpecialChar ? 'bg-gray-500' : 'bg-gray-300'
                   }`}>
                     {hasSpecialChar && (
                       <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -182,7 +182,7 @@ export default function CreatePasswordPage() {
 
                 <div className="flex items-center gap-2">
                   <div className={`w-5 h-5 rounded-full flex items-center justify-center ${
-                    hasMinLength ? 'bg-green-500' : 'bg-gray-300'
+                    hasMinLength ? 'bg-gray-500' : 'bg-gray-300'
                   }`}>
                     {hasMinLength && (
                       <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -197,7 +197,7 @@ export default function CreatePasswordPage() {
 
                 <div className="flex items-center gap-2">
                   <div className={`w-5 h-5 rounded-full flex items-center justify-center ${
-                    hasNumber ? 'bg-green-500' : 'bg-gray-300'
+                    hasNumber ? 'bg-gray-500' : 'bg-gray-300'
                   }`}>
                     {hasNumber && (
                       <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -213,7 +213,7 @@ export default function CreatePasswordPage() {
 
               <button
                 type="submit"
-                className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-colors"
+                className="w-full bg-gray-600 text-white py-3 rounded-lg font-medium hover:bg-gray-700 transition-colors"
               >
                 Continue
               </button>
@@ -222,7 +222,7 @@ export default function CreatePasswordPage() {
             {/* Sign in link */}
             <p className="mt-6 text-sm text-gray-600">
               Have an account?{' '}
-              <a href="#" className="text-yellow-600 hover:text-yellow-700 font-medium">
+              <a href="#" className="text-gray-600 hover:text-gray-700 font-medium">
                 Sign In
               </a>
             </p>

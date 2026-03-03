@@ -6,12 +6,12 @@ export default function CalendarInfo() {
   return (
     <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 relative overflow-hidden group">
       {/* Decorative background element */}
-      <div className="absolute top-0 right-0 w-24 h-24 bg-yellow-50 rounded-full -mr-8 -mt-8 transition-transform group-hover:scale-110 duration-500"></div>
+      <div className="absolute top-0 right-0 w-24 h-24 bg-gray-50 rounded-full -mr-8 -mt-8 transition-transform group-hover:scale-110 duration-500"></div>
 
       <div className="relative z-10">
         <div className="flex items-center justify-between mb-6">
           <h3 className="text-lg font-bold text-gray-900  ">Learning Status</h3>
-          <span className="px-2.5 py-1 bg-green-100 text-green-700 text-[10px] font-bold  rounded-md ">
+          <span className="px-2.5 py-1 bg-gray-100 text-gray-700 text-[10px] font-bold  rounded-md ">
             On Track
           </span>
         </div>
@@ -23,11 +23,11 @@ export default function CalendarInfo() {
             <h4 className="text-base font-bold text-gray-900 mb-2">Programming & Development</h4>
             <div className="flex items-center justify-between text-xs mb-1.5">
               <span className="text-gray-500 font-medium">Goal Progress</span>
-              <span className="text-yellow-600 font-bold">65%</span>
+              <span className="text-gray-600 font-bold">65%</span>
             </div>
             <div className="w-full bg-gray-100 rounded-full h-1.5">
               <div
-                className="bg-yellow-600 h-1.5 rounded-full transition-all duration-1000"
+                className="bg-gray-600 h-1.5 rounded-full transition-all duration-1000"
                 style={{ width: '65%' }}
               ></div>
             </div>
@@ -47,8 +47,8 @@ export default function CalendarInfo() {
 
           {/* Mentor Mention */}
           <div className="flex items-center gap-3 pt-2">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-100 to-yellow-200 flex items-center justify-center border border-white shadow-sm">
-              <span className="text-xs font-bold text-yellow-700">DW</span>
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center border border-white shadow-sm">
+              <span className="text-xs font-bold text-gray-700">DW</span>
             </div>
             <div>
               <p className="text-[10px] text-gray-400 font-bold      mb-1">Mentor</p>
@@ -58,7 +58,7 @@ export default function CalendarInfo() {
         </div>
 
         {/* Action Button */}
-        <button className="w-full mt-6 py-3 bg-yellow-600 text-white text-xs font-bold rounded-lg hover:bg-gray-800 transition-all active:scale-[0.98] shadow-lg shadow-gray-200">
+        <button className="w-full mt-6 py-3 bg-gray-600 text-white text-xs font-bold rounded-lg hover:bg-gray-800 transition-all active:scale-[0.98] shadow-lg shadow-gray-200">
           View Full Roadmap
         </button>
       </div>

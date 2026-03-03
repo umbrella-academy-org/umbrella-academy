@@ -103,8 +103,8 @@ export default function MoMoPayment({
     return (
       <div className="bg-white rounded-lg border border-gray-200 p-6">
         <div className="text-center">
-          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <CheckCircle className="w-8 h-8 text-green-600" />
+          <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <CheckCircle className="w-8 h-8 text-gray-600" />
           </div>
           <h3 className="text-lg font-semibold text-gray-900 mb-2">Payment Successful!</h3>
           <p className="text-gray-600 mb-4">
@@ -124,8 +124,8 @@ export default function MoMoPayment({
   return (
     <div className="bg-white rounded-lg border border-gray-200 p-6">
       <div className="flex items-center gap-3 mb-6">
-        <div className="w-10 h-10 bg-yellow-100 rounded-lg flex items-center justify-center">
-          <Phone className="w-5 h-5 text-yellow-600" />
+        <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center">
+          <Phone className="w-5 h-5 text-gray-600" />
         </div>
         <div>
           <h3 className="text-lg font-semibold text-gray-900">MoMo Payment</h3>
@@ -154,7 +154,7 @@ export default function MoMoPayment({
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
             placeholder="07XXXXXXXX"
-            className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600"
+            className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600"
             disabled={isProcessing}
           />
         </div>
@@ -165,9 +165,9 @@ export default function MoMoPayment({
 
       {/* Error Message */}
       {errorMessage && (
-        <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg flex items-center gap-2">
-          <AlertCircle className="w-4 h-4 text-red-600" />
-          <span className="text-sm text-red-600">{errorMessage}</span>
+        <div className="mb-4 p-3 bg-gray-50 border border-gray-200 rounded-lg flex items-center gap-2">
+          <AlertCircle className="w-4 h-4 text-gray-600" />
+          <span className="text-sm text-gray-600">{errorMessage}</span>
         </div>
       )}
 
@@ -175,7 +175,7 @@ export default function MoMoPayment({
       <button
         onClick={handlePayment}
         disabled={isProcessing || !phoneNumber}
-        className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+        className="w-full bg-gray-600 text-white py-3 rounded-lg font-medium hover:bg-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
       >
         {isProcessing ? (
           <>

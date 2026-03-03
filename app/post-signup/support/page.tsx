@@ -46,7 +46,7 @@ export default function StudentSupportPage() {
                                     placeholder="Search articles, topics, help..."
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
-                                    className="w-full pl-12 pr-4 py-4 bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent shadow-sm transition-all"
+                                    className="w-full pl-12 pr-4 py-4 bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent shadow-sm transition-all"
                                 />
                             </div>
                         </div>
@@ -54,34 +54,34 @@ export default function StudentSupportPage() {
                         {/* Support Actions */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
                             <div className="bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow group">
-                                <div className="w-12 h-12 bg-yellow-50 rounded-lg flex items-center justify-center text-yellow-600 mb-4 group-hover:bg-yellow-600 group-hover:text-white transition-colors">
+                                <div className="w-12 h-12 bg-gray-50 rounded-lg flex items-center justify-center text-gray-600 mb-4 group-hover:bg-gray-600 group-hover:text-white transition-colors">
                                     <Mail className="w-6 h-6" />
                                 </div>
                                 <h3 className="font-semibold text-gray-900 mb-2">Email Support</h3>
                                 <p className="text-sm text-gray-500 mb-4 leading-relaxed">Response within 24 hours from our operations team.</p>
-                                <a href="mailto:support@umbrellaacademy.rw" className="text-sm font-semibold text-yellow-600 flex items-center gap-1 hover:gap-2 transition-all">
+                                <a href="mailto:support@umbrellaacademy.rw" className="text-sm font-semibold text-gray-600 flex items-center gap-1 hover:gap-2 transition-all">
                                     Send Email <ChevronRight className="w-4 h-4" />
                                 </a>
                             </div>
 
                             <div className="bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow group">
-                                <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center text-blue-600 mb-4 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                                <div className="w-12 h-12 bg-gray-50 rounded-lg flex items-center justify-center text-gray-600 mb-4 group-hover:bg-gray-600 group-hover:text-white transition-colors">
                                     <MessageCircle className="w-6 h-6" />
                                 </div>
                                 <h3 className="font-semibold text-gray-900 mb-2">Community Discord</h3>
                                 <p className="text-sm text-gray-500 mb-4 leading-relaxed">Join 1,000+ students and mentors in our community.</p>
-                                <button className="text-sm font-semibold text-blue-600 flex items-center gap-1 hover:gap-2 transition-all">
+                                <button className="text-sm font-semibold text-gray-600 flex items-center gap-1 hover:gap-2 transition-all">
                                     Join Chat <ChevronRight className="w-4 h-4" />
                                 </button>
                             </div>
 
                             <div className="bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow group">
-                                <div className="w-12 h-12 bg-purple-50 rounded-lg flex items-center justify-center text-purple-600 mb-4 group-hover:bg-purple-600 group-hover:text-white transition-colors">
+                                <div className="w-12 h-12 bg-gray-50 rounded-lg flex items-center justify-center text-gray-600 mb-4 group-hover:bg-gray-600 group-hover:text-white transition-colors">
                                     <FileText className="w-6 h-6" />
                                 </div>
                                 <h3 className="font-semibold text-gray-900 mb-2">User Manual</h3>
                                 <p className="text-sm text-gray-500 mb-4 leading-relaxed">Deep dive into how everything works at the Academy.</p>
-                                <button className="text-sm font-semibold text-purple-600 flex items-center gap-1 hover:gap-2 transition-all">
+                                <button className="text-sm font-semibold text-gray-600 flex items-center gap-1 hover:gap-2 transition-all">
                                     Browse Docs <ExternalLink className="w-4 h-4" />
                                 </button>
                             </div>
@@ -94,7 +94,7 @@ export default function StudentSupportPage() {
                                 {faqs.map((faq, i) => (
                                     <div key={i} className="pb-6 border-b border-gray-50 last:border-0 last:pb-0">
                                         <h4 className="font-medium text-gray-900 mb-2 flex items-center gap-2">
-                                            <HelpCircle className="w-4 h-4 text-yellow-600" />
+                                            <HelpCircle className="w-4 h-4 text-gray-600" />
                                             {faq.question}
                                         </h4>
                                         <p className="text-sm text-gray-500 leading-relaxed pl-6">

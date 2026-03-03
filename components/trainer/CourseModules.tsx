@@ -16,7 +16,7 @@ export default function CourseModules({ selectedCourse }: CourseModulesProps) {
       students: 24,
       progress: 100,
       status: 'completed',
-      color: 'from-green-400 to-green-600',
+      color: 'from-gray-400 to-gray-600',
       icon: '🌐'
     },
     {
@@ -27,7 +27,7 @@ export default function CourseModules({ selectedCourse }: CourseModulesProps) {
       students: 18,
       progress: 75,
       status: 'in-progress',
-      color: 'from-blue-400 to-blue-600',
+      color: 'from-gray-400 to-gray-600',
       icon: '💻'
     },
     {
@@ -38,7 +38,7 @@ export default function CourseModules({ selectedCourse }: CourseModulesProps) {
       students: 32,
       progress: 60,
       status: 'in-progress',
-      color: 'from-orange-400 to-orange-600',
+      color: 'from-gray-400 to-gray-600',
       icon: '⚙️'
     },
     {
@@ -49,7 +49,7 @@ export default function CourseModules({ selectedCourse }: CourseModulesProps) {
       students: 28,
       progress: 40,
       status: 'in-progress',
-      color: 'from-purple-400 to-purple-600',
+      color: 'from-gray-400 to-gray-600',
       icon: '🔧'
     }
   ];
@@ -57,14 +57,14 @@ export default function CourseModules({ selectedCourse }: CourseModulesProps) {
   const getStatusBadge = (status: string, progress: number) => {
     if (status === 'completed') {
       return (
-        <div className="flex items-center gap-1 px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium">
+        <div className="flex items-center gap-1 px-2 py-1 bg-gray-100 text-gray-800 rounded-full text-xs font-medium">
           <CheckCircle className="w-3 h-3" />
           Completed
         </div>
       );
     }
     return (
-      <div className="flex items-center gap-1 px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-medium">
+      <div className="flex items-center gap-1 px-2 py-1 bg-gray-100 text-gray-800 rounded-full text-xs font-medium">
         <Play className="w-3 h-3" />
         {progress}% Complete
       </div>
@@ -135,7 +135,7 @@ export default function CourseModules({ selectedCourse }: CourseModulesProps) {
                   </div>
 
                   {/* Action Button */}
-                  <button className="w-full text-center py-2 text-sm font-medium text-yellow-600 hover:text-yellow-700 border border-yellow-600 hover:border-yellow-700 rounded-lg transition-colors">
+                  <button className="w-full text-center py-2 text-sm font-medium text-gray-600 hover:text-gray-700 border border-gray-600 hover:border-gray-700 rounded-lg transition-colors">
                     {module.status === 'completed' ? 'Review Module' : 'Continue Learning'}
                   </button>
                 </div>
@@ -151,7 +151,7 @@ export default function CourseModules({ selectedCourse }: CourseModulesProps) {
             <span className="text-sm font-medium text-gray-900">68% Complete</span>
           </div>
           <div className="w-full bg-gray-200 rounded-full h-3">
-            <div className="bg-yellow-600 h-3 rounded-full transition-all duration-500" style={{ width: '68%' }} />
+            <div className="bg-gray-600 h-3 rounded-full transition-all duration-500" style={{ width: '68%' }} />
           </div>
           <div className="flex items-center justify-between mt-2 text-sm text-gray-600">
             <span>3 of 4 modules in progress</span>

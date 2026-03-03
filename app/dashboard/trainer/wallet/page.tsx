@@ -68,11 +68,11 @@ export default function TrainerWalletPage() {
   const getTransactionIcon = (type: string) => {
     switch (type) {
       case 'earning':
-        return <ArrowDownLeft className="w-4 h-4 text-green-600" />;
+        return <ArrowDownLeft className="w-4 h-4 text-gray-600" />;
       case 'withdrawal':
-        return <ArrowUpRight className="w-4 h-4 text-red-600" />;
+        return <ArrowUpRight className="w-4 h-4 text-gray-600" />;
       case 'bonus':
-        return <ArrowDownLeft className="w-4 h-4 text-yellow-600" />;
+        return <ArrowDownLeft className="w-4 h-4 text-gray-600" />;
       default:
         return <ArrowDownLeft className="w-4 h-4 text-gray-600" />;
     }
@@ -81,11 +81,11 @@ export default function TrainerWalletPage() {
   const getStatusBadge = (status: string) => {
     switch (status) {
       case 'completed':
-        return <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">✓ Completed</span>;
+        return <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">✓ Completed</span>;
       case 'pending':
-        return <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">⏳ Pending</span>;
+        return <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">⏳ Pending</span>;
       case 'processing':
-        return <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">🔄 Processing</span>;
+        return <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">🔄 Processing</span>;
       default:
         return null;
     }
@@ -105,31 +105,31 @@ export default function TrainerWalletPage() {
 
             {/* Balance Cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-              <div className="bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-lg p-6 text-white">
+              <div className="bg-gradient-to-br from-gray-500 to-gray-600 rounded-lg p-6 text-white">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-lg font-semibold">Current Balance</h3>
                   <DollarSign className="w-8 h-8 opacity-80" />
                 </div>
                 <div className="text-3xl font-bold mb-2">RWF {currentBalance.toLocaleString()}</div>
-                <div className="text-yellow-100 text-sm">Available for withdrawal</div>
+                <div className="text-gray-100 text-sm">Available for withdrawal</div>
               </div>
 
               <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-lg font-semibold text-gray-900">This Month</h3>
-                  <TrendingUp className="w-8 h-8 text-green-500" />
+                  <TrendingUp className="w-8 h-8 text-gray-500" />
                 </div>
                 <div className="text-3xl font-bold text-gray-900 mb-2">RWF {monthlyEarnings.toLocaleString()}</div>
-                <div className="text-green-600 text-sm">+15% vs last month</div>
+                <div className="text-gray-600 text-sm">+15% vs last month</div>
               </div>
 
               <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-lg font-semibold text-gray-900">Total Earned</h3>
-                  <Calendar className="w-8 h-8 text-blue-500" />
+                  <Calendar className="w-8 h-8 text-gray-500" />
                 </div>
                 <div className="text-3xl font-bold text-gray-900 mb-2">RWF {totalEarned.toLocaleString()}</div>
-                <div className="text-blue-600 text-sm">All time earnings</div>
+                <div className="text-gray-600 text-sm">All time earnings</div>
               </div>
             </div>
 
@@ -140,12 +140,12 @@ export default function TrainerWalletPage() {
                   <h3 className="text-lg font-semibold text-gray-900">Withdrawal</h3>
                   <p className="text-sm text-gray-600">Next payout in 5 days (Jan 25, 2026)</p>
                 </div>
-                <button className="px-6 py-2.5 bg-yellow-600 text-white rounded-lg font-medium hover:bg-yellow-700 transition-colors">
+                <button className="px-6 py-2.5 bg-gray-600 text-white rounded-lg font-medium hover:bg-gray-700 transition-colors">
                   Request Withdrawal
                 </button>
               </div>
               <div className="w-full bg-gray-200 rounded-full h-2">
-                <div className="bg-yellow-600 h-2 rounded-full" style={{ width: '83%' }}></div>
+                <div className="bg-gray-600 h-2 rounded-full" style={{ width: '83%' }}></div>
               </div>
             </div>
 
@@ -179,8 +179,8 @@ export default function TrainerWalletPage() {
                         <td className="py-4 px-6">
                           <div className="flex items-center gap-3">
                             <div className={`w-8 h-8 rounded flex items-center justify-center shrink-0 ${
-                              transaction.type === 'earning' ? 'bg-green-100' :
-                              transaction.type === 'withdrawal' ? 'bg-red-100' : 'bg-yellow-100'
+                              transaction.type === 'earning' ? 'bg-gray-100' :
+                              transaction.type === 'withdrawal' ? 'bg-gray-100' : 'bg-gray-100'
                             }`}>
                               {getTransactionIcon(transaction.type)}
                             </div>
@@ -191,7 +191,7 @@ export default function TrainerWalletPage() {
                         <td className="py-4 px-6">{getStatusBadge(transaction.status)}</td>
                         <td className="py-4 px-6">
                           <span className={`text-sm font-medium ${
-                            transaction.amount.startsWith('+') ? 'text-green-600' : 'text-red-600'
+                            transaction.amount.startsWith('+') ? 'text-gray-600' : 'text-gray-600'
                           }`}>
                             {transaction.amount}
                           </span>

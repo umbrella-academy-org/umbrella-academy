@@ -12,28 +12,28 @@ export default function CalendarStats() {
       label: 'Sessions Today',
       value: '4',
       change: '+1 vs yesterday',
-      color: 'text-blue-600 bg-blue-100'
+      color: 'text-gray-600 bg-gray-100'
     },
     {
       icon: <Clock className="w-5 h-5" />,
       label: 'Hours Scheduled',
       value: '6.5',
       change: '+2.5 this week',
-      color: 'text-green-600 bg-green-100'
+      color: 'text-gray-600 bg-gray-100'
     },
     {
       icon: <Users className="w-5 h-5" />,
       label: 'Students Today',
       value: '8',
       change: '+3 new bookings',
-      color: 'text-yellow-600 bg-yellow-100'
+      color: 'text-gray-600 bg-gray-100'
     },
     {
       icon: <CheckCircle className="w-5 h-5" />,
       label: 'Completion Rate',
       value: '95%',
       change: '+5% improvement',
-      color: 'text-purple-600 bg-purple-100'
+      color: 'text-gray-600 bg-gray-100'
     }
   ];
 
@@ -64,7 +64,7 @@ export default function CalendarStats() {
             }`}>
               {stat.value}
             </p>
-            <p className="text-xs text-green-600 font-medium">
+            <p className="text-xs text-gray-600 font-medium">
               {stat.change}
             </p>
           </div>

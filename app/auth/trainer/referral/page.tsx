@@ -41,7 +41,7 @@ export default function TrainerReferralPage() {
           <div className="flex flex-col items-center justify-center flex-1">
             {/* Logo */}
             <div className="mb-8">
-              <div className="w-16 h-16 bg-yellow-600 rounded-2xl flex items-center justify-center">
+              <div className="w-16 h-16 bg-gray-600 rounded-2xl flex items-center justify-center">
                 <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" />
                 </svg>
@@ -62,14 +62,14 @@ export default function TrainerReferralPage() {
                 <label
                   key={index}
                   className={`flex items-center gap-4 p-4 border rounded-lg cursor-pointer transition-all ${selectedSource === source
-                      ? 'border-yellow-600 bg-yellow-50'
+                      ? 'border-gray-600 bg-gray-50'
                       : 'border-gray-200 bg-white hover:border-gray-300'
                     }`}
                 >
-                  <div className={`w-8 h-8 rounded-full border-2 flex items-center justify-center transition-colors ${selectedSource === source ? 'border-yellow-600' : 'border-gray-300'
+                  <div className={`w-8 h-8 rounded-full border-2 flex items-center justify-center transition-colors ${selectedSource === source ? 'border-gray-600' : 'border-gray-300'
                     }`}>
                     {selectedSource === source && (
-                      <div className="w-2.5 h-2.5 bg-yellow-600 rounded-full"></div>
+                      <div className="w-2.5 h-2.5 bg-gray-600 rounded-full"></div>
                     )}
                   </div>
                   <span className={`text-sm font-medium ${selectedSource === source ? 'text-gray-900' : 'text-gray-600'}`}>
@@ -88,16 +88,16 @@ export default function TrainerReferralPage() {
 
               <button
                 type="submit"
-                className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-colors mt-6"
+                className="w-full bg-gray-600 text-white py-3 rounded-lg font-medium hover:bg-gray-700 transition-colors mt-6"
               >
                 Continue
               </button>
 
               {/* Progress dots */}
               <div className="flex justify-center gap-2 pt-4">
-                <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
-                <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
-                <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
+                <div className="w-8 h-2 bg-gray-600 rounded-full"></div>
+                <div className="w-8 h-2 bg-gray-600 rounded-full"></div>
+                <div className="w-8 h-2 bg-gray-600 rounded-full"></div>
                 <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
                 <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
               </div>

@@ -27,13 +27,13 @@ export default function UmbrellaAdminFinancialPage() {
 
             {/* Financial Stats */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-              <div className="bg-gradient-to-r from-green-500 to-green-600 rounded-lg p-6 text-white">
+              <div className="bg-gradient-to-r from-gray-500 to-gray-600 rounded-lg p-6 text-white">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-green-100 text-sm">Total Revenue</p>
+                    <p className="text-gray-100 text-sm">Total Revenue</p>
                     <p className="text-3xl font-bold">RWF 67,845,000</p>
                   </div>
-                  <DollarSign className="w-8 h-8 text-green-200" />
+                  <DollarSign className="w-8 h-8 text-gray-200" />
                 </div>
               </div>
 
@@ -43,7 +43,7 @@ export default function UmbrellaAdminFinancialPage() {
                     <p className="text-gray-500 text-sm">Umbrella Share (65%)</p>
                     <p className="text-2xl font-bold text-gray-900">RWF 44,100,000</p>
                   </div>
-                  <PieChart className="w-8 h-8 text-yellow-500" />
+                  <PieChart className="w-8 h-8 text-gray-500" />
                 </div>
               </div>
 
@@ -53,7 +53,7 @@ export default function UmbrellaAdminFinancialPage() {
                     <p className="text-gray-500 text-sm">Fields Share (35%)</p>
                     <p className="text-2xl font-bold text-gray-900">RWF 23,745,000</p>
                   </div>
-                  <CreditCard className="w-8 h-8 text-blue-500" />
+                  <CreditCard className="w-8 h-8 text-gray-500" />
                 </div>
               </div>
 
@@ -61,9 +61,9 @@ export default function UmbrellaAdminFinancialPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-gray-500 text-sm">Growth Rate</p>
-                    <p className="text-2xl font-bold text-green-600">+12.5%</p>
+                    <p className="text-2xl font-bold text-gray-600">+12.5%</p>
                   </div>
-                  <TrendingUp className="w-8 h-8 text-green-500" />
+                  <TrendingUp className="w-8 h-8 text-gray-500" />
                 </div>
               </div>
             </div>
@@ -90,11 +90,11 @@ export default function UmbrellaAdminFinancialPage() {
                       <div className="flex items-center gap-4">
                         <div className="text-right">
                           <div className="font-semibold text-gray-900">RWF {field.revenue.toLocaleString()}</div>
-                          <div className="text-sm text-green-600">{field.growth}</div>
+                          <div className="text-sm text-gray-600">{field.growth}</div>
                         </div>
                         <div className="w-16 bg-gray-200 rounded-full h-2">
                           <div
-                            className="bg-yellow-600 h-2 rounded-full"
+                            className="bg-gray-600 h-2 rounded-full"
                             style={{ width: `${field.share * 4}%` }}
                           ></div>
                         </div>

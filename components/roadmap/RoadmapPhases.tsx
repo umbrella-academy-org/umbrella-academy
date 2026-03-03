@@ -39,16 +39,16 @@ export default function RoadmapPhases({ onPhaseSelect, onLessonSelect, selectedP
     switch (status) {
       case 'active':
         return {
-          color: 'bg-blue-100 border-blue-200',
-          iconColor: 'text-blue-600',
-          progressColor: 'bg-blue-500',
+          color: 'bg-gray-100 border-gray-200',
+          iconColor: 'text-gray-600',
+          progressColor: 'bg-gray-500',
           icon: Play
         };
       case 'completed':
         return {
-          color: 'bg-green-100 border-green-200',
-          iconColor: 'text-green-600',
-          progressColor: 'bg-green-500',
+          color: 'bg-gray-100 border-gray-200',
+          iconColor: 'text-gray-600',
+          progressColor: 'bg-gray-500',
           icon: CheckCircle
         };
       default: // pending
@@ -65,26 +65,26 @@ export default function RoadmapPhases({ onPhaseSelect, onLessonSelect, selectedP
     switch (status) {
       case 'completed':
         return {
-          color: 'bg-green-50 border-green-200',
-          iconColor: 'text-green-600',
+          color: 'bg-gray-50 border-gray-200',
+          iconColor: 'text-gray-600',
           icon: CheckCircle
         };
       case 'in-progress':
         return {
-          color: 'bg-blue-50 border-blue-200',
-          iconColor: 'text-blue-600',
+          color: 'bg-gray-50 border-gray-200',
+          iconColor: 'text-gray-600',
           icon: Play
         };
       case 'scheduled':
         return {
-          color: 'bg-yellow-50 border-yellow-200',
-          iconColor: 'text-yellow-600',
+          color: 'bg-gray-50 border-gray-200',
+          iconColor: 'text-gray-600',
           icon: Calendar
         };
       case 'cancelled':
         return {
-          color: 'bg-red-50 border-red-200',
-          iconColor: 'text-red-600',
+          color: 'bg-gray-50 border-gray-200',
+          iconColor: 'text-gray-600',
           icon: X
         };
       default: // pending
@@ -113,7 +113,7 @@ export default function RoadmapPhases({ onPhaseSelect, onLessonSelect, selectedP
           const isSelected = selectedPhaseId === phase.id;
 
           return (
-            <div key={phase.id} className={`border-2 rounded-lg transition-all duration-200 ${statusConfig.color} ${isSelected ? 'ring-2 ring-yellow-600 ring-opacity-50' : ''}`}>
+            <div key={phase.id} className={`border-2 rounded-lg transition-all duration-200 ${statusConfig.color} ${isSelected ? 'ring-2 ring-gray-600 ring-opacity-50' : ''}`}>
               {/* Phase Header */}
               <div 
                 className="p-4 cursor-pointer hover:bg-opacity-80 transition-colors"

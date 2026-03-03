@@ -25,7 +25,7 @@ export default function CourseCard({ activeRoadmap }: CourseCardProps) {
           <p className="text-gray-500 mb-4">Start your learning journey today</p>
           <button
             onClick={() => navigate('/post-signup/roadmap')}
-            className="px-4 py-2 bg-yellow-600 text-white rounded-lg font-medium hover:bg-yellow-700 transition-colors"
+            className="px-4 py-2 bg-gray-600 text-white rounded-lg font-medium hover:bg-gray-700 transition-colors"
           >
             Browse Roadmaps
           </button>
@@ -47,10 +47,10 @@ export default function CourseCard({ activeRoadmap }: CourseCardProps) {
     >
       <div className="flex items-start gap-3">
         {/* Roadmap Image */}
-        <div className="w-20 h-16 sm:w-24 sm:h-18 bg-gradient-to-br from-blue-900 to-blue-700 rounded-lg overflow-hidden flex-shrink-0 relative group cursor-pointer">
+        <div className="w-20 h-16 sm:w-24 sm:h-18 bg-gradient-to-br from-gray-900 to-gray-700 rounded-lg overflow-hidden flex-shrink-0 relative group cursor-pointer">
           <div className="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-10 transition-all duration-300"></div>
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className={`w-6 h-6 bg-yellow-600 rounded-full flex items-center justify-center transition-all duration-300 ${isHovered ? 'scale-110 animate-pulse-glow' : ''
+            <div className={`w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center transition-all duration-300 ${isHovered ? 'scale-110 animate-pulse-glow' : ''
               }`}>
               <Play className="w-3 h-3 text-white fill-current" />
             </div>
@@ -58,11 +58,11 @@ export default function CourseCard({ activeRoadmap }: CourseCardProps) {
           {/* Code-like overlay with animation */}
           <div className="absolute top-1 left-1 right-1">
             <div className="space-y-1">
-              <div className={`h-0.5 bg-blue-300 rounded w-3/4 opacity-60 transition-all duration-500 ${isHovered ? 'animate-shimmer' : ''
+              <div className={`h-0.5 bg-gray-300 rounded w-3/4 opacity-60 transition-all duration-500 ${isHovered ? 'animate-shimmer' : ''
                 }`}></div>
-              <div className={`h-0.5 bg-green-300 rounded w-1/2 opacity-60 transition-all duration-700 ${isHovered ? 'animate-shimmer' : ''
+              <div className={`h-0.5 bg-gray-300 rounded w-1/2 opacity-60 transition-all duration-700 ${isHovered ? 'animate-shimmer' : ''
                 }`} style={{ animationDelay: '0.2s' }}></div>
-              <div className={`h-0.5 bg-yellow-300 rounded w-2/3 opacity-60 transition-all duration-900 ${isHovered ? 'animate-shimmer' : ''
+              <div className={`h-0.5 bg-gray-300 rounded w-2/3 opacity-60 transition-all duration-900 ${isHovered ? 'animate-shimmer' : ''
                 }`} style={{ animationDelay: '0.4s' }}></div>
             </div>
           </div>
@@ -72,7 +72,7 @@ export default function CourseCard({ activeRoadmap }: CourseCardProps) {
         <div className="flex-1 min-w-0">
           <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
             <div className="flex-1 min-w-0">
-              <h3 className="text-sm sm:text-base font-semibold text-gray-900 mb-1 truncate group-hover:text-yellow-600 transition-colors">
+              <h3 className="text-sm sm:text-base font-semibold text-gray-900 mb-1 truncate group-hover:text-gray-600 transition-colors">
                 {roadmap.title}
               </h3>
               <p className="text-xs text-gray-500 mb-1">
@@ -80,9 +80,9 @@ export default function CourseCard({ activeRoadmap }: CourseCardProps) {
               </p>
               <div className="flex items-center gap-2 mb-2 flex-wrap">
                 <span className={`px-2 py-0.5 text-xs font-medium rounded-full ${activeRoadmap.status === 'active'
-                  ? 'bg-green-100 text-green-700 animate-pulse'
+                  ? 'bg-gray-100 text-gray-700 animate-pulse'
                   : activeRoadmap.status === 'paused'
-                    ? 'bg-yellow-100 text-yellow-700'
+                    ? 'bg-gray-100 text-gray-700'
                     : 'bg-gray-100 text-gray-700'
                   }`}>
                   ● {activeRoadmap.status.charAt(0).toUpperCase() + activeRoadmap.status.slice(1)}
@@ -91,7 +91,7 @@ export default function CourseCard({ activeRoadmap }: CourseCardProps) {
                   {[...Array(5)].map((_, i) => (
                     <Star
                       key={i}
-                      className={`w-3 h-3 transition-all duration-200 ${i < Math.floor(roadmap.difficulty === 'beginner' ? 3 : roadmap.difficulty === 'intermediate' ? 4 : 5) ? 'text-yellow-400 fill-current' : 'text-gray-300'
+                      className={`w-3 h-3 transition-all duration-200 ${i < Math.floor(roadmap.difficulty === 'beginner' ? 3 : roadmap.difficulty === 'intermediate' ? 4 : 5) ? 'text-gray-400 fill-current' : 'text-gray-300'
                         }`}
                       style={{ animationDelay: `${i * 100}ms` }}
                     />
@@ -104,7 +104,7 @@ export default function CourseCard({ activeRoadmap }: CourseCardProps) {
 
             {/* Progress */}
             <div className="text-right flex-shrink-0">
-              <div className={`text-lg sm:text-xl font-bold text-gray-900 mb-1 transition-all duration-300 ${isHovered ? 'scale-110 text-yellow-600' : ''
+              <div className={`text-lg sm:text-xl font-bold text-gray-900 mb-1 transition-all duration-300 ${isHovered ? 'scale-110 text-gray-600' : ''
                 }`}>
                 {Math.round(progress)}%
               </div>
@@ -113,7 +113,7 @@ export default function CourseCard({ activeRoadmap }: CourseCardProps) {
               </p>
               <button
                 onClick={() => navigate('/post-signup/roadmap')}
-                className="px-3 py-1 bg-yellow-600 text-white text-xs font-medium rounded hover:bg-yellow-700 transition-all duration-200 interactive-button transform hover:scale-105 focus:ring-2 focus:ring-yellow-300"
+                className="px-3 py-1 bg-gray-600 text-white text-xs font-medium rounded hover:bg-gray-700 transition-all duration-200 interactive-button transform hover:scale-105 focus:ring-2 focus:ring-gray-300"
               >
                 Continue
               </button>
@@ -129,7 +129,7 @@ export default function CourseCard({ activeRoadmap }: CourseCardProps) {
             </div>
             <div className="w-full bg-gray-200 rounded-full h-1.5 overflow-hidden">
               <div
-                className="bg-gradient-to-r from-yellow-500 to-yellow-600 h-1.5 rounded-full transition-all duration-1000 ease-out relative"
+                className="bg-gradient-to-r from-gray-500 to-gray-600 h-1.5 rounded-full transition-all duration-1000 ease-out relative"
                 style={{ width: `${progress}%` }}
               >
                 <div className="absolute inset-0 bg-white opacity-30 animate-shimmer"></div>

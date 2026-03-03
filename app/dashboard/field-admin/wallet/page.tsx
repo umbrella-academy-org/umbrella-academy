@@ -64,11 +64,11 @@ export default function FieldAdminWalletPage() {
   const getTransactionIcon = (type: string) => {
     switch (type) {
       case 'income':
-        return <ArrowDownLeft className="w-4 h-4 text-green-600" />;
+        return <ArrowDownLeft className="w-4 h-4 text-gray-600" />;
       case 'withdrawal':
-        return <ArrowUpRight className="w-4 h-4 text-red-600" />;
+        return <ArrowUpRight className="w-4 h-4 text-gray-600" />;
       case 'fee':
-        return <ArrowUpRight className="w-4 h-4 text-orange-600" />;
+        return <ArrowUpRight className="w-4 h-4 text-gray-600" />;
       default:
         return <ArrowDownLeft className="w-4 h-4 text-gray-600" />;
     }
@@ -77,11 +77,11 @@ export default function FieldAdminWalletPage() {
   const getStatusBadge = (status: string) => {
     switch (status) {
       case 'completed':
-        return <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">✓ Completed</span>;
+        return <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">✓ Completed</span>;
       case 'pending':
-        return <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">⏳ Pending</span>;
+        return <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">⏳ Pending</span>;
       case 'processing':
-        return <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">🔄 Processing</span>;
+        return <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">🔄 Processing</span>;
       default:
         return null;
     }
@@ -101,31 +101,31 @@ export default function FieldAdminWalletPage() {
 
             {/* Balance Cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-              <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg p-6 text-white">
+              <div className="bg-gradient-to-br from-gray-500 to-gray-600 rounded-lg p-6 text-white">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-lg font-semibold">Field Balance</h3>
                   <DollarSign className="w-8 h-8 opacity-80" />
                 </div>
                 <div className="text-3xl font-bold mb-2">RWF {currentBalance.toLocaleString()}</div>
-                <div className="text-blue-100 text-sm">Available for operations</div>
+                <div className="text-gray-100 text-sm">Available for operations</div>
               </div>
 
               <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-lg font-semibold text-gray-900">This Month</h3>
-                  <TrendingUp className="w-8 h-8 text-green-500" />
+                  <TrendingUp className="w-8 h-8 text-gray-500" />
                 </div>
                 <div className="text-3xl font-bold text-gray-900 mb-2">RWF {monthlyIncome.toLocaleString()}</div>
-                <div className="text-green-600 text-sm">+18% vs last month</div>
+                <div className="text-gray-600 text-sm">+18% vs last month</div>
               </div>
 
               <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-lg font-semibold text-gray-900">Total Withdrawn</h3>
-                  <Download className="w-8 h-8 text-purple-500" />
+                  <Download className="w-8 h-8 text-gray-500" />
                 </div>
                 <div className="text-3xl font-bold text-gray-900 mb-2">RWF {totalWithdrawn.toLocaleString()}</div>
-                <div className="text-purple-600 text-sm">All time withdrawals</div>
+                <div className="text-gray-600 text-sm">All time withdrawals</div>
               </div>
             </div>
 
@@ -136,7 +136,7 @@ export default function FieldAdminWalletPage() {
                   <h3 className="text-lg font-semibold text-gray-900">Field Operations</h3>
                   <p className="text-sm text-gray-600">Manage field finances and operational expenses</p>
                 </div>
-                <button className="px-6 py-2.5 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors">
+                <button className="px-6 py-2.5 bg-gray-600 text-white rounded-lg font-medium hover:bg-gray-700 transition-colors">
                   Request Withdrawal
                 </button>
               </div>
@@ -171,8 +171,8 @@ export default function FieldAdminWalletPage() {
                       <tr key={transaction.id} className="hover:bg-gray-50">
                         <td className="py-4 px-6">
                           <div className="flex items-center gap-3">
-                            <div className={`w-8 h-8 rounded flex items-center justify-center shrink-0 ${transaction.type === 'income' ? 'bg-green-100' :
-                              transaction.type === 'withdrawal' ? 'bg-red-100' : 'bg-orange-100'
+                            <div className={`w-8 h-8 rounded flex items-center justify-center shrink-0 ${transaction.type === 'income' ? 'bg-gray-100' :
+                              transaction.type === 'withdrawal' ? 'bg-gray-100' : 'bg-gray-100'
                               }`}>
                               {getTransactionIcon(transaction.type)}
                             </div>
@@ -182,7 +182,7 @@ export default function FieldAdminWalletPage() {
                         <td className="py-4 px-6 text-sm text-gray-600">{transaction.date}</td>
                         <td className="py-4 px-6">{getStatusBadge(transaction.status)}</td>
                         <td className="py-4 px-6">
-                          <span className={`text-sm font-medium ${transaction.amount.startsWith('+') ? 'text-green-600' : 'text-red-600'
+                          <span className={`text-sm font-medium ${transaction.amount.startsWith('+') ? 'text-gray-600' : 'text-gray-600'
                             }`}>
                             {transaction.amount}
                           </span>

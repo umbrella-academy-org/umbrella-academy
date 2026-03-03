@@ -112,9 +112,9 @@ export default function CoursesCalendar() {
                 <button
                   className={`w-full h-full text-xs rounded transition-colors ${
                     isToday(date)
-                      ? 'bg-yellow-600 text-white font-medium'
+                      ? 'bg-gray-600 text-white font-medium'
                       : hasEvent(date)
-                        ? 'bg-blue-100 text-blue-800 font-medium'
+                        ? 'bg-gray-100 text-gray-800 font-medium'
                         : 'text-gray-700 hover:bg-gray-100'
                   }`}
                 >
@@ -134,7 +134,7 @@ export default function CoursesCalendar() {
               key={range.label}
               className={`w-full text-left px-3 py-2 text-sm rounded transition-colors ${
                 range.active
-                  ? 'bg-yellow-100 text-yellow-800 font-medium'
+                  ? 'bg-gray-100 text-gray-800 font-medium'
                   : 'text-gray-600 hover:bg-gray-50'
               }`}
             >
