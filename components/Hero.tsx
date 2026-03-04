@@ -4,42 +4,88 @@ import { ArrowRight, PlayCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const CATEGORIES = ["FILM", "TELEVISION", "GAMES", "COMMERCIALS"];
+const CATEGORIES=[
+  "FILMING"
+]
+
+
+const HERO_IMAGES = [
+  "/real/dashboard1.jpeg",
+  "/real/dashboard2.jpeg",
+  "/real/dashboard3.jpeg",
+  "/real/dashboard4.jpeg",
+  "/real/dashboard5.jpeg",
+  "/real/dashboard6.jpeg",
+];
 
 export function Hero() {
   const router = useRouter();
   const [scrollY, setScrollY] = useState(0);
   const [catIndex, setCatIndex] = useState(0);
+  const [imageIndex, setImageIndex] = useState(0);
+  const [nextImageIndex, setNextImageIndex] = useState(1);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
     window.addEventListener("scroll", handleScroll);
 
-    const interval = setInterval(() => {
-      setCatIndex((prev) => (prev + 1) % CATEGORIES.length);
+    const categoryInterval = setInterval(() => {
+      setCatIndex((prev) => (prev + 1) % HERO_IMAGES.length);
     }, 3000);
+
+    const imageInterval = setInterval(() => {
+      setIsTransitioning(true);
+      setNextImageIndex((prev) => (prev + 1) % HERO_IMAGES.length);
+
+      setTimeout(() => {
+        setImageIndex((prev) => (prev + 1) % HERO_IMAGES.length);
+        setIsTransitioning(false);
+      }, 2000);
+    }, 4000);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      clearInterval(interval);
+      clearInterval(categoryInterval);
+      clearInterval(imageInterval);
     };
   }, []);
 
   return (
     <section className="relative h-screen flex flex-col items-center justify-center overflow-hidden bg-black text-white mt-20">
-      {/* Dynamic Background Image */}
-      <div
-        className="absolute inset-0 z-0 opacity-40 transition-transform duration-[2000ms] ease-out scale-110"
-        style={{
-          transform: `translateY(${scrollY * 0.2}px) scale(${1.1 + scrollY * 0.0001})`,
-        }}
-      >
-        <img
-          src="/nfts_inspired_hero_bg_1770538732614.png"
-          alt="Cinematic production studio"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-linear-to-b from-black via-transparent to-black" />
+      {/* Dynamic Background Images with Crossfade */}
+      <div className="absolute inset-0 z-0">
+        {/* Current Image */}
+        <div
+          className="absolute inset-0 opacity-90 transition-all duration-1000 ease-out scale-110"
+          style={{
+            transform: `translateY(${scrollY * 0.2}px) scale(${1.1 + scrollY * 0.0001})`,
+            opacity: isTransitioning ? 0 : 0.4,
+          }}
+        >
+          <img
+            src={HERO_IMAGES[imageIndex]}
+            alt="Hero background"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
+        </div>
+
+        {/* Next Image (for crossfade) */}
+        <div
+          className="absolute inset-0 opacity-0 transition-all duration-1000 ease-out scale-110"
+          style={{
+            transform: `translateY(${scrollY * 0.2}px) scale(${1.1 + scrollY * 0.0001})`,
+            opacity: isTransitioning ? 0.4 : 0,
+          }}
+        >
+          <img
+            src={HERO_IMAGES[nextImageIndex]}
+            alt="Hero background next"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
+        </div>
       </div>
 
       {/* Main Content */}
@@ -51,7 +97,7 @@ export function Hero() {
             KICKSTART <br />
             <span className="text-white">YOUR</span> <br />
             <span className="text-[#525252] transition-all duration-500 inline-block">
-              {CATEGORIES[catIndex]}
+              {/* {CATEGORIES[catIndex]} */}
             </span> <br />
             CAREER.
           </h1>
@@ -67,7 +113,7 @@ export function Hero() {
           </button>
 
           <button
-            
+
             className="group w-full md:w-auto px-8 md:px-12 py-4 md:py-6 bg-transparent border-2 border-white/20 text-white rounded-none hover:border-[#525252] hover:bg-[#525252]/10 transition-all duration-500 flex items-center justify-center space-x-3 font-bold text-base md:text-lg tracking-tight active:scale-95"
           >
             <PlayCircle className="w-5 h-5 md:w-6 md:h-6 text-[#525252]" />

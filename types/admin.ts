@@ -70,4 +70,21 @@ export interface Company {
     hiringRate: number;
     partnerSince: string;
   };
+  programDetails?: {
+    curriculum: string;
+    duration: {
+      minimum: string;
+      extended: string;
+    };
+    schedule: {
+      days: string;
+      flexibility: string;
+    };
+    projects: string[];
+  };
+  pricing?: {
+    tuition: string;
+    includes: string[];
+  };
+  whyChoose?: string[];
 }

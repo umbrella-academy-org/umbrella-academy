@@ -123,7 +123,7 @@ export default function ReferralPage() {
       {/* Right side - Image */}
       <div className="hidden lg:block flex-[1] relative overflow-hidden">
         <Image
-          src="/auth/login/image.png"
+          src="/real/image.jpeg"
           alt="Green fern leaves"
           fill
           className="object-cover object-center scale-105"

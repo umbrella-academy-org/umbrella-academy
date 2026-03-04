@@ -33,23 +33,7 @@ const testimonials = [
     image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150",
     content: "Best investment in my education. The progress tracking kept me motivated, and the live sessions with trainers were incredibly engaging.",
     rating: 5,
-  },
-  {
-    name: "Aisha Malik",
-    role: "UX Designer",
-    company: "Byose Tech - Design",
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150",
-    content: "The company-based structure made learning feel professional and organized. I felt like I was part of something bigger from day one.",
-    rating: 5,
-  },
-  {
-    name: "James Wilson",
-    role: "Video Editor",
-    company: "Green Land Film School",
-    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150",
-    content: "Outstanding platform! The combination of structured learning and creative freedom helped me develop a portfolio that got me hired immediately.",
-    rating: 5,
-  },
+  }
 ];
 
 export function Testimonials() {
@@ -77,7 +61,7 @@ export function Testimonials() {
         </div>
 
         {/* Testimonials Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {testimonials.map((testimonial, index) => {
             const delays = ["animation-delay-100", "animation-delay-200", "animation-delay-300", "animation-delay-400", "animation-delay-500", "animation-delay-600"];
             return (
@@ -98,7 +82,7 @@ export function Testimonials() {
                 </div>
 
                 {/* Content */}
-                <p className="text-gray-700 mb-6 leading-relaxed">
+                <p className="text-gray-700 text-xs mb-6 leading-relaxed">
                   "{testimonial.content}"
                 </p>
 
@@ -120,33 +104,7 @@ export function Testimonials() {
           })}
         </div>
 
-        {/* Stats Bar */}
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 bg-white rounded-2xl p-8 shadow-lg border-2 border-gray-200 animate-fade-in animation-delay-700">
-          <div className="text-center">
-            <div className="text-4xl font-bold text-[#525252] mb-2">
-              50K+
-            </div>
-            <div className="text-sm text-gray-600">Happy Students</div>
-          </div>
-          <div className="text-center">
-            <div className="text-4xl font-bold text-[#737373] mb-2">
-              4.9/5
-            </div>
-            <div className="text-sm text-gray-600">Average Rating</div>
-          </div>
-          <div className="text-center">
-            <div className="text-4xl font-bold text-black mb-2">
-              95%
-            </div>
-            <div className="text-sm text-gray-600">Success Rate</div>
-          </div>
-          <div className="text-center">
-            <div className="text-4xl font-bold text-[#525252] mb-2">
-              1K+
-            </div>
-            <div className="text-sm text-gray-600">Trainers</div>
-          </div>
-        </div>
+       
       </div>
     </section>
   );

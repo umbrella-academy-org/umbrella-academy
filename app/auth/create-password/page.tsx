@@ -46,7 +46,7 @@ export default function CreatePasswordPage() {
     } else if (userType === 'mentor') {
       router.push('/auth/mentor/profile');
     } else if (userType === 'student') {
-      router.push('/auth/student/education-level');
+      router.push('/auth/student/referral');
     } else {
       // Default to student if no userType is set
       router.push('/auth/student/education-level');
@@ -244,7 +244,7 @@ export default function CreatePasswordPage() {
       {/* Right side - Image */}
       <div className="hidden lg:block flex-[1] relative overflow-hidden">
         <Image
-          src="/auth/login/image.png"
+          src="/real/image.jpeg"
           alt="Blue sky with clouds"
           fill
           className="object-cover object-center scale-105"

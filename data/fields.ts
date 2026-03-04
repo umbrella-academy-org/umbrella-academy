@@ -36,8 +36,8 @@ export const mockFields: Field[] = [
         monthlyPrice: 85000
     },
     {
-        id: 'ux-innovation',
-        name: 'UX & Product Innovation',
+        id: 'media-production-and-storytelling',
+        name: 'Media Production and StoryTelling',
         description: 'Go beyond interfaces. Design immersive digital ecosystems using psychology-driven UX, motion design, and strategic product thinking that users love.',
         industry: 'Design',
         companies: mockCompanies.filter(c => c.fieldId === 'ux-innovation'),
