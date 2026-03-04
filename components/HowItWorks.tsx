@@ -40,7 +40,7 @@ export function HowItWorks() {
   const { ref, isVisible } = useReveal();
 
   return (
-    <section id="how-it-works" className="py-24 px-4 sm:px-6 lg:px-8 bg-white overflow-hidden">
+    <section id="how-it-works" className="pt-24 pb-4 px-4 sm:px-6 lg:px-8 bg-white overflow-hidden">
       <div ref={ref} className="max-w-full mx-auto">
         <div className={`mb-16 reveal ${isVisible ? 'visible' : ''}`}>
           <h3 className="text-4xl md:text-6xl lg:text-8xl font-black tracking-tighter text-black leading-none ">

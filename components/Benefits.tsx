@@ -38,7 +38,7 @@ export function Benefits() {
   const { ref, isVisible } = useReveal();
 
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-white relative overflow-hidden">
+    <section className="pb-24 px-4 sm:px-6 lg:px-8 bg-white relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-[#525252]/5 rounded-full blur-3xl -z-10" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#737373]/5 rounded-full blur-3xl -z-10" />
@@ -49,9 +49,9 @@ export function Benefits() {
           <div className={`relative ${isVisible ? 'animate-fade-in' : 'opacity-0'}`}>
             <div className="relative rounded-2xl overflow-hidden shadow-2xl border-2 border-gray-200">
               <img
-                src="https://images.unsplash.com/photo-1758691736975-9f7f643d178e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkaXZlcnNlJTIwdGVhbSUyMGNvbGxhYm9yYXRpb258ZW58MXx8fHwxNzcwMzI4NjIzfDA&ixlib=rb-4.1.0&q=80&w=1080"
+                src="/real/dashboard-future.jpeg"
                 alt="Team collaboration"
-                className="w-full h-auto"
+                className="w-full h-180 object-cover"
               />
               <div className="absolute inset-0 bg-linear-to-t from-[#525252]/30 to-transparent" />
             </div>

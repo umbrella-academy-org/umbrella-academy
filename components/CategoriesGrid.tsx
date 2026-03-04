@@ -8,25 +8,25 @@ const categories = [
     {
         title: "Film",
         icon: Film,
-        image: "/tech_category_bg_1770538824271.png",
+        image: "/real/dashboard-film.jpeg",
         color: "bg-black"
     },
     {
-        title: "Television",
+        title: "Photography",
         icon: Film,
-        image: "/visual_audio_category_bg_1770538848275.png",
+        image: "/real/dashboard-photograph.jpeg",
         color: "bg-[#525252]"
     },
     {
-        title: "Games",
+        title: "Software Engineering",
         icon: Zap,
-        image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800",
+        image: "/real/dashboard-software.jpeg",
         color: "bg-gray-900"
     },
     {
-        title: "Business",
+        title: "Digital Media",
         icon: Briefcase,
-        image: "/business_category_bg_1770538870671.png",
+        image: "/real/dashboard-media.jpeg",
         color: "bg-black"
     }
 ];

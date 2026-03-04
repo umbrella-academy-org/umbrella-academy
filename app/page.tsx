@@ -59,7 +59,7 @@ export default function Home() {
         <FeaturedPrograms />
         <NewsHighlights />
         <HowItWorks />
-        <PlatformRoles />
+        {/* <PlatformRoles /> */}
         <Benefits />
         <Testimonials />
         <CTA />
