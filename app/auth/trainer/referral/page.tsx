@@ -32,7 +32,7 @@ export default function ReferralPage() {
   return (
     <div className="flex h-screen bg-white">
       {/* Left side - Form */}
-      <div className="flex flex-[2] flex-col justify-between p-8 bg-white overflow-y-auto">
+      <div className="flex flex-2 flex-col justify-between p-8 bg-white overflow-y-auto">
         <div className="flex flex-col flex-1 max-w-md mx-auto w-full">
           {/* Go back button */}
           <button
