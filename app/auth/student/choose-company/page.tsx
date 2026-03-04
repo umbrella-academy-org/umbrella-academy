@@ -3,9 +3,10 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { CheckCircle, Rocket, Palette, Brain, Shield, Building2 } from 'lucide-react';
+import { CheckCircle, Rocket, Palette, Brain, Shield, Building2, ArrowLeft, Eye } from 'lucide-react';
 import { mockCompanies } from '@/data/companies';
 import { mockFields } from '@/data/fields';
+import { Company } from '@/types';
 
 const fieldIcons: Record<string, any> = {
   'software-engineering': Rocket,
@@ -18,6 +19,7 @@ export default function ChooseCompanyPage() {
   const router = useRouter();
   const [selectedCompanyId, setSelectedCompanyId] = useState('');
   const [selectedFieldId, setSelectedFieldId] = useState('');
+  const [viewingCompany, setViewingCompany] = useState<Company | null>(null);
   const [error, setError] = useState('');
 
   const handleCompanySelect = (companyId: string, fieldId: string) => {
@@ -47,6 +49,8 @@ export default function ChooseCompanyPage() {
     companies: mockCompanies.filter(c => c.fieldId === field.id && c.isActive)
   })).filter(group => group.companies.length > 0);
 
+  const viewingField = viewingCompany ? mockFields.find(f => f.id === viewingCompany.fieldId) : null;
+
   return (
     <div className="flex h-screen bg-white">
       {/* Left side - Form */}
@@ -54,16 +58,91 @@ export default function ChooseCompanyPage() {
         <div className="flex flex-col flex-1 max-w-2xl mx-auto w-full">
           {/* Go back button */}
           <button
-            onClick={() => window.history.back()}
+            onClick={() => viewingCompany ? setViewingCompany(null) : window.history.back()}
             className="flex items-center gap-2 text-gray-400 hover:text-gray-900 mb-8 transition-colors group"
           >
             <svg className="w-5 h-5 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M15 19l-7-7 7-7" />
             </svg>
-            <span className="text-xs font-black">Go back</span>
+            <span className="text-xs font-black">{viewingCompany ? 'Back to list' : 'Go back'}</span>
           </button>
 
-          <div className="flex flex-col items-center justify-center flex-1">
+          <div className="flex flex-col items-center justify-center flex-1">{viewingCompany ? (
+              /* Company Detail View */
+              <div className="w-full space-y-6">
+                {/* Company Header */}
+                <div className="text-center mb-8">
+                  <div className="relative w-32 h-32 mx-auto mb-4 rounded-2xl overflow-hidden shadow-lg">
+                    <Image
+                      src={viewingCompany.images[0] || '/auth/login/image.png'}
+                      alt={viewingCompany.name}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <h2 className="text-2xl font-black text-gray-900 mb-2">{viewingCompany.name}</h2>
+                  {viewingField && (
+                    <div className="flex items-center justify-center gap-2 text-sm text-gray-500">
+                      {(() => {
+                        const FieldIcon = fieldIcons[viewingField.id] || Building2;
+                        return <FieldIcon className="w-4 h-4" />;
+                      })()}
+                      <span>{viewingField.name}</span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Description */}
+                <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
+                  <h3 className="text-sm font-black text-gray-900 mb-3">About</h3>
+                  <p className="text-sm text-gray-600 leading-relaxed">{viewingCompany.description}</p>
+                </div>
+
+                {/* Teaching Focus */}
+                <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
+                  <h3 className="text-sm font-black text-gray-900 mb-3">Teaching Focus</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {viewingCompany.teachingFocus.map((focus, idx) => (
+                      <span key={idx} className="bg-white text-gray-700 text-xs font-medium px-3 py-1.5 rounded border border-gray-200">
+                        {focus}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Images Gallery */}
+                {viewingCompany.images.length > 1 && (
+                  <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
+                    <h3 className="text-sm font-black text-gray-900 mb-3">Gallery</h3>
+                    <div className="grid grid-cols-2 gap-3">
+                      {viewingCompany.images.slice(1).map((img, idx) => (
+                        <div key={idx} className="relative h-32 rounded-lg overflow-hidden">
+                          <Image
+                            src={img}
+                            alt={`${viewingCompany.name} ${idx + 1}`}
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Select Button */}
+                <button
+                  onClick={() => {
+                    handleCompanySelect(viewingCompany.id, viewingCompany.fieldId);
+                    setViewingCompany(null);
+                  }}
+                  className="w-full bg-black text-white py-3 rounded-lg font-medium hover:bg-gray-900 transition-all active:scale-95"
+                >
+                  Select This Company
+                </button>
+              </div>
+            ) : (
+              /* Company List View */
+              <>
             {/* Logo */}
             <div className="mb-8">
               <div className="w-16 h-16 bg-black rounded-2xl flex items-center justify-center shadow-lg">
@@ -105,17 +184,19 @@ export default function ChooseCompanyPage() {
                         return (
                           <div
                             key={company.id}
-                            className={`flex items-start gap-4 p-4 border rounded-lg cursor-pointer transition-all group ${
+                            className={`flex items-start gap-4 p-4 border rounded-lg transition-all group ${
                               isSelected
                                 ? 'border-black bg-gray-50'
                                 : 'border-gray-200 bg-white hover:border-gray-300'
                             }`}
-                            onClick={() => handleCompanySelect(company.id, field.id)}
                           >
                             {/* Company Image */}
-                            <div className={`relative w-16 h-16 rounded-lg overflow-hidden shrink-0 ${
-                              isSelected ? 'ring-2 ring-black' : ''
-                            }`}>
+                            <div 
+                              className={`relative w-16 h-16 rounded-lg overflow-hidden shrink-0 cursor-pointer ${
+                                isSelected ? 'ring-2 ring-black' : ''
+                              }`}
+                              onClick={() => handleCompanySelect(company.id, field.id)}
+                            >
                               <Image
                                 src={company.images[0] || '/auth/login/image.png'}
                                 alt={company.name}
@@ -125,7 +206,10 @@ export default function ChooseCompanyPage() {
                             </div>
 
                             {/* Company Details */}
-                            <div className="flex-1 min-w-0">
+                            <div 
+                              className="flex-1 min-w-0 cursor-pointer"
+                              onClick={() => handleCompanySelect(company.id, field.id)}
+                            >
                               <h4 className={`text-sm font-semibold mb-1 ${isSelected ? 'text-gray-900' : 'text-gray-700'}`}>
                                 {company.name}
                               </h4>
@@ -143,10 +227,22 @@ export default function ChooseCompanyPage() {
                               </div>
                             </div>
 
-                            {/* Selection Indicator */}
-                            {isSelected && (
-                              <CheckCircle className="w-5 h-5 text-black shrink-0" />
-                            )}
+                            {/* Actions */}
+                            <div className="flex flex-col gap-2 shrink-0">
+                              {isSelected && (
+                                <CheckCircle className="w-5 h-5 text-black" />
+                              )}
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setViewingCompany(company);
+                                }}
+                                className="w-8 h-8 rounded-lg bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors"
+                                title="View details"
+                              >
+                                <Eye className="w-4 h-4 text-gray-600" />
+                              </button>
+                            </div>
                           </div>
                         );
                       })}
@@ -174,6 +270,8 @@ export default function ChooseCompanyPage() {
                 <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
               </div>
             </form>
+            </>
+            )}
           </div>
         </div>
 
