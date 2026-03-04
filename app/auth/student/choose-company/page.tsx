@@ -10,9 +10,7 @@ import { Company } from '@/types';
 
 const fieldIcons: Record<string, any> = {
   'software-engineering': Rocket,
-  'ux-innovation': Palette,
-  'ai-intelligence': Brain,
-  'cyber-resilience': Shield,
+  'media-production-and-storytelling': Palette,
 };
 
 export default function ChooseCompanyPage() {
@@ -72,15 +70,14 @@ export default function ChooseCompanyPage() {
               <div className="w-full space-y-6">
                 {/* Company Header */}
                 <div className="text-center mb-8">
-                  <div className="relative w-32 h-32 mx-auto mb-4 rounded-2xl overflow-hidden shadow-lg">
+                  <div className="relative w-xl h-50 mx-auto mb-4 rounded-2xl overflow-hidden shadow-lg">
                     <Image
-                      src={viewingCompany.images[0] || '/auth/login/image.png'}
+                      src={viewingCompany.images[0] || '/real/image.jpeg'}
                       alt={viewingCompany.name}
                       fill
                       className="object-cover"
                     />
                   </div>
-                  <h2 className="text-2xl font-black text-gray-900 mb-2">{viewingCompany.name}</h2>
                   {viewingField && (
                     <div className="flex items-center justify-center gap-2 text-sm text-gray-500">
                       {(() => {
@@ -110,13 +107,80 @@ export default function ChooseCompanyPage() {
                   </div>
                 </div>
 
+                {/* How Our Programs Work */}
+                {viewingCompany.programDetails && (
+                  <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
+                    <h3 className="text-sm font-black text-gray-900 mb-4">How Our Programs Work</h3>
+                    <div className="space-y-4">
+                      <div>
+                        <h4 className="text-xs font-black text-gray-900 mb-1">Personalized Curriculum</h4>
+                        <p className="text-xs text-gray-600">{viewingCompany.programDetails.curriculum}</p>
+                      </div>
+                      <div>
+                        <h4 className="text-xs font-black text-gray-900 mb-1">Learning Duration</h4>
+                        <ul className="text-xs text-gray-600 space-y-1 ml-4">
+                          <li className="list-disc">Minimum: {viewingCompany.programDetails.duration.minimum}</li>
+                          <li className="list-disc">{viewingCompany.programDetails.duration.extended}</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 className="text-xs font-black text-gray-900 mb-1">Schedule</h4>
+                        <ul className="text-xs text-gray-600 space-y-1 ml-4">
+                          <li className="list-disc">Classes run {viewingCompany.programDetails.schedule.days}</li>
+                          <li className="list-disc">{viewingCompany.programDetails.schedule.flexibility}</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 className="text-xs font-black text-gray-900 mb-1">Hands-On Projects</h4>
+                        <ul className="text-xs text-gray-600 space-y-1 ml-4">
+                          {viewingCompany.programDetails.projects.map((project, idx) => (
+                            <li key={idx} className="list-disc">{project}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Pricing */}
+                {viewingCompany.pricing && (
+                  <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
+                    <h3 className="text-sm font-black text-gray-900 mb-4">Pricing</h3>
+                    <div className="space-y-3">
+                      <div>
+                        <p className="text-xs font-black text-gray-900 mb-1">Tuition: {viewingCompany.pricing.tuition}</p>
+                      </div>
+                      <div>
+                        <h4 className="text-xs font-black text-gray-900 mb-2">Pricing includes:</h4>
+                        <ul className="text-xs text-gray-600 space-y-1 ml-4">
+                          {viewingCompany.pricing.includes.map((item, idx) => (
+                            <li key={idx} className="list-disc">{item}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Why Choose */}
+                {viewingCompany.whyChoose && (
+                  <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
+                    <h3 className="text-sm font-black text-gray-900 mb-3">Why Choose {viewingCompany.name}</h3>
+                    <ul className="text-xs text-gray-600 space-y-2 ml-4">
+                      {viewingCompany.whyChoose.map((reason, idx) => (
+                        <li key={idx} className="list-disc">{reason}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
                 {/* Images Gallery */}
                 {viewingCompany.images.length > 1 && (
                   <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
                     <h3 className="text-sm font-black text-gray-900 mb-3">Gallery</h3>
                     <div className="grid grid-cols-2 gap-3">
                       {viewingCompany.images.slice(1).map((img, idx) => (
-                        <div key={idx} className="relative h-32 rounded-lg overflow-hidden">
+                        <div key={idx} className="relative w-2xl h-96 rounded-lg overflow-hidden">
                           <Image
                             src={img}
                             alt={`${viewingCompany.name} ${idx + 1}`}
@@ -198,7 +262,7 @@ export default function ChooseCompanyPage() {
                               onClick={() => handleCompanySelect(company.id, field.id)}
                             >
                               <Image
-                                src={company.images[0] || '/auth/login/image.png'}
+                                src={company.images[0] || '/real/image.jpeg'}
                                 alt={company.name}
                                 fill
                                 className="object-cover transition-transform duration-300 group-hover:scale-110"
@@ -284,7 +348,7 @@ export default function ChooseCompanyPage() {
       {/* Right side - Image */}
       <div className="hidden lg:block flex-1 relative overflow-hidden">
         <Image
-          src="/auth/login/image.png"
+          src="/real/image.jpeg"
           alt="Training environment"
           fill
           className="object-cover object-center scale-105"

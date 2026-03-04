@@ -72,7 +72,7 @@ export default function LoginPage() {
   return (
     <div className="flex h-screen">
       {/* Left side - Form */}
-      <div className="flex flex-2 flex-col justify-between p-8 bg-white overflow-y-auto">
+      <div className="flex flex-1 flex-col justify-between p-8 bg-white overflow-y-auto">
         <div className="flex flex-col items-center justify-center flex-1 max-w-md mx-auto w-full">
           <div className="mb-8">
             <Logo size="lg" />
@@ -250,7 +250,7 @@ export default function LoginPage() {
       {/* Right side - Image */}
       <div className="hidden lg:block flex-1 relative overflow-hidden">
         <Image
-          src="/auth/login/image.png"
+          src="/real/image.jpeg"
           alt="Beach with palm tree"
           fill
           className="object-cover object-center scale-105"

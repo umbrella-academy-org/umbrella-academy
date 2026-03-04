@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { Award, BookMarked, BookOpen, Briefcase, CheckCircle, ChevronDown, FileText, GraduationCap, Trophy } from 'lucide-react';
 
 export default function ProfilePage() {
   const router = useRouter();
@@ -24,6 +25,20 @@ export default function ProfilePage() {
     phoneNumber: '',
   });
 
+  const [selectedLevel, setSelectedLevel] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
+
+  const educationLevels = [
+    { value: "High School Diploma", icon: BookOpen },
+    { value: "Associate Degree", icon: Award },
+    { value: "Bachelor's Degree", icon: GraduationCap },
+    { value: "Master's Degree", icon: Trophy },
+    { value: "Doctoral Degree (PhD)", icon: Trophy },
+    { value: "Professional Degree", icon: Briefcase },
+    { value: "Certificate/Diploma", icon: FileText },
+    { value: "Some College (No Degree)", icon: BookMarked }
+  ];
+
   const handleChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     setErrors((prev) => ({ ...prev, [field]: '' }));
@@ -39,20 +54,20 @@ export default function ProfilePage() {
       email: '',
       phoneNumber: '',
     };
-    
+
     if (!formData.firstName) newErrors.firstName = 'First name is required';
     if (!formData.lastName) newErrors.lastName = 'Last name is required';
     if (!formData.gender) newErrors.gender = 'Please select your gender';
     if (!formData.dateOfBirth) newErrors.dateOfBirth = 'Date of birth is required';
     if (!formData.email) newErrors.email = 'Email is required';
     if (!formData.phoneNumber) newErrors.phoneNumber = 'Phone number is required';
-    
+
     setErrors(newErrors);
-    
+
     if (Object.values(newErrors).some(error => error !== '')) {
       return;
     }
-    
+
     console.log('Profile data:', formData);
     // Store user type and email for verification
     localStorage.setItem('userType', 'student');
@@ -108,9 +123,8 @@ export default function ProfilePage() {
                     value={formData.firstName}
                     onChange={(e) => handleChange('firstName', e.target.value)}
                     placeholder="eg. John"
-                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${
-                      errors.firstName ? 'border-gray-500' : 'border-gray-300'
-                    }`}
+                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${errors.firstName ? 'border-gray-500' : 'border-gray-300'
+                      }`}
                     required
                   />
                   {errors.firstName && <p className="mt-1 text-sm text-gray-500">{errors.firstName}</p>}
@@ -125,9 +139,8 @@ export default function ProfilePage() {
                     value={formData.lastName}
                     onChange={(e) => handleChange('lastName', e.target.value)}
                     placeholder="eg. Doe"
-                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${
-                      errors.lastName ? 'border-gray-500' : 'border-gray-300'
-                    }`}
+                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${errors.lastName ? 'border-gray-500' : 'border-gray-300'
+                      }`}
                     required
                   />
                   {errors.lastName && <p className="mt-1 text-sm text-gray-500">{errors.lastName}</p>}
@@ -144,9 +157,8 @@ export default function ProfilePage() {
                     id="gender"
                     value={formData.gender}
                     onChange={(e) => handleChange('gender', e.target.value)}
-                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent appearance-none bg-white text-gray-900 ${
-                      errors.gender ? 'border-gray-500' : 'border-gray-300'
-                    }`}
+                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent appearance-none bg-white text-gray-900 ${errors.gender ? 'border-gray-500' : 'border-gray-300'
+                      }`}
                     required
                   >
                     <option value="">Preferred gender</option>
@@ -167,9 +179,8 @@ export default function ProfilePage() {
                     value={formData.dateOfBirth}
                     onChange={(e) => handleChange('dateOfBirth', e.target.value)}
                     placeholder="DD / MM / YY"
-                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 ${
-                      errors.dateOfBirth ? 'border-gray-500' : 'border-gray-300'
-                    }`}
+                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 ${errors.dateOfBirth ? 'border-gray-500' : 'border-gray-300'
+                      }`}
                     required
                   />
                   {errors.dateOfBirth && <p className="mt-1 text-sm text-gray-500">{errors.dateOfBirth}</p>}
@@ -187,9 +198,8 @@ export default function ProfilePage() {
                   placeholder="eg. johndoe@example.com"
                   value={formData.email}
                   onChange={(e) => handleChange('email', e.target.value)}
-                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent appearance-none bg-white text-gray-900 ${
-                    errors.email ? 'border-gray-500' : 'border-gray-300'
-                  }`}
+                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent appearance-none bg-white text-gray-900 ${errors.email ? 'border-gray-500' : 'border-gray-300'
+                    }`}
                   required
                 />
                 {errors.email && <p className="mt-1 text-sm text-gray-500">{errors.email}</p>}
@@ -219,14 +229,89 @@ export default function ProfilePage() {
                       value={formData.phoneNumber}
                       onChange={(e) => handleChange('phoneNumber', e.target.value)}
                       placeholder="7XXX-XXX-XXX"
-                      className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${
-                        errors.phoneNumber ? 'border-gray-500' : 'border-gray-300'
-                      }`}
+                      className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${errors.phoneNumber ? 'border-gray-500' : 'border-gray-300'
+                        }`}
                       required
                     />
                     {errors.phoneNumber && <p className="mt-1 text-sm text-gray-500">{errors.phoneNumber}</p>}
                   </div>
                 </div>
+              </div>
+
+              <div className="relative">
+                <label className='block text-sm font-medium text-gray-700 mb-2'>
+                  Education Level
+                </label>
+                <button
+                  type="button"
+                  onClick={() => setIsOpen(!isOpen)}
+                  className={`w-full flex items-center justify-between p-2 border rounded-lg transition-all ${selectedLevel
+                      ? 'border-black bg-gray-50'
+                      : 'border-gray-200 bg-white hover:border-gray-300'
+                    }`}
+                >
+                  <div className="flex items-center gap-4">
+                    {selectedLevel ? (
+                      <>
+                        {(() => {
+                          const selected = educationLevels.find(l => l.value === selectedLevel);
+                          const Icon = selected?.icon || GraduationCap;
+                          return (
+                            <>
+                              <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-black text-white">
+                                <Icon className="w-5 h-5" />
+                              </div>
+                              <span className="text-sm font-medium text-gray-900">{selectedLevel}</span>
+                            </>
+                          );
+                        })()}
+                      </>
+                    ) : (
+                      <>
+                        <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-gray-100 text-gray-400">
+                          <GraduationCap className="w-5 h-5" />
+                        </div>
+                        <span className="text-sm font-medium text-gray-500">Select your education level</span>
+                      </>
+                    )}
+                  </div>
+                  <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+                </button>
+
+                {/* Dropdown menu */}
+                {isOpen && (
+                  <div className="absolute z-10 w-full mt-2 bg-white border border-gray-200 rounded-lg shadow-lg max-h-80 overflow-y-auto">
+                    {educationLevels.map((level, index) => {
+                      const Icon = level.icon;
+                      return (
+                        <button
+                          key={index}
+                          type="button"
+                          onClick={() => {
+                            setSelectedLevel(level.value);
+                            setIsOpen(false);
+                          }}
+                          className={`w-full flex items-center gap-4 p-4 transition-all hover:bg-gray-50 ${selectedLevel === level.value ? 'bg-gray-50' : ''
+                            } ${index !== educationLevels.length - 1 ? 'border-b border-gray-100' : ''}`}
+                        >
+                          <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-colors ${selectedLevel === level.value
+                              ? 'bg-black text-white'
+                              : 'bg-gray-100 text-gray-400'
+                            }`}>
+                            <Icon className="w-5 h-5" />
+                          </div>
+                          <span className={`flex-1 text-left text-sm font-medium ${selectedLevel === level.value ? 'text-gray-900' : 'text-gray-600'
+                            }`}>
+                            {level.value}
+                          </span>
+                          {selectedLevel === level.value && (
+                            <CheckCircle className="w-5 h-5 text-gray-600" />
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
               </div>
 
               <button
@@ -256,7 +341,7 @@ export default function ProfilePage() {
       {/* Right side - Image */}
       <div className="hidden lg:block flex-[1] relative overflow-hidden">
         <Image
-          src="/auth/login/image.png"
+          src="/real/image.jpeg"
           alt="Palm trees against blue sky"
           fill
           className="object-cover object-center scale-105"
