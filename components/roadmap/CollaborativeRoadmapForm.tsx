@@ -186,7 +186,7 @@ export default function CollaborativeRoadmapForm({
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-xl font-semibold text-gray-900">Collaborative Roadmap Creation</h2>
         <div className="flex items-center gap-2">
-          <Users className="w-4 h-4 text-green-500" />
+          <Users className="w-4 h-4 text-gray-500" />
           <span className="text-sm text-gray-600">
             {isTrainerConnected ? `${collaborators.length} collaborators` : 'Connecting...'}
           </span>
@@ -194,8 +194,8 @@ export default function CollaborativeRoadmapForm({
       </div>
 
       {!isTrainerConnected && (
-        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
-          <p className="text-yellow-800">Waiting for trainer to join the session...</p>
+        <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 mb-6">
+          <p className="text-gray-800">Waiting for trainer to join the session...</p>
         </div>
       )}
 
@@ -203,7 +203,7 @@ export default function CollaborativeRoadmapForm({
         {/* Student Goals */}
         <div>
           <div className="flex items-center gap-2 mb-4">
-            <Target className="w-5 h-5 text-blue-600" />
+            <Target className="w-5 h-5 text-gray-600" />
             <h3 className="text-lg font-medium text-gray-900">Learning Goals</h3>
           </div>
           <div className="space-y-3">
@@ -214,13 +214,13 @@ export default function CollaborativeRoadmapForm({
                   value={goal}
                   onChange={(e) => updateGoal(index, e.target.value)}
                   placeholder="Enter a learning goal..."
-                  className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600"
+                  className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600"
                   disabled={!isTrainerConnected}
                 />
                 {formData.studentGoals.length > 1 && (
                   <button
                     onClick={() => removeGoal(index)}
-                    className="p-2 text-red-500 hover:text-red-700"
+                    className="p-2 text-gray-500 hover:text-gray-700"
                     disabled={!isTrainerConnected}
                   >
                     <Trash2 className="w-4 h-4" />
@@ -230,7 +230,7 @@ export default function CollaborativeRoadmapForm({
             ))}
             <button
               onClick={addGoal}
-              className="flex items-center gap-2 px-3 py-2 text-blue-600 hover:text-blue-700 disabled:opacity-50"
+              className="flex items-center gap-2 px-3 py-2 text-gray-600 hover:text-gray-700 disabled:opacity-50"
               disabled={!isTrainerConnected}
             >
               <Plus className="w-4 h-4" />
@@ -242,7 +242,7 @@ export default function CollaborativeRoadmapForm({
         {/* Learning Path */}
         <div>
           <div className="flex items-center gap-2 mb-4">
-            <BookOpen className="w-5 h-5 text-green-600" />
+            <BookOpen className="w-5 h-5 text-gray-600" />
             <h3 className="text-lg font-medium text-gray-900">Learning Path</h3>
           </div>
           <div className="space-y-4">
@@ -252,7 +252,7 @@ export default function CollaborativeRoadmapForm({
                   <span className="text-sm font-medium text-gray-500">Module {index + 1}</span>
                   <button
                     onClick={() => removeLearningModule(index)}
-                    className="p-1 text-red-500 hover:text-red-700"
+                    className="p-1 text-gray-500 hover:text-gray-700"
                     disabled={!isTrainerConnected}
                   >
                     <Trash2 className="w-4 h-4" />
@@ -264,7 +264,7 @@ export default function CollaborativeRoadmapForm({
                     value={module.title}
                     onChange={(e) => updateLearningModule(index, 'title', e.target.value)}
                     placeholder="Module title..."
-                    className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600"
+                    className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600"
                     disabled={!isTrainerConnected}
                   />
                   <input
@@ -272,7 +272,7 @@ export default function CollaborativeRoadmapForm({
                     value={module.duration}
                     onChange={(e) => updateLearningModule(index, 'duration', e.target.value)}
                     placeholder="Duration (e.g., 2 weeks)..."
-                    className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600"
+                    className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600"
                     disabled={!isTrainerConnected}
                   />
                 </div>
@@ -281,14 +281,14 @@ export default function CollaborativeRoadmapForm({
                   onChange={(e) => updateLearningModule(index, 'description', e.target.value)}
                   placeholder="Module description..."
                   rows={2}
-                  className="w-full mt-3 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600"
+                  className="w-full mt-3 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600"
                   disabled={!isTrainerConnected}
                 />
               </div>
             ))}
             <button
               onClick={addLearningModule}
-              className="flex items-center gap-2 px-3 py-2 text-green-600 hover:text-green-700 disabled:opacity-50"
+              className="flex items-center gap-2 px-3 py-2 text-gray-600 hover:text-gray-700 disabled:opacity-50"
               disabled={!isTrainerConnected}
             >
               <Plus className="w-4 h-4" />
@@ -300,7 +300,7 @@ export default function CollaborativeRoadmapForm({
         {/* Timeline */}
         <div>
           <div className="flex items-center gap-2 mb-4">
-            <Calendar className="w-5 h-5 text-purple-600" />
+            <Calendar className="w-5 h-5 text-gray-600" />
             <h3 className="text-lg font-medium text-gray-900">Timeline</h3>
           </div>
           <div className="space-y-4">
@@ -310,7 +310,7 @@ export default function CollaborativeRoadmapForm({
                   <span className="text-sm font-medium text-gray-500">Phase {index + 1}</span>
                   <button
                     onClick={() => removeTimelineItem(index)}
-                    className="p-1 text-red-500 hover:text-red-700"
+                    className="p-1 text-gray-500 hover:text-gray-700"
                     disabled={!isTrainerConnected}
                   >
                     <Trash2 className="w-4 h-4" />
@@ -322,21 +322,21 @@ export default function CollaborativeRoadmapForm({
                     value={item.phase}
                     onChange={(e) => updateTimelineItem(index, 'phase', e.target.value)}
                     placeholder="Phase name..."
-                    className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600"
+                    className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600"
                     disabled={!isTrainerConnected}
                   />
                   <input
                     type="date"
                     value={item.startDate}
                     onChange={(e) => updateTimelineItem(index, 'startDate', e.target.value)}
-                    className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600"
+                    className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600"
                     disabled={!isTrainerConnected}
                   />
                   <input
                     type="date"
                     value={item.endDate}
                     onChange={(e) => updateTimelineItem(index, 'endDate', e.target.value)}
-                    className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600"
+                    className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600"
                     disabled={!isTrainerConnected}
                   />
                 </div>
@@ -344,7 +344,7 @@ export default function CollaborativeRoadmapForm({
             ))}
             <button
               onClick={addTimelineItem}
-              className="flex items-center gap-2 px-3 py-2 text-purple-600 hover:text-purple-700 disabled:opacity-50"
+              className="flex items-center gap-2 px-3 py-2 text-gray-600 hover:text-gray-700 disabled:opacity-50"
               disabled={!isTrainerConnected}
             >
               <Plus className="w-4 h-4" />
@@ -364,13 +364,13 @@ export default function CollaborativeRoadmapForm({
                   value={criteria}
                   onChange={(e) => updateAssessmentCriteria(index, e.target.value)}
                   placeholder="Enter assessment criteria..."
-                  className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600"
+                  className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600"
                   disabled={!isTrainerConnected}
                 />
                 {formData.assessmentCriteria.length > 1 && (
                   <button
                     onClick={() => removeAssessmentCriteria(index)}
-                    className="p-2 text-red-500 hover:text-red-700"
+                    className="p-2 text-gray-500 hover:text-gray-700"
                     disabled={!isTrainerConnected}
                   >
                     <Trash2 className="w-4 h-4" />
@@ -380,7 +380,7 @@ export default function CollaborativeRoadmapForm({
             ))}
             <button
               onClick={addAssessmentCriteria}
-              className="flex items-center gap-2 px-3 py-2 text-orange-600 hover:text-orange-700 disabled:opacity-50"
+              className="flex items-center gap-2 px-3 py-2 text-gray-600 hover:text-gray-700 disabled:opacity-50"
               disabled={!isTrainerConnected}
             >
               <Plus className="w-4 h-4" />
@@ -393,7 +393,7 @@ export default function CollaborativeRoadmapForm({
         <div className="flex justify-end pt-6 border-t border-gray-200">
           <button
             onClick={handleSave}
-            className="px-6 py-3 bg-yellow-600 text-white rounded-lg font-medium hover:bg-yellow-700 transition-colors disabled:opacity-50"
+            className="px-6 py-3 bg-gray-600 text-white rounded-lg font-medium hover:bg-gray-700 transition-colors disabled:opacity-50"
             disabled={!isTrainerConnected}
           >
             Save Roadmap

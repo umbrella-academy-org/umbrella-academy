@@ -5,44 +5,44 @@ import { TrendingUp, Clock, Users, BookOpen } from 'lucide-react';
 export default function TrainerSessionStats() {
   const stats = [
     {
-      icon: <TrendingUp className="w-5 h-5 text-green-600" />,
+      icon: <TrendingUp className="w-5 h-5 text-gray-600" />,
       title: 'Session Delivery',
       value: '92%',
       subtitle: 'Success rate',
       trend: '+5% from last week',
       trendType: 'positive' as const,
-      bgColor: 'bg-green-50/50',
-      borderColor: 'border-green-100'
+      bgColor: 'bg-gray-50/50',
+      borderColor: 'border-gray-100'
     },
     {
-      icon: <Clock className="w-5 h-5 text-blue-600" />,
+      icon: <Clock className="w-5 h-5 text-gray-600" />,
       title: 'Teaching Time',
       value: '4.2h',
       subtitle: 'Daily average',
       trend: '-0.3h from target',
       trendType: 'neutral' as const,
-      bgColor: 'bg-blue-50/50',
-      borderColor: 'border-blue-100'
+      bgColor: 'bg-gray-50/50',
+      borderColor: 'border-gray-100'
     },
     {
-      icon: <Users className="w-5 h-5 text-purple-600" />,
+      icon: <Users className="w-5 h-5 text-gray-600" />,
       title: 'Student Engagement',
       value: '87%',
       subtitle: 'Active participants',
       trend: '+12% this month',
       trendType: 'positive' as const,
-      bgColor: 'bg-purple-50/50',
-      borderColor: 'border-purple-100'
+      bgColor: 'bg-gray-50/50',
+      borderColor: 'border-gray-100'
     },
     {
-      icon: <BookOpen className="w-5 h-5 text-orange-600" />,
+      icon: <BookOpen className="w-5 h-5 text-gray-600" />,
       title: 'Roadmap Progress',
       value: '15/18',
       subtitle: 'Assigned tracks',
       trend: '3 tracks pending',
       trendType: 'neutral' as const,
-      bgColor: 'bg-orange-50/50',
-      borderColor: 'border-orange-100'
+      bgColor: 'bg-gray-50/50',
+      borderColor: 'border-gray-100'
     }
   ];
 
@@ -51,7 +51,7 @@ export default function TrainerSessionStats() {
       <div className="flex items-center justify-between mb-6 px-1">
         <h2 className="text-lg font-bold text-gray-900  ">Session Performance</h2>
         <div className="flex items-center gap-2">
-          <select className="text-[10px] font-bold    bg-white border border-gray-100 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-600 shadow-sm">
+          <select className="text-[10px] font-bold    bg-white border border-gray-100 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-600 shadow-sm">
             <option>Current Week</option>
             <option>This Month</option>
             <option>Last Quarter</option>
@@ -63,7 +63,7 @@ export default function TrainerSessionStats() {
         {stats.map((stat, index) => (
           <div
             key={stat.title}
-            className={`${stat.bgColor} ${stat.borderColor} border rounded-lg p-5 hover:shadow-lg hover:shadow-yellow-600/5 transition-all duration-300 group`}
+            className={`${stat.bgColor} ${stat.borderColor} border rounded-lg p-5 hover:shadow-lg hover:shadow-gray-600/5 transition-all duration-300 group`}
             style={{ animationDelay: `${index * 100}ms` }}
           >
             <div className="flex items-center justify-between mb-4">
@@ -79,7 +79,7 @@ export default function TrainerSessionStats() {
               <h3 className="text-xs font-bold text-gray-400   ">{stat.title}</h3>
               <p className="text-sm font-semibold text-gray-900">{stat.subtitle}</p>
               <div className={`text-[10px] font-bold flex items-center gap-1 mt-2 ${stat.trendType === 'positive'
-                ? 'text-green-600'
+                ? 'text-gray-600'
                 : 'text-gray-400'
                 }`}>
                 {stat.trend}

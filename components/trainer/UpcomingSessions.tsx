@@ -64,19 +64,19 @@ export default function UpcomingSessions() {
     switch (status) {
       case 'live':
         return (
-          <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800 animate-pulse">
+          <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800 animate-pulse">
             ● Live
           </span>
         );
       case 'upcoming':
         return (
-          <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+          <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
             ● Upcoming
           </span>
         );
       default:
         return (
-          <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+          <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
             ● Completed
           </span>
         );
@@ -102,8 +102,8 @@ export default function UpcomingSessions() {
                 {/* Avatar */}
                 <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-medium ${
                   session.type === 'group' 
-                    ? 'bg-purple-500' 
-                    : 'bg-gradient-to-br from-yellow-400 to-yellow-600'
+                    ? 'bg-gray-500' 
+                    : 'bg-gradient-to-br from-gray-400 to-gray-600'
                 }`}>
                   {session.avatar}
                 </div>
@@ -146,12 +146,12 @@ export default function UpcomingSessions() {
                   <div className="absolute right-0 top-full mt-1 w-40 bg-white rounded-lg shadow-lg border border-gray-200 z-10">
                     <div className="py-1">
                       {session.status === 'live' ? (
-                        <button className="flex items-center gap-2 w-full px-3 py-2 text-sm text-green-600 hover:bg-green-50">
+                        <button className="flex items-center gap-2 w-full px-3 py-2 text-sm text-gray-600 hover:bg-gray-50">
                           <Video className="w-4 h-4" />
                           Join Session
                         </button>
                       ) : (
-                        <button className="flex items-center gap-2 w-full px-3 py-2 text-sm text-blue-600 hover:bg-blue-50">
+                        <button className="flex items-center gap-2 w-full px-3 py-2 text-sm text-gray-600 hover:bg-gray-50">
                           <Video className="w-4 h-4" />
                           Start Session
                         </button>
@@ -160,7 +160,7 @@ export default function UpcomingSessions() {
                         <Clock className="w-4 h-4" />
                         Reschedule
                       </button>
-                      <button className="flex items-center gap-2 w-full px-3 py-2 text-sm text-red-600 hover:bg-red-50">
+                      <button className="flex items-center gap-2 w-full px-3 py-2 text-sm text-gray-600 hover:bg-gray-50">
                         <span className="w-4 h-4 text-center">✕</span>
                         Cancel
                       </button>
@@ -173,12 +173,12 @@ export default function UpcomingSessions() {
             {/* Action Buttons */}
             <div className="flex gap-2 mt-3">
               {session.status === 'live' ? (
-                <button className="flex-1 px-3 py-1.5 bg-green-600 text-white text-xs font-medium rounded hover:bg-green-700 transition-colors">
+                <button className="flex-1 px-3 py-1.5 bg-gray-600 text-white text-xs font-medium rounded hover:bg-gray-700 transition-colors">
                   Join Live Session
                 </button>
               ) : (
                 <>
-                  <button className="flex-1 px-3 py-1.5 bg-yellow-600 text-white text-xs font-medium rounded hover:bg-yellow-700 transition-colors">
+                  <button className="flex-1 px-3 py-1.5 bg-gray-600 text-white text-xs font-medium rounded hover:bg-gray-700 transition-colors">
                     Start Session
                   </button>
                   <button className="px-3 py-1.5 border border-gray-300 text-gray-700 text-xs font-medium rounded hover:bg-gray-50 transition-colors">
@@ -192,7 +192,7 @@ export default function UpcomingSessions() {
       </div>
 
       {/* Add Session Button */}
-      <button className="w-full mt-4 px-4 py-2.5 border-2 border-dashed border-gray-300 text-gray-600 text-sm font-medium rounded-lg hover:border-yellow-400 hover:text-yellow-600 transition-all duration-200">
+      <button className="w-full mt-4 px-4 py-2.5 border-2 border-dashed border-gray-300 text-gray-600 text-sm font-medium rounded-lg hover:border-gray-400 hover:text-gray-600 transition-all duration-200">
         + Schedule New Session
       </button>
 

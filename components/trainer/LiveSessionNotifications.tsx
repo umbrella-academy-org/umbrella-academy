@@ -42,30 +42,30 @@ export default function LiveSessionNotifications() {
       type: 'session-reminder',
       message: 'React Hooks session starts in 15 minutes',
       time: '5 min ago',
-      icon: <Bell className="w-4 h-4 text-yellow-600" />
+      icon: <Bell className="w-4 h-4 text-gray-600" />
     },
     {
       id: 2,
       type: 'student-joined',
       message: '3 new students joined your JavaScript course',
       time: '1 hour ago',
-      icon: <Users className="w-4 h-4 text-green-600" />
+      icon: <Users className="w-4 h-4 text-gray-600" />
     },
     {
       id: 3,
       type: 'session-completed',
       message: 'CSS Grid session completed successfully',
       time: '2 hours ago',
-      icon: <Video className="w-4 h-4 text-blue-600" />
+      icon: <Video className="w-4 h-4 text-gray-600" />
     }
   ];
 
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'starting-soon':
-        return 'bg-red-100 text-red-800 border-red-200';
+        return 'bg-gray-100 text-gray-800 border-gray-200';
       case 'scheduled':
-        return 'bg-blue-100 text-blue-800 border-blue-200';
+        return 'bg-gray-100 text-gray-800 border-gray-200';
       default:
         return 'bg-gray-100 text-gray-800 border-gray-200';
     }
@@ -78,7 +78,7 @@ export default function LiveSessionNotifications() {
         <div className="p-6 border-b border-gray-200">
           <div className="flex items-center justify-between">
             <h2 className="text-lg font-semibold text-gray-900">Today's Sessions</h2>
-            <button className="text-sm text-yellow-600 hover:text-yellow-700 font-medium">
+            <button className="text-sm text-gray-600 hover:text-gray-700 font-medium">
               View All
             </button>
           </div>
@@ -93,7 +93,7 @@ export default function LiveSessionNotifications() {
             >
               <div className="flex items-start justify-between mb-3">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-yellow-600 rounded-lg flex items-center justify-center">
+                  <div className="w-10 h-10 bg-gray-600 rounded-lg flex items-center justify-center">
                     <Video className="w-5 h-5 text-white" />
                   </div>
                   <div>
@@ -132,7 +132,7 @@ export default function LiveSessionNotifications() {
                 </div>
                 
                 {session.status === 'starting-soon' ? (
-                  <button className="flex items-center gap-2 px-3 py-2 bg-green-600 text-white text-sm font-medium rounded-lg hover:bg-green-700 transition-colors">
+                  <button className="flex items-center gap-2 px-3 py-2 bg-gray-600 text-white text-sm font-medium rounded-lg hover:bg-gray-700 transition-colors">
                     <Play className="w-4 h-4" />
                     Start Session
                   </button>
@@ -152,7 +152,7 @@ export default function LiveSessionNotifications() {
         <div className="p-6 border-b border-gray-200">
           <div className="flex items-center justify-between">
             <h2 className="text-lg font-semibold text-gray-900">Notifications</h2>
-            <button className="text-sm text-yellow-600 hover:text-yellow-700 font-medium">
+            <button className="text-sm text-gray-600 hover:text-gray-700 font-medium">
               Mark All Read
             </button>
           </div>
@@ -182,7 +182,7 @@ export default function LiveSessionNotifications() {
         </div>
 
         <div className="p-6 border-t border-gray-200">
-          <button className="w-full text-center text-sm text-yellow-600 hover:text-yellow-700 font-medium">
+          <button className="w-full text-center text-sm text-gray-600 hover:text-gray-700 font-medium">
             View All Notifications
           </button>
         </div>

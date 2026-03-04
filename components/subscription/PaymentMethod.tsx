@@ -35,22 +35,22 @@ export default function PaymentMethod() {
         <div className="space-y-3 mb-6">
           {paymentMethods.map((method) => (
             <div key={method.id} className={`border rounded-lg p-4 ${
-              method.isDefault ? 'border-yellow-200 bg-yellow-50' : 'border-gray-200'
+              method.isDefault ? 'border-gray-200 bg-gray-50' : 'border-gray-200'
             }`}>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                    method.provider === 'MTN MoMo' ? 'bg-yellow-100' : 'bg-red-100'
+                    method.provider === 'MTN MoMo' ? 'bg-gray-100' : 'bg-gray-100'
                   }`}>
                     <Smartphone className={`w-5 h-5 ${
-                      method.provider === 'MTN MoMo' ? 'text-yellow-600' : 'text-red-600'
+                      method.provider === 'MTN MoMo' ? 'text-gray-600' : 'text-gray-600'
                     }`} />
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
                       <div className="text-sm font-medium text-gray-900">{method.provider}</div>
                       {method.isDefault && (
-                        <span className="px-2 py-1 text-xs font-medium bg-yellow-100 text-yellow-800 rounded-full">
+                        <span className="px-2 py-1 text-xs font-medium bg-gray-100 text-gray-800 rounded-full">
                           Default
                         </span>
                       )}
@@ -58,7 +58,7 @@ export default function PaymentMethod() {
                     <div className="text-xs text-gray-500 flex items-center gap-1">
                       {method.phoneNumber}
                       {method.status === 'verified' && (
-                        <CheckCircle className="w-3 h-3 text-green-500" />
+                        <CheckCircle className="w-3 h-3 text-gray-500" />
                       )}
                     </div>
                   </div>
@@ -69,7 +69,7 @@ export default function PaymentMethod() {
                       Set Default
                     </button>
                   )}
-                  <button className="text-sm text-yellow-600 hover:text-yellow-700 font-medium">
+                  <button className="text-sm text-gray-600 hover:text-gray-700 font-medium">
                     Edit
                   </button>
                 </div>
@@ -79,8 +79,8 @@ export default function PaymentMethod() {
         </div>
 
         {/* Add New Payment Method */}
-        <button className="w-full border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-yellow-400 hover:bg-yellow-50 transition-colors group">
-          <div className="flex items-center justify-center gap-2 text-gray-600 group-hover:text-yellow-600">
+        <button className="w-full border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-gray-400 hover:bg-gray-50 transition-colors group">
+          <div className="flex items-center justify-center gap-2 text-gray-600 group-hover:text-gray-600">
             <Plus className="w-4 h-4" />
             <span className="text-sm font-medium">Add new MoMo account</span>
           </div>
@@ -96,7 +96,7 @@ export default function PaymentMethod() {
                 <div>{billingEmail}</div>
               </div>
             </div>
-            <button className="text-sm text-yellow-600 hover:text-yellow-700 font-medium">
+            <button className="text-sm text-gray-600 hover:text-gray-700 font-medium">
               Change
             </button>
           </div>

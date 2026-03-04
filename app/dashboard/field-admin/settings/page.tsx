@@ -47,7 +47,7 @@ export default function FieldAdminSettingsPage() {
               {/* Company Association */}
               <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
                 <div className="flex items-center gap-3 mb-6">
-                  <Building2 className="w-6 h-6 text-blue-500" />
+                  <Building2 className="w-6 h-6 text-gray-500" />
                   <h3 className="text-lg font-semibold text-gray-900">Company Association</h3>
                 </div>
                 <div className="space-y-4">
@@ -58,14 +58,14 @@ export default function FieldAdminSettingsPage() {
                         <div
                           key={company.id}
                           className={`p-4 border rounded-lg cursor-pointer transition-all ${selectedCompany === company.id
-                              ? 'border-blue-500 bg-blue-50'
+                              ? 'border-gray-500 bg-gray-50'
                               : 'border-gray-200 hover:border-gray-300'
                             }`}
                           onClick={() => setSelectedCompany(company.id)}
                         >
                           <div className="flex items-center gap-3">
                             <div className={`w-4 h-4 rounded-full border-2 ${selectedCompany === company.id
-                                ? 'border-blue-500 bg-blue-500'
+                                ? 'border-gray-500 bg-gray-500'
                                 : 'border-gray-300'
                               }`}>
                               {selectedCompany === company.id && (
@@ -87,7 +87,7 @@ export default function FieldAdminSettingsPage() {
               {/* Field Information */}
               <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
                 <div className="flex items-center gap-3 mb-6">
-                  <Settings className="w-6 h-6 text-green-500" />
+                  <Settings className="w-6 h-6 text-gray-500" />
                   <h3 className="text-lg font-semibold text-gray-900">Field Information</h3>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -97,7 +97,7 @@ export default function FieldAdminSettingsPage() {
                       type="text"
                       value={fieldSettings.fieldName}
                       onChange={(e) => setFieldSettings({ ...fieldSettings, fieldName: e.target.value })}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent"
                     />
                   </div>
                   <div>
@@ -106,7 +106,7 @@ export default function FieldAdminSettingsPage() {
                       type="text"
                       value={fieldSettings.fieldCode}
                       onChange={(e) => setFieldSettings({ ...fieldSettings, fieldCode: e.target.value })}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent"
                     />
                   </div>
                 </div>
@@ -115,7 +115,7 @@ export default function FieldAdminSettingsPage() {
               {/* Capacity Settings */}
               <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
                 <div className="flex items-center gap-3 mb-6">
-                  <Users className="w-6 h-6 text-purple-500" />
+                  <Users className="w-6 h-6 text-gray-500" />
                   <h3 className="text-lg font-semibold text-gray-900">Capacity & Training Settings</h3>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -125,7 +125,7 @@ export default function FieldAdminSettingsPage() {
                       type="number"
                       value={fieldSettings.maxStudentsPerTrainer}
                       onChange={(e) => setFieldSettings({ ...fieldSettings, maxStudentsPerTrainer: parseInt(e.target.value) })}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent"
                     />
                   </div>
                   <div>
@@ -135,7 +135,7 @@ export default function FieldAdminSettingsPage() {
                       value={fieldSettings.minHoursPerWeek}
                       onChange={(e) => setFieldSettings({ ...fieldSettings, minHoursPerWeek: parseFloat(e.target.value) })}
                       step="0.5"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent"
                     />
                   </div>
                 </div>
@@ -144,7 +144,7 @@ export default function FieldAdminSettingsPage() {
               {/* Payment Settings */}
               <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
                 <div className="flex items-center gap-3 mb-6">
-                  <DollarSign className="w-6 h-6 text-yellow-500" />
+                  <DollarSign className="w-6 h-6 text-gray-500" />
                   <h3 className="text-lg font-semibold text-gray-900">Payment Settings</h3>
                 </div>
                 <div className="space-y-6">
@@ -155,7 +155,7 @@ export default function FieldAdminSettingsPage() {
                         type="number"
                         value={fieldSettings.fieldSharePercentage}
                         onChange={(e) => setFieldSettings({ ...fieldSettings, fieldSharePercentage: parseInt(e.target.value) })}
-                        className="w-24 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
+                        className="w-24 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent"
                       />
                       <span className="text-gray-600">% of total revenue</span>
                     </div>
@@ -166,7 +166,7 @@ export default function FieldAdminSettingsPage() {
                       type="text"
                       value={fieldSettings.bankAccount}
                       onChange={(e) => setFieldSettings({ ...fieldSettings, bankAccount: e.target.value })}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent"
                     />
                   </div>
                 </div>
@@ -175,7 +175,7 @@ export default function FieldAdminSettingsPage() {
               {/* Approval & Notification Settings */}
               <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
                 <div className="flex items-center gap-3 mb-6">
-                  <Shield className="w-6 h-6 text-red-500" />
+                  <Shield className="w-6 h-6 text-gray-500" />
                   <h3 className="text-lg font-semibold text-gray-900">Approval & Notification Settings</h3>
                 </div>
                 <div className="space-y-4">
@@ -191,7 +191,7 @@ export default function FieldAdminSettingsPage() {
                         onChange={(e) => setFieldSettings({ ...fieldSettings, autoApproveTrainers: e.target.checked })}
                         className="sr-only peer"
                       />
-                      <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-yellow-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-yellow-600"></div>
+                      <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-gray-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gray-600"></div>
                     </label>
                   </div>
 
@@ -207,7 +207,7 @@ export default function FieldAdminSettingsPage() {
                         onChange={(e) => setFieldSettings({ ...fieldSettings, requireMentorApproval: e.target.checked })}
                         className="sr-only peer"
                       />
-                      <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-yellow-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-yellow-600"></div>
+                      <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-gray-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gray-600"></div>
                     </label>
                   </div>
 
@@ -223,7 +223,7 @@ export default function FieldAdminSettingsPage() {
                         onChange={(e) => setFieldSettings({ ...fieldSettings, enableNotifications: e.target.checked })}
                         className="sr-only peer"
                       />
-                      <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-yellow-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-yellow-600"></div>
+                      <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-gray-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gray-600"></div>
                     </label>
                   </div>
                 </div>
@@ -233,7 +233,7 @@ export default function FieldAdminSettingsPage() {
               <div className="flex gap-4 pb-8">
                 <button
                   onClick={handleSaveSettings}
-                  className="bg-yellow-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-yellow-700 transition-colors"
+                  className="bg-gray-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-gray-700 transition-colors"
                 >
                   Save Changes
                 </button>

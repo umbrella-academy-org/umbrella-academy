@@ -111,7 +111,7 @@ export default function VerifyPage() {
             <p className="text-gray-500 mb-2">
               Enter the 6-digit code we sent to your email.
             </p>
-            <p className="text-yellow-600 text-sm mb-8">
+            <p className="text-gray-600 text-sm mb-8">
               ({typeof window !== 'undefined' ?
                 localStorage.getItem('signupEmail') || localStorage.getItem('resetEmail') || 'johndoe@example.com'
                 : 'johndoe@example.com'})
@@ -131,25 +131,25 @@ export default function VerifyPage() {
                     onChange={(e) => handleChange(index, e.target.value)}
                     onKeyDown={(e) => handleKeyDown(index, e)}
                     onPaste={handlePaste}
-                    className={`w-12 h-14 text-center text-xl font-semibold border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 ${error ? 'border-red-500' : 'border-gray-300'
+                    className={`w-12 h-14 text-center text-xl font-semibold border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 ${error ? 'border-gray-500' : 'border-gray-300'
                       }`}
                   />
                 ))}
               </div>
-              {error && <p className="mb-4 text-sm text-red-500 text-center">{error}</p>}
+              {error && <p className="mb-4 text-sm text-gray-500 text-center">{error}</p>}
 
               {/* Resend link */}
               <div className="text-center mb-6">
                 <span className="text-sm text-gray-600">Didn't receive code? </span>
                 {timer > 0 ? (
-                  <span className="text-sm text-yellow-600">
+                  <span className="text-sm text-gray-600">
                     Resend in {formatTime(timer)}
                   </span>
                 ) : (
                   <button
                     type="button"
                     onClick={handleResend}
-                    className="text-sm text-yellow-600 hover:text-yellow-700 font-medium"
+                    className="text-sm text-gray-600 hover:text-gray-700 font-medium"
                   >
                     Resend
                   </button>
@@ -158,7 +158,7 @@ export default function VerifyPage() {
 
               <button
                 type="submit"
-                className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-colors"
+                className="w-full bg-black text-white py-3 rounded-lg font-medium hover:bg-gray-900 transition-colors"
               >
                 Continue
               </button>
@@ -167,7 +167,7 @@ export default function VerifyPage() {
             {/* Sign in link */}
             <p className="mt-6 text-sm text-gray-600">
               Have an account?{' '}
-              <a href="#" className="text-yellow-600 hover:text-yellow-700 font-medium">
+              <a href="#" className="text-gray-600 hover:text-gray-700 font-medium">
                 Sign In
               </a>
             </p>

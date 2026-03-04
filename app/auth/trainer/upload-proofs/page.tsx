@@ -3,85 +3,72 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { Upload, X, FileText, File, Image as ImageIcon, FileCheck } from 'lucide-react';
 
 export default function UploadProofsPage() {
   const router = useRouter();
-  const [uploadedFile, setUploadedFile] = useState<File | null>(null);
-  const [uploadProgress, setUploadProgress] = useState(0);
+  const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
   const [error, setError] = useState('');
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+    const files = e.target.files;
+    if (!files) return;
 
-    // Validate file type
-    const allowedTypes = ['application/pdf', 'image/png', 'image/jpeg', 'image/gif'];
-    if (!allowedTypes.includes(file.type)) {
-      setError('Please upload a PDF, PNG, JPG, or GIF file');
-      return;
-    }
+    const newFiles = Array.from(files);
 
-    // Validate file size (max 10MB)
-    if (file.size > 10 * 1024 * 1024) {
-      setError('File size must be less than 10MB');
-      return;
+    // Validate each file
+    for (const file of newFiles) {
+      const allowedTypes = ['application/pdf', 'image/png', 'image/jpeg', 'image/jpg', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+      if (!allowedTypes.includes(file.type)) {
+        setError('Please upload PDF, PNG, JPG, DOC, or DOCX files only');
+        return;
+      }
+
+      if (file.size > 10 * 1024 * 1024) {
+        setError(`File "${file.name}" is too large. Maximum size is 10MB`);
+        return;
+      }
     }
 
     setError('');
-    setUploadedFile(file);
+    setUploadedFiles(prev => [...prev, ...newFiles]);
+  };
 
-    // Simulate upload progress
-    let progress = 0;
-    const interval = setInterval(() => {
-      progress += 10;
-      setUploadProgress(progress);
-      if (progress >= 100) {
-        clearInterval(interval);
-      }
-    }, 100);
+  const removeFile = (index: number) => {
+    setUploadedFiles(prev => prev.filter((_, i) => i !== index));
+  };
+
+  const formatFileSize = (bytes: number) => {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+  };
+
+  const getFileIcon = (fileType: string) => {
+    if (fileType.includes('pdf')) return FileText;
+    if (fileType.includes('image')) return ImageIcon;
+    if (fileType.includes('word') || fileType.includes('document')) return File;
+    return FileCheck;
   };
 
   const handleContinue = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!uploadedFile) {
-      setError('Please upload your proof documents');
+    if (uploadedFiles.length === 0) {
+      setError('Please upload at least one proof document');
       return;
     }
 
-    console.log('Uploaded file:', uploadedFile);
+    console.log('Uploaded files:', uploadedFiles);
     router.push('/auth/trainer/pending');
   };
 
-  const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault();
-  };
-
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    const file = e.dataTransfer.files[0];
-    if (file) {
-      // Create a proper file input change event
-      const input = document.createElement('input');
-      input.type = 'file';
-      const dataTransfer = new DataTransfer();
-      dataTransfer.items.add(file);
-      input.files = dataTransfer.files;
-
-      const event = new Event('change', { bubbles: true });
-      Object.defineProperty(event, 'target', {
-        writable: false,
-        value: input
-      });
-
-      handleFileUpload(event as unknown as React.ChangeEvent<HTMLInputElement>);
-    }
-  };
-
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen ">
       {/* Left side - Form */}
-      <div className="flex flex-[2] flex-col justify-between p-8 bg-white">
+      <div className="flex flex-[2] flex-col justify-between p-8 bg-white h-screen overflow-auto">
         <div className="flex flex-col flex-1 max-w-md mx-auto w-full">
           {/* Go back button */}
           <button
@@ -97,7 +84,7 @@ export default function UploadProofsPage() {
           <div className="flex flex-col items-center justify-center flex-1">
             {/* Logo */}
             <div className="mb-8">
-              <div className="w-16 h-16 bg-yellow-600 rounded-2xl flex items-center justify-center">
+              <div className="w-16 h-16 bg-gray-600 rounded-2xl flex items-center justify-center">
                 <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" />
                 </svg>
@@ -109,91 +96,92 @@ export default function UploadProofsPage() {
               Upload Your Proofs
             </h1>
             <p className="text-gray-500 mb-8 text-center">
-              Upload the required proofs to activate your mentor account.
+              Upload certificates, diplomas, ID, or any proof documents (multiple files supported)
             </p>
 
             {/* Form */}
             <form onSubmit={handleContinue} className="w-full">
               {/* Upload Area */}
-              <div
-                className={`border-2 border-dashed rounded-lg p-8 text-center mb-4 transition-colors ${error ? 'border-red-300 bg-red-50' : 'border-gray-300 hover:border-yellow-600 hover:bg-yellow-50'
-                  }`}
-                onDragOver={handleDragOver}
-                onDrop={handleDrop}
-              >
-                <input
-                  type="file"
-                  id="fileUpload"
-                  className="hidden"
-                  accept=".pdf,.png,.jpg,.jpeg,.gif"
-                  onChange={handleFileUpload}
-                />
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-gray-700 mb-3">
+                  Upload Documents
+                </label>
 
-                {!uploadedFile ? (
-                  <>
-                    <div className="mb-4">
-                      <svg className="w-12 h-12 text-gray-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                      </svg>
-                    </div>
-                    <label htmlFor="fileUpload" className="cursor-pointer">
-                      <span className="text-yellow-600 font-medium">Click to upload</span>
-                      <span className="text-gray-500"> or drag and drop</span>
-                    </label>
-                    <p className="text-sm text-gray-500 mt-2">
-                      PDF, PNG, JPG or GIF (max. 10MB)
-                    </p>
-                  </>
-                ) : (
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-3 p-3 bg-white rounded-lg border">
-                      <div className="w-8 h-8 bg-red-100 rounded flex items-center justify-center">
-                        <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" />
-                        </svg>
-                      </div>
-                      <div className="flex-1 text-left">
-                        <p className="text-sm font-medium text-gray-900">{uploadedFile.name}</p>
-                        <p className="text-xs text-gray-500">{(uploadedFile.size / 1024).toFixed(1)} KB</p>
-                      </div>
-                      <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center">
-                        <svg className="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z" />
-                        </svg>
-                      </div>
-                    </div>
-
-                    {uploadProgress < 100 && (
-                      <div className="w-full bg-gray-200 rounded-full h-2">
-                        <div
-                          className="bg-blue-600 h-2 rounded-full transition-all duration-300"
-                          style={{ width: `${uploadProgress}%` }}
-                        ></div>
-                      </div>
-                    )}
-
-                    {uploadProgress === 100 && (
-                      <p className="text-sm text-green-600 font-medium">Upload complete!</p>
-                    )}
+                <label className="flex flex-col items-center justify-center gap-3 p-8 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer transition-all hover:border-black hover:bg-gray-50">
+                  <Upload className="w-8 h-8 text-gray-400" />
+                  <div className="text-center">
+                    <span className="text-sm font-medium text-gray-600 block">
+                      Click to upload or drag and drop
+                    </span>
+                    <span className="text-xs text-gray-500 mt-1 block">
+                      PDF, DOC, DOCX, JPG, PNG (Max 10MB each)
+                    </span>
                   </div>
-                )}
+                  <input
+                    type="file"
+                    multiple
+                    accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                    onChange={handleFileUpload}
+                    className="hidden"
+                  />
+                </label>
               </div>
 
-              {error && <p className="mb-4 text-sm text-red-500">{error}</p>}
+              {/* Uploaded Files List */}
+              {uploadedFiles.length > 0 && (
+                <div className="mb-6 max-h-60 overflow-y-auto">
+                  <p className="text-sm font-medium text-gray-700 mb-3">
+                    Uploaded Documents ({uploadedFiles.length})
+                  </p>
+                  <div className="space-y-2">
+                    {uploadedFiles.map((file, index) => {
+                      const FileIcon = getFileIcon(file.type);
+                      return (
+                        <div
+                          key={index}
+                          className="flex items-center gap-3 p-3 bg-gray-50 border border-gray-200 rounded-lg hover:border-gray-300 transition-all"
+                        >
+                          <div className="w-10 h-10 rounded-lg bg-black flex items-center justify-center shrink-0">
+                            <FileIcon className="w-5 h-5 text-white" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-medium text-gray-900 truncate">
+                              {file.name}
+                            </p>
+                            <p className="text-xs text-gray-500">
+                              {formatFileSize(file.size)}
+                            </p>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => removeFile(index)}
+                            className="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center transition-colors shrink-0"
+                          >
+                            <X className="w-4 h-4 text-gray-600" />
+                          </button>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {error && <p className="mb-4 text-sm text-gray-600 text-center">{error}</p>}
 
               <button
                 type="submit"
-                className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-colors"
+                disabled={uploadedFiles.length === 0}
+                className="w-full bg-black text-white py-3 rounded-lg font-medium hover:bg-gray-900 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Continue
               </button>
 
               {/* Progress dots */}
               <div className="flex justify-center gap-2 pt-4">
-                <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
-                <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
-                <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
-                <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
+                <div className="w-8 h-2 bg-black rounded-full"></div>
+                <div className="w-8 h-2 bg-black rounded-full"></div>
+                <div className="w-8 h-2 bg-black rounded-full"></div>
+                <div className="w-8 h-2 bg-black rounded-full"></div>
                 <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
               </div>
             </form>

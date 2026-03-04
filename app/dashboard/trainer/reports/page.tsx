@@ -119,8 +119,8 @@ export default function TrainerReportsPage() {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'draft': return 'bg-gray-100 text-gray-800';
-      case 'submitted': return 'bg-yellow-100 text-yellow-800';
-      case 'reviewed': return 'bg-green-100 text-green-800';
+      case 'submitted': return 'bg-gray-100 text-gray-800';
+      case 'reviewed': return 'bg-gray-100 text-gray-800';
       default: return 'bg-gray-100 text-gray-800';
     }
   };
@@ -147,7 +147,7 @@ export default function TrainerReportsPage() {
                 </div>
                 <button
                   onClick={() => setShowCreateForm(true)}
-                  className="flex items-center gap-2 px-6 py-2.5 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-all font-medium shadow-sm active:scale-95"
+                  className="flex items-center gap-2 px-6 py-2.5 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-all font-medium shadow-sm active:scale-95"
                 >
                   <Plus className="w-4 h-4" />
                   Create Report
@@ -199,8 +199,8 @@ export default function TrainerReportsPage() {
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="flex items-center">
                             <div className="flex-shrink-0 h-8 w-8">
-                              <div className="h-8 w-8 rounded-full bg-yellow-100 flex items-center justify-center">
-                                <span className="text-xs font-medium text-yellow-800">
+                              <div className="h-8 w-8 rounded-full bg-gray-100 flex items-center justify-center">
+                                <span className="text-xs font-medium text-gray-800">
                                   {report.studentName.split(' ').map(n => n[0]).join('')}
                                 </span>
                               </div>
@@ -224,7 +224,7 @@ export default function TrainerReportsPage() {
                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                           <button
                             onClick={() => handleViewReport(report.id)}
-                            className="text-blue-600 hover:text-blue-900 p-1 hover:bg-blue-50 rounded"
+                            className="text-gray-600 hover:text-gray-900 p-1 hover:bg-gray-50 rounded"
                             title="View Details"
                           >
                             <Eye className="w-4 h-4" />

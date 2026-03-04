@@ -111,7 +111,7 @@ export default function DataTable({
               placeholder="Search..."
               value={searchQuery}
               onChange={(e) => handleSearch(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600"
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600"
             />
           </div>
         </div>
@@ -127,7 +127,7 @@ export default function DataTable({
                     type="checkbox"
                     checked={selectedItems.length === data.length && data.length > 0}
                     onChange={(e) => handleSelectAll(e.target.checked)}
-                    className="rounded border-gray-300 text-yellow-600 focus:ring-yellow-600"
+                    className="rounded border-gray-300 text-gray-600 focus:ring-gray-600"
                   />
                 </th>
               )}
@@ -160,7 +160,7 @@ export default function DataTable({
                       type="checkbox"
                       checked={selectedItems.some(selected => selected.id === item.id)}
                       onChange={(e) => handleItemSelect(item, e.target.checked)}
-                      className="rounded border-gray-300 text-yellow-600 focus:ring-yellow-600"
+                      className="rounded border-gray-300 text-gray-600 focus:ring-gray-600"
                     />
                   </td>
                 )}

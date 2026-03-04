@@ -8,25 +8,25 @@ export default function LearningMaterials() {
       id: 1,
       title: 'Node.js Design Patterns',
       category: 'By Harsh Choudhary',
-      color: 'from-blue-400 to-blue-600'
+      color: 'from-gray-400 to-gray-600'
     },
     {
       id: 2,
       title: 'Node.js Design Patterns',
       category: 'By Harsh Choudhary',
-      color: 'from-green-400 to-green-600'
+      color: 'from-gray-400 to-gray-600'
     },
     {
       id: 3,
       title: 'Node.js Design Patterns',
       category: 'By Harsh Choudhary',
-      color: 'from-orange-400 to-orange-600'
+      color: 'from-gray-400 to-gray-600'
     },
     {
       id: 4,
       title: 'Node.js Design Patterns',
       category: 'By Harsh Choudhary',
-      color: 'from-purple-400 to-purple-600'
+      color: 'from-gray-400 to-gray-600'
     }
   ];
 
@@ -65,7 +65,7 @@ export default function LearningMaterials() {
             </div>
 
             <div className="mt-4 pt-4 border-t border-gray-200">
-              <button className="w-full text-center py-2 text-sm font-medium text-yellow-600 hover:text-yellow-700 border border-yellow-600 hover:border-yellow-700 rounded-lg transition-colors group-hover:bg-yellow-50">
+              <button className="w-full text-center py-2 text-sm font-medium text-gray-600 hover:text-gray-700 border border-gray-600 hover:border-gray-700 rounded-lg transition-colors group-hover:bg-gray-50">
                 Access Material
               </button>
             </div>

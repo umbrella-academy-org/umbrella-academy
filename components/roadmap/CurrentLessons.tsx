@@ -25,22 +25,22 @@ export default function CurrentLessons() {
     switch (status) {
       case 'completed':
         return {
-          color: 'text-green-600',
-          bgColor: 'bg-green-100',
+          color: 'text-gray-600',
+          bgColor: 'bg-gray-100',
           icon: CheckCircle,
           statusText: 'Completed'
         };
       case 'in-progress':
         return {
-          color: 'text-blue-600',
-          bgColor: 'bg-blue-100',
+          color: 'text-gray-600',
+          bgColor: 'bg-gray-100',
           icon: Play,
           statusText: 'In Progress'
         };
       case 'scheduled':
         return {
-          color: 'text-yellow-600',
-          bgColor: 'bg-yellow-100',
+          color: 'text-gray-600',
+          bgColor: 'bg-gray-100',
           icon: Clock,
           statusText: 'Scheduled'
         };
@@ -104,8 +104,8 @@ export default function CurrentLessons() {
                 <div className="flex-1 bg-gray-200 rounded-full h-2">
                   <div 
                     className={`h-2 rounded-full transition-all duration-300 ${
-                      currentSession.status === 'completed' ? 'bg-green-600' : 
-                      currentSession.status === 'in-progress' ? 'bg-blue-600' : 'bg-gray-400'
+                      currentSession.status === 'completed' ? 'bg-gray-600' : 
+                      currentSession.status === 'in-progress' ? 'bg-gray-600' : 'bg-gray-400'
                     }`}
                     style={{ width: currentSession.status === 'completed' ? '100%' : currentSession.status === 'in-progress' ? '50%' : '0%' }}
                   ></div>
@@ -125,12 +125,12 @@ export default function CurrentLessons() {
         {/* Action Buttons */}
         <div className="flex items-center gap-2 mt-3">
           {currentSession.status === 'in-progress' && (
-            <button className="flex-1 px-3 py-2 bg-yellow-600 text-white text-sm font-medium rounded-lg hover:bg-yellow-700 transition-colors">
+            <button className="flex-1 px-3 py-2 bg-gray-600 text-white text-sm font-medium rounded-lg hover:bg-gray-700 transition-colors">
               Continue Session
             </button>
           )}
           {currentSession.status === 'pending' && (
-            <button className="flex-1 px-3 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors">
+            <button className="flex-1 px-3 py-2 bg-gray-600 text-white text-sm font-medium rounded-lg hover:bg-gray-700 transition-colors">
               Start Session
             </button>
           )}
@@ -187,7 +187,7 @@ export default function CurrentLessons() {
         </div>
         <div className="w-full bg-gray-200 rounded-full h-1.5">
           <div 
-            className="bg-yellow-600 h-1.5 rounded-full transition-all duration-300"
+            className="bg-gray-600 h-1.5 rounded-full transition-all duration-300"
             style={{ width: `${phaseProgress}%` }}
           ></div>
         </div>

@@ -116,8 +116,8 @@ export default function UmbrellaAdminDashboard() {
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4 mb-4 sm:mb-6 lg:mb-8">
               <div className="bg-white rounded-lg p-3 lg:p-4 shadow-sm border border-gray-100  hover:shadow-lg transition-all duration-300 animate-slide-up">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-blue-100 rounded-lg">
-                    <Building2 className="w-5 h-5 text-blue-600" />
+                  <div className="p-2 bg-gray-100 rounded-lg">
+                    <Building2 className="w-5 h-5 text-gray-600" />
                   </div>
                   <div>
                     <p className="text-xs font-medium text-gray-600">Total Fields</p>
@@ -128,8 +128,8 @@ export default function UmbrellaAdminDashboard() {
 
               <div className="bg-white rounded-lg p-3 lg:p-4 shadow-sm border border-gray-100  hover:shadow-lg transition-all duration-300 animate-slide-up" style={{ animationDelay: '100ms' }}>
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-green-100 rounded-lg">
-                    <Users className="w-5 h-5 text-green-600" />
+                  <div className="p-2 bg-gray-100 rounded-lg">
+                    <Users className="w-5 h-5 text-gray-600" />
                   </div>
                   <div>
                     <p className="text-xs font-medium text-gray-600">Total Students</p>
@@ -140,8 +140,8 @@ export default function UmbrellaAdminDashboard() {
 
               <div className="bg-white rounded-lg p-3 lg:p-4 shadow-sm border border-gray-100  hover:shadow-lg transition-all duration-300 animate-slide-up" style={{ animationDelay: '200ms' }}>
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-yellow-100 rounded-lg">
-                    <DollarSign className="w-5 h-5 text-yellow-600" />
+                  <div className="p-2 bg-gray-100 rounded-lg">
+                    <DollarSign className="w-5 h-5 text-gray-600" />
                   </div>
                   <div>
                     <p className="text-xs font-medium text-gray-600">Total Revenue</p>
@@ -154,12 +154,12 @@ export default function UmbrellaAdminDashboard() {
 
               <div className="bg-white rounded-lg p-3 lg:p-4 shadow-sm border border-gray-100  hover:shadow-lg transition-all duration-300 animate-slide-up" style={{ animationDelay: '300ms' }}>
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-green-100 rounded-lg">
-                    <Activity className="w-5 h-5 text-green-600" />
+                  <div className="p-2 bg-gray-100 rounded-lg">
+                    <Activity className="w-5 h-5 text-gray-600" />
                   </div>
                   <div>
                     <p className="text-xs font-medium text-gray-600">System Health</p>
-                    <p className="text-lg lg:text-xl font-bold text-green-600">{systemStats.systemHealth}%</p>
+                    <p className="text-lg lg:text-xl font-bold text-gray-600">{systemStats.systemHealth}%</p>
                   </div>
                 </div>
               </div>
@@ -189,7 +189,7 @@ export default function UmbrellaAdminDashboard() {
                         <div className="flex items-center gap-3">
                           <div className="w-16 bg-gray-200 rounded-full h-2">
                             <div
-                              className="bg-yellow-600 h-2 rounded-full transition-all duration-1000"
+                              className="bg-gray-600 h-2 rounded-full transition-all duration-1000"
                               style={{ width: `${field.performance}%` }}
                             ></div>
                           </div>
@@ -221,7 +221,7 @@ export default function UmbrellaAdminDashboard() {
                       className="w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors group"
                     >
                       <div className="flex items-center gap-3">
-                        <Building2 className="w-4 h-4 text-gray-500 group-hover:text-yellow-600" />
+                        <Building2 className="w-4 h-4 text-gray-500 group-hover:text-gray-600" />
                         <div>
                           <div className="font-medium text-gray-900 text-sm">Manage Fields</div>
                           <div className="text-xs text-gray-500">View all field performance</div>
@@ -234,7 +234,7 @@ export default function UmbrellaAdminDashboard() {
                       className="w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors group"
                     >
                       <div className="flex items-center gap-3">
-                        <Users className="w-4 h-4 text-gray-500 group-hover:text-yellow-600" />
+                        <Users className="w-4 h-4 text-gray-500 group-hover:text-gray-600" />
                         <div>
                           <div className="font-medium text-gray-900 text-sm">User Management</div>
                           <div className="text-xs text-gray-500">Manage all system users</div>
@@ -247,7 +247,7 @@ export default function UmbrellaAdminDashboard() {
                       className="w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors group"
                     >
                       <div className="flex items-center gap-3">
-                        <BarChart3 className="w-4 h-4 text-gray-500 group-hover:text-yellow-600" />
+                        <BarChart3 className="w-4 h-4 text-gray-500 group-hover:text-gray-600" />
                         <div>
                           <div className="font-medium text-gray-900 text-sm">Financial Reports</div>
                           <div className="text-xs text-gray-500">View revenue analytics</div>
@@ -260,7 +260,7 @@ export default function UmbrellaAdminDashboard() {
                       className="w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors group"
                     >
                       <div className="flex items-center gap-3">
-                        <Shield className="w-4 h-4 text-gray-500 group-hover:text-yellow-600" />
+                        <Shield className="w-4 h-4 text-gray-500 group-hover:text-gray-600" />
                         <div>
                           <div className="font-medium text-gray-900 text-sm">System Health</div>
                           <div className="text-xs text-gray-500">Monitor system status</div>

@@ -50,7 +50,7 @@ export default function MentorAvailabilityPage() {
 
                     <div className="flex flex-col items-center justify-center flex-1">
                         <div className="mb-8">
-                            <div className="w-16 h-16 bg-yellow-600 rounded-2xl flex items-center justify-center shadow-lg shadow-yellow-600/20">
+                            <div className="w-16 h-16 bg-gray-600 rounded-2xl flex items-center justify-center shadow-lg shadow-gray-600/20">
                                 <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" />
                                 </svg>
@@ -79,7 +79,7 @@ export default function MentorAvailabilityPage() {
                                             type="button"
                                             onClick={() => setHoursPerDay(h)}
                                             className={`py-3 rounded-lg text-sm font-medium transition-all border ${hoursPerDay === h
-                                                ? 'border-yellow-600 bg-yellow-50 text-yellow-600'
+                                                ? 'border-black bg-gray-50 text-gray-600'
                                                 : 'border-gray-300 bg-white text-gray-600 hover:border-gray-400'
                                                 }`}
                                         >
@@ -101,11 +101,11 @@ export default function MentorAvailabilityPage() {
                                             type="button"
                                             onClick={() => toggleSlot(slot.id)}
                                             className={`w-full flex items-center gap-4 p-4 border rounded-lg transition-all ${timeSlots.includes(slot.id)
-                                                ? 'border-yellow-600 bg-yellow-50'
+                                                ? 'border-black bg-gray-50'
                                                 : 'border-gray-300 bg-white hover:border-gray-400'
                                                 }`}
                                         >
-                                            <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-colors ${timeSlots.includes(slot.id) ? 'bg-yellow-600 text-white' : 'bg-gray-100 text-gray-400'
+                                            <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-colors ${timeSlots.includes(slot.id) ? 'bg-black text-white' : 'bg-gray-100 text-gray-400'
                                                 }`}>
                                                 <Clock className="w-5 h-5" />
                                             </div>
@@ -117,7 +117,7 @@ export default function MentorAvailabilityPage() {
                                                 <p className="text-xs text-gray-500">{slot.time}</p>
                                             </div>
                                             {timeSlots.includes(slot.id) && (
-                                                <CheckCircle className="w-5 h-5 text-yellow-600" />
+                                                <CheckCircle className="w-5 h-5 text-gray-600" />
                                             )}
                                         </button>
                                     ))}
@@ -126,16 +126,16 @@ export default function MentorAvailabilityPage() {
 
                             <button
                                 type="submit"
-                                className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-colors"
+                                className="w-full bg-black text-white py-3 rounded-lg font-medium hover:bg-gray-900 transition-colors"
                             >
                                 Continue
                             </button>
 
                             {/* Progress dots */}
                             <div className="flex justify-center gap-2 pt-4">
-                                <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
-                                <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
-                                <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
+                                <div className="w-8 h-2 bg-gray-600 rounded-full"></div>
+                                <div className="w-8 h-2 bg-gray-600 rounded-full"></div>
+                                <div className="w-8 h-2 bg-gray-600 rounded-full"></div>
                                 <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
                                 <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
                             </div>

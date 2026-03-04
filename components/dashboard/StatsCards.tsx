@@ -42,7 +42,7 @@ export default function StatsCards() {
       icon: <BarChart3 className="w-5 h-5 lg:w-6 lg:h-6" />,
       title: 'Roadmap Progress',
       value: `${Math.round(overallProgress)}%`,
-      color: 'text-yellow-600',
+      color: 'text-gray-600',
       trend: overallProgress > 50 ? '+Good' : 'Start',
       trendDirection: overallProgress > 50 ? 'up' : 'down'
     },
@@ -50,7 +50,7 @@ export default function StatsCards() {
       icon: <User className="w-5 h-5 lg:w-6 lg:h-6" />,
       title: 'Phases Complete',
       value: `${completedPhases}/${totalPhases}`,
-      color: 'text-green-600',
+      color: 'text-gray-600',
       trend: phaseCompletionRate > 0 ? `${phaseCompletionRate}%` : '0%',
       trendDirection: phaseCompletionRate > 50 ? 'up' : 'down'
     },
@@ -58,7 +58,7 @@ export default function StatsCards() {
       icon: <Calendar className="w-5 h-5 lg:w-6 lg:h-6" />,
       title: 'Sessions Done',
       value: `${completedSessions}/${totalSessions}`,
-      color: 'text-blue-600',
+      color: 'text-gray-600',
       trend: sessionCompletionRate > 0 ? `${sessionCompletionRate}%` : '0%',
       trendDirection: sessionCompletionRate > 50 ? 'up' : 'down'
     },
@@ -66,7 +66,7 @@ export default function StatsCards() {
       icon: <Video className="w-5 h-5 lg:w-6 lg:h-6" />,
       title: 'Hours Completed',
       value: `${completedHours}/${totalHours}h`,
-      color: 'text-purple-600',
+      color: 'text-gray-600',
       trend: hoursCompletionRate > 0 ? `${hoursCompletionRate}%` : '0%',
       trendDirection: hoursCompletionRate > 80 ? 'up' : 'down'
     }
@@ -150,8 +150,8 @@ export default function StatsCards() {
                 {stat.trend && (
                   <span className={`text-xs font-medium px-1.5 py-0.5 rounded-full ${
                     stat.trendDirection === 'up' 
-                      ? 'text-green-700 bg-green-100' 
-                      : 'text-orange-700 bg-orange-100'
+                      ? 'text-gray-700 bg-gray-100' 
+                      : 'text-gray-700 bg-gray-100'
                   } animate-pulse-glow`}>
                     {stat.trend}
                   </span>

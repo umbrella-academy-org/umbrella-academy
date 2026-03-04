@@ -62,7 +62,7 @@ export default function SessionCalendar({ selectedDateRange, onDateRangeChange }
 
   return (
     <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 relative overflow-hidden group">
-      <div className="absolute top-0 right-0 w-24 h-24 bg-yellow-50 rounded-full -mr-12 -mt-12 opacity-50 blur-2xl group-hover:bg-yellow-100 transition-colors duration-500"></div>
+      <div className="absolute top-0 right-0 w-24 h-24 bg-gray-50 rounded-full -mr-12 -mt-12 opacity-50 blur-2xl group-hover:bg-gray-100 transition-colors duration-500"></div>
 
       <div className="relative z-10">
         <div className="flex items-center justify-between mb-6">
@@ -85,8 +85,8 @@ export default function SessionCalendar({ selectedDateRange, onDateRangeChange }
               key={range}
               onClick={() => onDateRangeChange(range)}
               className={`whitespace-nowrap px-4 py-2 rounded-lg text-xs font-semibold transition-all border ${selectedDateRange === range
-                ? 'bg-yellow-600 text-white border-yellow-600 shadow-md'
-                : 'bg-white text-gray-500 border-gray-100 hover:border-yellow-200'
+                ? 'bg-gray-600 text-white border-gray-600 shadow-md'
+                : 'bg-white text-gray-500 border-gray-100 hover:border-gray-200'
                 }`}
             >
               {range}
@@ -111,15 +111,15 @@ export default function SessionCalendar({ selectedDateRange, onDateRangeChange }
                 className={`w-full aspect-square text-xs font-medium rounded-lg flex flex-col items-center justify-center transition-all relative ${date.isOtherMonth
                   ? 'text-gray-200 cursor-not-allowed opacity-40'
                   : date.isToday
-                    ? 'bg-yellow-600 text-white shadow-md'
+                    ? 'bg-gray-600 text-white shadow-md'
                     : date.hasSession
-                      ? 'bg-yellow-50 text-yellow-700'
-                      : 'text-gray-600 hover:bg-yellow-50 hover:text-yellow-600'
+                      ? 'bg-gray-50 text-gray-700'
+                      : 'text-gray-600 hover:bg-gray-50 hover:text-gray-600'
                   }`}
               >
                 <span>{date.day}</span>
                 {date.hasSession && (
-                  <span className={`w-1 h-1 rounded-full absolute bottom-1.5 ${date.isToday ? 'bg-yellow-200' : 'bg-yellow-600'
+                  <span className={`w-1 h-1 rounded-full absolute bottom-1.5 ${date.isToday ? 'bg-gray-200' : 'bg-gray-600'
                     }`}></span>
                 )}
               </button>
@@ -130,10 +130,10 @@ export default function SessionCalendar({ selectedDateRange, onDateRangeChange }
         {/* Quick Footer Info */}
         <div className="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-yellow-500"></div>
+            <div className="w-2 h-2 rounded-full bg-gray-500"></div>
             <span className="text-[11px] font-medium text-gray-500">Sessions</span>
           </div>
-          <button className="text-[11px] font-semibold text-yellow-600 hover:underline decoration-2 underline-offset-4">
+          <button className="text-[11px] font-semibold text-gray-600 hover:underline decoration-2 underline-offset-4">
             Full View
           </button>
         </div>

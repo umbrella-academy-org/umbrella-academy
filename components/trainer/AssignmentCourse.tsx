@@ -7,7 +7,7 @@ export default function AssignmentCourse() {
     <div className="bg-white rounded-lg border border-gray-200 p-6">
       <div className="flex items-start gap-4">
         {/* Course Image */}
-        <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center flex-shrink-0">
+        <div className="w-16 h-16 bg-gradient-to-br from-gray-400 to-gray-500 rounded-lg flex items-center justify-center flex-shrink-0">
           <BookOpen className="w-8 h-8 text-white" />
         </div>
 
@@ -22,7 +22,7 @@ export default function AssignmentCourse() {
                 Master advanced React concepts including hooks, context, and performance optimization
               </p>
             </div>
-            <div className="flex items-center gap-1 text-yellow-500">
+            <div className="flex items-center gap-1 text-gray-500">
               <Star className="w-4 h-4 fill-current" />
               <span className="text-sm font-medium text-gray-900">4.8</span>
             </div>
@@ -52,7 +52,7 @@ export default function AssignmentCourse() {
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-4 h-4 bg-green-500 rounded-full" />
+              <div className="w-4 h-4 bg-gray-500 rounded-full" />
               <div>
                 <div className="text-sm font-medium text-gray-900">Active</div>
                 <div className="text-xs text-gray-600">Status</div>
@@ -68,7 +68,7 @@ export default function AssignmentCourse() {
             </div>
             <div className="w-full bg-gray-200 rounded-full h-2">
               <div 
-                className="bg-yellow-600 h-2 rounded-full transition-all duration-500"
+                className="bg-gray-600 h-2 rounded-full transition-all duration-500"
                 style={{ width: '75%' }}
               />
             </div>
@@ -76,7 +76,7 @@ export default function AssignmentCourse() {
 
           {/* Action Buttons */}
           <div className="flex flex-wrap gap-3">
-            <button className="px-4 py-2 bg-yellow-600 text-white text-sm font-medium rounded-lg hover:bg-yellow-700 transition-colors">
+            <button className="px-4 py-2 bg-gray-600 text-white text-sm font-medium rounded-lg hover:bg-gray-700 transition-colors">
               View Course Details
             </button>
             <button className="px-4 py-2 border border-gray-300 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-50 transition-colors">

@@ -50,7 +50,7 @@ export function Hero() {
           <h1 className="text-5xl font-black  leading-[0.85]  transition-all duration-700">
             KICKSTART <br />
             <span className="text-white">YOUR</span> <br />
-            <span className="text-[#ca8a04] transition-all duration-500 inline-block">
+            <span className="text-[#525252] transition-all duration-500 inline-block">
               {CATEGORIES[catIndex]}
             </span> <br />
             CAREER.
@@ -60,7 +60,7 @@ export function Hero() {
         <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8 w-full md:w-auto animate-slide-up">
           <button
             onClick={() => router.push("/auth/signup")}
-            className="group w-full md:w-auto px-8 md:px-12 py-4 md:py-6 bg-white text-black rounded-none hover:bg-[#ca8a04] hover:text-white transition-all duration-500 flex items-center justify-center space-x-4 font-black text-lg md:text-xl  active:scale-95"
+            className="group w-full md:w-auto px-8 md:px-12 py-4 md:py-6 bg-white text-black rounded-none hover:bg-[#525252] hover:text-white transition-all duration-500 flex items-center justify-center space-x-4 font-black text-lg md:text-xl  active:scale-95"
           >
             <span>JOIN THE ACADEMY</span>
             <ArrowRight className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-2 transition-transform" />
@@ -68,9 +68,9 @@ export function Hero() {
 
           <button
             
-            className="group w-full md:w-auto px-8 md:px-12 py-4 md:py-6 bg-transparent border-2 border-white/20 text-white rounded-none hover:border-[#ca8a04] hover:bg-[#ca8a04]/10 transition-all duration-500 flex items-center justify-center space-x-3 font-bold text-base md:text-lg tracking-tight active:scale-95"
+            className="group w-full md:w-auto px-8 md:px-12 py-4 md:py-6 bg-transparent border-2 border-white/20 text-white rounded-none hover:border-[#525252] hover:bg-[#525252]/10 transition-all duration-500 flex items-center justify-center space-x-3 font-bold text-base md:text-lg tracking-tight active:scale-95"
           >
-            <PlayCircle className="w-5 h-5 md:w-6 md:h-6 text-[#ca8a04]" />
+            <PlayCircle className="w-5 h-5 md:w-6 md:h-6 text-[#525252]" />
             <span>EXPLORE SHOWCASE</span>
           </button>
         </div>
@@ -81,7 +81,7 @@ export function Hero() {
         {CATEGORIES.map((_, i) => (
           <div
             key={i}
-            className={`h-1 transition-all duration-500 ${i === catIndex ? 'w-20 bg-[#ca8a04]' : 'w-8 bg-white/20'}`}
+            className={`h-1 transition-all duration-500 ${i === catIndex ? 'w-20 bg-[#525252]' : 'w-8 bg-white/20'}`}
           />
         ))}
       </div>
@@ -96,7 +96,7 @@ export function Hero() {
         <div className="flex flex-col items-center space-y-2">
           <span className="text-[10px]  tracking-[0.4em] font-black text-white/50">Our Credits</span>
           <div className="w-px h-16 bg-white/20 relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-full h-full bg-[#ca8a04] animate-slide-y" />
+            <div className="absolute top-0 left-0 w-full h-full bg-[#525252] animate-slide-y" />
           </div>
         </div>
       </div>

@@ -16,7 +16,7 @@ function ChatPageContent() {
             {roadmap && (
                 <div className="fixed right-0 w-fit z-50 p-4 bg-transparent">
                     <Link href="/post-signup/roadmap">
-                        <button className="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-2xl hover:bg-blue-700">
+                        <button className="px-4 py-2 text-sm font-medium text-white bg-gray-500 rounded-2xl hover:bg-gray-700">
                             Return to Roadmap Creation
                         </button>
                     </Link>

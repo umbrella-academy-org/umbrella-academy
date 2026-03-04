@@ -38,23 +38,23 @@ export default function MentorProfilePage() {
                     <div className="max-w-full mx-auto animate-fade-in">
                         {/* Profile Header Card */}
                         <div className="bg-white rounded-lg border border-gray-100 shadow-xl shadow-gray-200/50 overflow-hidden mb-8">
-                            <div className="h-48 bg-gradient-to-br from-yellow-600 to-yellow-800 relative overflow-hidden">
+                            <div className="h-48 bg-gradient-to-br from-gray-600 to-gray-800 relative overflow-hidden">
                                 {/* Decorative Abstract Shapes */}
                                 <div className="absolute top-0 left-0 w-full h-full opacity-20">
                                     <div className="absolute -top-24 -left-24 w-64 h-64 bg-white rounded-full blur-3xl" />
-                                    <div className="absolute top-1/2 -right-12 w-48 h-48 bg-yellow-200 rounded-full blur-2xl" />
+                                    <div className="absolute top-1/2 -right-12 w-48 h-48 bg-gray-200 rounded-full blur-2xl" />
                                 </div>
                             </div>
 
                             <div className="px-10 pb-10 pt-10">
                                 <div className="flex flex-col md:flex-row md:items-end -mt-16 gap-20">
                                     <div className="relative group">
-                                        <div className="w-32 h-32 rounded-full bg-white p-1.5 shadow-2xl shadow-yellow-200/50 transform group-hover:scale-105 transition-all duration-500">
-                                            <div className="w-full h-full bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-full flex items-center justify-center text-yellow-700 text-4xl font-extrabold border border-yellow-200 ">
+                                        <div className="w-32 h-32 rounded-full bg-white p-1.5 shadow-2xl shadow-gray-200/50 transform group-hover:scale-105 transition-all duration-500">
+                                            <div className="w-full h-full bg-gradient-to-br from-gray-50 to-gray-100 rounded-full flex items-center justify-center text-gray-700 text-4xl font-extrabold border border-gray-200 ">
                                                 {profileData.name.split(' ').map(n => n[0]).join('')}
                                             </div>
                                         </div>
-                                        <div className="absolute -bottom-0 -right-0 w-10 h-10 bg-yellow-600 border-4 border-white rounded-full flex items-center justify-center shadow-lg">
+                                        <div className="absolute -bottom-0 -right-0 w-10 h-10 bg-gray-600 border-4 border-white rounded-full flex items-center justify-center shadow-lg">
                                             <Shield className="w-5 h-5 text-white" />
                                         </div>
                                     </div>
@@ -63,10 +63,10 @@ export default function MentorProfilePage() {
                                         <div className=''>
                                             <div className="flex items-center gap-3">
                                                 <h1 className="text-2xl font-semibold text-gray-900  ">{profileData.name}</h1>
-                                                <div className="px-2 py-1 bg-yellow-50 text-yellow-700 border border-yellow-100 rounded-full text-[10px] font-black  ">ACADEMIC DIRECTOR</div>
+                                                <div className="px-2 py-1 bg-gray-50 text-gray-700 border border-gray-100 rounded-full text-[10px] font-black  ">ACADEMIC DIRECTOR</div>
                                             </div>
                                             <p className="text-gray-500 font-semibold flex items-center gap-2 mt-2">
-                                                <Zap className="w-4.5 h-4.5 text-yellow-600" />
+                                                <Zap className="w-4.5 h-4.5 text-gray-600" />
                                                 <span className="text-gray-600 text-sm capitalize">{profileData.field.replace(/-/g, ' ')} Field</span>
                                                 <span className="w-1 h-1 bg-gray-300 rounded-full" />
                                                 <span className="text-gray-400 text-sm">Senior Mentor</span>
@@ -80,7 +80,7 @@ export default function MentorProfilePage() {
                                                     <button onClick={handleSave} className="px-8 py-3 bg-gray-900 text-white rounded-lg font-bold hover:bg-black shadow-xl shadow-gray-200 active:scale-95 transition-all">Save Changes</button>
                                                 </>
                                             ) : (
-                                                <button onClick={() => setIsEditing(true)} className="flex items-center gap-2.5 px-8 py-3 bg-white border border-gray-200 text-gray-800 rounded-lg font-bold hover:border-yellow-600 hover:text-yellow-600 shadow-sm hover:shadow-yellow-100/50 transition-all active:scale-95 group">
+                                                <button onClick={() => setIsEditing(true)} className="flex items-center gap-2.5 px-8 py-3 bg-white border border-gray-200 text-gray-800 rounded-lg font-bold hover:border-gray-600 hover:text-gray-600 shadow-sm hover:shadow-gray-100/50 transition-all active:scale-95 group">
                                                     <Edit2 className="w-4.5 h-4.5 group-hover:rotate-12 transition-transform" />
                                                     Edit Profile
                                                 </button>
@@ -118,9 +118,9 @@ export default function MentorProfilePage() {
                                         </div>
                                         <div className="space-y-2">
                                             <label className="text-xs font-semibold text-gray-400   ml-1">Role Status</label>
-                                            <div className="px-5 py-3.5 bg-green-50/50 border border-green-100 rounded-[1.2rem] flex items-center gap-2">
-                                                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                                                <p className="text-green-700 font-semibold text-xs   ">Active Member</p>
+                                            <div className="px-5 py-3.5 bg-gray-50/50 border border-gray-100 rounded-[1.2rem] flex items-center gap-2">
+                                                <div className="w-2 h-2 bg-gray-500 rounded-full animate-pulse" />
+                                                <p className="text-gray-700 font-semibold text-xs   ">Active Member</p>
                                             </div>
                                         </div>
                                         <div className="space-y-2">
@@ -149,30 +149,30 @@ export default function MentorProfilePage() {
                                     </div>
 
                                     <div className="space-y-6">
-                                        <div className="flex items-center justify-between p-6 bg-blue-50/30 rounded-lg border border-blue-100/50 group hover:bg-blue-50 transition-all">
+                                        <div className="flex items-center justify-between p-6 bg-gray-50/30 rounded-lg border border-gray-100/50 group hover:bg-gray-50 transition-all">
                                             <div className="flex items-center gap-6">
-                                                <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-blue-600 shadow-sm transform group-hover:scale-110 transition-transform duration-500">
+                                                <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-gray-600 shadow-sm transform group-hover:scale-110 transition-transform duration-500">
                                                     <Users className="w-7 h-7" />
                                                 </div>
                                                 <div className="space-y-1">
                                                     <p className="text-lg font-semibold text-gray-900">Supervised Trainers</p>
-                                                    <p className="text-xs text-blue-800/60 font-bold   ">Profile Approval Access</p>
+                                                    <p className="text-xs text-gray-800/60 font-bold   ">Profile Approval Access</p>
                                                 </div>
                                             </div>
-                                            <span className="text-3xl font-black text-blue-600">24</span>
+                                            <span className="text-3xl font-black text-gray-600">24</span>
                                         </div>
 
-                                        <div className="flex items-center justify-between p-6 bg-purple-50/30 rounded-lg border border-purple-100/50 group hover:bg-purple-50 transition-all">
+                                        <div className="flex items-center justify-between p-6 bg-gray-50/30 rounded-lg border border-gray-100/50 group hover:bg-gray-50 transition-all">
                                             <div className="flex items-center gap-6">
-                                                <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-purple-600 shadow-sm transform group-hover:scale-110 transition-transform duration-500">
+                                                <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-gray-600 shadow-sm transform group-hover:scale-110 transition-transform duration-500">
                                                     <BookOpen className="w-7 h-7" />
                                                 </div>
                                                 <div className="space-y-1">
                                                     <p className="text-lg font-semibold text-gray-900">Active Roadmaps</p>
-                                                    <p className="text-xs text-purple-800/60 font-bold   ">Quality Assurance Flow</p>
+                                                    <p className="text-xs text-gray-800/60 font-bold   ">Quality Assurance Flow</p>
                                                 </div>
                                             </div>
-                                            <span className="text-3xl font-black text-purple-600">182</span>
+                                            <span className="text-3xl font-black text-gray-600">182</span>
                                         </div>
                                     </div>
                                 </div>
@@ -187,11 +187,9 @@ export default function MentorProfilePage() {
 
 function SettingsItem({ icon, label, color }: { icon: React.ReactNode, label: string, color: string }) {
     const colors = {
-        blue: 'bg-blue-50 text-blue-600 group-hover:bg-blue-600',
-        indigo: 'bg-indigo-50 text-indigo-600 group-hover:bg-indigo-600',
-        purple: 'bg-purple-50 text-purple-600 group-hover:bg-purple-600'
+        gray: 'bg-gray-50 text-gray-600 group-hover:bg-gray-600',
     };
-    const colorClasses = colors[color as keyof typeof colors] || colors.blue;
+    const colorClasses = colors[color as keyof typeof colors] || colors.gray;
 
     return (
         <button className="w-full flex items-center justify-between p-4 rounded-2xl hover:bg-gray-50 transition-all border border-transparent hover:border-gray-100 group">

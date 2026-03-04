@@ -151,7 +151,7 @@ export default function StudentsTable({ searchQuery, selectedStatus, selectedCou
     id: student.id,
     student: (
       <div className="flex items-center gap-3">
-        <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center text-white font-medium text-sm">
+        <div className="w-10 h-10 bg-gradient-to-br from-gray-400 to-gray-600 rounded-full flex items-center justify-center text-white font-medium text-sm">
           {student.avatar}
         </div>
         <div>
@@ -173,10 +173,10 @@ export default function StudentsTable({ searchQuery, selectedStatus, selectedCou
       </div>
     ),
     status: (
-      <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${student.status === 'active' ? 'bg-green-100 text-green-800' :
+      <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${student.status === 'active' ? 'bg-gray-100 text-gray-800' :
         student.status === 'inactive' ? 'bg-gray-100 text-gray-800' :
-          student.status === 'completed' ? 'bg-blue-100 text-blue-800' :
-            'bg-yellow-100 text-yellow-800'
+          student.status === 'completed' ? 'bg-gray-100 text-gray-800' :
+            'bg-gray-100 text-gray-800'
         }`}>
         ● {student.status.charAt(0).toUpperCase() + student.status.slice(1)}
       </span>
@@ -185,13 +185,13 @@ export default function StudentsTable({ searchQuery, selectedStatus, selectedCou
       <div className="flex items-center gap-2">
         <div className="flex-1 bg-gray-200 rounded-full h-2 w-20">
           <div
-            className="bg-gradient-to-r from-yellow-500 to-yellow-600 h-2 rounded-full transition-all duration-500"
+            className="bg-gradient-to-r from-gray-500 to-gray-600 h-2 rounded-full transition-all duration-500"
             style={{ width: `${student.progress}%` }}
           />
         </div>
         <span className="text-sm font-medium text-gray-900">{student.progress}%</span>
-        {student.trend === 'up' ? <TrendingUp className="w-3 h-3 text-green-500" /> :
-          student.trend === 'down' ? <TrendingDown className="w-3 h-3 text-red-500" /> :
+        {student.trend === 'up' ? <TrendingUp className="w-3 h-3 text-gray-500" /> :
+          student.trend === 'down' ? <TrendingDown className="w-3 h-3 text-gray-500" /> :
             <div className="w-3 h-3 bg-gray-400 rounded-full" />}
       </div>
     ),
@@ -210,7 +210,7 @@ export default function StudentsTable({ searchQuery, selectedStatus, selectedCou
       <div className="flex items-center gap-2">
         <button
           onClick={() => handleCreateReport(student)}
-          className="px-3 py-1 bg-yellow-600 text-white text-xs rounded hover:bg-yellow-700"
+          className="px-3 py-1 bg-gray-600 text-white text-xs rounded hover:bg-gray-700"
         >
           Create Report
         </button>
@@ -251,16 +251,16 @@ export default function StudentsTable({ searchQuery, selectedStatus, selectedCou
     <div className="space-y-6">
       {/* Selected Actions */}
       {selectedStudents.length > 0 && (
-        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+        <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
           <div className="flex items-center justify-between">
-            <span className="text-sm font-medium text-yellow-800">
+            <span className="text-sm font-medium text-gray-800">
               {selectedStudents.length} student{selectedStudents.length > 1 ? 's' : ''} selected
             </span>
             <div className="flex items-center gap-2">
               <button className="px-3 py-1.5 text-xs font-medium text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
                 Send Message
               </button>
-              <button className="px-3 py-1.5 text-xs font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition-colors">
+              <button className="px-3 py-1.5 text-xs font-medium text-white bg-gray-600 rounded-lg hover:bg-gray-700 transition-colors">
                 Remove Selected
               </button>
             </div>

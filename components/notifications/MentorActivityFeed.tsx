@@ -77,11 +77,11 @@ export default function MentorActivityFeed() {
 
     const getIcon = (type: MentorActivity['type']) => {
         switch (type) {
-            case 'roadmap': return <Map className="w-4 h-4 text-blue-600" />;
-            case 'session': return <CheckCircle className="w-4 h-4 text-green-600" />;
-            case 'milestone': return <CheckCircle className="w-4 h-4 text-yellow-600" />;
-            case 'sync': return <Clock className="w-4 h-4 text-purple-600" />;
-            case 'feedback': return <MessageSquare className="w-4 h-4 text-orange-600" />;
+            case 'roadmap': return <Map className="w-4 h-4 text-gray-600" />;
+            case 'session': return <CheckCircle className="w-4 h-4 text-gray-600" />;
+            case 'milestone': return <CheckCircle className="w-4 h-4 text-gray-600" />;
+            case 'sync': return <Clock className="w-4 h-4 text-gray-600" />;
+            case 'feedback': return <MessageSquare className="w-4 h-4 text-gray-600" />;
             default: return <User className="w-4 h-4 text-gray-600" />;
         }
     };
@@ -89,8 +89,8 @@ export default function MentorActivityFeed() {
     const getStatusBadge = (status?: MentorActivity['status']) => {
         if (!status) return null;
         switch (status) {
-            case 'urgent': return <span className="bg-red-50 text-red-600 text-xs font-bold px-2 py-1 rounded-lg border border-red-100">Urgent Review</span>;
-            case 'pending': return <span className="bg-yellow-50 text-yellow-700 text-xs font-bold px-2 py-1 rounded-lg border border-yellow-100">Action Needed</span>;
+            case 'urgent': return <span className="bg-gray-50 text-gray-600 text-xs font-bold px-2 py-1 rounded-lg border border-gray-100">Urgent Review</span>;
+            case 'pending': return <span className="bg-gray-50 text-gray-700 text-xs font-bold px-2 py-1 rounded-lg border border-gray-100">Action Needed</span>;
             case 'reviewed': return <span className="bg-gray-50 text-gray-500 text-xs font-bold px-2 py-1 rounded-lg border border-gray-100">Reviewed</span>;
             default: return null;
         }
@@ -114,7 +114,7 @@ export default function MentorActivityFeed() {
                         key={activity.id}
                         onClick={() => setSelectedActivity(activity.id)}
                         className={`flex items-start gap-4 p-4 rounded-lg transition-all duration-300 border group cursor-pointer ${selectedActivity === activity.id
-                            ? 'bg-yellow-50/50 border-yellow-200 shadow-sm shadow-yellow-600/5'
+                            ? 'bg-gray-50/50 border-gray-200 shadow-sm shadow-gray-600/5'
                             : 'bg-white border-transparent hover:border-gray-100 hover:bg-gray-50/30'
                             }`}
                     >
@@ -142,19 +142,19 @@ export default function MentorActivityFeed() {
                             <p className="text-sm text-gray-900 leading-tight">
                                 <span className="font-bold">{activity.student.name}</span>
                                 <span className="text-gray-500 mx-1.5">{activity.action}</span>
-                                <span className="font-bold text-blue-600 underline decoration-2 underline-offset-4 decoration-blue-600/20">{activity.target}</span>
+                                <span className="font-bold text-gray-600 underline decoration-2 underline-offset-4 decoration-gray-600/20">{activity.target}</span>
                             </p>
 
                             {/* Interaction Buttons (Shown on select) */}
                             {selectedActivity === activity.id && (
                                 <div className="flex items-center gap-2 mt-4 animate-fade-in">
                                     {activity.type === 'roadmap' && (
-                                        <button className="px-4 py-2 bg-yellow-600 text-white text-xs font-semibold   rounded-lg hover:bg-yellow-700 shadow-lg shadow-yellow-600/20 transition-all active:scale-95">
+                                        <button className="px-4 py-2 bg-gray-600 text-white text-xs font-semibold   rounded-lg hover:bg-gray-700 shadow-lg shadow-gray-600/20 transition-all active:scale-95">
                                             Approve Roadmap
                                         </button>
                                     )}
                                     {activity.type === 'session' && (
-                                        <button className="px-4 py-2 bg-blue-600 text-white text-xs font-semibold   rounded-lg hover:bg-blue-700 shadow-lg shadow-blue-600/20 transition-all active:scale-95">
+                                        <button className="px-4 py-2 bg-gray-600 text-white text-xs font-semibold   rounded-lg hover:bg-gray-700 shadow-lg shadow-gray-600/20 transition-all active:scale-95">
                                             Review Submission
                                         </button>
                                     )}

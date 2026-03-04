@@ -25,7 +25,7 @@ export default function MentorNotificationsPage() {
                 <p className="text-sm font-medium text-gray-500">Monitor your students' success and manage administrative requests.</p>
               </div>
               <div className="flex items-center gap-2">
-                <button className="px-5 py-2.5 bg-yellow-600 text-white text-xs font-semibold rounded-lg hover:bg-yellow-700 shadow-lg shadow-yellow-600/20 transition-all active:scale-95">
+                <button className="px-5 py-2.5 bg-gray-600 text-white text-xs font-semibold rounded-lg hover:bg-gray-700 shadow-lg shadow-gray-600/20 transition-all active:scale-95">
                   Mark All Read
                 </button>
                 <button className="p-2.5 bg-white border border-gray-200 text-gray-400 rounded-lg hover:text-gray-900 shadow-sm transition-all">

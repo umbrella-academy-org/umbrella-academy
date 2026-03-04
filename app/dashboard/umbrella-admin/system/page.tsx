@@ -59,9 +59,9 @@ export default function UmbrellaAdminSystemPage() {
                         <p className="text-gray-500 text-sm">{metric.name}</p>
                         <p className="text-2xl font-bold text-gray-900">{metric.value}</p>
                       </div>
-                      <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${metric.status === 'healthy' ? 'bg-green-100' : 'bg-red-100'
+                      <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${metric.status === 'healthy' ? 'bg-gray-100' : 'bg-gray-100'
                         }`}>
-                        <Icon className={`w-6 h-6 ${metric.status === 'healthy' ? 'text-green-600' : 'text-red-600'
+                        <Icon className={`w-6 h-6 ${metric.status === 'healthy' ? 'text-gray-600' : 'text-gray-600'
                           }`} />
                       </div>
                     </div>
@@ -90,13 +90,13 @@ export default function UmbrellaAdminSystemPage() {
                         <span className="text-sm text-gray-900">{service.name}</span>
                         <div className="flex items-center gap-2">
                           {service.status === 'operational' ? (
-                            <CheckCircle className="w-4 h-4 text-green-500" />
+                            <CheckCircle className="w-4 h-4 text-gray-500" />
                           ) : (
-                            <AlertTriangle className="w-4 h-4 text-yellow-500" />
+                            <AlertTriangle className="w-4 h-4 text-gray-500" />
                           )}
                           <span className={`text-xs px-2 py-1 rounded-full ${service.status === 'operational'
-                              ? 'bg-green-100 text-green-800'
-                              : 'bg-yellow-100 text-yellow-800'
+                              ? 'bg-gray-100 text-gray-800'
+                              : 'bg-gray-100 text-gray-800'
                             }`}>
                             {service.status}
                           </span>
@@ -116,15 +116,15 @@ export default function UmbrellaAdminSystemPage() {
                   <div className="space-y-4">
                     {systemAlerts.map((alert) => (
                       <div key={alert.id} className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
-                        <div className={`w-2 h-2 rounded-full mt-2 ${alert.type === 'warning' ? 'bg-yellow-500' :
-                            alert.type === 'success' ? 'bg-green-500' : 'bg-blue-500'
+                        <div className={`w-2 h-2 rounded-full mt-2 ${alert.type === 'warning' ? 'bg-gray-500' :
+                            alert.type === 'success' ? 'bg-gray-500' : 'bg-gray-500'
                           }`}></div>
                         <div className="flex-1">
                           <p className="text-sm text-gray-900">{alert.message}</p>
                           <p className="text-xs text-gray-500 mt-1">{alert.time}</p>
                         </div>
-                        <span className={`text-xs px-2 py-1 rounded-full ${alert.severity === 'high' ? 'bg-red-100 text-red-800' :
-                            alert.severity === 'medium' ? 'bg-yellow-100 text-yellow-800' :
+                        <span className={`text-xs px-2 py-1 rounded-full ${alert.severity === 'high' ? 'bg-gray-100 text-gray-800' :
+                            alert.severity === 'medium' ? 'bg-gray-100 text-gray-800' :
                               'bg-gray-100 text-gray-800'
                           }`}>
                           {alert.severity}

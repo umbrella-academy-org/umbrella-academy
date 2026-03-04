@@ -32,19 +32,19 @@ export function Header() {
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center space-x-10">
-              <a href="#features" className={`text-sm font-bold tracking-widest  transition-colors ${isScrolled ? "text-white/70 hover:text-[#ca8a04]" : "text-white/80 hover:text-white"}`}>
+              <a href="#features" className={`text-sm font-bold tracking-widest  transition-colors ${isScrolled ? "text-white/70 hover:text-[#525252]" : "text-white/80 hover:text-white"}`}>
                 Features
               </a>
-              <a href="#how-it-works" className={`text-sm font-bold tracking-widest  transition-colors ${isScrolled ? "text-white/70 hover:text-[#ca8a04]" : "text-white/80 hover:text-white"}`}>
+              <a href="#how-it-works" className={`text-sm font-bold tracking-widest  transition-colors ${isScrolled ? "text-white/70 hover:text-[#525252]" : "text-white/80 hover:text-white"}`}>
                 Process
               </a>
-              <a href="#programs" className={`text-sm font-bold tracking-widest  transition-colors ${isScrolled ? "text-white/70 hover:text-[#ca8a04]" : "text-white/80 hover:text-white"}`}>
+              <a href="#programs" className={`text-sm font-bold tracking-widest  transition-colors ${isScrolled ? "text-white/70 hover:text-[#525252]" : "text-white/80 hover:text-white"}`}>
                 Programs
               </a>
-              <a href="#about" className={`text-sm font-bold tracking-widest  transition-colors ${isScrolled ? "text-white/70 hover:text-[#ca8a04]" : "text-white/80 hover:text-white"}`}>
+              <a href="#about" className={`text-sm font-bold tracking-widest  transition-colors ${isScrolled ? "text-white/70 hover:text-[#525252]" : "text-white/80 hover:text-white"}`}>
                 About
               </a>
-              <a href="/blog" className={`text-sm font-bold tracking-widest  transition-colors ${isScrolled ? "text-white/70 hover:text-[#ca8a04]" : "text-white/80 hover:text-white"}`}>
+              <a href="/blog" className={`text-sm font-bold tracking-widest  transition-colors ${isScrolled ? "text-white/70 hover:text-[#525252]" : "text-white/80 hover:text-white"}`}>
                 Blog
               </a>
             </div>
@@ -65,7 +65,7 @@ export function Header() {
                 Sign In
               </button>
               <button
-                className="px-8 py-3 bg-[#ca8a04] text-white rounded-full hover:bg-[#a16207] shadow-lg transition-all duration-300 font-bold text-xs tracking-widest  active:scale-95"
+                className="px-8 py-3 bg-[#525252] text-white rounded-full hover:bg-[#a16207] shadow-lg transition-all duration-300 font-bold text-xs tracking-widest  active:scale-95"
                 onClick={() => router.push("/auth/signup")}
               >
                 Join Now
@@ -98,15 +98,15 @@ export function Header() {
               <X size={32} />
             </button>
 
-            <a href="#features" onClick={() => setIsMenuOpen(false)} className="text-4xl font-black tracking-tighter hover:text-[#ca8a04] transition-colors">FEATURES</a>
-            <a href="#how-it-works" onClick={() => setIsMenuOpen(false)} className="text-4xl font-black tracking-tighter hover:text-[#ca8a04] transition-colors">PROCESS</a>
-            <a href="#programs" onClick={() => setIsMenuOpen(false)} className="text-4xl font-black tracking-tighter hover:text-[#ca8a04] transition-colors">PROGRAMS</a>
-            <a href="#about" onClick={() => setIsMenuOpen(false)} className="text-4xl font-black tracking-tighter hover:text-[#ca8a04] transition-colors">ABOUT</a>
-            <a href="/blog" onClick={() => setIsMenuOpen(false)} className="text-4xl font-black tracking-tighter hover:text-[#ca8a04] transition-colors">BLOG</a>
+            <a href="#features" onClick={() => setIsMenuOpen(false)} className="text-4xl font-black tracking-tighter hover:text-[#525252] transition-colors">FEATURES</a>
+            <a href="#how-it-works" onClick={() => setIsMenuOpen(false)} className="text-4xl font-black tracking-tighter hover:text-[#525252] transition-colors">PROCESS</a>
+            <a href="#programs" onClick={() => setIsMenuOpen(false)} className="text-4xl font-black tracking-tighter hover:text-[#525252] transition-colors">PROGRAMS</a>
+            <a href="#about" onClick={() => setIsMenuOpen(false)} className="text-4xl font-black tracking-tighter hover:text-[#525252] transition-colors">ABOUT</a>
+            <a href="/blog" onClick={() => setIsMenuOpen(false)} className="text-4xl font-black tracking-tighter hover:text-[#525252] transition-colors">BLOG</a>
 
             <div className="pt-8 flex flex-col space-y-4 w-full max-w-xs transition-all duration-700">
               <button
-                className="w-full py-4 text-sm font-black tracking-widest border border-white/20 rounded-none hover:bg-[#ca8a04] hover:border-[#ca8a04] "
+                className="w-full py-4 text-sm font-black tracking-widest border border-white/20 rounded-none hover:bg-[#525252] hover:border-[#525252] "
                 onClick={() => {
                   router.push("/auth/login");
                   setIsMenuOpen(false);
@@ -115,7 +115,7 @@ export function Header() {
                 SIGN IN
               </button>
               <button
-                className="w-full py-4 text-sm font-black tracking-widest bg-[#ca8a04] text-white rounded-none hover:bg-[#a16207] "
+                className="w-full py-4 text-sm font-black tracking-widest bg-[#525252] text-white rounded-none hover:bg-[#a16207] "
                 onClick={() => {
                   router.push("/auth/signup");
                   setIsMenuOpen(false);

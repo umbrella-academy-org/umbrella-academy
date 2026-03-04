@@ -90,7 +90,7 @@ export default function Home() {
                 {hero.badge.icon === 'sparkles' && <Sparkles className="h-4 w-4 text-gray-700" />}
                 <span className="text-sm font-medium text-gray-800">{hero.badge.text}</span>
               </div>
-              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl text-balance leading-tight text-amber-600">
+              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl text-balance leading-tight text-black-600">
                 {hero.title}
               </h1>
               <p className="mt-6 text-lg sm:text-xl text-gray-600 text-balance leading-relaxed">
@@ -152,8 +152,8 @@ export default function Home() {
               {/* Floating Cards */}
               <div className="absolute -top-4 -right-4 bg-white rounded-xl shadow-lg p-3 border border-gray-200 hover:shadow-xl transition-shadow">
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
-                    <Trophy className="h-4 w-4 text-green-600" />
+                  <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center">
+                    <Trophy className="h-4 w-4 text-gray-600" />
                   </div>
                   <div>
                     <p className="text-xs font-semibold text-gray-900">Success Stories</p>
@@ -164,8 +164,8 @@ export default function Home() {
 
               <div className="absolute -bottom-4 -left-4 bg-white rounded-xl shadow-lg p-3 border border-gray-200 hover:shadow-xl transition-shadow">
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
-                    <Users className="h-4 w-4 text-blue-600" />
+                  <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center">
+                    <Users className="h-4 w-4 text-gray-600" />
                   </div>
                   <div>
                     <p className="text-xs font-semibold text-gray-900">Active Community</p>
@@ -176,8 +176,8 @@ export default function Home() {
 
               <div className="absolute top-1/2 -left-8 bg-white rounded-xl shadow-lg p-3 border border-gray-200 hover:shadow-xl transition-shadow">
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
-                    <Star className="h-4 w-4 text-purple-600" />
+                  <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center">
+                    <Star className="h-4 w-4 text-gray-600" />
                   </div>
                   <div>
                     <p className="text-xs font-semibold text-gray-900">Top Rated</p>
@@ -327,7 +327,7 @@ export default function Home() {
 
                                 <div className="mt-1.5 flex items-center gap-1.5">
                                   <div className="flex items-center gap-0.5">
-                                    <Star className="h-2 w-2 text-yellow-500 fill-yellow-500" />
+                                    <Star className="h-2 w-2 text-gray-500 fill-gray-500" />
                                     <span className="text-xs font-semibold text-gray-700">4.9</span>
                                   </div>
                                   <div className="flex items-center gap-0.5 text-xs text-gray-500">
@@ -466,7 +466,7 @@ export default function Home() {
 
                       <div className="absolute top-3 right-3">
                         <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-white/90 backdrop-blur border border-gray-200 shadow-sm">
-                          <Star className="h-3 w-3 text-yellow-500 fill-yellow-500" />
+                          <Star className="h-3 w-3 text-gray-500 fill-gray-500" />
                           <span className="text-black text-xs font-bold">{item.stats.rating}</span>
                         </div>
                       </div>

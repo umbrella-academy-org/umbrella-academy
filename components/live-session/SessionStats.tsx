@@ -11,15 +11,15 @@ export default function SessionStats({ onUpcomingClick }: SessionStatsProps) {
     {
       label: 'Upcoming Sessions',
       value: '12',
-      icon: <Clock className="w-5 h-5 text-blue-600" />,
-      bgColor: 'bg-blue-50',
+      icon: <Clock className="w-5 h-5 text-gray-600" />,
+      bgColor: 'bg-gray-50',
       clickable: true
     },
     {
       label: 'Missed',
       value: '2',
-      icon: <Calendar className="w-5 h-5 text-red-600" />,
-      bgColor: 'bg-red-50',
+      icon: <Calendar className="w-5 h-5 text-gray-600" />,
+      bgColor: 'bg-gray-50',
       clickable: false
     }
   ];
@@ -29,7 +29,7 @@ export default function SessionStats({ onUpcomingClick }: SessionStatsProps) {
       {stats.map((stat, index) => (
         <div
           key={index}
-          className={`bg-white rounded-2xl p-5 shadow-[0_8px_30px_rgb(0,0,0,0.02)] border border-gray-100 group transition-all duration-300 ${stat.clickable ? 'cursor-pointer hover:border-yellow-200 hover:shadow-lg hover:shadow-yellow-600/5' : ''
+          className={`bg-white rounded-2xl p-5 shadow-[0_8px_30px_rgb(0,0,0,0.02)] border border-gray-100 group transition-all duration-300 ${stat.clickable ? 'cursor-pointer hover:border-gray-200 hover:shadow-lg hover:shadow-gray-600/5' : ''
             }`}
           onClick={stat.clickable ? onUpcomingClick : undefined}
         >

@@ -10,7 +10,7 @@ export default function VideoTutorials() {
       category: 'ABC Tutorials',
       instructor: 'Backend developer',
       tag: 'Technology',
-      thumbnail: 'from-purple-400 to-purple-600',
+      thumbnail: 'from-gray-400 to-gray-600',
       duration: '15:30'
     },
     {
@@ -19,7 +19,7 @@ export default function VideoTutorials() {
       category: 'ABC Tutorials',
       instructor: 'Backend developer',
       tag: 'Technology',
-      thumbnail: 'from-purple-400 to-purple-600',
+      thumbnail: 'from-gray-400 to-gray-600',
       duration: '12:45'
     }
   ];
@@ -35,18 +35,18 @@ export default function VideoTutorials() {
             <input
               type="text"
               placeholder="Search here..."
-              className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
+              className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent"
             />
           </div>
           
-          <select className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent">
+          <select className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent">
             <option>All Courses</option>
             <option>Web Development</option>
             <option>Backend Development</option>
             <option>Frontend Development</option>
           </select>
           
-          <select className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent">
+          <select className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent">
             <option>By Date</option>
             <option>By Duration</option>
             <option>By Popularity</option>
@@ -89,7 +89,7 @@ export default function VideoTutorials() {
                   <p className="text-sm text-gray-600 mb-1">{tutorial.category}</p>
                   <p className="text-sm text-gray-600">{tutorial.instructor}</p>
                 </div>
-                <span className="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs font-medium rounded-full">
+                <span className="px-2 py-1 bg-gray-100 text-gray-800 text-xs font-medium rounded-full">
                   {tutorial.tag}
                 </span>
               </div>
@@ -98,7 +98,7 @@ export default function VideoTutorials() {
                 <button className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm">
                   Cancel
                 </button>
-                <button className="px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors text-sm font-medium">
+                <button className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors text-sm font-medium">
                   Continue
                 </button>
               </div>

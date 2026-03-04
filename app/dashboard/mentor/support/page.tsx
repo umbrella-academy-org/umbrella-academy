@@ -94,7 +94,7 @@ export default function MentorSupportPage() {
                         <select
                           value={issueType}
                           onChange={(e) => setIssueType(e.target.value)}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent"
                         >
                           <option value="technical">Technical Issue</option>
                           <option value="roadmap-approval">Roadmap Approval</option>
@@ -112,7 +112,7 @@ export default function MentorSupportPage() {
                         <select
                           value={priority}
                           onChange={(e) => setPriority(e.target.value)}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent"
                         >
                           <option value="low">Low</option>
                           <option value="medium">Medium</option>
@@ -131,7 +131,7 @@ export default function MentorSupportPage() {
                         value={subject}
                         onChange={(e) => setSubject(e.target.value)}
                         placeholder="Brief description of your issue"
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent"
                         required
                       />
                     </div>
@@ -145,7 +145,7 @@ export default function MentorSupportPage() {
                         onChange={(e) => setDescription(e.target.value)}
                         placeholder="Please provide detailed information about your issue..."
                         rows={6}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent"
                         required
                       />
                     </div>
@@ -154,7 +154,7 @@ export default function MentorSupportPage() {
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="px-6 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="px-6 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         {isSubmitting ? 'Submitting...' : 'Submit Ticket'}
                       </button>
@@ -186,29 +186,29 @@ export default function MentorSupportPage() {
                 <div className="bg-white border border-gray-200 rounded-lg p-6">
                   <h3 className="font-semibold text-gray-900 mb-3">Common Mentor Issues</h3>
                   <div className="space-y-2">
-                    <button className="w-full text-left text-sm text-yellow-600 hover:text-yellow-700">
+                    <button className="w-full text-left text-sm text-gray-600 hover:text-gray-700">
                       Roadmap approval delays
                     </button>
-                    <button className="w-full text-left text-sm text-yellow-600 hover:text-yellow-700">
+                    <button className="w-full text-left text-sm text-gray-600 hover:text-gray-700">
                       Trainer report concerns
                     </button>
-                    <button className="w-full text-left text-sm text-yellow-600 hover:text-yellow-700">
+                    <button className="w-full text-left text-sm text-gray-600 hover:text-gray-700">
                       Student progress tracking
                     </button>
-                    <button className="w-full text-left text-sm text-yellow-600 hover:text-yellow-700">
+                    <button className="w-full text-left text-sm text-gray-600 hover:text-gray-700">
                       Communication with trainers
                     </button>
                   </div>
                 </div>
 
-                <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
                   <div className="flex items-start gap-2">
-                    <svg className="w-5 h-5 text-green-600 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5 text-gray-600 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     <div>
-                      <p className="text-sm font-medium text-green-800">Mentor Resources</p>
-                      <p className="text-sm text-green-700">Access mentoring guidelines and best practices in your mentor dashboard.</p>
+                      <p className="text-sm font-medium text-gray-800">Mentor Resources</p>
+                      <p className="text-sm text-gray-700">Access mentoring guidelines and best practices in your mentor dashboard.</p>
                     </div>
                   </div>
                 </div>

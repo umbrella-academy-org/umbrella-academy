@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#ca8a04",
+  themeColor: "#525252",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,

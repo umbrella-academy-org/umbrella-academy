@@ -467,7 +467,7 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
                 <button
                   onClick={() => handleNavigation(item)}
                   className={`w-full flex items-center gap-3 px-3 lg:px-4 py-2 lg:py-3 rounded-lg text-left transition-colors text-sm lg:text-base ${currentActive === item.label
-                    ? 'bg-yellow-600 text-white'
+                    ? 'bg-gray-600 text-white'
                     : 'text-gray-300 hover:text-white hover:bg-gray-800'
                     }`}
                 >
@@ -504,7 +504,7 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
                   />
                 </svg>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-xl font-bold text-yellow-600">{userInfo.progressValue}%</span>
+                  <span className="text-xl font-bold text-gray-600">{userInfo.progressValue}%</span>
                 </div>
               </div>
 
@@ -524,7 +524,7 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
                   </span>
                   <a
                     href={userInfo.renewHref}
-                    className="text-sm text-yellow-600 hover:text-yellow-500"
+                    className="text-sm text-gray-600 hover:text-gray-500"
                   >
                     {userInfo.renewLabel}
                   </a>
@@ -562,7 +562,7 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
                   }
                 }}
                 className={`w-full px-3 py-2 rounded-lg text-xs font-medium transition-colors ${devNewUserMode
-                  ? 'bg-yellow-600 text-white'
+                  ? 'bg-gray-600 text-white'
                   : 'bg-gray-800 text-gray-400 hover:text-white'
                   }`}
               >
@@ -574,13 +574,13 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
             {showNewUserGuide && (
               <div className="bg-gray-800 rounded-lg p-4">
                 <div className="flex items-center gap-2 mb-3">
-                  <AlertCircle className="w-4 h-4 text-yellow-600" />
+                  <AlertCircle className="w-4 h-4 text-gray-600" />
                   <span className="text-sm font-medium text-white">Finish Setting Your Account</span>
                 </div>
                 <p className="text-xs text-gray-400 mb-3">Complete your profile setup to start learning</p>
                 <button
                   onClick={() => navigate('/post-signup/availability')}
-                  className="w-full bg-yellow-600 text-white px-3 py-2 rounded-lg text-xs font-medium hover:bg-yellow-700 transition-colors"
+                  className="w-full bg-gray-600 text-white px-3 py-2 rounded-lg text-xs font-medium hover:bg-gray-700 transition-colors"
                 >
                   Continue Setup
                 </button>
@@ -592,7 +592,7 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
         {/* User Profile */}
         <div className="p-3 lg:p-4 border-t border-gray-800">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 lg:w-10 lg:h-10 bg-yellow-600 rounded-full flex items-center justify-center">
+            <div className="w-8 h-8 lg:w-10 lg:h-10 bg-gray-600 rounded-full flex items-center justify-center">
               <span className="text-xs lg:text-sm font-medium text-white">{userInitials}</span>
             </div>
             <div className="flex-1 min-w-0">
@@ -605,7 +605,7 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
               </button>
               <button
                 onClick={handleLogout}
-                className="text-gray-400 hover:text-red-400 p-1"
+                className="text-gray-400 hover:text-gray-400 p-1"
                 title="Logout"
               >
                 <LogOut className="w-4 h-4 lg:w-5 lg:h-5" />

@@ -39,8 +39,8 @@ export default function CurrentPlan() {
         <div className="flex items-center justify-between mb-4">
           <p className="text-sm text-gray-600">Complete learning experience with wing companies.</p>
           <div className="flex items-center gap-2">
-            <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-            <div className="text-sm text-green-600 capitalize">{subscription.status}</div>
+            <div className="w-2 h-2 bg-gray-500 rounded-full"></div>
+            <div className="text-sm text-gray-600 capitalize">{subscription.status}</div>
           </div>
         </div>
 
@@ -50,7 +50,7 @@ export default function CurrentPlan() {
             <span>{progressPercentage.toFixed(1)}%</span>
           </div>
           <div className="w-full bg-gray-200 rounded-full h-2">
-            <div className="bg-yellow-600 h-2 rounded-full transition-all duration-500" style={{ width: `${progressPercentage}%` }}></div>
+            <div className="bg-gray-600 h-2 rounded-full transition-all duration-500" style={{ width: `${progressPercentage}%` }}></div>
           </div>
         </div>
 
@@ -74,7 +74,7 @@ export default function CurrentPlan() {
           <div className="space-y-2">
             {subscription.features.map((feature, index) => (
               <div key={index} className="flex items-center gap-2 text-sm text-gray-600">
-                <CheckCircle className="w-4 h-4 text-green-500" />
+                <CheckCircle className="w-4 h-4 text-gray-500" />
                 {feature}
               </div>
             ))}
@@ -83,7 +83,7 @@ export default function CurrentPlan() {
 
         <a 
           href="/post-signup/subscription/renew"
-          className="flex items-center gap-2 text-yellow-600 hover:text-yellow-700 font-medium text-sm transition-colors"
+          className="flex items-center gap-2 text-gray-600 hover:text-gray-700 font-medium text-sm transition-colors"
         >
           Upgrade plan
           <ArrowRight className="w-4 h-4" />

@@ -58,17 +58,17 @@ export function Testimonials() {
   return (
     <section className="py-24 px-4 sm:px-6 lg:px-8 bg-linear-to-br from-gray-50 to-white relative overflow-hidden">
       {/* Background Decoration */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-96 bg-[#ca8a04]/5 rounded-full blur-3xl -z-10" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-96 bg-[#525252]/5 rounded-full blur-3xl -z-10" />
 
       <div ref={ref} className="max-w-full mx-auto">
         {/* Section Header */}
         <div className={`text-center max-w-3xl mx-auto mb-16 reveal ${isVisible ? 'visible' : ''}`}>
           <div>
-            <span className="inline-block px-4 py-2 bg-white text-[#ca8a04] rounded-full text-sm font-medium mb-4 shadow-sm border border-gray-200">
+            <span className="inline-block px-4 py-2 bg-white text-[#525252] rounded-full text-sm font-medium mb-4 shadow-sm border border-gray-200">
               Success Stories
             </span>
             <h2 className="text-4xl md:text-5xl font-bold text-black mb-6">
-              What Our <span className="text-[#ca8a04]">Students Say</span>
+              What Our <span className="text-[#525252]">Students Say</span>
             </h2>
             <p className="text-xl text-gray-600">
               Join thousands of successful learners who transformed their careers with us
@@ -83,17 +83,17 @@ export function Testimonials() {
             return (
               <div
                 key={index}
-                className={`bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-gray-200 hover:border-[#ca8a04]/30 relative ${isVisible ? 'animate-fade-in' : 'opacity-0'} ${delays[index]}`}
+                className={`bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-gray-200 hover:border-[#525252]/30 relative ${isVisible ? 'animate-fade-in' : 'opacity-0'} ${delays[index]}`}
               >
                 {/* Quote Icon */}
-                <div className="absolute -top-3 -right-3 w-12 h-12 bg-[#fbbf24] rounded-full flex items-center justify-center shadow-lg">
+                <div className="absolute -top-3 -right-3 w-12 h-12 bg-[#737373] rounded-full flex items-center justify-center shadow-lg">
                   <Quote className="w-6 h-6 text-white" />
                 </div>
 
                 {/* Rating */}
                 <div className="flex space-x-1 mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-[#fbbf24] text-[#fbbf24]" />
+                    <Star key={i} className="w-5 h-5 fill-[#737373] text-[#737373]" />
                   ))}
                 </div>
 
@@ -107,12 +107,12 @@ export function Testimonials() {
                   <img
                     src={testimonial.image}
                     alt={testimonial.name}
-                    className="w-12 h-12 rounded-full object-cover ring-2 ring-[#ca8a04]/20"
+                    className="w-12 h-12 rounded-full object-cover ring-2 ring-[#525252]/20"
                   />
                   <div>
                     <div className="font-bold text-gray-900">{testimonial.name}</div>
                     <div className="text-sm text-gray-600">{testimonial.role}</div>
-                    <div className="text-xs text-[#ca8a04]">{testimonial.company}</div>
+                    <div className="text-xs text-[#525252]">{testimonial.company}</div>
                   </div>
                 </div>
               </div>
@@ -123,13 +123,13 @@ export function Testimonials() {
         {/* Stats Bar */}
         <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 bg-white rounded-2xl p-8 shadow-lg border-2 border-gray-200 animate-fade-in animation-delay-700">
           <div className="text-center">
-            <div className="text-4xl font-bold text-[#ca8a04] mb-2">
+            <div className="text-4xl font-bold text-[#525252] mb-2">
               50K+
             </div>
             <div className="text-sm text-gray-600">Happy Students</div>
           </div>
           <div className="text-center">
-            <div className="text-4xl font-bold text-[#fbbf24] mb-2">
+            <div className="text-4xl font-bold text-[#737373] mb-2">
               4.9/5
             </div>
             <div className="text-sm text-gray-600">Average Rating</div>
@@ -141,7 +141,7 @@ export function Testimonials() {
             <div className="text-sm text-gray-600">Success Rate</div>
           </div>
           <div className="text-center">
-            <div className="text-4xl font-bold text-[#ca8a04] mb-2">
+            <div className="text-4xl font-bold text-[#525252] mb-2">
               1K+
             </div>
             <div className="text-sm text-gray-600">Trainers</div>

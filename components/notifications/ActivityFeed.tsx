@@ -113,9 +113,9 @@ export default function ActivityFeed({ searchQuery, selectedActivity, onActivity
   const getActivityIcon = (type: Activity['type']) => {
     switch (type) {
       case 'file':
-        return <FileText className="w-4 h-4 text-red-600" />;
+        return <FileText className="w-4 h-4 text-gray-600" />;
       case 'video':
-        return <Video className="w-4 h-4 text-blue-600" />;
+        return <Video className="w-4 h-4 text-gray-600" />;
       default:
         return null;
     }
@@ -124,9 +124,9 @@ export default function ActivityFeed({ searchQuery, selectedActivity, onActivity
   const getFileTypeColor = (type: Activity['type']) => {
     switch (type) {
       case 'file':
-        return 'bg-red-100 text-red-700';
+        return 'bg-gray-100 text-gray-700';
       case 'video':
-        return 'bg-blue-100 text-blue-700';
+        return 'bg-gray-100 text-gray-700';
       default:
         return 'bg-gray-100 text-gray-700';
     }
@@ -152,17 +152,17 @@ export default function ActivityFeed({ searchQuery, selectedActivity, onActivity
           <div
             key={activity.id}
             className={`flex items-start gap-3 p-3 rounded-lg cursor-pointer transition-colors ${
-              selectedActivity === activity.id ? 'bg-yellow-50 border border-yellow-200' : 'hover:bg-gray-50'
+              selectedActivity === activity.id ? 'bg-gray-50 border border-gray-200' : 'hover:bg-gray-50'
             }`}
             onClick={() => onActivitySelect(activity.id)}
           >
             {/* User Avatar */}
             <div className="relative">
-              <div className="w-10 h-10 bg-orange-400 rounded-full flex items-center justify-center flex-shrink-0">
+              <div className="w-10 h-10 bg-gray-400 rounded-full flex items-center justify-center flex-shrink-0">
                 <span className="text-white text-sm font-medium">{activity.user.initials}</span>
               </div>
               {activity.isOnline && (
-                <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></div>
+                <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-gray-500 border-2 border-white rounded-full"></div>
               )}
             </div>
 
@@ -174,7 +174,7 @@ export default function ActivityFeed({ searchQuery, selectedActivity, onActivity
                     <span className="font-medium">{activity.user.name}</span>
                     <span className="text-gray-600 ml-1">{activity.action}</span>
                     {activity.target && (
-                      <span className="text-blue-600 ml-1 font-medium">{activity.target}</span>
+                      <span className="text-gray-600 ml-1 font-medium">{activity.target}</span>
                     )}
                   </p>
                   <p className="text-xs text-gray-500 mt-1">{activity.time}</p>
@@ -193,7 +193,7 @@ export default function ActivityFeed({ searchQuery, selectedActivity, onActivity
                   {/* Message preview for Koray's message */}
                   {activity.id === '9' && (
                     <div className="mt-2 p-2 bg-gray-50 rounded text-xs text-gray-600">
-                      <span className="text-purple-600">@olivia</span> This is starting to look really good!
+                      <span className="text-gray-600">@olivia</span> This is starting to look really good!
                       <br />I'll polish it up a bit and send it.
                     </div>
                   )}

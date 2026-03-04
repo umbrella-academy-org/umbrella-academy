@@ -54,6 +54,9 @@ export default function ProfilePage() {
     }
     
     console.log('Profile data:', formData);
+    // Store user type and email for verification
+    localStorage.setItem('userType', 'student');
+    localStorage.setItem('signupEmail', formData.email);
     router.push('/auth/verify');
   };
 
@@ -76,7 +79,7 @@ export default function ProfilePage() {
           <div className="flex flex-col items-center justify-center flex-1">
             {/* Logo */}
             <div className="mb-8">
-              <div className="w-16 h-16 bg-yellow-600 rounded-2xl flex items-center justify-center">
+              <div className="w-16 h-16 bg-gray-600 rounded-2xl flex items-center justify-center">
                 <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" />
                 </svg>
@@ -105,12 +108,12 @@ export default function ProfilePage() {
                     value={formData.firstName}
                     onChange={(e) => handleChange('firstName', e.target.value)}
                     placeholder="eg. John"
-                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${
-                      errors.firstName ? 'border-red-500' : 'border-gray-300'
+                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${
+                      errors.firstName ? 'border-gray-500' : 'border-gray-300'
                     }`}
                     required
                   />
-                  {errors.firstName && <p className="mt-1 text-sm text-red-500">{errors.firstName}</p>}
+                  {errors.firstName && <p className="mt-1 text-sm text-gray-500">{errors.firstName}</p>}
                 </div>
                 <div>
                   <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-2">
@@ -122,12 +125,12 @@ export default function ProfilePage() {
                     value={formData.lastName}
                     onChange={(e) => handleChange('lastName', e.target.value)}
                     placeholder="eg. Doe"
-                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${
-                      errors.lastName ? 'border-red-500' : 'border-gray-300'
+                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${
+                      errors.lastName ? 'border-gray-500' : 'border-gray-300'
                     }`}
                     required
                   />
-                  {errors.lastName && <p className="mt-1 text-sm text-red-500">{errors.lastName}</p>}
+                  {errors.lastName && <p className="mt-1 text-sm text-gray-500">{errors.lastName}</p>}
                 </div>
               </div>
 
@@ -141,8 +144,8 @@ export default function ProfilePage() {
                     id="gender"
                     value={formData.gender}
                     onChange={(e) => handleChange('gender', e.target.value)}
-                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white text-gray-900 ${
-                      errors.gender ? 'border-red-500' : 'border-gray-300'
+                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent appearance-none bg-white text-gray-900 ${
+                      errors.gender ? 'border-gray-500' : 'border-gray-300'
                     }`}
                     required
                   >
@@ -152,7 +155,7 @@ export default function ProfilePage() {
                     <option value="other">Other</option>
                     <option value="prefer-not-to-say">Prefer not to say</option>
                   </select>
-                  {errors.gender && <p className="mt-1 text-sm text-red-500">{errors.gender}</p>}
+                  {errors.gender && <p className="mt-1 text-sm text-gray-500">{errors.gender}</p>}
                 </div>
                 <div>
                   <label htmlFor="dateOfBirth" className="block text-sm font-medium text-gray-700 mb-2">
@@ -164,12 +167,12 @@ export default function ProfilePage() {
                     value={formData.dateOfBirth}
                     onChange={(e) => handleChange('dateOfBirth', e.target.value)}
                     placeholder="DD / MM / YY"
-                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 ${
-                      errors.dateOfBirth ? 'border-red-500' : 'border-gray-300'
+                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 ${
+                      errors.dateOfBirth ? 'border-gray-500' : 'border-gray-300'
                     }`}
                     required
                   />
-                  {errors.dateOfBirth && <p className="mt-1 text-sm text-red-500">{errors.dateOfBirth}</p>}
+                  {errors.dateOfBirth && <p className="mt-1 text-sm text-gray-500">{errors.dateOfBirth}</p>}
                 </div>
               </div>
 
@@ -184,12 +187,12 @@ export default function ProfilePage() {
                   placeholder="eg. johndoe@example.com"
                   value={formData.email}
                   onChange={(e) => handleChange('email', e.target.value)}
-                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white text-gray-900 ${
-                    errors.email ? 'border-red-500' : 'border-gray-300'
+                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent appearance-none bg-white text-gray-900 ${
+                    errors.email ? 'border-gray-500' : 'border-gray-300'
                   }`}
                   required
                 />
-                {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email}</p>}
+                {errors.email && <p className="mt-1 text-sm text-gray-500">{errors.email}</p>}
               </div>
 
               {/* Phone Number */}
@@ -201,7 +204,7 @@ export default function ProfilePage() {
                   <select
                     value={formData.phoneCode}
                     onChange={(e) => handleChange('phoneCode', e.target.value)}
-                    className="w-24 px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white text-gray-900"
+                    className="w-24 px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent appearance-none bg-white text-gray-900"
                   >
                     <option value="+250">+250</option>
                     <option value="+1">+1</option>
@@ -216,26 +219,26 @@ export default function ProfilePage() {
                       value={formData.phoneNumber}
                       onChange={(e) => handleChange('phoneNumber', e.target.value)}
                       placeholder="7XXX-XXX-XXX"
-                      className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${
-                        errors.phoneNumber ? 'border-red-500' : 'border-gray-300'
+                      className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${
+                        errors.phoneNumber ? 'border-gray-500' : 'border-gray-300'
                       }`}
                       required
                     />
-                    {errors.phoneNumber && <p className="mt-1 text-sm text-red-500">{errors.phoneNumber}</p>}
+                    {errors.phoneNumber && <p className="mt-1 text-sm text-gray-500">{errors.phoneNumber}</p>}
                   </div>
                 </div>
               </div>
 
               <button
                 type="submit"
-                className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-colors"
+                className="w-full bg-black text-white py-3 rounded-lg font-medium hover:bg-gray-900 transition-colors"
               >
                 Continue
               </button>
 
               {/* Progress dots */}
               <div className="flex justify-center gap-2 pt-4">
-                <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
+                <div className="w-8 h-2 bg-gray-600 rounded-full"></div>
                 <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
                 <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
                 <div className="w-2 h-2 bg-gray-300 rounded-full"></div>

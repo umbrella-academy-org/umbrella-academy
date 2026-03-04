@@ -100,11 +100,11 @@ export default function AssignmentList({ activeTab }: AssignmentListProps) {
   const getStatusBadge = (status: string, grade?: number | null) => {
     switch (status) {
       case 'submitted':
-        return <span className="px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full">Submitted</span>;
+        return <span className="px-2 py-1 text-xs font-medium bg-gray-100 text-gray-800 rounded-full">Submitted</span>;
       case 'graded':
-        return <span className="px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-full">Graded ({grade}%)</span>;
+        return <span className="px-2 py-1 text-xs font-medium bg-gray-100 text-gray-800 rounded-full">Graded ({grade}%)</span>;
       case 'overdue':
-        return <span className="px-2 py-1 text-xs font-medium bg-red-100 text-red-800 rounded-full">Overdue</span>;
+        return <span className="px-2 py-1 text-xs font-medium bg-gray-100 text-gray-800 rounded-full">Overdue</span>;
       case 'draft':
         return <span className="px-2 py-1 text-xs font-medium bg-gray-100 text-gray-800 rounded-full">Draft</span>;
       default:
@@ -186,7 +186,7 @@ export default function AssignmentList({ activeTab }: AssignmentListProps) {
                       <Eye className="w-4 h-4" />
                       Review
                     </button>
-                    <button className="flex items-center gap-1 px-3 py-2 text-sm text-white bg-yellow-600 rounded-lg hover:bg-yellow-700 transition-colors">
+                    <button className="flex items-center gap-1 px-3 py-2 text-sm text-white bg-gray-600 rounded-lg hover:bg-gray-700 transition-colors">
                       <CheckCircle className="w-4 h-4" />
                       Grade
                     </button>
@@ -213,7 +213,7 @@ export default function AssignmentList({ activeTab }: AssignmentListProps) {
                       <Eye className="w-4 h-4" />
                       Edit
                     </button>
-                    <button className="flex items-center gap-1 px-3 py-2 text-sm text-white bg-yellow-600 rounded-lg hover:bg-yellow-700 transition-colors">
+                    <button className="flex items-center gap-1 px-3 py-2 text-sm text-white bg-gray-600 rounded-lg hover:bg-gray-700 transition-colors">
                       Publish
                     </button>
                   </>
@@ -223,13 +223,13 @@ export default function AssignmentList({ activeTab }: AssignmentListProps) {
 
             {/* Assignment Progress for submitted items */}
             {assignment.status === 'submitted' && (
-              <div className="mt-4 p-4 bg-blue-50 rounded-lg">
+              <div className="mt-4 p-4 bg-gray-50 rounded-lg">
                 <div className="flex items-center justify-between text-sm mb-2">
-                  <span className="text-blue-700 font-medium">Awaiting Review</span>
-                  <span className="text-blue-600">Priority: Normal</span>
+                  <span className="text-gray-700 font-medium">Awaiting Review</span>
+                  <span className="text-gray-600">Priority: Normal</span>
                 </div>
-                <div className="w-full bg-blue-200 rounded-full h-2">
-                  <div className="bg-blue-600 h-2 rounded-full w-1/3" />
+                <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div className="bg-gray-600 h-2 rounded-full w-1/3" />
                 </div>
               </div>
             )}

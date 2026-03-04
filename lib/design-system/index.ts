@@ -110,7 +110,7 @@ export const spacingClasses = {
   formSection: 'space-y-8',
   formElement: 'space-y-4',
   formLabel: 'block text-sm font-medium text-gray-700 mb-2',
-  formInput: 'w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent',
+  formInput: 'w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent',
 
   // Layout patterns
   mainContainer: 'max-w-fullmx-auto px-4 sm:px-6 lg:px-8',
@@ -118,8 +118,8 @@ export const spacingClasses = {
   cardContainer: 'bg-white rounded-lg shadow-sm border p-8',
 
   // Button patterns
-  primaryButton: 'w-full bg-yellow-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-yellow-700 transition-colors',
-  secondaryButton: 'w-full bg-white text-yellow-600 border border-yellow-600 py-3 px-4 rounded-lg font-medium hover:bg-yellow-50 transition-colors',
+  primaryButton: 'w-full bg-gray-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-gray-700 transition-colors',
+  secondaryButton: 'w-full bg-white text-gray-600 border border-gray-600 py-3 px-4 rounded-lg font-medium hover:bg-gray-50 transition-colors',
 
   // Navigation patterns
   navContainer: 'space-y-4',

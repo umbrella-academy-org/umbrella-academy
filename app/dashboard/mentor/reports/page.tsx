@@ -123,10 +123,10 @@ export default function MentorReportsPage() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'pending-review': return 'bg-yellow-100 text-yellow-800';
-      case 'approved': return 'bg-green-100 text-green-800';
-      case 'needs-revision': return 'bg-orange-100 text-orange-800';
-      case 'rejected': return 'bg-red-100 text-red-800';
+      case 'pending-review': return 'bg-gray-100 text-gray-800';
+      case 'approved': return 'bg-gray-100 text-gray-800';
+      case 'needs-revision': return 'bg-gray-100 text-gray-800';
+      case 'rejected': return 'bg-gray-100 text-gray-800';
       default: return 'bg-gray-100 text-gray-800';
     }
   };
@@ -223,7 +223,7 @@ export default function MentorReportsPage() {
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <button
                           onClick={() => handleViewReport(report.id)}
-                          className="text-blue-600 hover:text-blue-900 p-1 hover:bg-blue-50 rounded"
+                          className="text-gray-600 hover:text-gray-900 p-1 hover:bg-gray-50 rounded"
                           title="View Details"
                         >
                           <Eye className="w-4 h-4" />
@@ -300,24 +300,24 @@ export default function MentorReportsPage() {
                   {/* Student Performance */}
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-3">Student Performance</h3>
-                    <p className="text-gray-700 bg-green-50 p-4 rounded-lg border-l-4 border-green-400">{selectedReport.studentPerformance}</p>
+                    <p className="text-gray-700 bg-gray-50 p-4 rounded-lg border-l-4 border-gray-400">{selectedReport.studentPerformance}</p>
                   </div>
 
                   {/* Ratings */}
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-3">Ratings</h3>
                     <div className="grid grid-cols-3 gap-4">
-                      <div className="text-center p-3 bg-blue-50 rounded-lg">
-                        <div className="text-2xl font-bold text-blue-600">{selectedReport.ratings.progress}</div>
-                        <div className="text-xs text-blue-600">Progress</div>
+                      <div className="text-center p-3 bg-gray-50 rounded-lg">
+                        <div className="text-2xl font-bold text-gray-600">{selectedReport.ratings.progress}</div>
+                        <div className="text-xs text-gray-600">Progress</div>
                       </div>
-                      <div className="text-center p-3 bg-green-50 rounded-lg">
-                        <div className="text-2xl font-bold text-green-600">{selectedReport.ratings.attendance}</div>
-                        <div className="text-xs text-green-600">Attendance</div>
+                      <div className="text-center p-3 bg-gray-50 rounded-lg">
+                        <div className="text-2xl font-bold text-gray-600">{selectedReport.ratings.attendance}</div>
+                        <div className="text-xs text-gray-600">Attendance</div>
                       </div>
-                      <div className="text-center p-3 bg-purple-50 rounded-lg">
-                        <div className="text-2xl font-bold text-purple-600">{selectedReport.ratings.engagement}</div>
-                        <div className="text-xs text-purple-600">Engagement</div>
+                      <div className="text-center p-3 bg-gray-50 rounded-lg">
+                        <div className="text-2xl font-bold text-gray-600">{selectedReport.ratings.engagement}</div>
+                        <div className="text-xs text-gray-600">Engagement</div>
                       </div>
                     </div>
                   </div>
@@ -329,7 +329,7 @@ export default function MentorReportsPage() {
                   {selectedReport.challenges && (
                     <div>
                       <h3 className="font-semibold text-gray-900 mb-3">Challenges</h3>
-                      <p className="text-gray-700 bg-orange-50 p-4 rounded-lg border-l-4 border-orange-400">{selectedReport.challenges}</p>
+                      <p className="text-gray-700 bg-gray-50 p-4 rounded-lg border-l-4 border-gray-400">{selectedReport.challenges}</p>
                     </div>
                   )}
 
@@ -337,7 +337,7 @@ export default function MentorReportsPage() {
                   {selectedReport.recommendations && (
                     <div>
                       <h3 className="font-semibold text-gray-900 mb-3">Recommendations</h3>
-                      <p className="text-gray-700 bg-blue-50 p-4 rounded-lg border-l-4 border-blue-400">{selectedReport.recommendations}</p>
+                      <p className="text-gray-700 bg-gray-50 p-4 rounded-lg border-l-4 border-gray-400">{selectedReport.recommendations}</p>
                     </div>
                   )}
 
@@ -345,7 +345,7 @@ export default function MentorReportsPage() {
                   {selectedReport.nextSteps && (
                     <div>
                       <h3 className="font-semibold text-gray-900 mb-3">Next Steps</h3>
-                      <p className="text-gray-700 bg-purple-50 p-4 rounded-lg border-l-4 border-purple-400">{selectedReport.nextSteps}</p>
+                      <p className="text-gray-700 bg-gray-50 p-4 rounded-lg border-l-4 border-gray-400">{selectedReport.nextSteps}</p>
                     </div>
                   )}
 
@@ -353,7 +353,7 @@ export default function MentorReportsPage() {
                   {selectedReport.roadmapUpdates && (
                     <div>
                       <h3 className="font-semibold text-gray-900 mb-3">Roadmap Updates</h3>
-                      <p className="text-gray-700 bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-400">{selectedReport.roadmapUpdates}</p>
+                      <p className="text-gray-700 bg-gray-50 p-4 rounded-lg border-l-4 border-gray-400">{selectedReport.roadmapUpdates}</p>
                     </div>
                   )}
                 </div>
@@ -366,21 +366,21 @@ export default function MentorReportsPage() {
                 <>
                   <button
                     onClick={() => handleReportAction(selectedReport.id, 'request-revision')}
-                    className="flex items-center gap-2 px-4 py-2 text-orange-700 bg-orange-100 rounded-lg hover:bg-orange-200 transition-colors"
+                    className="flex items-center gap-2 px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
                   >
                     <FileText className="w-4 h-4" />
                     Request Revision
                   </button>
                   <button
                     onClick={() => handleReportAction(selectedReport.id, 'reject')}
-                    className="flex items-center gap-2 px-4 py-2 text-red-700 bg-red-100 rounded-lg hover:bg-red-200 transition-colors"
+                    className="flex items-center gap-2 px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
                   >
                     <XCircle className="w-4 h-4" />
                     Reject
                   </button>
                   <button
                     onClick={() => handleReportAction(selectedReport.id, 'approve')}
-                    className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+                    className="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
                   >
                     <CheckCircle className="w-4 h-4" />
                     Approve

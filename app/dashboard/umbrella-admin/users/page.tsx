@@ -146,11 +146,11 @@ export default function UmbrellaAdminUsersPage() {
 
   const getRoleBadge = (role: string) => {
     const colors = {
-      student: 'bg-blue-100 text-blue-800',
-      trainer: 'bg-green-100 text-green-800',
-      mentor: 'bg-purple-100 text-purple-800',
-      'field-admin': 'bg-yellow-100 text-yellow-800',
-      'umbrella-admin': 'bg-red-100 text-red-800'
+      student: 'bg-gray-100 text-gray-800',
+      trainer: 'bg-gray-100 text-gray-800',
+      mentor: 'bg-gray-100 text-gray-800',
+      'field-admin': 'bg-gray-100 text-gray-800',
+      'umbrella-admin': 'bg-gray-100 text-gray-800'
     };
     return colors[role as keyof typeof colors] || 'bg-gray-100 text-gray-800';
   };
@@ -172,7 +172,7 @@ export default function UmbrellaAdminUsersPage() {
                   <h1 className="text-2xl font-semibold text-gray-900 mb-2">User Management</h1>
                   <p className="text-gray-600">Manage all users across the system</p>
                 </div>
-                <button className="flex items-center gap-2 px-4 py-2 bg-yellow-600 text-white rounded-lg font-medium hover:bg-yellow-700 transition-colors">
+                <button className="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-lg font-medium hover:bg-gray-700 transition-colors">
                   <Plus className="w-4 h-4" />
                   Add User
                 </button>
@@ -187,7 +187,7 @@ export default function UmbrellaAdminUsersPage() {
                     <p className="text-sm font-medium text-gray-600">Total Users</p>
                     <p className="text-2xl font-bold text-gray-900">{totalUsers}</p>
                   </div>
-                  <Users className="w-8 h-8 text-blue-500" />
+                  <Users className="w-8 h-8 text-gray-500" />
                 </div>
               </div>
               <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
@@ -196,7 +196,7 @@ export default function UmbrellaAdminUsersPage() {
                     <p className="text-sm font-medium text-gray-600">Active Users</p>
                     <p className="text-2xl font-bold text-gray-900">{activeUsers}</p>
                   </div>
-                  <UserCheck className="w-8 h-8 text-green-500" />
+                  <UserCheck className="w-8 h-8 text-gray-500" />
                 </div>
               </div>
               <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
@@ -205,7 +205,7 @@ export default function UmbrellaAdminUsersPage() {
                     <p className="text-sm font-medium text-gray-600">Students</p>
                     <p className="text-2xl font-bold text-gray-900">{students.length}</p>
                   </div>
-                  <GraduationCap className="w-8 h-8 text-purple-500" />
+                  <GraduationCap className="w-8 h-8 text-gray-500" />
                 </div>
               </div>
               <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
@@ -214,7 +214,7 @@ export default function UmbrellaAdminUsersPage() {
                     <p className="text-sm font-medium text-gray-600">Staff</p>
                     <p className="text-2xl font-bold text-gray-900">{trainers.length + mentors.length + admins.length}</p>
                   </div>
-                  <Shield className="w-8 h-8 text-yellow-500" />
+                  <Shield className="w-8 h-8 text-gray-500" />
                 </div>
               </div>
             </div>
@@ -231,7 +231,7 @@ export default function UmbrellaAdminUsersPage() {
                   key={tab.key}
                   onClick={() => setSelectedTab(tab.key as any)}
                   className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${selectedTab === tab.key
-                    ? 'border-yellow-600 text-yellow-600'
+                    ? 'border-gray-600 text-gray-600'
                     : 'border-transparent text-gray-500 hover:text-gray-700'
                     }`}
                 >

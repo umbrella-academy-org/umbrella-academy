@@ -120,16 +120,16 @@ export default function TrainerCalendarGrid({
         <div
           key={day}
           onClick={() => onDateSelect(new Date(currentDate.getFullYear(), currentDate.getMonth(), day))}
-          className={`min-h-[120px] p-2 border border-gray-200 cursor-pointer transition-all duration-200 hover:bg-gray-50 ${isSelected ? 'bg-yellow-50 border-yellow-300' : 'bg-white'
-            } ${isToday ? 'ring-2 ring-blue-500' : ''}`}
+          className={`min-h-[120px] p-2 border border-gray-200 cursor-pointer transition-all duration-200 hover:bg-gray-50 ${isSelected ? 'bg-gray-50 border-gray-300' : 'bg-white'
+            } ${isToday ? 'ring-2 ring-gray-500' : ''}`}
         >
           <div className="flex items-center justify-between mb-2">
-            <span className={`text-sm font-medium ${isToday ? 'text-blue-600' : isSelected ? 'text-yellow-600' : 'text-gray-900'
+            <span className={`text-sm font-medium ${isToday ? 'text-gray-600' : isSelected ? 'text-gray-600' : 'text-gray-900'
               }`}>
               {day}
             </span>
             {daySessions.length > 0 && (
-              <button className="p-1 text-gray-400 hover:text-yellow-600 transition-colors">
+              <button className="p-1 text-gray-400 hover:text-gray-600 transition-colors">
                 <Plus className="w-3 h-3" />
               </button>
             )}
@@ -141,10 +141,10 @@ export default function TrainerCalendarGrid({
               <div
                 key={session.id}
                 className={`text-xs p-1.5 rounded text-white truncate ${session.status === 'confirmed'
-                  ? 'bg-green-500'
+                  ? 'bg-gray-500'
                   : session.status === 'pending'
-                    ? 'bg-yellow-500'
-                    : 'bg-red-500'
+                    ? 'bg-gray-500'
+                    : 'bg-gray-500'
                   }`}
               >
                 <div className="flex items-center gap-1">
@@ -221,7 +221,7 @@ export default function TrainerCalendarGrid({
             ))}
           </div>
 
-          <button className="px-3 py-2 bg-yellow-600 text-white text-sm font-medium rounded-lg hover:bg-yellow-700 transition-all duration-200 interactive-button">
+          <button className="px-3 py-2 bg-gray-600 text-white text-sm font-medium rounded-lg hover:bg-gray-700 transition-all duration-200 interactive-button">
             <Plus className="w-4 h-4 mr-1" />
             Add Session
           </button>
@@ -249,15 +249,15 @@ export default function TrainerCalendarGrid({
       <div className="flex items-center justify-between p-4 border-t border-gray-200 bg-gray-50">
         <div className="flex items-center gap-4 text-sm">
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 bg-green-500 rounded"></div>
+            <div className="w-3 h-3 bg-gray-500 rounded"></div>
             <span className="text-gray-600">Confirmed</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 bg-yellow-500 rounded"></div>
+            <div className="w-3 h-3 bg-gray-500 rounded"></div>
             <span className="text-gray-600">Pending</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 bg-red-500 rounded"></div>
+            <div className="w-3 h-3 bg-gray-500 rounded"></div>
             <span className="text-gray-600">Cancelled</span>
           </div>
         </div>

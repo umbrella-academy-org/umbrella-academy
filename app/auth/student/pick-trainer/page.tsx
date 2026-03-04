@@ -171,7 +171,7 @@ export default function PickTrainerPage() {
     return (
       <div className="flex items-center gap-1">
         {[...Array(5)].map((_, i) => (
-          <Star key={i} className={`w-3 h-3 ${i < Math.floor(rating) ? 'text-yellow-400 fill-current' : 'text-gray-200'}`} />
+          <Star key={i} className={`w-3 h-3 ${i < Math.floor(rating) ? 'text-gray-400 fill-current' : 'text-gray-200'}`} />
         ))}
       </div>
     );
@@ -194,7 +194,7 @@ export default function PickTrainerPage() {
 
           <div className="flex flex-col items-center justify-center flex-1">
             <div className="mb-8">
-              <div className="w-16 h-16 bg-yellow-600 rounded-2xl flex items-center justify-center shadow-lg shadow-yellow-600/20">
+              <div className="w-16 h-16 bg-gray-600 rounded-2xl flex items-center justify-center shadow-lg shadow-gray-600/20">
                 <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" />
                 </svg>
@@ -217,11 +217,11 @@ export default function PickTrainerPage() {
                   <div
                     key={trainer.id}
                     className={`flex items-start gap-4 p-4 border rounded-lg transition-all ${selectedTrainer === trainer.id
-                      ? 'border-yellow-600 bg-yellow-50'
+                      ? 'border-black bg-gray-50'
                       : 'border-gray-200 bg-white hover:border-gray-300'
                       }`}
                   >
-                    <div className={`w-14 h-14 rounded-full flex items-center justify-center text-white font-semibold flex-shrink-0 ${selectedTrainer === trainer.id ? 'bg-yellow-600' : 'bg-gradient-to-br from-gray-300 to-gray-400'
+                    <div className={`w-14 h-14 rounded-full flex items-center justify-center text-white font-semibold flex-shrink-0 ${selectedTrainer === trainer.id ? 'bg-gray-600' : 'bg-gradient-to-br from-gray-300 to-gray-400'
                       }`}>
                       {trainer.avatar}
                     </div>
@@ -275,7 +275,7 @@ export default function PickTrainerPage() {
                             type="button"
                             onClick={() => setSelectedTrainer(trainer.id)}
                             className={`px-3 py-1 text-xs rounded transition-colors ${selectedTrainer === trainer.id
-                              ? 'bg-yellow-600 text-white'
+                              ? 'bg-black text-white'
                               : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
                               }`}
                           >
@@ -284,7 +284,7 @@ export default function PickTrainerPage() {
                           <button
                             type="button"
                             onClick={() => handleViewProfile(trainer)}
-                            className="flex items-center gap-1 px-3 py-1 text-xs text-blue-600 hover:text-blue-700 border border-blue-200 rounded hover:border-blue-300 transition-colors"
+                            className="flex items-center gap-1 px-3 py-1 text-xs text-gray-600 hover:text-gray-700 border border-gray-200 rounded hover:border-gray-300 transition-colors"
                           >
                             <Eye className="w-3 h-3" />
                             View Profile
@@ -297,7 +297,7 @@ export default function PickTrainerPage() {
                     </div>
 
                     {selectedTrainer === trainer.id && (
-                      <CheckCircle className="w-5 h-5 text-yellow-600" />
+                      <CheckCircle className="w-5 h-5 text-gray-600" />
                     )}
                   </div>
                 ))}
@@ -308,7 +308,7 @@ export default function PickTrainerPage() {
                     <button
                       type="button"
                       onClick={() => router.push('/auth/student/availability')}
-                      className="text-yellow-600 font-medium text-sm mt-2"
+                      className="text-gray-600 font-medium text-sm mt-2"
                     >
                       Update your availability
                     </button>
@@ -316,11 +316,11 @@ export default function PickTrainerPage() {
                 )}
               </div>
 
-              {error && <p className="mb-4 text-xs font-medium text-red-500 text-center">{error}</p>}
+              {error && <p className="mb-4 text-xs font-medium text-gray-500 text-center">{error}</p>}
 
               <button
                 type="submit"
-                className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-colors"
+                className="w-full bg-black text-white py-3 rounded-lg font-medium hover:bg-gray-900 transition-colors"
                 disabled={filteredTrainers.length === 0}
               >
                 Continue to Payment
@@ -328,7 +328,7 @@ export default function PickTrainerPage() {
 
               <div className="flex justify-center gap-2 pt-6">
                 {[1, 2, 3, 4, 5, 6, 7].map((i) => (
-                  <div key={i} className={`h-2 rounded-full transition-all ${i === 6 ? 'w-8 bg-yellow-600' : 'w-2 bg-gray-300'}`}></div>
+                  <div key={i} className={`h-2 rounded-full transition-all ${i === 6 ? 'w-8 bg-gray-600' : 'w-2 bg-gray-300'}`}></div>
                 ))}
               </div>
             </form>
@@ -370,7 +370,7 @@ export default function PickTrainerPage() {
             <div className="p-6">
               {/* Trainer Header */}
               <div className="flex items-start gap-4 mb-6">
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-semibold text-lg">
+                <div className="w-16 h-16 bg-gradient-to-br from-gray-500 to-gray-600 rounded-full flex items-center justify-center text-white font-semibold text-lg">
                   {viewingProfile.avatar}
                 </div>
                 <div className="flex-1">
@@ -429,7 +429,7 @@ export default function PickTrainerPage() {
                 <h4 className="font-semibold text-gray-900 mb-2">Specialties</h4>
                 <div className="flex flex-wrap gap-2">
                   {viewingProfile.specialties.map((specialty, index) => (
-                    <span key={index} className="px-3 py-1 bg-blue-100 text-blue-700 text-sm rounded-full">
+                    <span key={index} className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">
                       {specialty}
                     </span>
                   ))}
@@ -454,7 +454,7 @@ export default function PickTrainerPage() {
                 <h4 className="font-semibold text-gray-900 mb-2">Certifications</h4>
                 <div className="flex flex-wrap gap-2">
                   {viewingProfile.certifications.map((cert, index) => (
-                    <span key={index} className="px-3 py-1 bg-green-100 text-green-700 text-sm rounded-full">
+                    <span key={index} className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">
                       {cert}
                     </span>
                   ))}
@@ -482,7 +482,7 @@ export default function PickTrainerPage() {
                       <div className="font-medium text-gray-900 text-sm mb-1">{slot.day}</div>
                       <div className="flex flex-wrap gap-1">
                         {slot.times.map((time, timeIndex) => (
-                          <span key={timeIndex} className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded">
+                          <span key={timeIndex} className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">
                             {time}
                           </span>
                         ))}
@@ -499,7 +499,7 @@ export default function PickTrainerPage() {
                     setSelectedTrainer(viewingProfile.id);
                     handleCloseProfile();
                   }}
-                  className="flex-1 bg-yellow-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-yellow-700 transition-colors"
+                  className="flex-1 bg-black text-white py-2 px-4 rounded-lg font-medium hover:bg-gray-900 transition-colors"
                 >
                   Select This Trainer
                 </button>

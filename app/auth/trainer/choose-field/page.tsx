@@ -85,7 +85,7 @@ export default function ChooseFieldPage() {
         return (
             <div className="flex items-center gap-1">
                 {[...Array(5)].map((_, i) => (
-                    <svg key={i} className={`w-3 h-3 ${i < Math.floor(rating) ? 'text-yellow-400' : 'text-gray-200'}`} fill="currentColor" viewBox="0 0 20 20">
+                    <svg key={i} className={`w-3 h-3 ${i < Math.floor(rating) ? 'text-gray-400' : 'text-gray-200'}`} fill="currentColor" viewBox="0 0 20 20">
                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                     </svg>
                 ))}
@@ -112,7 +112,7 @@ export default function ChooseFieldPage() {
                     <div className="flex flex-col items-center justify-center flex-1">
                         {/* Logo */}
                         <div className="mb-8">
-                            <div className="w-16 h-16 bg-yellow-600 rounded-2xl flex items-center justify-center shadow-lg shadow-yellow-600/20">
+                            <div className="w-16 h-16 bg-gray-600 rounded-2xl flex items-center justify-center shadow-lg shadow-gray-600/20">
                                 <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" />
                                 </svg>
@@ -134,12 +134,12 @@ export default function ChooseFieldPage() {
                                     <div
                                         key={field.id}
                                         className={`flex items-start gap-4 p-4 border rounded-lg cursor-pointer transition-all ${selectedField === field.id
-                                            ? 'border-yellow-600 bg-yellow-50'
+                                            ? 'border-black bg-gray-50'
                                             : 'border-gray-200 bg-white hover:border-gray-300'
                                             }`}
                                         onClick={() => handleFieldSelect(field.id)}
                                     >
-                                        <div className={`w-12 h-12 rounded-lg flex items-center justify-center text-xl shadow-sm transition-colors ${selectedField === field.id ? 'bg-yellow-600 text-white' : 'bg-gray-50'
+                                        <div className={`w-12 h-12 rounded-lg flex items-center justify-center text-xl shadow-sm transition-colors ${selectedField === field.id ? 'bg-black text-white' : 'bg-gray-50'
                                             }`}>
                                             {field.icon}
                                         </div>
@@ -154,22 +154,22 @@ export default function ChooseFieldPage() {
 
                                             <div className="flex items-center gap-2 mt-2">
                                                 {renderStars(field.rating)}
-                                                <span className="text-[10px] font-medium text-yellow-600  ">Top Field</span>
+                                                <span className="text-[10px] font-medium text-gray-600  ">Top Field</span>
                                             </div>
                                         </div>
 
                                         {selectedField === field.id && (
-                                            <CheckCircle className="w-5 h-5 text-yellow-600" />
+                                            <CheckCircle className="w-5 h-5 text-gray-600" />
                                         )}
                                     </div>
                                 ))}
                             </div>
 
-                            {error && <p className="mb-4 text-xs font-medium text-red-500 text-center">{error}</p>}
+                            {error && <p className="mb-4 text-xs font-medium text-gray-500 text-center">{error}</p>}
 
                             <button
                                 type="submit"
-                                className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-all active:scale-95"
+                                className="w-full bg-black text-white py-3 rounded-lg font-medium hover:bg-gray-900 transition-all active:scale-95"
                             >
                                 Continue
                             </button>
@@ -177,7 +177,7 @@ export default function ChooseFieldPage() {
                             {/* Progress dots */}
                             <div className="flex justify-center gap-2 pt-6">
                                 {[1, 2, 3, 4, 5, 6, 7].map((i) => (
-                                    <div key={i} className={`h-2 rounded-full transition-all ${i === 5 ? 'w-8 bg-yellow-600' : 'w-2 bg-gray-300'}`}></div>
+                                    <div key={i} className={`h-2 rounded-full transition-all ${i === 5 ? 'w-8 bg-gray-600' : 'w-2 bg-gray-300'}`}></div>
                                 ))}
                             </div>
                         </form>

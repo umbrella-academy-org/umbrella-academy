@@ -23,12 +23,12 @@ export default function FormInput({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-black placeholder:text-gray-400 ${
-          error ? 'border-red-500' : 'border-gray-300'
+        className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-black placeholder:text-gray-400 ${
+          error ? 'border-gray-500' : 'border-gray-300'
         }`}
         required={required}
       />
-      {error && <p className="mt-2 text-sm text-red-500">{error}</p>}
+      {error && <p className="mt-2 text-sm text-gray-500">{error}</p>}
     </div>
   );
 }

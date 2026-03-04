@@ -48,7 +48,7 @@ export default function TrainerStatsCards({
       icon: <Users className="w-5 h-5 lg:w-6 lg:h-6" />,
       title: 'Active Students',
       value: studentsCount,
-      color: 'text-blue-600',
+      color: 'text-gray-600',
       trend: studentsCount > 0 ? `+${Math.min(studentsCount, 2)} this month` : 'No students yet',
       trendDirection: studentsCount > 0 ? 'up' : 'down',
       subtitle: 'Currently enrolled'
@@ -57,7 +57,7 @@ export default function TrainerStatsCards({
       icon: <CheckCircle className="w-5 h-5 lg:w-6 lg:h-6" />,
       title: 'Active Roadmaps',
       value: activeRoadmaps,
-      color: 'text-green-600',
+      color: 'text-gray-600',
       trend: activeRoadmaps > 0 ? `${activeRoadmaps} in progress` : 'No active roadmaps',
       trendDirection: activeRoadmaps > 0 ? 'up' : 'down',
       subtitle: 'Student roadmaps'
@@ -66,7 +66,7 @@ export default function TrainerStatsCards({
       icon: <DollarSign className="w-5 h-5 lg:w-6 lg:h-6" />,
       title: 'Wallet Balance',
       value: walletBalance.toLocaleString(),
-      color: 'text-yellow-600',
+      color: 'text-gray-600',
       trend: monthlyEarnings > 0 ? `+${monthlyEarnings.toLocaleString()} earned` : 'No earnings yet',
       trendDirection: monthlyEarnings > 0 ? 'up' : 'down',
       subtitle: 'RWF available'
@@ -75,7 +75,7 @@ export default function TrainerStatsCards({
       icon: <Star className="w-5 h-5 lg:w-6 lg:h-6" />,
       title: 'Average Rating',
       value: averageRating.toFixed(1),
-      color: 'text-purple-600',
+      color: 'text-gray-600',
       trend: `${totalRatings} reviews`,
       trendDirection: 'up',
       subtitle: 'Student feedback'
@@ -84,7 +84,7 @@ export default function TrainerStatsCards({
       icon: <Bell className="w-5 h-5 lg:w-6 lg:h-6" />,
       title: 'Completed Sessions',
       value: completedSessions + 18, // Add mock completed sessions
-      color: 'text-indigo-600',
+      color: 'text-gray-600',
       trend: completedSessions > 0 ? `+${completedSessions} recent` : 'No recent sessions',
       trendDirection: completedSessions > 0 ? 'up' : 'down',
       subtitle: 'Total sessions done'
@@ -112,8 +112,8 @@ export default function TrainerStatsCards({
               {stat.trend && (
                 <span className={`text-xs font-medium px-2 py-1 rounded-full ${
                   stat.trendDirection === 'up' 
-                    ? 'text-green-700 bg-green-100' 
-                    : 'text-red-700 bg-red-100'
+                    ? 'text-gray-700 bg-gray-100' 
+                    : 'text-gray-700 bg-gray-100'
                 } transition-all duration-300 ${
                   hoveredCard === index ? 'animate-pulse scale-105' : ''
                 }`}>

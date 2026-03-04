@@ -42,7 +42,7 @@ export default function RenewSubscriptionPage() {
             <div className="mt-4 lg:mt-6 mb-4 lg:mb-6">
               <a
                 href="/post-signup/subscription"
-                className="bg-yellow-600 text-white px-3 lg:px-4 py-2 rounded-lg font-medium hover:bg-yellow-700 transition-colors inline-block text-sm lg:text-base"
+                className="bg-gray-600 text-white px-3 lg:px-4 py-2 rounded-lg font-medium hover:bg-gray-700 transition-colors inline-block text-sm lg:text-base"
               >
                 ← Back
               </a>

@@ -53,7 +53,7 @@ export default function ActivityDetails({ selectedActivity }: ActivityDetailsPro
   return (
     <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100 h-fit">
       <div className="flex items-center gap-3 mb-6">
-        <div className="w-10 h-10 bg-orange-400 rounded-full flex items-center justify-center">
+        <div className="w-10 h-10 bg-gray-400 rounded-full flex items-center justify-center">
           <span className="text-white text-sm font-medium">PB</span>
         </div>
         <div>
@@ -70,8 +70,8 @@ export default function ActivityDetails({ selectedActivity }: ActivityDetailsPro
       <div className="border border-gray-200 rounded-lg p-4 mb-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
-              <FileText className="w-5 h-5 text-red-600" />
+            <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center">
+              <FileText className="w-5 h-5 text-gray-600" />
             </div>
             <div>
               <h4 className="text-sm font-medium text-gray-900">{details.file.name}</h4>
@@ -88,7 +88,7 @@ export default function ActivityDetails({ selectedActivity }: ActivityDetailsPro
           <span className="text-gray-400">→</span>
         </button>
         
-        <button className="w-full bg-yellow-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-yellow-700 transition-colors flex items-center justify-center gap-2">
+        <button className="w-full bg-gray-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-gray-700 transition-colors flex items-center justify-center gap-2">
           <Download className="w-4 h-4" />
           Download
         </button>

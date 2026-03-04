@@ -21,8 +21,8 @@ export default function FormSelect({
         id={id}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white text-black ${
-          error ? 'border-red-500' : 'border-gray-300'
+        className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent appearance-none bg-white text-black ${
+          error ? 'border-gray-500' : 'border-gray-300'
         }`}
         required={required}
       >
@@ -33,7 +33,7 @@ export default function FormSelect({
           </option>
         ))}
       </select>
-      {error && <p className="mt-2 text-sm text-red-500">{error}</p>}
+      {error && <p className="mt-2 text-sm text-gray-500">{error}</p>}
     </div>
   );
 }

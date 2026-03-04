@@ -5,28 +5,28 @@ import { Users, Clock, Star, BookOpen } from 'lucide-react';
 export default function EarningsStats() {
   const stats = [
     {
-      icon: <Users className="w-5 h-5 text-blue-600" />,
+      icon: <Users className="w-5 h-5 text-gray-600" />,
       label: 'Active Students',
       value: '24',
       change: '+3 this month',
       changeType: 'positive'
     },
     {
-      icon: <Clock className="w-5 h-5 text-green-600" />,
+      icon: <Clock className="w-5 h-5 text-gray-600" />,
       label: 'Hours Taught',
       value: '156',
       change: '+12 this month',
       changeType: 'positive'
     },
     {
-      icon: <Star className="w-5 h-5 text-yellow-600" />,
+      icon: <Star className="w-5 h-5 text-gray-600" />,
       label: 'Avg Rating',
       value: '4.8',
       change: '+0.2 this month',
       changeType: 'positive'
     },
     {
-      icon: <BookOpen className="w-5 h-5 text-purple-600" />,
+      icon: <BookOpen className="w-5 h-5 text-gray-600" />,
       label: 'Sessions',
       value: '89',
       change: '+7 this month',
@@ -46,7 +46,7 @@ export default function EarningsStats() {
               <span className="text-sm font-medium text-gray-700">{stat.label}</span>
             </div>
             <div className="text-2xl font-bold text-gray-900 mb-1">{stat.value}</div>
-            <div className={`text-xs ${stat.changeType === 'positive' ? 'text-green-600' : 'text-red-600'}`}>
+            <div className={`text-xs ${stat.changeType === 'positive' ? 'text-gray-600' : 'text-gray-600'}`}>
               {stat.change}
             </div>
           </div>

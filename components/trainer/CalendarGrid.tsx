@@ -137,9 +137,9 @@ export default function CalendarGrid({ selectedDate, onDateSelect }: CalendarGri
                   onClick={() => onDateSelect(date)}
                   className={`w-full h-full p-2 rounded-lg text-left transition-all duration-200 hover:bg-gray-50 ${
                     isSelected(date)
-                      ? 'bg-yellow-600 text-white'
+                      ? 'bg-gray-600 text-white'
                       : isToday(date)
-                        ? 'bg-yellow-100 text-yellow-800'
+                        ? 'bg-gray-100 text-gray-800'
                         : 'text-gray-900'
                   }`}
                 >
@@ -151,10 +151,10 @@ export default function CalendarGrid({ selectedDate, onDateSelect }: CalendarGri
                           key={session.id}
                           className={`text-xs p-1 rounded ${
                             isSelected(date)
-                              ? 'bg-yellow-700 text-yellow-100'
+                              ? 'bg-gray-700 text-gray-100'
                               : session.type === 'live'
-                                ? 'bg-green-100 text-green-800'
-                                : 'bg-blue-100 text-blue-800'
+                                ? 'bg-gray-100 text-gray-800'
+                                : 'bg-gray-100 text-gray-800'
                           }`}
                         >
                           <div className="font-medium truncate">{session.title}</div>
@@ -165,7 +165,7 @@ export default function CalendarGrid({ selectedDate, onDateSelect }: CalendarGri
                         </div>
                       ))}
                       {getSessionsForDate(date).length > 2 && (
-                        <div className={`text-xs ${isSelected(date) ? 'text-yellow-200' : 'text-gray-600'}`}>
+                        <div className={`text-xs ${isSelected(date) ? 'text-gray-200' : 'text-gray-600'}`}>
                           +{getSessionsForDate(date).length - 2} more
                         </div>
                       )}
@@ -210,12 +210,12 @@ export default function CalendarGrid({ selectedDate, onDateSelect }: CalendarGri
                   <div className="flex items-center gap-2">
                     <span className={`px-2 py-1 text-xs font-medium rounded-full ${
                       session.type === 'live' 
-                        ? 'bg-green-100 text-green-800' 
-                        : 'bg-blue-100 text-blue-800'
+                        ? 'bg-gray-100 text-gray-800' 
+                        : 'bg-gray-100 text-gray-800'
                     }`}>
                       {session.type}
                     </span>
-                    <button className="text-yellow-600 hover:text-yellow-700 text-sm font-medium">
+                    <button className="text-gray-600 hover:text-gray-700 text-sm font-medium">
                       Edit
                     </button>
                   </div>
@@ -226,7 +226,7 @@ export default function CalendarGrid({ selectedDate, onDateSelect }: CalendarGri
             <div className="text-center py-8 text-gray-500">
               <Calendar className="w-12 h-12 mx-auto mb-3 text-gray-300" />
               <p>No sessions scheduled for this date</p>
-              <button className="mt-2 text-yellow-600 hover:text-yellow-700 text-sm font-medium">
+              <button className="mt-2 text-gray-600 hover:text-gray-700 text-sm font-medium">
                 Schedule a session
               </button>
             </div>

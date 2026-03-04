@@ -107,15 +107,15 @@ export default function BillingInvoices() {
               <tr key={invoice.id} className="border-b border-gray-100 hover:bg-gray-50">
                 <td className="py-4 px-4">
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-red-100 rounded flex items-center justify-center flex-shrink-0">
-                      <FileText className="w-4 h-4 text-red-600" />
+                    <div className="w-8 h-8 bg-gray-100 rounded flex items-center justify-center flex-shrink-0">
+                      <FileText className="w-4 h-4 text-gray-600" />
                     </div>
                     <span className="text-sm text-gray-900">{invoice.number}</span>
                   </div>
                 </td>
                 <td className="py-4 px-4 text-sm text-gray-600">{invoice.billingDate}</td>
                 <td className="py-4 px-4">
-                  <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                  <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
                     ✓ {invoice.status}
                   </span>
                 </td>
@@ -127,7 +127,7 @@ export default function BillingInvoices() {
                   </div>
                 </td>
                 <td className="py-4 px-4">
-                  <button className="text-sm text-yellow-600 hover:text-yellow-700 font-medium">
+                  <button className="text-sm text-gray-600 hover:text-gray-700 font-medium">
                     Download
                   </button>
                 </td>

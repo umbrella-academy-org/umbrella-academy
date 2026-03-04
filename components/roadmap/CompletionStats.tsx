@@ -28,8 +28,8 @@ export default function CompletionStats() {
       value: progress.completedPhases,
       total: progress.totalPhases,
       suffix: 'phases',
-      color: 'text-green-600',
-      bgColor: 'bg-green-100'
+      color: 'text-gray-600',
+      bgColor: 'bg-gray-100'
     },
     {
       icon: Target,
@@ -37,8 +37,8 @@ export default function CompletionStats() {
       value: progress.totalPhases - progress.completedPhases - (progress.totalPhases - progress.completedPhases - 1),
       total: progress.totalPhases,
       suffix: 'phase',
-      color: 'text-blue-600',
-      bgColor: 'bg-blue-100'
+      color: 'text-gray-600',
+      bgColor: 'bg-gray-100'
     },
     {
       icon: Clock,
@@ -46,8 +46,8 @@ export default function CompletionStats() {
       value: weeksEnrolled,
       total: roadmap.estimatedDuration,
       suffix: 'weeks',
-      color: 'text-purple-600',
-      bgColor: 'bg-purple-100'
+      color: 'text-gray-600',
+      bgColor: 'bg-gray-100'
     },
     {
       icon: Trophy,
@@ -55,8 +55,8 @@ export default function CompletionStats() {
       value: progress.completedSessions,
       total: progress.totalSessions,
       suffix: 'sessions',
-      color: 'text-yellow-600',
-      bgColor: 'bg-yellow-100'
+      color: 'text-gray-600',
+      bgColor: 'bg-gray-100'
     }
   ];
 
@@ -70,7 +70,7 @@ export default function CompletionStats() {
         </div>
         <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
           <div 
-            className="bg-yellow-600 h-2 rounded-full transition-all duration-500"
+            className="bg-gray-600 h-2 rounded-full transition-all duration-500"
             style={{ width: `${progress.overallProgress}%` }}
           ></div>
         </div>

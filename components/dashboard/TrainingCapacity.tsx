@@ -37,16 +37,16 @@ export default function TrainingCapacity({ assignedStudents, maxCapacity, weekly
     >
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-3">
-          <div className={`p-2 bg-blue-100 rounded-lg transition-all duration-300 ${
+          <div className={`p-2 bg-gray-100 rounded-lg transition-all duration-300 ${
             isHovered ? 'scale-110 animate-pulse-glow' : ''
           }`}>
-            <Users className={`w-5 h-5 text-blue-600 transition-all duration-300 ${
+            <Users className={`w-5 h-5 text-gray-600 transition-all duration-300 ${
               isHovered ? 'scale-110' : ''
             }`} />
           </div>
           <div>
             <h3 className={`text-sm sm:text-base font-semibold text-gray-900 transition-colors duration-200 ${
-              isHovered ? 'text-blue-600' : ''
+              isHovered ? 'text-gray-600' : ''
             }`}>
               Training Capacity
             </h3>
@@ -54,7 +54,7 @@ export default function TrainingCapacity({ assignedStudents, maxCapacity, weekly
           </div>
         </div>
         <ChevronRight className={`w-4 h-4 text-gray-400 transition-all duration-200 ${
-          isHovered ? 'translate-x-1 text-blue-600' : ''
+          isHovered ? 'translate-x-1 text-gray-600' : ''
         }`} />
       </div>
 
@@ -62,7 +62,7 @@ export default function TrainingCapacity({ assignedStudents, maxCapacity, weekly
       <div className="grid grid-cols-2 gap-4 mb-4">
         <div className="text-center p-3 bg-gray-50 rounded-lg">
           <div className={`text-xl font-bold text-gray-900 transition-all duration-300 ${
-            isHovered ? 'scale-110 text-blue-600' : ''
+            isHovered ? 'scale-110 text-gray-600' : ''
           }`}>
             {assignedStudents}/{maxCapacity}
           </div>
@@ -70,7 +70,7 @@ export default function TrainingCapacity({ assignedStudents, maxCapacity, weekly
         </div>
         <div className="text-center p-3 bg-gray-50 rounded-lg">
           <div className={`text-xl font-bold text-gray-900 transition-all duration-300 ${
-            isHovered ? 'scale-110 text-green-600' : ''
+            isHovered ? 'scale-110 text-gray-600' : ''
           }`}>
             {utilizationRate}%
           </div>
@@ -94,10 +94,10 @@ export default function TrainingCapacity({ assignedStudents, maxCapacity, weekly
                   <div 
                     className={`h-2 rounded-full transition-all duration-1000 ease-out ${
                       day.sessions === day.capacity 
-                        ? 'bg-gradient-to-r from-red-500 to-red-600' 
+                        ? 'bg-gradient-to-r from-gray-500 to-gray-600' 
                         : day.sessions > day.capacity * 0.7
-                          ? 'bg-gradient-to-r from-yellow-500 to-yellow-600'
-                          : 'bg-gradient-to-r from-green-500 to-green-600'
+                          ? 'bg-gradient-to-r from-gray-500 to-gray-600'
+                          : 'bg-gradient-to-r from-gray-500 to-gray-600'
                     }`}
                     style={{ 
                       width: `${(day.sessions / day.capacity) * 100}%`,
@@ -117,11 +117,11 @@ export default function TrainingCapacity({ assignedStudents, maxCapacity, weekly
       {/* Quick Stats */}
       <div className="flex items-center justify-between text-xs text-gray-600 mb-4">
         <div className="flex items-center gap-1">
-          <TrendingUp className="w-3 h-3 text-green-500" />
+          <TrendingUp className="w-3 h-3 text-gray-500" />
           <span>+{weeklyGrowth} students vs last week</span>
         </div>
         <div className="flex items-center gap-1">
-          <Clock className="w-3 h-3 text-blue-500" />
+          <Clock className="w-3 h-3 text-gray-500" />
           <span>Avg: {averageSessionsPerDay} sessions/day</span>
         </div>
       </div>
@@ -131,7 +131,7 @@ export default function TrainingCapacity({ assignedStudents, maxCapacity, weekly
         <button className="flex-1 px-3 py-2 border border-gray-300 text-gray-700 text-xs font-medium rounded-lg hover:bg-gray-50 transition-all duration-200 interactive-button">
           View Schedule
         </button>
-        <button className="flex-1 px-3 py-2 bg-blue-600 text-white text-xs font-medium rounded-lg hover:bg-blue-700 transition-all duration-200 interactive-button transform hover:scale-105 focus:ring-2 focus:ring-blue-300">
+        <button className="flex-1 px-3 py-2 bg-gray-600 text-white text-xs font-medium rounded-lg hover:bg-gray-700 transition-all duration-200 interactive-button transform hover:scale-105 focus:ring-2 focus:ring-gray-300">
           Add Session
         </button>
       </div>
@@ -141,15 +141,15 @@ export default function TrainingCapacity({ assignedStudents, maxCapacity, weekly
         <div className="flex items-center justify-between text-xs">
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-1">
-              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+              <div className="w-2 h-2 bg-gray-500 rounded-full"></div>
               <span className="text-gray-600">Available</span>
             </div>
             <div className="flex items-center gap-1">
-              <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+              <div className="w-2 h-2 bg-gray-500 rounded-full"></div>
               <span className="text-gray-600">Busy</span>
             </div>
             <div className="flex items-center gap-1">
-              <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+              <div className="w-2 h-2 bg-gray-500 rounded-full"></div>
               <span className="text-gray-600">Full</span>
             </div>
           </div>
