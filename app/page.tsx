@@ -90,7 +90,7 @@ export default function Home() {
                 {hero.badge.icon === 'sparkles' && <Sparkles className="h-4 w-4 text-gray-700" />}
                 <span className="text-sm font-medium text-gray-800">{hero.badge.text}</span>
               </div>
-              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl text-balance leading-tight text-amber-600">
+              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl text-balance leading-tight text-black-600">
                 {hero.title}
               </h1>
               <p className="mt-6 text-lg sm:text-xl text-gray-600 text-balance leading-relaxed">

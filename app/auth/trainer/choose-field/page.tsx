@@ -134,12 +134,12 @@ export default function ChooseFieldPage() {
                                     <div
                                         key={field.id}
                                         className={`flex items-start gap-4 p-4 border rounded-lg cursor-pointer transition-all ${selectedField === field.id
-                                            ? 'border-gray-600 bg-gray-50'
+                                            ? 'border-black bg-gray-50'
                                             : 'border-gray-200 bg-white hover:border-gray-300'
                                             }`}
                                         onClick={() => handleFieldSelect(field.id)}
                                     >
-                                        <div className={`w-12 h-12 rounded-lg flex items-center justify-center text-xl shadow-sm transition-colors ${selectedField === field.id ? 'bg-gray-600 text-white' : 'bg-gray-50'
+                                        <div className={`w-12 h-12 rounded-lg flex items-center justify-center text-xl shadow-sm transition-colors ${selectedField === field.id ? 'bg-black text-white' : 'bg-gray-50'
                                             }`}>
                                             {field.icon}
                                         </div>
@@ -169,7 +169,7 @@ export default function ChooseFieldPage() {
 
                             <button
                                 type="submit"
-                                className="w-full bg-gray-600 text-white py-3 rounded-lg font-medium hover:bg-gray-700 transition-all active:scale-95"
+                                className="w-full bg-black text-white py-3 rounded-lg font-medium hover:bg-gray-900 transition-all active:scale-95"
                             >
                                 Continue
                             </button>

@@ -40,9 +40,15 @@ export default function CreatePasswordPage() {
     
     // Route based on user type
     const userType = typeof window !== 'undefined' ? localStorage.getItem('userType') : null;
+    
     if (userType === 'trainer') {
       router.push('/auth/trainer/profile');
+    } else if (userType === 'mentor') {
+      router.push('/auth/mentor/profile');
+    } else if (userType === 'student') {
+      router.push('/auth/student/education-level');
     } else {
+      // Default to student if no userType is set
       router.push('/auth/student/education-level');
     }
   };
@@ -213,7 +219,7 @@ export default function CreatePasswordPage() {
 
               <button
                 type="submit"
-                className="w-full bg-gray-600 text-white py-3 rounded-lg font-medium hover:bg-gray-700 transition-colors"
+                className="w-full bg-black text-white py-3 rounded-lg font-medium hover:bg-gray-900 transition-colors"
               >
                 Continue
               </button>

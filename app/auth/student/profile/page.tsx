@@ -54,6 +54,9 @@ export default function ProfilePage() {
     }
     
     console.log('Profile data:', formData);
+    // Store user type and email for verification
+    localStorage.setItem('userType', 'student');
+    localStorage.setItem('signupEmail', formData.email);
     router.push('/auth/verify');
   };
 
@@ -228,7 +231,7 @@ export default function ProfilePage() {
 
               <button
                 type="submit"
-                className="w-full bg-gray-600 text-white py-3 rounded-lg font-medium hover:bg-gray-700 transition-colors"
+                className="w-full bg-black text-white py-3 rounded-lg font-medium hover:bg-gray-900 transition-colors"
               >
                 Continue
               </button>

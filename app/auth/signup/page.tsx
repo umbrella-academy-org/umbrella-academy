@@ -28,8 +28,11 @@ export default function SignupPage() {
           {/* Role Selection */}
           <div className="w-full space-y-4">
             <button
-              onClick={() => router.push('/auth/student/profile')}
-              className="w-full p-6 border-2 border-gray-200 rounded-lg hover:border-gray-600 hover:bg-gray-50 transition-colors text-left"
+              onClick={() => {
+                localStorage.setItem('userType', 'student')
+                router.push('/auth/student/profile')
+              }}
+              className="w-full p-6 border-2 border-gray-200 rounded-lg hover:border-black hover:bg-gray-50 transition-colors text-left"
             >
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
@@ -45,8 +48,11 @@ export default function SignupPage() {
             </button>
 
             <button
-              onClick={() => router.push('/auth/trainer/signup')}
-              className="w-full p-6 border-2 border-gray-200 rounded-lg hover:border-gray-600 hover:bg-gray-50 transition-colors text-left"
+              onClick={() => {
+                localStorage.setItem('userType', 'trainer')
+                router.push('/auth/trainer/signup')
+              }}
+              className="w-full p-6 border-2 border-gray-200 rounded-lg hover:border-black hover:bg-gray-50 transition-colors text-left"
             >
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">

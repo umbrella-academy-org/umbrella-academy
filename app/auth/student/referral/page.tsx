@@ -3,19 +3,19 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Share2, CheckCircle } from 'lucide-react';
+import { Youtube, Twitter, Linkedin, Instagram, Users, Globe, CheckCircle } from 'lucide-react';
 
 export default function ReferralPage() {
   const router = useRouter();
   const [selectedSource, setSelectedSource] = useState<string[]>([]);
 
   const sources = [
-    'YouTube',
-    'X (Formerly Twitter)',
-    'LinkedIn',
-    'Instagram',
-    'Friend or Colleague',
-    'Elsewhere',
+    { value: 'YouTube', icon: Youtube },
+    { value: 'X (Formerly Twitter)', icon: Twitter },
+    { value: 'LinkedIn', icon: Linkedin },
+    { value: 'Instagram', icon: Instagram },
+    { value: 'Friend or Colleague', icon: Users },
+    { value: 'Elsewhere', icon: Globe },
   ];
 
   const handleContinue = (e: React.FormEvent) => {
@@ -25,8 +25,8 @@ export default function ReferralPage() {
       return;
     }
     console.log('Selected source:', selectedSource);
-    // Navigate to availabilityr page
-    router.push('/auth/student/choose-field');
+    // Navigate to choose-company page
+    router.push('/auth/student/choose-company');
   };
 
   return (
@@ -66,36 +66,39 @@ export default function ReferralPage() {
             {/* Form */}
             <form onSubmit={handleContinue} className="w-full space-y-3">
               {/* Source options */}
-              {sources.map((source, index) => (
-                <label
-                  key={index}
-                  className={`flex items-center gap-4 p-4 border rounded-lg cursor-pointer transition-all ${selectedSource.includes(source)
-                    ? 'border-gray-600 bg-gray-50'
-                    : 'border-gray-200 bg-white hover:border-gray-300'
-                    }`}
-                >
-                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${selectedSource.includes(source) ? 'bg-gray-600 text-white' : 'bg-gray-100 text-gray-400'
-                    }`}>
-                    <Share2 className="w-4 h-4" />
-                  </div>
-                  <span className={`flex-1 text-sm font-medium ${selectedSource.includes(source) ? 'text-gray-900' : 'text-gray-600'}`}>{source}</span>
-                  <input
-                    type="radio"
-                    name="source"
-                    value={source}
-                    checked={selectedSource.includes(source)}
-                    onChange={(e) => setSelectedSource((prev) => [...prev, e.target.value])}
-                    className="hidden"
-                  />
-                  {selectedSource.includes(source) && (
-                    <CheckCircle className="w-5 h-5 text-gray-600" />
-                  )}
-                </label>
-              ))}
+              {sources.map((source, index) => {
+                const Icon = source.icon;
+                return (
+                  <label
+                    key={index}
+                    className={`flex items-center gap-4 p-4 border rounded-lg cursor-pointer transition-all ${selectedSource.includes(source.value)
+                      ? 'border-black bg-gray-50'
+                      : 'border-gray-200 bg-white hover:border-gray-300'
+                      }`}
+                  >
+                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${selectedSource.includes(source.value) ? 'bg-black text-white' : 'bg-gray-100 text-gray-400'
+                      }`}>
+                      <Icon className="w-4 h-4" />
+                    </div>
+                    <span className={`flex-1 text-sm font-medium ${selectedSource.includes(source.value) ? 'text-gray-900' : 'text-gray-600'}`}>{source.value}</span>
+                    <input
+                      type="radio"
+                      name="source"
+                      value={source.value}
+                      checked={selectedSource.includes(source.value)}
+                      onChange={(e) => setSelectedSource((prev) => [...prev, e.target.value])}
+                      className="hidden"
+                    />
+                    {selectedSource.includes(source.value) && (
+                      <CheckCircle className="w-5 h-5 text-black" />
+                    )}
+                  </label>
+                );
+              })}
 
               <button
                 type="submit"
-                className="w-full bg-gray-600 text-white py-3 rounded-lg font-medium hover:bg-gray-700 transition-all mt-6"
+                className="w-full bg-black text-white py-3 rounded-lg font-medium hover:bg-gray-900 transition-all mt-6"
               >
                 Continue
               </button>
@@ -103,7 +106,7 @@ export default function ReferralPage() {
               {/* Progress dots */}
               <div className="flex justify-center gap-2 pt-4">
                 {[1, 2, 3, 4, 5, 6, 7].map((i) => (
-                  <div key={i} className={`h-2 rounded-full transition-all ${i === 4 ? 'w-8 bg-gray-600' : 'w-2 bg-gray-300'}`}></div>
+                  <div key={i} className={`h-2 rounded-full transition-all ${i === 4 ? 'w-8 bg-black' : 'w-2 bg-gray-300'}`}></div>
                 ))}
               </div>
             </form>

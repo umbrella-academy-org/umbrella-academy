@@ -79,7 +79,7 @@ export default function MentorAvailabilityPage() {
                                             type="button"
                                             onClick={() => setHoursPerDay(h)}
                                             className={`py-3 rounded-lg text-sm font-medium transition-all border ${hoursPerDay === h
-                                                ? 'border-gray-600 bg-gray-50 text-gray-600'
+                                                ? 'border-black bg-gray-50 text-gray-600'
                                                 : 'border-gray-300 bg-white text-gray-600 hover:border-gray-400'
                                                 }`}
                                         >
@@ -101,11 +101,11 @@ export default function MentorAvailabilityPage() {
                                             type="button"
                                             onClick={() => toggleSlot(slot.id)}
                                             className={`w-full flex items-center gap-4 p-4 border rounded-lg transition-all ${timeSlots.includes(slot.id)
-                                                ? 'border-gray-600 bg-gray-50'
+                                                ? 'border-black bg-gray-50'
                                                 : 'border-gray-300 bg-white hover:border-gray-400'
                                                 }`}
                                         >
-                                            <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-colors ${timeSlots.includes(slot.id) ? 'bg-gray-600 text-white' : 'bg-gray-100 text-gray-400'
+                                            <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-colors ${timeSlots.includes(slot.id) ? 'bg-black text-white' : 'bg-gray-100 text-gray-400'
                                                 }`}>
                                                 <Clock className="w-5 h-5" />
                                             </div>
@@ -126,7 +126,7 @@ export default function MentorAvailabilityPage() {
 
                             <button
                                 type="submit"
-                                className="w-full bg-gray-600 text-white py-3 rounded-lg font-medium hover:bg-gray-700 transition-colors"
+                                className="w-full bg-black text-white py-3 rounded-lg font-medium hover:bg-gray-900 transition-colors"
                             >
                                 Continue
                             </button>

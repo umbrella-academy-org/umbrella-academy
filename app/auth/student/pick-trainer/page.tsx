@@ -217,7 +217,7 @@ export default function PickTrainerPage() {
                   <div
                     key={trainer.id}
                     className={`flex items-start gap-4 p-4 border rounded-lg transition-all ${selectedTrainer === trainer.id
-                      ? 'border-gray-600 bg-gray-50'
+                      ? 'border-black bg-gray-50'
                       : 'border-gray-200 bg-white hover:border-gray-300'
                       }`}
                   >
@@ -275,7 +275,7 @@ export default function PickTrainerPage() {
                             type="button"
                             onClick={() => setSelectedTrainer(trainer.id)}
                             className={`px-3 py-1 text-xs rounded transition-colors ${selectedTrainer === trainer.id
-                              ? 'bg-gray-600 text-white'
+                              ? 'bg-black text-white'
                               : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
                               }`}
                           >
@@ -320,7 +320,7 @@ export default function PickTrainerPage() {
 
               <button
                 type="submit"
-                className="w-full bg-gray-600 text-white py-3 rounded-lg font-medium hover:bg-gray-700 transition-colors"
+                className="w-full bg-black text-white py-3 rounded-lg font-medium hover:bg-gray-900 transition-colors"
                 disabled={filteredTrainers.length === 0}
               >
                 Continue to Payment
@@ -499,7 +499,7 @@ export default function PickTrainerPage() {
                     setSelectedTrainer(viewingProfile.id);
                     handleCloseProfile();
                   }}
-                  className="flex-1 bg-gray-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-gray-700 transition-colors"
+                  className="flex-1 bg-black text-white py-2 px-4 rounded-lg font-medium hover:bg-gray-900 transition-colors"
                 >
                   Select This Trainer
                 </button>
