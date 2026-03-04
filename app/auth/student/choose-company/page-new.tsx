@@ -14,7 +14,7 @@ const fieldIcons: Record<string, any> = {
   'cyber-resilience': Shield,
 };
 
-export default function TrainerChooseCompanyPage() {
+export default function ChooseCompanyPage() {
   const router = useRouter();
   const [selectedCompanyId, setSelectedCompanyId] = useState('');
   const [selectedFieldId, setSelectedFieldId] = useState('');
@@ -38,7 +38,7 @@ export default function TrainerChooseCompanyPage() {
     console.log('Selected field:', selectedFieldId);
     localStorage.setItem('selectedCompany', selectedCompanyId);
     localStorage.setItem('selectedField', selectedFieldId);
-    router.push('/auth/trainer/referral');
+    router.push('/auth/student/payment');
   };
 
   // Group companies by field
@@ -50,7 +50,7 @@ export default function TrainerChooseCompanyPage() {
   return (
     <div className="flex h-screen bg-white">
       {/* Left side - Form */}
-      <div className="flex flex-2 flex-col justify-between p-8 bg-white overflow-y-auto">
+      <div className="flex flex-[2] flex-col justify-between p-8 bg-white overflow-y-auto">
         <div className="flex flex-col flex-1 max-w-2xl mx-auto w-full">
           {/* Go back button */}
           <button
@@ -78,7 +78,7 @@ export default function TrainerChooseCompanyPage() {
               Choose Your Training Path
             </h1>
             <p className="text-gray-500 mb-10 text-center text-sm px-4">
-              Select a company and specialized field where you'll provide training.
+              Select a company and specialized field where you'll complete your industry training.
             </p>
 
             {/* Form */}
@@ -113,7 +113,7 @@ export default function TrainerChooseCompanyPage() {
                             onClick={() => handleCompanySelect(company.id, field.id)}
                           >
                             {/* Company Image */}
-                            <div className={`relative w-16 h-16 rounded-lg overflow-hidden shrink-0 ${
+                            <div className={`relative w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 ${
                               isSelected ? 'ring-2 ring-black' : ''
                             }`}>
                               <Image
@@ -145,7 +145,7 @@ export default function TrainerChooseCompanyPage() {
 
                             {/* Selection Indicator */}
                             {isSelected && (
-                              <CheckCircle className="w-5 h-5 text-black shrink-0" />
+                              <CheckCircle className="w-5 h-5 text-black flex-shrink-0" />
                             )}
                           </div>
                         );
@@ -155,21 +155,23 @@ export default function TrainerChooseCompanyPage() {
                 })}
               </div>
 
-              {error && <p className="mb-4 text-xs font-medium text-gray-500 text-center">{error}</p>}
+              {error && <p className="mb-4 text-xs font-medium text-gray-600 text-center">{error}</p>}
 
               <button
                 type="submit"
                 disabled={!selectedCompanyId || !selectedFieldId}
                 className="w-full bg-black text-white py-3 rounded-lg font-medium hover:bg-gray-900 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Continue
+                Continue to Payment
               </button>
 
               {/* Progress dots */}
               <div className="flex justify-center gap-2 pt-6">
-                {[1, 2, 3, 4, 5, 6, 7].map((i) => (
-                  <div key={i} className={`h-2 rounded-full transition-all ${i === 5 ? 'w-8 bg-black' : 'w-2 bg-gray-300'}`}></div>
-                ))}
+                <div className="w-2 h-2 bg-black/30 rounded-full"></div>
+                <div className="w-8 h-2 bg-black rounded-full"></div>
+                <div className="w-12 h-2 bg-black rounded-full shadow-lg"></div>
+                <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
+                <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
               </div>
             </form>
           </div>
@@ -182,7 +184,7 @@ export default function TrainerChooseCompanyPage() {
       </div>
 
       {/* Right side - Image */}
-      <div className="hidden lg:block flex-1 relative overflow-hidden">
+      <div className="hidden lg:block flex-[1] relative overflow-hidden">
         <Image
           src="/auth/login/image.png"
           alt="Training environment"
