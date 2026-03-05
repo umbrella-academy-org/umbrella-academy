@@ -87,4 +87,15 @@ export interface Company {
     includes: string[];
   };
   whyChoose?: string[];
+  courses?: Course[];
+}
+
+export interface Course {
+  id: string;
+  name: string;
+  price: number;
+  duration: string;
+  level: 'Beginner' | 'Intermediate' | 'Advanced';
+  image: string;
+  description: string;
 }
