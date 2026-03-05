@@ -19,7 +19,6 @@ export const mockCompanies: Company[] = [
         ],
         images: [
             '/real/dreamizelogo.jpeg',
-
         ],
         description: 'Our mission is to provide high-quality, hands-on technology education tailored to each student’s goals and pace.',
         fieldId: 'software-engineering',
@@ -60,6 +59,44 @@ export const mockCompanies: Company[] = [
         whyChoose: [
             'High-Quality Mentorship – Each student is assigned mentors and trainers',
             'Career-Oriented – Roadmaps are designed to prepare students for industry opportunities'
+        ],
+        courses: [
+            {
+                id: 'course-dreamize-1',
+                name: 'Embedded Systems & Robotics',
+                price: 299,
+                duration: '12 weeks',
+                level: 'Intermediate',
+                image: '/real/dashboard1.jpeg',
+                description: 'Master embedded systems programming and robotics development'
+            },
+            {
+                id: 'course-dreamize-2',
+                name: 'Full-Stack Web Development',
+                price: 299,
+                duration: '12 weeks',
+                level: 'Beginner',
+                image: '/real/dashboard1.jpeg',
+                description: 'Learn modern web development from frontend to backend'
+            },
+            {
+                id: 'course-dreamize-3',
+                name: 'Cybersecurity',
+                price: 349,
+                duration: '16 weeks',
+                level: 'Advanced',
+                image: '/real/dashboard1.jpeg',
+                description: 'Advanced cybersecurity practices and ethical hacking'
+            },
+            {
+                id: 'course-dreamize-4',
+                name: 'Machine Learning & AI',
+                price: 399,
+                duration: '16 weeks',
+                level: 'Advanced',
+                image: '/real/dashboard1.jpeg',
+                description: 'Deep dive into ML algorithms and AI applications'
+            }
         ]
     },
     {
@@ -126,6 +163,35 @@ export const mockCompanies: Company[] = [
             'Portfolio Development – Graduate with industry-ready projects and showreels',
             'Career Opportunities – Build connections with production companies and creative agencies',
             'Small Class Sizes – Filmmaking: 10 students per shift, Design & Photography: 6 students per shift'
+        ],
+        courses: [
+            {
+                id: 'course-greenland-1',
+                name: 'Professional Filmmaking',
+                price: 300,
+                duration: '3 months',
+                level: 'Beginner',
+                image: '/real/greenlandlogo.jpeg',
+                description: 'Complete filmmaking from pre-production to post-production'
+            },
+            {
+                id: 'course-greenland-2',
+                name: 'Videography',
+                price: 250,
+                duration: '2 months',
+                level: 'Intermediate',
+                image: '/real/greenlandlogo.jpeg',
+                description: 'Professional video production and cinematography'
+            },
+            {
+                id: 'course-greenland-3',
+                name: 'Graphic Design & Photography',
+                price: 200,
+                duration: '3 months',
+                level: 'Beginner',
+                image: '/real/greenlandlogo.jpeg',
+                description: 'Master design principles and photography techniques'
+            }
         ]
     },
 

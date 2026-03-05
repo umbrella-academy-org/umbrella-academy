@@ -38,7 +38,7 @@ export default function ChooseCompanyPage() {
     console.log('Selected field:', selectedFieldId);
     localStorage.setItem('selectedCompany', selectedCompanyId);
     localStorage.setItem('selectedField', selectedFieldId);
-    router.push('/auth/student/payment');
+    router.push('/auth/student/choose-course');
   };
 
   // Group companies by field
@@ -322,7 +322,7 @@ export default function ChooseCompanyPage() {
                 disabled={!selectedCompanyId || !selectedFieldId}
                 className="w-full bg-black text-white py-3 rounded-lg font-medium hover:bg-gray-900 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Continue to Payment
+                Continue to Courses
               </button>
 
               {/* Progress dots */}
