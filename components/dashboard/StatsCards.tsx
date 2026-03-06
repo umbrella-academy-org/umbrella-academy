@@ -42,7 +42,7 @@ export default function StatsCards() {
       icon: <BarChart3 className="w-5 h-5 lg:w-6 lg:h-6" />,
       title: 'Roadmap Progress',
       value: `${Math.round(overallProgress)}%`,
-      color: 'text-yellow-600',
+      color: 'text-gray-600',
       trend: overallProgress > 50 ? '+Good' : 'Start',
       trendDirection: overallProgress > 50 ? 'up' : 'down'
     },
@@ -50,7 +50,7 @@ export default function StatsCards() {
       icon: <User className="w-5 h-5 lg:w-6 lg:h-6" />,
       title: 'Phases Complete',
       value: `${completedPhases}/${totalPhases}`,
-      color: 'text-yellow-600',
+      color: 'text-gray-600',
       trend: phaseCompletionRate > 0 ? `${phaseCompletionRate}%` : '0%',
       trendDirection: phaseCompletionRate > 50 ? 'up' : 'down'
     },
@@ -58,7 +58,7 @@ export default function StatsCards() {
       icon: <Calendar className="w-5 h-5 lg:w-6 lg:h-6" />,
       title: 'Sessions Done',
       value: `${completedSessions}/${totalSessions}`,
-      color: 'text-yellow-600',
+      color: 'text-gray-600',
       trend: sessionCompletionRate > 0 ? `${sessionCompletionRate}%` : '0%',
       trendDirection: sessionCompletionRate > 50 ? 'up' : 'down'
     },
@@ -66,7 +66,7 @@ export default function StatsCards() {
       icon: <Video className="w-5 h-5 lg:w-6 lg:h-6" />,
       title: 'Hours Completed',
       value: `${completedHours}/${totalHours}h`,
-      color: 'text-yellow-600',
+      color: 'text-gray-600',
       trend: hoursCompletionRate > 0 ? `${hoursCompletionRate}%` : '0%',
       trendDirection: hoursCompletionRate > 80 ? 'up' : 'down'
     }
@@ -79,25 +79,25 @@ export default function StatsCards() {
         icon: <BarChart3 className="w-5 h-5 lg:w-6 lg:h-6" />,
         title: 'Roadmap Progress',
         value: '0%',
-        color: 'text-yellow-400'
+        color: 'text-gray-400'
       },
       {
         icon: <User className="w-5 h-5 lg:w-6 lg:h-6" />,
         title: 'Phases Complete',
         value: '0/0',
-        color: 'text-yellow-400'
+        color: 'text-gray-400'
       },
       {
         icon: <Calendar className="w-5 h-5 lg:w-6 lg:h-6" />,
         title: 'Sessions Done',
         value: '0/0',
-        color: 'text-yellow-400'
+        color: 'text-gray-400'
       },
       {
         icon: <Video className="w-5 h-5 lg:w-6 lg:h-6" />,
         title: 'Hours Completed',
         value: '0/0h',
-        color: 'text-yellow-400'
+        color: 'text-gray-400'
       }
     ];
 
@@ -106,7 +106,7 @@ export default function StatsCards() {
         {placeholderStats.map((stat, index) => (
           <div 
             key={index} 
-            className="bg-white rounded-lg p-3 lg:p-4 shadow-sm border border-yellow-100"
+            className="bg-white rounded-lg p-3 lg:p-4 shadow-sm border border-gray-100"
           >
             <div className="flex items-center justify-between">
               <div className="flex-1">
@@ -118,7 +118,7 @@ export default function StatsCards() {
                 </p>
                 <p className="text-xs text-gray-400 mt-1">No active roadmap</p>
               </div>
-              <div className="p-1.5 lg:p-2 rounded-lg bg-yellow-50 text-gray-400">
+              <div className="p-1.5 lg:p-2 rounded-lg bg-gray-50 text-gray-400">
                 {stat.icon}
               </div>
             </div>
@@ -133,7 +133,7 @@ export default function StatsCards() {
       {stats.map((stat, index) => (
         <div 
           key={index} 
-          className="bg-white rounded-lg p-3 lg:p-4 shadow-sm border border-yellow-100  cursor-pointer group animate-slide-up"
+          className="bg-white rounded-lg p-3 lg:p-4 shadow-sm border border-gray-100  cursor-pointer group animate-slide-up"
           style={{ animationDelay: `${index * 100}ms` }}
           onMouseEnter={() => setHoveredCard(index)}
           onMouseLeave={() => setHoveredCard(null)}
@@ -158,7 +158,7 @@ export default function StatsCards() {
                 )}
               </div>
             </div>
-            <div className={`p-1.5 lg:p-2 rounded-lg bg-yellow-50 ${stat.color} group-hover:scale-110 transition-all duration-300 ${
+            <div className={`p-1.5 lg:p-2 rounded-lg bg-gray-50 ${stat.color} group-hover:scale-110 transition-all duration-300 ${
               hoveredCard === index ? 'animate-bounce-subtle' : ''
             }`}>
               {stat.icon}
@@ -166,7 +166,7 @@ export default function StatsCards() {
           </div>
           
           {/* Progress bar animation */}
-          <div className="mt-3 w-full bg-yellow-100 rounded-full h-1 overflow-hidden">
+          <div className="mt-3 w-full bg-gray-200 rounded-full h-1 overflow-hidden">
             <div 
               className={`h-1 rounded-full transition-all duration-1000 ease-out ${
                 stat.color.replace('text-', 'bg-')
