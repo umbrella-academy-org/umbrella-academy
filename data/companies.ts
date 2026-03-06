@@ -64,7 +64,7 @@ export const mockCompanies: Company[] = [
             {
                 id: 'course-dreamize-1',
                 name: 'Embedded Systems & Robotics',
-                price: 299,
+                price: 100000,
                 duration: '12 weeks',
                 level: 'Intermediate',
                 image: '/real/dashboard1.jpeg',
@@ -73,7 +73,7 @@ export const mockCompanies: Company[] = [
             {
                 id: 'course-dreamize-2',
                 name: 'Full-Stack Web Development',
-                price: 299,
+                price: 100000,
                 duration: '12 weeks',
                 level: 'Beginner',
                 image: '/real/dashboard1.jpeg',
@@ -82,7 +82,7 @@ export const mockCompanies: Company[] = [
             {
                 id: 'course-dreamize-3',
                 name: 'Cybersecurity',
-                price: 349,
+                price: 100000,
                 duration: '16 weeks',
                 level: 'Advanced',
                 image: '/real/dashboard1.jpeg',
@@ -91,7 +91,7 @@ export const mockCompanies: Company[] = [
             {
                 id: 'course-dreamize-4',
                 name: 'Machine Learning & AI',
-                price: 399,
+                price: 100000,
                 duration: '16 weeks',
                 level: 'Advanced',
                 image: '/real/dashboard1.jpeg',
@@ -168,7 +168,7 @@ export const mockCompanies: Company[] = [
             {
                 id: 'course-greenland-1',
                 name: 'Professional Filmmaking',
-                price: 300,
+                price: 300000,
                 duration: '3 months',
                 level: 'Beginner',
                 image: '/real/greenlandlogo.jpeg',
@@ -177,7 +177,7 @@ export const mockCompanies: Company[] = [
             {
                 id: 'course-greenland-2',
                 name: 'Videography',
-                price: 250,
+                price: 250000,
                 duration: '2 months',
                 level: 'Intermediate',
                 image: '/real/greenlandlogo.jpeg',
@@ -186,11 +186,22 @@ export const mockCompanies: Company[] = [
             {
                 id: 'course-greenland-3',
                 name: 'Graphic Design & Photography',
-                price: 200,
+                price: 200000,
                 duration: '3 months',
                 level: 'Beginner',
                 image: '/real/greenlandlogo.jpeg',
                 description: 'Master design principles and photography techniques'
+            },
+            {
+
+                id: 'course-greenland-4',
+                name: 'Digital Photography',
+                price: 200000,
+                duration: '3 months',
+                level: 'Beginner',
+                image: '/real/greenlandlogo.jpeg',
+                description: 'Master design principles and photography techniques'
+         
             }
         ]
     },
