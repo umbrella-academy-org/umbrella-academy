@@ -38,7 +38,7 @@ export default function TrainerProfilePage() {
                     <div className="max-w-full mx-auto animate-fade-in">
                         {/* Profile Header Card */}
                         <div className="bg-white rounded-lg border border-gray-100 shadow-xl shadow-gray-200/50 overflow-hidden mb-8 ">
-                            <div className="h-48 bg-gradient-to-br from-gray-500 to-gray-600 relative overflow-hidden">
+                            <div className="h-48 bg-linear-to-br from-gray-500 to-gray-600 relative overflow-hidden">
                                 {/* Decorative Abstract Shapes */}
                                 <div className="absolute top-0 left-0 w-full h-full opacity-20">
                                     <div className="absolute -top-24 -left-24 w-64 h-64 bg-white rounded-full blur-3xl" />
@@ -50,11 +50,11 @@ export default function TrainerProfilePage() {
                                 <div className="flex flex-col md:flex-row md:items-end -mt-16 gap-8">
                                     <div className="relative group">
                                         <div className="w-32 h-32 rounded-full bg-white p-1.5 shadow-2xl shadow-gray-200/50 transform group-hover:scale-105 transition-all duration-500">
-                                            <div className="w-full h-full bg-gradient-to-br from-gray-50 to-gray-100 rounded-full flex items-center justify-center text-gray-700 text-4xl font-extrabold border border-gray-200   er">
+                                            <div className="w-full h-full bg-linear-to-br from-gray-50 to-gray-100 rounded-full flex items-center justify-center text-gray-700 text-4xl font-extrabold border border-gray-200   er">
                                                 {profileData.name.split(' ').map(n => n[0]).join('')}
                                             </div>
                                         </div>
-                                        <div className="absolute -bottom-1 -right-1 w-10 h-10 bg-gray-500 border-4 border-white rounded-full flex items-center justify-center" title="Verified Trainer">
+                                        <div className="absolute -bottom-1 -right-1 w-10 h-10 bg-yellow-600 border-4 border-white rounded-full flex items-center justify-center" title="Verified Trainer">
                                             <Check className="w-5 h-5 text-white" />
                                         </div>
                                     </div>
@@ -123,7 +123,7 @@ export default function TrainerProfilePage() {
                                                     type="text"
                                                     value={profileData.name}
                                                     onChange={(e) => setProfileData({ ...profileData, name: e.target.value })}
-                                                    className="w-full px-5 py-3.5 bg-gray-50 border-gray-100 rounded-lg focus:ring-4 focus:ring-gray-500/10 focus:border-gray-500 outline-none transition-all font-medium"
+                                                    className="w-full px-5 py-3.5 bg-gray-50 border-gray-100 rounded-lg focus:ring-4 focus:ring-yellow-600/10 focus:border-gray-500 outline-none transition-all font-medium"
                                                 />
                                             ) : (
                                                 <div className="px-5 py-3.5 bg-gray-50/50 border border-transparent rounded-lg">
@@ -138,7 +138,7 @@ export default function TrainerProfilePage() {
                                                     type="email"
                                                     value={profileData.email}
                                                     onChange={(e) => setProfileData({ ...profileData, email: e.target.value })}
-                                                    className="w-full px-5 py-3.5 bg-gray-50 border-gray-100 rounded-lg focus:ring-4 focus:ring-gray-500/10 focus:border-gray-500 outline-none transition-all font-medium"
+                                                    className="w-full px-5 py-3.5 bg-gray-50 border-gray-100 rounded-lg focus:ring-4 focus:ring-yellow-600/10 focus:border-gray-500 outline-none transition-all font-medium"
                                                 />
                                             ) : (
                                                 <div className="px-5 py-3.5 bg-gray-50/50 border border-transparent rounded-lg flex items-center justify-between">
@@ -154,7 +154,7 @@ export default function TrainerProfilePage() {
                                                     type="text"
                                                     value={profileData.phone}
                                                     onChange={(e) => setProfileData({ ...profileData, phone: e.target.value })}
-                                                    className="w-full px-5 py-3.5 bg-gray-50 border-gray-100 rounded-lg focus:ring-4 focus:ring-gray-500/10 focus:border-gray-500 outline-none transition-all font-medium"
+                                                    className="w-full px-5 py-3.5 bg-gray-50 border-gray-100 rounded-lg focus:ring-4 focus:ring-yellow-600/10 focus:border-gray-500 outline-none transition-all font-medium"
                                                 />
                                             ) : (
                                                 <div className="px-5 py-3.5 bg-gray-50/50 border border-transparent rounded-lg flex items-center justify-between">
@@ -170,7 +170,7 @@ export default function TrainerProfilePage() {
                                                     type="text"
                                                     value={profileData.location}
                                                     onChange={(e) => setProfileData({ ...profileData, location: e.target.value })}
-                                                    className="w-full px-5 py-3.5 bg-gray-50 border-gray-100 rounded-lg focus:ring-4 focus:ring-gray-500/10 focus:border-gray-500 outline-none transition-all font-medium"
+                                                    className="w-full px-5 py-3.5 bg-gray-50 border-gray-100 rounded-lg focus:ring-4 focus:ring-yellow-600/10 focus:border-gray-500 outline-none transition-all font-medium"
                                                 />
                                             ) : (
                                                 <div className="px-5 py-3.5 bg-gray-50/50 border border-transparent rounded-lg flex items-center justify-between">
@@ -187,7 +187,7 @@ export default function TrainerProfilePage() {
                                                 value={profileData.bio}
                                                 onChange={(e) => setProfileData({ ...profileData, bio: e.target.value })}
                                                 rows={4}
-                                                className="w-full px-5 py-4 bg-gray-50 border-gray-100 rounded-lg focus:ring-4 focus:ring-gray-500/10 focus:border-gray-500 outline-none transition-all font-medium resize-none leading-relaxed"
+                                                className="w-full px-5 py-4 bg-gray-50 border-gray-100 rounded-lg focus:ring-4 focus:ring-yellow-600/10 focus:border-gray-500 outline-none transition-all font-medium resize-none leading-relaxed"
                                             />
                                         ) : (
                                             <div className="p-6 bg-gray-50/50 rounded-lg border border-transparent">
@@ -282,13 +282,13 @@ export default function TrainerProfilePage() {
 
                                 <div className="bg-black rounded-lg p-8 text-white relative overflow-hidden group">
                                     <div className="relative z-10 text-center">
-                                        <div className="inline-flex items-center gap-2 px-3 py-1 bg-gray-500/20 text-gray-400 rounded-full text-[10px] font-semibold  mb-4 ">
+                                        <div className="inline-flex items-center gap-2 px-3 py-1 bg-yellow-600/10 text-yellow-700 rounded-full text-[10px] font-semibold  mb-4 ">
                                             <Shield className="w-3 h-3" />
                                             Identity Verified
                                         </div>
                                         <h3 className="text-xl font-semibold mb-2">Trainer Badge</h3>
                                         <p className="text-gray-400 text-xs font-medium mb-6 leading-relaxed">Your professional credentials have been fully verified by the Academy board.</p>
-                                        <div className="w-16 h-16 bg-gradient-to-br from-gray-400 to-gray-600 rounded-lg mx-auto flex items-center justify-center shadow-lg shadow-gray-600/20 transform group-hover:rotate-12 transition-transform duration-500">
+                                        <div className="w-16 h-16 bg-linear-to-br from-gray-400 to-gray-600 rounded-lg mx-auto flex items-center justify-center shadow-lg shadow-gray-600/20 transform group-hover:rotate-12 transition-transform duration-500">
                                             <Check className="w-8 h-8 text-white" />
                                         </div>
                                     </div>

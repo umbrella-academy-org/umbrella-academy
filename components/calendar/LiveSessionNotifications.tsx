@@ -32,20 +32,20 @@ export default function LiveSessionNotifications() {
     switch (status) {
       case 'info':
         return (
-          <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
-            <Monitor className="w-5 h-5 text-gray-600" />
+          <div className="w-10 h-10 bg-yellow-50 rounded-lg flex items-center justify-center shrink-0">
+            <Monitor className="w-5 h-5 text-yellow-600" />
           </div>
         );
       case 'warning':
         return (
-          <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
-            <Video className="w-5 h-5 text-gray-600" />
+          <div className="w-10 h-10 bg-yellow-50 rounded-lg flex items-center justify-center shrink-0">
+            <Video className="w-5 h-5 text-yellow-600" />
           </div>
         );
       default:
         return (
-          <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
-            <Monitor className="w-5 h-5 text-gray-600" />
+          <div className="w-10 h-10 bg-yellow-50 rounded-lg flex items-center justify-center shrink-0">
+            <Monitor className="w-5 h-5 text-yellow-600" />
           </div>
         );
     }
@@ -77,7 +77,7 @@ export default function LiveSessionNotifications() {
                 </div>
               </div>
             </div>
-            
+
             <div className="flex items-center gap-2 ml-3">
               <div className="text-right">
                 <div className="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded-full flex items-center gap-1">

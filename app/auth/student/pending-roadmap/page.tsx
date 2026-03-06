@@ -37,15 +37,15 @@ export default function StudentRoadmapPendingPage() {
                         <h3 className="text-sm font-semibold text-gray-900 mb-2  ">Next Steps</h3>
                         <ul className="space-y-3">
                             <li className="flex gap-3 text-sm text-gray-600">
-                                <div className="w-1.5 h-1.5 rounded-full bg-yellow-600 mt-1.5 flex-shrink-0"></div>
+                                <div className="w-1.5 h-1.5 rounded-full bg-yellow-600 mt-1.5 shrink-0"></div>
                                 <span>A trainer will review your proposed learning phases.</span>
                             </li>
                             <li className="flex gap-3 text-sm text-gray-600">
-                                <div className="w-1.5 h-1.5 rounded-full bg-yellow-600 mt-1.5 flex-shrink-0"></div>
+                                <div className="w-1.5 h-1.5 rounded-full bg-yellow-600 mt-1.5 shrink-0"></div>
                                 <span>You will be notified once it's approved or if adjustments are suggested.</span>
                             </li>
                             <li className="flex gap-3 text-sm text-gray-600">
-                                <div className="w-1.5 h-1.5 rounded-full bg-yellow-600 mt-1.5 flex-shrink-0"></div>
+                                <div className="w-1.5 h-1.5 rounded-full bg-yellow-600 mt-1.5 shrink-0"></div>
                                 <span>Once approved, your dashboard will be fully activated.</span>
                             </li>
                         </ul>

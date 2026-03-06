@@ -18,7 +18,7 @@ export default function CourseCard({ user, userType = 'student' }: CourseCardPro
 
       <div className="flex flex-col md:flex-row gap-8 relative z-10">
         {/* Course Discovery Image */}
-        <div className="w-full md:w-48 h-36 bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl flex-shrink-0 overflow-hidden relative shadow-lg">
+        <div className="w-full md:w-48 h-36 bg-linear-to-br from-gray-900 to-gray-800 rounded-2xl shrink-0 overflow-hidden relative shadow-lg">
           <div className="absolute inset-0 bg-yellow-600/40 flex items-center justify-center p-4">
             <h4 className="text-white text-sm font-semibold text-center italic leading-tight decoration-gray-600 decoration-2 underline-offset-4 underline">
               Programming & Development
@@ -66,7 +66,7 @@ export default function CourseCard({ user, userType = 'student' }: CourseCardPro
             <div className="flex-1">
               <div className="flex items-center gap-2">
                 <p className="text-sm font-semibold text-gray-900">{user?.name || 'Demi Wilkinson'}</p>
-                <span className="w-1.5 h-1.5 bg-gray-500 rounded-full"></span>
+                <span className="w-1.5 h-1.5 bg-yellow-600 rounded-full"></span>
               </div>
               <p className="text-xs text-gray-500 font-medium mt-0.5">{user?.expertise || 'Expert in Software Engineering'}</p>
             </div>

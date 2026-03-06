@@ -71,7 +71,7 @@ export default function TrainerEducationPage() {
                 <select
                   value={education.level}
                   onChange={(e) => setEducation({ ...education, level: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 appearance-none bg-white"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 appearance-none bg-white"
                   required
                 >
                   <option value="">Select your highest education level</option>
@@ -90,7 +90,7 @@ export default function TrainerEducationPage() {
                   value={education.title}
                   onChange={(e) => setEducation({ ...education, title: e.target.value })}
                   placeholder="eg. B.S. in Computer Science"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400"
                   required
                 />
               </div>
@@ -102,7 +102,7 @@ export default function TrainerEducationPage() {
                   value={education.school}
                   onChange={(e) => setEducation({ ...education, school: e.target.value })}
                   placeholder="eg. Stanford University"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400"
                   required
                 />
               </div>
@@ -114,7 +114,7 @@ export default function TrainerEducationPage() {
                   value={education.year}
                   onChange={(e) => setEducation({ ...education, year: e.target.value })}
                   placeholder="eg. 2020"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400"
                   required
                 />
               </div>

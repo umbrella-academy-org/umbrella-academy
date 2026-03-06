@@ -36,7 +36,7 @@ export default function StudentSettingsPage() {
 
                         <div className="flex flex-col lg:flex-row gap-8">
                             {/* Settings Navigation */}
-                            <div className="w-full lg:w-64 flex-shrink-0">
+                            <div className="w-full lg:w-64 shrink-0">
                                 <nav className="flex flex-col gap-1">
                                     {[
                                         { id: 'account', label: 'Account Security', icon: <Lock className="w-4 h-4" /> },
@@ -145,7 +145,7 @@ export default function StudentSettingsPage() {
                                                         </div>
                                                         <button
                                                             onClick={() => setNotifications({ ...notifications, [pref.id]: !notifications[pref.id as keyof typeof notifications] })}
-                                                            className={`w-12 h-6 rounded-full transition-all relative flex-shrink-0 ${notifications[pref.id as keyof typeof notifications] ? 'bg-yellow-600' : 'bg-gray-200'}`}
+                                                            className={`w-12 h-6 rounded-full transition-all relative shrink-0 ${notifications[pref.id as keyof typeof notifications] ? 'bg-yellow-600' : 'bg-gray-200'}`}
                                                         >
                                                             <div className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-all ${notifications[pref.id as keyof typeof notifications] ? 'left-7' : 'left-1'}`} />
                                                         </button>

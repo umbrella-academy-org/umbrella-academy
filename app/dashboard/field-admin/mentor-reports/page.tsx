@@ -218,7 +218,7 @@ export default function FieldAdminMentorReportsPage() {
                       <select
                         value={filterStatus}
                         onChange={(e) => setFilterStatus(e.target.value)}
-                        className="px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-600"
+                        className="px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-600"
                       >
                         <option value="all">All Status</option>
                         <option value="pending">Pending</option>
@@ -230,7 +230,7 @@ export default function FieldAdminMentorReportsPage() {
                       <select
                         value={filterType}
                         onChange={(e) => setFilterType(e.target.value)}
-                        className="px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-600"
+                        className="px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-600"
                       >
                         <option value="all">All Types</option>
                         <option value="monthly">Monthly</option>
@@ -469,7 +469,7 @@ export default function FieldAdminMentorReportsPage() {
                       onChange={(e) => setAdminNotes(e.target.value)}
                       placeholder="Add your notes or feedback..."
                       rows={3}
-                      className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent"
+                      className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
                     />
                     <button
                       onClick={() => handleAddNotes(selectedReportData.id)}

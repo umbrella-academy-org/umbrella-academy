@@ -158,7 +158,7 @@ export default function FieldAdminMentorsPage() {
                         type="text"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 transition-all"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 transition-all"
                         placeholder="eg. Dr. John Smith"
                         required
                       />
@@ -169,7 +169,7 @@ export default function FieldAdminMentorsPage() {
                         type="email"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 transition-all"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 transition-all"
                         placeholder="eg. john.smith@academy.com"
                         required
                       />
@@ -182,7 +182,7 @@ export default function FieldAdminMentorsPage() {
                       type="text"
                       value={formData.expertise}
                       onChange={(e) => setFormData({ ...formData, expertise: e.target.value })}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 transition-all"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 transition-all"
                       placeholder="eg. JavaScript, React, System Architecture"
                       required
                     />
@@ -197,7 +197,7 @@ export default function FieldAdminMentorsPage() {
                       type="number"
                       value={formData.maxStudents}
                       onChange={(e) => setFormData({ ...formData, maxStudents: parseInt(e.target.value) })}
-                      className="w-24 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 text-center font-bold"
+                      className="w-24 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 text-center font-bold"
                       min="5"
                       max="100"
                       required

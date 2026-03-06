@@ -123,7 +123,7 @@ export default function ProfilePage() {
                     value={formData.firstName}
                     onChange={(e) => handleChange('firstName', e.target.value)}
                     placeholder="eg. John"
-                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${errors.firstName ? 'border-gray-500' : 'border-gray-300'
+                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${errors.firstName ? 'border-gray-500' : 'border-gray-300'
                       }`}
                     required
                   />
@@ -139,7 +139,7 @@ export default function ProfilePage() {
                     value={formData.lastName}
                     onChange={(e) => handleChange('lastName', e.target.value)}
                     placeholder="eg. Doe"
-                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${errors.lastName ? 'border-gray-500' : 'border-gray-300'
+                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${errors.lastName ? 'border-gray-500' : 'border-gray-300'
                       }`}
                     required
                   />
@@ -157,7 +157,7 @@ export default function ProfilePage() {
                     id="gender"
                     value={formData.gender}
                     onChange={(e) => handleChange('gender', e.target.value)}
-                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent appearance-none bg-white text-gray-900 ${errors.gender ? 'border-gray-500' : 'border-gray-300'
+                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white text-gray-900 ${errors.gender ? 'border-gray-500' : 'border-gray-300'
                       }`}
                     required
                   >
@@ -179,7 +179,7 @@ export default function ProfilePage() {
                     value={formData.dateOfBirth}
                     onChange={(e) => handleChange('dateOfBirth', e.target.value)}
                     placeholder="DD / MM / YY"
-                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 ${errors.dateOfBirth ? 'border-gray-500' : 'border-gray-300'
+                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 ${errors.dateOfBirth ? 'border-gray-500' : 'border-gray-300'
                       }`}
                     required
                   />
@@ -198,7 +198,7 @@ export default function ProfilePage() {
                   placeholder="eg. johndoe@example.com"
                   value={formData.email}
                   onChange={(e) => handleChange('email', e.target.value)}
-                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent appearance-none bg-white text-gray-900 ${errors.email ? 'border-gray-500' : 'border-gray-300'
+                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white text-gray-900 ${errors.email ? 'border-gray-500' : 'border-gray-300'
                     }`}
                   required
                 />
@@ -214,7 +214,7 @@ export default function ProfilePage() {
                   <select
                     value={formData.phoneCode}
                     onChange={(e) => handleChange('phoneCode', e.target.value)}
-                    className="w-24 px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent appearance-none bg-white text-gray-900"
+                    className="w-24 px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white text-gray-900"
                   >
                     <option value="+250">+250</option>
                     <option value="+1">+1</option>
@@ -229,7 +229,7 @@ export default function ProfilePage() {
                       value={formData.phoneNumber}
                       onChange={(e) => handleChange('phoneNumber', e.target.value)}
                       placeholder="7XXX-XXX-XXX"
-                      className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${errors.phoneNumber ? 'border-gray-500' : 'border-gray-300'
+                      className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${errors.phoneNumber ? 'border-gray-500' : 'border-gray-300'
                         }`}
                       required
                     />

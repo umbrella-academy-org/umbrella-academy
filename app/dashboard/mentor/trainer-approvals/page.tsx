@@ -212,7 +212,7 @@ export default function MentorTrainerApprovalsPage() {
                   placeholder="Search trainers..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600"
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600"
                 />
               </div>
               <div className="relative">
@@ -220,7 +220,7 @@ export default function MentorTrainerApprovalsPage() {
                 <select
                   value={statusFilter}
                   onChange={(e) => setStatusFilter(e.target.value)}
-                  className="pl-10 pr-8 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 bg-white"
+                  className="pl-10 pr-8 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 bg-white"
                 >
                   <option value="all">All Status</option>
                   <option value="pending">Pending</option>
@@ -270,7 +270,7 @@ export default function MentorTrainerApprovalsPage() {
                         {/* Trainer Info */}
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="flex items-center">
-                            <div className="flex-shrink-0 h-10 w-10">
+                            <div className="shrink-0 h-10 w-10">
                               <div className="h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center">
                                 <span className="text-sm font-medium text-gray-800">
                                   {trainer.name.split(' ').map(n => n[0]).join('')}
@@ -361,7 +361,7 @@ export default function MentorTrainerApprovalsPage() {
             {/* Modal Header */}
             <div className="flex items-center justify-between p-6 border-b border-gray-200">
               <div className="flex items-center">
-                <div className="flex-shrink-0 h-12 w-12">
+                <div className="shrink-0 h-12 w-12">
                   <div className="h-12 w-12 rounded-full bg-gray-100 flex items-center justify-center">
                     <span className="text-lg font-medium text-gray-800">
                       {selectedTrainerData.name.split(' ').map(n => n[0]).join('')}

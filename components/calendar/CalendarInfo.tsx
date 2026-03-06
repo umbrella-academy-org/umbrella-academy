@@ -47,7 +47,7 @@ export default function CalendarInfo() {
 
           {/* Mentor Mention */}
           <div className="flex items-center gap-3 pt-2">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center border border-white shadow-sm">
+            <div className="w-10 h-10 rounded-full bg-linear-to-br from-gray-100 to-gray-200 flex items-center justify-center border border-white shadow-sm">
               <span className="text-xs font-bold text-gray-700">DW</span>
             </div>
             <div>

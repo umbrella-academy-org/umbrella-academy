@@ -89,7 +89,7 @@ export default function CurrentPhase({ activeRoadmap }: CurrentPhaseProps) {
         
         <div className="w-full bg-gray-200 rounded-full h-2 mt-3 overflow-hidden">
           <div 
-            className="bg-gradient-to-r from-gray-500 to-gray-600 h-2 rounded-full transition-all duration-1000 ease-out relative"
+            className="bg-linear-to-r from-gray-500 to-gray-600 h-2 rounded-full transition-all duration-1000 ease-out relative"
             style={{ width: `${phaseProgress}%` }}
           >
             <div className="absolute inset-0 bg-white opacity-30 animate-shimmer"></div>

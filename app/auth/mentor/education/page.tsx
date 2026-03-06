@@ -78,7 +78,7 @@ export default function MentorEducationPage() {
                 <select
                   value={education.level}
                   onChange={(e) => setEducation({ ...education, level: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 appearance-none bg-white"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 appearance-none bg-white"
                   required
                 >
                   <option value="">Select your highest education level</option>
@@ -97,7 +97,7 @@ export default function MentorEducationPage() {
                   value={education.title}
                   onChange={(e) => setEducation({ ...education, title: e.target.value })}
                   placeholder="eg. Ph.D. in Computer Science"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400"
                   required
                 />
               </div>
@@ -109,7 +109,7 @@ export default function MentorEducationPage() {
                   value={education.school}
                   onChange={(e) => setEducation({ ...education, school: e.target.value })}
                   placeholder="eg. MIT, Stanford University"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400"
                   required
                 />
               </div>
@@ -121,7 +121,7 @@ export default function MentorEducationPage() {
                   value={education.specialization}
                   onChange={(e) => setEducation({ ...education, specialization: e.target.value })}
                   placeholder="eg. Machine Learning, Software Architecture"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400"
                   required
                 />
               </div>
@@ -131,7 +131,7 @@ export default function MentorEducationPage() {
                 <select
                   value={education.experience}
                   onChange={(e) => setEducation({ ...education, experience: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 appearance-none bg-white"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 appearance-none bg-white"
                   required
                 >
                   <option value="">Select experience level</option>
@@ -150,7 +150,7 @@ export default function MentorEducationPage() {
                   value={education.year}
                   onChange={(e) => setEducation({ ...education, year: e.target.value })}
                   placeholder="eg. 2015"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400"
                   required
                 />
               </div>

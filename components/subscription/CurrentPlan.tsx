@@ -39,7 +39,7 @@ export default function CurrentPlan() {
         <div className="flex items-center justify-between mb-4">
           <p className="text-sm text-gray-600">Complete learning experience with wing companies.</p>
           <div className="flex items-center gap-2">
-            <div className="w-2 h-2 bg-gray-500 rounded-full"></div>
+            <div className="w-2 h-2 bg-yellow-600 rounded-full"></div>
             <div className="text-sm text-gray-600 capitalize">{subscription.status}</div>
           </div>
         </div>
@@ -74,7 +74,7 @@ export default function CurrentPlan() {
           <div className="space-y-2">
             {subscription.features.map((feature, index) => (
               <div key={index} className="flex items-center gap-2 text-sm text-gray-600">
-                <CheckCircle className="w-4 h-4 text-gray-500" />
+                <CheckCircle className="w-4 h-4 text-yellow-600" />
                 {feature}
               </div>
             ))}

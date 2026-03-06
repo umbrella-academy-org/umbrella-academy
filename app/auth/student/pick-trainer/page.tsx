@@ -221,7 +221,7 @@ export default function PickTrainerPage() {
                       : 'border-gray-200 bg-white hover:border-gray-300'
                       }`}
                   >
-                    <div className={`w-14 h-14 rounded-full flex items-center justify-center text-white font-semibold flex-shrink-0 ${selectedTrainer === trainer.id ? 'bg-yellow-600' : 'bg-gradient-to-br from-gray-300 to-gray-400'
+                    <div className={`w-14 h-14 rounded-full flex items-center justify-center text-white font-semibold shrink-0 ${selectedTrainer === trainer.id ? 'bg-yellow-600' : 'bg-linear-to-br from-gray-300 to-gray-400'
                       }`}>
                       {trainer.avatar}
                     </div>
@@ -370,7 +370,7 @@ export default function PickTrainerPage() {
             <div className="p-6">
               {/* Trainer Header */}
               <div className="flex items-start gap-4 mb-6">
-                <div className="w-16 h-16 bg-gradient-to-br from-gray-500 to-gray-600 rounded-full flex items-center justify-center text-white font-semibold text-lg">
+                <div className="w-16 h-16 bg-linear-to-br from-gray-500 to-gray-600 rounded-full flex items-center justify-center text-white font-semibold text-lg">
                   {viewingProfile.avatar}
                 </div>
                 <div className="flex-1">

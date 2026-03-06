@@ -105,7 +105,7 @@ export default function MentorWalletPage() {
 
             {/* Balance Cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-              <div className="bg-gradient-to-br from-gray-500 to-gray-600 rounded-lg p-6 text-white">
+              <div className="bg-linear-to-br from-gray-500 to-gray-600 rounded-lg p-6 text-white">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-lg font-semibold">Current Balance</h3>
                   <DollarSign className="w-8 h-8 opacity-80" />

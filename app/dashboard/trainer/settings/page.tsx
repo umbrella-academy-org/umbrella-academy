@@ -32,7 +32,7 @@ export default function TrainerSettingsPage() {
 
                         <div className="flex flex-col lg:flex-row gap-8">
                             {/* Settings Navigation */}
-                            <div className="w-full lg:w-64 flex-shrink-0">
+                            <div className="w-full lg:w-64 shrink-0">
                                 <nav className="flex flex-col gap-1">
                                     {[
                                         { id: 'account', label: 'Security', icon: <Lock className="w-4 h-4" /> },
@@ -75,8 +75,8 @@ export default function TrainerSettingsPage() {
                                                     <div>
                                                         <label className="block text-sm font-medium text-gray-700 mb-2">Change Password</label>
                                                         <div className="grid grid-cols-1 gap-4">
-                                                            <input type="password" placeholder="Current Password" className="px-4 py-3 text-sm border border-gray-200 rounded-lg outline-none focus:ring-2 focus:ring-gray-600" />
-                                                            <input type="password" placeholder="New Password" className="px-4 py-3 border text-sm border-gray-200 rounded-lg outline-none focus:ring-2 focus:ring-gray-600" />
+                                                            <input type="password" placeholder="Current Password" className="px-4 py-3 text-sm border border-gray-200 rounded-lg outline-none focus:ring-2 focus:ring-yellow-600" />
+                                                            <input type="password" placeholder="New Password" className="px-4 py-3 border text-sm border-gray-200 rounded-lg outline-none focus:ring-2 focus:ring-yellow-600" />
                                                         </div>
                                                     </div>
                                                     <button className="px-6 py-2.5 bg-yellow-600 text-white rounded-lg text-sm hover:bg-yellow-700 shadow-md">

@@ -130,7 +130,7 @@ export default function SessionCalendar({ selectedDateRange, onDateRangeChange }
         {/* Quick Footer Info */}
         <div className="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-gray-500"></div>
+            <div className="w-2 h-2 rounded-full bg-yellow-600"></div>
             <span className="text-[11px] font-medium text-gray-500">Sessions</span>
           </div>
           <button className="text-[11px] font-semibold text-gray-600 hover:underline decoration-2 underline-offset-4">

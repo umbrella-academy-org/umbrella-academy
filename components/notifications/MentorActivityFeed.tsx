@@ -120,7 +120,7 @@ export default function MentorActivityFeed() {
                     >
                         {/* Student Avatar */}
                         <div className="relative">
-                            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform duration-500">
+                            <div className="w-12 h-12 rounded-full bg-linear-to-br from-gray-100 to-gray-200 flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform duration-500">
                                 <span className="text-gray-700 font-semibold text-sm ">{activity.student.initials}</span>
                             </div>
                             <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-white rounded-full flex items-center justify-center shadow-sm border border-gray-50 overflow-hidden">

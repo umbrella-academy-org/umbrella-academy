@@ -158,11 +158,11 @@ export default function ActivityFeed({ searchQuery, selectedActivity, onActivity
           >
             {/* User Avatar */}
             <div className="relative">
-              <div className="w-10 h-10 bg-gray-400 rounded-full flex items-center justify-center flex-shrink-0">
+              <div className="w-10 h-10 bg-yellow-50 rounded-full flex items-center justify-center shrink-0">
                 <span className="text-white text-sm font-medium">{activity.user.initials}</span>
               </div>
               {activity.isOnline && (
-                <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-gray-500 border-2 border-white rounded-full"></div>
+                <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-yellow-600 border-2 border-white rounded-full"></div>
               )}
             </div>
 

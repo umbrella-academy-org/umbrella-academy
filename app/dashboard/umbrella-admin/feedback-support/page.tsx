@@ -189,11 +189,11 @@ export default function UmbrellaAdminFeedbackSupportPage() {
 
   const getRoleColor = (role: string) => {
     switch (role) {
-      case 'student': return 'bg-gray-500';
-      case 'trainer': return 'bg-gray-500';
-      case 'mentor': return 'bg-gray-500';
-      case 'field-admin': return 'bg-gray-500';
-      default: return 'bg-gray-500';
+      case 'student': return 'bg-yellow-600';
+      case 'trainer': return 'bg-yellow-600';
+      case 'mentor': return 'bg-yellow-600';
+      case 'field-admin': return 'bg-yellow-600';
+      default: return 'bg-yellow-600';
     }
   };
 
@@ -293,7 +293,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         placeholder="Search items..."
-                        className="w-full pl-10 pr-4 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-600"
+                        className="w-full pl-10 pr-4 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-600"
                       />
                     </div>
 
@@ -304,7 +304,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
                         <select
                           value={filterType}
                           onChange={(e) => setFilterType(e.target.value)}
-                          className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-600"
+                          className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-600"
                         >
                           <option value="all">All Types</option>
                           <option value="feedback">Feedback</option>
@@ -318,7 +318,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
                         <select
                           value={filterStatus}
                           onChange={(e) => setFilterStatus(e.target.value)}
-                          className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-600"
+                          className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-600"
                         >
                           <option value="all">All Status</option>
                           <option value="open">Open</option>
@@ -332,7 +332,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
                         <select
                           value={filterPriority}
                           onChange={(e) => setFilterPriority(e.target.value)}
-                          className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-600"
+                          className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-600"
                         >
                           <option value="all">All Priority</option>
                           <option value="low">Low</option>
@@ -489,7 +489,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
                             onChange={(e) => setAdminResponse(e.target.value)}
                             placeholder="Write your response..."
                             rows={3}
-                            className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent"
+                            className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
                           />
                           <button
                             onClick={() => handleAddResponse(selectedItemData.id)}

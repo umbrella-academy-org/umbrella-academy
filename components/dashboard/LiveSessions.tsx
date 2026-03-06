@@ -145,7 +145,7 @@ export default function LiveSessions({ userType }: LiveSessionsProps) {
   };
 
   const getStatusIcon = (status: LiveSession['status'], isHovered: boolean) => {
-    const baseClasses = "w-10 h-10 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center flex-shrink-0 transition-all duration-300";
+    const baseClasses = "w-10 h-10 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center shrink-0 transition-all duration-300";
 
     switch (status) {
       case 'info':
@@ -214,7 +214,7 @@ export default function LiveSessions({ userType }: LiveSessionsProps) {
 
           <div className="flex flex-col sm:flex-row gap-5 relative z-10">
             {/* Session Icon / Status */}
-            <div className="flex-shrink-0">
+            <div className="shrink-0">
               {getStatusIcon(session.status, hoveredSession === session.id)}
             </div>
 
@@ -270,7 +270,7 @@ export default function LiveSessions({ userType }: LiveSessionsProps) {
                 <span className="text-gray-900 bg-gray-50 px-2 py-0.5 rounded border border-gray-100 font-mono">01:45:22</span>
               </div>
               <div className="w-full bg-gray-50 rounded-full h-1 overflow-hidden border border-gray-100">
-                <div className="bg-gradient-to-r from-gray-500 to-gray-500 h-1 rounded-full animate-shimmer" style={{ width: '75%' }}></div>
+                <div className="bg-linear-to-r from-gray-500 to-gray-500 h-1 rounded-full animate-shimmer" style={{ width: '75%' }}></div>
               </div>
             </div>
           )}

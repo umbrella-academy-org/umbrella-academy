@@ -43,7 +43,7 @@ export default function MentorDashboard() {
   if (authLoading || roadmapsLoading || usersLoading) {
     return (
       <div className="flex h-screen bg-white">
-        <div className="w-64 bg-black animate-pulse"></div>
+        <div className="w-64 bg-gray-900 animate-pulse"></div>
         <div className="flex-1 flex flex-col">
           <div className="h-16 bg-gray-100 animate-pulse"></div>
           <div className="flex-1 p-6 space-y-6">

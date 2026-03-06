@@ -37,15 +37,15 @@ export default function TrainerPendingPage() {
                         <h3 className="text-sm font-semibold text-gray-900 mb-2  ">What happens next?</h3>
                         <ul className="space-y-3">
                             <li className="flex gap-3 text-sm text-gray-600">
-                                <div className="w-1.5 h-1.5 rounded-full bg-yellow-600 mt-1.5 flex-shrink-0"></div>
+                                <div className="w-1.5 h-1.5 rounded-full bg-yellow-600 mt-1.5 shrink-0"></div>
                                 <span>A mentor will review your expertise and proofs.</span>
                             </li>
                             <li className="flex gap-3 text-sm text-gray-600">
-                                <div className="w-1.5 h-1.5 rounded-full bg-yellow-600 mt-1.5 flex-shrink-0"></div>
+                                <div className="w-1.5 h-1.5 rounded-full bg-yellow-600 mt-1.5 shrink-0"></div>
                                 <span>You will receive an email notification once approved.</span>
                             </li>
                             <li className="flex gap-3 text-sm text-gray-600">
-                                <div className="w-1.5 h-1.5 rounded-full bg-yellow-600 mt-1.5 flex-shrink-0"></div>
+                                <div className="w-1.5 h-1.5 rounded-full bg-yellow-600 mt-1.5 shrink-0"></div>
                                 <span>After approval, you can set up your training wings.</span>
                             </li>
                         </ul>

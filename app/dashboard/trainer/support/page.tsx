@@ -36,7 +36,7 @@ export default function TrainerSupportPage() {
   if (authLoading) {
     return (
       <div className="flex h-screen bg-white">
-        <div className="w-64 bg-black animate-pulse"></div>
+        <div className="w-64 bg-gray-900 animate-pulse"></div>
         <div className="flex-1 p-6">
           <div className="h-8 bg-gray-200 rounded animate-pulse"></div>
         </div>
@@ -94,7 +94,7 @@ export default function TrainerSupportPage() {
                         <select
                           value={issueType}
                           onChange={(e) => setIssueType(e.target.value)}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent"
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
                         >
                           <option value="technical">Technical Issue</option>
                           <option value="student-management">Student Management</option>
@@ -112,7 +112,7 @@ export default function TrainerSupportPage() {
                         <select
                           value={priority}
                           onChange={(e) => setPriority(e.target.value)}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent"
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
                         >
                           <option value="low">Low</option>
                           <option value="medium">Medium</option>
@@ -131,7 +131,7 @@ export default function TrainerSupportPage() {
                         value={subject}
                         onChange={(e) => setSubject(e.target.value)}
                         placeholder="Brief description of your issue"
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
                         required
                       />
                     </div>
@@ -145,7 +145,7 @@ export default function TrainerSupportPage() {
                         onChange={(e) => setDescription(e.target.value)}
                         placeholder="Please provide detailed information about your issue..."
                         rows={6}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
                         required
                       />
                     </div>

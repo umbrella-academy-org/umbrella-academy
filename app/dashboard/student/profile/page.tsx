@@ -64,7 +64,7 @@ export default function StudentProfilePage() {
                                 fill
                                 className="object-cover opacity-90"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-r from-gray-900/40 to-transparent" />
+                            <div className="absolute inset-0 bg-linear-to-r from-gray-900/40 to-transparent" />
                             <div className="absolute top-4 right-4">
                                 <button className="p-2 bg-white/20 backdrop-blur-md rounded-lg text-white hover:bg-white/30 transition-all border border-white/20">
                                     <Camera className="w-5 h-5" />
@@ -79,7 +79,7 @@ export default function StudentProfilePage() {
                                     {user?.avatar ? (
                                         <Image src={user.avatar} alt="Avatar" width={128} height={128} className="w-full h-full object-cover rounded-lg" />
                                     ) : (
-                                        <div className="w-full h-full bg-gradient-to-br from-yellow-500 to-yellow-600 flex items-center justify-center text-white text-4xl font-black rounded-lg">
+                                        <div className="w-full h-full bg-linear-to-br from-yellow-500 to-yellow-600 flex items-center justify-center text-white text-4xl font-black rounded-lg">
                                             {profileData.name.charAt(0)}
                                         </div>
                                     )}

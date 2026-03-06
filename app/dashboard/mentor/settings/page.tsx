@@ -24,7 +24,7 @@ export default function MentorSettingsPage() {
 
                         <div className="flex flex-col lg:flex-row gap-8">
                             {/* Settings Navigation */}
-                            <div className="w-full lg:w-64 flex-shrink-0">
+                            <div className="w-full lg:w-64 shrink-0">
                                 <nav className="flex flex-col gap-1">
                                     {[
                                         { id: 'account', label: 'Account Security', icon: <Lock className="w-4 h-4" /> },

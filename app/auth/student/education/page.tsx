@@ -123,7 +123,7 @@ export default function StudentEducationPage() {
                   id="fieldOfInterest"
                   value={formData.fieldOfInterest}
                   onChange={(e) => handleChange('fieldOfInterest', e.target.value)}
-                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent appearance-none bg-white text-gray-900 ${errors.fieldOfInterest ? 'border-gray-500' : 'border-gray-300'
+                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white text-gray-900 ${errors.fieldOfInterest ? 'border-gray-500' : 'border-gray-300'
                     }`}
                   required
                 >
@@ -146,7 +146,7 @@ export default function StudentEducationPage() {
                   id="skillLevel"
                   value={formData.skillLevel}
                   onChange={(e) => handleChange('skillLevel', e.target.value)}
-                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent appearance-none bg-white text-gray-900 ${errors.skillLevel ? 'border-gray-500' : 'border-gray-300'
+                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white text-gray-900 ${errors.skillLevel ? 'border-gray-500' : 'border-gray-300'
                     }`}
                   required
                 >
@@ -169,7 +169,7 @@ export default function StudentEducationPage() {
                   id="learningGoals"
                   value={formData.learningGoals}
                   onChange={(e) => handleChange('learningGoals', e.target.value)}
-                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent appearance-none bg-white text-gray-900 ${errors.learningGoals ? 'border-gray-500' : 'border-gray-300'
+                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white text-gray-900 ${errors.learningGoals ? 'border-gray-500' : 'border-gray-300'
                     }`}
                   required
                 >

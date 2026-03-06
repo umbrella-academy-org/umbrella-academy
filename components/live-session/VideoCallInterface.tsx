@@ -26,13 +26,13 @@ export default function VideoCallInterface({
   isFullscreen
 }: VideoCallInterfaceProps) {
   return (
-    <div className="relative w-full h-full bg-gradient-to-b from-slate-900 via-slate-800 to-slate-700 overflow-hidden">
+    <div className="relative w-full h-full bg-linear-to-b from-slate-900 via-slate-800 to-slate-700 overflow-hidden">
       {/* Background Scene */}
       <div className="absolute inset-0">
         {/* Night sky with stars */}
         <div className="w-full h-full relative">
           {/* Dark gradient sky */}
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-800 to-gray-900"></div>
+          <div className="absolute inset-0 bg-linear-to-b from-slate-900 via-slate-800 to-gray-900"></div>
           
           {/* Stars */}
           <div className="absolute top-1/4 left-1/4 w-1 h-1 bg-white rounded-full opacity-80"></div>
@@ -49,7 +49,7 @@ export default function VideoCallInterface({
               {/* Balloon with checkered pattern */}
               <div className="w-32 h-40 relative">
                 {/* Base balloon shape */}
-                <div className="w-full h-full bg-gradient-to-b from-gray-500 to-gray-700 rounded-full relative overflow-hidden">
+                <div className="w-full h-full bg-linear-to-b from-gray-500 to-gray-700 rounded-full relative overflow-hidden">
                   {/* Checkered pattern */}
                   <div className="absolute inset-0">
                     {/* Red and blue stripes */}
@@ -59,7 +59,7 @@ export default function VideoCallInterface({
                     <div className="absolute top-3/4 left-0 w-full h-1/4 bg-gray-500"></div>
                     
                     {/* Vertical stripes overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-black via-transparent to-transparent opacity-20"></div>
+                    <div className="absolute inset-0 bg-linear-to-r from-transparent via-black via-transparent to-transparent opacity-20"></div>
                   </div>
                 </div>
                 
@@ -77,10 +77,10 @@ export default function VideoCallInterface({
           </div>
 
           {/* Water surface */}
-          <div className="absolute bottom-0 left-0 right-0 h-2/5 bg-gradient-to-t from-slate-800 to-slate-700">
+          <div className="absolute bottom-0 left-0 right-0 h-2/5 bg-linear-to-t from-slate-800 to-slate-700">
             {/* Water ripples */}
             <div className="absolute inset-0 opacity-30">
-              <div className="absolute bottom-1/4 left-1/2 transform -translate-x-1/2 w-16 h-32 bg-gradient-to-t from-gray-400 via-gray-400 to-transparent opacity-60 blur-sm"></div>
+              <div className="absolute bottom-1/4 left-1/2 transform -translate-x-1/2 w-16 h-32 bg-linear-to-t from-gray-400 via-gray-400 to-transparent opacity-60 blur-sm"></div>
             </div>
           </div>
         </div>
@@ -103,7 +103,7 @@ export default function VideoCallInterface({
       <div className="absolute top-3 lg:top-6 left-1/2 transform -translate-x-1/2 z-20">
         <div className="bg-yellow-600 bg-opacity-40 rounded-full px-3 lg:px-4 py-1.5 lg:py-2 backdrop-blur-sm">
           <div className="text-white text-xs lg:text-sm font-medium flex items-center gap-2">
-            <div className="w-1.5 h-1.5 lg:w-2 lg:h-2 bg-gray-500 rounded-full animate-pulse"></div>
+            <div className="w-1.5 h-1.5 lg:w-2 lg:h-2 bg-red-500 rounded-full animate-pulse"></div>
             {callDuration}
           </div>
         </div>
@@ -125,10 +125,10 @@ export default function VideoCallInterface({
         
         {/* Other Participant Video */}
         <div className="w-28 h-20 lg:w-40 lg:h-28 bg-gray-800 rounded-lg overflow-hidden border-2 border-white shadow-xl">
-          <div className="w-full h-full bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
+          <div className="w-full h-full bg-linear-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
             {/* Participant avatar */}
             <div className="w-12 h-12 lg:w-16 lg:h-16 bg-gray-500 rounded-full flex items-center justify-center overflow-hidden">
-              <div className="w-full h-full bg-gradient-to-br from-gray-400 to-gray-600 flex items-center justify-center">
+              <div className="w-full h-full bg-linear-to-br from-gray-400 to-gray-600 flex items-center justify-center">
                 <span className="text-white text-sm lg:text-lg font-medium">M</span>
               </div>
             </div>

@@ -70,7 +70,7 @@ export default function TrainerProfilePage() {
                     setError('');
                   }}
                   placeholder="I'm a Product Designer based in Melbourne, Australia. I specialise in UX/UI design, brand strategy, and Webflow development."
-                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 resize-none h-32 ${
+                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 resize-none h-32 ${
                     error ? 'border-gray-500' : 'border-gray-300'
                   }`}
                   required

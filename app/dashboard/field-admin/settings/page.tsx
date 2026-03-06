@@ -65,7 +65,7 @@ export default function FieldAdminSettingsPage() {
                         >
                           <div className="flex items-center gap-3">
                             <div className={`w-4 h-4 rounded-full border-2 ${selectedCompany === company.id
-                                ? 'border-gray-500 bg-gray-500'
+                                ? 'border-yellow-600 bg-yellow-600'
                                 : 'border-gray-300'
                               }`}>
                               {selectedCompany === company.id && (
@@ -97,7 +97,7 @@ export default function FieldAdminSettingsPage() {
                       type="text"
                       value={fieldSettings.fieldName}
                       onChange={(e) => setFieldSettings({ ...fieldSettings, fieldName: e.target.value })}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
                     />
                   </div>
                   <div>
@@ -106,7 +106,7 @@ export default function FieldAdminSettingsPage() {
                       type="text"
                       value={fieldSettings.fieldCode}
                       onChange={(e) => setFieldSettings({ ...fieldSettings, fieldCode: e.target.value })}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
                     />
                   </div>
                 </div>
@@ -125,7 +125,7 @@ export default function FieldAdminSettingsPage() {
                       type="number"
                       value={fieldSettings.maxStudentsPerTrainer}
                       onChange={(e) => setFieldSettings({ ...fieldSettings, maxStudentsPerTrainer: parseInt(e.target.value) })}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
                     />
                   </div>
                   <div>
@@ -135,7 +135,7 @@ export default function FieldAdminSettingsPage() {
                       value={fieldSettings.minHoursPerWeek}
                       onChange={(e) => setFieldSettings({ ...fieldSettings, minHoursPerWeek: parseFloat(e.target.value) })}
                       step="0.5"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
                     />
                   </div>
                 </div>
@@ -155,7 +155,7 @@ export default function FieldAdminSettingsPage() {
                         type="number"
                         value={fieldSettings.fieldSharePercentage}
                         onChange={(e) => setFieldSettings({ ...fieldSettings, fieldSharePercentage: parseInt(e.target.value) })}
-                        className="w-24 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent"
+                        className="w-24 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
                       />
                       <span className="text-gray-600">% of total revenue</span>
                     </div>
@@ -166,7 +166,7 @@ export default function FieldAdminSettingsPage() {
                       type="text"
                       value={fieldSettings.bankAccount}
                       onChange={(e) => setFieldSettings({ ...fieldSettings, bankAccount: e.target.value })}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
                     />
                   </div>
                 </div>

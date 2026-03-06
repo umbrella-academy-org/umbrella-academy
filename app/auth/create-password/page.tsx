@@ -104,7 +104,7 @@ export default function CreatePasswordPage() {
                       setErrors(prev => ({ ...prev, password: '' }));
                     }}
                     placeholder="••••••••"
-                    className={`w-full px-4 py-3 pr-12 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${
+                    className={`w-full px-4 py-3 pr-12 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${
                       errors.password ? 'border-gray-500' : 'border-gray-300'
                     }`}
                     required
@@ -144,7 +144,7 @@ export default function CreatePasswordPage() {
                       setErrors(prev => ({ ...prev, confirmPassword: '' }));
                     }}
                     placeholder="••••••••"
-                    className={`w-full px-4 py-3 pr-12 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${
+                    className={`w-full px-4 py-3 pr-12 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${
                       errors.confirmPassword ? 'border-gray-500' : 'border-gray-300'
                     }`}
                     required

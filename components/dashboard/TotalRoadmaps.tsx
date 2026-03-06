@@ -41,7 +41,7 @@ export default function TotalRoadmaps({ roadmaps, userType }: TotalRoadmapsProps
       <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
         <div className="text-center py-8">
           <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <CheckCircle className="w-8 h-8 text-gray-400" />
+            <CheckCircle className="w-8 h-8 text-yellow-600" />
           </div>
           <h3 className="text-lg font-semibold text-gray-900 mb-2">No Roadmaps Available</h3>
           <p className="text-sm text-gray-600 mb-4">
@@ -66,7 +66,7 @@ export default function TotalRoadmaps({ roadmaps, userType }: TotalRoadmapsProps
     >
       <div className="flex items-start gap-4">
         {/* Course Image */}
-        <div className="w-32 h-24 sm:w-40 sm:h-28 bg-gradient-to-br from-gray-900 to-gray-700 rounded-lg overflow-hidden flex-shrink-0 relative group cursor-pointer">
+        <div className="w-32 h-24 sm:w-40 sm:h-28 bg-linear-to-br from-gray-900 to-gray-700 rounded-lg overflow-hidden shrink-0 relative group cursor-pointer">
           <div className="absolute inset-0 bg-yellow-600 bg-opacity-20 group-hover:bg-opacity-10 transition-all duration-300"></div>
           <div className="absolute inset-0 flex items-center justify-center">
             <div className={`w-8 h-8 bg-yellow-600 rounded-full flex items-center justify-center transition-all duration-300 ${
@@ -148,7 +148,7 @@ export default function TotalRoadmaps({ roadmaps, userType }: TotalRoadmapsProps
             </div>
             
             {/* Progress Section */}
-            <div className="text-right flex-shrink-0">
+            <div className="text-right shrink-0">
               <div className={`text-2xl font-bold text-gray-900 mb-1 transition-all duration-300 ${
                 isHovered ? 'scale-110 text-gray-600' : ''
               }`}>
@@ -178,7 +178,7 @@ export default function TotalRoadmaps({ roadmaps, userType }: TotalRoadmapsProps
             </div>
             <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
               <div 
-                className="bg-gradient-to-r from-gray-500 to-gray-600 h-2 rounded-full transition-all duration-1000 ease-out relative"
+                className="bg-linear-to-r from-gray-500 to-gray-600 h-2 rounded-full transition-all duration-1000 ease-out relative"
                 style={{ width: isHovered ? `${overallProgress}%` : `${Math.max(overallProgress - 10, 0)}%` }}
               >
                 <div className="absolute inset-0 bg-white opacity-30 animate-shimmer"></div>
@@ -194,7 +194,7 @@ export default function TotalRoadmaps({ roadmaps, userType }: TotalRoadmapsProps
           {/* Milestones */}
           <div className="mt-4 flex items-center gap-4 text-xs">
             <div className="flex items-center gap-1">
-              <CheckCircle className="w-3 h-3 text-gray-500" />
+              <CheckCircle className="w-3 h-3 text-yellow-600" />
               <span className="text-gray-600">{completedRoadmaps} Completed</span>
             </div>
             <div className="flex items-center gap-1">

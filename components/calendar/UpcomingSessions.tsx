@@ -20,21 +20,21 @@ export default function UpcomingSessions() {
             title: 'Advanced React Patterns',
             type: 'Live Mentor Session',
             status: 'active',
-            color: 'bg-gray-500'
+            color: 'bg-yellow-600'
           },
           {
             time: '11:00 AM',
             title: 'JS Performance Lab',
             type: 'Group Sync',
             status: 'pending',
-            color: 'bg-gray-500'
+            color: 'bg-yellow-600'
           },
           {
             time: '03:00 PM',
             title: 'One-on-One Engineering Sync',
             type: 'Mentoring',
             status: 'urgent',
-            color: 'bg-gray-500'
+            color: 'bg-yellow-600'
           }
         ].map((session, index) => (
           <div key={index} className="flex items-start gap-4 group cursor-pointer">

@@ -27,7 +27,7 @@ export default function UmbrellaAdminFinancialPage() {
 
             {/* Financial Stats */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-              <div className="bg-gradient-to-r from-gray-500 to-gray-600 rounded-lg p-6 text-white">
+              <div className="bg-linear-to-r from-gray-500 to-gray-600 rounded-lg p-6 text-white">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-gray-100 text-sm">Total Revenue</p>

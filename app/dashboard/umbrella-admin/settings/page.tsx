@@ -89,7 +89,7 @@ export default function UmbrellaAdminSettingsPage() {
                                                     type="text"
                                                     value={newCompany.name}
                                                     onChange={(e) => setNewCompany({ ...newCompany, name: e.target.value })}
-                                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600"
+                                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600"
                                                     placeholder="e.g. TechCorp Inc."
                                                 />
                                             </div>
@@ -98,7 +98,7 @@ export default function UmbrellaAdminSettingsPage() {
                                                 <select
                                                     value={newCompany.industry}
                                                     onChange={(e) => setNewCompany({ ...newCompany, industry: e.target.value })}
-                                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600"
+                                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600"
                                                 >
                                                     <option value="">Select Industry</option>
                                                     <option value="Technology">Technology</option>
@@ -187,7 +187,7 @@ export default function UmbrellaAdminSettingsPage() {
                                             type="text"
                                             value={systemSettings.platformName}
                                             onChange={(e) => setSystemSettings({ ...systemSettings, platformName: e.target.value })}
-                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600"
+                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600"
                                         />
                                     </div>
                                     <div>
@@ -195,7 +195,7 @@ export default function UmbrellaAdminSettingsPage() {
                                         <select
                                             value={systemSettings.defaultCurrency}
                                             onChange={(e) => setSystemSettings({ ...systemSettings, defaultCurrency: e.target.value })}
-                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600"
+                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600"
                                         >
                                             <option value="RWF">RWF - Rwandan Franc</option>
                                             <option value="USD">USD - US Dollar</option>
@@ -207,7 +207,7 @@ export default function UmbrellaAdminSettingsPage() {
                                         <select
                                             value={systemSettings.timezone}
                                             onChange={(e) => setSystemSettings({ ...systemSettings, timezone: e.target.value })}
-                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600"
+                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600"
                                         >
                                             <option value="Africa/Kigali">Africa/Kigali (CAT)</option>
                                             <option value="UTC">UTC</option>
@@ -221,7 +221,7 @@ export default function UmbrellaAdminSettingsPage() {
                                             type="number"
                                             value={systemSettings.sessionTimeout}
                                             onChange={(e) => setSystemSettings({ ...systemSettings, sessionTimeout: parseInt(e.target.value) })}
-                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600"
+                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600"
                                         />
                                     </div>
                                 </div>

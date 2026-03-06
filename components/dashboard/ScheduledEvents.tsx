@@ -21,21 +21,21 @@ export default function ScheduledEvents({ userType }: ScheduledEventsProps) {
             title: 'Training Session - React Basics',
             time: '09:00 AM',
             type: 'training',
-            color: 'bg-gray-500'
+            color: 'bg-yellow-600'
           },
           {
             id: 2,
             title: 'Student Progress Review',
             time: '02:30 PM',
             type: 'review',
-            color: 'bg-gray-500'
+            color: 'bg-yellow-600'
           },
           {
             id: 3,
             title: 'Weekly Team Meeting',
             time: '04:00 PM',
             type: 'meeting',
-            color: 'bg-gray-500'
+            color: 'bg-yellow-600'
           }
         ];
       case 'mentor':
@@ -45,21 +45,21 @@ export default function ScheduledEvents({ userType }: ScheduledEventsProps) {
             title: 'Roadmap Review Session',
             time: '10:00 AM',
             type: 'review',
-            color: 'bg-gray-500'
+            color: 'bg-yellow-600'
           },
           {
             id: 2,
             title: 'Student Check-in Call',
             time: '01:00 PM',
             type: 'mentoring',
-            color: 'bg-gray-500'
+            color: 'bg-yellow-600'
           },
           {
             id: 3,
             title: 'Course Planning Meeting',
             time: '03:30 PM',
             type: 'planning',
-            color: 'bg-gray-500'
+            color: 'bg-yellow-600'
           }
         ];
       case 'student':
@@ -69,21 +69,21 @@ export default function ScheduledEvents({ userType }: ScheduledEventsProps) {
             title: 'JavaScript Fundamentals',
             time: '09:00 AM',
             type: 'lesson',
-            color: 'bg-gray-500'
+            color: 'bg-yellow-600'
           },
           {
             id: 2,
             title: 'Mentor Check-in',
             time: '02:00 PM',
             type: 'mentoring',
-            color: 'bg-gray-500'
+            color: 'bg-yellow-600'
           },
           {
             id: 3,
             title: 'Project Submission',
             time: '05:00 PM',
             type: 'deadline',
-            color: 'bg-gray-500'
+            color: 'bg-yellow-600'
           }
         ];
       case 'field-admin':
@@ -93,21 +93,21 @@ export default function ScheduledEvents({ userType }: ScheduledEventsProps) {
             title: 'Field Performance Review',
             time: '10:00 AM',
             type: 'review',
-            color: 'bg-gray-500'
+            color: 'bg-yellow-600'
           },
           {
             id: 2,
             title: 'Trainer Coordination Meeting',
             time: '02:30 PM',
             type: 'meeting',
-            color: 'bg-gray-500'
+            color: 'bg-yellow-600'
           },
           {
             id: 3,
             title: 'Monthly Financial Report',
             time: '04:00 PM',
             type: 'report',
-            color: 'bg-gray-500'
+            color: 'bg-yellow-600'
           }
         ];
       case 'umbrella-admin':
@@ -117,21 +117,21 @@ export default function ScheduledEvents({ userType }: ScheduledEventsProps) {
             title: 'System Health Check',
             time: '09:00 AM',
             type: 'system',
-            color: 'bg-gray-500'
+            color: 'bg-yellow-600'
           },
           {
             id: 2,
             title: 'Fields Coordination Meeting',
             time: '01:00 PM',
             type: 'meeting',
-            color: 'bg-gray-500'
+            color: 'bg-yellow-600'
           },
           {
             id: 3,
             title: 'Quarterly Board Review',
             time: '03:30 PM',
             type: 'review',
-            color: 'bg-gray-500'
+            color: 'bg-yellow-600'
           }
         ];
       default:
@@ -141,21 +141,21 @@ export default function ScheduledEvents({ userType }: ScheduledEventsProps) {
             title: 'Team Standup Meeting',
             time: '09:00 AM',
             type: 'meeting',
-            color: 'bg-gray-500'
+            color: 'bg-yellow-600'
           },
           {
             id: 2,
             title: 'Code Review Session',
             time: '02:30 PM',
             type: 'review',
-            color: 'bg-gray-500'
+            color: 'bg-yellow-600'
           },
           {
             id: 3,
             title: 'Client Presentation',
             time: '04:00 PM',
             type: 'presentation',
-            color: 'bg-gray-500'
+            color: 'bg-yellow-600'
           }
         ];
     }
@@ -247,8 +247,8 @@ export default function ScheduledEvents({ userType }: ScheduledEventsProps) {
 
       {/* Notification Indicator */}
       {isHovered && (
-        <div className="absolute -top-1 -right-1 w-3 h-3 bg-gray-500 rounded-full animate-pulse-glow">
-          <div className="absolute inset-0 bg-gray-500 rounded-full animate-ping"></div>
+        <div className="absolute -top-1 -right-1 w-3 h-3 bg-yellow-600 rounded-full animate-pulse-glow">
+          <div className="absolute inset-0 bg-yellow-600 rounded-full animate-ping"></div>
         </div>
       )}
     </div>

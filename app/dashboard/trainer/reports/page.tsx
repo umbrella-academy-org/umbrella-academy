@@ -198,7 +198,7 @@ export default function TrainerReportsPage() {
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="flex items-center">
-                            <div className="flex-shrink-0 h-8 w-8">
+                            <div className="shrink-0 h-8 w-8">
                               <div className="h-8 w-8 rounded-full bg-gray-100 flex items-center justify-center">
                                 <span className="text-xs font-medium text-gray-800">
                                   {report.studentName.split(' ').map(n => n[0]).join('')}
