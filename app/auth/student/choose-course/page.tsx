@@ -166,7 +166,7 @@ export default function ChooseCoursePage() {
                             <span className="text-xs font-medium">{company.name}</span>
                           </div>
                           <div className="text-2xl font-black text-gray-900">
-                            ${course.price}
+                            {course.price} RWF
                           </div>
                         </div>
                       </div>
