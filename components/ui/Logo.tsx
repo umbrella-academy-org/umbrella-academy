@@ -49,13 +49,13 @@ export function Logo({
   return (
     <div className={`flex items-center space-x-3 ${className}`}>
       <div className={`${iconSizes[size]} ${showBackground ? 'bg-white shadow-md shadow-black/5' : 'bg-transparent'} rounded-lg flex items-center justify-center shrink-0`}>
-        <Umbrella className={`${umbrellaSizes[size]} text-[#525252]`} />
+        <Umbrella className={`${umbrellaSizes[size]} text-[#ca8a04]`} />
       </div>
       <div className="flex flex-col leading-tight">
         <span className={`${textSizes[size].main} font-bold ${isDark ? 'text-white' : 'text-gray-900'} tracking-wide `}>
           Umbrella
         </span>
-        <span className={`${textSizes[size].sub} font-medium text-[#525252] tracking-wider `}>
+        <span className={`${textSizes[size].sub} font-medium text-[#ca8a04] tracking-wider `}>
           {subTitle || "Academy"}
         </span>
       </div>

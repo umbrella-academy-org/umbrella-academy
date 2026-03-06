@@ -8,7 +8,7 @@ const steps = [
     icon: Layers,
     title: "Choose a Field",
     description: "Select from diverse learning domains like Technology, Business, and Creative Arts.",
-    color: "bg-[#525252]"
+    color: "bg-[#ca8a04]"
   },
   {
     icon: Building2,
@@ -20,7 +20,7 @@ const steps = [
     icon: CreditCard,
     title: "Enroll and Pay",
     description: "Complete secure enrollment with flexible payment options to start.",
-    color: "bg-[#525252]"
+    color: "bg-[#ca8a04]"
   },
   {
     icon: GraduationCap,
@@ -32,7 +32,7 @@ const steps = [
     icon: BarChart3,
     title: "Get Mentored",
     description: "Receive high-level guidance while monitoring your achievements.",
-    color: "bg-[#525252]"
+    color: "bg-[#ca8a04]"
   },
 ];
 
@@ -44,7 +44,7 @@ export function HowItWorks() {
       <div ref={ref} className="max-w-full mx-auto">
         <div className={`mb-16 reveal ${isVisible ? 'visible' : ''}`}>
           <h3 className="text-4xl md:text-6xl lg:text-8xl font-black tracking-tighter text-gray-900 leading-none ">
-            YOUR PATH TO <br /> <span className="text-[#525252]">SUCCESS</span>
+            YOUR PATH TO <br /> <span className="text-[#ca8a04]">SUCCESS</span>
           </h3>
         </div>
 
@@ -55,7 +55,7 @@ export function HowItWorks() {
             return (
               <div
                 key={index}
-                className={`flex-1 group relative p-8 md:p-12 border border-gray-100 hover:border-[#525252] transition-all duration-500 min-h-[350px] flex flex-col justify-between ${isVisible ? 'animate-fade-in' : 'opacity-0'} ${delays[index]}`}
+                className={`flex-1 group relative p-8 md:p-12 border border-gray-100 hover:border-[#ca8a04] transition-all duration-500 min-h-[350px] flex flex-col justify-between ${isVisible ? 'animate-fade-in' : 'opacity-0'} ${delays[index]}`}
               >
                 <div className="space-y-6">
                   <div className={`w-12 h-12 ${step.color} flex items-center justify-center text-white`}>
@@ -69,7 +69,7 @@ export function HowItWorks() {
                 </div>
 
                 <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <ArrowRight className="text-[#525252] w-6 h-6" />
+                  <ArrowRight className="text-[#ca8a04] w-6 h-6" />
                 </div>
               </div>
             );

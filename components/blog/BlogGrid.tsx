@@ -128,7 +128,7 @@ export function BlogGrid() {
                 </div>
 
                 <div className="pt-12 flex justify-center">
-                    <button className="bg-yellow-600 text-white px-8 py-3 rounded-lg font-black tracking-tight hover:bg-[#525252] transition-colors interactive-button">
+                    <button className="bg-yellow-600 text-white px-8 py-3 rounded-lg font-black tracking-tight hover:bg-[#ca8a04] transition-colors interactive-button">
                         Loading more...
                     </button>
                 </div>

@@ -82,7 +82,7 @@ export default function StudentSettingsPage() {
                                                             <input
                                                                 type="password"
                                                                 placeholder="••••••••"
-                                                                className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-gray-600 outline-none transition-all"
+                                                                className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-yellow-600 outline-none transition-all"
                                                             />
                                                         </div>
                                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -91,7 +91,7 @@ export default function StudentSettingsPage() {
                                                                 <input
                                                                     type="password"
                                                                     placeholder="••••••••"
-                                                                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-gray-600 outline-none transition-all"
+                                                                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-yellow-600 outline-none transition-all"
                                                                 />
                                                             </div>
                                                             <div>
@@ -99,7 +99,7 @@ export default function StudentSettingsPage() {
                                                                 <input
                                                                     type="password"
                                                                     placeholder="••••••••"
-                                                                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-gray-600 outline-none transition-all"
+                                                                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-yellow-600 outline-none transition-all"
                                                                 />
                                                             </div>
                                                         </div>
@@ -118,7 +118,7 @@ export default function StudentSettingsPage() {
                                                     </div>
                                                     <button
                                                         onClick={() => setSecurity({ ...security, twoFactor: !security.twoFactor })}
-                                                        className={`w-12 h-6 rounded-full transition-all relative ${security.twoFactor ? 'bg-gray-500' : 'bg-gray-200'}`}
+                                                        className={`w-12 h-6 rounded-full transition-all relative ${security.twoFactor ? 'bg-yellow-600' : 'bg-gray-200'}`}
                                                     >
                                                         <div className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-all ${security.twoFactor ? 'left-7' : 'left-1'}`} />
                                                     </button>

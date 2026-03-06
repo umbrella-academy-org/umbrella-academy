@@ -15,7 +15,7 @@ const categories = [
         title: "Photography",
         icon: Film,
         image: "/real/dashboard-photograph.jpeg",
-        color: "bg-[#525252]"
+        color: "bg-[#ca8a04]"
     },
     {
         title: "Software Engineering",
@@ -40,7 +40,7 @@ export function CategoriesGrid() {
             <div ref={ref} className="max-w-full mx-auto">
                 <div className={`mb-16 reveal ${isVisible ? 'visible' : ''}`}>
                     <h3 className="text-4xl md:text-6xl lg:text-8xl font-black tracking-tighter text-gray-900 leading-none ">
-                        WHAT ARE YOU <br /> <span className="text-[#525252]">INTERESTED IN?</span>
+                        WHAT ARE YOU <br /> <span className="text-[#ca8a04]">INTERESTED IN?</span>
                     </h3>
                 </div>
 

@@ -24,13 +24,13 @@ export function NewsHighlights() {
     const { ref, isVisible } = useReveal();
 
     return (
-        <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-yellow-600 text-white">
+        <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-black text-white">
             <div ref={ref} className="max-w-full mx-auto">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-px bg-white/10">
                     {news.map((item, index) => (
                         <div
                             key={index}
-                            className={`group relative min-h-[400px] md:min-h-[600px] flex flex-col justify-end p-8 md:p-12 bg-yellow-600 overflow-hidden ${isVisible ? 'animate-fade-in' : 'opacity-0'}`}
+                            className={`group relative min-h-[400px] md:min-h-[600px] flex flex-col justify-end p-8 md:p-12 bg-black overflow-hidden ${isVisible ? 'animate-fade-in' : 'opacity-0'}`}
                             style={{ animationDelay: `${index * 200}ms` }}
                         >
                             <img
@@ -41,10 +41,10 @@ export function NewsHighlights() {
                             <div className="absolute inset-0 bg-linear-to-t from-black via-black/40 to-transparent" />
 
                             <div className="relative z-10 space-y-6">
-                                <span className="text-[10px] font-black tracking-[0.5em] text-[#525252] ">
+                                <span className="text-[10px] font-black tracking-[0.5em] text-[#ca8a04] ">
                                     {item.tag}
                                 </span>
-                                <h3 className="text-3xl md:text-5xl font-black tracking-tighter  leading-none group-hover:text-[#525252] transition-colors">
+                                <h3 className="text-3xl md:text-5xl font-black tracking-tighter  leading-none group-hover:text-[#ca8a04] transition-colors">
                                     {item.title}
                                 </h3>
                                 <p className="text-gray-400 max-w-md font-light">

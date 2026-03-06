@@ -35,7 +35,7 @@ export default function StudentFeedbackPage() {
   if (authLoading) {
     return (
       <div className="flex h-screen bg-white">
-        <div className="w-64 bg-black animate-pulse"></div>
+        <div className="w-64 bg-gray-900 animate-pulse"></div>
         <div className="flex-1 p-6">
           <div className="h-8 bg-gray-200 rounded animate-pulse"></div>
         </div>
@@ -91,7 +91,7 @@ export default function StudentFeedbackPage() {
                         <select
                           value={feedbackType}
                           onChange={(e) => setFeedbackType(e.target.value)}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent"
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
                         >
                           <option value="general">General Feedback</option>
                           <option value="trainer">Trainer Experience</option>
@@ -108,7 +108,7 @@ export default function StudentFeedbackPage() {
                         <select
                           value={rating}
                           onChange={(e) => setRating(Number(e.target.value))}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent"
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
                         >
                           <option value={5}>⭐⭐⭐⭐⭐ Excellent</option>
                           <option value={4}>⭐⭐⭐⭐ Good</option>
@@ -128,7 +128,7 @@ export default function StudentFeedbackPage() {
                         value={subject}
                         onChange={(e) => setSubject(e.target.value)}
                         placeholder="Brief summary of your feedback"
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
                         required
                       />
                     </div>
@@ -142,7 +142,7 @@ export default function StudentFeedbackPage() {
                         onChange={(e) => setFeedback(e.target.value)}
                         placeholder="Please share your thoughts, suggestions, or experiences..."
                         rows={6}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
                         required
                       />
                     </div>
@@ -179,14 +179,14 @@ export default function StudentFeedbackPage() {
                   <h3 className="font-semibold text-gray-900 mb-3">Recent Improvements</h3>
                   <div className="space-y-2 text-sm">
                     <div className="flex items-start gap-2">
-                      <div className="w-2 h-2 bg-gray-500 rounded-full mt-2"></div>
+                      <div className="w-2 h-2 bg-yellow-600 rounded-full mt-2"></div>
                       <div>
                         <p className="font-medium text-gray-900">Enhanced Live Sessions</p>
                         <p className="text-gray-600">Based on your feedback about video quality</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-2">
-                      <div className="w-2 h-2 bg-gray-500 rounded-full mt-2"></div>
+                      <div className="w-2 h-2 bg-yellow-600 rounded-full mt-2"></div>
                       <div>
                         <p className="font-medium text-gray-900">Better Roadmap Navigation</p>
                         <p className="text-gray-600">Improved based on user suggestions</p>

@@ -37,10 +37,10 @@ export default function StudentProfilePage() {
         totalHours: 142,
         engagementScore: 88,
         skills: [
-            { name: 'React Architecture', level: 'Advanced', color: 'bg-gray-500' },
+            { name: 'React Architecture', level: 'Advanced', color: 'bg-yellow-600' },
             { name: 'Node.js Systems', level: 'Intermediate', color: 'bg-yellow-600' },
             { name: 'TypeScript', level: 'Intermediate', color: 'bg-yellow-600' },
-            { name: 'UI/UX Principles', level: 'Advanced', color: 'bg-gray-500' },
+            { name: 'UI/UX Principles', level: 'Advanced', color: 'bg-yellow-600' },
         ],
         liveRoadmap: [
             { title: 'Core JavaScript', status: 'Completed', date: 'Oct 2024' },
@@ -79,12 +79,12 @@ export default function StudentProfilePage() {
                                     {user?.avatar ? (
                                         <Image src={user.avatar} alt="Avatar" width={128} height={128} className="w-full h-full object-cover rounded-lg" />
                                     ) : (
-                                        <div className="w-full h-full bg-gradient-to-br from-gray-400 to-gray-600 flex items-center justify-center text-white text-4xl font-black rounded-lg">
+                                        <div className="w-full h-full bg-gradient-to-br from-yellow-500 to-yellow-600 flex items-center justify-center text-white text-4xl font-black rounded-lg">
                                             {profileData.name.charAt(0)}
                                         </div>
                                     )}
                                 </div>
-                                <div className="absolute bottom-2 right-2 w-4 h-4 bg-gray-500 border-2 border-white rounded-full" />
+                                <div className="absolute bottom-2 right-2 w-4 h-4 bg-yellow-600 border-2 border-white rounded-full" />
                             </div>
 
                             <div className="flex-1 pb-2">
@@ -111,10 +111,10 @@ export default function StudentProfilePage() {
 
                     {/* Stats Grid - Rounded LG */}
                     <div className="max-w-[1400px] mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6 mt-10">
-                        <SimpleStat icon={<Video className="w-5 h-5" />} label="Live Sessions" value={profileData.sessionsAttended} color="text-gray-600" />
-                        <SimpleStat icon={<Users className="w-5 h-5" />} label="Attendance" value={profileData.attendanceRate} color="text-gray-600" />
-                        <SimpleStat icon={<Clock className="w-5 h-5" />} label="Live Hours" value={profileData.totalHours} color="text-gray-600" />
-                        <SimpleStat icon={<TrendingUp className="w-5 h-5" />} label="Engagement" value={`${profileData.engagementScore}%`} color="text-gray-600" />
+                        <SimpleStat icon={<Video className="w-5 h-5" />} label="Live Sessions" value={profileData.sessionsAttended} color="text-yellow-600" />
+                        <SimpleStat icon={<Users className="w-5 h-5" />} label="Attendance" value={profileData.attendanceRate} color="text-yellow-600" />
+                        <SimpleStat icon={<Clock className="w-5 h-5" />} label="Live Hours" value={profileData.totalHours} color="text-yellow-600" />
+                        <SimpleStat icon={<TrendingUp className="w-5 h-5" />} label="Engagement" value={`${profileData.engagementScore}%`} color="text-yellow-600" />
                     </div>
 
                     <div className="max-w-[1400px] mx-auto p-6 grid grid-cols-1 lg:grid-cols-3 gap-8 pb-20">

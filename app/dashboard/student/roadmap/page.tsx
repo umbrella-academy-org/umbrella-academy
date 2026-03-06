@@ -31,7 +31,7 @@ export default function StudentRoadmapPage() {
   if (authLoading || roadmapsLoading) {
     return (
       <div className="flex h-screen bg-white">
-        <div className="w-64 bg-black animate-pulse"></div>
+        <div className="w-64 bg-gray-900 animate-pulse"></div>
         <div className="flex-1 p-6">
           <div className="h-8 bg-gray-200 rounded animate-pulse mb-6"></div>
           <div className="space-y-4">
@@ -88,18 +88,18 @@ export default function StudentRoadmapPage() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="bg-white border border-gray-200 rounded-lg p-6">
                   <h3 className="font-semibold text-gray-900 mb-2">Current Phase</h3>
-                  <p className="text-2xl font-bold text-gray-600">Phase 2</p>
-                  <p className="text-sm text-gray-600">Intermediate Concepts</p>
+                  <p className="text-2xl font-bold text-yellow-600">Phase 2</p>
+                  <p className="text-sm text-yellow-600">Intermediate Concepts</p>
                 </div>
                 <div className="bg-white border border-gray-200 rounded-lg p-6">
                   <h3 className="font-semibold text-gray-900 mb-2">Completed Lessons</h3>
-                  <p className="text-2xl font-bold text-gray-600">{activeRoadmap.roadmap.progress.completedSessions}/{activeRoadmap.roadmap.progress.totalSessions}</p>
-                  <p className="text-sm text-gray-600">{Math.round((activeRoadmap.roadmap.progress.completedSessions / activeRoadmap.roadmap.progress.totalSessions) * 100)}% Complete</p>
+                  <p className="text-2xl font-bold text-yellow-600">{activeRoadmap.roadmap.progress.completedSessions}/{activeRoadmap.roadmap.progress.totalSessions}</p>
+                  <p className="text-sm text-yellow-600">{Math.round((activeRoadmap.roadmap.progress.completedSessions / activeRoadmap.roadmap.progress.totalSessions) * 100)}% Complete</p>
                 </div>
                 <div className="bg-white border border-gray-200 rounded-lg p-6">
                   <h3 className="font-semibold text-gray-900 mb-2">Next Session</h3>
-                  <p className="text-2xl font-bold text-gray-600">Tomorrow</p>
-                  <p className="text-sm text-gray-600">2:00 PM - 3:00 PM</p>
+                  <p className="text-2xl font-bold text-yellow-600">Tomorrow</p>
+                  <p className="text-sm text-yellow-600">2:00 PM - 3:00 PM</p>
                 </div>
               </div>
 
