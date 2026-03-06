@@ -120,7 +120,7 @@ export default function StudentAvailabilityPage() {
                                                     <p className="text-xs text-gray-500">{slot.time}</p>
                                                 </div>
                                                 {timeSlots.includes(slot.id) && (
-                                                    <CheckCircle className="w-5 h-5 text-gray-600" />
+                                                    <CheckCircle className="w-5 h-5 text-yellow-600" />
                                                 )}
                                             </button>
                                         ))}

@@ -104,7 +104,7 @@ export default function RoadmapBuilder({ onSave }: RoadmapBuilderProps) {
             onChange={(e) => setGoal(e.target.value)}
             placeholder="e.g., 'I want to become a full-stack web developer'"
             rows={3}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent resize-none bg-white text-gray-900 placeholder:text-gray-400 font-medium"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent resize-none bg-white text-gray-900 placeholder:text-gray-400 font-medium"
           />
         </div>
       </div>

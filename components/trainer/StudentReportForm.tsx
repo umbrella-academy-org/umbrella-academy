@@ -86,7 +86,7 @@ export default function StudentReportForm({ studentId, studentName, onSubmit, on
               <select
                 value={reportType}
                 onChange={(e) => setReportType(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
               >
                 <option value="session">Session Report</option>
                 <option value="progress">Progress Update</option>
@@ -102,7 +102,7 @@ export default function StudentReportForm({ studentId, studentName, onSubmit, on
                 type="date"
                 value={sessionDate}
                 onChange={(e) => setSessionDate(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
                 required
               />
             </div>
@@ -115,7 +115,7 @@ export default function StudentReportForm({ studentId, studentName, onSubmit, on
                 value={duration}
                 onChange={(e) => setDuration(e.target.value)}
                 placeholder="60"
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
                 required
               />
             </div>
@@ -131,7 +131,7 @@ export default function StudentReportForm({ studentId, studentName, onSubmit, on
               onChange={(e) => setTopicsCovered(e.target.value)}
               placeholder="List the main topics and concepts covered in this session..."
               rows={3}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
               required
             />
           </div>
@@ -146,7 +146,7 @@ export default function StudentReportForm({ studentId, studentName, onSubmit, on
               onChange={(e) => setStudentPerformance(e.target.value)}
               placeholder="Describe the student's understanding, participation, and performance during the session..."
               rows={4}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
               required
             />
           </div>
@@ -162,7 +162,7 @@ export default function StudentReportForm({ studentId, studentName, onSubmit, on
                 <select
                   value={progressRating}
                   onChange={(e) => setProgressRating(Number(e.target.value))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
                 >
                   <option value={5}>5 - Excellent Progress</option>
                   <option value={4}>4 - Good Progress</option>
@@ -178,7 +178,7 @@ export default function StudentReportForm({ studentId, studentName, onSubmit, on
                 <select
                   value={attendanceRating}
                   onChange={(e) => setAttendanceRating(Number(e.target.value))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
                 >
                   <option value={5}>5 - Always Present</option>
                   <option value={4}>4 - Rarely Absent</option>
@@ -194,7 +194,7 @@ export default function StudentReportForm({ studentId, studentName, onSubmit, on
                 <select
                   value={engagementRating}
                   onChange={(e) => setEngagementRating(Number(e.target.value))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
                 >
                   <option value={5}>5 - Highly Engaged</option>
                   <option value={4}>4 - Well Engaged</option>
@@ -217,7 +217,7 @@ export default function StudentReportForm({ studentId, studentName, onSubmit, on
                 onChange={(e) => setChallenges(e.target.value)}
                 placeholder="Describe any challenges or difficulties the student is facing..."
                 rows={4}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
               />
             </div>
             <div>
@@ -229,7 +229,7 @@ export default function StudentReportForm({ studentId, studentName, onSubmit, on
                 onChange={(e) => setRecommendations(e.target.value)}
                 placeholder="Provide recommendations for improvement or additional support..."
                 rows={4}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
               />
             </div>
           </div>
@@ -244,7 +244,7 @@ export default function StudentReportForm({ studentId, studentName, onSubmit, on
               onChange={(e) => setNextSteps(e.target.value)}
               placeholder="Outline the plan for upcoming sessions and learning objectives..."
               rows={3}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
               required
             />
           </div>
@@ -259,7 +259,7 @@ export default function StudentReportForm({ studentId, studentName, onSubmit, on
               onChange={(e) => setRoadmapUpdates(e.target.value)}
               placeholder="Suggest any updates or modifications to the student's learning roadmap..."
               rows={3}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
             />
           </div>
 

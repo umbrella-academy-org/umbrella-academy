@@ -114,7 +114,7 @@ export default function RoadmapCreation({ roadmap, onRoadmapCreated }: RoadmapCr
       {/* Roadmap Preview */}
       <div className="border border-gray-200 rounded-lg p-4 mb-6">
         <div className="flex items-start gap-4">
-          <div className="w-16 h-12 bg-gradient-to-br from-gray-900 to-gray-700 rounded-lg flex-shrink-0 flex items-center justify-center">
+          <div className="w-16 h-12 bg-linear-to-br from-gray-900 to-gray-700 rounded-lg shrink-0 flex items-center justify-center">
             <div className="w-6 h-6 bg-yellow-600 rounded-full"></div>
           </div>
           <div className="flex-1">

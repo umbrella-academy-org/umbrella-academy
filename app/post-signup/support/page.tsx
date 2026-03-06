@@ -46,7 +46,7 @@ export default function StudentSupportPage() {
                                     placeholder="Search articles, topics, help..."
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
-                                    className="w-full pl-12 pr-4 py-4 bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent shadow-sm transition-all"
+                                    className="w-full pl-12 pr-4 py-4 bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent shadow-sm transition-all"
                                 />
                             </div>
                         </div>

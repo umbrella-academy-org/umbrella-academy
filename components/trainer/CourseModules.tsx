@@ -92,7 +92,7 @@ export default function CourseModules({ selectedCourse }: CourseModulesProps) {
             >
               <div className="flex items-start gap-4">
                 {/* Module Icon */}
-                <div className={`w-12 h-12 bg-gradient-to-br ${module.color} rounded-lg flex items-center justify-center text-white text-xl flex-shrink-0`}>
+                <div className={`w-12 h-12 bg-linear-to-br ${module.color} rounded-lg flex items-center justify-center text-white text-xl shrink-0`}>
                   {module.icon}
                 </div>
 
@@ -128,7 +128,7 @@ export default function CourseModules({ selectedCourse }: CourseModulesProps) {
                     </div>
                     <div className="w-full bg-gray-200 rounded-full h-2">
                       <div 
-                        className={`bg-gradient-to-r ${module.color} h-2 rounded-full transition-all duration-500`}
+                        className={`bg-linear-to-r ${module.color} h-2 rounded-full transition-all duration-500`}
                         style={{ width: `${module.progress}%` }}
                       />
                     </div>

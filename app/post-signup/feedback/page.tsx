@@ -43,7 +43,7 @@ export default function StudentFeedbackPage() {
                         {submitted ? (
                             <div className="bg-white rounded-lg border border-gray-100 p-12 text-center animate-fade-in shadow-sm">
                                 <div className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-6">
-                                    <CheckCircle2 className="w-10 h-10 text-gray-500" />
+                                    <CheckCircle2 className="w-10 h-10 text-yellow-600" />
                                 </div>
                                 <h2 className="text-2xl font-semibold text-gray-900 mb-2">Thank you for your feedback!</h2>
                                 <p className="text-gray-500 mb-8 max-w-sm mx-auto">
@@ -106,7 +106,7 @@ export default function StudentFeedbackPage() {
                                             value={feedback}
                                             onChange={(e) => setFeedback(e.target.value)}
                                             placeholder="Tell us what's on your mind..."
-                                            className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 h-40 resize-none transition-all"
+                                            className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 h-40 resize-none transition-all"
                                             required
                                         />
                                     </div>
@@ -128,7 +128,7 @@ export default function StudentFeedbackPage() {
                         {/* Previous Feedback Summary (Optional/Mock) */}
                         {!submitted && (
                             <div className="mt-8 p-6 bg-gray-50/50 rounded-lg border border-gray-100 flex items-start gap-4">
-                                <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0 text-gray-600">
+                                <div className="w-10 h-10 bg-yellow-50 rounded-lg flex items-center justify-center shrink-0 text-yellow-600">
                                     <MessageSquare className="w-5 h-5" />
                                 </div>
                                 <div>

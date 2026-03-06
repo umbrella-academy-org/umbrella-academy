@@ -53,7 +53,7 @@ export default function AddActivityForm() {
             value={formData.title}
             onChange={handleChange}
             placeholder="e.g., React Hooks Deep Dive"
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent placeholder:text-gray-400"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent placeholder:text-gray-400"
             required
           />
         </div>
@@ -68,7 +68,7 @@ export default function AddActivityForm() {
             name="course"
             value={formData.course}
             onChange={handleChange}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
             required
           >
             <option value="">Select a course</option>
@@ -94,7 +94,7 @@ export default function AddActivityForm() {
                 name="date"
                 value={formData.date}
                 onChange={handleChange}
-                className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent"
+                className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
                 required
               />
             </div>
@@ -112,7 +112,7 @@ export default function AddActivityForm() {
                 name="time"
                 value={formData.time}
                 onChange={handleChange}
-                className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent"
+                className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
                 required
               />
             </div>
@@ -130,7 +130,7 @@ export default function AddActivityForm() {
               name="duration"
               value={formData.duration}
               onChange={handleChange}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
               required
             >
               <option value="">Select duration</option>
@@ -157,7 +157,7 @@ export default function AddActivityForm() {
                 placeholder="e.g., 15"
                 min="1"
                 max="50"
-                className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent placeholder:text-gray-400"
+                className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent placeholder:text-gray-400"
                 required
               />
             </div>
@@ -174,7 +174,7 @@ export default function AddActivityForm() {
             name="type"
             value={formData.type}
             onChange={handleChange}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
           >
             <option value="live">Live Session</option>
             <option value="recorded">Recorded Session</option>
@@ -196,7 +196,7 @@ export default function AddActivityForm() {
             onChange={handleChange}
             rows={3}
             placeholder="Brief description of the activity..."
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent placeholder:text-gray-400 resize-none"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent placeholder:text-gray-400 resize-none"
           />
         </div>
 

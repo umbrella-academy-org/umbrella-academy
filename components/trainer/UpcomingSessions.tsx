@@ -103,7 +103,7 @@ export default function UpcomingSessions() {
                 <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-medium ${
                   session.type === 'group' 
                     ? 'bg-gray-500' 
-                    : 'bg-gradient-to-br from-gray-400 to-gray-600'
+                    : 'bg-linear-to-br from-gray-400 to-gray-600'
                 }`}>
                   {session.avatar}
                 </div>

@@ -154,7 +154,7 @@ export default function MoMoPayment({
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
             placeholder="07XXXXXXXX"
-            className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600"
+            className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600"
             disabled={isProcessing}
           />
         </div>

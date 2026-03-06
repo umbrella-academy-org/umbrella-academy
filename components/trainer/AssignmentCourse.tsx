@@ -7,7 +7,7 @@ export default function AssignmentCourse() {
     <div className="bg-white rounded-lg border border-gray-200 p-6">
       <div className="flex items-start gap-4">
         {/* Course Image */}
-        <div className="w-16 h-16 bg-gradient-to-br from-gray-400 to-gray-500 rounded-lg flex items-center justify-center flex-shrink-0">
+        <div className="w-16 h-16 bg-linear-to-br from-gray-400 to-gray-500 rounded-lg flex items-center justify-center shrink-0">
           <BookOpen className="w-8 h-8 text-white" />
         </div>
 

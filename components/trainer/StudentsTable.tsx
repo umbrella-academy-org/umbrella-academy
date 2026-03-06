@@ -151,7 +151,7 @@ export default function StudentsTable({ searchQuery, selectedStatus, selectedCou
     id: student.id,
     student: (
       <div className="flex items-center gap-3">
-        <div className="w-10 h-10 bg-gradient-to-br from-gray-400 to-gray-600 rounded-full flex items-center justify-center text-white font-medium text-sm">
+        <div className="w-10 h-10 bg-linear-to-br from-gray-400 to-gray-600 rounded-full flex items-center justify-center text-white font-medium text-sm">
           {student.avatar}
         </div>
         <div>
@@ -185,7 +185,7 @@ export default function StudentsTable({ searchQuery, selectedStatus, selectedCou
       <div className="flex items-center gap-2">
         <div className="flex-1 bg-gray-200 rounded-full h-2 w-20">
           <div
-            className="bg-gradient-to-r from-gray-500 to-gray-600 h-2 rounded-full transition-all duration-500"
+            className="bg-linear-to-r from-gray-500 to-gray-600 h-2 rounded-full transition-all duration-500"
             style={{ width: `${student.progress}%` }}
           />
         </div>

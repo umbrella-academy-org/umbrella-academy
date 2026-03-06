@@ -32,7 +32,7 @@ export default function AssignmentHeader() {
       </div>
 
       {/* Quick Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-6 bg-gradient-to-r from-gray-50 to-gray-50 rounded-lg border border-gray-200">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-6 bg-linear-to-r from-gray-50 to-gray-50 rounded-lg border border-gray-200">
         <div className="text-center">
           <div className="text-2xl font-bold text-gray-900">12</div>
           <div className="text-sm text-gray-600">Active Assignments</div>

@@ -214,7 +214,7 @@ export default function CollaborativeRoadmapForm({
                   value={goal}
                   onChange={(e) => updateGoal(index, e.target.value)}
                   placeholder="Enter a learning goal..."
-                  className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600"
+                  className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600"
                   disabled={!isTrainerConnected}
                 />
                 {formData.studentGoals.length > 1 && (
@@ -264,7 +264,7 @@ export default function CollaborativeRoadmapForm({
                     value={module.title}
                     onChange={(e) => updateLearningModule(index, 'title', e.target.value)}
                     placeholder="Module title..."
-                    className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600"
+                    className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600"
                     disabled={!isTrainerConnected}
                   />
                   <input
@@ -272,7 +272,7 @@ export default function CollaborativeRoadmapForm({
                     value={module.duration}
                     onChange={(e) => updateLearningModule(index, 'duration', e.target.value)}
                     placeholder="Duration (e.g., 2 weeks)..."
-                    className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600"
+                    className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600"
                     disabled={!isTrainerConnected}
                   />
                 </div>
@@ -281,7 +281,7 @@ export default function CollaborativeRoadmapForm({
                   onChange={(e) => updateLearningModule(index, 'description', e.target.value)}
                   placeholder="Module description..."
                   rows={2}
-                  className="w-full mt-3 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600"
+                  className="w-full mt-3 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600"
                   disabled={!isTrainerConnected}
                 />
               </div>
@@ -322,21 +322,21 @@ export default function CollaborativeRoadmapForm({
                     value={item.phase}
                     onChange={(e) => updateTimelineItem(index, 'phase', e.target.value)}
                     placeholder="Phase name..."
-                    className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600"
+                    className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600"
                     disabled={!isTrainerConnected}
                   />
                   <input
                     type="date"
                     value={item.startDate}
                     onChange={(e) => updateTimelineItem(index, 'startDate', e.target.value)}
-                    className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600"
+                    className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600"
                     disabled={!isTrainerConnected}
                   />
                   <input
                     type="date"
                     value={item.endDate}
                     onChange={(e) => updateTimelineItem(index, 'endDate', e.target.value)}
-                    className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600"
+                    className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600"
                     disabled={!isTrainerConnected}
                   />
                 </div>
@@ -364,7 +364,7 @@ export default function CollaborativeRoadmapForm({
                   value={criteria}
                   onChange={(e) => updateAssessmentCriteria(index, e.target.value)}
                   placeholder="Enter assessment criteria..."
-                  className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600"
+                  className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600"
                   disabled={!isTrainerConnected}
                 />
                 {formData.assessmentCriteria.length > 1 && (

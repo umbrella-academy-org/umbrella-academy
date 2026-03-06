@@ -176,7 +176,7 @@ export default function ChooseFieldPage() {
                               <h3 className={`text-sm font-semibold truncate ${isSelected ? 'text-gray-900' : 'text-gray-700'}`}>
                                 {field.title}
                               </h3>
-                              {isSelected && <CheckCircle className="w-5 h-5 text-gray-600" />}
+                              {isSelected && <CheckCircle className="w-5 h-5 text-yellow-600" />}
                             </div>
 
                             <div className="flex items-center justify-between">

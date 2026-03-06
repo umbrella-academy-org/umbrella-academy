@@ -154,7 +154,7 @@ export default function TransactionHistory() {
               <tr key={transaction.id} className="border-b border-gray-100 hover:bg-gray-50">
                 <td className="py-4 px-4">
                   <div className="flex items-center gap-3">
-                    <div className={`w-8 h-8 rounded flex items-center justify-center flex-shrink-0 ${
+                    <div className={`w-8 h-8 rounded flex items-center justify-center shrink-0 ${
                       transaction.type === 'earning' ? 'bg-gray-100' :
                       transaction.type === 'withdrawal' ? 'bg-gray-100' : 'bg-gray-100'
                     }`}>

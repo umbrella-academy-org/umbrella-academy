@@ -165,7 +165,7 @@ export default function LiveSessionNotifications() {
               className="flex items-start gap-3 p-3 hover:bg-gray-50 rounded-lg transition-colors animate-fade-in"
               style={{ animationDelay: `${index * 50}ms` }}
             >
-              <div className="flex-shrink-0 mt-1">
+              <div className="shrink-0 mt-1">
                 {notification.icon}
               </div>
               <div className="flex-1 min-w-0">

@@ -124,7 +124,7 @@ export default function SessionScheduler({ selectedDate }: SessionSchedulerProps
         <select
           value={duration}
           onChange={(e) => setDuration(e.target.value)}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-sm"
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-sm"
         >
           <option value="30">30 minutes</option>
           <option value="60">1 hour</option>
@@ -142,7 +142,7 @@ export default function SessionScheduler({ selectedDate }: SessionSchedulerProps
           <select
             value={student}
             onChange={(e) => setStudent(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-sm"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-sm"
           >
             <option value="">Choose a student...</option>
             {students.map((studentName) => (
@@ -157,7 +157,7 @@ export default function SessionScheduler({ selectedDate }: SessionSchedulerProps
             value={student}
             onChange={(e) => setStudent(e.target.value)}
             placeholder="e.g., React Fundamentals Group Session"
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-sm"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-sm"
           />
         )}
       </div>

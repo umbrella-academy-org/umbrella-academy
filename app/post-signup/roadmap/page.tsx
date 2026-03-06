@@ -125,9 +125,9 @@ export default function RoadmapPage() {
   // Show success message
   if (showSuccessMessage) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-50 flex items-center justify-center">
         <div className="text-center p-8">
-          <CheckCircle className="w-16 h-16 text-gray-500 mx-auto mb-4" />
+          <CheckCircle className="w-16 h-16 text-yellow-600 mx-auto mb-4" />
           <h1 className="text-2xl font-bold text-gray-900 mb-2">Roadmap Created Successfully!</h1>
           <p className="text-gray-600 mb-4">Please wait for your roadmap to be approved by your mentor.</p>
           <div className="animate-spin w-6 h-6 border-2 border-gray-500 border-t-transparent rounded-full mx-auto"></div>
@@ -159,7 +159,7 @@ export default function RoadmapPage() {
               value={roadmapTitle}
               onChange={(e) => setRoadmapTitle(e.target.value)}
               placeholder="e.g., Full Stack Developer, Data Scientist, Mobile App Developer"
-              className="w-full px-3 lg:px-4 py-2 lg:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm lg:text-base"
+              className="w-full px-3 lg:px-4 py-2 lg:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-sm lg:text-base"
             />
           </div>
 
@@ -188,7 +188,7 @@ export default function RoadmapPage() {
                   {/* Phase card */}
                   <div className="flex items-start gap-3 lg:gap-4 mb-6 lg:mb-8">
                     {/* Timeline dot */}
-                    <div className="flex-shrink-0 w-10 h-10 lg:w-12 lg:h-12 bg-gray-100 rounded-full flex items-center justify-center border-4 border-white shadow-sm">
+                    <div className="shrink-0 w-10 h-10 lg:w-12 lg:h-12 bg-yellow-50 rounded-full flex items-center justify-center border-4 border-white shadow-sm">
                       <span className="text-gray-600 font-semibold text-xs lg:text-sm">{index + 1}</span>
                     </div>
 
@@ -205,14 +205,14 @@ export default function RoadmapPage() {
                       </div>
                       <p className="text-gray-600 text-xs lg:text-sm mb-3 line-clamp-3">{phase.description}</p>
                       <div className="flex items-center gap-2 text-xs lg:text-sm text-gray-500">
-                        <Clock className="w-3 h-3 lg:w-4 lg:h-4 flex-shrink-0" />
+                        <Clock className="w-3 h-3 lg:w-4 lg:h-4 shrink-0" />
                         <span>{getDurationText(phase.duration, phase.durationType)}</span>
                       </div>
                     </div>
 
                     {/* Arrow connector - hidden on mobile */}
                     {index < phases.length - 1 && (
-                      <div className="hidden sm:flex flex-shrink-0 mt-6">
+                      <div className="hidden sm:flex shrink-0 mt-6">
                         <ArrowRight className="w-4 h-4 lg:w-5 lg:h-5 text-gray-400" />
                       </div>
                     )}
@@ -233,7 +233,7 @@ export default function RoadmapPage() {
                       value={newPhase.title}
                       onChange={(e) => setNewPhase({ ...newPhase, title: e.target.value })}
                       placeholder="e.g., Learn React Fundamentals"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm lg:text-base"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-sm lg:text-base"
                     />
                   </div>
 
@@ -244,7 +244,7 @@ export default function RoadmapPage() {
                       onChange={(e) => setNewPhase({ ...newPhase, description: e.target.value })}
                       placeholder="Describe what will be covered in this phase"
                       rows={3}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm lg:text-base resize-none"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-sm lg:text-base resize-none"
                     />
                   </div>
 
@@ -256,7 +256,7 @@ export default function RoadmapPage() {
                         value={newPhase.duration}
                         onChange={(e) => setNewPhase({ ...newPhase, duration: e.target.value })}
                         placeholder="e.g., 4"
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm lg:text-base"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-sm lg:text-base"
                       />
                     </div>
                     <div>
@@ -264,7 +264,7 @@ export default function RoadmapPage() {
                       <select
                         value={newPhase.durationType}
                         onChange={(e) => setNewPhase({ ...newPhase, durationType: e.target.value as 'hours' | 'days' | 'weeks' })}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm lg:text-base"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-sm lg:text-base"
                       >
                         <option value="hours">Hours</option>
                         <option value="days">Days</option>
@@ -282,7 +282,7 @@ export default function RoadmapPage() {
                     </button>
                     <button
                       onClick={() => setIsCreatingPhase(false)}
-                      className="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition-colors text-sm lg:text-base"
+                      className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors text-sm lg:text-base"
                     >
                       Cancel
                     </button>
