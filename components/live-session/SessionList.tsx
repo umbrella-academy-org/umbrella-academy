@@ -90,7 +90,7 @@ export default function SessionList({ activeTab }: SessionListProps) {
             {filteredSessions.length === 0 ? (
                 <div className="bg-white rounded-2xl p-12 border border-dashed border-gray-200 text-center">
                     <Calendar className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-                    <h3 className="text-lg font-bold text-amber-900">No sessions found</h3>
+                    <h3 className="text-lg font-bold text-gray-900">No sessions found</h3>
                     <p className="text-sm text-gray-500">Check back later for new updates.</p>
                 </div>
             ) : (
@@ -132,7 +132,7 @@ export default function SessionList({ activeTab }: SessionListProps) {
                                         {session.title}
                                     </h3>
                                     <p className="text-sm text-gray-500 mt-1 truncate max-w-md">
-                                        Trainer: <span className="text-amber-900 font-semibold">{session.instructor}</span> • {session.description}
+                                        Trainer: <span className="text-gray-900 font-semibold">{session.instructor}</span> • {session.description}
                                     </p>
                                 </div>
                             </div>
@@ -141,12 +141,12 @@ export default function SessionList({ activeTab }: SessionListProps) {
                                 {session.status === 'live' ? (
                                     <button
                                         onClick={() => router.push('/post-signup/live-session/call')}
-                                        className="flex-1 md:flex-none px-8 py-3 bg-amber-600 text-white text-sm rounded-lg hover:bg-amber-700 shadow-md transition-all active:scale-95 animate-pulse"
+                                        className="flex-1 md:flex-none px-8 py-3 bg-yellow-600 text-white text-sm rounded-lg hover:bg-yellow-700 shadow-md transition-all active:scale-95 animate-pulse"
                                     >
                                         Join Meeting
                                     </button>
                                 ) : session.status === 'upcoming' ? (
-                                    <button className="flex-1 md:flex-none px-8 py-3 bg-amber-600 text-white text-sm rounded-lg hover:bg-amber-700 shadow-md transition-all active:scale-95">
+                                    <button className="flex-1 md:flex-none px-8 py-3 bg-yellow-600 text-white text-sm rounded-lg hover:bg-yellow-700 shadow-md transition-all active:scale-95">
                                         Register Session
                                     </button>
                                 ) : (

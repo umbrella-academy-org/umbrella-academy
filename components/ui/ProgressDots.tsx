@@ -18,7 +18,7 @@ export default function ProgressDots({
           key={index}
           className={`h-2 rounded-full ${
             index < currentStep 
-              ? 'w-8 bg-amber-600' 
+              ? 'w-8 bg-yellow-600' 
               : 'w-2 bg-gray-300'
           }`}
         />

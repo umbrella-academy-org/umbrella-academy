@@ -44,7 +44,7 @@ export default function ActivityStats() {
           
           <div>
             <p className="text-xs font-medium text-gray-600 mb-1">{stat.title}</p>
-            <p className="text-lg font-bold text-amber-900 mb-2">{stat.value}</p>
+            <p className="text-lg font-bold text-gray-900 mb-2">{stat.value}</p>
             
             {stat.status && (
               <span className="text-xs text-gray-600 font-medium">{stat.status}</span>

@@ -57,7 +57,7 @@ export default function ChooseCompanyPage() {
           {/* Go back button */}
           <button
             onClick={() => viewingCompany ? setViewingCompany(null) : window.history.back()}
-            className="flex items-center gap-2 text-gray-400 hover:text-amber-900 mb-8 transition-colors group"
+            className="flex items-center gap-2 text-gray-400 hover:text-gray-900 mb-8 transition-colors group"
           >
             <svg className="w-5 h-5 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M15 19l-7-7 7-7" />
@@ -91,13 +91,13 @@ export default function ChooseCompanyPage() {
 
                 {/* Description */}
                 <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
-                  <h3 className="text-sm font-black text-amber-900 mb-3">About</h3>
+                  <h3 className="text-sm font-black text-gray-900 mb-3">About</h3>
                   <p className="text-sm text-gray-600 leading-relaxed">{viewingCompany.description}</p>
                 </div>
 
                 {/* Teaching Focus */}
                 <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
-                  <h3 className="text-sm font-black text-amber-900 mb-3">Teaching Focus</h3>
+                  <h3 className="text-sm font-black text-gray-900 mb-3">Teaching Focus</h3>
                   <div className="flex flex-wrap gap-2">
                     {viewingCompany.teachingFocus.map((focus, idx) => (
                       <span key={idx} className="bg-white text-gray-700 text-xs font-medium px-3 py-1.5 rounded border border-gray-200">
@@ -110,28 +110,28 @@ export default function ChooseCompanyPage() {
                 {/* How Our Programs Work */}
                 {viewingCompany.programDetails && (
                   <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
-                    <h3 className="text-sm font-black text-amber-900 mb-4">How Our Programs Work</h3>
+                    <h3 className="text-sm font-black text-gray-900 mb-4">How Our Programs Work</h3>
                     <div className="space-y-4">
                       <div>
-                        <h4 className="text-xs font-black text-amber-900 mb-1">Personalized Curriculum</h4>
+                        <h4 className="text-xs font-black text-gray-900 mb-1">Personalized Curriculum</h4>
                         <p className="text-xs text-gray-600">{viewingCompany.programDetails.curriculum}</p>
                       </div>
                       <div>
-                        <h4 className="text-xs font-black text-amber-900 mb-1">Learning Duration</h4>
+                        <h4 className="text-xs font-black text-gray-900 mb-1">Learning Duration</h4>
                         <ul className="text-xs text-gray-600 space-y-1 ml-4">
                           <li className="list-disc">Minimum: {viewingCompany.programDetails.duration.minimum}</li>
                           <li className="list-disc">{viewingCompany.programDetails.duration.extended}</li>
                         </ul>
                       </div>
                       <div>
-                        <h4 className="text-xs font-black text-amber-900 mb-1">Schedule</h4>
+                        <h4 className="text-xs font-black text-gray-900 mb-1">Schedule</h4>
                         <ul className="text-xs text-gray-600 space-y-1 ml-4">
                           <li className="list-disc">Classes run {viewingCompany.programDetails.schedule.days}</li>
                           <li className="list-disc">{viewingCompany.programDetails.schedule.flexibility}</li>
                         </ul>
                       </div>
                       <div>
-                        <h4 className="text-xs font-black text-amber-900 mb-1">Hands-On Projects</h4>
+                        <h4 className="text-xs font-black text-gray-900 mb-1">Hands-On Projects</h4>
                         <ul className="text-xs text-gray-600 space-y-1 ml-4">
                           {viewingCompany.programDetails.projects.map((project, idx) => (
                             <li key={idx} className="list-disc">{project}</li>
@@ -145,13 +145,13 @@ export default function ChooseCompanyPage() {
                 {/* Pricing */}
                 {viewingCompany.pricing && (
                   <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
-                    <h3 className="text-sm font-black text-amber-900 mb-4">Pricing</h3>
+                    <h3 className="text-sm font-black text-gray-900 mb-4">Pricing</h3>
                     <div className="space-y-3">
                       <div>
-                        <p className="text-xs font-black text-amber-900 mb-1">Tuition: {viewingCompany.pricing.tuition}</p>
+                        <p className="text-xs font-black text-gray-900 mb-1">Tuition: {viewingCompany.pricing.tuition}</p>
                       </div>
                       <div>
-                        <h4 className="text-xs font-black text-amber-900 mb-2">Pricing includes:</h4>
+                        <h4 className="text-xs font-black text-gray-900 mb-2">Pricing includes:</h4>
                         <ul className="text-xs text-gray-600 space-y-1 ml-4">
                           {viewingCompany.pricing.includes.map((item, idx) => (
                             <li key={idx} className="list-disc">{item}</li>
@@ -165,7 +165,7 @@ export default function ChooseCompanyPage() {
                 {/* Why Choose */}
                 {viewingCompany.whyChoose && (
                   <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
-                    <h3 className="text-sm font-black text-amber-900 mb-3">Why Choose {viewingCompany.name}</h3>
+                    <h3 className="text-sm font-black text-gray-900 mb-3">Why Choose {viewingCompany.name}</h3>
                     <ul className="text-xs text-gray-600 space-y-2 ml-4">
                       {viewingCompany.whyChoose.map((reason, idx) => (
                         <li key={idx} className="list-disc">{reason}</li>
@@ -177,7 +177,7 @@ export default function ChooseCompanyPage() {
                 {/* Images Gallery */}
                 {viewingCompany.images.length > 1 && (
                   <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
-                    <h3 className="text-sm font-black text-amber-900 mb-3">Gallery</h3>
+                    <h3 className="text-sm font-black text-gray-900 mb-3">Gallery</h3>
                     <div className="grid grid-cols-2 gap-3">
                       {viewingCompany.images.slice(1).map((img, idx) => (
                         <div key={idx} className="relative w-2xl h-96 rounded-lg overflow-hidden">
@@ -199,7 +199,7 @@ export default function ChooseCompanyPage() {
                     handleCompanySelect(viewingCompany.id, viewingCompany.fieldId);
                     setViewingCompany(null);
                   }}
-                  className="w-full bg-amber-600 text-white py-3 rounded-lg font-medium hover:bg-amber-700 transition-all active:scale-95"
+                  className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-all active:scale-95"
                 >
                   Select This Company
                 </button>
@@ -209,7 +209,7 @@ export default function ChooseCompanyPage() {
               <>
             {/* Logo */}
             <div className="mb-8">
-              <div className="w-16 h-16 bg-amber-600 rounded-2xl flex items-center justify-center shadow-lg">
+              <div className="w-16 h-16 bg-yellow-600 rounded-2xl flex items-center justify-center shadow-lg">
                 <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" />
                 </svg>
@@ -217,7 +217,7 @@ export default function ChooseCompanyPage() {
             </div>
 
             {/* Title */}
-            <h1 className="text-3xl font-semibold text-amber-900 mb-2 text-center">
+            <h1 className="text-3xl font-semibold text-gray-900 mb-2 text-center">
               Choose Your Training Path
             </h1>
             <p className="text-gray-500 mb-10 text-center text-sm px-4">
@@ -233,11 +233,11 @@ export default function ChooseCompanyPage() {
                     <div key={field.id} className="space-y-3">
                       {/* Field Header */}
                       <div className="flex items-center gap-3 pb-2 border-b border-gray-200">
-                        <div className="w-8 h-8 bg-amber-600 rounded-lg flex items-center justify-center">
+                        <div className="w-8 h-8 bg-yellow-600 rounded-lg flex items-center justify-center">
                           <FieldIcon className="w-4 h-4 text-white" />
                         </div>
                         <div className="flex-1">
-                          <h3 className="text-sm font-black text-amber-900">{field.name}</h3>
+                          <h3 className="text-sm font-black text-gray-900">{field.name}</h3>
                           <p className="text-xs text-gray-500">{companies.length} partner companies</p>
                         </div>
                       </div>
@@ -250,14 +250,14 @@ export default function ChooseCompanyPage() {
                             key={company.id}
                             className={`flex items-start gap-4 p-4 border rounded-lg transition-all group ${
                               isSelected
-                                ? 'border-amber-600 bg-gray-50'
+                                ? 'border-yellow-600 bg-gray-50'
                                 : 'border-gray-200 bg-white hover:border-gray-300'
                             }`}
                           >
                             {/* Company Image */}
                             <div 
                               className={`relative w-16 h-16 rounded-lg overflow-hidden shrink-0 cursor-pointer ${
-                                isSelected ? 'ring-2 ring-amber-600' : ''
+                                isSelected ? 'ring-2 ring-yellow-600' : ''
                               }`}
                               onClick={() => handleCompanySelect(company.id, field.id)}
                             >
@@ -274,7 +274,7 @@ export default function ChooseCompanyPage() {
                               className="flex-1 min-w-0 cursor-pointer"
                               onClick={() => handleCompanySelect(company.id, field.id)}
                             >
-                              <h4 className={`text-sm font-semibold mb-1 ${isSelected ? 'text-amber-900' : 'text-gray-700'}`}>
+                              <h4 className={`text-sm font-semibold mb-1 ${isSelected ? 'text-gray-900' : 'text-gray-700'}`}>
                                 {company.name}
                               </h4>
                               <p className="text-xs text-gray-500 mb-2 line-clamp-2">
@@ -294,7 +294,7 @@ export default function ChooseCompanyPage() {
                             {/* Actions */}
                             <div className="flex flex-col gap-2 shrink-0">
                               {isSelected && (
-                                <CheckCircle className="w-5 h-5 text-amber-900" />
+                                <CheckCircle className="w-5 h-5 text-gray-900" />
                               )}
                               <button
                                 onClick={(e) => {
@@ -320,16 +320,16 @@ export default function ChooseCompanyPage() {
               <button
                 type="submit"
                 disabled={!selectedCompanyId || !selectedFieldId}
-                className="w-full bg-amber-600 text-white py-3 rounded-lg font-medium hover:bg-amber-700 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Continue to Courses
               </button>
 
               {/* Progress dots */}
               <div className="flex justify-center gap-2 pt-6">
-                <div className="w-2 h-2 bg-amber-600/30 rounded-full"></div>
-                <div className="w-8 h-2 bg-amber-600 rounded-full"></div>
-                <div className="w-12 h-2 bg-amber-600 rounded-full shadow-lg"></div>
+                <div className="w-2 h-2 bg-yellow-600/30 rounded-full"></div>
+                <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
+                <div className="w-12 h-2 bg-yellow-600 rounded-full shadow-lg"></div>
                 <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
                 <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
               </div>

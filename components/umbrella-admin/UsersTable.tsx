@@ -30,7 +30,7 @@ export default function UsersTable({ selectedTab, data }: UsersTableProps) {
                   <GraduationCap className="w-5 h-5 text-gray-600" />
                 </div>
                 <div>
-                  <div className="text-sm font-medium text-amber-900">{user.name}</div>
+                  <div className="text-sm font-medium text-gray-900">{user.name}</div>
                   <div className="text-sm text-gray-500">{user.email}</div>
                 </div>
               </div>
@@ -64,7 +64,7 @@ export default function UsersTable({ selectedTab, data }: UsersTableProps) {
                   <User className="w-5 h-5 text-gray-600" />
                 </div>
                 <div>
-                  <div className="text-sm font-medium text-amber-900">{user.name}</div>
+                  <div className="text-sm font-medium text-gray-900">{user.name}</div>
                   <div className="text-sm text-gray-500">{user.email}</div>
                 </div>
               </div>
@@ -98,7 +98,7 @@ export default function UsersTable({ selectedTab, data }: UsersTableProps) {
                   <Users className="w-5 h-5 text-gray-600" />
                 </div>
                 <div>
-                  <div className="text-sm font-medium text-amber-900">{user.name}</div>
+                  <div className="text-sm font-medium text-gray-900">{user.name}</div>
                   <div className="text-sm text-gray-500">{user.email}</div>
                 </div>
               </div>
@@ -132,7 +132,7 @@ export default function UsersTable({ selectedTab, data }: UsersTableProps) {
                   <Shield className="w-5 h-5 text-gray-600" />
                 </div>
                 <div>
-                  <div className="text-sm font-medium text-amber-900">{user.name}</div>
+                  <div className="text-sm font-medium text-gray-900">{user.name}</div>
                   <div className="text-sm text-gray-500">{user.email}</div>
                 </div>
               </div>
@@ -240,7 +240,7 @@ export default function UsersTable({ selectedTab, data }: UsersTableProps) {
               <button className="px-3 py-1.5 text-xs font-medium text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
                 Send Message
               </button>
-              <button className="px-3 py-1.5 text-xs font-medium text-white bg-amber-600 rounded-lg hover:bg-amber-700 transition-colors">
+              <button className="px-3 py-1.5 text-xs font-medium text-white bg-yellow-600 rounded-lg hover:bg-yellow-700 transition-colors">
                 Suspend Selected
               </button>
             </div>

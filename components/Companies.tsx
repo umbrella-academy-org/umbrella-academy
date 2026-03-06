@@ -52,7 +52,7 @@ export function Companies() {
             <span className="inline-block px-4 py-2 bg-white text-[#525252] rounded-full text-sm font-medium mb-4 shadow-sm border border-gray-200">
               Learning Companies
             </span>
-            <h2 className="text-4xl md:text-5xl font-bold text-amber-900 mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
               Explore Top <span className="text-[#525252]">Programs</span>
             </h2>
             <p className="text-xl text-gray-600">
@@ -90,7 +90,7 @@ export function Companies() {
 
                   {/* Field Badge */}
                   <div className="absolute bottom-4 left-4">
-                    <span className="px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-xs font-medium text-amber-900">
+                    <span className="px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-xs font-medium text-gray-900">
                       {company.field}
                     </span>
                   </div>
@@ -98,7 +98,7 @@ export function Companies() {
 
                 {/* Content */}
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-amber-900 mb-2">
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">
                     {company.name}
                   </h3>
                   <p className="text-sm text-gray-600 mb-4 leading-relaxed">
@@ -120,7 +120,7 @@ export function Companies() {
                   {/* Footer */}
                   <div className="flex items-center justify-between pt-4 border-t border-gray-200">
                     <div className="text-sm text-gray-600">
-                      <span className="font-bold text-amber-900">{company.students}</span> Students
+                      <span className="font-bold text-gray-900">{company.students}</span> Students
                     </div>
                     <button
                       className="flex items-center space-x-1 text-sm font-medium group-hover:underline"
@@ -138,7 +138,7 @@ export function Companies() {
 
         {/* Fields Overview */}
         <div className="bg-white rounded-2xl p-8 shadow-lg border-2 border-gray-200 animate-fade-in animation-delay-500">
-          <h3 className="text-2xl font-bold text-amber-900 mb-6 text-center">
+          <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">
             Available Learning Fields
           </h3>
           <div className="grid md:grid-cols-3 gap-6">
@@ -154,7 +154,7 @@ export function Companies() {
                     <Icon className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <div className="font-bold text-amber-900">{field.name}</div>
+                    <div className="font-bold text-gray-900">{field.name}</div>
                     <div className="text-sm text-gray-600">{field.companies} Companies</div>
                   </div>
                 </div>

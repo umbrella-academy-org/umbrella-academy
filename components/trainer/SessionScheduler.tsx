@@ -44,7 +44,7 @@ export default function SessionScheduler({ selectedDate }: SessionSchedulerProps
     <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100 animate-fade-in">
       <div className="flex items-center gap-2 mb-4">
         <Calendar className="w-5 h-5 text-gray-600" />
-        <h3 className="text-lg font-semibold text-amber-900">Schedule Session</h3>
+        <h3 className="text-lg font-semibold text-gray-900">Schedule Session</h3>
       </div>
 
       {/* Selected Date */}
@@ -69,7 +69,7 @@ export default function SessionScheduler({ selectedDate }: SessionSchedulerProps
             onClick={() => setSessionType('individual')}
             className={`flex-1 px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
               sessionType === 'individual'
-                ? 'bg-amber-600 text-white'
+                ? 'bg-yellow-600 text-white'
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
             }`}
           >
@@ -80,7 +80,7 @@ export default function SessionScheduler({ selectedDate }: SessionSchedulerProps
             onClick={() => setSessionType('group')}
             className={`flex-1 px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
               sessionType === 'group'
-                ? 'bg-amber-600 text-white'
+                ? 'bg-yellow-600 text-white'
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
             }`}
           >
@@ -106,7 +106,7 @@ export default function SessionScheduler({ selectedDate }: SessionSchedulerProps
               onClick={() => setSelectedTime(time)}
               className={`px-2 py-1.5 text-xs font-medium rounded transition-all duration-200 ${
                 selectedTime === time
-                  ? 'bg-amber-600 text-white'
+                  ? 'bg-yellow-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
@@ -166,7 +166,7 @@ export default function SessionScheduler({ selectedDate }: SessionSchedulerProps
       <button
         onClick={handleSchedule}
         disabled={!selectedTime || !student}
-        className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-amber-600 text-white text-sm font-medium rounded-lg hover:bg-amber-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-all duration-200 interactive-button"
+        className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-yellow-600 text-white text-sm font-medium rounded-lg hover:bg-yellow-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-all duration-200 interactive-button"
       >
         <Plus className="w-4 h-4" />
         Schedule Session

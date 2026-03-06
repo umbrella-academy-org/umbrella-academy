@@ -47,7 +47,7 @@ export function FeaturedPrograms() {
                 <div className={`flex items-end justify-between mb-20 reveal ${isVisible ? 'visible' : ''}`}>
                     <div>
                         <h2 className="text-sm font-bold tracking-[0.4em] text-gray-400  mb-4">Featured Selection</h2>
-                        <h3 className="text-4xl md:text-6xl font-black tracking-tighter text-amber-900  leading-none">
+                        <h3 className="text-4xl md:text-6xl font-black tracking-tighter text-gray-900  leading-none">
                             POPULAR <span className="text-[#525252]">PROGRAMS</span>
                         </h3>
                     </div>
@@ -74,7 +74,7 @@ export function FeaturedPrograms() {
                                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                                 />
                                 <div className="absolute top-6 left-6">
-                                    <span className="px-4 py-2 bg-white/90 backdrop-blur-md rounded-full text-[10px] font-black tracking-widest text-amber-900  shadow-lg">
+                                    <span className="px-4 py-2 bg-white/90 backdrop-blur-md rounded-full text-[10px] font-black tracking-widest text-gray-900  shadow-lg">
                                         {prog.field}
                                     </span>
                                 </div>
@@ -90,7 +90,7 @@ export function FeaturedPrograms() {
                                         </div>
                                         <div className="text-xs font-bold text-gray-400 tracking-widest ">{prog.company}</div>
                                     </div>
-                                    <h4 className="text-2xl md:text-3xl font-black tracking-tight text-amber-900  leading-tight group-hover:text-[#525252] transition-colors">
+                                    <h4 className="text-2xl md:text-3xl font-black tracking-tight text-gray-900  leading-tight group-hover:text-[#525252] transition-colors">
                                         {prog.title}
                                     </h4>
                                 </div>
@@ -108,7 +108,7 @@ export function FeaturedPrograms() {
 
                                 <button
                                     onClick={() => router.push("/auth/signup")}
-                                    className="w-full py-4 md:py-5 bg-amber-600 text-white rounded-2xl font-black tracking-widest  hover:bg-[#525252] transition-all duration-300 flex items-center justify-center space-x-3"
+                                    className="w-full py-4 md:py-5 bg-yellow-600 text-white rounded-2xl font-black tracking-widest  hover:bg-[#525252] transition-all duration-300 flex items-center justify-center space-x-3"
                                 >
                                     <span>Apply Now</span>
                                     <ArrowRight size={18} />

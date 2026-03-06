@@ -37,7 +37,7 @@ export default function CalendarInfo() {
   return (
     <div className="bg-white rounded-lg border border-gray-200 p-6">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-lg font-semibold text-amber-900">Calendar Overview</h2>
+        <h2 className="text-lg font-semibold text-gray-900">Calendar Overview</h2>
         <button className="text-sm text-gray-600 hover:text-gray-700 font-medium">
           View Details
         </button>
@@ -55,7 +55,7 @@ export default function CalendarInfo() {
               <span className="text-sm font-medium text-gray-600">{stat.label}</span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-xl font-bold text-amber-900">{stat.value}</span>
+              <span className="text-xl font-bold text-gray-900">{stat.value}</span>
               <span className={`text-xs font-medium ${
                 stat.changeType === 'positive' ? 'text-gray-600' : 'text-gray-600'
               }`}>
@@ -69,11 +69,11 @@ export default function CalendarInfo() {
       <div className="mt-6 pt-6 border-t border-gray-200">
         <div className="flex items-center justify-between text-sm">
           <span className="text-gray-600">This Month Progress</span>
-          <span className="font-medium text-amber-900">78% Complete</span>
+          <span className="font-medium text-gray-900">78% Complete</span>
         </div>
         <div className="mt-2 w-full bg-gray-200 rounded-full h-2">
           <div 
-            className="bg-amber-600 h-2 rounded-full transition-all duration-500"
+            className="bg-yellow-600 h-2 rounded-full transition-all duration-500"
             style={{ width: '78%' }}
           />
         </div>

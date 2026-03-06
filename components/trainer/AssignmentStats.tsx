@@ -82,12 +82,12 @@ export default function AssignmentStats() {
             <div className="flex items-center justify-between mb-3">
               {stat.icon}
               <div className="text-right">
-                <div className="text-2xl font-bold text-amber-900">{stat.value}</div>
+                <div className="text-2xl font-bold text-gray-900">{stat.value}</div>
               </div>
             </div>
             
             <div className="space-y-1">
-              <h3 className="font-semibold text-amber-900 text-sm">{stat.title}</h3>
+              <h3 className="font-semibold text-gray-900 text-sm">{stat.title}</h3>
               <div className={`text-xs font-medium ${
                 stat.changeType === 'positive' 
                   ? 'text-gray-600' 
@@ -102,7 +102,7 @@ export default function AssignmentStats() {
 
       {/* Grade Distribution */}
       <div className="bg-white rounded-lg border border-gray-200 p-6">
-        <h3 className="text-lg font-semibold text-amber-900 mb-4">Grade Distribution</h3>
+        <h3 className="text-lg font-semibold text-gray-900 mb-4">Grade Distribution</h3>
         
         <div className="space-y-3">
           {[
@@ -124,7 +124,7 @@ export default function AssignmentStats() {
                     style={{ width: `${item.percentage}%` }}
                   />
                 </div>
-                <span className="text-sm font-medium text-amber-900 w-8 text-right">{item.count}</span>
+                <span className="text-sm font-medium text-gray-900 w-8 text-right">{item.count}</span>
               </div>
             </div>
           ))}
@@ -134,7 +134,7 @@ export default function AssignmentStats() {
       {/* Recent Activity */}
       <div className="bg-white rounded-lg border border-gray-200 p-6">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold text-amber-900">Recent Activity</h3>
+          <h3 className="text-lg font-semibold text-gray-900">Recent Activity</h3>
           <button className="text-sm text-gray-600 hover:text-gray-700 font-medium">
             View All
           </button>
@@ -147,9 +147,9 @@ export default function AssignmentStats() {
               className="flex items-start gap-3 animate-fade-in"
               style={{ animationDelay: `${index * 50}ms` }}
             >
-              <div className="w-2 h-2 bg-amber-600 rounded-full mt-2 flex-shrink-0" />
+              <div className="w-2 h-2 bg-yellow-600 rounded-full mt-2 flex-shrink-0" />
               <div className="flex-1 min-w-0">
-                <p className="text-sm text-amber-900">
+                <p className="text-sm text-gray-900">
                   <span className="font-medium">{activity.action}</span>
                   {activity.student && (
                     <>
@@ -175,14 +175,14 @@ export default function AssignmentStats() {
 
       {/* Quick Actions */}
       <div className="bg-white rounded-lg border border-gray-200 p-6">
-        <h3 className="text-lg font-semibold text-amber-900 mb-4">Quick Actions</h3>
+        <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
         
         <div className="space-y-3">
           <button className="w-full text-left p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
             <div className="flex items-center gap-3">
               <FileText className="w-5 h-5 text-gray-400" />
               <div>
-                <div className="font-medium text-amber-900">Create Assignment</div>
+                <div className="font-medium text-gray-900">Create Assignment</div>
                 <div className="text-sm text-gray-600">Add a new assignment</div>
               </div>
             </div>
@@ -192,7 +192,7 @@ export default function AssignmentStats() {
             <div className="flex items-center gap-3">
               <TrendingUp className="w-5 h-5 text-gray-400" />
               <div>
-                <div className="font-medium text-amber-900">View Analytics</div>
+                <div className="font-medium text-gray-900">View Analytics</div>
                 <div className="text-sm text-gray-600">Assignment performance</div>
               </div>
             </div>
@@ -202,7 +202,7 @@ export default function AssignmentStats() {
             <div className="flex items-center gap-3">
               <Users className="w-5 h-5 text-gray-400" />
               <div>
-                <div className="font-medium text-amber-900">Bulk Actions</div>
+                <div className="font-medium text-gray-900">Bulk Actions</div>
                 <div className="text-sm text-gray-600">Grade multiple assignments</div>
               </div>
             </div>

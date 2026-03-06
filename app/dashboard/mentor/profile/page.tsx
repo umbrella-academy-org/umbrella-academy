@@ -54,7 +54,7 @@ export default function MentorProfilePage() {
                                                 {profileData.name.split(' ').map(n => n[0]).join('')}
                                             </div>
                                         </div>
-                                        <div className="absolute -bottom-0 -right-0 w-10 h-10 bg-amber-600 border-4 border-white rounded-full flex items-center justify-center shadow-lg">
+                                        <div className="absolute -bottom-0 -right-0 w-10 h-10 bg-yellow-600 border-4 border-white rounded-full flex items-center justify-center shadow-lg">
                                             <Shield className="w-5 h-5 text-white" />
                                         </div>
                                     </div>
@@ -62,7 +62,7 @@ export default function MentorProfilePage() {
                                     <div className="flex-1 flex flex-col md:flex-row md:items-center justify-between gap-6 pb-2">
                                         <div className=''>
                                             <div className="flex items-center gap-3">
-                                                <h1 className="text-2xl font-semibold text-amber-900  ">{profileData.name}</h1>
+                                                <h1 className="text-2xl font-semibold text-gray-900  ">{profileData.name}</h1>
                                                 <div className="px-2 py-1 bg-gray-50 text-gray-700 border border-gray-100 rounded-full text-[10px] font-black  ">ACADEMIC DIRECTOR</div>
                                             </div>
                                             <p className="text-gray-500 font-semibold flex items-center gap-2 mt-2">
@@ -77,10 +77,10 @@ export default function MentorProfilePage() {
                                             {isEditing ? (
                                                 <>
                                                     <button onClick={() => setIsEditing(false)} className="px-6 py-3 border border-gray-200 text-gray-600 rounded-lg font-bold hover:bg-gray-50 transition-all active:scale-95">Cancel</button>
-                                                    <button onClick={handleSave} className="px-8 py-3 bg-gray-900 text-white rounded-lg font-bold hover:bg-amber-600 shadow-xl shadow-gray-200 active:scale-95 transition-all">Save Changes</button>
+                                                    <button onClick={handleSave} className="px-8 py-3 bg-black text-white rounded-lg font-bold hover:bg-yellow-600 shadow-xl shadow-gray-200 active:scale-95 transition-all">Save Changes</button>
                                                 </>
                                             ) : (
-                                                <button onClick={() => setIsEditing(true)} className="flex items-center gap-2.5 px-8 py-3 bg-white border border-gray-200 text-gray-800 rounded-lg font-bold hover:border-amber-600 hover:text-gray-600 shadow-sm hover:shadow-gray-100/50 transition-all active:scale-95 group">
+                                                <button onClick={() => setIsEditing(true)} className="flex items-center gap-2.5 px-8 py-3 bg-white border border-gray-200 text-gray-800 rounded-lg font-bold hover:border-yellow-600 hover:text-gray-600 shadow-sm hover:shadow-gray-100/50 transition-all active:scale-95 group">
                                                     <Edit2 className="w-4.5 h-4.5 group-hover:rotate-12 transition-transform" />
                                                     Edit Profile
                                                 </button>
@@ -99,7 +99,7 @@ export default function MentorProfilePage() {
                                         <div className="w-12 h-12 bg-gray-50 rounded-2xl flex items-center justify-center text-gray-600">
                                             <User className="w-6 h-6" />
                                         </div>
-                                        <h3 className="text-xl font-semibold text-amber-900">Personal Information</h3>
+                                        <h3 className="text-xl font-semibold text-gray-900">Personal Information</h3>
                                     </div>
 
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6">
@@ -112,7 +112,7 @@ export default function MentorProfilePage() {
                                         <div className="space-y-2">
                                             <label className="font-semibold text-gray-500 ml-1">Email Address</label>
                                             <div className="px-5 py-3.5 bg-gray-50/50 border border-transparent rounded-[1.2rem] flex items-center justify-between">
-                                                <p className="text-amber-900 font-semibold">{profileData.email}</p>
+                                                <p className="text-gray-900 font-semibold">{profileData.email}</p>
                                                 <Mail className="w-4 h-4 text-gray-300" />
                                             </div>
                                         </div>
@@ -126,7 +126,7 @@ export default function MentorProfilePage() {
                                         <div className="space-y-2">
                                             <label className="text-xs font-semibold text-gray-400   ml-1">Work Location</label>
                                             <div className="px-5 py-3.5 bg-gray-50/50 border border-transparent rounded-[1.2rem] flex items-center justify-between">
-                                                <p className="text-amber-900 font-semibold">{profileData.location}</p>
+                                                <p className="text-gray-900 font-semibold">{profileData.location}</p>
                                                 <MapPin className="w-4 h-4 text-gray-300" />
                                             </div>
                                         </div>
@@ -145,7 +145,7 @@ export default function MentorProfilePage() {
                                         <div className="w-12 h-12 bg-gray-50 rounded-2xl flex items-center justify-center text-gray-600">
                                             <Award className="w-6 h-6" />
                                         </div>
-                                        <h3 className="text-xl font-semibold text-amber-900">Mentorship Oversight</h3>
+                                        <h3 className="text-xl font-semibold text-gray-900">Mentorship Oversight</h3>
                                     </div>
 
                                     <div className="space-y-6">
@@ -155,7 +155,7 @@ export default function MentorProfilePage() {
                                                     <Users className="w-7 h-7" />
                                                 </div>
                                                 <div className="space-y-1">
-                                                    <p className="text-lg font-semibold text-amber-900">Supervised Trainers</p>
+                                                    <p className="text-lg font-semibold text-gray-900">Supervised Trainers</p>
                                                     <p className="text-xs text-gray-800/60 font-bold   ">Profile Approval Access</p>
                                                 </div>
                                             </div>
@@ -168,7 +168,7 @@ export default function MentorProfilePage() {
                                                     <BookOpen className="w-7 h-7" />
                                                 </div>
                                                 <div className="space-y-1">
-                                                    <p className="text-lg font-semibold text-amber-900">Active Roadmaps</p>
+                                                    <p className="text-lg font-semibold text-gray-900">Active Roadmaps</p>
                                                     <p className="text-xs text-gray-800/60 font-bold   ">Quality Assurance Flow</p>
                                                 </div>
                                             </div>
@@ -187,7 +187,7 @@ export default function MentorProfilePage() {
 
 function SettingsItem({ icon, label, color }: { icon: React.ReactNode, label: string, color: string }) {
     const colors = {
-        gray: 'bg-gray-50 text-gray-600 group-hover:bg-amber-600',
+        gray: 'bg-gray-50 text-gray-600 group-hover:bg-yellow-600',
     };
     const colorClasses = colors[color as keyof typeof colors] || colors.gray;
 
@@ -197,9 +197,9 @@ function SettingsItem({ icon, label, color }: { icon: React.ReactNode, label: st
                 <div className={`w-10 h-10 rounded-lg flex items-center justify-center group-hover:text-white transition-all duration-300 ${colorClasses}`}>
                     {icon}
                 </div>
-                <span className="text-sm font-bold text-gray-700 group-hover:text-amber-900">{label}</span>
+                <span className="text-sm font-bold text-gray-700 group-hover:text-gray-900">{label}</span>
             </div>
-            <ChevronRight className="w-4 h-4 text-gray-300 group-hover:text-amber-900 group-hover:translate-x-1 transition-all" />
+            <ChevronRight className="w-4 h-4 text-gray-300 group-hover:text-gray-900 group-hover:translate-x-1 transition-all" />
         </button>
     );
 }

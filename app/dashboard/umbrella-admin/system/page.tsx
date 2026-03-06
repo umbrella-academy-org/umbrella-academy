@@ -44,7 +44,7 @@ export default function UmbrellaAdminSystemPage() {
         <main className="flex-1 overflow-auto">
           <div className="p-3 lg:p-4">
             <div className="mb-6">
-              <h1 className="text-2xl font-semibold text-amber-900 mb-2">System Health</h1>
+              <h1 className="text-2xl font-semibold text-gray-900 mb-2">System Health</h1>
               <p className="text-gray-600">Monitor system performance and health metrics</p>
             </div>
 
@@ -57,7 +57,7 @@ export default function UmbrellaAdminSystemPage() {
                     <div className="flex items-center justify-between">
                       <div>
                         <p className="text-gray-500 text-sm">{metric.name}</p>
-                        <p className="text-2xl font-bold text-amber-900">{metric.value}</p>
+                        <p className="text-2xl font-bold text-gray-900">{metric.value}</p>
                       </div>
                       <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${metric.status === 'healthy' ? 'bg-gray-100' : 'bg-gray-100'
                         }`}>
@@ -75,7 +75,7 @@ export default function UmbrellaAdminSystemPage() {
               {/* Service Status */}
               <div className="bg-white rounded-lg shadow-sm border border-gray-100">
                 <div className="p-6 border-b border-gray-200">
-                  <h3 className="text-lg font-semibold text-amber-900">Service Status</h3>
+                  <h3 className="text-lg font-semibold text-gray-900">Service Status</h3>
                 </div>
                 <div className="p-6">
                   <div className="space-y-4">
@@ -87,7 +87,7 @@ export default function UmbrellaAdminSystemPage() {
                       { name: 'Email Service', status: 'operational' }
                     ].map((service, index) => (
                       <div key={index} className="flex items-center justify-between">
-                        <span className="text-sm text-amber-900">{service.name}</span>
+                        <span className="text-sm text-gray-900">{service.name}</span>
                         <div className="flex items-center gap-2">
                           {service.status === 'operational' ? (
                             <CheckCircle className="w-4 h-4 text-gray-500" />
@@ -110,7 +110,7 @@ export default function UmbrellaAdminSystemPage() {
               {/* Recent Alerts */}
               <div className="bg-white rounded-lg shadow-sm border border-gray-100">
                 <div className="p-6 border-b border-gray-200">
-                  <h3 className="text-lg font-semibold text-amber-900">Recent Alerts</h3>
+                  <h3 className="text-lg font-semibold text-gray-900">Recent Alerts</h3>
                 </div>
                 <div className="p-6">
                   <div className="space-y-4">
@@ -120,7 +120,7 @@ export default function UmbrellaAdminSystemPage() {
                             alert.type === 'success' ? 'bg-gray-500' : 'bg-gray-500'
                           }`}></div>
                         <div className="flex-1">
-                          <p className="text-sm text-amber-900">{alert.message}</p>
+                          <p className="text-sm text-gray-900">{alert.message}</p>
                           <p className="text-xs text-gray-500 mt-1">{alert.time}</p>
                         </div>
                         <span className={`text-xs px-2 py-1 rounded-full ${alert.severity === 'high' ? 'bg-gray-100 text-gray-800' :
@@ -139,20 +139,20 @@ export default function UmbrellaAdminSystemPage() {
             {/* System Actions */}
             <div className="bg-white rounded-lg shadow-sm border border-gray-100">
               <div className="p-6 border-b border-gray-200">
-                <h3 className="text-lg font-semibold text-amber-900">System Actions</h3>
+                <h3 className="text-lg font-semibold text-gray-900">System Actions</h3>
               </div>
               <div className="p-6">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <button className="p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors text-left">
-                    <div className="font-medium text-amber-900">Run System Diagnostics</div>
+                    <div className="font-medium text-gray-900">Run System Diagnostics</div>
                     <div className="text-sm text-gray-500 mt-1">Check all system components</div>
                   </button>
                   <button className="p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors text-left">
-                    <div className="font-medium text-amber-900">Schedule Maintenance</div>
+                    <div className="font-medium text-gray-900">Schedule Maintenance</div>
                     <div className="text-sm text-gray-500 mt-1">Plan system maintenance window</div>
                   </button>
                   <button className="p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors text-left">
-                    <div className="font-medium text-amber-900">View Logs</div>
+                    <div className="font-medium text-gray-900">View Logs</div>
                     <div className="text-sm text-gray-500 mt-1">Access system logs and reports</div>
                   </button>
                 </div>

@@ -95,7 +95,7 @@ export default function FieldAdminWalletPage() {
         <main className="flex-1 overflow-auto">
           <div className="p-3 lg:p-6">
             <div className="mb-8">
-              <h1 className="text-2xl font-semibold text-amber-900 mb-1">Field Wallet</h1>
+              <h1 className="text-2xl font-semibold text-gray-900 mb-1">Field Wallet</h1>
               <p className="text-sm text-gray-500">Manage your field's finances and withdrawals</p>
             </div>
 
@@ -112,19 +112,19 @@ export default function FieldAdminWalletPage() {
 
               <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-lg font-semibold text-amber-900">This Month</h3>
+                  <h3 className="text-lg font-semibold text-gray-900">This Month</h3>
                   <TrendingUp className="w-8 h-8 text-gray-500" />
                 </div>
-                <div className="text-3xl font-bold text-amber-900 mb-2">RWF {monthlyIncome.toLocaleString()}</div>
+                <div className="text-3xl font-bold text-gray-900 mb-2">RWF {monthlyIncome.toLocaleString()}</div>
                 <div className="text-gray-600 text-sm">+18% vs last month</div>
               </div>
 
               <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-lg font-semibold text-amber-900">Total Withdrawn</h3>
+                  <h3 className="text-lg font-semibold text-gray-900">Total Withdrawn</h3>
                   <Download className="w-8 h-8 text-gray-500" />
                 </div>
-                <div className="text-3xl font-bold text-amber-900 mb-2">RWF {totalWithdrawn.toLocaleString()}</div>
+                <div className="text-3xl font-bold text-gray-900 mb-2">RWF {totalWithdrawn.toLocaleString()}</div>
                 <div className="text-gray-600 text-sm">All time withdrawals</div>
               </div>
             </div>
@@ -133,10 +133,10 @@ export default function FieldAdminWalletPage() {
             <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6 mb-8">
               <div className="flex items-center justify-between mb-4">
                 <div>
-                  <h3 className="text-lg font-semibold text-amber-900">Field Operations</h3>
+                  <h3 className="text-lg font-semibold text-gray-900">Field Operations</h3>
                   <p className="text-sm text-gray-600">Manage field finances and operational expenses</p>
                 </div>
-                <button className="px-6 py-2.5 bg-amber-600 text-white rounded-lg font-medium hover:bg-amber-700 transition-colors">
+                <button className="px-6 py-2.5 bg-yellow-600 text-white rounded-lg font-medium hover:bg-yellow-700 transition-colors">
                   Request Withdrawal
                 </button>
               </div>
@@ -146,10 +146,10 @@ export default function FieldAdminWalletPage() {
             <div className="bg-white rounded-lg shadow-sm border border-gray-100">
               <div className="flex items-center justify-between p-6 border-b border-gray-200">
                 <div>
-                  <h3 className="text-lg font-semibold text-amber-900">Recent Transactions</h3>
+                  <h3 className="text-lg font-semibold text-gray-900">Recent Transactions</h3>
                   <p className="text-sm text-gray-600 mt-1">Field revenue and operational expenses</p>
                 </div>
-                <button className="flex items-center gap-2 text-gray-600 hover:text-amber-900 font-medium text-sm">
+                <button className="flex items-center gap-2 text-gray-600 hover:text-gray-900 font-medium text-sm">
                   <Download className="w-4 h-4" />
                   Export
                 </button>
@@ -176,7 +176,7 @@ export default function FieldAdminWalletPage() {
                               }`}>
                               {getTransactionIcon(transaction.type)}
                             </div>
-                            <span className="text-sm text-amber-900 font-medium">{transaction.description}</span>
+                            <span className="text-sm text-gray-900 font-medium">{transaction.description}</span>
                           </div>
                         </td>
                         <td className="py-4 px-6 text-sm text-gray-600">{transaction.date}</td>

@@ -36,7 +36,7 @@ export default function EarningsStats() {
 
   return (
     <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
-      <h3 className="text-lg font-semibold text-amber-900 mb-4">Earnings Overview</h3>
+      <h3 className="text-lg font-semibold text-gray-900 mb-4">Earnings Overview</h3>
       
       <div className="grid grid-cols-2 gap-4">
         {stats.map((stat, index) => (
@@ -45,7 +45,7 @@ export default function EarningsStats() {
               {stat.icon}
               <span className="text-sm font-medium text-gray-700">{stat.label}</span>
             </div>
-            <div className="text-2xl font-bold text-amber-900 mb-1">{stat.value}</div>
+            <div className="text-2xl font-bold text-gray-900 mb-1">{stat.value}</div>
             <div className={`text-xs ${stat.changeType === 'positive' ? 'text-gray-600' : 'text-gray-600'}`}>
               {stat.change}
             </div>
@@ -56,7 +56,7 @@ export default function EarningsStats() {
       <div className="mt-4 pt-4 border-t border-gray-200">
         <div className="flex items-center justify-between text-sm">
           <span className="text-gray-600">Hourly Rate</span>
-          <span className="font-medium text-amber-900">RWF 2,500/hour</span>
+          <span className="font-medium text-gray-900">RWF 2,500/hour</span>
         </div>
       </div>
     </div>

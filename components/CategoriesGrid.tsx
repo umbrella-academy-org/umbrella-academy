@@ -9,7 +9,7 @@ const categories = [
         title: "Film",
         icon: Film,
         image: "/real/dashboard-film.jpeg",
-        color: "bg-amber-600"
+        color: "bg-yellow-600"
     },
     {
         title: "Photography",
@@ -21,13 +21,13 @@ const categories = [
         title: "Software Engineering",
         icon: Zap,
         image: "/real/dashboard-software.jpeg",
-        color: "bg-gray-900"
+        color: "bg-black"
     },
     {
         title: "Digital Media",
         icon: Briefcase,
         image: "/real/dashboard-media.jpeg",
-        color: "bg-amber-600"
+        color: "bg-yellow-600"
     }
 ];
 
@@ -39,7 +39,7 @@ export function CategoriesGrid() {
         <section id="features" className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-[#f9f9f9]">
             <div ref={ref} className="max-w-full mx-auto">
                 <div className={`mb-16 reveal ${isVisible ? 'visible' : ''}`}>
-                    <h3 className="text-4xl md:text-6xl lg:text-8xl font-black tracking-tighter text-amber-900 leading-none ">
+                    <h3 className="text-4xl md:text-6xl lg:text-8xl font-black tracking-tighter text-gray-900 leading-none ">
                         WHAT ARE YOU <br /> <span className="text-[#525252]">INTERESTED IN?</span>
                     </h3>
                 </div>

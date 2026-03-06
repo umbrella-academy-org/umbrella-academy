@@ -165,7 +165,7 @@ export default function MentorWingReportsPage() {
         <main className="flex-1 overflow-auto">
           <div className="p-3 lg:p-6">
             <div className="mb-8">
-              <h1 className="text-2xl font-semibold text-amber-900 mb-1">Wing Reports</h1>
+              <h1 className="text-2xl font-semibold text-gray-900 mb-1">Wing Reports</h1>
               <p className="text-sm text-gray-500">Monitor and review performance reports for wings under your mentorship.</p>
             </div>
 
@@ -175,7 +175,7 @@ export default function MentorWingReportsPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-gray-600">Total Reports</p>
-                    <p className="text-2xl font-bold text-amber-900">{totalReports}</p>
+                    <p className="text-2xl font-bold text-gray-900">{totalReports}</p>
                   </div>
                   <FileText className="w-8 h-8 text-gray-500" />
                 </div>
@@ -184,7 +184,7 @@ export default function MentorWingReportsPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-gray-600">Pending Review</p>
-                    <p className="text-2xl font-bold text-amber-900">{pendingReports}</p>
+                    <p className="text-2xl font-bold text-gray-900">{pendingReports}</p>
                   </div>
                   <AlertTriangle className="w-8 h-8 text-gray-500" />
                 </div>
@@ -193,7 +193,7 @@ export default function MentorWingReportsPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-gray-600">Avg Completion</p>
-                    <p className="text-2xl font-bold text-amber-900">{avgCompletionRate}%</p>
+                    <p className="text-2xl font-bold text-gray-900">{avgCompletionRate}%</p>
                   </div>
                   <TrendingUp className="w-8 h-8 text-gray-500" />
                 </div>
@@ -202,7 +202,7 @@ export default function MentorWingReportsPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-gray-600">Avg Satisfaction</p>
-                    <p className="text-2xl font-bold text-amber-900">{avgSatisfactionScore}%</p>
+                    <p className="text-2xl font-bold text-gray-900">{avgSatisfactionScore}%</p>
                   </div>
                   <Users className="w-8 h-8 text-gray-500" />
                 </div>
@@ -212,7 +212,7 @@ export default function MentorWingReportsPage() {
             <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
               <div className="p-4 border-b border-gray-200">
                 <div className="flex items-center justify-between">
-                  <h3 className="font-semibold text-amber-900">Wing Reports ({filteredReports.length})</h3>
+                  <h3 className="font-semibold text-gray-900">Wing Reports ({filteredReports.length})</h3>
 
                   {/* Filters */}
                   <div className="flex gap-3">
@@ -276,7 +276,7 @@ export default function MentorWingReportsPage() {
                     {filteredReports.map((report) => (
                       <tr key={report.id} className="hover:bg-gray-50">
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm font-medium text-amber-900">
+                          <div className="text-sm font-medium text-gray-900">
                             {report.reportType.charAt(0).toUpperCase() + report.reportType.slice(1)} Report - {report.period}
                           </div>
                           <div className="text-sm text-gray-500">
@@ -284,19 +284,19 @@ export default function MentorWingReportsPage() {
                           </div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm font-medium text-amber-900">{report.wingName}</div>
+                          <div className="text-sm font-medium text-gray-900">{report.wingName}</div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${getReportTypeColor(report.reportType)}`}>
                             {report.reportType.charAt(0).toUpperCase() + report.reportType.slice(1)}
                           </span>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-amber-900">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                           {report.period}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="flex items-center">
-                            <div className="text-sm font-medium text-amber-900">{report.completionRate}%</div>
+                            <div className="text-sm font-medium text-gray-900">{report.completionRate}%</div>
                             <div className="ml-2 w-16 bg-gray-200 rounded-full h-2">
                               <div
                                 className="bg-gray-500 h-2 rounded-full"
@@ -313,7 +313,7 @@ export default function MentorWingReportsPage() {
                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                           <button
                             onClick={() => handleViewReport(report.id)}
-                            className="text-gray-600 hover:text-amber-900 p-1 hover:bg-gray-50 rounded"
+                            className="text-gray-600 hover:text-gray-900 p-1 hover:bg-gray-50 rounded"
                             title="View Details"
                           >
                             <Eye className="w-4 h-4" />
@@ -338,17 +338,17 @@ export default function MentorWingReportsPage() {
 
       {/* Report Details Modal */}
       {showReportModal && selectedReport && (
-        <div className="fixed inset-0 bg-amber-600 bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div className="fixed inset-0 bg-yellow-600 bg-opacity-50 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
             {/* Modal Header */}
             <div className="flex items-center justify-between p-6 border-b border-gray-200">
               <div>
-                <h2 className="text-xl font-semibold text-amber-900">{selectedReport.wingName}</h2>
+                <h2 className="text-xl font-semibold text-gray-900">{selectedReport.wingName}</h2>
                 <div className="flex items-center gap-2 mt-1">
                   <span className={`px-3 py-1 rounded-full text-sm font-medium ${getReportTypeColor(selectedReport.reportType)}`}>
                     {selectedReport.reportType.charAt(0).toUpperCase() + selectedReport.reportType.slice(1)} Report
                   </span>
-                  <span className="text-lg font-semibold text-amber-900">{selectedReport.period}</span>
+                  <span className="text-lg font-semibold text-gray-900">{selectedReport.period}</span>
                 </div>
               </div>
               <button
@@ -404,12 +404,12 @@ export default function MentorWingReportsPage() {
               {/* Report Content */}
               <div className="space-y-6">
                 <div>
-                  <h3 className="font-semibold text-amber-900 mb-3">Overview</h3>
+                  <h3 className="font-semibold text-gray-900 mb-3">Overview</h3>
                   <p className="text-gray-700 bg-gray-50 p-4 rounded-lg">{selectedReport.overview}</p>
                 </div>
 
                 <div>
-                  <h3 className="flex items-center gap-2 font-semibold text-amber-900 mb-3">
+                  <h3 className="flex items-center gap-2 font-semibold text-gray-900 mb-3">
                     <Target className="w-5 h-5 text-gray-500" />
                     Key Achievements
                   </h3>
@@ -417,7 +417,7 @@ export default function MentorWingReportsPage() {
                 </div>
 
                 <div>
-                  <h3 className="flex items-center gap-2 font-semibold text-amber-900 mb-3">
+                  <h3 className="flex items-center gap-2 font-semibold text-gray-900 mb-3">
                     <AlertTriangle className="w-5 h-5 text-gray-500" />
                     Challenges
                   </h3>
@@ -425,7 +425,7 @@ export default function MentorWingReportsPage() {
                 </div>
 
                 <div>
-                  <h3 className="flex items-center gap-2 font-semibold text-amber-900 mb-3">
+                  <h3 className="flex items-center gap-2 font-semibold text-gray-900 mb-3">
                     <TrendingUp className="w-5 h-5 text-gray-500" />
                     Recommendations
                   </h3>

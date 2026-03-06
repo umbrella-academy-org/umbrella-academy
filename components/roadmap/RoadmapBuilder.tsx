@@ -93,7 +93,7 @@ export default function RoadmapBuilder({ onSave }: RoadmapBuilderProps) {
             <Target className="w-5 h-5 text-gray-600" />
           </div>
           <div>
-            <h2 className="text-lg font-semibold text-amber-900">Your Learning Goal</h2>
+            <h2 className="text-lg font-semibold text-gray-900">Your Learning Goal</h2>
             <p className="text-sm text-gray-500">What do you want to achieve?</p>
           </div>
         </div>
@@ -104,7 +104,7 @@ export default function RoadmapBuilder({ onSave }: RoadmapBuilderProps) {
             onChange={(e) => setGoal(e.target.value)}
             placeholder="e.g., 'I want to become a full-stack web developer'"
             rows={3}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent resize-none bg-white text-amber-900 placeholder:text-gray-400 font-medium"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent resize-none bg-white text-gray-900 placeholder:text-gray-400 font-medium"
           />
         </div>
       </div>
@@ -117,14 +117,14 @@ export default function RoadmapBuilder({ onSave }: RoadmapBuilderProps) {
               <BookOpen className="w-5 h-5 text-gray-600" />
             </div>
             <div>
-              <h2 className="text-lg font-semibold text-amber-900">Learning Phases</h2>
+              <h2 className="text-lg font-semibold text-gray-900">Learning Phases</h2>
               <p className="text-sm text-gray-500">Break down your journey</p>
             </div>
           </div>
 
           <button
             onClick={addPhase}
-            className="flex items-center gap-2 px-4 py-2 text-sm bg-amber-600 text-white font-medium rounded-lg hover:bg-amber-700 transition-colors"
+            className="flex items-center gap-2 px-4 py-2 text-sm bg-yellow-600 text-white font-medium rounded-lg hover:bg-yellow-700 transition-colors"
           >
             <Plus className="w-4 h-4" />
             Add Phase
@@ -150,11 +150,11 @@ export default function RoadmapBuilder({ onSave }: RoadmapBuilderProps) {
               {phases.map((phase, index) => (
                 <div key={phase.id} className="relative group">
                   {/* Phase Card */}
-                  <div className="bg-white rounded-lg border border-gray-200 p-5 hover:border-amber-600/50 transition-all duration-300 shadow-sm">
+                  <div className="bg-white rounded-lg border border-gray-200 p-5 hover:border-yellow-600/50 transition-all duration-300 shadow-sm">
                     {/* Phase Header */}
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-amber-600 rounded-lg flex items-center justify-center text-white font-bold text-sm">
+                        <div className="w-10 h-10 bg-yellow-600 rounded-lg flex items-center justify-center text-white font-bold text-sm">
                           {index + 1}
                         </div>
                         <div>
@@ -181,7 +181,7 @@ export default function RoadmapBuilder({ onSave }: RoadmapBuilderProps) {
                         value={phase.title}
                         onChange={(e) => updatePhase(phase.id, 'title', e.target.value)}
                         placeholder={`Phase ${index + 1} title...`}
-                        className="w-full text-base font-semibold text-amber-900 bg-transparent border-b border-gray-100 focus:border-amber-600 focus:outline-none pb-1 placeholder:text-gray-300"
+                        className="w-full text-base font-semibold text-gray-900 bg-transparent border-b border-gray-100 focus:border-yellow-600 focus:outline-none pb-1 placeholder:text-gray-300"
                       />
 
                       <textarea
@@ -201,7 +201,7 @@ export default function RoadmapBuilder({ onSave }: RoadmapBuilderProps) {
                           >
                             -
                           </button>
-                          <span className="w-8 text-center text-sm font-bold text-amber-900">{phase.estimatedWeeks}</span>
+                          <span className="w-8 text-center text-sm font-bold text-gray-900">{phase.estimatedWeeks}</span>
                           <button
                             onClick={() => updatePhase(phase.id, 'estimatedWeeks', phase.estimatedWeeks + 1)}
                             className="w-8 h-8 flex items-center justify-center rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-50"
@@ -226,25 +226,25 @@ export default function RoadmapBuilder({ onSave }: RoadmapBuilderProps) {
             <div className="flex items-center gap-6">
               <div className="text-center">
                 <p className="text-[10px] text-gray-400  font-bold   mb-1">Total Time</p>
-                <p className="text-lg font-bold text-amber-900">{totalWeeks} Weeks</p>
+                <p className="text-lg font-bold text-gray-900">{totalWeeks} Weeks</p>
               </div>
               <div className="h-8 w-px bg-gray-200"></div>
               <div className="text-center">
                 <p className="text-[10px] text-gray-400  font-bold   mb-1">Phases</p>
-                <p className="text-lg font-bold text-amber-900">{phases.length}</p>
+                <p className="text-lg font-bold text-gray-900">{phases.length}</p>
               </div>
             </div>
 
             <div className="text-right">
               <p className="text-[10px] text-gray-400  font-bold   mb-1">Est. Lessons</p>
-              <p className="text-lg font-bold text-amber-900">{phases.length * 3}</p>
+              <p className="text-lg font-bold text-gray-900">{phases.length * 3}</p>
             </div>
           </div>
 
           <button
             onClick={handleSave}
             disabled={!isValid}
-            className="w-full flex items-center justify-center gap-2 py-3 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-all disabled:opacity-50 shadow-lg shadow-gray-600/20 active:scale-[0.98]"
+            className="w-full flex items-center justify-center gap-2 py-3 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-all disabled:opacity-50 shadow-lg shadow-gray-600/20 active:scale-[0.98]"
           >
             <Save className="w-5 h-5" />
             Create Your Roadmap

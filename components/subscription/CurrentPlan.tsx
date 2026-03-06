@@ -29,9 +29,9 @@ export default function CurrentPlan() {
     <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
       <div className="mb-6">
         <div className="flex items-center justify-between mb-2">
-          <h3 className="text-lg font-semibold text-amber-900">{subscription.planName}</h3>
+          <h3 className="text-lg font-semibold text-gray-900">{subscription.planName}</h3>
           <div className="text-right">
-            <div className="text-2xl font-bold text-amber-900">{subscription.currency} {subscription.price.toLocaleString()}</div>
+            <div className="text-2xl font-bold text-gray-900">{subscription.currency} {subscription.price.toLocaleString()}</div>
             <div className="text-sm text-gray-500">per {subscription.billingCycle}</div>
           </div>
         </div>
@@ -50,7 +50,7 @@ export default function CurrentPlan() {
             <span>{progressPercentage.toFixed(1)}%</span>
           </div>
           <div className="w-full bg-gray-200 rounded-full h-2">
-            <div className="bg-amber-600 h-2 rounded-full transition-all duration-500" style={{ width: `${progressPercentage}%` }}></div>
+            <div className="bg-yellow-600 h-2 rounded-full transition-all duration-500" style={{ width: `${progressPercentage}%` }}></div>
           </div>
         </div>
 
@@ -59,18 +59,18 @@ export default function CurrentPlan() {
           <div className="grid grid-cols-2 gap-4 text-sm">
             <div>
               <div className="text-gray-500">Started</div>
-              <div className="font-medium text-amber-900">{new Date(subscription.startDate).toLocaleDateString()}</div>
+              <div className="font-medium text-gray-900">{new Date(subscription.startDate).toLocaleDateString()}</div>
             </div>
             <div>
               <div className="text-gray-500">Next billing</div>
-              <div className="font-medium text-amber-900">{new Date(subscription.nextBillingDate).toLocaleDateString()}</div>
+              <div className="font-medium text-gray-900">{new Date(subscription.nextBillingDate).toLocaleDateString()}</div>
             </div>
           </div>
         </div>
 
         {/* Plan Features */}
         <div className="mb-4">
-          <h4 className="text-sm font-medium text-amber-900 mb-2">Plan includes:</h4>
+          <h4 className="text-sm font-medium text-gray-900 mb-2">Plan includes:</h4>
           <div className="space-y-2">
             {subscription.features.map((feature, index) => (
               <div key={index} className="flex items-center gap-2 text-sm text-gray-600">

@@ -87,7 +87,7 @@ export default function Calendar({ selectedDateRange, onDateRangeChange, userTyp
           onMouseLeave={() => setHoveredDay(null)}
           className={`w-7 h-7 sm:w-8 sm:h-8 text-xs rounded-full transition-all duration-200 flex items-center justify-center relative transform hover:scale-110 ${
             isSelected
-              ? 'bg-amber-600 text-white font-medium shadow-lg animate-pulse-glow'
+              ? 'bg-yellow-600 text-white font-medium shadow-lg animate-pulse-glow'
               : isToday
                 ? 'bg-gray-100 text-gray-600 font-medium'
                 : 'text-gray-700 hover:bg-gray-100'
@@ -95,7 +95,7 @@ export default function Calendar({ selectedDateRange, onDateRangeChange, userTyp
         >
           {day}
           {hasEvent && !isSelected && (
-            <div className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-amber-600 rounded-full transition-all duration-200 ${
+            <div className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-yellow-600 rounded-full transition-all duration-200 ${
               hoveredDay === day ? 'animate-pulse scale-150' : ''
             }`}></div>
           )}
@@ -127,7 +127,7 @@ export default function Calendar({ selectedDateRange, onDateRangeChange, userTyp
         <div className="order-2 lg:order-1">
           <div className="flex items-center gap-2 mb-3 lg:hidden">
             <CalendarIcon className="w-4 h-4 text-gray-600" />
-            <h4 className="text-sm font-medium text-amber-900">Quick Select</h4>
+            <h4 className="text-sm font-medium text-gray-900">Quick Select</h4>
           </div>
           <div className="grid grid-cols-3 sm:grid-cols-1 gap-1 sm:gap-2 lg:space-y-3">
             {dateRanges.map((range, index) => (
@@ -137,7 +137,7 @@ export default function Calendar({ selectedDateRange, onDateRangeChange, userTyp
                 className={`text-left text-xs sm:text-sm transition-all duration-200 p-2 sm:p-1 rounded-lg animate-slide-up ${
                   selectedDateRange === range
                     ? 'text-gray-600 font-medium bg-gray-50 transform scale-105'
-                    : 'text-gray-600 hover:text-amber-900 hover:bg-gray-50'
+                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                 }`}
                 style={{ animationDelay: `${index * 50}ms` }}
               >

@@ -163,7 +163,7 @@ export default function FieldAdminMentorReportsPage() {
         <main className="flex-1 overflow-auto">
           <div className="p-3 lg:p-6">
             <div className="mb-8">
-              <h1 className="text-2xl font-semibold text-amber-900 mb-1">Mentor Reports</h1>
+              <h1 className="text-2xl font-semibold text-gray-900 mb-1">Mentor Reports</h1>
               <p className="text-sm text-gray-500">Review and manage reports submitted by mentors in your field.</p>
             </div>
 
@@ -173,7 +173,7 @@ export default function FieldAdminMentorReportsPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-gray-600">Total Reports</p>
-                    <p className="text-2xl font-bold text-amber-900">{totalReports}</p>
+                    <p className="text-2xl font-bold text-gray-900">{totalReports}</p>
                   </div>
                   <FileText className="w-8 h-8 text-gray-500" />
                 </div>
@@ -182,7 +182,7 @@ export default function FieldAdminMentorReportsPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-gray-600">Pending Review</p>
-                    <p className="text-2xl font-bold text-amber-900">{pendingReports}</p>
+                    <p className="text-2xl font-bold text-gray-900">{pendingReports}</p>
                   </div>
                   <AlertTriangle className="w-8 h-8 text-gray-500" />
                 </div>
@@ -191,7 +191,7 @@ export default function FieldAdminMentorReportsPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-gray-600">Avg Completion</p>
-                    <p className="text-2xl font-bold text-amber-900">{avgCompletionRate}%</p>
+                    <p className="text-2xl font-bold text-gray-900">{avgCompletionRate}%</p>
                   </div>
                   <TrendingUp className="w-8 h-8 text-gray-500" />
                 </div>
@@ -200,7 +200,7 @@ export default function FieldAdminMentorReportsPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-gray-600">Avg Satisfaction</p>
-                    <p className="text-2xl font-bold text-amber-900">{avgSatisfactionScore}%</p>
+                    <p className="text-2xl font-bold text-gray-900">{avgSatisfactionScore}%</p>
                   </div>
                   <Users className="w-8 h-8 text-gray-500" />
                 </div>
@@ -210,7 +210,7 @@ export default function FieldAdminMentorReportsPage() {
             <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
               <div className="p-4 border-b border-gray-200">
                 <div className="flex items-center justify-between">
-                  <h3 className="font-semibold text-amber-900">Reports ({filteredReports.length})</h3>
+                  <h3 className="font-semibold text-gray-900">Reports ({filteredReports.length})</h3>
 
                   {/* Filters */}
                   <div className="flex gap-3">
@@ -274,7 +274,7 @@ export default function FieldAdminMentorReportsPage() {
                     {filteredReports.map((report) => (
                       <tr key={report.id} className="hover:bg-gray-50">
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm font-medium text-amber-900">
+                          <div className="text-sm font-medium text-gray-900">
                             {report.reportType.charAt(0).toUpperCase() + report.reportType.slice(1)} Report - {report.period}
                           </div>
                           <div className="text-sm text-gray-500">
@@ -291,7 +291,7 @@ export default function FieldAdminMentorReportsPage() {
                               </div>
                             </div>
                             <div className="ml-3">
-                              <div className="text-sm font-medium text-amber-900">{report.mentorName}</div>
+                              <div className="text-sm font-medium text-gray-900">{report.mentorName}</div>
                             </div>
                           </div>
                         </td>
@@ -300,7 +300,7 @@ export default function FieldAdminMentorReportsPage() {
                             {report.reportType.charAt(0).toUpperCase() + report.reportType.slice(1)}
                           </span>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-amber-900">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                           {report.period}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
@@ -308,13 +308,13 @@ export default function FieldAdminMentorReportsPage() {
                             {report.status}
                           </span>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-amber-900">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                           {formatDate(report.submittedAt)}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                           <button
                             onClick={() => setSelectedReport(report.id)}
-                            className="text-gray-600 hover:text-amber-900 p-1 hover:bg-gray-50 rounded"
+                            className="text-gray-600 hover:text-gray-900 p-1 hover:bg-gray-50 rounded"
                             title="View Details"
                           >
                             <Eye className="w-4 h-4" />
@@ -339,7 +339,7 @@ export default function FieldAdminMentorReportsPage() {
 
       {/* Report Details Modal */}
       {selectedReportData && (
-        <div className="fixed inset-0 bg-amber-600 bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div className="fixed inset-0 bg-yellow-600 bg-opacity-50 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
             {/* Modal Header */}
             <div className="flex items-center justify-between p-6 border-b border-gray-200">
@@ -348,12 +348,12 @@ export default function FieldAdminMentorReportsPage() {
                   {selectedReportData.mentorAvatar}
                 </div>
                 <div>
-                  <h2 className="text-xl font-semibold text-amber-900">{selectedReportData.mentorName}</h2>
+                  <h2 className="text-xl font-semibold text-gray-900">{selectedReportData.mentorName}</h2>
                   <div className="flex items-center gap-2 mt-1">
                     <span className={`px-3 py-1 rounded-full text-sm font-medium ${getReportTypeColor(selectedReportData.reportType)}`}>
                       {selectedReportData.reportType.charAt(0).toUpperCase() + selectedReportData.reportType.slice(1)} Report
                     </span>
-                    <span className="text-lg font-semibold text-amber-900">{selectedReportData.period}</span>
+                    <span className="text-lg font-semibold text-gray-900">{selectedReportData.period}</span>
                   </div>
                 </div>
               </div>
@@ -362,14 +362,14 @@ export default function FieldAdminMentorReportsPage() {
                   <>
                     <button
                       onClick={() => handleStatusUpdate(selectedReportData.id, 'reviewed')}
-                      className="flex items-center gap-2 px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors text-sm"
+                      className="flex items-center gap-2 px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors text-sm"
                     >
                       <Eye className="w-4 h-4" />
                       Mark Reviewed
                     </button>
                     <button
                       onClick={() => handleStatusUpdate(selectedReportData.id, 'approved')}
-                      className="flex items-center gap-2 px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors text-sm"
+                      className="flex items-center gap-2 px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors text-sm"
                     >
                       <CheckCircle className="w-4 h-4" />
                       Approve
@@ -410,18 +410,18 @@ export default function FieldAdminMentorReportsPage() {
               {/* Report Content */}
               <div className="space-y-6">
                 <div>
-                  <h3 className="font-semibold text-amber-900 mb-3">Trainers Overview</h3>
+                  <h3 className="font-semibold text-gray-900 mb-3">Trainers Overview</h3>
                   <p className="text-gray-700 bg-gray-50 p-4 rounded-lg">{selectedReportData.trainersOverview}</p>
                 </div>
 
                 <div>
-                  <h3 className="font-semibold text-amber-900 mb-3">Students Progress</h3>
+                  <h3 className="font-semibold text-gray-900 mb-3">Students Progress</h3>
                   <p className="text-gray-700 bg-gray-50 p-4 rounded-lg border-l-4 border-gray-400">{selectedReportData.studentsProgress}</p>
                 </div>
 
                 {selectedReportData.keyAchievements && (
                   <div>
-                    <h3 className="flex items-center gap-2 font-semibold text-amber-900 mb-3">
+                    <h3 className="flex items-center gap-2 font-semibold text-gray-900 mb-3">
                       <CheckCircle className="w-5 h-5 text-gray-500" />
                       Key Achievements
                     </h3>
@@ -431,7 +431,7 @@ export default function FieldAdminMentorReportsPage() {
 
                 {selectedReportData.challenges && (
                   <div>
-                    <h3 className="flex items-center gap-2 font-semibold text-amber-900 mb-3">
+                    <h3 className="flex items-center gap-2 font-semibold text-gray-900 mb-3">
                       <AlertTriangle className="w-5 h-5 text-gray-500" />
                       Challenges & Issues
                     </h3>
@@ -441,7 +441,7 @@ export default function FieldAdminMentorReportsPage() {
 
                 {selectedReportData.recommendations && (
                   <div>
-                    <h3 className="flex items-center gap-2 font-semibold text-amber-900 mb-3">
+                    <h3 className="flex items-center gap-2 font-semibold text-gray-900 mb-3">
                       <Target className="w-5 h-5 text-gray-500" />
                       Recommendations
                     </h3>
@@ -451,7 +451,7 @@ export default function FieldAdminMentorReportsPage() {
 
                 {/* Admin Notes */}
                 <div className="border-t pt-6">
-                  <h3 className="flex items-center gap-2 font-semibold text-amber-900 mb-3">
+                  <h3 className="flex items-center gap-2 font-semibold text-gray-900 mb-3">
                     <MessageSquare className="w-5 h-5 text-gray-500" />
                     Field Admin Notes
                   </h3>
@@ -473,7 +473,7 @@ export default function FieldAdminMentorReportsPage() {
                     />
                     <button
                       onClick={() => handleAddNotes(selectedReportData.id)}
-                      className="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors"
+                      className="px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors"
                       disabled={!adminNotes.trim()}
                     >
                       Add Notes

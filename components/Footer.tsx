@@ -3,7 +3,7 @@ import { Logo } from "./ui/Logo";
 
 export function Footer() {
   return (
-    <footer className="bg-amber-600 text-gray-300">
+    <footer className="bg-yellow-600 text-gray-300">
       <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
@@ -13,16 +13,16 @@ export function Footer() {
               Structured learning platform connecting students with expert trainers and mentors across multiple fields.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="w-10 h-10 bg-gray-900 rounded-lg flex items-center justify-center hover:bg-[#525252] transition-colors">
+              <a href="#" className="w-10 h-10 bg-black rounded-lg flex items-center justify-center hover:bg-[#525252] transition-colors">
                 <Facebook className="w-5 h-5" />
               </a>
-              <a href="#" className="w-10 h-10 bg-gray-900 rounded-lg flex items-center justify-center hover:bg-[#525252] transition-colors">
+              <a href="#" className="w-10 h-10 bg-black rounded-lg flex items-center justify-center hover:bg-[#525252] transition-colors">
                 <Twitter className="w-5 h-5" />
               </a>
-              <a href="#" className="w-10 h-10 bg-gray-900 rounded-lg flex items-center justify-center hover:bg-[#525252] transition-colors">
+              <a href="#" className="w-10 h-10 bg-black rounded-lg flex items-center justify-center hover:bg-[#525252] transition-colors">
                 <Linkedin className="w-5 h-5" />
               </a>
-              <a href="#" className="w-10 h-10 bg-gray-900 rounded-lg flex items-center justify-center hover:bg-[#525252] transition-colors">
+              <a href="#" className="w-10 h-10 bg-black rounded-lg flex items-center justify-center hover:bg-[#525252] transition-colors">
                 <Instagram className="w-5 h-5" />
               </a>
             </div>

@@ -148,7 +148,7 @@ export default function MentorReportsPage() {
       <Sidebar />
       <div className="flex-1 p-8">
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-3xl font-bold text-amber-900 mb-8">Trainer Reports</h1>
+          <h1 className="text-3xl font-bold text-gray-900 mb-8">Trainer Reports</h1>
 
           {/* Filter Controls */}
           <div className="mb-6">
@@ -168,7 +168,7 @@ export default function MentorReportsPage() {
           {/* Reports Table */}
           <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
             <div className="p-4 border-b border-gray-200">
-              <h3 className="font-semibold text-amber-900">Reports ({filteredReports.length})</h3>
+              <h3 className="font-semibold text-gray-900">Reports ({filteredReports.length})</h3>
             </div>
 
             <div className="overflow-x-auto">
@@ -199,7 +199,7 @@ export default function MentorReportsPage() {
                   {filteredReports.map((report) => (
                     <tr key={report.id} className="hover:bg-gray-50">
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm font-medium text-amber-900">
+                        <div className="text-sm font-medium text-gray-900">
                           Session Report - {report.topicsCovered.split(',')[0]}
                         </div>
                         <div className="text-sm text-gray-500">
@@ -207,12 +207,12 @@ export default function MentorReportsPage() {
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm font-medium text-amber-900">{report.studentName}</div>
+                        <div className="text-sm font-medium text-gray-900">{report.studentName}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm font-medium text-amber-900">{report.trainerName}</div>
+                        <div className="text-sm font-medium text-gray-900">{report.trainerName}</div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-amber-900">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                         {formatDate(report.sessionDate)}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
@@ -223,7 +223,7 @@ export default function MentorReportsPage() {
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <button
                           onClick={() => handleViewReport(report.id)}
-                          className="text-gray-600 hover:text-amber-900 p-1 hover:bg-gray-50 rounded"
+                          className="text-gray-600 hover:text-gray-900 p-1 hover:bg-gray-50 rounded"
                           title="View Details"
                         >
                           <Eye className="w-4 h-4" />
@@ -247,12 +247,12 @@ export default function MentorReportsPage() {
 
       {/* Report Details Modal */}
       {showReportModal && selectedReport && (
-        <div className="fixed inset-0 bg-amber-600 bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div className="fixed inset-0 bg-yellow-600 bg-opacity-50 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
             {/* Modal Header */}
             <div className="flex items-center justify-between p-6 border-b border-gray-200">
               <div>
-                <h2 className="text-xl font-semibold text-amber-900">Trainer Report Details</h2>
+                <h2 className="text-xl font-semibold text-gray-900">Trainer Report Details</h2>
                 <p className="text-sm text-gray-600 mt-1">{selectedReport.studentName} - {selectedReport.trainerName}</p>
               </div>
               <button
@@ -270,42 +270,42 @@ export default function MentorReportsPage() {
                 <div className="space-y-6">
                   {/* Session Info */}
                   <div>
-                    <h3 className="font-semibold text-amber-900 mb-3">Session Information</h3>
+                    <h3 className="font-semibold text-gray-900 mb-3">Session Information</h3>
                     <div className="space-y-2 text-sm">
                       <div className="flex justify-between">
                         <span className="text-gray-600">Student:</span>
-                        <span className="text-amber-900">{selectedReport.studentName}</span>
+                        <span className="text-gray-900">{selectedReport.studentName}</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-gray-600">Trainer:</span>
-                        <span className="text-amber-900">{selectedReport.trainerName}</span>
+                        <span className="text-gray-900">{selectedReport.trainerName}</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-gray-600">Date:</span>
-                        <span className="text-amber-900">{formatDate(selectedReport.sessionDate)}</span>
+                        <span className="text-gray-900">{formatDate(selectedReport.sessionDate)}</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-gray-600">Duration:</span>
-                        <span className="text-amber-900">{selectedReport.duration}</span>
+                        <span className="text-gray-900">{selectedReport.duration}</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Topics Covered */}
                   <div>
-                    <h3 className="font-semibold text-amber-900 mb-3">Topics Covered</h3>
+                    <h3 className="font-semibold text-gray-900 mb-3">Topics Covered</h3>
                     <p className="text-gray-700 bg-gray-50 p-4 rounded-lg">{selectedReport.topicsCovered}</p>
                   </div>
 
                   {/* Student Performance */}
                   <div>
-                    <h3 className="font-semibold text-amber-900 mb-3">Student Performance</h3>
+                    <h3 className="font-semibold text-gray-900 mb-3">Student Performance</h3>
                     <p className="text-gray-700 bg-gray-50 p-4 rounded-lg border-l-4 border-gray-400">{selectedReport.studentPerformance}</p>
                   </div>
 
                   {/* Ratings */}
                   <div>
-                    <h3 className="font-semibold text-amber-900 mb-3">Ratings</h3>
+                    <h3 className="font-semibold text-gray-900 mb-3">Ratings</h3>
                     <div className="grid grid-cols-3 gap-4">
                       <div className="text-center p-3 bg-gray-50 rounded-lg">
                         <div className="text-2xl font-bold text-gray-600">{selectedReport.ratings.progress}</div>
@@ -328,7 +328,7 @@ export default function MentorReportsPage() {
                   {/* Challenges */}
                   {selectedReport.challenges && (
                     <div>
-                      <h3 className="font-semibold text-amber-900 mb-3">Challenges</h3>
+                      <h3 className="font-semibold text-gray-900 mb-3">Challenges</h3>
                       <p className="text-gray-700 bg-gray-50 p-4 rounded-lg border-l-4 border-gray-400">{selectedReport.challenges}</p>
                     </div>
                   )}
@@ -336,7 +336,7 @@ export default function MentorReportsPage() {
                   {/* Recommendations */}
                   {selectedReport.recommendations && (
                     <div>
-                      <h3 className="font-semibold text-amber-900 mb-3">Recommendations</h3>
+                      <h3 className="font-semibold text-gray-900 mb-3">Recommendations</h3>
                       <p className="text-gray-700 bg-gray-50 p-4 rounded-lg border-l-4 border-gray-400">{selectedReport.recommendations}</p>
                     </div>
                   )}
@@ -344,7 +344,7 @@ export default function MentorReportsPage() {
                   {/* Next Steps */}
                   {selectedReport.nextSteps && (
                     <div>
-                      <h3 className="font-semibold text-amber-900 mb-3">Next Steps</h3>
+                      <h3 className="font-semibold text-gray-900 mb-3">Next Steps</h3>
                       <p className="text-gray-700 bg-gray-50 p-4 rounded-lg border-l-4 border-gray-400">{selectedReport.nextSteps}</p>
                     </div>
                   )}
@@ -352,7 +352,7 @@ export default function MentorReportsPage() {
                   {/* Roadmap Updates */}
                   {selectedReport.roadmapUpdates && (
                     <div>
-                      <h3 className="font-semibold text-amber-900 mb-3">Roadmap Updates</h3>
+                      <h3 className="font-semibold text-gray-900 mb-3">Roadmap Updates</h3>
                       <p className="text-gray-700 bg-gray-50 p-4 rounded-lg border-l-4 border-gray-400">{selectedReport.roadmapUpdates}</p>
                     </div>
                   )}
@@ -380,7 +380,7 @@ export default function MentorReportsPage() {
                   </button>
                   <button
                     onClick={() => handleReportAction(selectedReport.id, 'approve')}
-                    className="flex items-center gap-2 px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors"
+                    className="flex items-center gap-2 px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors"
                   >
                     <CheckCircle className="w-4 h-4" />
                     Approve

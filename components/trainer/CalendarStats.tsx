@@ -59,7 +59,7 @@ export default function CalendarStats() {
             <p className="text-xs font-medium text-gray-600 mb-1">
               {stat.label}
             </p>
-            <p className={`text-xl lg:text-2xl font-bold text-amber-900 mb-1 transition-all duration-300 ${
+            <p className={`text-xl lg:text-2xl font-bold text-gray-900 mb-1 transition-all duration-300 ${
               hoveredCard === index ? 'scale-105' : ''
             }`}>
               {stat.value}

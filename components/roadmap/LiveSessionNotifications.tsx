@@ -63,17 +63,17 @@ export default function LiveSessionNotifications() {
               {getStatusIcon(session.status)}
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-1">
-                  <h4 className="text-sm font-medium text-amber-900">Live Session</h4>
+                  <h4 className="text-sm font-medium text-gray-900">Live Session</h4>
                 </div>
-                <h3 className="text-base font-medium text-amber-900 mb-2">{session.title}</h3>
+                <h3 className="text-base font-medium text-gray-900 mb-2">{session.title}</h3>
                 <p className="text-sm text-gray-600 mb-3 leading-relaxed">{session.description}</p>
                 <div className="flex items-center gap-3">
-                  <button className="text-sm text-gray-600 hover:text-amber-900 font-medium">
+                  <button className="text-sm text-gray-600 hover:text-gray-900 font-medium">
                     View Details
                   </button>
                   <a 
                     href="/post-signup/live-session/call"
-                    className="px-3 py-1 bg-amber-600 text-white text-sm font-medium rounded hover:bg-amber-700 transition-colors"
+                    className="px-3 py-1 bg-yellow-600 text-white text-sm font-medium rounded hover:bg-yellow-700 transition-colors"
                   >
                     Attend
                   </a>

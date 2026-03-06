@@ -9,7 +9,7 @@ export function BlogCTA() {
         <section className="py-24 px-4 sm:px-6 lg:px-8">
             <div
                 ref={ref}
-                className={`max-w-7xl mx-auto bg-amber-600 rounded-3xl p-12 md:p-24 text-center space-y-8 relative overflow-hidden reveal ${isVisible ? 'visible' : ''}`}
+                className={`max-w-7xl mx-auto bg-yellow-600 rounded-3xl p-12 md:p-24 text-center space-y-8 relative overflow-hidden reveal ${isVisible ? 'visible' : ''}`}
             >
                 {/* Decorative background elements */}
                 <div className="absolute top-0 right-0 w-64 h-64 bg-[#525252] opacity-10 blur-3xl -translate-y-1/2 translate-x-1/2" />

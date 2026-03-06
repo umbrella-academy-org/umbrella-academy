@@ -98,7 +98,7 @@ export default function CalendarGrid({ selectedDate, onDateSelect }: CalendarGri
     <div className="bg-white rounded-lg border border-gray-200">
       {/* Calendar Header */}
       <div className="flex items-center justify-between p-6 border-b border-gray-200">
-        <h2 className="text-lg font-semibold text-amber-900">
+        <h2 className="text-lg font-semibold text-gray-900">
           {monthNames[currentMonth.getMonth()]} {currentMonth.getFullYear()}
         </h2>
         <div className="flex items-center gap-2">
@@ -137,10 +137,10 @@ export default function CalendarGrid({ selectedDate, onDateSelect }: CalendarGri
                   onClick={() => onDateSelect(date)}
                   className={`w-full h-full p-2 rounded-lg text-left transition-all duration-200 hover:bg-gray-50 ${
                     isSelected(date)
-                      ? 'bg-amber-600 text-white'
+                      ? 'bg-yellow-600 text-white'
                       : isToday(date)
                         ? 'bg-gray-100 text-gray-800'
-                        : 'text-amber-900'
+                        : 'text-gray-900'
                   }`}
                 >
                   <div className="text-sm font-medium mb-1">{date.getDate()}</div>
@@ -181,7 +181,7 @@ export default function CalendarGrid({ selectedDate, onDateSelect }: CalendarGri
       {/* Selected Date Info */}
       {selectedDate && (
         <div className="border-t border-gray-200 p-6">
-          <h3 className="font-semibold text-amber-900 mb-4">
+          <h3 className="font-semibold text-gray-900 mb-4">
             Sessions for {selectedDate.toLocaleDateString('en-US', { 
               weekday: 'long', 
               year: 'numeric', 
@@ -195,7 +195,7 @@ export default function CalendarGrid({ selectedDate, onDateSelect }: CalendarGri
               {getSessionsForDate(selectedDate).map((session) => (
                 <div key={session.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                   <div>
-                    <div className="font-medium text-amber-900">{session.title}</div>
+                    <div className="font-medium text-gray-900">{session.title}</div>
                     <div className="flex items-center gap-4 mt-1 text-sm text-gray-600">
                       <div className="flex items-center gap-1">
                         <Clock className="w-4 h-4" />

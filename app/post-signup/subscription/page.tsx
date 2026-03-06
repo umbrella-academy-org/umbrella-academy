@@ -14,7 +14,7 @@ export default function SubscriptionPage() {
   return (
     <div className="flex h-screen bg-white items-center justify-center">
       <div className="text-center">
-        <div className="w-8 h-8 border-2 border-amber-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+        <div className="w-8 h-8 border-2 border-yellow-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
         <p className="text-gray-600">Redirecting to roadmap creation...</p>
       </div>
     </div>

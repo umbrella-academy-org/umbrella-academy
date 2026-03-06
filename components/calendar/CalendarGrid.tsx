@@ -78,7 +78,7 @@ export default function CalendarGrid({ selectedDateRange, onDateRangeChange }: C
         <button
           key={day}
           className={`w-10 h-10 text-sm rounded-lg transition-all flex flex-col items-center justify-center relative ${isSelected
-            ? 'bg-amber-600 text-white font-bold shadow-lg shadow-gray-600/20 active:scale-95'
+            ? 'bg-yellow-600 text-white font-bold shadow-lg shadow-gray-600/20 active:scale-95'
             : 'text-gray-700 hover:bg-gray-50 hover:text-gray-600'
             }`}
         >
@@ -118,8 +118,8 @@ export default function CalendarGrid({ selectedDateRange, onDateRangeChange }: C
                 key={range}
                 onClick={() => onDateRangeChange(range)}
                 className={`block w-full text-left text-sm transition-colors ${selectedDateRange === range
-                  ? 'text-amber-900 font-medium'
-                  : 'text-gray-600 hover:text-amber-900'
+                  ? 'text-gray-900 font-medium'
+                  : 'text-gray-600 hover:text-gray-900'
                   }`}
               >
                 {range}

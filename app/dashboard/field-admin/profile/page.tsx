@@ -50,7 +50,7 @@ export default function FieldAdminProfilePage() {
                                     <div className="flex-1 flex flex-col md:flex-row md:items-center justify-between gap-6 mt-20 pb-2">
                                         <div>
                                             <div className="flex items-center gap-3">
-                                                <h1 className="text-3xl font-black text-amber-900  ">{profileData.name}</h1>
+                                                <h1 className="text-3xl font-black text-gray-900  ">{profileData.name}</h1>
                                                 <div className="px-2.5 py-1 bg-gray-50 text-gray-700 border border-gray-100 rounded-full text-[10px] font-black  ">FIELD COMMANDER</div>
                                             </div>
                                             <p className="text-gray-500 font-semibold flex items-center gap-2 mt-1.5">
@@ -68,7 +68,7 @@ export default function FieldAdminProfilePage() {
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                             <div className="lg:col-span-2 space-y-8 animate-slide-up">
                                 <div className="bg-white rounded-lg border border-gray-100 shadow-xl shadow-gray-200/30 p-10 ">
-                                    <h3 className="text-xl font-semibold text-amber-900 mb-8 flex items-center gap-3">
+                                    <h3 className="text-xl font-semibold text-gray-900 mb-8 flex items-center gap-3">
                                         <User className="text-gray-500 w-6 h-6" />
                                         Administrator Details
                                     </h3>
@@ -76,11 +76,11 @@ export default function FieldAdminProfilePage() {
                                         <div className="space-y-4">
                                             <div className="p-6 bg-gray-50 rounded-[1.5rem] border border-transparent hover:border-gray-100 transition-all">
                                                 <label className="text-[10px] font-black text-gray-400    mb-1 block">Primary Email</label>
-                                                <p className="text-amber-900 font-semibold">{profileData.email}</p>
+                                                <p className="text-gray-900 font-semibold">{profileData.email}</p>
                                             </div>
                                             <div className="p-6 bg-gray-50 rounded-[1.5rem] border border-transparent hover:border-gray-100 transition-all">
                                                 <label className="text-[10px] font-black text-gray-400    mb-1 block">Joining Date</label>
-                                                <p className="text-amber-900 font-semibold">{profileData.joinDate}</p>
+                                                <p className="text-gray-900 font-semibold">{profileData.joinDate}</p>
                                             </div>
                                         </div>
                                         <div className="p-6 bg-gray-50/50 rounded-lg border border-gray-100">
@@ -91,14 +91,14 @@ export default function FieldAdminProfilePage() {
                                 </div>
 
                                 <div className="bg-white rounded-lg border border-gray-100 shadow-xl shadow-gray-200/30 p-10 ">
-                                    <h3 className="text-xl font-semibold text-amber-900 mb-8">Field Stats Oversight</h3>
+                                    <h3 className="text-xl font-semibold text-gray-900 mb-8">Field Stats Oversight</h3>
                                     <div className="grid grid-cols-2 gap-6">
-                                        <div className="p-8 bg-gray-900 rounded-lg text-white relative overflow-hidden group">
+                                        <div className="p-8 bg-black rounded-lg text-white relative overflow-hidden group">
                                             <Users className="w-8 h-8 text-gray-500 mb-4 transform group-hover:scale-110 transition-transform" />
                                             <p className="text-3xl font-black mb-1">50+</p>
                                             <p className="text-xs text-gray-400 font-semibold   ">Active Trainers</p>
                                         </div>
-                                        <div className="p-8 bg-amber-600 rounded-lg text-white relative overflow-hidden group">
+                                        <div className="p-8 bg-yellow-600 rounded-lg text-white relative overflow-hidden group">
                                             <BookOpen className="w-8 h-8 text-white mb-4 transform group-hover:scale-110 transition-transform" />
                                             <p className="text-3xl font-black mb-1">500+</p>
                                             <p className="text-xs text-gray-100 font-semibold   ">Enrolled Students</p>
@@ -109,7 +109,7 @@ export default function FieldAdminProfilePage() {
 
                             <div className="space-y-8 animate-slide-up [animation-delay:200ms]">
                                 <div className="bg-white rounded-lg border border-gray-100 shadow-xl shadow-gray-200/30 p-8">
-                                    <h3 className="text-xl font-semibold text-amber-900 mb-8">Management</h3>
+                                    <h3 className="text-xl font-semibold text-gray-900 mb-8">Management</h3>
                                     <div className="space-y-4">
                                         <ManagementItem icon={<Layout className="w-5 h-5" />} label="Field Dashboard" />
                                         <ManagementItem icon={<Users className="w-5 h-5" />} label="Staff Directory" />
@@ -117,15 +117,15 @@ export default function FieldAdminProfilePage() {
                                     </div>
                                 </div>
 
-                                <div className="p-8 bg-gray-900 rounded-lg text-white shadow-2xl shadow-gray-900/40 relative overflow-hidden group">
+                                <div className="p-8 bg-black rounded-lg text-white shadow-2xl shadow-gray-900/40 relative overflow-hidden group">
                                     <div className="relative z-10">
                                         <h4 className="text-xl font-black mb-2  ">Field Support</h4>
                                         <p className="text-gray-400 text-xs font-medium mb-6 leading-relaxed">Need help managing your field? Contact system admin.</p>
-                                        <button className="w-full py-4 bg-amber-600 hover:bg-gray-500 rounded-[1.2rem] font-black text-sm transition-all shadow-xl shadow-gray-600/20">
+                                        <button className="w-full py-4 bg-yellow-600 hover:bg-gray-500 rounded-[1.2rem] font-black text-sm transition-all shadow-xl shadow-gray-600/20">
                                             Get Support
                                         </button>
                                     </div>
-                                    <div className="absolute top-0 right-0 w-32 h-32 bg-amber-600/10 rounded-full -mr-16 -mt-16 blur-2xl group-hover:bg-amber-600/20 transition-all opacity-50" />
+                                    <div className="absolute top-0 right-0 w-32 h-32 bg-yellow-600/10 rounded-full -mr-16 -mt-16 blur-2xl group-hover:bg-yellow-600/20 transition-all opacity-50" />
                                 </div>
                             </div>
                         </div>
@@ -140,12 +140,12 @@ function ManagementItem({ icon, label }: { icon: React.ReactNode, label: string 
     return (
         <button className="w-full flex items-center justify-between p-4 rounded-lg hover:bg-gray-50 transition-all group border border-transparent hover:border-gray-100">
             <div className="flex items-center gap-4">
-                <div className="w-10 h-10 bg-gray-50 rounded-lg flex items-center justify-center text-gray-400 group-hover:bg-amber-600 group-hover:text-white transition-all shadow-sm">
+                <div className="w-10 h-10 bg-gray-50 rounded-lg flex items-center justify-center text-gray-400 group-hover:bg-yellow-600 group-hover:text-white transition-all shadow-sm">
                     {icon}
                 </div>
-                <span className="text-sm font-semibold text-gray-700 group-hover:text-amber-900">{label}</span>
+                <span className="text-sm font-semibold text-gray-700 group-hover:text-gray-900">{label}</span>
             </div>
-            <ChevronRight className="w-4 h-4 text-gray-300 group-hover:text-amber-900 group-hover:translate-x-1 transition-all" />
+            <ChevronRight className="w-4 h-4 text-gray-300 group-hover:text-gray-900 group-hover:translate-x-1 transition-all" />
         </button>
     );
 }

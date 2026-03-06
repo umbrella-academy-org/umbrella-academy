@@ -26,14 +26,14 @@ export default function PaymentMethodForm({ formData, onInputChange }: PaymentMe
         <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-4">
           <CreditCard className="w-6 h-6 text-gray-600" />
         </div>
-        <h2 className="text-2xl font-semibold text-amber-900 mb-2">Payment Method</h2>
+        <h2 className="text-2xl font-semibold text-gray-900 mb-2">Payment Method</h2>
         <p className="text-gray-600">Fill in your billing details and address</p>
       </div>
 
       <form className="space-y-6">
         {/* Card Details Section */}
         <div>
-          <h3 className="text-lg font-medium text-amber-900 mb-4">Card details</h3>
+          <h3 className="text-lg font-medium text-gray-900 mb-4">Card details</h3>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Name on Card */}
@@ -46,7 +46,7 @@ export default function PaymentMethodForm({ formData, onInputChange }: PaymentMe
                 id="nameOnCard"
                 value={formData.nameOnCard}
                 onChange={(e) => onInputChange('nameOnCard', e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-amber-900 placeholder:text-gray-400"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400"
                 placeholder="Olivia Rhye"
               />
             </div>
@@ -61,7 +61,7 @@ export default function PaymentMethodForm({ formData, onInputChange }: PaymentMe
                 id="expiry"
                 value={formData.expiry}
                 onChange={(e) => onInputChange('expiry', e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-amber-900 placeholder:text-gray-400"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400"
                 placeholder="06 / 2024"
               />
             </div>
@@ -77,7 +77,7 @@ export default function PaymentMethodForm({ formData, onInputChange }: PaymentMe
                   id="cardNumber"
                   value={formData.cardNumber}
                   onChange={(e) => onInputChange('cardNumber', e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-amber-900 placeholder:text-gray-400 pr-12"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 pr-12"
                   placeholder="1234 1234 1234 1234"
                 />
                 <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex gap-1">
@@ -101,7 +101,7 @@ export default function PaymentMethodForm({ formData, onInputChange }: PaymentMe
                 id="cvv"
                 value={formData.cvv}
                 onChange={(e) => onInputChange('cvv', e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-amber-900 placeholder:text-gray-400"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400"
                 placeholder="•••"
               />
             </div>
@@ -120,7 +120,7 @@ export default function PaymentMethodForm({ formData, onInputChange }: PaymentMe
               id="email"
               value={formData.email}
               onChange={(e) => onInputChange('email', e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-amber-900 placeholder:text-gray-400 pr-12"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 pr-12"
               placeholder="billing@umbrellaacademy.com"
             />
             <button
@@ -132,7 +132,7 @@ export default function PaymentMethodForm({ formData, onInputChange }: PaymentMe
           </div>
           <button
             type="button"
-            className="mt-2 flex items-center gap-2 text-sm text-gray-600 hover:text-amber-900"
+            className="mt-2 flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900"
           >
             <Plus className="w-4 h-4" />
             Add another
@@ -141,7 +141,7 @@ export default function PaymentMethodForm({ formData, onInputChange }: PaymentMe
 
         {/* Address Section */}
         <div>
-          <h3 className="text-lg font-medium text-amber-900 mb-4">Address</h3>
+          <h3 className="text-lg font-medium text-gray-900 mb-4">Address</h3>
           
           {/* Street Address */}
           <div className="mb-4">
@@ -153,7 +153,7 @@ export default function PaymentMethodForm({ formData, onInputChange }: PaymentMe
               id="streetAddress"
               value={formData.streetAddress}
               onChange={(e) => onInputChange('streetAddress', e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-amber-900 placeholder:text-gray-400"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400"
               placeholder="100 Smith Street"
             />
           </div>
@@ -168,7 +168,7 @@ export default function PaymentMethodForm({ formData, onInputChange }: PaymentMe
               id="city"
               value={formData.city}
               onChange={(e) => onInputChange('city', e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-amber-900 placeholder:text-gray-400"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400"
               placeholder="Collingwood"
             />
           </div>
@@ -184,7 +184,7 @@ export default function PaymentMethodForm({ formData, onInputChange }: PaymentMe
                 id="state"
                 value={formData.state}
                 onChange={(e) => onInputChange('state', e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-amber-900 placeholder:text-gray-400"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400"
                 placeholder="VIC"
               />
             </div>
@@ -197,7 +197,7 @@ export default function PaymentMethodForm({ formData, onInputChange }: PaymentMe
                 id="postalCode"
                 value={formData.postalCode}
                 onChange={(e) => onInputChange('postalCode', e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-amber-900 placeholder:text-gray-400"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400"
                 placeholder="3066"
               />
             </div>
@@ -213,7 +213,7 @@ export default function PaymentMethodForm({ formData, onInputChange }: PaymentMe
                 id="country"
                 value={formData.country}
                 onChange={(e) => onInputChange('country', e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-amber-900 appearance-none bg-white"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 appearance-none bg-white"
               >
                 <option value="Australia">🇦🇺 Australia</option>
                 <option value="United States">🇺🇸 United States</option>
@@ -235,7 +235,7 @@ export default function PaymentMethodForm({ formData, onInputChange }: PaymentMe
           </button>
           <button
             type="submit"
-            className="px-6 py-3 bg-amber-600 text-white rounded-lg font-medium hover:bg-amber-700 transition-colors"
+            className="px-6 py-3 bg-yellow-600 text-white rounded-lg font-medium hover:bg-yellow-700 transition-colors"
           >
             Save Payment Method
           </button>

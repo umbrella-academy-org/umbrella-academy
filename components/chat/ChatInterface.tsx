@@ -87,13 +87,13 @@ export default function ChatInterface({ userType }: { userType: string }) {
             {/* Sidebar - Contact List */}
             <div className="w-full md:w-80 border-r border-gray-100 flex flex-col">
                 <div className="p-6 border-b border-gray-50">
-                    <h2 className="text-xl font-bold text-amber-900 mb-4">Messages</h2>
+                    <h2 className="text-xl font-bold text-gray-900 mb-4">Messages</h2>
                     <div className="relative">
                         <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
                         <input
                             type="text"
                             placeholder="Search chats..."
-                            className="w-full pl-10 pr-4 py-2 bg-gray-50 rounded-lg border border-transparent focus:bg-white focus:border-amber-600 outline-none transition-all text-sm"
+                            className="w-full pl-10 pr-4 py-2 bg-gray-50 rounded-lg border border-transparent focus:bg-white focus:border-yellow-600 outline-none transition-all text-sm"
                         />
                     </div>
                 </div>
@@ -103,7 +103,7 @@ export default function ChatInterface({ userType }: { userType: string }) {
                         <button
                             key={contact.id}
                             onClick={() => setActiveChat(contact)}
-                            className={`w-full flex items-center gap-4 p-4 hover:bg-gray-50 transition-all border-l-4 ${activeChat?.id === contact.id ? 'bg-gray-50 border-amber-600' : 'border-transparent'
+                            className={`w-full flex items-center gap-4 p-4 hover:bg-gray-50 transition-all border-l-4 ${activeChat?.id === contact.id ? 'bg-gray-50 border-yellow-600' : 'border-transparent'
                                 }`}
                         >
                             <div className="relative">
@@ -114,13 +114,13 @@ export default function ChatInterface({ userType }: { userType: string }) {
                             </div>
                             <div className="flex-1 text-left min-w-0">
                                 <div className="flex justify-between items-center mb-0.5">
-                                    <h4 className="font-semibold text-amber-900 text-sm truncate">{contact.name}</h4>
+                                    <h4 className="font-semibold text-gray-900 text-sm truncate">{contact.name}</h4>
                                     <span className="text-[10px] text-gray-400 font-medium">{contact.time}</span>
                                 </div>
                                 <div className="flex justify-between items-center">
                                     <p className="text-xs text-gray-500 truncate">{contact.lastMessage}</p>
                                     {contact.unreadCount && (
-                                        <span className="bg-amber-600 text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full shadow-sm">
+                                        <span className="bg-yellow-600 text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full shadow-sm">
                                             {contact.unreadCount}
                                         </span>
                                     )}
@@ -145,18 +145,18 @@ export default function ChatInterface({ userType }: { userType: string }) {
                                     )}
                                 </div>
                                 <div>
-                                    <h3 className="font-bold text-amber-900 text-sm">{activeChat.name}</h3>
+                                    <h3 className="font-bold text-gray-900 text-sm">{activeChat.name}</h3>
                                     <p className="text-[10px] text-gray-500 font-medium   ">{activeChat.role} • {activeChat.online ? 'Online' : 'Away'}</p>
                                 </div>
                             </div>
                             <div className="flex items-center gap-2">
-                                <button className="p-2 text-gray-400 hover:text-amber-900 transition-colors hover:bg-gray-100 rounded-lg">
+                                <button className="p-2 text-gray-400 hover:text-gray-900 transition-colors hover:bg-gray-100 rounded-lg">
                                     <Phone className="w-5 h-5" />
                                 </button>
-                                <button className="p-2 text-gray-400 hover:text-amber-900 transition-colors hover:bg-gray-100 rounded-lg">
+                                <button className="p-2 text-gray-400 hover:text-gray-900 transition-colors hover:bg-gray-100 rounded-lg">
                                     <Video className="w-5 h-5" />
                                 </button>
-                                <button className="p-2 text-gray-400 hover:text-amber-900 transition-colors hover:bg-gray-100 rounded-lg">
+                                <button className="p-2 text-gray-400 hover:text-gray-900 transition-colors hover:bg-gray-100 rounded-lg">
                                     <MoreVertical className="w-5 h-5" />
                                 </button>
                             </div>
@@ -170,7 +170,7 @@ export default function ChatInterface({ userType }: { userType: string }) {
                                     className={`flex ${msg.isMe ? 'justify-end' : 'justify-start'} animate-fade-in`}>
                                     <div className={`max-w-[70%] group ${msg.isMe ? 'items-end' : 'items-start'}`}>
                                         <div className={`px-4 py-3 rounded-2xl text-sm shadow-sm ${msg.isMe
-                                            ? 'bg-amber-600 text-white rounded-tr-none'
+                                            ? 'bg-yellow-600 text-white rounded-tr-none'
                                             : 'bg-white text-gray-800 border border-gray-100 rounded-tl-none'
                                             }`}>
                                             {msg.text}
@@ -190,7 +190,7 @@ export default function ChatInterface({ userType }: { userType: string }) {
                                 onSubmit={(e) => { e.preventDefault(); setMessage(''); }}
                                 className="flex items-center gap-3"
                             >
-                                <button type="button" className="p-2 text-gray-400 hover:text-amber-900 transition-colors">
+                                <button type="button" className="p-2 text-gray-400 hover:text-gray-900 transition-colors">
                                     <Paperclip className="w-5 h-5" />
                                 </button>
                                 <div className="flex-1 relative">
@@ -199,7 +199,7 @@ export default function ChatInterface({ userType }: { userType: string }) {
                                         placeholder="Type your message..."
                                         value={message}
                                         onChange={(e) => setMessage(e.target.value)}
-                                        className="w-full px-4 py-3 bg-gray-50 rounded-2xl border border-transparent focus:bg-white focus:border-amber-600 outline-none transition-all text-sm pr-10"
+                                        className="w-full px-4 py-3 bg-gray-50 rounded-2xl border border-transparent focus:bg-white focus:border-yellow-600 outline-none transition-all text-sm pr-10"
                                     />
                                     <button type="button" className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-all">
                                         <Smile className="w-5 h-5" />
@@ -207,7 +207,7 @@ export default function ChatInterface({ userType }: { userType: string }) {
                                 </div>
                                 <button
                                     type="submit"
-                                    className="w-11 h-11 bg-amber-600 text-white rounded-lg flex items-center justify-center shadow-lg shadow-gray-600/20 hover:bg-amber-700 transition-all active:scale-95"
+                                    className="w-11 h-11 bg-yellow-600 text-white rounded-lg flex items-center justify-center shadow-lg shadow-gray-600/20 hover:bg-yellow-700 transition-all active:scale-95"
                                 >
                                     <Send className="w-5 h-5" />
                                 </button>
@@ -221,7 +221,7 @@ export default function ChatInterface({ userType }: { userType: string }) {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                             </svg>
                         </div>
-                        <h3 className="text-xl font-bold text-amber-900 mb-2">Select a conversation</h3>
+                        <h3 className="text-xl font-bold text-gray-900 mb-2">Select a conversation</h3>
                         <p className="text-sm text-gray-500 max-w-xs">Send messages to your trainers, students or mentors. Start by selecting a contact from the list on the left.</p>
                     </div>
                 )}

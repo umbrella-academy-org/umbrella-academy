@@ -71,10 +71,10 @@ export default function BillingInvoices() {
     <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h3 className="text-lg font-semibold text-amber-900">Billing and invoicing</h3>
+          <h3 className="text-lg font-semibold text-gray-900">Billing and invoicing</h3>
           <p className="text-sm text-gray-600 mt-1">Pick an account plan that fits your workflow.</p>
         </div>
-        <button className="flex items-center gap-2 text-gray-600 hover:text-amber-900 font-medium text-sm">
+        <button className="flex items-center gap-2 text-gray-600 hover:text-gray-900 font-medium text-sm">
           <Download className="w-4 h-4" />
           Download all
         </button>
@@ -110,7 +110,7 @@ export default function BillingInvoices() {
                     <div className="w-8 h-8 bg-gray-100 rounded flex items-center justify-center flex-shrink-0">
                       <FileText className="w-4 h-4 text-gray-600" />
                     </div>
-                    <span className="text-sm text-amber-900">{invoice.number}</span>
+                    <span className="text-sm text-gray-900">{invoice.number}</span>
                   </div>
                 </td>
                 <td className="py-4 px-4 text-sm text-gray-600">{invoice.billingDate}</td>
@@ -119,10 +119,10 @@ export default function BillingInvoices() {
                     ✓ {invoice.status}
                   </span>
                 </td>
-                <td className="py-4 px-4 text-sm text-amber-900 font-medium">{invoice.amount}</td>
+                <td className="py-4 px-4 text-sm text-gray-900 font-medium">{invoice.amount}</td>
                 <td className="py-4 px-4">
                   <div className="text-sm">
-                    <div className="text-amber-900 font-medium">{invoice.plan}</div>
+                    <div className="text-gray-900 font-medium">{invoice.plan}</div>
                     <div className="text-gray-500">{invoice.duration}</div>
                   </div>
                 </td>

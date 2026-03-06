@@ -99,7 +99,7 @@ export default function RoadmapPhases({ onPhaseSelect, onLessonSelect, selectedP
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between mb-6">
-        <h3 className="text-lg font-semibold text-amber-900">Learning Phases</h3>
+        <h3 className="text-lg font-semibold text-gray-900">Learning Phases</h3>
         <div className="text-sm text-gray-500">
           {phases.filter(p => p.status === 'completed').length} of {phases.length} completed
         </div>
@@ -133,12 +133,12 @@ export default function RoadmapPhases({ onPhaseSelect, onLessonSelect, selectedP
                       <StatusIcon className={`w-5 h-5 ${statusConfig.iconColor}`} />
                     </div>
                     <div>
-                      <h4 className="font-medium text-amber-900">{phase.title}</h4>
+                      <h4 className="font-medium text-gray-900">{phase.title}</h4>
                       <p className="text-sm text-gray-600">{phase.sessions.length} Sessions • {phase.estimatedHours} hours</p>
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-sm font-medium text-amber-900">
+                    <div className="text-sm font-medium text-gray-900">
                       {phase.sessions.filter(s => s.status === 'completed').length}/{phase.sessions.length}
                     </div>
                     <div className="w-16 bg-gray-200 rounded-full h-2 mt-1">
@@ -183,7 +183,7 @@ export default function RoadmapPhases({ onPhaseSelect, onLessonSelect, selectedP
                                   <SessionIcon className={`w-4 h-4 ${sessionConfig.iconColor}`} />
                                 </div>
                                 <div>
-                                  <h5 className="text-sm font-medium text-amber-900">{session.title}</h5>
+                                  <h5 className="text-sm font-medium text-gray-900">{session.title}</h5>
                                   <div className="flex items-center gap-2 text-xs text-gray-600">
                                     <Clock className="w-3 h-3" />
                                     <span>{session.duration} hours</span>
@@ -271,7 +271,7 @@ export default function RoadmapPhases({ onPhaseSelect, onLessonSelect, selectedP
       {phases.length === 0 && (
         <div className="text-center py-12 text-gray-500">
           <GraduationCap className="w-12 h-12 mx-auto mb-4 text-gray-400" />
-          <h3 className="text-lg font-medium text-amber-900 mb-2">No Phases Available</h3>
+          <h3 className="text-lg font-medium text-gray-900 mb-2">No Phases Available</h3>
           <p className="text-sm">This roadmap doesn't have any phases yet.</p>
         </div>
       )}

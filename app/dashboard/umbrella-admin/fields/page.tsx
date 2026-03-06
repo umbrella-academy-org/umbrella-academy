@@ -77,7 +77,7 @@ export default function UmbrellaAdminFieldsPage() {
         <main className="flex-1 overflow-auto">
           <div className="p-3 lg:p-4">
             <div className="mb-6">
-              <h1 className="text-2xl font-semibold text-amber-900 mb-2">Fields Management</h1>
+              <h1 className="text-2xl font-semibold text-gray-900 mb-2">Fields Management</h1>
               <p className="text-gray-600">Monitor and manage all fields across the system</p>
             </div>
 
@@ -87,7 +87,7 @@ export default function UmbrellaAdminFieldsPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-gray-600">Total Fields</p>
-                    <p className="text-2xl font-bold text-amber-900">{totalFields}</p>
+                    <p className="text-2xl font-bold text-gray-900">{totalFields}</p>
                   </div>
                   <Building2 className="w-8 h-8 text-gray-500" />
                 </div>
@@ -96,7 +96,7 @@ export default function UmbrellaAdminFieldsPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-gray-600">Active Fields</p>
-                    <p className="text-2xl font-bold text-amber-900">{activeFields}</p>
+                    <p className="text-2xl font-bold text-gray-900">{activeFields}</p>
                   </div>
                   <TrendingUp className="w-8 h-8 text-gray-500" />
                 </div>
@@ -105,7 +105,7 @@ export default function UmbrellaAdminFieldsPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-gray-600">Total Students</p>
-                    <p className="text-2xl font-bold text-amber-900">{totalStudents.toLocaleString()}</p>
+                    <p className="text-2xl font-bold text-gray-900">{totalStudents.toLocaleString()}</p>
                   </div>
                   <Users className="w-8 h-8 text-gray-500" />
                 </div>
@@ -114,7 +114,7 @@ export default function UmbrellaAdminFieldsPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-gray-600">Total Revenue</p>
-                    <p className="text-2xl font-bold text-amber-900">RWF {totalRevenue.toLocaleString()}</p>
+                    <p className="text-2xl font-bold text-gray-900">RWF {totalRevenue.toLocaleString()}</p>
                   </div>
                   <DollarSign className="w-8 h-8 text-gray-500" />
                 </div>

@@ -25,7 +25,7 @@ export default function PaymentPage() {
             {/* Go back button */}
             <button
               onClick={() => router.push('/post-signup/choose-field')}
-              className="flex items-center gap-2 text-gray-600 hover:text-amber-900 mb-8"
+              className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-8"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -39,7 +39,7 @@ export default function PaymentPage() {
               </div>
 
               {/* Title */}
-              <h1 className="text-3xl font-semibold text-amber-900 mb-2">
+              <h1 className="text-3xl font-semibold text-gray-900 mb-2">
                 Complete Payment
               </h1>
               <p className="text-gray-500 mb-8 text-center">
@@ -50,11 +50,11 @@ export default function PaymentPage() {
               <div className="w-full p-4 bg-gray-50 rounded-lg border mb-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="font-medium text-amber-900">Field Explorer Plan</h3>
+                    <h3 className="font-medium text-gray-900">Field Explorer Plan</h3>
                     <p className="text-sm text-gray-600">Annual subscription with full access</p>
                   </div>
                   <div className="text-right">
-                    <div className="text-2xl font-bold text-amber-900">RWF 75,000</div>
+                    <div className="text-2xl font-bold text-gray-900">RWF 75,000</div>
                     <div className="text-sm text-gray-600">per year</div>
                   </div>
                 </div>
@@ -70,9 +70,9 @@ export default function PaymentPage() {
 
               {/* Progress dots */}
               <div className="flex justify-center gap-2 pt-6">
-                <div className="w-8 h-2 bg-amber-600 rounded-full"></div>
-                <div className="w-8 h-2 bg-amber-600 rounded-full"></div>
-                <div className="w-8 h-2 bg-amber-600 rounded-full"></div>
+                <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
+                <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
+                <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
                 <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
                 <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
               </div>

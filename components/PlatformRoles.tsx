@@ -10,7 +10,7 @@ const roles = [
     subtitle: "Platform Guardian",
     description: "Global platform management, field oversight, and system administration.",
     features: ["Global Management", "System Control", "Analytics Overview", "User Management"],
-    color: "bg-amber-600",
+    color: "bg-yellow-600",
   },
   {
     icon: UserCheck,
@@ -26,7 +26,7 @@ const roles = [
     subtitle: "Knowledge Expert",
     description: "Deliver engaging lessons, conduct live sessions, and provide hands-on training.",
     features: ["Lesson Delivery", "Live Sessions", "Content Creation", "Student Assessment"],
-    color: "bg-amber-600",
+    color: "bg-yellow-600",
   },
   {
     icon: User,
@@ -45,7 +45,7 @@ export function PlatformRoles() {
     <section id="about" className="py-24 px-4 sm:px-6 lg:px-8 bg-[#f9f9f9]">
       <div ref={ref} className="max-w-full mx-auto">
         <div className={`mb-16 reveal ${isVisible ? 'visible' : ''}`}>
-          <h3 className="text-4xl md:text-6xl lg:text-8xl font-black tracking-tighter text-amber-900 leading-none ">
+          <h3 className="text-4xl md:text-6xl lg:text-8xl font-black tracking-tighter text-gray-900 leading-none ">
             BUILT FOR <br /> <span className="text-[#525252]">EVERYONE</span>
           </h3>
         </div>
@@ -64,7 +64,7 @@ export function PlatformRoles() {
                     <Icon size={24} />
                   </div>
                   <div className="space-y-2">
-                    <h4 className="text-3xl font-black  tracking-tighter text-amber-900">{role.title}</h4>
+                    <h4 className="text-3xl font-black  tracking-tighter text-gray-900">{role.title}</h4>
                     <p className="text-[10px] font-black text-[#525252] tracking-[0.3em] ">{role.subtitle}</p>
                   </div>
                   <p className="text-sm text-gray-400 font-light leading-relaxed">

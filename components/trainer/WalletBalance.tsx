@@ -7,9 +7,9 @@ export default function WalletBalance() {
     <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
       <div className="mb-6">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold text-amber-900">Current Balance</h3>
+          <h3 className="text-lg font-semibold text-gray-900">Current Balance</h3>
           <div className="text-right">
-            <div className="text-3xl font-bold text-amber-900">RWF 245,000</div>
+            <div className="text-3xl font-bold text-gray-900">RWF 245,000</div>
             <div className="text-sm text-gray-500">Available for withdrawal</div>
           </div>
         </div>
@@ -20,7 +20,7 @@ export default function WalletBalance() {
               <DollarSign className="w-4 h-4 text-gray-600" />
               <span className="text-sm font-medium text-gray-800">This Month</span>
             </div>
-            <div className="text-xl font-bold text-amber-900">RWF 45,000</div>
+            <div className="text-xl font-bold text-gray-900">RWF 45,000</div>
             <div className="text-xs text-gray-700">+15% vs last month</div>
           </div>
           
@@ -29,7 +29,7 @@ export default function WalletBalance() {
               <TrendingUp className="w-4 h-4 text-gray-600" />
               <span className="text-sm font-medium text-gray-800">Total Earned</span>
             </div>
-            <div className="text-xl font-bold text-amber-900">RWF 890,000</div>
+            <div className="text-xl font-bold text-gray-900">RWF 890,000</div>
             <div className="text-xs text-gray-700">All time earnings</div>
           </div>
         </div>
@@ -43,11 +43,11 @@ export default function WalletBalance() {
             </span>
           </div>
           <div className="w-full bg-gray-200 rounded-full h-2">
-            <div className="bg-amber-600 h-2 rounded-full" style={{ width: '83%' }}></div>
+            <div className="bg-yellow-600 h-2 rounded-full" style={{ width: '83%' }}></div>
           </div>
         </div>
 
-        <button className="w-full bg-amber-600 text-white py-3 rounded-lg font-medium hover:bg-amber-700 transition-colors">
+        <button className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-colors">
           Request Withdrawal
         </button>
       </div>

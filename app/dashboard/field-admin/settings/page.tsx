@@ -39,7 +39,7 @@ export default function FieldAdminSettingsPage() {
         <main className="flex-1 overflow-auto">
           <div className="p-3 lg:p-6">
             <div className="mb-8">
-              <h1 className="text-2xl font-semibold text-amber-900 mb-1">Field Settings</h1>
+              <h1 className="text-2xl font-semibold text-gray-900 mb-1">Field Settings</h1>
               <p className="text-sm text-gray-500">Configure field preferences, policies, and company association</p>
             </div>
 
@@ -48,7 +48,7 @@ export default function FieldAdminSettingsPage() {
               <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
                 <div className="flex items-center gap-3 mb-6">
                   <Building2 className="w-6 h-6 text-gray-500" />
-                  <h3 className="text-lg font-semibold text-amber-900">Company Association</h3>
+                  <h3 className="text-lg font-semibold text-gray-900">Company Association</h3>
                 </div>
                 <div className="space-y-4">
                   <div>
@@ -73,7 +73,7 @@ export default function FieldAdminSettingsPage() {
                               )}
                             </div>
                             <div>
-                              <div className="font-medium text-amber-900">{company.name}</div>
+                              <div className="font-medium text-gray-900">{company.name}</div>
                               <div className="text-sm text-gray-500">{company.industry}</div>
                             </div>
                           </div>
@@ -88,7 +88,7 @@ export default function FieldAdminSettingsPage() {
               <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
                 <div className="flex items-center gap-3 mb-6">
                   <Settings className="w-6 h-6 text-gray-500" />
-                  <h3 className="text-lg font-semibold text-amber-900">Field Information</h3>
+                  <h3 className="text-lg font-semibold text-gray-900">Field Information</h3>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
@@ -116,7 +116,7 @@ export default function FieldAdminSettingsPage() {
               <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
                 <div className="flex items-center gap-3 mb-6">
                   <Users className="w-6 h-6 text-gray-500" />
-                  <h3 className="text-lg font-semibold text-amber-900">Capacity & Training Settings</h3>
+                  <h3 className="text-lg font-semibold text-gray-900">Capacity & Training Settings</h3>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
@@ -145,7 +145,7 @@ export default function FieldAdminSettingsPage() {
               <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
                 <div className="flex items-center gap-3 mb-6">
                   <DollarSign className="w-6 h-6 text-gray-500" />
-                  <h3 className="text-lg font-semibold text-amber-900">Payment Settings</h3>
+                  <h3 className="text-lg font-semibold text-gray-900">Payment Settings</h3>
                 </div>
                 <div className="space-y-6">
                   <div>
@@ -176,12 +176,12 @@ export default function FieldAdminSettingsPage() {
               <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
                 <div className="flex items-center gap-3 mb-6">
                   <Shield className="w-6 h-6 text-gray-500" />
-                  <h3 className="text-lg font-semibold text-amber-900">Approval & Notification Settings</h3>
+                  <h3 className="text-lg font-semibold text-gray-900">Approval & Notification Settings</h3>
                 </div>
                 <div className="space-y-4">
                   <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                     <div>
-                      <div className="font-medium text-amber-900">Auto-approve Trainers</div>
+                      <div className="font-medium text-gray-900">Auto-approve Trainers</div>
                       <div className="text-sm text-gray-600">Automatically approve trainer applications without manual review</div>
                     </div>
                     <label className="relative inline-flex items-center cursor-pointer">
@@ -191,13 +191,13 @@ export default function FieldAdminSettingsPage() {
                         onChange={(e) => setFieldSettings({ ...fieldSettings, autoApproveTrainers: e.target.checked })}
                         className="sr-only peer"
                       />
-                      <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-gray-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600"></div>
+                      <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-gray-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-yellow-600"></div>
                     </label>
                   </div>
 
                   <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                     <div>
-                      <div className="font-medium text-amber-900">Require Mentor Approval</div>
+                      <div className="font-medium text-gray-900">Require Mentor Approval</div>
                       <div className="text-sm text-gray-600">Require mentor approval for roadmap changes and trainer decisions</div>
                     </div>
                     <label className="relative inline-flex items-center cursor-pointer">
@@ -207,13 +207,13 @@ export default function FieldAdminSettingsPage() {
                         onChange={(e) => setFieldSettings({ ...fieldSettings, requireMentorApproval: e.target.checked })}
                         className="sr-only peer"
                       />
-                      <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-gray-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600"></div>
+                      <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-gray-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-yellow-600"></div>
                     </label>
                   </div>
 
                   <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                     <div>
-                      <div className="font-medium text-amber-900">Enable Notifications</div>
+                      <div className="font-medium text-gray-900">Enable Notifications</div>
                       <div className="text-sm text-gray-600">Receive email and in-app notifications for field activities</div>
                     </div>
                     <label className="relative inline-flex items-center cursor-pointer">
@@ -223,7 +223,7 @@ export default function FieldAdminSettingsPage() {
                         onChange={(e) => setFieldSettings({ ...fieldSettings, enableNotifications: e.target.checked })}
                         className="sr-only peer"
                       />
-                      <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-gray-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600"></div>
+                      <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-gray-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-yellow-600"></div>
                     </label>
                   </div>
                 </div>
@@ -233,7 +233,7 @@ export default function FieldAdminSettingsPage() {
               <div className="flex gap-4 pb-8">
                 <button
                   onClick={handleSaveSettings}
-                  className="bg-amber-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-amber-700 transition-colors"
+                  className="bg-yellow-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-yellow-700 transition-colors"
                 >
                   Save Changes
                 </button>

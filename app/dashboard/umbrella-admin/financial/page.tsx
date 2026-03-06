@@ -21,7 +21,7 @@ export default function UmbrellaAdminFinancialPage() {
         <main className="flex-1 overflow-auto">
           <div className="p-3 lg:p-4">
             <div className="mb-6">
-              <h1 className="text-2xl font-semibold text-amber-900 mb-2">Financial Overview</h1>
+              <h1 className="text-2xl font-semibold text-gray-900 mb-2">Financial Overview</h1>
               <p className="text-gray-600">Monitor system-wide financial performance</p>
             </div>
 
@@ -41,7 +41,7 @@ export default function UmbrellaAdminFinancialPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-gray-500 text-sm">Umbrella Share (65%)</p>
-                    <p className="text-2xl font-bold text-amber-900">RWF 44,100,000</p>
+                    <p className="text-2xl font-bold text-gray-900">RWF 44,100,000</p>
                   </div>
                   <PieChart className="w-8 h-8 text-gray-500" />
                 </div>
@@ -51,7 +51,7 @@ export default function UmbrellaAdminFinancialPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-gray-500 text-sm">Fields Share (35%)</p>
-                    <p className="text-2xl font-bold text-amber-900">RWF 23,745,000</p>
+                    <p className="text-2xl font-bold text-gray-900">RWF 23,745,000</p>
                   </div>
                   <CreditCard className="w-8 h-8 text-gray-500" />
                 </div>
@@ -71,7 +71,7 @@ export default function UmbrellaAdminFinancialPage() {
             {/* Field Revenue Breakdown */}
             <div className="bg-white rounded-lg shadow-sm border border-gray-100 mb-6">
               <div className="p-6 border-b border-gray-200">
-                <h3 className="text-lg font-semibold text-amber-900">Revenue by Field</h3>
+                <h3 className="text-lg font-semibold text-gray-900">Revenue by Field</h3>
               </div>
               <div className="p-6">
                 <div className="space-y-4">
@@ -84,17 +84,17 @@ export default function UmbrellaAdminFinancialPage() {
                   ].map((field, index) => (
                     <div key={index} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                       <div className="flex-1">
-                        <div className="font-medium text-amber-900">{field.name}</div>
+                        <div className="font-medium text-gray-900">{field.name}</div>
                         <div className="text-sm text-gray-500">{field.share}% of total revenue</div>
                       </div>
                       <div className="flex items-center gap-4">
                         <div className="text-right">
-                          <div className="font-semibold text-amber-900">RWF {field.revenue.toLocaleString()}</div>
+                          <div className="font-semibold text-gray-900">RWF {field.revenue.toLocaleString()}</div>
                           <div className="text-sm text-gray-600">{field.growth}</div>
                         </div>
                         <div className="w-16 bg-gray-200 rounded-full h-2">
                           <div
-                            className="bg-amber-600 h-2 rounded-full"
+                            className="bg-yellow-600 h-2 rounded-full"
                             style={{ width: `${field.share * 4}%` }}
                           ></div>
                         </div>
@@ -108,7 +108,7 @@ export default function UmbrellaAdminFinancialPage() {
             {/* Recent Transactions */}
             <div className="bg-white rounded-lg shadow-sm border border-gray-100">
               <div className="p-6 border-b border-gray-200">
-                <h3 className="text-lg font-semibold text-amber-900">Recent Transactions</h3>
+                <h3 className="text-lg font-semibold text-gray-900">Recent Transactions</h3>
               </div>
               <div className="p-6">
                 <TransactionsTable transactions={transactions} />

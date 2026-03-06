@@ -14,7 +14,7 @@ export default function CurrentLessons() {
       <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
         <div className="text-center py-6">
           <BookOpen className="w-8 h-8 text-gray-400 mx-auto mb-3" />
-          <h3 className="text-sm font-medium text-amber-900 mb-1">No Active Session</h3>
+          <h3 className="text-sm font-medium text-gray-900 mb-1">No Active Session</h3>
           <p className="text-xs text-gray-500">Start a session to see your progress here</p>
         </div>
       </div>
@@ -70,7 +70,7 @@ export default function CurrentLessons() {
   return (
     <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
       <div className="mb-4">
-        <h3 className="text-base font-semibold text-amber-900">Current Session</h3>
+        <h3 className="text-base font-semibold text-gray-900">Current Session</h3>
         <p className="text-sm text-gray-500">{currentPhase.title}</p>
       </div>
 
@@ -82,7 +82,7 @@ export default function CurrentLessons() {
               <StatusIcon className={`w-5 h-5 ${statusConfig.color}`} />
             </div>
             <div className="flex-1">
-              <h4 className="text-sm font-medium text-amber-900 mb-1">{currentSession.title}</h4>
+              <h4 className="text-sm font-medium text-gray-900 mb-1">{currentSession.title}</h4>
               <p className="text-xs text-gray-600 mb-2">{currentSession.description}</p>
               
               {/* Session Details */}
@@ -104,8 +104,8 @@ export default function CurrentLessons() {
                 <div className="flex-1 bg-gray-200 rounded-full h-2">
                   <div 
                     className={`h-2 rounded-full transition-all duration-300 ${
-                      currentSession.status === 'completed' ? 'bg-amber-600' : 
-                      currentSession.status === 'in-progress' ? 'bg-amber-600' : 'bg-gray-400'
+                      currentSession.status === 'completed' ? 'bg-yellow-600' : 
+                      currentSession.status === 'in-progress' ? 'bg-yellow-600' : 'bg-gray-400'
                     }`}
                     style={{ width: currentSession.status === 'completed' ? '100%' : currentSession.status === 'in-progress' ? '50%' : '0%' }}
                   ></div>
@@ -125,12 +125,12 @@ export default function CurrentLessons() {
         {/* Action Buttons */}
         <div className="flex items-center gap-2 mt-3">
           {currentSession.status === 'in-progress' && (
-            <button className="flex-1 px-3 py-2 bg-amber-600 text-white text-sm font-medium rounded-lg hover:bg-amber-700 transition-colors">
+            <button className="flex-1 px-3 py-2 bg-yellow-600 text-white text-sm font-medium rounded-lg hover:bg-yellow-700 transition-colors">
               Continue Session
             </button>
           )}
           {currentSession.status === 'pending' && (
-            <button className="flex-1 px-3 py-2 bg-amber-600 text-white text-sm font-medium rounded-lg hover:bg-amber-700 transition-colors">
+            <button className="flex-1 px-3 py-2 bg-yellow-600 text-white text-sm font-medium rounded-lg hover:bg-yellow-700 transition-colors">
               Start Session
             </button>
           )}
@@ -145,7 +145,7 @@ export default function CurrentLessons() {
       {/* Next Sessions Preview */}
       {nextSessions.length > 0 && (
         <div>
-          <h4 className="text-sm font-medium text-amber-900 mb-3">Coming Next</h4>
+          <h4 className="text-sm font-medium text-gray-900 mb-3">Coming Next</h4>
           <div className="space-y-2">
             {nextSessions.map((session: Session) => {
               const nextStatusConfig = getSessionStatusConfig(session.status);
@@ -157,7 +157,7 @@ export default function CurrentLessons() {
                     <NextIcon className={`w-3 h-3 ${nextStatusConfig.color}`} />
                   </div>
                   <div className="flex-1">
-                    <h5 className="text-xs font-medium text-amber-900">{session.title}</h5>
+                    <h5 className="text-xs font-medium text-gray-900">{session.title}</h5>
                     <div className="flex items-center gap-2 text-xs text-gray-500">
                       <Clock className="w-3 h-3" />
                       <span>{session.duration}h</span>
@@ -187,7 +187,7 @@ export default function CurrentLessons() {
         </div>
         <div className="w-full bg-gray-200 rounded-full h-1.5">
           <div 
-            className="bg-amber-600 h-1.5 rounded-full transition-all duration-300"
+            className="bg-yellow-600 h-1.5 rounded-full transition-all duration-300"
             style={{ width: `${phaseProgress}%` }}
           ></div>
         </div>

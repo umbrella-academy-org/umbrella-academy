@@ -36,7 +36,7 @@ export default function StudentSupportPage() {
                     <div className="max-w-full mx-auto">
                         {/* Hero Section */}
                         <div className="mb-12">
-                            <h1 className="text-3xl font-semibold text-amber-900 mb-2">Support Center</h1>
+                            <h1 className="text-3xl font-semibold text-gray-900 mb-2">Support Center</h1>
                             <p className="text-gray-500 mb-8">How can we help you today? Search our knowledge base or contact us.</p>
 
                             <div className="relative max-w-2xl">
@@ -54,10 +54,10 @@ export default function StudentSupportPage() {
                         {/* Support Actions */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
                             <div className="bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow group">
-                                <div className="w-12 h-12 bg-gray-50 rounded-lg flex items-center justify-center text-gray-600 mb-4 group-hover:bg-amber-600 group-hover:text-white transition-colors">
+                                <div className="w-12 h-12 bg-gray-50 rounded-lg flex items-center justify-center text-gray-600 mb-4 group-hover:bg-yellow-600 group-hover:text-white transition-colors">
                                     <Mail className="w-6 h-6" />
                                 </div>
-                                <h3 className="font-semibold text-amber-900 mb-2">Email Support</h3>
+                                <h3 className="font-semibold text-gray-900 mb-2">Email Support</h3>
                                 <p className="text-sm text-gray-500 mb-4 leading-relaxed">Response within 24 hours from our operations team.</p>
                                 <a href="mailto:support@umbrellaacademy.rw" className="text-sm font-semibold text-gray-600 flex items-center gap-1 hover:gap-2 transition-all">
                                     Send Email <ChevronRight className="w-4 h-4" />
@@ -65,10 +65,10 @@ export default function StudentSupportPage() {
                             </div>
 
                             <div className="bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow group">
-                                <div className="w-12 h-12 bg-gray-50 rounded-lg flex items-center justify-center text-gray-600 mb-4 group-hover:bg-amber-600 group-hover:text-white transition-colors">
+                                <div className="w-12 h-12 bg-gray-50 rounded-lg flex items-center justify-center text-gray-600 mb-4 group-hover:bg-yellow-600 group-hover:text-white transition-colors">
                                     <MessageCircle className="w-6 h-6" />
                                 </div>
-                                <h3 className="font-semibold text-amber-900 mb-2">Community Discord</h3>
+                                <h3 className="font-semibold text-gray-900 mb-2">Community Discord</h3>
                                 <p className="text-sm text-gray-500 mb-4 leading-relaxed">Join 1,000+ students and mentors in our community.</p>
                                 <button className="text-sm font-semibold text-gray-600 flex items-center gap-1 hover:gap-2 transition-all">
                                     Join Chat <ChevronRight className="w-4 h-4" />
@@ -76,10 +76,10 @@ export default function StudentSupportPage() {
                             </div>
 
                             <div className="bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow group">
-                                <div className="w-12 h-12 bg-gray-50 rounded-lg flex items-center justify-center text-gray-600 mb-4 group-hover:bg-amber-600 group-hover:text-white transition-colors">
+                                <div className="w-12 h-12 bg-gray-50 rounded-lg flex items-center justify-center text-gray-600 mb-4 group-hover:bg-yellow-600 group-hover:text-white transition-colors">
                                     <FileText className="w-6 h-6" />
                                 </div>
-                                <h3 className="font-semibold text-amber-900 mb-2">User Manual</h3>
+                                <h3 className="font-semibold text-gray-900 mb-2">User Manual</h3>
                                 <p className="text-sm text-gray-500 mb-4 leading-relaxed">Deep dive into how everything works at the Academy.</p>
                                 <button className="text-sm font-semibold text-gray-600 flex items-center gap-1 hover:gap-2 transition-all">
                                     Browse Docs <ExternalLink className="w-4 h-4" />
@@ -89,11 +89,11 @@ export default function StudentSupportPage() {
 
                         {/* FAQs */}
                         <div className="bg-white rounded-lg border border-gray-100 shadow-sm p-8">
-                            <h2 className="text-xl font-semibold text-amber-900 mb-6">Frequently Asked Questions</h2>
+                            <h2 className="text-xl font-semibold text-gray-900 mb-6">Frequently Asked Questions</h2>
                             <div className="space-y-6">
                                 {faqs.map((faq, i) => (
                                     <div key={i} className="pb-6 border-b border-gray-50 last:border-0 last:pb-0">
-                                        <h4 className="font-medium text-amber-900 mb-2 flex items-center gap-2">
+                                        <h4 className="font-medium text-gray-900 mb-2 flex items-center gap-2">
                                             <HelpCircle className="w-4 h-4 text-gray-600" />
                                             {faq.question}
                                         </h4>

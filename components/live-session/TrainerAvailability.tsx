@@ -65,7 +65,7 @@ export default function TrainerAvailability({ onBookSession }: TrainerAvailabili
 
   return (
     <div className="bg-white rounded-lg border border-gray-200 p-6">
-      <h3 className="text-lg font-semibold text-amber-900 mb-6">Book Live Session</h3>
+      <h3 className="text-lg font-semibold text-gray-900 mb-6">Book Live Session</h3>
 
       {/* Date Selection */}
       <div className="mb-6">
@@ -94,7 +94,7 @@ export default function TrainerAvailability({ onBookSession }: TrainerAvailabili
             <div
               key={trainer.id}
               className={`p-4 border rounded-lg cursor-pointer transition-colors ${selectedTrainer === trainer.id
-                  ? 'border-amber-600 bg-gray-50'
+                  ? 'border-yellow-600 bg-gray-50'
                   : 'border-gray-200 hover:border-gray-300'
                 }`}
               onClick={() => setSelectedTrainer(trainer.id)}
@@ -104,7 +104,7 @@ export default function TrainerAvailability({ onBookSession }: TrainerAvailabili
                   <User className="w-5 h-5 text-gray-600" />
                 </div>
                 <div className="flex-1">
-                  <h4 className="font-medium text-amber-900">{trainer.name}</h4>
+                  <h4 className="font-medium text-gray-900">{trainer.name}</h4>
                   <div className="flex items-center gap-2 text-sm text-gray-600">
                     <span>★ {trainer.rating}</span>
                     <span>•</span>
@@ -132,7 +132,7 @@ export default function TrainerAvailability({ onBookSession }: TrainerAvailabili
                 className={`p-3 border rounded-lg text-sm font-medium transition-colors ${!slot.available
                     ? 'border-gray-200 bg-gray-100 text-gray-400 cursor-not-allowed'
                     : selectedTimeSlot === slot.id
-                      ? 'border-amber-600 bg-gray-50 text-gray-600'
+                      ? 'border-yellow-600 bg-gray-50 text-gray-600'
                       : 'border-gray-200 hover:border-gray-300 text-gray-700'
                   }`}
               >
@@ -150,7 +150,7 @@ export default function TrainerAvailability({ onBookSession }: TrainerAvailabili
       {selectedTrainer && selectedTimeSlot && (
         <button
           onClick={handleBookSession}
-          className="w-full bg-amber-600 text-white py-3 rounded-lg font-medium hover:bg-amber-700 transition-colors flex items-center justify-center gap-2"
+          className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-colors flex items-center justify-center gap-2"
         >
           <Video className="w-4 h-4" />
           Book Live Session

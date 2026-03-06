@@ -36,7 +36,7 @@ export default function SubscriptionPage() {
 
             {/* Caregivers Count */}
             <div className="mt-4 lg:mt-6 mb-3 lg:mb-4">
-              <h2 className="text-lg lg:text-xl font-semibold text-amber-900">1000+ Caregivers</h2>
+              <h2 className="text-lg lg:text-xl font-semibold text-gray-900">1000+ Caregivers</h2>
             </div>
 
             {/* Main Subscription Grid */}

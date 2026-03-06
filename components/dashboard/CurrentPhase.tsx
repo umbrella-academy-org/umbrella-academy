@@ -19,11 +19,11 @@ export default function CurrentPhase({ activeRoadmap }: CurrentPhaseProps) {
       <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
         <div className="text-center py-6">
           <Target className="w-8 h-8 text-gray-400 mx-auto mb-3" />
-          <h3 className="text-sm font-semibold text-amber-900 mb-2">No Active Phase</h3>
+          <h3 className="text-sm font-semibold text-gray-900 mb-2">No Active Phase</h3>
           <p className="text-xs text-gray-500 mb-4">Start a roadmap to see your current phase</p>
           <button 
             onClick={() => navigate('/post-signup/roadmap')}
-            className="px-3 py-2 bg-amber-600 text-white text-xs font-medium rounded-lg hover:bg-amber-700 transition-colors"
+            className="px-3 py-2 bg-yellow-600 text-white text-xs font-medium rounded-lg hover:bg-yellow-700 transition-colors"
           >
             Browse Roadmaps
           </button>
@@ -42,7 +42,7 @@ export default function CurrentPhase({ activeRoadmap }: CurrentPhaseProps) {
       <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
         <div className="text-center py-6">
           <Target className="w-8 h-8 text-gray-400 mx-auto mb-3" />
-          <h3 className="text-sm font-semibold text-amber-900 mb-2">Roadmap Not Started</h3>
+          <h3 className="text-sm font-semibold text-gray-900 mb-2">Roadmap Not Started</h3>
           <p className="text-xs text-gray-500">Begin your learning journey</p>
         </div>
       </div>
@@ -64,7 +64,7 @@ export default function CurrentPhase({ activeRoadmap }: CurrentPhaseProps) {
       onMouseLeave={() => setIsHovered(false)}
     >
       <div className="flex items-center justify-between mb-3">
-        <h3 className="text-sm sm:text-base font-semibold text-amber-900 group-hover:text-gray-600 transition-colors">
+        <h3 className="text-sm sm:text-base font-semibold text-gray-900 group-hover:text-gray-600 transition-colors">
           Current Phase
         </h3>
         <ChevronRight className={`w-4 h-4 text-gray-400 transition-all duration-200 ${
@@ -77,7 +77,7 @@ export default function CurrentPhase({ activeRoadmap }: CurrentPhaseProps) {
           <Target className={`w-4 h-4 text-gray-600 transition-all duration-300 ${
             isHovered ? 'animate-pulse-glow' : ''
           }`} />
-          <p className="text-sm font-medium text-amber-900">{currentPhase.title}</p>
+          <p className="text-sm font-medium text-gray-900">{currentPhase.title}</p>
         </div>
         
         <div className="flex items-center gap-2 text-xs text-gray-600">
@@ -112,7 +112,7 @@ export default function CurrentPhase({ activeRoadmap }: CurrentPhaseProps) {
         {/* Action Button */}
         <button 
           onClick={() => navigate('/post-signup/roadmap')}
-          className="w-full mt-3 px-3 py-2 bg-amber-600 text-white text-xs font-medium rounded-lg hover:bg-amber-700 transition-all duration-200 interactive-button transform hover:scale-105 focus:ring-2 focus:ring-gray-300"
+          className="w-full mt-3 px-3 py-2 bg-yellow-600 text-white text-xs font-medium rounded-lg hover:bg-yellow-700 transition-all duration-200 interactive-button transform hover:scale-105 focus:ring-2 focus:ring-gray-300"
         >
           View Phase Details
         </button>

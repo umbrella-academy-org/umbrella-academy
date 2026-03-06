@@ -25,7 +25,7 @@ export default function TrainersTable({ trainers }: TrainersTableProps) {
     id: trainer.id,
     trainer: (
       <div>
-        <div className="text-sm font-medium text-amber-900">{trainer.name}</div>
+        <div className="text-sm font-medium text-gray-900">{trainer.name}</div>
         <div className="text-sm text-gray-500">{trainer.email}</div>
       </div>
     ),
@@ -84,7 +84,7 @@ export default function TrainersTable({ trainers }: TrainersTableProps) {
               <button className="px-3 py-1.5 text-xs font-medium text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
                 Send Message
               </button>
-              <button className="px-3 py-1.5 text-xs font-medium text-white bg-amber-600 rounded-lg hover:bg-amber-700 transition-colors">
+              <button className="px-3 py-1.5 text-xs font-medium text-white bg-yellow-600 rounded-lg hover:bg-yellow-700 transition-colors">
                 Suspend Selected
               </button>
             </div>

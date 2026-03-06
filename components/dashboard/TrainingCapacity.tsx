@@ -45,7 +45,7 @@ export default function TrainingCapacity({ assignedStudents, maxCapacity, weekly
             }`} />
           </div>
           <div>
-            <h3 className={`text-sm sm:text-base font-semibold text-amber-900 transition-colors duration-200 ${
+            <h3 className={`text-sm sm:text-base font-semibold text-gray-900 transition-colors duration-200 ${
               isHovered ? 'text-gray-600' : ''
             }`}>
               Training Capacity
@@ -61,7 +61,7 @@ export default function TrainingCapacity({ assignedStudents, maxCapacity, weekly
       {/* Capacity Stats */}
       <div className="grid grid-cols-2 gap-4 mb-4">
         <div className="text-center p-3 bg-gray-50 rounded-lg">
-          <div className={`text-xl font-bold text-amber-900 transition-all duration-300 ${
+          <div className={`text-xl font-bold text-gray-900 transition-all duration-300 ${
             isHovered ? 'scale-110 text-gray-600' : ''
           }`}>
             {assignedStudents}/{maxCapacity}
@@ -69,7 +69,7 @@ export default function TrainingCapacity({ assignedStudents, maxCapacity, weekly
           <p className="text-xs text-gray-600 mt-1">Students Assigned</p>
         </div>
         <div className="text-center p-3 bg-gray-50 rounded-lg">
-          <div className={`text-xl font-bold text-amber-900 transition-all duration-300 ${
+          <div className={`text-xl font-bold text-gray-900 transition-all duration-300 ${
             isHovered ? 'scale-110 text-gray-600' : ''
           }`}>
             {utilizationRate}%
@@ -131,7 +131,7 @@ export default function TrainingCapacity({ assignedStudents, maxCapacity, weekly
         <button className="flex-1 px-3 py-2 border border-gray-300 text-gray-700 text-xs font-medium rounded-lg hover:bg-gray-50 transition-all duration-200 interactive-button">
           View Schedule
         </button>
-        <button className="flex-1 px-3 py-2 bg-amber-600 text-white text-xs font-medium rounded-lg hover:bg-amber-700 transition-all duration-200 interactive-button transform hover:scale-105 focus:ring-2 focus:ring-gray-300">
+        <button className="flex-1 px-3 py-2 bg-yellow-600 text-white text-xs font-medium rounded-lg hover:bg-yellow-700 transition-all duration-200 interactive-button transform hover:scale-105 focus:ring-2 focus:ring-gray-300">
           Add Session
         </button>
       </div>

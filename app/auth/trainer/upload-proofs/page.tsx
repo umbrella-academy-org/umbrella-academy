@@ -73,7 +73,7 @@ export default function UploadProofsPage() {
           {/* Go back button */}
           <button
             onClick={() => window.history.back()}
-            className="flex items-center gap-2 text-gray-600 hover:text-amber-900 mb-8"
+            className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-8"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -84,7 +84,7 @@ export default function UploadProofsPage() {
           <div className="flex flex-col items-center justify-center flex-1">
             {/* Logo */}
             <div className="mb-8">
-              <div className="w-16 h-16 bg-amber-600 rounded-2xl flex items-center justify-center">
+              <div className="w-16 h-16 bg-yellow-600 rounded-2xl flex items-center justify-center">
                 <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" />
                 </svg>
@@ -92,7 +92,7 @@ export default function UploadProofsPage() {
             </div>
 
             {/* Title */}
-            <h1 className="text-3xl font-semibold text-amber-900 mb-2">
+            <h1 className="text-3xl font-semibold text-gray-900 mb-2">
               Upload Your Proofs
             </h1>
             <p className="text-gray-500 mb-8 text-center">
@@ -107,7 +107,7 @@ export default function UploadProofsPage() {
                   Upload Documents
                 </label>
 
-                <label className="flex flex-col items-center justify-center gap-3 p-8 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer transition-all hover:border-amber-600 hover:bg-gray-50">
+                <label className="flex flex-col items-center justify-center gap-3 p-8 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer transition-all hover:border-yellow-600 hover:bg-gray-50">
                   <Upload className="w-8 h-8 text-gray-400" />
                   <div className="text-center">
                     <span className="text-sm font-medium text-gray-600 block">
@@ -141,11 +141,11 @@ export default function UploadProofsPage() {
                           key={index}
                           className="flex items-center gap-3 p-3 bg-gray-50 border border-gray-200 rounded-lg hover:border-gray-300 transition-all"
                         >
-                          <div className="w-10 h-10 rounded-lg bg-amber-600 flex items-center justify-center shrink-0">
+                          <div className="w-10 h-10 rounded-lg bg-yellow-600 flex items-center justify-center shrink-0">
                             <FileIcon className="w-5 h-5 text-white" />
                           </div>
                           <div className="flex-1 min-w-0">
-                            <p className="text-sm font-medium text-amber-900 truncate">
+                            <p className="text-sm font-medium text-gray-900 truncate">
                               {file.name}
                             </p>
                             <p className="text-xs text-gray-500">
@@ -171,17 +171,17 @@ export default function UploadProofsPage() {
               <button
                 type="submit"
                 disabled={uploadedFiles.length === 0}
-                className="w-full bg-amber-600 text-white py-3 rounded-lg font-medium hover:bg-amber-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Continue
               </button>
 
               {/* Progress dots */}
               <div className="flex justify-center gap-2 pt-4">
-                <div className="w-8 h-2 bg-amber-600 rounded-full"></div>
-                <div className="w-8 h-2 bg-amber-600 rounded-full"></div>
-                <div className="w-8 h-2 bg-amber-600 rounded-full"></div>
-                <div className="w-8 h-2 bg-amber-600 rounded-full"></div>
+                <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
+                <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
+                <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
+                <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
                 <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
               </div>
             </form>

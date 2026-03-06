@@ -128,7 +128,7 @@ export default function TrainerStatsCards({
                 {stat.title}
               </p>
               <div className="flex items-baseline gap-1">
-                <p className={`text-lg lg:text-2xl font-bold text-amber-900 group-hover:scale-105 transition-transform ${
+                <p className={`text-lg lg:text-2xl font-bold text-gray-900 group-hover:scale-105 transition-transform ${
                   hoveredCard === index ? stat.color : ''
                 }`}>
                   {stat.value}

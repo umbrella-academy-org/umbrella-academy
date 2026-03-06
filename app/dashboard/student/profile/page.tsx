@@ -38,8 +38,8 @@ export default function StudentProfilePage() {
         engagementScore: 88,
         skills: [
             { name: 'React Architecture', level: 'Advanced', color: 'bg-gray-500' },
-            { name: 'Node.js Systems', level: 'Intermediate', color: 'bg-amber-600' },
-            { name: 'TypeScript', level: 'Intermediate', color: 'bg-amber-600' },
+            { name: 'Node.js Systems', level: 'Intermediate', color: 'bg-yellow-600' },
+            { name: 'TypeScript', level: 'Intermediate', color: 'bg-yellow-600' },
             { name: 'UI/UX Principles', level: 'Advanced', color: 'bg-gray-500' },
         ],
         liveRoadmap: [
@@ -90,14 +90,14 @@ export default function StudentProfilePage() {
                             <div className="flex-1 pb-2">
                                 <div className="flex flex-wrap items-center justify-between gap-4">
                                     <div className="space-y-1">
-                                        <h1 className="text-3xl font-bold text-amber-900">{profileData.name}</h1>
+                                        <h1 className="text-3xl font-bold text-gray-900">{profileData.name}</h1>
                                         <div className="flex items-center gap-4 text-sm font-medium text-gray-500">
                                             <span className="flex items-center gap-1.5"><MapPin className="w-4 h-4 text-gray-600" /> {profileData.location}</span>
                                             <span className="flex items-center gap-1.5 text-gray-700 font-bold"><Zap className="w-4 h-4" /> {profileData.role}</span>
                                         </div>
                                     </div>
                                     <div className="flex items-center gap-3">
-                                        <button className="px-5 py-2.5 bg-amber-600 text-white font-bold rounded-lg hover:bg-amber-700 transition-all shadow-md active:scale-95 text-sm">
+                                        <button className="px-5 py-2.5 bg-yellow-600 text-white font-bold rounded-lg hover:bg-yellow-700 transition-all shadow-md active:scale-95 text-sm">
                                             Edit Details
                                         </button>
                                         <button className="p-2.5 bg-white border border-gray-200 text-gray-600 rounded-lg hover:bg-gray-50 shadow-sm transition-all">
@@ -158,7 +158,7 @@ export default function StudentProfilePage() {
                             {/* Live Session Roadmap */}
                             <div className="bg-white rounded-lg border border-gray-100 shadow-sm p-8 space-y-8">
                                 <div className="flex items-center justify-between">
-                                    <h3 className="text-xl font-bold text-amber-900">Live Session Roadmap</h3>
+                                    <h3 className="text-xl font-bold text-gray-900">Live Session Roadmap</h3>
                                     <span className="text-[10px] font-black text-gray-600  bg-gray-50 px-2.5 py-1 rounded-full border border-gray-100">Active Field: {profileData.field}</span>
                                 </div>
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -178,7 +178,7 @@ export default function StudentProfilePage() {
                             {/* Technical Arsenal & Info Grid */}
                             <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
                                 <div className="md:col-span-3 bg-white rounded-lg border border-gray-100 shadow-sm p-8 space-y-6">
-                                    <h3 className="text-xl font-bold text-amber-900">Technical Arsenal</h3>
+                                    <h3 className="text-xl font-bold text-gray-900">Technical Arsenal</h3>
                                     <div className="space-y-5">
                                         {profileData.skills.map((skill) => (
                                             <div key={skill.name} className="space-y-2">
@@ -198,7 +198,7 @@ export default function StudentProfilePage() {
                                 </div>
 
                                 <div className="md:col-span-2 bg-white rounded-lg border border-gray-100 shadow-sm p-8 space-y-6">
-                                    <h3 className="text-xl font-bold text-amber-900">Contact Details</h3>
+                                    <h3 className="text-xl font-bold text-gray-900">Contact Details</h3>
                                     <div className="space-y-6">
                                         <MiniInfo label="Academy Email" value={profileData.email} icon={<Mail className="w-4 h-4" />} />
                                         <MiniInfo label="Phone Number" value={profileData.phone} icon={<Phone className="w-4 h-4" />} />
@@ -208,7 +208,7 @@ export default function StudentProfilePage() {
                             </div>
 
                             {/* Preferences Recap */}
-                            <div className="bg-gray-900 rounded-lg p-8 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
+                            <div className="bg-black rounded-lg p-8 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
                                 <div className="space-y-2">
                                     <h4 className="text-lg font-bold">Trainee Academic Preferences</h4>
                                     <p className="text-gray-400 text-sm font-medium">Your current session availability and learning style</p>
@@ -243,7 +243,7 @@ function SimpleStat({ icon, label, value, color }: { icon: React.ReactNode, labe
                 {icon}
             </div>
             <p className="text-[10px] font-black text-gray-400  ">{label}</p>
-            <p className="text-2xl font-black text-amber-900">{value}</p>
+            <p className="text-2xl font-black text-gray-900">{value}</p>
         </div>
     );
 }

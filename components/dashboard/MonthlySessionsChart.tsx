@@ -115,7 +115,7 @@ export default function MonthlySessionsChart({ userType }: MonthlySessionsChartP
     <div className="bg-white rounded-lg p-3 lg:p-4 shadow-sm border border-gray-100">
       <div className="flex items-center justify-between mb-4 lg:mb-6">
         <div>
-          <h3 className="text-sm lg:text-base font-semibold text-amber-900">{getTitle()}</h3>
+          <h3 className="text-sm lg:text-base font-semibold text-gray-900">{getTitle()}</h3>
           <p className="text-xs text-gray-500 mt-1">{getDescription()}</p>
         </div>
         <button className="p-1 text-gray-400 hover:text-gray-600">
@@ -145,7 +145,7 @@ export default function MonthlySessionsChart({ userType }: MonthlySessionsChartP
                   {/* Bar */}
                   <div className="flex justify-center mb-2 w-full">
                     <div
-                      className="bg-gray-500 rounded-t-sm transition-all duration-300 hover:bg-amber-600"
+                      className="bg-gray-500 rounded-t-sm transition-all duration-300 hover:bg-yellow-600"
                       style={{
                         width: '16px',
                         height: `${Math.max((data.sessions / maxSessions) * 100, 8)}px`

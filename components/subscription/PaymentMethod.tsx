@@ -28,7 +28,7 @@ export default function PaymentMethod() {
   return (
     <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
       <div className="mb-6">
-        <h3 className="text-lg font-semibold text-amber-900 mb-2">Payment method</h3>
+        <h3 className="text-lg font-semibold text-gray-900 mb-2">Payment method</h3>
         <p className="text-sm text-gray-600 mb-6">Manage your MoMo payment methods for subscriptions.</p>
 
         {/* Payment Methods */}
@@ -48,7 +48,7 @@ export default function PaymentMethod() {
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <div className="text-sm font-medium text-amber-900">{method.provider}</div>
+                      <div className="text-sm font-medium text-gray-900">{method.provider}</div>
                       {method.isDefault && (
                         <span className="px-2 py-1 text-xs font-medium bg-gray-100 text-gray-800 rounded-full">
                           Default
@@ -92,7 +92,7 @@ export default function PaymentMethod() {
             <div className="flex items-center gap-3 text-sm text-gray-600">
               <Mail className="w-4 h-4" />
               <div>
-                <div className="text-amber-900 font-medium">Billing email</div>
+                <div className="text-gray-900 font-medium">Billing email</div>
                 <div>{billingEmail}</div>
               </div>
             </div>

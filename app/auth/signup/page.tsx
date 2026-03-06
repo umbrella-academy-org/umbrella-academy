@@ -18,7 +18,7 @@ export default function SignupPage() {
           </div>
 
           {/* Title */}
-          <h1 className="text-3xl font-semibold text-amber-900 mb-2">
+          <h1 className="text-3xl font-semibold text-gray-900 mb-2">
             Join Umbrella Academy
           </h1>
           <p className="text-gray-500 mb-8">
@@ -32,7 +32,7 @@ export default function SignupPage() {
                 localStorage.setItem('userType', 'student')
                 router.push('/auth/student/profile')
               }}
-              className="w-full p-6 border-2 border-gray-200 rounded-lg hover:border-amber-600 hover:bg-gray-50 transition-colors text-left"
+              className="w-full p-6 border-2 border-gray-200 rounded-lg hover:border-yellow-600 hover:bg-gray-50 transition-colors text-left"
             >
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
@@ -41,7 +41,7 @@ export default function SignupPage() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-amber-900">I'm a Student</h3>
+                  <h3 className="text-lg font-semibold text-gray-900">I'm a Student</h3>
                   <p className="text-gray-600">Looking to learn and grow my skills</p>
                 </div>
               </div>
@@ -52,7 +52,7 @@ export default function SignupPage() {
                 localStorage.setItem('userType', 'trainer')
                 router.push('/auth/trainer/signup')
               }}
-              className="w-full p-6 border-2 border-gray-200 rounded-lg hover:border-amber-600 hover:bg-gray-50 transition-colors text-left"
+              className="w-full p-6 border-2 border-gray-200 rounded-lg hover:border-yellow-600 hover:bg-gray-50 transition-colors text-left"
             >
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
@@ -61,7 +61,7 @@ export default function SignupPage() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-amber-900">I'm a Trainer</h3>
+                  <h3 className="text-lg font-semibold text-gray-900">I'm a Trainer</h3>
                   <p className="text-gray-600">Apply to train and share your expertise</p>
                 </div>
               </div>

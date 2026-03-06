@@ -184,7 +184,7 @@ export default function PickTrainerPage() {
         <div className="flex flex-col flex-1 max-w-md mx-auto w-full">
           <button
             onClick={() => window.history.back()}
-            className="flex items-center gap-2 text-gray-600 hover:text-amber-900 mb-8 transition-colors"
+            className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-8 transition-colors"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -194,14 +194,14 @@ export default function PickTrainerPage() {
 
           <div className="flex flex-col items-center justify-center flex-1">
             <div className="mb-8">
-              <div className="w-16 h-16 bg-amber-600 rounded-2xl flex items-center justify-center shadow-lg shadow-gray-600/20">
+              <div className="w-16 h-16 bg-yellow-600 rounded-2xl flex items-center justify-center shadow-lg shadow-gray-600/20">
                 <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" />
                 </svg>
               </div>
             </div>
 
-            <h1 className="text-3xl font-semibold text-amber-900 mb-2">
+            <h1 className="text-3xl font-semibold text-gray-900 mb-2">
               Pick your Trainer
             </h1>
             <p className="text-gray-500 mb-2 text-center">
@@ -217,11 +217,11 @@ export default function PickTrainerPage() {
                   <div
                     key={trainer.id}
                     className={`flex items-start gap-4 p-4 border rounded-lg transition-all ${selectedTrainer === trainer.id
-                      ? 'border-amber-600 bg-gray-50'
+                      ? 'border-yellow-600 bg-gray-50'
                       : 'border-gray-200 bg-white hover:border-gray-300'
                       }`}
                   >
-                    <div className={`w-14 h-14 rounded-full flex items-center justify-center text-white font-semibold flex-shrink-0 ${selectedTrainer === trainer.id ? 'bg-amber-600' : 'bg-gradient-to-br from-gray-300 to-gray-400'
+                    <div className={`w-14 h-14 rounded-full flex items-center justify-center text-white font-semibold flex-shrink-0 ${selectedTrainer === trainer.id ? 'bg-yellow-600' : 'bg-gradient-to-br from-gray-300 to-gray-400'
                       }`}>
                       {trainer.avatar}
                     </div>
@@ -229,7 +229,7 @@ export default function PickTrainerPage() {
                     <div className="flex-1">
                       <div className="flex items-start justify-between mb-2">
                         <div>
-                          <h3 className="text-sm font-semibold text-amber-900">
+                          <h3 className="text-sm font-semibold text-gray-900">
                             {trainer.name}
                           </h3>
                           <p className="text-xs text-gray-500">
@@ -275,7 +275,7 @@ export default function PickTrainerPage() {
                             type="button"
                             onClick={() => setSelectedTrainer(trainer.id)}
                             className={`px-3 py-1 text-xs rounded transition-colors ${selectedTrainer === trainer.id
-                              ? 'bg-amber-600 text-white'
+                              ? 'bg-yellow-600 text-white'
                               : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
                               }`}
                           >
@@ -291,7 +291,7 @@ export default function PickTrainerPage() {
                           </button>
                         </div>
                         <div className="text-right">
-                          <div className="text-xs font-semibold text-amber-900">{trainer.hourlyRate}</div>
+                          <div className="text-xs font-semibold text-gray-900">{trainer.hourlyRate}</div>
                         </div>
                       </div>
                     </div>
@@ -320,7 +320,7 @@ export default function PickTrainerPage() {
 
               <button
                 type="submit"
-                className="w-full bg-amber-600 text-white py-3 rounded-lg font-medium hover:bg-amber-700 transition-colors"
+                className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-colors"
                 disabled={filteredTrainers.length === 0}
               >
                 Continue to Payment
@@ -328,7 +328,7 @@ export default function PickTrainerPage() {
 
               <div className="flex justify-center gap-2 pt-6">
                 {[1, 2, 3, 4, 5, 6, 7].map((i) => (
-                  <div key={i} className={`h-2 rounded-full transition-all ${i === 6 ? 'w-8 bg-amber-600' : 'w-2 bg-gray-300'}`}></div>
+                  <div key={i} className={`h-2 rounded-full transition-all ${i === 6 ? 'w-8 bg-yellow-600' : 'w-2 bg-gray-300'}`}></div>
                 ))}
               </div>
             </form>
@@ -353,11 +353,11 @@ export default function PickTrainerPage() {
 
       {/* Profile Modal */}
       {viewingProfile && (
-        <div className="fixed inset-0 bg-amber-600 bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div className="fixed inset-0 bg-yellow-600 bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
             {/* Modal Header */}
             <div className="flex items-center justify-between p-6 border-b">
-              <h2 className="text-xl font-semibold text-amber-900">Trainer Profile</h2>
+              <h2 className="text-xl font-semibold text-gray-900">Trainer Profile</h2>
               <button
                 onClick={handleCloseProfile}
                 className="p-2 hover:bg-gray-100 rounded-full transition-colors"
@@ -374,7 +374,7 @@ export default function PickTrainerPage() {
                   {viewingProfile.avatar}
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-xl font-semibold text-amber-900">{viewingProfile.name}</h3>
+                  <h3 className="text-xl font-semibold text-gray-900">{viewingProfile.name}</h3>
                   <p className="text-gray-600 mb-2">{viewingProfile.title}</p>
                   <div className="flex items-center gap-2 mb-2">
                     {renderStars(viewingProfile.rating)}
@@ -394,39 +394,39 @@ export default function PickTrainerPage() {
                   </div>
                 </div>
                 <div className="text-right">
-                  <div className="text-lg font-semibold text-amber-900">{viewingProfile.hourlyRate}</div>
+                  <div className="text-lg font-semibold text-gray-900">{viewingProfile.hourlyRate}</div>
                 </div>
               </div>
 
               {/* Stats */}
               <div className="grid grid-cols-4 gap-4 mb-6">
                 <div className="text-center p-3 bg-gray-50 rounded-lg">
-                  <div className="text-lg font-semibold text-amber-900">{viewingProfile.students}</div>
+                  <div className="text-lg font-semibold text-gray-900">{viewingProfile.students}</div>
                   <div className="text-xs text-gray-500">Students</div>
                 </div>
                 <div className="text-center p-3 bg-gray-50 rounded-lg">
-                  <div className="text-lg font-semibold text-amber-900">{viewingProfile.totalSessions}</div>
+                  <div className="text-lg font-semibold text-gray-900">{viewingProfile.totalSessions}</div>
                   <div className="text-xs text-gray-500">Sessions</div>
                 </div>
                 <div className="text-center p-3 bg-gray-50 rounded-lg">
-                  <div className="text-lg font-semibold text-amber-900">{viewingProfile.completionRate}%</div>
+                  <div className="text-lg font-semibold text-gray-900">{viewingProfile.completionRate}%</div>
                   <div className="text-xs text-gray-500">Completion</div>
                 </div>
                 <div className="text-center p-3 bg-gray-50 rounded-lg">
-                  <div className="text-lg font-semibold text-amber-900">{viewingProfile.responseTime}</div>
+                  <div className="text-lg font-semibold text-gray-900">{viewingProfile.responseTime}</div>
                   <div className="text-xs text-gray-500">Response</div>
                 </div>
               </div>
 
               {/* Bio */}
               <div className="mb-6">
-                <h4 className="font-semibold text-amber-900 mb-2">About</h4>
+                <h4 className="font-semibold text-gray-900 mb-2">About</h4>
                 <p className="text-gray-600 text-sm leading-relaxed">{viewingProfile.bio}</p>
               </div>
 
               {/* Specialties */}
               <div className="mb-6">
-                <h4 className="font-semibold text-amber-900 mb-2">Specialties</h4>
+                <h4 className="font-semibold text-gray-900 mb-2">Specialties</h4>
                 <div className="flex flex-wrap gap-2">
                   {viewingProfile.specialties.map((specialty, index) => (
                     <span key={index} className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">
@@ -438,7 +438,7 @@ export default function PickTrainerPage() {
 
               {/* Education */}
               <div className="mb-6">
-                <h4 className="font-semibold text-amber-900 mb-2">Education</h4>
+                <h4 className="font-semibold text-gray-900 mb-2">Education</h4>
                 <ul className="space-y-1">
                   {viewingProfile.education.map((edu, index) => (
                     <li key={index} className="text-sm text-gray-600 flex items-center gap-2">
@@ -451,7 +451,7 @@ export default function PickTrainerPage() {
 
               {/* Certifications */}
               <div className="mb-6">
-                <h4 className="font-semibold text-amber-900 mb-2">Certifications</h4>
+                <h4 className="font-semibold text-gray-900 mb-2">Certifications</h4>
                 <div className="flex flex-wrap gap-2">
                   {viewingProfile.certifications.map((cert, index) => (
                     <span key={index} className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">
@@ -463,7 +463,7 @@ export default function PickTrainerPage() {
 
               {/* Languages */}
               <div className="mb-6">
-                <h4 className="font-semibold text-amber-900 mb-2">Languages</h4>
+                <h4 className="font-semibold text-gray-900 mb-2">Languages</h4>
                 <div className="flex flex-wrap gap-2">
                   {viewingProfile.languages.map((lang, index) => (
                     <span key={index} className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">
@@ -475,11 +475,11 @@ export default function PickTrainerPage() {
 
               {/* Availability Schedule */}
               <div className="mb-6">
-                <h4 className="font-semibold text-amber-900 mb-2">Weekly Availability</h4>
+                <h4 className="font-semibold text-gray-900 mb-2">Weekly Availability</h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {viewingProfile.availableTimeSlots.map((slot, index) => (
                     <div key={index} className="p-3 bg-gray-50 rounded-lg">
-                      <div className="font-medium text-amber-900 text-sm mb-1">{slot.day}</div>
+                      <div className="font-medium text-gray-900 text-sm mb-1">{slot.day}</div>
                       <div className="flex flex-wrap gap-1">
                         {slot.times.map((time, timeIndex) => (
                           <span key={timeIndex} className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">
@@ -499,7 +499,7 @@ export default function PickTrainerPage() {
                     setSelectedTrainer(viewingProfile.id);
                     handleCloseProfile();
                   }}
-                  className="flex-1 bg-amber-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-amber-700 transition-colors"
+                  className="flex-1 bg-yellow-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-yellow-700 transition-colors"
                 >
                   Select This Trainer
                 </button>

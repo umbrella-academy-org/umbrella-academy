@@ -66,7 +66,7 @@ export default function StudentDashboard() {
   if (authLoading || roadmapsLoading) {
     return (
       <div className="flex h-screen bg-white">
-        <div className="w-64 bg-gray-900 animate-pulse"></div>
+        <div className="w-64 bg-black animate-pulse"></div>
         <div className="flex-1 flex flex-col">
           <div className="h-16 bg-gray-100 animate-pulse"></div>
           <div className="flex-1 p-6 space-y-6">
@@ -115,7 +115,7 @@ export default function StudentDashboard() {
               <div className="mb-4 lg:mb-6">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                   <div>
-                    <h1 className="text-xl lg:text-2xl font-semibold text-amber-900 flex items-center gap-2">
+                    <h1 className="text-xl lg:text-2xl font-semibold text-gray-900 flex items-center gap-2">
                       <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 8h10m0 0V6a2 2 0 00-2-2H9a2 2 0 00-2 2v2m10 0v10a2 2 0 01-2 2H9a2 2 0 01-2-2V8m10 0H7" />
                       </svg>
@@ -129,20 +129,20 @@ export default function StudentDashboard() {
               {/* Setup Prompt Banner */}
               <div className="bg-gradient-to-r from-gray-50 to-gray-100 border border-gray-200 rounded-lg p-6 mb-6">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-amber-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 bg-yellow-600 rounded-lg flex items-center justify-center flex-shrink-0">
                     <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-amber-900 mb-2">Finish Setting Up Your Account</h3>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">Finish Setting Up Your Account</h3>
                     <p className="text-gray-600 mb-4">
                       Complete your profile setup to unlock your personalized learning experience, connect with trainers, and start your roadmap.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-3">
                       <button
                         onClick={() => navigate('/post-signup/availability')}
-                        className="px-6 py-3 bg-amber-600 text-white rounded-lg font-medium hover:bg-amber-700 transition-colors"
+                        className="px-6 py-3 bg-yellow-600 text-white rounded-lg font-medium hover:bg-yellow-700 transition-colors"
                       >
                         Complete Setup
                       </button>
@@ -174,7 +174,7 @@ export default function StudentDashboard() {
                       </div>
                       <div>
                         <p className="text-sm text-gray-500">{stat.label}</p>
-                        <p className="text-lg font-semibold text-amber-900">{stat.value}</p>
+                        <p className="text-lg font-semibold text-gray-900">{stat.value}</p>
                       </div>
                     </div>
                   </div>
@@ -186,7 +186,7 @@ export default function StudentDashboard() {
                 <div className="xl:col-span-3 space-y-3 lg:space-y-4">
                   {/* Empty Chart */}
                   <div className="bg-white border border-gray-200 rounded-lg p-6">
-                    <h3 className="text-lg font-semibold text-amber-900 mb-4">Learning Progress</h3>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Learning Progress</h3>
                     <div className="flex items-center justify-center h-48 bg-gray-50 rounded-lg">
                       <div className="text-center">
                         <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -202,7 +202,7 @@ export default function StudentDashboard() {
 
                   {/* Empty Course Card */}
                   <div className="bg-white border border-gray-200 rounded-lg p-6">
-                    <h3 className="text-lg font-semibold text-amber-900 mb-4">Current Course</h3>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Current Course</h3>
                     <div className="flex items-center justify-center h-32 bg-gray-50 rounded-lg">
                       <div className="text-center">
                         <p className="text-gray-500">No active course</p>
@@ -215,7 +215,7 @@ export default function StudentDashboard() {
                 <div className="xl:col-span-2 space-y-3 lg:space-y-4">
                   {/* Empty Phase */}
                   <div className="bg-white border border-gray-200 rounded-lg p-6">
-                    <h3 className="text-lg font-semibold text-amber-900 mb-4">Current Phase</h3>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Current Phase</h3>
                     <div className="text-center py-8">
                       <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-3">
                         <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -228,7 +228,7 @@ export default function StudentDashboard() {
 
                   {/* Empty Events */}
                   <div className="bg-white border border-gray-200 rounded-lg p-6">
-                    <h3 className="text-lg font-semibold text-amber-900 mb-4">Upcoming Events</h3>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Upcoming Events</h3>
                     <div className="text-center py-8">
                       <p className="text-gray-500">No scheduled events</p>
                     </div>
@@ -236,7 +236,7 @@ export default function StudentDashboard() {
 
                   {/* Empty Sessions */}
                   <div className="bg-white border border-gray-200 rounded-lg p-6">
-                    <h3 className="text-lg font-semibold text-amber-900 mb-4">Live Sessions</h3>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Live Sessions</h3>
                     <div className="text-center py-8">
                       <p className="text-gray-500">No live sessions</p>
                     </div>
@@ -264,7 +264,7 @@ export default function StudentDashboard() {
             <div className="mb-4 lg:mb-6">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
-                  <h1 className="text-xl lg:text-2xl font-semibold text-amber-900 flex items-center gap-2">
+                  <h1 className="text-xl lg:text-2xl font-semibold text-gray-900 flex items-center gap-2">
                     <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 8h10m0 0V6a2 2 0 00-2-2H9a2 2 0 00-2 2v2m10 0v10a2 2 0 01-2 2H9a2 2 0 01-2-2V8m10 0H7" />
                     </svg>
@@ -273,7 +273,7 @@ export default function StudentDashboard() {
                   <p className="text-gray-500 mt-1 text-sm lg:text-base">Learn with ease</p>
                 </div>
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 lg:gap-3">
-                  <button className="flex items-center justify-center gap-2 px-3 lg:px-4 py-2 text-gray-600 hover:text-amber-900 transition-colors text-sm lg:text-base">
+                  <button className="flex items-center justify-center gap-2 px-3 lg:px-4 py-2 text-gray-600 hover:text-gray-900 transition-colors text-sm lg:text-base">
                     <svg className="w-4 h-4 lg:w-5 lg:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
@@ -282,7 +282,7 @@ export default function StudentDashboard() {
                   </button>
                   <button
                     onClick={() => navigate('/post-signup/roadmap')}
-                    className="px-4 lg:px-6 py-2 bg-amber-600 text-white rounded-lg font-medium hover:bg-amber-700 transition-colors text-sm lg:text-base"
+                    className="px-4 lg:px-6 py-2 bg-yellow-600 text-white rounded-lg font-medium hover:bg-yellow-700 transition-colors text-sm lg:text-base"
                   >
                     Continue Learning
                   </button>

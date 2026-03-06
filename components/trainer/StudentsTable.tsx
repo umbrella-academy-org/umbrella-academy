@@ -155,7 +155,7 @@ export default function StudentsTable({ searchQuery, selectedStatus, selectedCou
           {student.avatar}
         </div>
         <div>
-          <div className="text-sm font-medium text-amber-900">{student.name}</div>
+          <div className="text-sm font-medium text-gray-900">{student.name}</div>
           <div className="text-sm text-gray-500 flex items-center gap-1">
             <Mail className="w-3 h-3" />
             {student.email}
@@ -165,7 +165,7 @@ export default function StudentsTable({ searchQuery, selectedStatus, selectedCou
     ),
     course: (
       <div>
-        <div className="text-sm text-amber-900">{student.course}</div>
+        <div className="text-sm text-gray-900">{student.course}</div>
         <div className="text-sm text-gray-500 flex items-center gap-1">
           <Calendar className="w-3 h-3" />
           Joined {new Date(student.joinDate).toLocaleDateString()}
@@ -189,7 +189,7 @@ export default function StudentsTable({ searchQuery, selectedStatus, selectedCou
             style={{ width: `${student.progress}%` }}
           />
         </div>
-        <span className="text-sm font-medium text-amber-900">{student.progress}%</span>
+        <span className="text-sm font-medium text-gray-900">{student.progress}%</span>
         {student.trend === 'up' ? <TrendingUp className="w-3 h-3 text-gray-500" /> :
           student.trend === 'down' ? <TrendingDown className="w-3 h-3 text-gray-500" /> :
             <div className="w-3 h-3 bg-gray-400 rounded-full" />}
@@ -197,7 +197,7 @@ export default function StudentsTable({ searchQuery, selectedStatus, selectedCou
     ),
     sessions: (
       <div>
-        <div className="text-sm text-amber-900">
+        <div className="text-sm text-gray-900">
           {student.sessionsCompleted}/{student.totalSessions}
         </div>
         <div className="text-sm text-gray-500">
@@ -210,7 +210,7 @@ export default function StudentsTable({ searchQuery, selectedStatus, selectedCou
       <div className="flex items-center gap-2">
         <button
           onClick={() => handleCreateReport(student)}
-          className="px-3 py-1 bg-amber-600 text-white text-xs rounded hover:bg-amber-700"
+          className="px-3 py-1 bg-yellow-600 text-white text-xs rounded hover:bg-yellow-700"
         >
           Create Report
         </button>
@@ -260,7 +260,7 @@ export default function StudentsTable({ searchQuery, selectedStatus, selectedCou
               <button className="px-3 py-1.5 text-xs font-medium text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
                 Send Message
               </button>
-              <button className="px-3 py-1.5 text-xs font-medium text-white bg-amber-600 rounded-lg hover:bg-amber-700 transition-colors">
+              <button className="px-3 py-1.5 text-xs font-medium text-white bg-yellow-600 rounded-lg hover:bg-yellow-700 transition-colors">
                 Remove Selected
               </button>
             </div>

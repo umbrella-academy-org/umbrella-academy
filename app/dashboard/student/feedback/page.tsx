@@ -35,7 +35,7 @@ export default function StudentFeedbackPage() {
   if (authLoading) {
     return (
       <div className="flex h-screen bg-white">
-        <div className="w-64 bg-gray-900 animate-pulse"></div>
+        <div className="w-64 bg-black animate-pulse"></div>
         <div className="flex-1 p-6">
           <div className="h-8 bg-gray-200 rounded animate-pulse"></div>
         </div>
@@ -72,7 +72,7 @@ export default function StudentFeedbackPage() {
         <main className="flex-1 overflow-auto p-6">
           <div className="max-w-4xl mx-auto">
             <div className="mb-6">
-              <h1 className="text-2xl font-semibold text-amber-900">Share Your Feedback</h1>
+              <h1 className="text-2xl font-semibold text-gray-900">Share Your Feedback</h1>
               <p className="text-gray-600 mt-1">Help us improve your learning experience</p>
             </div>
 
@@ -80,7 +80,7 @@ export default function StudentFeedbackPage() {
               {/* Feedback Form */}
               <div className="lg:col-span-2">
                 <div className="bg-white border border-gray-200 rounded-lg p-6">
-                  <h2 className="text-lg font-semibold text-amber-900 mb-4">Submit Feedback</h2>
+                  <h2 className="text-lg font-semibold text-gray-900 mb-4">Submit Feedback</h2>
 
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -151,7 +151,7 @@ export default function StudentFeedbackPage() {
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="px-6 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="px-6 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         {isSubmitting ? 'Submitting...' : 'Submit Feedback'}
                       </button>
@@ -163,7 +163,7 @@ export default function StudentFeedbackPage() {
               {/* Feedback Info */}
               <div className="space-y-6">
                 <div className="bg-white border border-gray-200 rounded-lg p-6">
-                  <h3 className="font-semibold text-amber-900 mb-3">Why Your Feedback Matters</h3>
+                  <h3 className="font-semibold text-gray-900 mb-3">Why Your Feedback Matters</h3>
                   <div className="space-y-3 text-sm text-gray-600">
                     <p>Your feedback helps us:</p>
                     <ul className="space-y-1 ml-4">
@@ -176,19 +176,19 @@ export default function StudentFeedbackPage() {
                 </div>
 
                 <div className="bg-white border border-gray-200 rounded-lg p-6">
-                  <h3 className="font-semibold text-amber-900 mb-3">Recent Improvements</h3>
+                  <h3 className="font-semibold text-gray-900 mb-3">Recent Improvements</h3>
                   <div className="space-y-2 text-sm">
                     <div className="flex items-start gap-2">
                       <div className="w-2 h-2 bg-gray-500 rounded-full mt-2"></div>
                       <div>
-                        <p className="font-medium text-amber-900">Enhanced Live Sessions</p>
+                        <p className="font-medium text-gray-900">Enhanced Live Sessions</p>
                         <p className="text-gray-600">Based on your feedback about video quality</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-2">
                       <div className="w-2 h-2 bg-gray-500 rounded-full mt-2"></div>
                       <div>
-                        <p className="font-medium text-amber-900">Better Roadmap Navigation</p>
+                        <p className="font-medium text-gray-900">Better Roadmap Navigation</p>
                         <p className="text-gray-600">Improved based on user suggestions</p>
                       </div>
                     </div>

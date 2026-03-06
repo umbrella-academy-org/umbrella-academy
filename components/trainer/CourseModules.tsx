@@ -75,7 +75,7 @@ export default function CourseModules({ selectedCourse }: CourseModulesProps) {
     <div className="bg-white rounded-lg border border-gray-200">
       <div className="p-6 border-b border-gray-200">
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-amber-900">Course Modules</h2>
+          <h2 className="text-lg font-semibold text-gray-900">Course Modules</h2>
           <p className="text-sm text-gray-600">
             Explore modules to enhance your understanding
           </p>
@@ -99,7 +99,7 @@ export default function CourseModules({ selectedCourse }: CourseModulesProps) {
                 {/* Module Info */}
                 <div className="flex-1 min-w-0">
                   <div className="flex items-start justify-between mb-2">
-                    <h3 className="font-semibold text-amber-900 text-sm">
+                    <h3 className="font-semibold text-gray-900 text-sm">
                       {module.title}
                     </h3>
                     {getStatusBadge(module.status, module.progress)}
@@ -124,7 +124,7 @@ export default function CourseModules({ selectedCourse }: CourseModulesProps) {
                   <div className="mb-3">
                     <div className="flex items-center justify-between text-xs mb-1">
                       <span className="text-gray-600">Progress</span>
-                      <span className="font-medium text-amber-900">{module.progress}%</span>
+                      <span className="font-medium text-gray-900">{module.progress}%</span>
                     </div>
                     <div className="w-full bg-gray-200 rounded-full h-2">
                       <div 
@@ -135,7 +135,7 @@ export default function CourseModules({ selectedCourse }: CourseModulesProps) {
                   </div>
 
                   {/* Action Button */}
-                  <button className="w-full text-center py-2 text-sm font-medium text-gray-600 hover:text-gray-700 border border-amber-600 hover:border-gray-700 rounded-lg transition-colors">
+                  <button className="w-full text-center py-2 text-sm font-medium text-gray-600 hover:text-gray-700 border border-yellow-600 hover:border-gray-700 rounded-lg transition-colors">
                     {module.status === 'completed' ? 'Review Module' : 'Continue Learning'}
                   </button>
                 </div>
@@ -147,11 +147,11 @@ export default function CourseModules({ selectedCourse }: CourseModulesProps) {
         {/* Module Progress Summary */}
         <div className="mt-6 p-4 bg-gray-50 rounded-lg">
           <div className="flex items-center justify-between mb-3">
-            <h3 className="font-semibold text-amber-900">Overall Progress</h3>
-            <span className="text-sm font-medium text-amber-900">68% Complete</span>
+            <h3 className="font-semibold text-gray-900">Overall Progress</h3>
+            <span className="text-sm font-medium text-gray-900">68% Complete</span>
           </div>
           <div className="w-full bg-gray-200 rounded-full h-3">
-            <div className="bg-amber-600 h-3 rounded-full transition-all duration-500" style={{ width: '68%' }} />
+            <div className="bg-yellow-600 h-3 rounded-full transition-all duration-500" style={{ width: '68%' }} />
           </div>
           <div className="flex items-center justify-between mt-2 text-sm text-gray-600">
             <span>3 of 4 modules in progress</span>

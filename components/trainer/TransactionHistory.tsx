@@ -119,10 +119,10 @@ export default function TransactionHistory() {
     <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h3 className="text-lg font-semibold text-amber-900">Transaction History</h3>
+          <h3 className="text-lg font-semibold text-gray-900">Transaction History</h3>
           <p className="text-sm text-gray-600 mt-1">Track all your earnings and withdrawals</p>
         </div>
-        <button className="flex items-center gap-2 text-gray-600 hover:text-amber-900 font-medium text-sm">
+        <button className="flex items-center gap-2 text-gray-600 hover:text-gray-900 font-medium text-sm">
           <Download className="w-4 h-4" />
           Export
         </button>
@@ -160,7 +160,7 @@ export default function TransactionHistory() {
                     }`}>
                       {getTransactionIcon(transaction.type)}
                     </div>
-                    <span className="text-sm text-amber-900 font-medium">{transaction.description}</span>
+                    <span className="text-sm text-gray-900 font-medium">{transaction.description}</span>
                   </div>
                 </td>
                 <td className="py-4 px-4">
