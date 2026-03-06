@@ -47,7 +47,7 @@ export default function StudentAvailabilityPage() {
                         {/* Go back button */}
                         <button
                             onClick={() => router.push('/dashboard/student')}
-                            className="flex items-center gap-2 text-gray-400 hover:text-gray-900 mt-50 transition-colors group"
+                            className="flex items-center gap-2 text-gray-400 hover:text-amber-900 mt-50 transition-colors group"
                         >
                             <svg className="w-5 h-5 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M15 19l-7-7 7-7" />
@@ -61,7 +61,7 @@ export default function StudentAvailabilityPage() {
                             </div>
 
                             {/* Title */}
-                            <h1 className="text-3xl font-semibold text-gray-900 mb-2">
+                            <h1 className="text-3xl font-semibold text-amber-900 mb-2">
                                 Your Availability
                             </h1>
                             <p className="text-gray-500 mb-8 text-center">
@@ -82,7 +82,7 @@ export default function StudentAvailabilityPage() {
                                                 type="button"
                                                 onClick={() => setHoursPerDay(h)}
                                                 className={`py-3 rounded-lg text-sm font-medium transition-all border ${hoursPerDay === h
-                                                    ? 'border-gray-600 bg-gray-50 text-gray-600'
+                                                    ? 'border-amber-600 bg-gray-50 text-gray-600'
                                                     : 'border-gray-300 bg-white text-gray-600 hover:border-gray-400'
                                                     }`}
                                             >
@@ -104,16 +104,16 @@ export default function StudentAvailabilityPage() {
                                                 type="button"
                                                 onClick={() => toggleSlot(slot.id)}
                                                 className={`w-full flex items-center gap-4 p-4 border rounded-lg transition-all ${timeSlots.includes(slot.id)
-                                                    ? 'border-gray-600 bg-gray-50'
+                                                    ? 'border-amber-600 bg-gray-50'
                                                     : 'border-gray-300 bg-white hover:border-gray-400'
                                                     }`}
                                             >
-                                                <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-colors ${timeSlots.includes(slot.id) ? 'bg-gray-600 text-white' : 'bg-gray-100 text-gray-400'
+                                                <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-colors ${timeSlots.includes(slot.id) ? 'bg-amber-600 text-white' : 'bg-gray-100 text-gray-400'
                                                     }`}>
                                                     <Clock className="w-5 h-5" />
                                                 </div>
                                                 <div className="flex-1 text-left">
-                                                    <p className={`text-sm font-semibold ${timeSlots.includes(slot.id) ? 'text-gray-900' : 'text-gray-700'
+                                                    <p className={`text-sm font-semibold ${timeSlots.includes(slot.id) ? 'text-amber-900' : 'text-gray-700'
                                                         }`}>
                                                         {slot.label}
                                                     </p>
@@ -129,14 +129,14 @@ export default function StudentAvailabilityPage() {
 
                                 <button
                                     type="submit"
-                                    className="w-full bg-gray-600 text-white py-3 rounded-lg font-medium hover:bg-gray-700 transition-colors"
+                                    className="w-full bg-amber-600 text-white py-3 rounded-lg font-medium hover:bg-amber-700 transition-colors"
                                 >
                                     Continue to Choose Trainer
                                 </button>
 
                                 {/* Progress dots */}
                                 <div className="flex justify-center gap-2 pt-4">
-                                    <div className="w-8 h-2 bg-gray-600 rounded-full"></div>
+                                    <div className="w-8 h-2 bg-amber-600 rounded-full"></div>
                                     <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
                                     <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
                                     <div className="w-2 h-2 bg-gray-300 rounded-full"></div>

@@ -184,7 +184,7 @@ export default function CollaborativeRoadmapForm({
     <div className="bg-white rounded-lg border border-gray-200 p-6">
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-semibold text-gray-900">Collaborative Roadmap Creation</h2>
+        <h2 className="text-xl font-semibold text-amber-900">Collaborative Roadmap Creation</h2>
         <div className="flex items-center gap-2">
           <Users className="w-4 h-4 text-gray-500" />
           <span className="text-sm text-gray-600">
@@ -204,7 +204,7 @@ export default function CollaborativeRoadmapForm({
         <div>
           <div className="flex items-center gap-2 mb-4">
             <Target className="w-5 h-5 text-gray-600" />
-            <h3 className="text-lg font-medium text-gray-900">Learning Goals</h3>
+            <h3 className="text-lg font-medium text-amber-900">Learning Goals</h3>
           </div>
           <div className="space-y-3">
             {formData.studentGoals.map((goal, index) => (
@@ -243,7 +243,7 @@ export default function CollaborativeRoadmapForm({
         <div>
           <div className="flex items-center gap-2 mb-4">
             <BookOpen className="w-5 h-5 text-gray-600" />
-            <h3 className="text-lg font-medium text-gray-900">Learning Path</h3>
+            <h3 className="text-lg font-medium text-amber-900">Learning Path</h3>
           </div>
           <div className="space-y-4">
             {formData.learningPath.map((module, index) => (
@@ -301,7 +301,7 @@ export default function CollaborativeRoadmapForm({
         <div>
           <div className="flex items-center gap-2 mb-4">
             <Calendar className="w-5 h-5 text-gray-600" />
-            <h3 className="text-lg font-medium text-gray-900">Timeline</h3>
+            <h3 className="text-lg font-medium text-amber-900">Timeline</h3>
           </div>
           <div className="space-y-4">
             {formData.timeline.map((item, index) => (
@@ -355,7 +355,7 @@ export default function CollaborativeRoadmapForm({
 
         {/* Assessment Criteria */}
         <div>
-          <h3 className="text-lg font-medium text-gray-900 mb-4">Assessment Criteria</h3>
+          <h3 className="text-lg font-medium text-amber-900 mb-4">Assessment Criteria</h3>
           <div className="space-y-3">
             {formData.assessmentCriteria.map((criteria, index) => (
               <div key={index} className="flex items-center gap-2">
@@ -393,7 +393,7 @@ export default function CollaborativeRoadmapForm({
         <div className="flex justify-end pt-6 border-t border-gray-200">
           <button
             onClick={handleSave}
-            className="px-6 py-3 bg-gray-600 text-white rounded-lg font-medium hover:bg-gray-700 transition-colors disabled:opacity-50"
+            className="px-6 py-3 bg-amber-600 text-white rounded-lg font-medium hover:bg-amber-700 transition-colors disabled:opacity-50"
             disabled={!isTrainerConnected}
           >
             Save Roadmap

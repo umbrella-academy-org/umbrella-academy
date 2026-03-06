@@ -14,7 +14,7 @@ export default function ActivityDetails({ selectedActivity }: ActivityDetailsPro
           <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <Bell className="w-6 h-6 text-gray-400" />
           </div>
-          <h3 className="text-lg font-medium text-gray-900 mb-2">Activity Details</h3>
+          <h3 className="text-lg font-medium text-amber-900 mb-2">Activity Details</h3>
           <p className="text-sm text-gray-600">Select an activity on the left panel and view it's details below.</p>
         </div>
       </div>
@@ -57,13 +57,13 @@ export default function ActivityDetails({ selectedActivity }: ActivityDetailsPro
           <span className="text-white text-sm font-medium">PB</span>
         </div>
         <div>
-          <h3 className="text-lg font-medium text-gray-900">{details.user}</h3>
+          <h3 className="text-lg font-medium text-amber-900">{details.user}</h3>
           <p className="text-sm text-gray-600">just now</p>
         </div>
       </div>
 
       <div className="mb-6">
-        <p className="text-gray-900 mb-4">{details.action}</p>
+        <p className="text-amber-900 mb-4">{details.action}</p>
       </div>
 
       {/* File Details */}
@@ -74,7 +74,7 @@ export default function ActivityDetails({ selectedActivity }: ActivityDetailsPro
               <FileText className="w-5 h-5 text-gray-600" />
             </div>
             <div>
-              <h4 className="text-sm font-medium text-gray-900">{details.file.name}</h4>
+              <h4 className="text-sm font-medium text-amber-900">{details.file.name}</h4>
               <p className="text-xs text-gray-500">{details.file.size}</p>
             </div>
           </div>
@@ -83,12 +83,12 @@ export default function ActivityDetails({ selectedActivity }: ActivityDetailsPro
 
       {/* Actions */}
       <div className="space-y-3">
-        <button className="w-full flex items-center justify-center gap-2 text-sm text-gray-600 hover:text-gray-900 font-medium">
+        <button className="w-full flex items-center justify-center gap-2 text-sm text-gray-600 hover:text-amber-900 font-medium">
           All course files
           <span className="text-gray-400">→</span>
         </button>
         
-        <button className="w-full bg-gray-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-gray-700 transition-colors flex items-center justify-center gap-2">
+        <button className="w-full bg-amber-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-amber-700 transition-colors flex items-center justify-center gap-2">
           <Download className="w-4 h-4" />
           Download
         </button>

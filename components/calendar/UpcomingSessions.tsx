@@ -6,7 +6,7 @@ export default function UpcomingSessions() {
   return (
     <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
       <div className="flex items-center justify-between mb-6">
-        <h3 className="text-lg font-bold text-gray-900  ">Upcoming Sessions</h3>
+        <h3 className="text-lg font-bold text-amber-900  ">Upcoming Sessions</h3>
         <button className="text-gray-600 hover:text-gray-700 text-xs font-bold   flex items-center gap-1.5 transition-colors">
           <Edit className="w-3.5 h-3.5" />
           Customize
@@ -53,7 +53,7 @@ export default function UpcomingSessions() {
                   {session.type}
                 </span>
               </div>
-              <h4 className="text-sm font-bold text-gray-900 group-hover:text-gray-600 transition-colors">{session.title}</h4>
+              <h4 className="text-sm font-bold text-amber-900 group-hover:text-gray-600 transition-colors">{session.title}</h4>
             </div>
           </div>
         ))}

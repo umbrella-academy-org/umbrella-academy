@@ -31,11 +31,11 @@ export default function AddActivityForm() {
   return (
     <div className="bg-white rounded-lg border border-gray-200 p-6">
       <div className="flex items-center gap-3 mb-6">
-        <div className="w-10 h-10 bg-gray-600 rounded-lg flex items-center justify-center">
+        <div className="w-10 h-10 bg-amber-600 rounded-lg flex items-center justify-center">
           <Plus className="w-5 h-5 text-white" />
         </div>
         <div>
-          <h2 className="text-lg font-semibold text-gray-900">Add New Activity</h2>
+          <h2 className="text-lg font-semibold text-amber-900">Add New Activity</h2>
           <p className="text-sm text-gray-600">Schedule a new session or activity</p>
         </div>
       </div>
@@ -204,7 +204,7 @@ export default function AddActivityForm() {
         <div className="flex flex-col sm:flex-row gap-3 pt-4">
           <button
             type="submit"
-            className="flex-1 bg-gray-600 text-white py-3 rounded-lg font-medium hover:bg-gray-700 transition-all duration-200 transform hover:scale-105"
+            className="flex-1 bg-amber-600 text-white py-3 rounded-lg font-medium hover:bg-amber-700 transition-all duration-200 transform hover:scale-105"
           >
             Create Activity
           </button>

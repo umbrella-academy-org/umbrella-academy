@@ -96,7 +96,7 @@ export default function MentorDashboard() {
           <div className="w-full mx-auto">
             {/* Welcome Section */}
             <div className="mb-4 sm:mb-6 lg:mb-8 animate-fade-in">
-              <h1 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-gray-900 mb-2">
+              <h1 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-amber-900 mb-2">
                 Welcome back, {user.name.split(' ')[0]}
               </h1>
               <p className="text-sm sm:text-base text-gray-600">

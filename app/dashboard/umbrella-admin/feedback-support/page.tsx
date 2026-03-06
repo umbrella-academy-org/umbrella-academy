@@ -234,7 +234,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
         <main className="flex-1 overflow-auto">
           <div className="p-3 lg:p-6">
             <div className="mb-8">
-              <h1 className="text-2xl font-semibold text-gray-900 mb-1">Feedback & Support</h1>
+              <h1 className="text-2xl font-semibold text-amber-900 mb-1">Feedback & Support</h1>
               <p className="text-sm text-gray-500">Manage user feedback, support requests, and platform suggestions.</p>
             </div>
 
@@ -244,7 +244,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-gray-600">Total Items</p>
-                    <p className="text-2xl font-bold text-gray-900">{totalItems}</p>
+                    <p className="text-2xl font-bold text-amber-900">{totalItems}</p>
                   </div>
                   <MessageSquare className="w-8 h-8 text-gray-500" />
                 </div>
@@ -253,7 +253,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-gray-600">Open Items</p>
-                    <p className="text-2xl font-bold text-gray-900">{openItems}</p>
+                    <p className="text-2xl font-bold text-amber-900">{openItems}</p>
                   </div>
                   <Clock className="w-8 h-8 text-gray-500" />
                 </div>
@@ -262,7 +262,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-gray-600">Urgent Items</p>
-                    <p className="text-2xl font-bold text-gray-900">{urgentItems}</p>
+                    <p className="text-2xl font-bold text-amber-900">{urgentItems}</p>
                   </div>
                   <AlertCircle className="w-8 h-8 text-gray-500" />
                 </div>
@@ -271,7 +271,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-gray-600">Avg Rating</p>
-                    <p className="text-2xl font-bold text-gray-900">{avgRating.toFixed(1)}</p>
+                    <p className="text-2xl font-bold text-amber-900">{avgRating.toFixed(1)}</p>
                   </div>
                   <Star className="w-8 h-8 text-gray-500" />
                 </div>
@@ -283,7 +283,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
               <div className="lg:col-span-1">
                 <div className="bg-white rounded-lg shadow-sm border border-gray-100">
                   <div className="p-4 border-b border-gray-200">
-                    <h3 className="font-semibold text-gray-900 mb-4">Items ({filteredItems.length})</h3>
+                    <h3 className="font-semibold text-amber-900 mb-4">Items ({filteredItems.length})</h3>
 
                     {/* Search */}
                     <div className="relative mb-4">
@@ -348,7 +348,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
                     {filteredItems.map((item) => (
                       <div
                         key={item.id}
-                        className={`p-4 cursor-pointer hover:bg-gray-50 transition-colors ${selectedItem === item.id ? 'bg-gray-50 border-r-4 border-gray-600' : ''
+                        className={`p-4 cursor-pointer hover:bg-gray-50 transition-colors ${selectedItem === item.id ? 'bg-gray-50 border-r-4 border-amber-600' : ''
                           }`}
                         onClick={() => setSelectedItem(item.id)}
                       >
@@ -358,7 +358,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
                               {item.userAvatar}
                             </div>
                             <div>
-                              <h4 className="font-medium text-gray-900 text-sm">{item.userName}</h4>
+                              <h4 className="font-medium text-amber-900 text-sm">{item.userName}</h4>
                               <p className="text-xs text-gray-500 capitalize">{item.userRole}</p>
                             </div>
                           </div>
@@ -367,7 +367,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
                           </span>
                         </div>
 
-                        <h5 className="font-medium text-gray-900 text-sm mb-1 line-clamp-1">{item.subject}</h5>
+                        <h5 className="font-medium text-amber-900 text-sm mb-1 line-clamp-1">{item.subject}</h5>
                         <p className="text-xs text-gray-600 line-clamp-2 mb-2">{item.message}</p>
 
                         <div className="flex items-center justify-between">
@@ -399,7 +399,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
                             {selectedItemData.userAvatar}
                           </div>
                           <div>
-                            <h2 className="text-xl font-semibold text-gray-900">{selectedItemData.userName}</h2>
+                            <h2 className="text-xl font-semibold text-amber-900">{selectedItemData.userName}</h2>
                             <p className="text-gray-600 capitalize">{selectedItemData.userRole}</p>
                             <div className="flex items-center gap-2 mt-1">
                               <span className={`px-3 py-1 rounded-full text-sm font-medium ${getTypeColor(selectedItemData.type)}`}>
@@ -415,7 +415,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
                           {selectedItemData.status === 'open' && (
                             <button
                               onClick={() => handleStatusUpdate(selectedItemData.id, 'in-progress')}
-                              className="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors text-sm"
+                              className="flex items-center gap-2 px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors text-sm"
                             >
                               <Clock className="w-4 h-4" />
                               Start Progress
@@ -424,7 +424,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
                           {selectedItemData.status === 'in-progress' && (
                             <button
                               onClick={() => handleStatusUpdate(selectedItemData.id, 'resolved')}
-                              className="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors text-sm"
+                              className="flex items-center gap-2 px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors text-sm"
                             >
                               <CheckCircle className="w-4 h-4" />
                               Mark Resolved
@@ -459,7 +459,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
                     {/* Content */}
                     <div className="p-6 space-y-6">
                       <div>
-                        <h3 className="text-lg font-semibold text-gray-900 mb-3">{selectedItemData.subject}</h3>
+                        <h3 className="text-lg font-semibold text-amber-900 mb-3">{selectedItemData.subject}</h3>
                         {selectedItemData.rating && (
                           <div className="flex items-center gap-2 mb-3">
                             {renderStars(selectedItemData.rating)}
@@ -471,7 +471,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
 
                       {/* Admin Response */}
                       <div className="border-t pt-6">
-                        <h3 className="flex items-center gap-2 font-semibold text-gray-900 mb-3">
+                        <h3 className="flex items-center gap-2 font-semibold text-amber-900 mb-3">
                           <MessageCircle className="w-5 h-5 text-gray-500" />
                           Admin Response
                         </h3>
@@ -493,7 +493,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
                           />
                           <button
                             onClick={() => handleAddResponse(selectedItemData.id)}
-                            className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
+                            className="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors"
                             disabled={!adminResponse.trim()}
                           >
                             Send Response
@@ -507,7 +507,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
                     <div className="text-gray-400 mb-4">
                       <MessageSquare className="w-12 h-12 mx-auto" />
                     </div>
-                    <h3 className="text-lg font-medium text-gray-900 mb-2">Select an Item</h3>
+                    <h3 className="text-lg font-medium text-amber-900 mb-2">Select an Item</h3>
                     <p className="text-gray-600">Choose a feedback or support item from the list to view details</p>
                   </div>
                 )}

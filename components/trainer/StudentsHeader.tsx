@@ -38,7 +38,7 @@ export default function StudentsHeader() {
     <div className="mb-6 animate-fade-in">
       {/* Title */}
       <div className="mb-6">
-        <h1 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-gray-900 mb-2">
+        <h1 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-amber-900 mb-2">
           My Students
         </h1>
         <p className="text-sm sm:text-base text-gray-600">
@@ -64,7 +64,7 @@ export default function StudentsHeader() {
               <p className="text-xs font-medium text-gray-600 mb-1">
                 {stat.label}
               </p>
-              <p className="text-xl lg:text-2xl font-bold text-gray-900 mb-1">
+              <p className="text-xl lg:text-2xl font-bold text-amber-900 mb-1">
                 {stat.value}
               </p>
               <p className="text-xs text-gray-600 font-medium">

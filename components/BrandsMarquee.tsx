@@ -31,7 +31,7 @@ function brandList(list: string[]) {
             {list.map((brand, i) => (
                 <span
                     key={i}
-                    className="mx-6 md:mx-12 text-2xl md:text-6xl font-black text-gray-200 hover:text-black transition-colors cursor-default select-none  tracking-tighter"
+                    className="mx-6 md:mx-12 text-2xl md:text-6xl font-black text-gray-200 hover:text-amber-900 transition-colors cursor-default select-none  tracking-tighter"
                 >
                     {brand}
                 </span>

@@ -52,7 +52,7 @@ export function Logo({
         <Umbrella className={`${umbrellaSizes[size]} text-[#525252]`} />
       </div>
       <div className="flex flex-col leading-tight">
-        <span className={`${textSizes[size].main} font-bold ${isDark ? 'text-white' : 'text-black'} tracking-wide `}>
+        <span className={`${textSizes[size].main} font-bold ${isDark ? 'text-white' : 'text-amber-900'} tracking-wide `}>
           Umbrella
         </span>
         <span className={`${textSizes[size].sub} font-medium text-[#525252] tracking-wider `}>

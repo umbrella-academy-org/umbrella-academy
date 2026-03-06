@@ -144,7 +144,7 @@ export default function StatsCards() {
                 {stat.title}
               </p>
               <div className="flex items-baseline gap-2">
-                <p className="text-lg lg:text-2xl font-bold text-gray-900 group-hover:scale-105 transition-transform">
+                <p className="text-lg lg:text-2xl font-bold text-amber-900 group-hover:scale-105 transition-transform">
                   {stat.value}
                 </p>
                 {stat.trend && (

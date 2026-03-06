@@ -39,10 +39,10 @@ export default function NoRoadmapState() {
       <div className="max-w-4xl w-full">
         {/* Hero Section */}
         <div className="text-center mb-12">
-          <div className="w-24 h-24 bg-gray-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <div className="w-24 h-24 bg-amber-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
             <Map className="w-12 h-12 text-white" />
           </div>
-          <h1 className="text-3xl font-semibold text-gray-900 mb-4">
+          <h1 className="text-3xl font-semibold text-amber-900 mb-4">
             Complete Your Profile
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -60,7 +60,7 @@ export default function NoRoadmapState() {
                 <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-4">
                   <Icon className="w-6 h-6 text-gray-600" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">{feature.title}</h3>
+                <h3 className="text-lg font-semibold text-amber-900 mb-2">{feature.title}</h3>
                 <p className="text-gray-600">{feature.description}</p>
               </div>
             );
@@ -69,7 +69,7 @@ export default function NoRoadmapState() {
 
         {/* CTA Section */}
         <div className="bg-white rounded-lg p-8 shadow-sm border border-gray-100 text-center">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">
+          <h2 className="text-xl font-semibold text-amber-900 mb-4">
             Ready to Complete Your Setup?
           </h2>
           <p className="text-gray-600 mb-6">
@@ -78,7 +78,7 @@ export default function NoRoadmapState() {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <button
               onClick={handleCreateRoadmap}
-              className="inline-flex items-center gap-2 px-8 py-3 bg-gray-600 text-white font-medium rounded-lg hover:bg-gray-700 transition-colors"
+              className="inline-flex items-center gap-2 px-8 py-3 bg-amber-600 text-white font-medium rounded-lg hover:bg-amber-700 transition-colors"
             >
               Complete Profile
               <ArrowRight className="w-4 h-4" />
@@ -100,15 +100,15 @@ export default function NoRoadmapState() {
         {/* Stats */}
         <div className="grid grid-cols-3 gap-6 mt-12 text-center">
           <div>
-            <div className="text-2xl font-bold text-gray-900">1,200+</div>
+            <div className="text-2xl font-bold text-amber-900">1,200+</div>
             <div className="text-sm text-gray-600">Students Learning</div>
           </div>
           <div>
-            <div className="text-2xl font-bold text-gray-900">50+</div>
+            <div className="text-2xl font-bold text-amber-900">50+</div>
             <div className="text-sm text-gray-600">Expert Mentors</div>
           </div>
           <div>
-            <div className="text-2xl font-bold text-gray-900">95%</div>
+            <div className="text-2xl font-bold text-amber-900">95%</div>
             <div className="text-sm text-gray-600">Completion Rate</div>
           </div>
         </div>

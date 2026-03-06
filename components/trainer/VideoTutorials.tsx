@@ -27,7 +27,7 @@ export default function VideoTutorials() {
   return (
     <div className="bg-white rounded-lg border border-gray-200 p-6">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-semibold text-gray-900">Video Tutorials</h2>
+        <h2 className="text-xl font-semibold text-amber-900">Video Tutorials</h2>
         
         <div className="flex items-center gap-3">
           <div className="relative">
@@ -64,13 +64,13 @@ export default function VideoTutorials() {
           >
             {/* Video Thumbnail */}
             <div className={`relative h-48 bg-gradient-to-br ${tutorial.thumbnail} flex items-center justify-center`}>
-              <div className="absolute inset-0 bg-black bg-opacity-20" />
+              <div className="absolute inset-0 bg-amber-600 bg-opacity-20" />
               <button className="relative z-10 w-16 h-16 bg-white bg-opacity-90 rounded-full flex items-center justify-center group-hover:bg-opacity-100 transition-all duration-200 transform group-hover:scale-110">
                 <Play className="w-8 h-8 text-gray-800 ml-1" />
               </button>
               
               {/* Duration Badge */}
-              <div className="absolute bottom-3 right-3 px-2 py-1 bg-black bg-opacity-70 text-white text-xs rounded">
+              <div className="absolute bottom-3 right-3 px-2 py-1 bg-amber-600 bg-opacity-70 text-white text-xs rounded">
                 {tutorial.duration}
               </div>
               
@@ -98,7 +98,7 @@ export default function VideoTutorials() {
                 <button className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm">
                   Cancel
                 </button>
-                <button className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors text-sm font-medium">
+                <button className="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors text-sm font-medium">
                   Continue
                 </button>
               </div>

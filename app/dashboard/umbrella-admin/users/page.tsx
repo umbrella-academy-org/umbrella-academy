@@ -169,10 +169,10 @@ export default function UmbrellaAdminUsersPage() {
             <div className="mb-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <h1 className="text-2xl font-semibold text-gray-900 mb-2">User Management</h1>
+                  <h1 className="text-2xl font-semibold text-amber-900 mb-2">User Management</h1>
                   <p className="text-gray-600">Manage all users across the system</p>
                 </div>
-                <button className="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-lg font-medium hover:bg-gray-700 transition-colors">
+                <button className="flex items-center gap-2 px-4 py-2 bg-amber-600 text-white rounded-lg font-medium hover:bg-amber-700 transition-colors">
                   <Plus className="w-4 h-4" />
                   Add User
                 </button>
@@ -185,7 +185,7 @@ export default function UmbrellaAdminUsersPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-gray-600">Total Users</p>
-                    <p className="text-2xl font-bold text-gray-900">{totalUsers}</p>
+                    <p className="text-2xl font-bold text-amber-900">{totalUsers}</p>
                   </div>
                   <Users className="w-8 h-8 text-gray-500" />
                 </div>
@@ -194,7 +194,7 @@ export default function UmbrellaAdminUsersPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-gray-600">Active Users</p>
-                    <p className="text-2xl font-bold text-gray-900">{activeUsers}</p>
+                    <p className="text-2xl font-bold text-amber-900">{activeUsers}</p>
                   </div>
                   <UserCheck className="w-8 h-8 text-gray-500" />
                 </div>
@@ -203,7 +203,7 @@ export default function UmbrellaAdminUsersPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-gray-600">Students</p>
-                    <p className="text-2xl font-bold text-gray-900">{students.length}</p>
+                    <p className="text-2xl font-bold text-amber-900">{students.length}</p>
                   </div>
                   <GraduationCap className="w-8 h-8 text-gray-500" />
                 </div>
@@ -212,7 +212,7 @@ export default function UmbrellaAdminUsersPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-gray-600">Staff</p>
-                    <p className="text-2xl font-bold text-gray-900">{trainers.length + mentors.length + admins.length}</p>
+                    <p className="text-2xl font-bold text-amber-900">{trainers.length + mentors.length + admins.length}</p>
                   </div>
                   <Shield className="w-8 h-8 text-gray-500" />
                 </div>
@@ -231,7 +231,7 @@ export default function UmbrellaAdminUsersPage() {
                   key={tab.key}
                   onClick={() => setSelectedTab(tab.key as any)}
                   className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${selectedTab === tab.key
-                    ? 'border-gray-600 text-gray-600'
+                    ? 'border-amber-600 text-gray-600'
                     : 'border-transparent text-gray-500 hover:text-gray-700'
                     }`}
                 >

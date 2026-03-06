@@ -30,7 +30,7 @@ export default function LiveSessionsPanel() {
     if (status === 'live') {
       return (
         <div className="flex items-center gap-1 px-2 py-1 bg-gray-100 text-gray-800 rounded-full text-xs font-medium">
-          <div className="w-2 h-2 bg-gray-600 rounded-full animate-pulse" />
+          <div className="w-2 h-2 bg-amber-600 rounded-full animate-pulse" />
           Live Session
         </div>
       );
@@ -46,7 +46,7 @@ export default function LiveSessionsPanel() {
   return (
     <div className="bg-white rounded-lg border border-gray-200">
       <div className="p-4 border-b border-gray-200">
-        <h3 className="font-semibold text-gray-900">Live Sessions</h3>
+        <h3 className="font-semibold text-amber-900">Live Sessions</h3>
       </div>
 
       <div className="p-4 space-y-4">
@@ -59,7 +59,7 @@ export default function LiveSessionsPanel() {
             <div className="flex items-start justify-between mb-3">
               <div className="flex items-center gap-2">
                 <Video className="w-5 h-5 text-gray-600" />
-                <h4 className="font-semibold text-gray-900 text-sm">
+                <h4 className="font-semibold text-amber-900 text-sm">
                   {session.title}
                 </h4>
               </div>
@@ -92,12 +92,12 @@ export default function LiveSessionsPanel() {
                   View Details
                 </button>
                 {session.status === 'live' ? (
-                  <button className="flex items-center gap-1 px-3 py-1 text-xs text-white bg-gray-600 rounded hover:bg-gray-700 transition-colors">
+                  <button className="flex items-center gap-1 px-3 py-1 text-xs text-white bg-amber-600 rounded hover:bg-amber-700 transition-colors">
                     <Video className="w-3 h-3" />
                     Join Live
                   </button>
                 ) : (
-                  <button className="flex items-center gap-1 px-3 py-1 text-xs text-white bg-gray-600 rounded hover:bg-gray-700 transition-colors">
+                  <button className="flex items-center gap-1 px-3 py-1 text-xs text-white bg-amber-600 rounded hover:bg-amber-700 transition-colors">
                     Attend
                   </button>
                 )}
@@ -109,10 +109,10 @@ export default function LiveSessionsPanel() {
               <div className="mt-3 pt-3 border-t border-gray-200">
                 <div className="flex items-center justify-between text-xs mb-1">
                   <span className="text-gray-600">Session Progress</span>
-                  <span className="text-gray-900 font-medium">45 min remaining</span>
+                  <span className="text-amber-900 font-medium">45 min remaining</span>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div className="bg-gray-600 h-2 rounded-full transition-all duration-500" style={{ width: '60%' }} />
+                  <div className="bg-amber-600 h-2 rounded-full transition-all duration-500" style={{ width: '60%' }} />
                 </div>
               </div>
             )}
@@ -120,7 +120,7 @@ export default function LiveSessionsPanel() {
         ))}
 
         {/* Add Session Button */}
-        <button className="w-full p-4 border-2 border-dashed border-gray-300 rounded-lg text-gray-600 hover:border-gray-600 hover:text-gray-600 transition-colors">
+        <button className="w-full p-4 border-2 border-dashed border-gray-300 rounded-lg text-gray-600 hover:border-amber-600 hover:text-gray-600 transition-colors">
           <div className="flex items-center justify-center gap-2">
             <Video className="w-5 h-5" />
             <span className="font-medium">Schedule New Session</span>

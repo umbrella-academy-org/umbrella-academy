@@ -53,7 +53,7 @@ export default function ChooseCoursePage() {
     return (
       <div className="flex h-screen items-center justify-center bg-white">
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-black border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <div className="w-16 h-16 border-4 border-amber-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-gray-600">Loading courses...</p>
         </div>
       </div>
@@ -67,7 +67,7 @@ export default function ChooseCoursePage() {
       case 'Intermediate':
         return 'bg-gray-200 text-gray-800';
       case 'Advanced':
-        return 'bg-black text-white';
+        return 'bg-amber-600 text-white';
       default:
         return 'bg-gray-100 text-gray-700';
     }
@@ -81,7 +81,7 @@ export default function ChooseCoursePage() {
           {/* Go back button */}
           <button
             onClick={() => router.back()}
-            className="flex items-center gap-2 text-gray-400 hover:text-gray-900 mb-8 transition-colors group"
+            className="flex items-center gap-2 text-gray-400 hover:text-amber-900 mb-8 transition-colors group"
           >
             <svg className="w-5 h-5 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M15 19l-7-7 7-7" />
@@ -92,7 +92,7 @@ export default function ChooseCoursePage() {
           <div className="flex flex-col items-center justify-center flex-1">
             {/* Logo */}
             <div className="mb-8">
-              <div className="w-16 h-16 bg-black rounded-2xl flex items-center justify-center shadow-lg">
+              <div className="w-16 h-16 bg-amber-600 rounded-2xl flex items-center justify-center shadow-lg">
                 <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" />
                 </svg>
@@ -100,7 +100,7 @@ export default function ChooseCoursePage() {
             </div>
 
             {/* Title */}
-            <h1 className="text-3xl font-semibold text-gray-900 mb-2 text-center">
+            <h1 className="text-3xl font-semibold text-amber-900 mb-2 text-center">
               Choose Your Course
             </h1>
             <p className="text-gray-500 mb-4 text-center text-sm px-4">
@@ -118,7 +118,7 @@ export default function ChooseCoursePage() {
                       onClick={() => handleCourseSelect(course.id)}
                       className={`relative rounded-xl overflow-hidden cursor-pointer transition-all duration-300 ${
                         isSelected
-                          ? 'ring-4 ring-black shadow-2xl scale-[1.02]'
+                          ? 'ring-4 ring-amber-600 shadow-2xl scale-[1.02]'
                           : 'ring-1 ring-gray-200 hover:ring-gray-300 hover:shadow-xl'
                       }`}
                     >
@@ -139,18 +139,18 @@ export default function ChooseCoursePage() {
                         {/* Duration Badge */}
                         <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1.5 flex items-center gap-1.5">
                           <Clock className="w-3.5 h-3.5 text-gray-700" />
-                          <span className="text-xs font-black text-gray-900">{course.duration}</span>
+                          <span className="text-xs font-black text-amber-900">{course.duration}</span>
                         </div>
                       </div>
 
                       {/* Course Content */}
                       <div className="bg-white p-6">
                         <div className="flex items-start justify-between mb-3">
-                          <h3 className="text-lg font-black text-gray-900 flex-1">
+                          <h3 className="text-lg font-black text-amber-900 flex-1">
                             {course.name}
                           </h3>
                           {isSelected && (
-                            <CheckCircle className="w-6 h-6 text-black shrink-0 ml-2" />
+                            <CheckCircle className="w-6 h-6 text-amber-900 shrink-0 ml-2" />
                           )}
                         </div>
 
@@ -165,7 +165,7 @@ export default function ChooseCoursePage() {
                             </svg>
                             <span className="text-xs font-medium">{company.name}</span>
                           </div>
-                          <div className="text-2xl font-black text-gray-900">
+                          <div className="text-2xl font-black text-amber-900">
                             {course.price} RWF
                           </div>
                         </div>
@@ -180,17 +180,17 @@ export default function ChooseCoursePage() {
               <button
                 type="submit"
                 disabled={!selectedCourseId}
-                className="w-full bg-black text-white py-3 rounded-lg font-medium hover:bg-gray-900 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-amber-600 text-white py-3 rounded-lg font-medium hover:bg-amber-700 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Continue to Payment
               </button>
 
               {/* Progress dots */}
               <div className="flex justify-center gap-2 pt-6">
-                <div className="w-2 h-2 bg-black/30 rounded-full"></div>
-                <div className="w-8 h-2 bg-black rounded-full"></div>
-                <div className="w-12 h-2 bg-black rounded-full shadow-lg"></div>
-                <div className="w-12 h-2 bg-black rounded-full shadow-lg"></div>
+                <div className="w-2 h-2 bg-amber-600/30 rounded-full"></div>
+                <div className="w-8 h-2 bg-amber-600 rounded-full"></div>
+                <div className="w-12 h-2 bg-amber-600 rounded-full shadow-lg"></div>
+                <div className="w-12 h-2 bg-amber-600 rounded-full shadow-lg"></div>
                 <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
               </div>
             </form>

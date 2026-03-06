@@ -24,13 +24,13 @@ export function NewsHighlights() {
     const { ref, isVisible } = useReveal();
 
     return (
-        <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-black text-white">
+        <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-amber-600 text-white">
             <div ref={ref} className="max-w-full mx-auto">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-px bg-white/10">
                     {news.map((item, index) => (
                         <div
                             key={index}
-                            className={`group relative min-h-[400px] md:min-h-[600px] flex flex-col justify-end p-8 md:p-12 bg-black overflow-hidden ${isVisible ? 'animate-fade-in' : 'opacity-0'}`}
+                            className={`group relative min-h-[400px] md:min-h-[600px] flex flex-col justify-end p-8 md:p-12 bg-amber-600 overflow-hidden ${isVisible ? 'animate-fade-in' : 'opacity-0'}`}
                             style={{ animationDelay: `${index * 200}ms` }}
                         >
                             <img

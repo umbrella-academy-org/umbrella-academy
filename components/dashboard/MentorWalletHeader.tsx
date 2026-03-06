@@ -6,7 +6,7 @@ export default function MentorWalletHeader() {
   return (
     <div className="flex items-center justify-between mb-6">
       <div>
-        <h1 className="text-2xl font-semibold text-gray-900">My Wallet 💰</h1>
+        <h1 className="text-2xl font-semibold text-amber-900">My Wallet 💰</h1>
         <p className="text-gray-600 mt-1">Track your mentoring earnings, manage withdrawals, and view payment history</p>
       </div>
       
@@ -15,7 +15,7 @@ export default function MentorWalletHeader() {
           <FileText className="w-4 h-4" />
           Generate Report
         </button>
-        <button className="bg-gray-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-gray-700 transition-colors flex items-center gap-2">
+        <button className="bg-amber-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-amber-700 transition-colors flex items-center gap-2">
           <Banknote className="w-4 h-4" />
           Request Withdrawal
         </button>

@@ -33,12 +33,12 @@ export default function UpcomingSessionsModal({ onClose }: UpcomingSessionsModal
   ];
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-amber-600 bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4 max-h-[80vh] overflow-y-auto">
         {/* Modal Header */}
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h2 className="text-xl font-semibold text-gray-900">Upcoming Live Sessions</h2>
+            <h2 className="text-xl font-semibold text-amber-900">Upcoming Live Sessions</h2>
             <p className="text-sm text-gray-600 mt-1">Collaborate and study face to face.</p>
           </div>
           <button
@@ -63,9 +63,9 @@ export default function UpcomingSessionsModal({ onClose }: UpcomingSessionsModal
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-1">
-                      <h4 className="text-sm font-medium text-gray-900">Live Session</h4>
+                      <h4 className="text-sm font-medium text-amber-900">Live Session</h4>
                     </div>
-                    <h3 className="text-base font-medium text-gray-900 mb-2">{session.title}</h3>
+                    <h3 className="text-base font-medium text-amber-900 mb-2">{session.title}</h3>
                     <p className="text-sm text-gray-600 mb-3 leading-relaxed">{session.description}</p>
                   </div>
                 </div>
@@ -89,7 +89,7 @@ export default function UpcomingSessionsModal({ onClose }: UpcomingSessionsModal
                   disabled={!session.canJoin}
                   className={`px-4 py-2 text-sm font-medium rounded transition-colors ${
                     session.canJoin
-                      ? 'bg-gray-600 text-white hover:bg-gray-700'
+                      ? 'bg-amber-600 text-white hover:bg-amber-700'
                       : 'bg-gray-100 text-gray-400 cursor-not-allowed'
                   }`}
                 >

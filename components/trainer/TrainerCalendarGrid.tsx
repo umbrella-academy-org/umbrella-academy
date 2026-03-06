@@ -124,7 +124,7 @@ export default function TrainerCalendarGrid({
             } ${isToday ? 'ring-2 ring-gray-500' : ''}`}
         >
           <div className="flex items-center justify-between mb-2">
-            <span className={`text-sm font-medium ${isToday ? 'text-gray-600' : isSelected ? 'text-gray-600' : 'text-gray-900'
+            <span className={`text-sm font-medium ${isToday ? 'text-gray-600' : isSelected ? 'text-gray-600' : 'text-amber-900'
               }`}>
               {day}
             </span>
@@ -185,7 +185,7 @@ export default function TrainerCalendarGrid({
       {/* Calendar Header */}
       <div className="flex items-center justify-between p-4 border-b border-gray-200">
         <div className="flex items-center gap-4">
-          <h2 className="text-lg font-semibold text-gray-900">
+          <h2 className="text-lg font-semibold text-amber-900">
             {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
           </h2>
           <div className="flex items-center gap-1">
@@ -212,8 +212,8 @@ export default function TrainerCalendarGrid({
                 key={mode}
                 onClick={() => onViewModeChange(mode)}
                 className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all duration-200 ${viewMode === mode
-                  ? 'bg-white text-gray-900 shadow-sm'
-                  : 'text-gray-600 hover:text-gray-900'
+                  ? 'bg-white text-amber-900 shadow-sm'
+                  : 'text-gray-600 hover:text-amber-900'
                   }`}
               >
                 {mode.charAt(0).toUpperCase() + mode.slice(1)}
@@ -221,7 +221,7 @@ export default function TrainerCalendarGrid({
             ))}
           </div>
 
-          <button className="px-3 py-2 bg-gray-600 text-white text-sm font-medium rounded-lg hover:bg-gray-700 transition-all duration-200 interactive-button">
+          <button className="px-3 py-2 bg-amber-600 text-white text-sm font-medium rounded-lg hover:bg-amber-700 transition-all duration-200 interactive-button">
             <Plus className="w-4 h-4 mr-1" />
             Add Session
           </button>

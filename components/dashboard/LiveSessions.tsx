@@ -195,7 +195,7 @@ export default function LiveSessions({ userType }: LiveSessionsProps) {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between px-1">
-        <h3 className="text-lg font-bold text-gray-900  ">{getTitle()}</h3>
+        <h3 className="text-lg font-bold text-amber-900  ">{getTitle()}</h3>
         <span className="text-[10px] font-bold text-gray-400    bg-gray-50 px-2 py-1 rounded-md border border-gray-100">
           2 Active Today
         </span>
@@ -235,7 +235,7 @@ export default function LiveSessions({ userType }: LiveSessionsProps) {
                 </div>
               </div>
 
-              <h3 className={`text-base font-semibold text-gray-900 mb-2 transition-colors duration-300 ${hoveredSession === session.id ? 'text-gray-600' : ''
+              <h3 className={`text-base font-semibold text-amber-900 mb-2 transition-colors duration-300 ${hoveredSession === session.id ? 'text-gray-600' : ''
                 }`}>
                 {session.title}
               </h3>
@@ -247,12 +247,12 @@ export default function LiveSessions({ userType }: LiveSessionsProps) {
               {/* Action Bar */}
               <div className="flex items-center justify-between pt-1">
                 <div className="flex items-center gap-3">
-                  <button className="text-xs text-gray-400 hover:text-gray-900    transition-colors duration-300">
+                  <button className="text-xs text-gray-400 hover:text-amber-900    transition-colors duration-300">
                     {session.actions.secondary}
                   </button>
                 </div>
 
-                <button className={`flex items-center gap-2 px-5 py-2.5 bg-gray-600 text-white text-xs rounded-lg hover:bg-gray-700 transition-all duration-300 shadow-lg shadow-gray-600/20 active:scale-95 ${hoveredSession === session.id ? 'translate-x-1' : ''
+                <button className={`flex items-center gap-2 px-5 py-2.5 bg-amber-600 text-white text-xs rounded-lg hover:bg-amber-700 transition-all duration-300 shadow-lg shadow-gray-600/20 active:scale-95 ${hoveredSession === session.id ? 'translate-x-1' : ''
                   }`}>
                   <Play className="w-3 h-3 fill-current" />
                   {session.actions.primary}
@@ -267,7 +267,7 @@ export default function LiveSessions({ userType }: LiveSessionsProps) {
             <div className="mt-5 pt-4 border-t border-gray-100/60">
               <div className="flex items-center justify-between text-[10px] mb-2 font-bold  ">
                 <span className="text-gray-500   ">Connection window opens in</span>
-                <span className="text-gray-900 bg-gray-50 px-2 py-0.5 rounded border border-gray-100 font-mono">01:45:22</span>
+                <span className="text-amber-900 bg-gray-50 px-2 py-0.5 rounded border border-gray-100 font-mono">01:45:22</span>
               </div>
               <div className="w-full bg-gray-50 rounded-full h-1 overflow-hidden border border-gray-100">
                 <div className="bg-gradient-to-r from-gray-500 to-gray-500 h-1 rounded-full animate-shimmer" style={{ width: '75%' }}></div>

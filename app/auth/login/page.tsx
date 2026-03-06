@@ -79,7 +79,7 @@ export default function LoginPage() {
           </div>
 
           {/* Title */}
-          <h1 className="text-3xl font-semibold text-gray-900 mb-2">
+          <h1 className="text-3xl font-semibold text-amber-900 mb-2">
             Welcome Back
           </h1>
           <p className="text-gray-500 mb-8">
@@ -143,7 +143,7 @@ export default function LoginPage() {
                   setLocalErrors((prev: { email: string; password: string }) => ({ ...prev, email: '' }));
                 }}
                 placeholder="Enter your email"
-                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${localErrors.email || error ? 'border-gray-500' : 'border-gray-300'
+                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-amber-900 placeholder:text-gray-400 ${localErrors.email || error ? 'border-gray-500' : 'border-gray-300'
                   }`}
                 required
                 disabled={isLoading}
@@ -165,7 +165,7 @@ export default function LoginPage() {
                     setLocalErrors(prev => ({ ...prev, password: '' }));
                   }}
                   placeholder="Enter your password"
-                  className={`w-full px-4 py-3 pr-12 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${localErrors.password || error ? 'border-gray-500' : 'border-gray-300'
+                  className={`w-full px-4 py-3 pr-12 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-amber-900 placeholder:text-gray-400 ${localErrors.password || error ? 'border-gray-500' : 'border-gray-300'
                     }`}
                   required
                   disabled={isLoading}
@@ -201,7 +201,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-black text-white py-3 rounded-lg font-medium hover:bg-gray-900 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-amber-600 text-white py-3 rounded-lg font-medium hover:bg-amber-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? (
                 <div className="flex items-center justify-center">

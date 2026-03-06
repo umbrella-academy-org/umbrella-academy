@@ -78,7 +78,7 @@ export default function CalendarSection({ selectedDateRange, onDateRangeChange }
           key={day}
           className={`w-8 h-8 text-xs rounded-full transition-colors flex items-center justify-center ${
             isSelected
-              ? 'bg-gray-600 text-white font-medium'
+              ? 'bg-amber-600 text-white font-medium'
               : 'text-gray-700 hover:bg-gray-100'
           }`}
         >
@@ -111,7 +111,7 @@ export default function CalendarSection({ selectedDateRange, onDateRangeChange }
           <div className="flex items-center gap-2">
             <Calendar className="w-4 h-4 text-gray-400" />
             <div>
-              <h3 className="text-base font-semibold text-gray-900">12 January, 2024</h3>
+              <h3 className="text-base font-semibold text-amber-900">12 January, 2024</h3>
               <p className="text-xs text-gray-500">2 Activities Pending</p>
             </div>
           </div>
@@ -133,8 +133,8 @@ export default function CalendarSection({ selectedDateRange, onDateRangeChange }
                   onClick={() => onDateRangeChange(range)}
                   className={`block w-full text-left text-sm transition-colors ${
                     selectedDateRange === range
-                      ? 'text-gray-900 font-medium'
-                      : 'text-gray-600 hover:text-gray-900'
+                      ? 'text-amber-900 font-medium'
+                      : 'text-gray-600 hover:text-amber-900'
                   }`}
                 >
                   {range}

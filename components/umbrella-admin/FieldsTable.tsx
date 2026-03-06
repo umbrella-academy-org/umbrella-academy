@@ -31,7 +31,7 @@ export default function FieldsTable({ fields }: FieldsTableProps) {
           <Building2 className="w-5 h-5 text-gray-600" />
         </div>
         <div>
-          <div className="text-sm font-medium text-gray-900">{field.name}</div>
+          <div className="text-sm font-medium text-amber-900">{field.name}</div>
           <div className="text-sm text-gray-500">{field.code}</div>
         </div>
       </div>
@@ -40,19 +40,19 @@ export default function FieldsTable({ fields }: FieldsTableProps) {
     students: (
       <div className="flex items-center gap-2">
         <Users className="w-4 h-4 text-gray-400" />
-        <span className="text-sm text-gray-900">{field.students}</span>
+        <span className="text-sm text-amber-900">{field.students}</span>
       </div>
     ),
     trainers: (
       <div className="flex items-center gap-2">
         <Users className="w-4 h-4 text-gray-400" />
-        <span className="text-sm text-gray-900">{field.trainers}</span>
+        <span className="text-sm text-amber-900">{field.trainers}</span>
       </div>
     ),
     revenue: (
       <div className="flex items-center gap-2">
         <DollarSign className="w-4 h-4 text-gray-500" />
-        <span className="text-sm font-medium text-gray-900">RWF {field.revenue.toLocaleString()}</span>
+        <span className="text-sm font-medium text-amber-900">RWF {field.revenue.toLocaleString()}</span>
       </div>
     ),
     status: (
@@ -112,7 +112,7 @@ export default function FieldsTable({ fields }: FieldsTableProps) {
               <button className="px-3 py-1.5 text-xs font-medium text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
                 Export Data
               </button>
-              <button className="px-3 py-1.5 text-xs font-medium text-white bg-gray-600 rounded-lg hover:bg-gray-700 transition-colors">
+              <button className="px-3 py-1.5 text-xs font-medium text-white bg-amber-600 rounded-lg hover:bg-amber-700 transition-colors">
                 Suspend Selected
               </button>
             </div>

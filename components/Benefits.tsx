@@ -63,7 +63,7 @@ export function Benefits() {
                   <span className="text-3xl text-white">🎓</span>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold text-gray-900">98%</div>
+                  <div className="text-3xl font-bold text-amber-900">98%</div>
                   <div className="text-sm text-gray-600">Completion Rate</div>
                 </div>
               </div>
@@ -75,7 +75,7 @@ export function Benefits() {
                   <span className="text-3xl">⭐</span>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold text-gray-900">4.9</div>
+                  <div className="text-3xl font-bold text-amber-900">4.9</div>
                   <div className="text-sm text-gray-600">Average Rating</div>
                 </div>
               </div>
@@ -87,7 +87,7 @@ export function Benefits() {
             <span className="inline-block px-4 py-2 bg-[#525252]/10 text-[#525252] rounded-full text-sm font-medium mb-4 border border-[#525252]/20">
               Why Choose Us
             </span>
-            <h2 className="text-4xl md:text-5xl font-bold text-black mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-amber-900 mb-6">
               Transform Your <span className="text-[#525252]">Future</span>
             </h2>
             <p className="text-xl text-gray-600 mb-8">
@@ -111,7 +111,7 @@ export function Benefits() {
                       <Icon className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <h3 className="text-lg font-bold text-gray-900 mb-1">
+                      <h3 className="text-lg font-bold text-amber-900 mb-1">
                         {benefit.title}
                       </h3>
                       <p className="text-sm text-gray-600">

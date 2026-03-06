@@ -52,7 +52,7 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="relative h-screen flex flex-col items-center justify-center overflow-hidden bg-black text-white mt-20">
+    <section className="relative h-screen flex flex-col items-center justify-center overflow-hidden bg-amber-600 text-white mt-20">
       {/* Dynamic Background Images with Crossfade */}
       <div className="absolute inset-0 z-0">
         {/* Current Image */}
@@ -106,7 +106,7 @@ export function Hero() {
         <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8 w-full md:w-auto animate-slide-up">
           <button
             onClick={() => router.push("/auth/signup")}
-            className="group w-full md:w-auto px-8 md:px-12 py-4 md:py-6 bg-white text-black rounded-none hover:bg-[#525252] hover:text-white transition-all duration-500 flex items-center justify-center space-x-4 font-black text-lg md:text-xl  active:scale-95"
+            className="group w-full md:w-auto px-8 md:px-12 py-4 md:py-6 bg-white text-amber-900 rounded-none hover:bg-[#525252] hover:text-white transition-all duration-500 flex items-center justify-center space-x-4 font-black text-lg md:text-xl  active:scale-95"
           >
             <span>JOIN THE ACADEMY</span>
             <ArrowRight className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-2 transition-transform" />

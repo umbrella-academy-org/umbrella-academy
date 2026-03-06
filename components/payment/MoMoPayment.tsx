@@ -106,7 +106,7 @@ export default function MoMoPayment({
           <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <CheckCircle className="w-8 h-8 text-gray-600" />
           </div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">Payment Successful!</h3>
+          <h3 className="text-lg font-semibold text-amber-900 mb-2">Payment Successful!</h3>
           <p className="text-gray-600 mb-4">
             Your payment of {amount.toLocaleString()} RWF has been processed successfully.
           </p>
@@ -128,7 +128,7 @@ export default function MoMoPayment({
           <Phone className="w-5 h-5 text-gray-600" />
         </div>
         <div>
-          <h3 className="text-lg font-semibold text-gray-900">MoMo Payment</h3>
+          <h3 className="text-lg font-semibold text-amber-900">MoMo Payment</h3>
           <p className="text-sm text-gray-600">Pay securely with Mobile Money</p>
         </div>
       </div>
@@ -137,7 +137,7 @@ export default function MoMoPayment({
       <div className="bg-gray-50 rounded-lg p-4 mb-6">
         <div className="flex justify-between items-center">
           <span className="text-gray-600">Amount to Pay:</span>
-          <span className="text-xl font-semibold text-gray-900">{amount.toLocaleString()} RWF</span>
+          <span className="text-xl font-semibold text-amber-900">{amount.toLocaleString()} RWF</span>
         </div>
       </div>
 
@@ -175,7 +175,7 @@ export default function MoMoPayment({
       <button
         onClick={handlePayment}
         disabled={isProcessing || !phoneNumber}
-        className="w-full bg-gray-600 text-white py-3 rounded-lg font-medium hover:bg-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+        className="w-full bg-amber-600 text-white py-3 rounded-lg font-medium hover:bg-amber-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
       >
         {isProcessing ? (
           <>

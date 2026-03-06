@@ -190,7 +190,7 @@ export const ToastError = ({
             onClick={handleDismiss}
             className={`
               flex-shrink-0 p-1 rounded-md transition-colors
-              ${colors.text} hover:bg-black/10 dark:hover:bg-white/10
+              ${colors.text} hover:bg-amber-600/10 dark:hover:bg-white/10
             `}
             aria-label="Dismiss"
           >
@@ -352,7 +352,7 @@ export const ErrorMessage = ({
                 onClick={onDismiss}
                 className={`
                   flex-shrink-0 p-1 rounded-md transition-colors
-                  ${colors.text} hover:bg-black/10 dark:hover:bg-white/10
+                  ${colors.text} hover:bg-amber-600/10 dark:hover:bg-white/10
                 `}
                 aria-label="Dismiss"
               >

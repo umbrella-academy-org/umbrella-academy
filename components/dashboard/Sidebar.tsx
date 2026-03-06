@@ -435,7 +435,7 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
       {/* Mobile Overlay */}
       {isMobileMenuOpen && (
         <div
-          className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-40"
+          className="lg:hidden fixed inset-0 bg-amber-600 bg-opacity-50 z-40"
           onClick={() => setIsMobileMenuOpen(false)}
         />
       )}
@@ -467,7 +467,7 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
                 <button
                   onClick={() => handleNavigation(item)}
                   className={`w-full flex items-center gap-3 px-3 lg:px-4 py-2 lg:py-3 rounded-lg text-left transition-colors text-sm lg:text-base ${currentActive === item.label
-                    ? 'bg-gray-600 text-white'
+                    ? 'bg-amber-600 text-white'
                     : 'text-gray-300 hover:text-white hover:bg-gray-800'
                     }`}
                 >
@@ -562,7 +562,7 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
                   }
                 }}
                 className={`w-full px-3 py-2 rounded-lg text-xs font-medium transition-colors ${devNewUserMode
-                  ? 'bg-gray-600 text-white'
+                  ? 'bg-amber-600 text-white'
                   : 'bg-gray-800 text-gray-400 hover:text-white'
                   }`}
               >
@@ -580,7 +580,7 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
                 <p className="text-xs text-gray-400 mb-3">Complete your profile setup to start learning</p>
                 <button
                   onClick={() => navigate('/post-signup/availability')}
-                  className="w-full bg-gray-600 text-white px-3 py-2 rounded-lg text-xs font-medium hover:bg-gray-700 transition-colors"
+                  className="w-full bg-amber-600 text-white px-3 py-2 rounded-lg text-xs font-medium hover:bg-amber-700 transition-colors"
                 >
                   Continue Setup
                 </button>
@@ -592,7 +592,7 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
         {/* User Profile */}
         <div className="p-3 lg:p-4 border-t border-gray-800">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 lg:w-10 lg:h-10 bg-gray-600 rounded-full flex items-center justify-center">
+            <div className="w-8 h-8 lg:w-10 lg:h-10 bg-amber-600 rounded-full flex items-center justify-center">
               <span className="text-xs lg:text-sm font-medium text-white">{userInitials}</span>
             </div>
             <div className="flex-1 min-w-0">

@@ -52,7 +52,7 @@ export function Features() {
             <span className="inline-block px-4 py-2 bg-[#525252]/10 text-[#525252] rounded-full text-sm font-medium mb-4 border border-[#525252]/20">
               Features
             </span>
-            <h2 className="text-4xl md:text-5xl font-bold text-black mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-amber-900 mb-6">
               Everything You Need to <span className="text-[#525252]">Excel</span>
             </h2>
             <p className="text-xl text-gray-600">
@@ -80,7 +80,7 @@ export function Features() {
                 </div>
 
                 {/* Content */}
-                <h3 className="text-xl font-bold text-gray-900 mb-3">
+                <h3 className="text-xl font-bold text-amber-900 mb-3">
                   {feature.title}
                 </h3>
                 <p className="text-gray-600 leading-relaxed">

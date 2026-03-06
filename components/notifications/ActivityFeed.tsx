@@ -141,7 +141,7 @@ export default function ActivityFeed({ searchQuery, selectedActivity, onActivity
   return (
     <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-lg font-semibold text-gray-900">Recent activity</h2>
+        <h2 className="text-lg font-semibold text-amber-900">Recent activity</h2>
         <button className="text-gray-400 hover:text-gray-600">
           <MoreHorizontal className="w-5 h-5" />
         </button>
@@ -170,7 +170,7 @@ export default function ActivityFeed({ searchQuery, selectedActivity, onActivity
             <div className="flex-1 min-w-0">
               <div className="flex items-start justify-between">
                 <div className="flex-1">
-                  <p className="text-sm text-gray-900">
+                  <p className="text-sm text-amber-900">
                     <span className="font-medium">{activity.user.name}</span>
                     <span className="text-gray-600 ml-1">{activity.action}</span>
                     {activity.target && (

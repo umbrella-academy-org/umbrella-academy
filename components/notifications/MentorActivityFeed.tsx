@@ -100,7 +100,7 @@ export default function MentorActivityFeed() {
         <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
             <div className="flex items-center justify-between mb-8">
                 <div>
-                    <h2 className="text-xl font-bold text-gray-900    ">Mentor Activities</h2>
+                    <h2 className="text-xl font-bold text-amber-900    ">Mentor Activities</h2>
                     <p className="text-xs text-gray-500 mt-1 font-medium">Track your students' progress and requests</p>
                 </div>
                 <button className="p-2 hover:bg-gray-50 rounded-lg transition-colors">
@@ -139,7 +139,7 @@ export default function MentorActivityFeed() {
                                 {getStatusBadge(activity.status)}
                             </div>
 
-                            <p className="text-sm text-gray-900 leading-tight">
+                            <p className="text-sm text-amber-900 leading-tight">
                                 <span className="font-bold">{activity.student.name}</span>
                                 <span className="text-gray-500 mx-1.5">{activity.action}</span>
                                 <span className="font-bold text-gray-600 underline decoration-2 underline-offset-4 decoration-gray-600/20">{activity.target}</span>
@@ -149,12 +149,12 @@ export default function MentorActivityFeed() {
                             {selectedActivity === activity.id && (
                                 <div className="flex items-center gap-2 mt-4 animate-fade-in">
                                     {activity.type === 'roadmap' && (
-                                        <button className="px-4 py-2 bg-gray-600 text-white text-xs font-semibold   rounded-lg hover:bg-gray-700 shadow-lg shadow-gray-600/20 transition-all active:scale-95">
+                                        <button className="px-4 py-2 bg-amber-600 text-white text-xs font-semibold   rounded-lg hover:bg-amber-700 shadow-lg shadow-gray-600/20 transition-all active:scale-95">
                                             Approve Roadmap
                                         </button>
                                     )}
                                     {activity.type === 'session' && (
-                                        <button className="px-4 py-2 bg-gray-600 text-white text-xs font-semibold   rounded-lg hover:bg-gray-700 shadow-lg shadow-gray-600/20 transition-all active:scale-95">
+                                        <button className="px-4 py-2 bg-amber-600 text-white text-xs font-semibold   rounded-lg hover:bg-amber-700 shadow-lg shadow-gray-600/20 transition-all active:scale-95">
                                             Review Submission
                                         </button>
                                     )}

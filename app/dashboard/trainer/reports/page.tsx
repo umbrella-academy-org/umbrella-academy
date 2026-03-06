@@ -142,12 +142,12 @@ export default function TrainerReportsPage() {
             <div className="mb-8">
               <div className="flex items-center justify-between">
                 <div>
-                  <h1 className="text-2xl font-semibold text-gray-900 mb-1">Session Reports</h1>
+                  <h1 className="text-2xl font-semibold text-amber-900 mb-1">Session Reports</h1>
                   <p className="text-sm text-gray-500">Submit detailed reports to your mentor after each training session.</p>
                 </div>
                 <button
                   onClick={() => setShowCreateForm(true)}
-                  className="flex items-center gap-2 px-6 py-2.5 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-all font-medium shadow-sm active:scale-95"
+                  className="flex items-center gap-2 px-6 py-2.5 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-all font-medium shadow-sm active:scale-95"
                 >
                   <Plus className="w-4 h-4" />
                   Create Report
@@ -158,7 +158,7 @@ export default function TrainerReportsPage() {
             {/* Reports Table */}
             <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
               <div className="p-4 border-b border-gray-200">
-                <h3 className="font-semibold text-gray-900">Recent Reports ({reports.length})</h3>
+                <h3 className="font-semibold text-amber-900">Recent Reports ({reports.length})</h3>
               </div>
 
               <div className="overflow-x-auto">
@@ -189,7 +189,7 @@ export default function TrainerReportsPage() {
                     {reports.map((report) => (
                       <tr key={report.id} className="hover:bg-gray-50">
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm font-medium text-gray-900">
+                          <div className="text-sm font-medium text-amber-900">
                             Session Report - {report.topicsCovered.split(',')[0]}
                           </div>
                           <div className="text-sm text-gray-500">
@@ -206,14 +206,14 @@ export default function TrainerReportsPage() {
                               </div>
                             </div>
                             <div className="ml-3">
-                              <div className="text-sm font-medium text-gray-900">{report.studentName}</div>
+                              <div className="text-sm font-medium text-amber-900">{report.studentName}</div>
                             </div>
                           </div>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-amber-900">
                           {formatDate(report.sessionDate)}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-amber-900">
                           {report.duration}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
@@ -224,7 +224,7 @@ export default function TrainerReportsPage() {
                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                           <button
                             onClick={() => handleViewReport(report.id)}
-                            className="text-gray-600 hover:text-gray-900 p-1 hover:bg-gray-50 rounded"
+                            className="text-gray-600 hover:text-amber-900 p-1 hover:bg-gray-50 rounded"
                             title="View Details"
                           >
                             <Eye className="w-4 h-4" />

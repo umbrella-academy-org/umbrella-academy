@@ -3,7 +3,7 @@ import { Logo } from "./ui/Logo";
 
 export function Footer() {
   return (
-    <footer className="bg-black text-gray-300">
+    <footer className="bg-amber-600 text-gray-300">
       <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Brand */}

@@ -93,7 +93,7 @@ export default function AssignmentCalendarSection() {
 
   return (
     <div className="bg-white rounded-lg border border-gray-200 p-6">
-      <h2 className="text-xl font-semibold text-gray-900 mb-6">Assignments</h2>
+      <h2 className="text-xl font-semibold text-amber-900 mb-6">Assignments</h2>
       
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         {/* Left Column - Time Ranges and Calendar */}
@@ -117,7 +117,7 @@ export default function AssignmentCalendarSection() {
           {/* Mini Calendar */}
           <div className="border border-gray-200 rounded-lg p-4">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="font-medium text-gray-900">
+              <h3 className="font-medium text-amber-900">
                 {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
               </h3>
               <div className="flex items-center gap-1">
@@ -153,7 +153,7 @@ export default function AssignmentCalendarSection() {
                     <button
                       className={`w-full h-full text-xs rounded transition-colors ${
                         isToday(date)
-                          ? 'bg-gray-600 text-white font-medium'
+                          ? 'bg-amber-600 text-white font-medium'
                           : hasAssignment(date)
                             ? 'bg-gray-100 text-gray-800 font-medium'
                             : 'text-gray-700 hover:bg-gray-100'
@@ -191,7 +191,7 @@ export default function AssignmentCalendarSection() {
                     <FileText className="w-5 h-5 text-gray-600" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900">{assignment.title}</h3>
+                    <h3 className="font-semibold text-amber-900">{assignment.title}</h3>
                     <div className="flex items-center gap-4 text-sm text-gray-600 mt-1">
                       <span>{assignment.activity}</span>
                       <span>{assignment.expiry}</span>
@@ -229,7 +229,7 @@ export default function AssignmentCalendarSection() {
                     <Eye className="w-4 h-4" />
                     View Details
                   </button>
-                  <button className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors">
+                  <button className="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors">
                     Submissions
                   </button>
                 </div>

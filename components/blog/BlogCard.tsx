@@ -31,10 +31,10 @@ export function BlogCard({ image, category, title, description, author }: BlogCa
                 </span>
 
                 <div className="flex justify-between items-start gap-4">
-                    <h3 className="text-xl md:text-2xl font-black text-black leading-tight group-hover:text-[#525252] transition-colors">
+                    <h3 className="text-xl md:text-2xl font-black text-amber-900 leading-tight group-hover:text-[#525252] transition-colors">
                         {title}
                     </h3>
-                    <ArrowUpRight className="w-5 h-5 text-black group-hover:text-[#525252] transition-colors shrink-0" />
+                    <ArrowUpRight className="w-5 h-5 text-amber-900 group-hover:text-[#525252] transition-colors shrink-0" />
                 </div>
 
                 <p className="text-gray-500 font-light line-clamp-2">
@@ -47,7 +47,7 @@ export function BlogCard({ image, category, title, description, author }: BlogCa
                     <img src={author.avatar} alt={author.name} className="w-full h-full object-cover" />
                 </div>
                 <div className="flex flex-col">
-                    <span className="text-sm font-bold text-black">{author.name}</span>
+                    <span className="text-sm font-bold text-amber-900">{author.name}</span>
                     <span className="text-xs text-gray-400">{author.date}</span>
                 </div>
             </div>

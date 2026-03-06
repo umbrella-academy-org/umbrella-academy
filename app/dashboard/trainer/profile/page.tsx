@@ -62,7 +62,7 @@ export default function TrainerProfilePage() {
                                     <div className="flex-1 flex flex-col md:flex-row md:items-center justify-between gap-6 pb-2">
                                         <div>
                                             <div className="flex items-center gap-3">
-                                                <h1 className="text-3xl font-semibold text-gray-900  ">{profileData.name}</h1>
+                                                <h1 className="text-3xl font-semibold text-amber-900  ">{profileData.name}</h1>
                                                 <div className="px-2.5 py-1 bg-gray-50 text-gray-700 border border-gray-100 rounded-full text-[10px] font-semibold  ">CERTIFIED TRAINER</div>
                                             </div>
                                             <p className="text-gray-500 font-semibold flex items-center gap-2 mt-1.5">
@@ -84,7 +84,7 @@ export default function TrainerProfilePage() {
                                                     </button>
                                                     <button
                                                         onClick={handleSave}
-                                                        className="px-8 py-3 bg-gray-900 text-white rounded-lg font-semibold hover:bg-black shadow-xl shadow-gray-200 active:scale-95 transition-all"
+                                                        className="px-8 py-3 bg-gray-900 text-white rounded-lg font-semibold hover:bg-amber-600 shadow-xl shadow-gray-200 active:scale-95 transition-all"
                                                     >
                                                         Save Changes
                                                     </button>
@@ -92,7 +92,7 @@ export default function TrainerProfilePage() {
                                             ) : (
                                                 <button
                                                     onClick={() => setIsEditing(true)}
-                                                    className="flex items-center gap-2.5 px-8 py-3 bg-white border border-gray-200 text-gray-800 rounded-lg font-semibold hover:border-gray-600 hover:text-gray-600 shadow-sm hover:shadow-gray-100/50 transition-all active:scale-95 group"
+                                                    className="flex items-center gap-2.5 px-8 py-3 bg-white border border-gray-200 text-gray-800 rounded-lg font-semibold hover:border-amber-600 hover:text-gray-600 shadow-sm hover:shadow-gray-100/50 transition-all active:scale-95 group"
                                                 >
                                                     <Edit2 className="w-4.5 h-4.5 group-hover:rotate-12 transition-transform" />
                                                     Edit Profile
@@ -112,7 +112,7 @@ export default function TrainerProfilePage() {
                                         <div className="w-12 h-12 bg-gray-50 rounded-lg flex items-center justify-center text-gray-600">
                                             <User className="w-6 h-6" />
                                         </div>
-                                        <h3 className="text-xl font-semibold text-gray-900">Personal Information</h3>
+                                        <h3 className="text-xl font-semibold text-amber-900">Personal Information</h3>
                                     </div>
 
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
@@ -127,7 +127,7 @@ export default function TrainerProfilePage() {
                                                 />
                                             ) : (
                                                 <div className="px-5 py-3.5 bg-gray-50/50 border border-transparent rounded-lg">
-                                                    <p className="text-gray-900 font-semibold">{profileData.name}</p>
+                                                    <p className="text-amber-900 font-semibold">{profileData.name}</p>
                                                 </div>
                                             )}
                                         </div>
@@ -142,7 +142,7 @@ export default function TrainerProfilePage() {
                                                 />
                                             ) : (
                                                 <div className="px-5 py-3.5 bg-gray-50/50 border border-transparent rounded-lg flex items-center justify-between">
-                                                    <p className="text-gray-900 font-semibold">{profileData.email}</p>
+                                                    <p className="text-amber-900 font-semibold">{profileData.email}</p>
                                                     <Mail className="w-4 h-4 text-gray-300" />
                                                 </div>
                                             )}
@@ -158,7 +158,7 @@ export default function TrainerProfilePage() {
                                                 />
                                             ) : (
                                                 <div className="px-5 py-3.5 bg-gray-50/50 border border-transparent rounded-lg flex items-center justify-between">
-                                                    <p className="text-gray-900 font-semibold">{profileData.phone}</p>
+                                                    <p className="text-amber-900 font-semibold">{profileData.phone}</p>
                                                     <Phone className="w-4 h-4 text-gray-300" />
                                                 </div>
                                             )}
@@ -174,7 +174,7 @@ export default function TrainerProfilePage() {
                                                 />
                                             ) : (
                                                 <div className="px-5 py-3.5 bg-gray-50/50 border border-transparent rounded-lg flex items-center justify-between">
-                                                    <p className="text-gray-900 font-semibold">{profileData.location}</p>
+                                                    <p className="text-amber-900 font-semibold">{profileData.location}</p>
                                                     <MapPin className="w-4 h-4 text-gray-300" />
                                                 </div>
                                             )}
@@ -202,7 +202,7 @@ export default function TrainerProfilePage() {
                                         <div className="w-12 h-12 bg-gray-50 rounded-lg flex items-center justify-center text-gray-600">
                                             <Award className="w-6 h-6" />
                                         </div>
-                                        <h3 className="text-xl font-semibold text-gray-900">Expertise & Experience</h3>
+                                        <h3 className="text-xl font-semibold text-amber-900">Expertise & Experience</h3>
                                     </div>
 
                                     <div className="space-y-8">
@@ -229,7 +229,7 @@ export default function TrainerProfilePage() {
                                                 </div>
                                                 <div>
                                                     <p className="text-xs font-semibold text-gray-800/60    mb-1">Experience</p>
-                                                    <p className="text-lg font-semibold text-gray-900">{profileData.experience}</p>
+                                                    <p className="text-lg font-semibold text-amber-900">{profileData.experience}</p>
                                                 </div>
                                             </div>
                                             <div className="flex items-center gap-6 p-6 bg-gray-50/30 rounded-lg border border-gray-100/50 group hover:bg-gray-50 transition-colors">
@@ -238,7 +238,7 @@ export default function TrainerProfilePage() {
                                                 </div>
                                                 <div>
                                                     <p className="text-xs font-semibold text-gray-800/60   mb-1">Active Since</p>
-                                                    <p className="text-lg font-semibold text-gray-900">{profileData.joinDate}</p>
+                                                    <p className="text-lg font-semibold text-amber-900">{profileData.joinDate}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -249,27 +249,27 @@ export default function TrainerProfilePage() {
                             {/* Right Column - Stats & Settings */}
                             <div className="space-y-8 animate-slide-up [animation-delay:200ms]">
                                 <div className="bg-white rounded-lg border border-gray-100 shadow-xl shadow-gray-200/30 p-8 ">
-                                    <h3 className="text-xl font-semibold text-gray-900 mb-8 flex items-center gap-3">
+                                    <h3 className="text-xl font-semibold text-amber-900 mb-8 flex items-center gap-3">
                                         <Star className="w-5 h-5 text-gray-500" />
                                         Performance Stats
                                     </h3>
                                     <div className="space-y-4">
                                         <div className="p-6 bg-gray-50 rounded-lg border border-gray-100 flex justify-between items-center group hover:bg-white hover:shadow-lg transition-all">
                                             <span className="text-sm text-gray-500 font-semibold  ">Students</span>
-                                            <span className="text-2xl font-semibold text-gray-900">124</span>
+                                            <span className="text-2xl font-semibold text-amber-900">124</span>
                                         </div>
                                         <div className="p-6 bg-gray-50 rounded-lg border border-gray-100 flex justify-between items-center group hover:bg-white hover:shadow-lg transition-all border-l-4 border-l-gray-500">
                                             <span className="text-sm text-gray-500 font-semibold  ">Avg. Rating</span>
                                             <div className="flex items-center gap-2">
                                                 <Star className="w-4 h-4 text-gray-500 fill-gray-500" />
-                                                <span className="text-2xl font-semibold text-gray-900">4.9</span>
+                                                <span className="text-2xl font-semibold text-amber-900">4.9</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div className="bg-white rounded-lg border border-gray-100 shadow-xl shadow-gray-200/30 p-8 ">
-                                    <h3 className="text-xl font-semibold text-gray-900 mb-8 flex items-center gap-3">
+                                    <h3 className="text-xl font-semibold text-amber-900 mb-8 flex items-center gap-3">
                                         <Settings className="w-5 h-5 text-gray-400" />
                                         Trainer Hub
                                     </h3>
@@ -292,7 +292,7 @@ export default function TrainerProfilePage() {
                                             <Check className="w-8 h-8 text-white" />
                                         </div>
                                     </div>
-                                    <div className="absolute top-0 right-0 w-32 h-32 bg-gray-600/10 rounded-full -mr-16 -mt-16 blur-3xl opacity-50" />
+                                    <div className="absolute top-0 right-0 w-32 h-32 bg-amber-600/10 rounded-full -mr-16 -mt-16 blur-3xl opacity-50" />
                                 </div>
                             </div>
                         </div>
@@ -305,7 +305,7 @@ export default function TrainerProfilePage() {
 
 function SettingsItem({ icon, label, color }: { icon: React.ReactNode, label: string, color: string }) {
     const colors = {
-        gray: 'bg-gray-50 text-gray-600 group-hover:bg-gray-600',
+        gray: 'bg-gray-50 text-gray-600 group-hover:bg-amber-600',
     };
 
     const colorClasses = colors[color as keyof typeof colors] || colors.gray;
@@ -316,9 +316,9 @@ function SettingsItem({ icon, label, color }: { icon: React.ReactNode, label: st
                 <div className={`w-10 h-10 rounded-lg flex items-center justify-center group-hover:text-white transition-all duration-300 ${colorClasses}`}>
                     {icon}
                 </div>
-                <span className="text-sm font-semibold text-gray-700 group-hover:text-gray-900">{label}</span>
+                <span className="text-sm font-semibold text-gray-700 group-hover:text-amber-900">{label}</span>
             </div>
-            <ChevronRight className="w-5 h-5 text-gray-300 group-hover:text-gray-900 group-hover:translate-x-1 transition-all" />
+            <ChevronRight className="w-5 h-5 text-gray-300 group-hover:text-amber-900 group-hover:translate-x-1 transition-all" />
         </button>
     );
 }

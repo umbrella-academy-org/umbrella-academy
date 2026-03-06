@@ -117,7 +117,7 @@ export default function AssignmentList({ activeTab }: AssignmentListProps) {
       <div className="bg-white rounded-lg border border-gray-200 p-8">
         <div className="text-center">
           <FileText className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-          <h3 className="text-lg font-medium text-gray-900 mb-2">
+          <h3 className="text-lg font-medium text-amber-900 mb-2">
             No {activeTab} assignments
           </h3>
           <p className="text-gray-600">
@@ -143,7 +143,7 @@ export default function AssignmentList({ activeTab }: AssignmentListProps) {
             <div className="flex items-start justify-between mb-4">
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-3 mb-2">
-                  <h3 className="text-lg font-semibold text-gray-900 truncate">
+                  <h3 className="text-lg font-semibold text-amber-900 truncate">
                     {assignment.title}
                   </h3>
                   {getStatusBadge(assignment.status, assignment.grade)}
@@ -186,7 +186,7 @@ export default function AssignmentList({ activeTab }: AssignmentListProps) {
                       <Eye className="w-4 h-4" />
                       Review
                     </button>
-                    <button className="flex items-center gap-1 px-3 py-2 text-sm text-white bg-gray-600 rounded-lg hover:bg-gray-700 transition-colors">
+                    <button className="flex items-center gap-1 px-3 py-2 text-sm text-white bg-amber-600 rounded-lg hover:bg-amber-700 transition-colors">
                       <CheckCircle className="w-4 h-4" />
                       Grade
                     </button>
@@ -213,7 +213,7 @@ export default function AssignmentList({ activeTab }: AssignmentListProps) {
                       <Eye className="w-4 h-4" />
                       Edit
                     </button>
-                    <button className="flex items-center gap-1 px-3 py-2 text-sm text-white bg-gray-600 rounded-lg hover:bg-gray-700 transition-colors">
+                    <button className="flex items-center gap-1 px-3 py-2 text-sm text-white bg-amber-600 rounded-lg hover:bg-amber-700 transition-colors">
                       Publish
                     </button>
                   </>
@@ -229,7 +229,7 @@ export default function AssignmentList({ activeTab }: AssignmentListProps) {
                   <span className="text-gray-600">Priority: Normal</span>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div className="bg-gray-600 h-2 rounded-full w-1/3" />
+                  <div className="bg-amber-600 h-2 rounded-full w-1/3" />
                 </div>
               </div>
             )}

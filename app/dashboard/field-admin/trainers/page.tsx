@@ -50,7 +50,7 @@ export default function FieldAdminTrainersPage() {
         <main className="flex-1 overflow-auto">
           <div className="p-3 lg:p-4">
             <div className="mb-6">
-              <h1 className="text-2xl font-semibold text-gray-900 mb-2">Trainer Management</h1>
+              <h1 className="text-2xl font-semibold text-amber-900 mb-2">Trainer Management</h1>
               <p className="text-gray-600">Monitor trainer capacity and assignments</p>
             </div>
 
@@ -60,7 +60,7 @@ export default function FieldAdminTrainersPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-gray-600">Total Trainers</p>
-                    <p className="text-2xl font-bold text-gray-900">{totalTrainers}</p>
+                    <p className="text-2xl font-bold text-amber-900">{totalTrainers}</p>
                   </div>
                   <Users className="w-8 h-8 text-gray-500" />
                 </div>
@@ -69,7 +69,7 @@ export default function FieldAdminTrainersPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-gray-600">Active Trainers</p>
-                    <p className="text-2xl font-bold text-gray-900">{activeTrainers}</p>
+                    <p className="text-2xl font-bold text-amber-900">{activeTrainers}</p>
                   </div>
                   <UserCheck className="w-8 h-8 text-gray-500" />
                 </div>
@@ -78,7 +78,7 @@ export default function FieldAdminTrainersPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-gray-600">Total Capacity</p>
-                    <p className="text-2xl font-bold text-gray-900">{totalCapacity}</p>
+                    <p className="text-2xl font-bold text-amber-900">{totalCapacity}</p>
                   </div>
                   <UserX className="w-8 h-8 text-gray-500" />
                 </div>
@@ -87,7 +87,7 @@ export default function FieldAdminTrainersPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-gray-600">Utilization Rate</p>
-                    <p className="text-2xl font-bold text-gray-900">{utilizationRate}%</p>
+                    <p className="text-2xl font-bold text-amber-900">{utilizationRate}%</p>
                   </div>
                   <TrendingUp className="w-8 h-8 text-gray-500" />
                 </div>

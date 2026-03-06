@@ -21,8 +21,8 @@ export function Header() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
-        ? "bg-black backdrop-blur-xl border-b border-white/10 py-3"
-        : "bg-black py-6"
+        ? "bg-amber-600 backdrop-blur-xl border-b border-white/10 py-3"
+        : "bg-amber-600 py-6"
         }`}
     >
       <nav className="max-w-full mx-auto px-6 sm:px-10 lg:px-16">
@@ -87,7 +87,7 @@ export function Header() {
 
         {/* Mobile Menu Overlay */}
         {isMenuOpen && (
-          <div className="fixed inset-0 top-0 left-0 w-full h-screen bg-black z-100 flex flex-col items-center justify-center space-y-8 animate-fade-in text-center p-6">
+          <div className="fixed inset-0 top-0 left-0 w-full h-screen bg-amber-600 z-100 flex flex-col items-center justify-center space-y-8 animate-fade-in text-center p-6">
             <div className="absolute top-6 left-6">
               <Logo inverted={true} />
             </div>

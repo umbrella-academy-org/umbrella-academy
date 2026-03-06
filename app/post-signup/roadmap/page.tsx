@@ -128,7 +128,7 @@ export default function RoadmapPage() {
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-50 flex items-center justify-center">
         <div className="text-center p-8">
           <CheckCircle className="w-16 h-16 text-gray-500 mx-auto mb-4" />
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">Roadmap Created Successfully!</h1>
+          <h1 className="text-2xl font-bold text-amber-900 mb-2">Roadmap Created Successfully!</h1>
           <p className="text-gray-600 mb-4">Please wait for your roadmap to be approved by your mentor.</p>
           <div className="animate-spin w-6 h-6 border-2 border-gray-500 border-t-transparent rounded-full mx-auto"></div>
         </div>
@@ -143,7 +143,7 @@ export default function RoadmapPage() {
         <div className="max-w-2xl mx-auto">
           {/* Header */}
           <div className="mb-6 lg:mb-8">
-            <h1 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-2">Create Your Learning Roadmap</h1>
+            <h1 className="text-2xl lg:text-3xl font-bold text-amber-900 mb-2">Create Your Learning Roadmap</h1>
             <p className="text-gray-600 mb-4">Define your learning goals and break them down into manageable phases</p>
 
 
@@ -166,10 +166,10 @@ export default function RoadmapPage() {
           {/* Phases Timeline */}
           <div className="bg-white rounded-lg shadow-sm border p-4 lg:p-6 mb-4 lg:mb-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 lg:mb-6 gap-3">
-              <h2 className="text-lg lg:text-xl font-semibold text-gray-900">Learning Phases</h2>
+              <h2 className="text-lg lg:text-xl font-semibold text-amber-900">Learning Phases</h2>
               <button
                 onClick={() => setIsCreatingPhase(true)}
-                className="flex items-center justify-center gap-2 px-3 lg:px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors text-sm lg:text-base"
+                className="flex items-center justify-center gap-2 px-3 lg:px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors text-sm lg:text-base"
               >
                 <Plus className="w-4 h-4" />
                 Add Phase
@@ -195,7 +195,7 @@ export default function RoadmapPage() {
                     {/* Phase content */}
                     <div className="flex-1 bg-gray-50 rounded-lg p-3 lg:p-4 border border-gray-200 min-w-0">
                       <div className="flex flex-col sm:flex-row sm:items-start justify-between mb-2 gap-2">
-                        <h3 className="font-semibold text-gray-900 text-sm lg:text-base">{phase.title}</h3>
+                        <h3 className="font-semibold text-amber-900 text-sm lg:text-base">{phase.title}</h3>
                         <button
                           onClick={() => handleRemovePhase(phase.id)}
                           className="text-gray-500 hover:text-gray-700 text-xs lg:text-sm self-start"
@@ -224,7 +224,7 @@ export default function RoadmapPage() {
             {/* Add Phase Form */}
             {isCreatingPhase && (
               <div className="border-t pt-6 mt-6">
-                <h3 className="font-semibold text-gray-900 mb-4">Add New Phase</h3>
+                <h3 className="font-semibold text-amber-900 mb-4">Add New Phase</h3>
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">Phase Title</label>
@@ -276,7 +276,7 @@ export default function RoadmapPage() {
                   <div className="flex flex-col sm:flex-row gap-3">
                     <button
                       onClick={handleAddPhase}
-                      className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors text-sm lg:text-base"
+                      className="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors text-sm lg:text-base"
                     >
                       Add Phase
                     </button>
@@ -304,7 +304,7 @@ export default function RoadmapPage() {
             <button
               onClick={handleSubmitRoadmap}
               disabled={!roadmapTitle || phases.length === 0 || isSubmitting}
-              className="w-full sm:w-auto px-6 lg:px-8 py-2 lg:py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2 text-sm lg:text-base"
+              className="w-full sm:w-auto px-6 lg:px-8 py-2 lg:py-3 bg-amber-600 text-white rounded-lg hover:bg-amber-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2 text-sm lg:text-base"
             >
               {isSubmitting ? (
                 <>

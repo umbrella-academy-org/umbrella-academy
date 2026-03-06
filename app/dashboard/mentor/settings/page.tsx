@@ -18,7 +18,7 @@ export default function MentorSettingsPage() {
                 <main className="flex-1 p-4 lg:p-8 overflow-y-auto bg-gray-50/30">
                     <div className="max-w-5xl mx-auto">
                         <div className="mb-8">
-                            <h1 className="text-3xl font-semibold text-gray-900 mb-2">Mentor Settings</h1>
+                            <h1 className="text-3xl font-semibold text-amber-900 mb-2">Mentor Settings</h1>
                             <p className="text-gray-500">Configure your administrative preferences and notifications.</p>
                         </div>
 
@@ -35,8 +35,8 @@ export default function MentorSettingsPage() {
                                             key={item.id}
                                             onClick={() => setActiveSection(item.id)}
                                             className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all ${activeSection === item.id
-                                                ? 'bg-gray-600 text-white shadow-md'
-                                                : 'text-gray-600 hover:bg-white hover:text-gray-900 border border-transparent hover:border-gray-100'
+                                                ? 'bg-amber-600 text-white shadow-md'
+                                                : 'text-gray-600 hover:bg-white hover:text-amber-900 border border-transparent hover:border-gray-100'
                                                 }`}
                                         >
                                             {item.icon}
@@ -59,10 +59,10 @@ export default function MentorSettingsPage() {
 
                                     {activeSection === 'account' && (
                                         <div className="space-y-8">
-                                            <h3 className="text-lg font-semibold text-gray-900 mb-6">Security & Authentication</h3>
+                                            <h3 className="text-lg font-semibold text-amber-900 mb-6">Security & Authentication</h3>
                                             <div className="p-6 bg-gray-50 rounded-2xl border border-gray-100">
                                                 <p className="text-sm font-medium text-gray-700 mb-4">You are currently logged in with an official academy mentor account.</p>
-                                                <button className="px-6 py-2 bg-gray-600 text-sm rounded-lg hover:bg-gray-700 shadow-md">
+                                                <button className="px-6 py-2 bg-amber-600 text-sm rounded-lg hover:bg-amber-700 shadow-md">
                                                     Change Official Password
                                                 </button>
                                             </div>
@@ -71,7 +71,7 @@ export default function MentorSettingsPage() {
 
                                     {activeSection === 'notif' && (
                                         <div className="space-y-6">
-                                            <h3 className="text-lg font-semibold text-gray-900 mb-4">Oversight Alerts</h3>
+                                            <h3 className="text-lg font-semibold text-amber-900 mb-4">Oversight Alerts</h3>
                                             <div className="space-y-4">
                                                 {[
                                                     { title: 'New Trainer Applications', desc: 'Get notified when a new trainer joins the academy.' },
@@ -80,10 +80,10 @@ export default function MentorSettingsPage() {
                                                 ].map((pref, i) => (
                                                     <div key={i} className="flex items-center justify-between p-3">
                                                         <div>
-                                                            <h4 className="text-sm font-semibold text-gray-900">{pref.title}</h4>
+                                                            <h4 className="text-sm font-semibold text-amber-900">{pref.title}</h4>
                                                             <p className="text-xs text-gray-500">{pref.desc}</p>
                                                         </div>
-                                                        <button className="w-12 h-6 rounded-full bg-gray-600 relative">
+                                                        <button className="w-12 h-6 rounded-full bg-amber-600 relative">
                                                             <div className="absolute top-1 left-7 w-4 h-4 bg-white rounded-full" />
                                                         </button>
                                                     </div>
@@ -95,7 +95,7 @@ export default function MentorSettingsPage() {
                                     {activeSection === 'wing' && (
                                         <div className="flex flex-col items-center justify-center py-20 text-center text-gray-400">
                                             <Globe className="w-12 h-12 mb-4 opacity-20" />
-                                            <h3 className="text-lg font-semibold text-gray-900">Wing Configuration</h3>
+                                            <h3 className="text-lg font-semibold text-amber-900">Wing Configuration</h3>
                                             <p className="text-sm mt-2">Mentors can only customize wing preferences via the Wing Admin dashboard.</p>
                                         </div>
                                     )}

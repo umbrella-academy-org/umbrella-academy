@@ -117,7 +117,7 @@ export default function LiveSessionDetails({ selectedPhaseId, selectedSessionId 
       <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
         <div className="text-center py-8">
           <Video className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-          <h3 className="text-lg font-medium text-gray-900 mb-2">No Live Sessions</h3>
+          <h3 className="text-lg font-medium text-amber-900 mb-2">No Live Sessions</h3>
           <p className="text-sm text-gray-500">
             {selectedSessionId 
               ? 'This session doesn\'t have any live sessions scheduled.'
@@ -134,7 +134,7 @@ export default function LiveSessionDetails({ selectedPhaseId, selectedSessionId 
   return (
     <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
       <div className="mb-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-2">Live Sessions</h3>
+        <h3 className="text-lg font-semibold text-amber-900 mb-2">Live Sessions</h3>
         <p className="text-sm text-gray-500">
           {selectedSessionId 
             ? 'Sessions for selected session'
@@ -151,7 +151,7 @@ export default function LiveSessionDetails({ selectedPhaseId, selectedSessionId 
           onClick={() => setActiveTab('upcoming')}
           className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
             activeTab === 'upcoming'
-              ? 'border-gray-600 text-gray-600'
+              ? 'border-amber-600 text-gray-600'
               : 'border-transparent text-gray-500 hover:text-gray-700'
           }`}
         >
@@ -161,7 +161,7 @@ export default function LiveSessionDetails({ selectedPhaseId, selectedSessionId 
           onClick={() => setActiveTab('completed')}
           className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
             activeTab === 'completed'
-              ? 'border-gray-600 text-gray-600'
+              ? 'border-amber-600 text-gray-600'
               : 'border-transparent text-gray-500 hover:text-gray-700'
           }`}
         >
@@ -171,7 +171,7 @@ export default function LiveSessionDetails({ selectedPhaseId, selectedSessionId 
           onClick={() => setActiveTab('cancelled')}
           className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
             activeTab === 'cancelled'
-              ? 'border-gray-600 text-gray-600'
+              ? 'border-amber-600 text-gray-600'
               : 'border-transparent text-gray-500 hover:text-gray-700'
           }`}
         >
@@ -193,7 +193,7 @@ export default function LiveSessionDetails({ selectedPhaseId, selectedSessionId 
                     <StatusIcon className={`w-5 h-5 ${statusConfig.color}`} />
                   </div>
                   <div>
-                    <h4 className="font-medium text-gray-900 mb-1">{session.title}</h4>
+                    <h4 className="font-medium text-amber-900 mb-1">{session.title}</h4>
                     <p className="text-sm text-gray-600 mb-2">{session.description}</p>
                     
                     {/* Session Details */}
@@ -220,13 +220,13 @@ export default function LiveSessionDetails({ selectedPhaseId, selectedSessionId 
                     {session.status}
                   </span>
                   {session.status === 'scheduled' && session.meetingLink && (
-                    <button className="flex items-center gap-1 px-3 py-1.5 bg-gray-600 text-white text-xs font-medium rounded-lg hover:bg-gray-700 transition-colors">
+                    <button className="flex items-center gap-1 px-3 py-1.5 bg-amber-600 text-white text-xs font-medium rounded-lg hover:bg-amber-700 transition-colors">
                       <ExternalLink className="w-3 h-3" />
                       Join
                     </button>
                   )}
                   {session.status === 'completed' && session.recordingUrl && (
-                    <button className="flex items-center gap-1 px-3 py-1.5 bg-gray-600 text-white text-xs font-medium rounded-lg hover:bg-gray-700 transition-colors">
+                    <button className="flex items-center gap-1 px-3 py-1.5 bg-amber-600 text-white text-xs font-medium rounded-lg hover:bg-amber-700 transition-colors">
                       <Play className="w-3 h-3" />
                       Recording
                     </button>
@@ -256,7 +256,7 @@ export default function LiveSessionDetails({ selectedPhaseId, selectedSessionId 
               {/* Trainer Info */}
               <div className="border-t border-gray-100 pt-3 mt-3">
                 <div className="flex items-center gap-2">
-                  <div className="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center">
+                  <div className="w-6 h-6 bg-amber-600 rounded-full flex items-center justify-center">
                     <span className="text-xs font-medium text-white">
                       {session.trainerName.charAt(0)}
                     </span>

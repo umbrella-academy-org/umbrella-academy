@@ -47,7 +47,7 @@ export default function PaymentPage() {
     return (
       <div className="flex h-screen items-center justify-center bg-white">
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-black border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <div className="w-16 h-16 border-4 border-amber-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-gray-600">Loading payment details...</p>
         </div>
       </div>
@@ -63,7 +63,7 @@ export default function PaymentPage() {
             {/* Go back button */}
             <button
               onClick={() => router.back()}
-              className="flex items-center gap-2 text-gray-600 mt-50 hover:text-gray-900 mb-8"
+              className="flex items-center gap-2 text-gray-600 mt-50 hover:text-amber-900 mb-8"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -74,7 +74,7 @@ export default function PaymentPage() {
             <div className="text-center">
               {/* Logo */}
               <div className="mb-8">
-                <div className="w-16 h-16 bg-gray-600 rounded-2xl flex items-center justify-center mx-auto">
+                <div className="w-16 h-16 bg-amber-600 rounded-2xl flex items-center justify-center mx-auto">
                   <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" />
                   </svg>
@@ -82,7 +82,7 @@ export default function PaymentPage() {
               </div>
 
               {/* Title */}
-              <h1 className="text-3xl font-semibold text-gray-900 mb-2">
+              <h1 className="text-3xl font-semibold text-amber-900 mb-2">
                 Complete Payment
               </h1>
               <p className="text-gray-500 mb-8 text-center">
@@ -101,7 +101,7 @@ export default function PaymentPage() {
                     />
                   </div>
                   <div className="flex-1 text-left">
-                    <h3 className="font-black text-gray-900 text-lg mb-1">{courseData.name}</h3>
+                    <h3 className="font-black text-amber-900 text-lg mb-1">{courseData.name}</h3>
                     <p className="text-sm text-gray-600 mb-2">{companyName}</p>
                     <div className="flex items-center gap-3 text-xs text-gray-500">
                       <span className="flex items-center gap-1">
@@ -119,7 +119,7 @@ export default function PaymentPage() {
                 <div className="flex items-center justify-between pt-4 border-t border-gray-200">
                   <span className="text-sm font-medium text-gray-600">Total Amount</span>
                   <div className="text-right">
-                    <div className="text-2xl font-black text-gray-900">${courseData.price}</div>
+                    <div className="text-2xl font-black text-amber-900">${courseData.price}</div>
                   </div>
                 </div>
               </div>
@@ -134,11 +134,11 @@ export default function PaymentPage() {
 
               {/* Progress dots */}
               <div className="flex justify-center gap-2 pt-6">
-                <div className="w-2 h-2 bg-black/30 rounded-full"></div>
-                <div className="w-8 h-2 bg-black rounded-full"></div>
-                <div className="w-12 h-2 bg-black rounded-full shadow-lg"></div>
-                <div className="w-12 h-2 bg-black rounded-full shadow-lg"></div>
-                <div className="w-12 h-2 bg-black rounded-full shadow-lg"></div>
+                <div className="w-2 h-2 bg-amber-600/30 rounded-full"></div>
+                <div className="w-8 h-2 bg-amber-600 rounded-full"></div>
+                <div className="w-12 h-2 bg-amber-600 rounded-full shadow-lg"></div>
+                <div className="w-12 h-2 bg-amber-600 rounded-full shadow-lg"></div>
+                <div className="w-12 h-2 bg-amber-600 rounded-full shadow-lg"></div>
               </div>
 
               {/* Footer */}

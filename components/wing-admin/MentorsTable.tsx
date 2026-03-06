@@ -34,7 +34,7 @@ export default function MentorsTable({ mentors }: MentorsTableProps) {
           <User className="w-5 h-5 text-gray-600" />
         </div>
         <div>
-          <div className="text-sm font-medium text-gray-900">{mentor.name}</div>
+          <div className="text-sm font-medium text-amber-900">{mentor.name}</div>
           <div className="text-sm text-gray-500">{mentor.email}</div>
         </div>
       </div>
@@ -55,12 +55,12 @@ export default function MentorsTable({ mentors }: MentorsTableProps) {
     ),
     students: (
       <div>
-        <div className="text-sm text-gray-900">
+        <div className="text-sm text-amber-900">
           {mentor.currentStudents}/{mentor.maxStudents}
         </div>
         <div className="w-16 bg-gray-200 rounded-full h-1.5 mt-1">
           <div
-            className="bg-gray-600 h-1.5 rounded-full"
+            className="bg-amber-600 h-1.5 rounded-full"
             style={{ width: `${(mentor.currentStudents / mentor.maxStudents) * 100}%` }}
           />
         </div>
@@ -70,7 +70,7 @@ export default function MentorsTable({ mentors }: MentorsTableProps) {
       <div>
         <div className="flex items-center gap-2">
           <Star className="w-4 h-4 text-gray-500 fill-current" />
-          <span className="text-sm font-medium text-gray-900">{mentor.rating}</span>
+          <span className="text-sm font-medium text-amber-900">{mentor.rating}</span>
         </div>
         <div className="text-xs text-gray-500">
           {mentor.approvedRoadmaps} roadmaps • {mentor.approvedTrainers} trainers
@@ -130,7 +130,7 @@ export default function MentorsTable({ mentors }: MentorsTableProps) {
               <button className="px-3 py-1.5 text-xs font-medium text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
                 Send Message
               </button>
-              <button className="px-3 py-1.5 text-xs font-medium text-white bg-gray-600 rounded-lg hover:bg-gray-700 transition-colors">
+              <button className="px-3 py-1.5 text-xs font-medium text-white bg-amber-600 rounded-lg hover:bg-amber-700 transition-colors">
                 Deactivate Selected
               </button>
             </div>

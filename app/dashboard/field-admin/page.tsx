@@ -94,7 +94,7 @@ export default function FieldAdminDashboard() {
           <div className="max-w-full mx-auto">
             {/* Welcome Section */}
             <div className="mb-4 sm:mb-6 lg:mb-8 animate-fade-in">
-              <h1 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-gray-900 mb-2">
+              <h1 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-amber-900 mb-2">
                 Welcome back, {user.name.split(' ')[0]} 👑
               </h1>
               <p className="text-sm sm:text-base text-gray-600">
@@ -111,7 +111,7 @@ export default function FieldAdminDashboard() {
                   </div>
                   <div>
                     <p className="text-xs font-medium text-gray-600">Students</p>
-                    <p className="text-lg lg:text-xl font-bold text-gray-900">{fieldStudents.length}</p>
+                    <p className="text-lg lg:text-xl font-bold text-amber-900">{fieldStudents.length}</p>
                   </div>
                 </div>
               </div>
@@ -123,7 +123,7 @@ export default function FieldAdminDashboard() {
                   </div>
                   <div>
                     <p className="text-xs font-medium text-gray-600">Trainers</p>
-                    <p className="text-lg lg:text-xl font-bold text-gray-900">{fieldTrainers.length}</p>
+                    <p className="text-lg lg:text-xl font-bold text-amber-900">{fieldTrainers.length}</p>
                   </div>
                 </div>
               </div>
@@ -135,7 +135,7 @@ export default function FieldAdminDashboard() {
                   </div>
                   <div>
                     <p className="text-xs font-medium text-gray-600">Field Wallet</p>
-                    <p className="text-lg lg:text-xl font-bold text-gray-900">
+                    <p className="text-lg lg:text-xl font-bold text-amber-900">
                       {(fieldWallet?.balance || 0).toLocaleString()} RWF
                     </p>
                   </div>
@@ -149,7 +149,7 @@ export default function FieldAdminDashboard() {
                   </div>
                   <div>
                     <p className="text-xs font-medium text-gray-600">Active Roadmaps</p>
-                    <p className="text-lg lg:text-xl font-bold text-gray-900">{activeRoadmaps.length}</p>
+                    <p className="text-lg lg:text-xl font-bold text-amber-900">{activeRoadmaps.length}</p>
                   </div>
                 </div>
               </div>
@@ -186,7 +186,7 @@ export default function FieldAdminDashboard() {
               <div className="lg:col-span-2 space-y-4 sm:space-y-6 lg:space-y-8">
                 {/* Quick Actions */}
                 <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100 animate-slide-up" style={{ animationDelay: '700ms' }}>
-                  <h3 className="text-sm sm:text-base font-semibold text-gray-900 mb-4">Quick Actions</h3>
+                  <h3 className="text-sm sm:text-base font-semibold text-amber-900 mb-4">Quick Actions</h3>
                   <div className="space-y-3">
                     <button
                       onClick={() => navigate('/dashboard/field-admin/trainers')}
@@ -195,7 +195,7 @@ export default function FieldAdminDashboard() {
                       <div className="flex items-center gap-3">
                         <Settings className="w-4 h-4 text-gray-500 group-hover:text-gray-600" />
                         <div>
-                          <div className="font-medium text-gray-900">Manage Trainers</div>
+                          <div className="font-medium text-amber-900">Manage Trainers</div>
                           <div className="text-xs text-gray-500">View trainer capacity & assignments</div>
                         </div>
                       </div>
@@ -208,7 +208,7 @@ export default function FieldAdminDashboard() {
                       <div className="flex items-center gap-3">
                         <Eye className="w-4 h-4 text-gray-500 group-hover:text-gray-600" />
                         <div>
-                          <div className="font-medium text-gray-900">Student Activity</div>
+                          <div className="font-medium text-amber-900">Student Activity</div>
                           <div className="text-xs text-gray-500">Monitor learning progress</div>
                         </div>
                       </div>
@@ -221,7 +221,7 @@ export default function FieldAdminDashboard() {
                       <div className="flex items-center gap-3">
                         <Wallet className="w-4 h-4 text-gray-500 group-hover:text-gray-600" />
                         <div>
-                          <div className="font-medium text-gray-900">Field Wallet</div>
+                          <div className="font-medium text-amber-900">Field Wallet</div>
                           <div className="text-xs text-gray-500">Manage field finances</div>
                         </div>
                       </div>

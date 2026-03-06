@@ -57,7 +57,7 @@ export default function UmbrellaAdminSettingsPage() {
                 <main className="flex-1 overflow-auto">
                     <div className="p-3 lg:p-6">
                         <div className="mb-8">
-                            <h1 className="text-2xl font-semibold text-gray-900 mb-1">System Settings</h1>
+                            <h1 className="text-2xl font-semibold text-amber-900 mb-1">System Settings</h1>
                             <p className="text-sm text-gray-500">Configure global parameters and manage companies across the platform</p>
                         </div>
 
@@ -67,11 +67,11 @@ export default function UmbrellaAdminSettingsPage() {
                                 <div className="flex items-center justify-between mb-6">
                                     <div className="flex items-center gap-3">
                                         <Building2 className="w-6 h-6 text-gray-500" />
-                                        <h3 className="text-lg font-semibold text-gray-900">Company Management</h3>
+                                        <h3 className="text-lg font-semibold text-amber-900">Company Management</h3>
                                     </div>
                                     <button
                                         onClick={() => setShowAddCompany(true)}
-                                        className="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
+                                        className="flex items-center gap-2 px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors"
                                     >
                                         <Plus className="w-4 h-4" />
                                         Add Company
@@ -81,7 +81,7 @@ export default function UmbrellaAdminSettingsPage() {
                                 {/* Add Company Form */}
                                 {showAddCompany && (
                                     <div className="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
-                                        <h4 className="font-medium text-gray-900 mb-4">Add New Company</h4>
+                                        <h4 className="font-medium text-amber-900 mb-4">Add New Company</h4>
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                                             <div>
                                                 <label className="block text-sm font-medium text-gray-700 mb-2">Company Name</label>
@@ -114,7 +114,7 @@ export default function UmbrellaAdminSettingsPage() {
                                         <div className="flex gap-3">
                                             <button
                                                 onClick={handleAddCompany}
-                                                className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
+                                                className="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors"
                                             >
                                                 Add Company
                                             </button>
@@ -143,7 +143,7 @@ export default function UmbrellaAdminSettingsPage() {
                                         <tbody className="divide-y divide-gray-200">
                                             {companies.map((company) => (
                                                 <tr key={company.id} className="hover:bg-gray-50">
-                                                    <td className="py-3 px-4 text-sm font-medium text-gray-900">{company.name}</td>
+                                                    <td className="py-3 px-4 text-sm font-medium text-amber-900">{company.name}</td>
                                                     <td className="py-3 px-4 text-sm text-gray-600">{company.industry}</td>
                                                     <td className="py-3 px-4 text-sm text-gray-600">{company.fields} fields</td>
                                                     <td className="py-3 px-4">
@@ -178,7 +178,7 @@ export default function UmbrellaAdminSettingsPage() {
                             <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
                                 <div className="flex items-center gap-3 mb-6">
                                     <Settings className="w-6 h-6 text-gray-500" />
-                                    <h3 className="text-lg font-semibold text-gray-900">Platform Settings</h3>
+                                    <h3 className="text-lg font-semibold text-amber-900">Platform Settings</h3>
                                 </div>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div>
@@ -231,12 +231,12 @@ export default function UmbrellaAdminSettingsPage() {
                             <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
                                 <div className="flex items-center gap-3 mb-6">
                                     <Shield className="w-6 h-6 text-gray-500" />
-                                    <h3 className="text-lg font-semibold text-gray-900">Security Settings</h3>
+                                    <h3 className="text-lg font-semibold text-amber-900">Security Settings</h3>
                                 </div>
                                 <div className="space-y-4">
                                     <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                                         <div>
-                                            <div className="font-medium text-gray-900">Require Multi-Factor Authentication</div>
+                                            <div className="font-medium text-amber-900">Require Multi-Factor Authentication</div>
                                             <div className="text-sm text-gray-600">Force all users to enable MFA for enhanced security</div>
                                         </div>
                                         <label className="relative inline-flex items-center cursor-pointer">
@@ -246,13 +246,13 @@ export default function UmbrellaAdminSettingsPage() {
                                                 onChange={(e) => setSystemSettings({ ...systemSettings, requireMFA: e.target.checked })}
                                                 className="sr-only peer"
                                             />
-                                            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-gray-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gray-600"></div>
+                                            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-gray-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600"></div>
                                         </label>
                                     </div>
 
                                     <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                                         <div>
-                                            <div className="font-medium text-gray-900">Automatic Backup</div>
+                                            <div className="font-medium text-amber-900">Automatic Backup</div>
                                             <div className="text-sm text-gray-600">Automatically backup system data daily</div>
                                         </div>
                                         <label className="relative inline-flex items-center cursor-pointer">
@@ -262,13 +262,13 @@ export default function UmbrellaAdminSettingsPage() {
                                                 onChange={(e) => setSystemSettings({ ...systemSettings, autoBackup: e.target.checked })}
                                                 className="sr-only peer"
                                             />
-                                            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-gray-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gray-600"></div>
+                                            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-gray-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600"></div>
                                         </label>
                                     </div>
 
                                     <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                                         <div>
-                                            <div className="font-medium text-gray-900">Maintenance Mode</div>
+                                            <div className="font-medium text-amber-900">Maintenance Mode</div>
                                             <div className="text-sm text-gray-600">Enable maintenance mode to restrict access during updates</div>
                                         </div>
                                         <label className="relative inline-flex items-center cursor-pointer">
@@ -278,7 +278,7 @@ export default function UmbrellaAdminSettingsPage() {
                                                 onChange={(e) => setSystemSettings({ ...systemSettings, maintenanceMode: e.target.checked })}
                                                 className="sr-only peer"
                                             />
-                                            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-gray-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gray-600"></div>
+                                            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-gray-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600"></div>
                                         </label>
                                     </div>
                                 </div>
@@ -288,7 +288,7 @@ export default function UmbrellaAdminSettingsPage() {
                             <div className="flex gap-4 pb-8">
                                 <button
                                     onClick={handleSaveSettings}
-                                    className="bg-gray-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-gray-700 transition-colors"
+                                    className="bg-amber-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-amber-700 transition-colors"
                                 >
                                     Save All Settings
                                 </button>

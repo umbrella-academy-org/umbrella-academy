@@ -165,7 +165,7 @@ export default function DataTable({
                   </td>
                 )}
                 {columns.map((column) => (
-                  <td key={column.key} className="px-4 py-4 text-sm text-gray-900">
+                  <td key={column.key} className="px-4 py-4 text-sm text-amber-900">
                     {item[column.key]}
                   </td>
                 ))}

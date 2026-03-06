@@ -51,7 +51,7 @@ export function Testimonials() {
             <span className="inline-block px-4 py-2 bg-white text-[#525252] rounded-full text-sm font-medium mb-4 shadow-sm border border-gray-200">
               Success Stories
             </span>
-            <h2 className="text-4xl md:text-5xl font-bold text-black mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-amber-900 mb-6">
               What Our <span className="text-[#525252]">Students Say</span>
             </h2>
             <p className="text-xl text-gray-600">
@@ -94,7 +94,7 @@ export function Testimonials() {
                     className="w-12 h-12 rounded-full object-cover ring-2 ring-[#525252]/20"
                   />
                   <div>
-                    <div className="font-bold text-gray-900">{testimonial.name}</div>
+                    <div className="font-bold text-amber-900">{testimonial.name}</div>
                     <div className="text-sm text-gray-600">{testimonial.role}</div>
                     <div className="text-xs text-[#525252]">{testimonial.company}</div>
                   </div>

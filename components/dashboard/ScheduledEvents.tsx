@@ -194,7 +194,7 @@ export default function ScheduledEvents({ userType }: ScheduledEventsProps) {
               }`} />
           </div>
           <div>
-            <h3 className={`text-sm sm:text-base font-semibold text-gray-900 transition-colors duration-200 ${isHovered ? 'text-gray-600' : ''
+            <h3 className={`text-sm sm:text-base font-semibold text-amber-900 transition-colors duration-200 ${isHovered ? 'text-gray-600' : ''
               }`}>
               {getTitle()}
             </h3>
@@ -223,7 +223,7 @@ export default function ScheduledEvents({ userType }: ScheduledEventsProps) {
           >
             <div className={`w-2 h-2 rounded-full ${event.color} group-hover:scale-150 transition-transform duration-200`}></div>
             <div className="flex-1 min-w-0">
-              <p className="text-xs font-medium text-gray-900 truncate group-hover:text-gray-600 transition-colors">
+              <p className="text-xs font-medium text-amber-900 truncate group-hover:text-gray-600 transition-colors">
                 {event.title}
               </p>
               <div className="flex items-center gap-1 text-xs text-gray-500">

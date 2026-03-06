@@ -39,7 +39,7 @@ export default function EducationLevelPage() {
           {/* Go back button */}
           <button
             onClick={() => window.history.back()}
-            className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-8"
+            className="flex items-center gap-2 text-gray-600 hover:text-amber-900 mb-8"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -50,7 +50,7 @@ export default function EducationLevelPage() {
           <div className="flex flex-col items-center justify-center flex-1">
             {/* Logo */}
             <div className="mb-8">
-              <div className="w-16 h-16 bg-gray-600 rounded-2xl flex items-center justify-center">
+              <div className="w-16 h-16 bg-amber-600 rounded-2xl flex items-center justify-center">
                 <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" />
                 </svg>
@@ -58,7 +58,7 @@ export default function EducationLevelPage() {
             </div>
 
             {/* Title */}
-            <h1 className="text-3xl font-semibold text-gray-900 mb-2 text-center">
+            <h1 className="text-3xl font-semibold text-amber-900 mb-2 text-center">
               Degree Level
             </h1>
             <p className="text-gray-500 mb-10 text-center text-sm">
@@ -74,7 +74,7 @@ export default function EducationLevelPage() {
                   onClick={() => setIsOpen(!isOpen)}
                   className={`w-full flex items-center justify-between p-4 border rounded-lg transition-all ${
                     selectedLevel 
-                      ? 'border-black bg-gray-50' 
+                      ? 'border-amber-600 bg-gray-50' 
                       : 'border-gray-200 bg-white hover:border-gray-300'
                   }`}
                 >
@@ -86,10 +86,10 @@ export default function EducationLevelPage() {
                           const Icon = selected?.icon || GraduationCap;
                           return (
                             <>
-                              <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-black text-white">
+                              <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-amber-600 text-white">
                                 <Icon className="w-5 h-5" />
                               </div>
-                              <span className="text-sm font-medium text-gray-900">{selectedLevel}</span>
+                              <span className="text-sm font-medium text-amber-900">{selectedLevel}</span>
                             </>
                           );
                         })()}
@@ -125,13 +125,13 @@ export default function EducationLevelPage() {
                         >
                           <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-colors ${
                             selectedLevel === level.value 
-                              ? 'bg-black text-white' 
+                              ? 'bg-amber-600 text-white' 
                               : 'bg-gray-100 text-gray-400'
                           }`}>
                             <Icon className="w-5 h-5" />
                           </div>
                           <span className={`flex-1 text-left text-sm font-medium ${
-                            selectedLevel === level.value ? 'text-gray-900' : 'text-gray-600'
+                            selectedLevel === level.value ? 'text-amber-900' : 'text-gray-600'
                           }`}>
                             {level.value}
                           </span>
@@ -147,16 +147,16 @@ export default function EducationLevelPage() {
 
               <button
                 type="submit"
-                className="w-full bg-black text-white py-3 rounded-lg font-medium hover:bg-gray-900 transition-colors mt-6"
+                className="w-full bg-amber-600 text-white py-3 rounded-lg font-medium hover:bg-amber-700 transition-colors mt-6"
               >
                 Continue
               </button>
 
               {/* Progress dots */}
               <div className="flex justify-center gap-2 pt-4">
-                <div className="w-8 h-2 bg-black rounded-full"></div>
-                <div className="w-8 h-2 bg-black rounded-full"></div>
-                <div className="w-8 h-2 bg-black rounded-full"></div>
+                <div className="w-8 h-2 bg-amber-600 rounded-full"></div>
+                <div className="w-8 h-2 bg-amber-600 rounded-full"></div>
+                <div className="w-8 h-2 bg-amber-600 rounded-full"></div>
                 {[4, 5, 6, 7].map((i) => (
                   <div key={i} className="w-2 h-2 bg-gray-300 rounded-full"></div>
                 ))}

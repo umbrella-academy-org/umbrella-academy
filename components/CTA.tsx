@@ -11,7 +11,7 @@ export function CTA() {
   return (
     <section className="py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       {/* Gradient Background */}
-      <div className="absolute inset-0 bg-black" />
+      <div className="absolute inset-0 bg-amber-600" />
 
       {/* Animated Background Elements */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-[#737373]/20 rounded-full blur-3xl animate-slide-x" />

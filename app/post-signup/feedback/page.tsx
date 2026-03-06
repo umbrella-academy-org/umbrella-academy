@@ -36,7 +36,7 @@ export default function StudentFeedbackPage() {
                 <main className="flex-1 p-4 lg:p-8 overflow-y-auto bg-gray-50/30">
                     <div className="max-w-3xl mx-auto">
                         <div className="mb-8">
-                            <h1 className="text-3xl font-semibold text-gray-900 mb-2">Feedback</h1>
+                            <h1 className="text-3xl font-semibold text-amber-900 mb-2">Feedback</h1>
                             <p className="text-gray-500">Your thoughts help us improve. Share your experience with us.</p>
                         </div>
 
@@ -45,13 +45,13 @@ export default function StudentFeedbackPage() {
                                 <div className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-6">
                                     <CheckCircle2 className="w-10 h-10 text-gray-500" />
                                 </div>
-                                <h2 className="text-2xl font-semibold text-gray-900 mb-2">Thank you for your feedback!</h2>
+                                <h2 className="text-2xl font-semibold text-amber-900 mb-2">Thank you for your feedback!</h2>
                                 <p className="text-gray-500 mb-8 max-w-sm mx-auto">
                                     We've received your message and will use it to make Umbrella Academy even better.
                                 </p>
                                 <button
                                     onClick={() => setSubmitted(false)}
-                                    className="px-8 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-all font-medium"
+                                    className="px-8 py-3 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-all font-medium"
                                 >
                                     Send another feedback
                                 </button>
@@ -69,7 +69,7 @@ export default function StudentFeedbackPage() {
                                                     type="button"
                                                     onClick={() => setCategory(c)}
                                                     className={`px-4 py-3 rounded-lg text-sm font-medium border transition-all ${category === c
-                                                        ? 'border-gray-600 bg-gray-50 text-gray-600 shadow-sm'
+                                                        ? 'border-amber-600 bg-gray-50 text-gray-600 shadow-sm'
                                                         : 'border-gray-200 bg-white text-gray-600 hover:border-gray-300'
                                                         }`}
                                                 >
@@ -106,7 +106,7 @@ export default function StudentFeedbackPage() {
                                             value={feedback}
                                             onChange={(e) => setFeedback(e.target.value)}
                                             placeholder="Tell us what's on your mind..."
-                                            className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 h-40 resize-none transition-all"
+                                            className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-amber-900 placeholder:text-gray-400 h-40 resize-none transition-all"
                                             required
                                         />
                                     </div>
@@ -115,7 +115,7 @@ export default function StudentFeedbackPage() {
                                     <div className="flex justify-end">
                                         <button
                                             type="submit"
-                                            className="flex items-center gap-2 px-8 py-3.5 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-all  shadow-md active:scale-95"
+                                            className="flex items-center gap-2 px-8 py-3.5 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-all  shadow-md active:scale-95"
                                         >
                                             <Send className="w-4 h-4" />
                                             Submit Feedback

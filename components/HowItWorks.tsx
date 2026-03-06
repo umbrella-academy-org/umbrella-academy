@@ -14,7 +14,7 @@ const steps = [
     icon: Building2,
     title: "Select a Company",
     description: "Browse top learning companies offering structured programs in your field.",
-    color: "bg-black"
+    color: "bg-amber-600"
   },
   {
     icon: CreditCard,
@@ -26,7 +26,7 @@ const steps = [
     icon: GraduationCap,
     title: "Learn with Experts",
     description: "Engage in interactive sessions with world-class trainers.",
-    color: "bg-black"
+    color: "bg-amber-600"
   },
   {
     icon: BarChart3,
@@ -43,7 +43,7 @@ export function HowItWorks() {
     <section id="how-it-works" className="pt-24 pb-4 px-4 sm:px-6 lg:px-8 bg-white overflow-hidden">
       <div ref={ref} className="max-w-full mx-auto">
         <div className={`mb-16 reveal ${isVisible ? 'visible' : ''}`}>
-          <h3 className="text-4xl md:text-6xl lg:text-8xl font-black tracking-tighter text-black leading-none ">
+          <h3 className="text-4xl md:text-6xl lg:text-8xl font-black tracking-tighter text-amber-900 leading-none ">
             YOUR PATH TO <br /> <span className="text-[#525252]">SUCCESS</span>
           </h3>
         </div>
@@ -63,7 +63,7 @@ export function HowItWorks() {
                   </div>
                   <div className="space-y-4">
                     <span className="text-[10px] font-black text-gray-300 tracking-[0.4em] ">0{index + 1}</span>
-                    <h4 className="text-xl md:text-2xl font-black  tracking-tight text-black">{step.title}</h4>
+                    <h4 className="text-xl md:text-2xl font-black  tracking-tight text-amber-900">{step.title}</h4>
                     <p className="text-sm text-gray-400 font-light leading-relaxed">{step.description}</p>
                   </div>
                 </div>

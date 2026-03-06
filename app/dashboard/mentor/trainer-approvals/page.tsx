@@ -199,7 +199,7 @@ export default function MentorTrainerApprovalsPage() {
         <main className="flex-1 overflow-auto">
           <div className="p-3 lg:p-6">
             <div className="mb-8">
-              <h1 className="text-2xl font-semibold text-gray-900 mb-1">Trainer Applications</h1>
+              <h1 className="text-2xl font-semibold text-amber-900 mb-1">Trainer Applications</h1>
               <p className="text-sm text-gray-500">Review and vet new trainer candidates for your wing.</p>
             </div>
 
@@ -234,7 +234,7 @@ export default function MentorTrainerApprovalsPage() {
             {/* Full Table */}
             <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
               <div className="p-4 border-b border-gray-200">
-                <h3 className="font-semibold text-gray-900">Applications ({filteredTrainers.length})</h3>
+                <h3 className="font-semibold text-amber-900">Applications ({filteredTrainers.length})</h3>
               </div>
 
               <div className="overflow-x-auto">
@@ -278,7 +278,7 @@ export default function MentorTrainerApprovalsPage() {
                               </div>
                             </div>
                             <div className="ml-4">
-                              <div className="text-sm font-medium text-gray-900">{trainer.name}</div>
+                              <div className="text-sm font-medium text-amber-900">{trainer.name}</div>
                               <div className="text-sm text-gray-500">{trainer.email}</div>
                               <div className="flex items-center gap-1 mt-1">
                                 <Star className="w-3 h-3 text-gray-400 fill-current" />
@@ -289,12 +289,12 @@ export default function MentorTrainerApprovalsPage() {
                         </td>
 
                         {/* Wing */}
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-amber-900">
                           {trainer.wing}
                         </td>
 
                         {/* Experience */}
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-amber-900">
                           <div>{trainer.experience}</div>
                           <div className="text-xs text-gray-500">{trainer.completedProjects} projects</div>
                         </td>
@@ -302,7 +302,7 @@ export default function MentorTrainerApprovalsPage() {
 
 
                         {/* Rate */}
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-amber-900">
                           <div className="font-medium">€{trainer.hourlyRate}/hr</div>
                         </td>
 
@@ -321,7 +321,7 @@ export default function MentorTrainerApprovalsPage() {
                           <div className="flex items-center justify-end gap-2">
                             <button
                               onClick={() => handleViewDetails(trainer.id)}
-                              className="bg-gray-600 p-1 hover:bg-gray-700 rounded px-4"
+                              className="bg-amber-600 p-1 hover:bg-amber-700 rounded px-4"
                               title="View Details"
                             >
                               View
@@ -330,7 +330,7 @@ export default function MentorTrainerApprovalsPage() {
 
                             <button
                               onClick={() => handleReject(trainer.id)}
-                              className="bg-gray-600 hover:bg-gray-900 px-4 py-1 rounded"
+                              className="bg-amber-600 hover:bg-amber-700 px-4 py-1 rounded"
                               title="Reject"
                             >
                               Reject
@@ -356,7 +356,7 @@ export default function MentorTrainerApprovalsPage() {
 
       {/* Details Modal */}
       {showDetailsModal && selectedTrainerData && (
-        <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50">
+        <div className="fixed inset-0 bg-amber-600/80 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
             {/* Modal Header */}
             <div className="flex items-center justify-between p-6 border-b border-gray-200">
@@ -369,7 +369,7 @@ export default function MentorTrainerApprovalsPage() {
                   </div>
                 </div>
                 <div className="ml-4">
-                  <h2 className="text-xl font-semibold text-gray-900">{selectedTrainerData.name}</h2>
+                  <h2 className="text-xl font-semibold text-amber-900">{selectedTrainerData.name}</h2>
                   <p className="text-sm text-gray-600">{selectedTrainerData.email}</p>
                   <div className="flex items-center gap-2 mt-1">
                     <Star className="w-4 h-4 text-gray-400 fill-current" />
@@ -381,10 +381,10 @@ export default function MentorTrainerApprovalsPage() {
               </div>
               <div className='flex gap-4'>
                 <div className='flex gap-x-2'>
-                  <button className='bg-gray-600 px-4 py-1 rounded-lg hover:bg-gray-700'>
+                  <button className='bg-amber-600 px-4 py-1 rounded-lg hover:bg-amber-700'>
                     Approve
                   </button>
-                  <button className='bg-gray-600 px-4 py-1 rounded-lg hover:bg-gray-700'>
+                  <button className='bg-amber-600 px-4 py-1 rounded-lg hover:bg-amber-700'>
                     Reject
                   </button>
                 </div>
@@ -425,7 +425,7 @@ export default function MentorTrainerApprovalsPage() {
                 <div className="space-y-6">
                   {/* Application Info */}
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-3">Application Info</h3>
+                    <h3 className="font-semibold text-amber-900 mb-3">Application Info</h3>
                     <div className="space-y-2 text-sm">
                       <div className="flex justify-between">
                         <span className="text-gray-600">Status:</span>
@@ -433,18 +433,18 @@ export default function MentorTrainerApprovalsPage() {
                       </div>
                       <div className="flex justify-between">
                         <span className="text-gray-600">Submitted:</span>
-                        <span className="text-gray-900">{formatDate(selectedTrainerData.submittedAt)}</span>
+                        <span className="text-amber-900">{formatDate(selectedTrainerData.submittedAt)}</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-gray-600">Timezone:</span>
-                        <span className="text-gray-900">{selectedTrainerData.timezone}</span>
+                        <span className="text-amber-900">{selectedTrainerData.timezone}</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Education */}
                   <div>
-                    <h3 className="flex items-center gap-2 font-semibold text-gray-900 mb-3">
+                    <h3 className="flex items-center gap-2 font-semibold text-amber-900 mb-3">
                       <BookOpen className="w-5 h-5 text-gray-600" />
                       Education
                     </h3>
@@ -453,7 +453,7 @@ export default function MentorTrainerApprovalsPage() {
 
                   {/* Availability */}
                   <div>
-                    <h3 className="flex items-center gap-2 font-semibold text-gray-900 mb-3">
+                    <h3 className="flex items-center gap-2 font-semibold text-amber-900 mb-3">
                       <Calendar className="w-5 h-5 text-gray-600" />
                       Availability
                     </h3>
@@ -462,7 +462,7 @@ export default function MentorTrainerApprovalsPage() {
 
                   {/* Languages */}
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-3">Languages</h3>
+                    <h3 className="font-semibold text-amber-900 mb-3">Languages</h3>
                     <div className="flex flex-wrap gap-2">
                       {selectedTrainerData.languages.map((lang, index) => (
                         <span key={index} className="inline-flex px-3 py-1 text-sm font-medium bg-gray-100 text-gray-800 rounded-full">
@@ -474,7 +474,7 @@ export default function MentorTrainerApprovalsPage() {
 
                   {/* Technical Expertise */}
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-3">Technical Expertise</h3>
+                    <h3 className="font-semibold text-amber-900 mb-3">Technical Expertise</h3>
                     <div className="flex flex-wrap gap-2">
                       {selectedTrainerData.expertise.map((skill, index) => (
                         <span key={index} className="inline-flex px-3 py-1 text-sm font-medium bg-gray-100 text-gray-800 rounded-full">
@@ -489,11 +489,11 @@ export default function MentorTrainerApprovalsPage() {
                 <div className="space-y-6">
                   {/* Previous Roles */}
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-3">Previous Experience</h3>
+                    <h3 className="font-semibold text-amber-900 mb-3">Previous Experience</h3>
                     <div className="space-y-3">
                       {selectedTrainerData.previousRoles.map((role, index) => (
                         <div key={index} className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
-                          <div className="w-2 h-2 bg-gray-600 rounded-full mt-2"></div>
+                          <div className="w-2 h-2 bg-amber-600 rounded-full mt-2"></div>
                           <span className="text-gray-700">{role}</span>
                         </div>
                       ))}
@@ -502,7 +502,7 @@ export default function MentorTrainerApprovalsPage() {
 
                   {/* Certifications */}
                   <div>
-                    <h3 className="flex items-center gap-2 font-semibold text-gray-900 mb-3">
+                    <h3 className="flex items-center gap-2 font-semibold text-amber-900 mb-3">
                       <Award className="w-5 h-5 text-gray-600" />
                       Certifications
                     </h3>
@@ -518,11 +518,11 @@ export default function MentorTrainerApprovalsPage() {
 
                   {/* References */}
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-3">References</h3>
+                    <h3 className="font-semibold text-amber-900 mb-3">References</h3>
                     <div className="space-y-3">
                       {selectedTrainerData.references.map((ref, index) => (
                         <div key={index} className="p-3 bg-gray-50 rounded-lg">
-                          <div className="font-medium text-gray-900">{ref.name}</div>
+                          <div className="font-medium text-amber-900">{ref.name}</div>
                           <div className="text-sm text-gray-600">{ref.role}</div>
                           <div className="text-sm text-gray-500">{ref.contact}</div>
                         </div>
@@ -532,7 +532,7 @@ export default function MentorTrainerApprovalsPage() {
 
                   {/* Portfolio */}
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-3">Portfolio</h3>
+                    <h3 className="font-semibold text-amber-900 mb-3">Portfolio</h3>
                     <a
                       href={selectedTrainerData.portfolio}
                       target="_blank"
@@ -549,13 +549,13 @@ export default function MentorTrainerApprovalsPage() {
               <div className="mt-8 space-y-6">
                 {/* Teaching Experience */}
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-3">Teaching Experience</h3>
+                  <h3 className="font-semibold text-amber-900 mb-3">Teaching Experience</h3>
                   <p className="text-gray-700 bg-gray-50 p-4 rounded-lg">{selectedTrainerData.teachingExperience}</p>
                 </div>
 
                 {/* Motivation */}
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-3">Motivation</h3>
+                  <h3 className="font-semibold text-amber-900 mb-3">Motivation</h3>
                   <p className="text-gray-700 italic bg-gray-50 p-4 rounded-lg border-l-4 border-gray-400">
                     "{selectedTrainerData.motivation}"
                   </p>
@@ -588,7 +588,7 @@ export default function MentorTrainerApprovalsPage() {
               </button>
               <button
                 onClick={() => handleApprove(selectedTrainerData.id)}
-                className="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
+                className="flex items-center gap-2 px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors"
               >
                 <CheckCircle className="w-4 h-4" />
                 Approve

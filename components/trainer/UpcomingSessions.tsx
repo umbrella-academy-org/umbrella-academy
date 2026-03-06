@@ -86,7 +86,7 @@ export default function UpcomingSessions() {
   return (
     <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100 animate-fade-in">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-semibold text-gray-900">Today's Sessions</h3>
+        <h3 className="text-lg font-semibold text-amber-900">Today's Sessions</h3>
         <span className="text-sm text-gray-500">{sessions.length} sessions</span>
       </div>
 
@@ -111,7 +111,7 @@ export default function UpcomingSessions() {
                 {/* Session Info */}
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
-                    <h4 className="text-sm font-medium text-gray-900 truncate">
+                    <h4 className="text-sm font-medium text-amber-900 truncate">
                       {session.title}
                     </h4>
                     {getStatusBadge(session.status)}
@@ -173,12 +173,12 @@ export default function UpcomingSessions() {
             {/* Action Buttons */}
             <div className="flex gap-2 mt-3">
               {session.status === 'live' ? (
-                <button className="flex-1 px-3 py-1.5 bg-gray-600 text-white text-xs font-medium rounded hover:bg-gray-700 transition-colors">
+                <button className="flex-1 px-3 py-1.5 bg-amber-600 text-white text-xs font-medium rounded hover:bg-amber-700 transition-colors">
                   Join Live Session
                 </button>
               ) : (
                 <>
-                  <button className="flex-1 px-3 py-1.5 bg-gray-600 text-white text-xs font-medium rounded hover:bg-gray-700 transition-colors">
+                  <button className="flex-1 px-3 py-1.5 bg-amber-600 text-white text-xs font-medium rounded hover:bg-amber-700 transition-colors">
                     Start Session
                   </button>
                   <button className="px-3 py-1.5 border border-gray-300 text-gray-700 text-xs font-medium rounded hover:bg-gray-50 transition-colors">
@@ -200,11 +200,11 @@ export default function UpcomingSessions() {
       <div className="mt-4 pt-4 border-t border-gray-200">
         <div className="grid grid-cols-2 gap-4 text-center">
           <div>
-            <div className="text-lg font-bold text-gray-900">4</div>
+            <div className="text-lg font-bold text-amber-900">4</div>
             <div className="text-xs text-gray-500">Today</div>
           </div>
           <div>
-            <div className="text-lg font-bold text-gray-900">12</div>
+            <div className="text-lg font-bold text-amber-900">12</div>
             <div className="text-xs text-gray-500">This Week</div>
           </div>
         </div>

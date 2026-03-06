@@ -76,7 +76,7 @@ export default function CoursesCalendar() {
       {/* Calendar Header */}
       <div className="p-4 border-b border-gray-200">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="font-semibold text-gray-900">
+          <h3 className="font-semibold text-amber-900">
             {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
           </h3>
           <div className="flex items-center gap-1">
@@ -112,7 +112,7 @@ export default function CoursesCalendar() {
                 <button
                   className={`w-full h-full text-xs rounded transition-colors ${
                     isToday(date)
-                      ? 'bg-gray-600 text-white font-medium'
+                      ? 'bg-amber-600 text-white font-medium'
                       : hasEvent(date)
                         ? 'bg-gray-100 text-gray-800 font-medium'
                         : 'text-gray-700 hover:bg-gray-100'

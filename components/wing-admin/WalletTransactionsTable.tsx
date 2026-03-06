@@ -34,7 +34,7 @@ export default function WalletTransactionsTable({ transactions }: WalletTransact
           }
         </div>
         <div>
-          <div className="text-sm font-medium text-gray-900">{transaction.description}</div>
+          <div className="text-sm font-medium text-amber-900">{transaction.description}</div>
           <div className="text-sm text-gray-500 capitalize">{transaction.type}</div>
         </div>
       </div>
@@ -49,7 +49,7 @@ export default function WalletTransactionsTable({ transactions }: WalletTransact
     date: (
       <div className="flex items-center gap-2">
         <Calendar className="w-4 h-4 text-gray-400" />
-        <span className="text-sm text-gray-900">{transaction.date}</span>
+        <span className="text-sm text-amber-900">{transaction.date}</span>
       </div>
     ),
     status: (
@@ -97,7 +97,7 @@ export default function WalletTransactionsTable({ transactions }: WalletTransact
               <button className="px-3 py-1.5 text-xs font-medium text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
                 Export Selected
               </button>
-              <button className="px-3 py-1.5 text-xs font-medium text-white bg-gray-600 rounded-lg hover:bg-gray-700 transition-colors">
+              <button className="px-3 py-1.5 text-xs font-medium text-white bg-amber-600 rounded-lg hover:bg-amber-700 transition-colors">
                 Generate Report
               </button>
             </div>
