@@ -199,7 +199,7 @@ export default function ChooseCompanyPage() {
                     handleCompanySelect(viewingCompany.id, viewingCompany.fieldId);
                     setViewingCompany(null);
                   }}
-                  className="w-full bg-black text-white py-3 rounded-lg font-medium hover:bg-gray-900 transition-all active:scale-95"
+                  className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-all active:scale-95"
                 >
                   Select This Company
                 </button>
@@ -209,7 +209,7 @@ export default function ChooseCompanyPage() {
               <>
             {/* Logo */}
             <div className="mb-8">
-              <div className="w-16 h-16 bg-black rounded-2xl flex items-center justify-center shadow-lg">
+              <div className="w-16 h-16 bg-yellow-600 rounded-2xl flex items-center justify-center shadow-lg">
                 <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" />
                 </svg>
@@ -233,7 +233,7 @@ export default function ChooseCompanyPage() {
                     <div key={field.id} className="space-y-3">
                       {/* Field Header */}
                       <div className="flex items-center gap-3 pb-2 border-b border-gray-200">
-                        <div className="w-8 h-8 bg-black rounded-lg flex items-center justify-center">
+                        <div className="w-8 h-8 bg-yellow-600 rounded-lg flex items-center justify-center">
                           <FieldIcon className="w-4 h-4 text-white" />
                         </div>
                         <div className="flex-1">
@@ -250,14 +250,14 @@ export default function ChooseCompanyPage() {
                             key={company.id}
                             className={`flex items-start gap-4 p-4 border rounded-lg transition-all group ${
                               isSelected
-                                ? 'border-black bg-gray-50'
+                                ? 'border-yellow-600 bg-gray-50'
                                 : 'border-gray-200 bg-white hover:border-gray-300'
                             }`}
                           >
                             {/* Company Image */}
                             <div 
                               className={`relative w-16 h-16 rounded-lg overflow-hidden shrink-0 cursor-pointer ${
-                                isSelected ? 'ring-2 ring-black' : ''
+                                isSelected ? 'ring-2 ring-yellow-600' : ''
                               }`}
                               onClick={() => handleCompanySelect(company.id, field.id)}
                             >
@@ -294,7 +294,7 @@ export default function ChooseCompanyPage() {
                             {/* Actions */}
                             <div className="flex flex-col gap-2 shrink-0">
                               {isSelected && (
-                                <CheckCircle className="w-5 h-5 text-black" />
+                                <CheckCircle className="w-5 h-5 text-gray-900" />
                               )}
                               <button
                                 onClick={(e) => {
@@ -320,16 +320,16 @@ export default function ChooseCompanyPage() {
               <button
                 type="submit"
                 disabled={!selectedCompanyId || !selectedFieldId}
-                className="w-full bg-black text-white py-3 rounded-lg font-medium hover:bg-gray-900 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Continue to Courses
               </button>
 
               {/* Progress dots */}
               <div className="flex justify-center gap-2 pt-6">
-                <div className="w-2 h-2 bg-black/30 rounded-full"></div>
-                <div className="w-8 h-2 bg-black rounded-full"></div>
-                <div className="w-12 h-2 bg-black rounded-full shadow-lg"></div>
+                <div className="w-2 h-2 bg-yellow-600/30 rounded-full"></div>
+                <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
+                <div className="w-12 h-2 bg-yellow-600 rounded-full shadow-lg"></div>
                 <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
                 <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
               </div>

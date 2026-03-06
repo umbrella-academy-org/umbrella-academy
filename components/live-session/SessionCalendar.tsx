@@ -85,7 +85,7 @@ export default function SessionCalendar({ selectedDateRange, onDateRangeChange }
               key={range}
               onClick={() => onDateRangeChange(range)}
               className={`whitespace-nowrap px-4 py-2 rounded-lg text-xs font-semibold transition-all border ${selectedDateRange === range
-                ? 'bg-gray-600 text-white border-gray-600 shadow-md'
+                ? 'bg-yellow-600 text-white border-yellow-600 shadow-md'
                 : 'bg-white text-gray-500 border-gray-100 hover:border-gray-200'
                 }`}
             >
@@ -111,7 +111,7 @@ export default function SessionCalendar({ selectedDateRange, onDateRangeChange }
                 className={`w-full aspect-square text-xs font-medium rounded-lg flex flex-col items-center justify-center transition-all relative ${date.isOtherMonth
                   ? 'text-gray-200 cursor-not-allowed opacity-40'
                   : date.isToday
-                    ? 'bg-gray-600 text-white shadow-md'
+                    ? 'bg-yellow-600 text-white shadow-md'
                     : date.hasSession
                       ? 'bg-gray-50 text-gray-700'
                       : 'text-gray-600 hover:bg-gray-50 hover:text-gray-600'
@@ -119,7 +119,7 @@ export default function SessionCalendar({ selectedDateRange, onDateRangeChange }
               >
                 <span>{date.day}</span>
                 {date.hasSession && (
-                  <span className={`w-1 h-1 rounded-full absolute bottom-1.5 ${date.isToday ? 'bg-gray-200' : 'bg-gray-600'
+                  <span className={`w-1 h-1 rounded-full absolute bottom-1.5 ${date.isToday ? 'bg-gray-200' : 'bg-yellow-600'
                     }`}></span>
                 )}
               </button>
@@ -130,7 +130,7 @@ export default function SessionCalendar({ selectedDateRange, onDateRangeChange }
         {/* Quick Footer Info */}
         <div className="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-gray-500"></div>
+            <div className="w-2 h-2 rounded-full bg-yellow-600"></div>
             <span className="text-[11px] font-medium text-gray-500">Sessions</span>
           </div>
           <button className="text-[11px] font-semibold text-gray-600 hover:underline decoration-2 underline-offset-4">

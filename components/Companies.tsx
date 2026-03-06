@@ -9,7 +9,7 @@ const companies = [
     description: "Leading tech education hub offering cutting-edge programs in software development, AI, and digital innovation.",
     programs: ["Web Development", "Mobile Apps", "AI & ML", "Cloud Computing"],
     students: "15,000+",
-    color: "#525252",
+    color: "#ca8a04",
     bgImage: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800",
   },
   {
@@ -19,7 +19,7 @@ const companies = [
     description: "Premier technology institute specializing in practical, industry-ready skills for modern tech professionals.",
     programs: ["Data Science", "Cybersecurity", "DevOps", "Blockchain"],
     students: "12,000+",
-    color: "#737373",
+    color: "#fbbf24",
     bgImage: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800",
   },
   {
@@ -49,11 +49,11 @@ export function Companies() {
         {/* Section Header */}
         <div className={`text-center max-w-3xl mx-auto mb-16 reveal ${isVisible ? 'visible' : ''}`}>
           <div>
-            <span className="inline-block px-4 py-2 bg-white text-[#525252] rounded-full text-sm font-medium mb-4 shadow-sm border border-gray-200">
+            <span className="inline-block px-4 py-2 bg-white text-[#ca8a04] rounded-full text-sm font-medium mb-4 shadow-sm border border-gray-200">
               Learning Companies
             </span>
-            <h2 className="text-4xl md:text-5xl font-bold text-black mb-6">
-              Explore Top <span className="text-[#525252]">Programs</span>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              Explore Top <span className="text-[#ca8a04]">Programs</span>
             </h2>
             <p className="text-xl text-gray-600">
               Learn from industry-leading companies offering world-class structured programs
@@ -69,7 +69,7 @@ export function Companies() {
             return (
               <div
                 key={index}
-                className={`group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-gray-200 hover:border-[#525252]/30 ${isVisible ? 'animate-fade-in' : 'opacity-0'} ${delays[index]}`}
+                className={`group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-gray-200 hover:border-[#ca8a04]/30 ${isVisible ? 'animate-fade-in' : 'opacity-0'} ${delays[index]}`}
               >
                 {/* Background Image */}
                 <div className="relative h-48 overflow-hidden">
@@ -144,9 +144,9 @@ export function Companies() {
           <div className="grid md:grid-cols-3 gap-6">
             {additionalFields.map((field, index) => {
               const Icon = field.icon;
-              const colors = ["#525252", "#737373", "#000000"];
+              const colors = ["#ca8a04", "#fbbf24", "#000000"];
               return (
-                <div key={index} className="flex items-center space-x-4 p-4 rounded-xl bg-gray-50 hover:bg-[#525252]/5 transition-colors duration-300 border border-gray-200">
+                <div key={index} className="flex items-center space-x-4 p-4 rounded-xl bg-gray-50 hover:bg-[#ca8a04]/5 transition-colors duration-300 border border-gray-200">
                   <div
                     className="w-12 h-12 rounded-lg flex items-center justify-center shrink-0"
                     style={{ backgroundColor: colors[index] }}
@@ -165,7 +165,7 @@ export function Companies() {
 
         {/* CTA */}
         <div className="text-center mt-12 animate-fade-in animation-delay-700">
-          <button className="px-8 py-4 bg-[#525252] text-white rounded-xl hover:bg-[#a16207] hover:shadow-xl transition-all duration-300 font-medium active:scale-95 hover:scale-105">
+          <button className="px-8 py-4 bg-[#ca8a04] text-white rounded-xl hover:bg-[#a16207] hover:shadow-xl transition-all duration-300 font-medium active:scale-95 hover:scale-105">
             Browse All Programs
           </button>
         </div>

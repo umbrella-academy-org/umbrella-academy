@@ -21,7 +21,7 @@ export default function SessionTabs({ activeTab, onTabChange }: SessionTabsProps
             key={tab.id}
             onClick={() => onTabChange(tab.id)}
             className={`px-6 py-2.5 text-sm font-medium rounded-lg transition-all duration-300 ${activeTab === tab.id
-              ? 'bg-gray-600 text-white shadow-md'
+              ? 'bg-yellow-600 text-white shadow-md'
               : 'text-gray-500 hover:text-gray-900 hover:bg-gray-50'
               }`}
           >

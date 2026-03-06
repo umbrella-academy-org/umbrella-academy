@@ -21,7 +21,7 @@ export default function FormSelect({
         id={id}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent appearance-none bg-white text-black ${
+        className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent appearance-none bg-white text-gray-900 ${
           error ? 'border-gray-500' : 'border-gray-300'
         }`}
         required={required}

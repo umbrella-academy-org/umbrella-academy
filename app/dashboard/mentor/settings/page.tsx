@@ -24,7 +24,7 @@ export default function MentorSettingsPage() {
 
                         <div className="flex flex-col lg:flex-row gap-8">
                             {/* Settings Navigation */}
-                            <div className="w-full lg:w-64 flex-shrink-0">
+                            <div className="w-full lg:w-64 shrink-0">
                                 <nav className="flex flex-col gap-1">
                                     {[
                                         { id: 'account', label: 'Account Security', icon: <Lock className="w-4 h-4" /> },
@@ -35,7 +35,7 @@ export default function MentorSettingsPage() {
                                             key={item.id}
                                             onClick={() => setActiveSection(item.id)}
                                             className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all ${activeSection === item.id
-                                                ? 'bg-gray-600 text-white shadow-md'
+                                                ? 'bg-yellow-600 text-white shadow-md'
                                                 : 'text-gray-600 hover:bg-white hover:text-gray-900 border border-transparent hover:border-gray-100'
                                                 }`}
                                         >
@@ -62,7 +62,7 @@ export default function MentorSettingsPage() {
                                             <h3 className="text-lg font-semibold text-gray-900 mb-6">Security & Authentication</h3>
                                             <div className="p-6 bg-gray-50 rounded-2xl border border-gray-100">
                                                 <p className="text-sm font-medium text-gray-700 mb-4">You are currently logged in with an official academy mentor account.</p>
-                                                <button className="px-6 py-2 bg-gray-600 text-sm rounded-lg hover:bg-gray-700 shadow-md">
+                                                <button className="px-6 py-2 bg-yellow-600 text-sm rounded-lg hover:bg-yellow-700 shadow-md">
                                                     Change Official Password
                                                 </button>
                                             </div>
@@ -83,7 +83,7 @@ export default function MentorSettingsPage() {
                                                             <h4 className="text-sm font-semibold text-gray-900">{pref.title}</h4>
                                                             <p className="text-xs text-gray-500">{pref.desc}</p>
                                                         </div>
-                                                        <button className="w-12 h-6 rounded-full bg-gray-600 relative">
+                                                        <button className="w-12 h-6 rounded-full bg-yellow-600 relative">
                                                             <div className="absolute top-1 left-7 w-4 h-4 bg-white rounded-full" />
                                                         </button>
                                                     </div>

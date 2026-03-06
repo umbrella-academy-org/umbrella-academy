@@ -33,7 +33,7 @@ export default function UpcomingSessionsModal({ onClose }: UpcomingSessionsModal
   ];
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-yellow-600 bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4 max-h-[80vh] overflow-y-auto">
         {/* Modal Header */}
         <div className="flex items-center justify-between mb-6">
@@ -58,7 +58,7 @@ export default function UpcomingSessionsModal({ onClose }: UpcomingSessionsModal
             >
               <div className="flex items-start justify-between mb-3">
                 <div className="flex items-start gap-3 flex-1">
-                  <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center shrink-0">
                     <Calendar className="w-5 h-5 text-gray-600" />
                   </div>
                   <div className="flex-1">
@@ -89,7 +89,7 @@ export default function UpcomingSessionsModal({ onClose }: UpcomingSessionsModal
                   disabled={!session.canJoin}
                   className={`px-4 py-2 text-sm font-medium rounded transition-colors ${
                     session.canJoin
-                      ? 'bg-gray-600 text-white hover:bg-gray-700'
+                      ? 'bg-yellow-600 text-white hover:bg-yellow-700'
                       : 'bg-gray-100 text-gray-400 cursor-not-allowed'
                   }`}
                 >

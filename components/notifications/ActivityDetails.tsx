@@ -88,7 +88,7 @@ export default function ActivityDetails({ selectedActivity }: ActivityDetailsPro
           <span className="text-gray-400">→</span>
         </button>
         
-        <button className="w-full bg-gray-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-gray-700 transition-colors flex items-center justify-center gap-2">
+        <button className="w-full bg-yellow-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-yellow-700 transition-colors flex items-center justify-center gap-2">
           <Download className="w-4 h-4" />
           Download
         </button>

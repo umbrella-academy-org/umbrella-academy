@@ -53,7 +53,7 @@ export default function ChooseCoursePage() {
     return (
       <div className="flex h-screen items-center justify-center bg-white">
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-black border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <div className="w-16 h-16 border-4 border-yellow-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-gray-600">Loading courses...</p>
         </div>
       </div>
@@ -67,7 +67,7 @@ export default function ChooseCoursePage() {
       case 'Intermediate':
         return 'bg-gray-200 text-gray-800';
       case 'Advanced':
-        return 'bg-black text-white';
+        return 'bg-yellow-600 text-white';
       default:
         return 'bg-gray-100 text-gray-700';
     }
@@ -92,7 +92,7 @@ export default function ChooseCoursePage() {
           <div className="flex flex-col items-center justify-center flex-1">
             {/* Logo */}
             <div className="mb-8">
-              <div className="w-16 h-16 bg-black rounded-2xl flex items-center justify-center shadow-lg">
+              <div className="w-16 h-16 bg-yellow-600 rounded-2xl flex items-center justify-center shadow-lg">
                 <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" />
                 </svg>
@@ -118,7 +118,7 @@ export default function ChooseCoursePage() {
                       onClick={() => handleCourseSelect(course.id)}
                       className={`relative rounded-xl overflow-hidden cursor-pointer transition-all duration-300 ${
                         isSelected
-                          ? 'ring-4 ring-black shadow-2xl scale-[1.02]'
+                          ? 'ring-4 ring-yellow-600 shadow-2xl scale-[1.02]'
                           : 'ring-1 ring-gray-200 hover:ring-gray-300 hover:shadow-xl'
                       }`}
                     >
@@ -150,7 +150,7 @@ export default function ChooseCoursePage() {
                             {course.name}
                           </h3>
                           {isSelected && (
-                            <CheckCircle className="w-6 h-6 text-black shrink-0 ml-2" />
+                            <CheckCircle className="w-6 h-6 text-gray-900 shrink-0 ml-2" />
                           )}
                         </div>
 
@@ -180,17 +180,17 @@ export default function ChooseCoursePage() {
               <button
                 type="submit"
                 disabled={!selectedCourseId}
-                className="w-full bg-black text-white py-3 rounded-lg font-medium hover:bg-gray-900 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Continue to Payment
               </button>
 
               {/* Progress dots */}
               <div className="flex justify-center gap-2 pt-6">
-                <div className="w-2 h-2 bg-black/30 rounded-full"></div>
-                <div className="w-8 h-2 bg-black rounded-full"></div>
-                <div className="w-12 h-2 bg-black rounded-full shadow-lg"></div>
-                <div className="w-12 h-2 bg-black rounded-full shadow-lg"></div>
+                <div className="w-2 h-2 bg-yellow-600/30 rounded-full"></div>
+                <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
+                <div className="w-12 h-2 bg-yellow-600 rounded-full shadow-lg"></div>
+                <div className="w-12 h-2 bg-yellow-600 rounded-full shadow-lg"></div>
                 <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
               </div>
             </form>

@@ -212,7 +212,7 @@ export default function MentorTrainerApprovalsPage() {
                   placeholder="Search trainers..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600"
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600"
                 />
               </div>
               <div className="relative">
@@ -220,7 +220,7 @@ export default function MentorTrainerApprovalsPage() {
                 <select
                   value={statusFilter}
                   onChange={(e) => setStatusFilter(e.target.value)}
-                  className="pl-10 pr-8 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 bg-white"
+                  className="pl-10 pr-8 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 bg-white"
                 >
                   <option value="all">All Status</option>
                   <option value="pending">Pending</option>
@@ -270,7 +270,7 @@ export default function MentorTrainerApprovalsPage() {
                         {/* Trainer Info */}
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="flex items-center">
-                            <div className="flex-shrink-0 h-10 w-10">
+                            <div className="shrink-0 h-10 w-10">
                               <div className="h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center">
                                 <span className="text-sm font-medium text-gray-800">
                                   {trainer.name.split(' ').map(n => n[0]).join('')}
@@ -321,7 +321,7 @@ export default function MentorTrainerApprovalsPage() {
                           <div className="flex items-center justify-end gap-2">
                             <button
                               onClick={() => handleViewDetails(trainer.id)}
-                              className="bg-gray-600 p-1 hover:bg-gray-700 rounded px-4"
+                              className="bg-yellow-600 p-1 hover:bg-yellow-700 rounded px-4"
                               title="View Details"
                             >
                               View
@@ -330,7 +330,7 @@ export default function MentorTrainerApprovalsPage() {
 
                             <button
                               onClick={() => handleReject(trainer.id)}
-                              className="bg-gray-600 hover:bg-gray-900 px-4 py-1 rounded"
+                              className="bg-yellow-600 hover:bg-yellow-700 px-4 py-1 rounded"
                               title="Reject"
                             >
                               Reject
@@ -356,12 +356,12 @@ export default function MentorTrainerApprovalsPage() {
 
       {/* Details Modal */}
       {showDetailsModal && selectedTrainerData && (
-        <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50">
+        <div className="fixed inset-0 bg-yellow-600/80 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
             {/* Modal Header */}
             <div className="flex items-center justify-between p-6 border-b border-gray-200">
               <div className="flex items-center">
-                <div className="flex-shrink-0 h-12 w-12">
+                <div className="shrink-0 h-12 w-12">
                   <div className="h-12 w-12 rounded-full bg-gray-100 flex items-center justify-center">
                     <span className="text-lg font-medium text-gray-800">
                       {selectedTrainerData.name.split(' ').map(n => n[0]).join('')}
@@ -381,10 +381,10 @@ export default function MentorTrainerApprovalsPage() {
               </div>
               <div className='flex gap-4'>
                 <div className='flex gap-x-2'>
-                  <button className='bg-gray-600 px-4 py-1 rounded-lg hover:bg-gray-700'>
+                  <button className='bg-yellow-600 px-4 py-1 rounded-lg hover:bg-yellow-700'>
                     Approve
                   </button>
-                  <button className='bg-gray-600 px-4 py-1 rounded-lg hover:bg-gray-700'>
+                  <button className='bg-yellow-600 px-4 py-1 rounded-lg hover:bg-yellow-700'>
                     Reject
                   </button>
                 </div>
@@ -493,7 +493,7 @@ export default function MentorTrainerApprovalsPage() {
                     <div className="space-y-3">
                       {selectedTrainerData.previousRoles.map((role, index) => (
                         <div key={index} className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
-                          <div className="w-2 h-2 bg-gray-600 rounded-full mt-2"></div>
+                          <div className="w-2 h-2 bg-yellow-600 rounded-full mt-2"></div>
                           <span className="text-gray-700">{role}</span>
                         </div>
                       ))}
@@ -588,7 +588,7 @@ export default function MentorTrainerApprovalsPage() {
               </button>
               <button
                 onClick={() => handleApprove(selectedTrainerData.id)}
-                className="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
+                className="flex items-center gap-2 px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors"
               >
                 <CheckCircle className="w-4 h-4" />
                 Approve

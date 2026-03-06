@@ -94,10 +94,10 @@ export default function TrainingCapacity({ assignedStudents, maxCapacity, weekly
                   <div 
                     className={`h-2 rounded-full transition-all duration-1000 ease-out ${
                       day.sessions === day.capacity 
-                        ? 'bg-gradient-to-r from-gray-500 to-gray-600' 
+                        ? 'bg-linear-to-r from-gray-500 to-gray-600' 
                         : day.sessions > day.capacity * 0.7
-                          ? 'bg-gradient-to-r from-gray-500 to-gray-600'
-                          : 'bg-gradient-to-r from-gray-500 to-gray-600'
+                          ? 'bg-linear-to-r from-gray-500 to-gray-600'
+                          : 'bg-linear-to-r from-gray-500 to-gray-600'
                     }`}
                     style={{ 
                       width: `${(day.sessions / day.capacity) * 100}%`,
@@ -131,7 +131,7 @@ export default function TrainingCapacity({ assignedStudents, maxCapacity, weekly
         <button className="flex-1 px-3 py-2 border border-gray-300 text-gray-700 text-xs font-medium rounded-lg hover:bg-gray-50 transition-all duration-200 interactive-button">
           View Schedule
         </button>
-        <button className="flex-1 px-3 py-2 bg-gray-600 text-white text-xs font-medium rounded-lg hover:bg-gray-700 transition-all duration-200 interactive-button transform hover:scale-105 focus:ring-2 focus:ring-gray-300">
+        <button className="flex-1 px-3 py-2 bg-yellow-600 text-white text-xs font-medium rounded-lg hover:bg-yellow-700 transition-all duration-200 interactive-button transform hover:scale-105 focus:ring-2 focus:ring-gray-300">
           Add Session
         </button>
       </div>
@@ -141,15 +141,15 @@ export default function TrainingCapacity({ assignedStudents, maxCapacity, weekly
         <div className="flex items-center justify-between text-xs">
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-1">
-              <div className="w-2 h-2 bg-gray-500 rounded-full"></div>
+              <div className="w-2 h-2 bg-yellow-600 rounded-full"></div>
               <span className="text-gray-600">Available</span>
             </div>
             <div className="flex items-center gap-1">
-              <div className="w-2 h-2 bg-gray-500 rounded-full"></div>
+              <div className="w-2 h-2 bg-yellow-600 rounded-full"></div>
               <span className="text-gray-600">Busy</span>
             </div>
             <div className="flex items-center gap-1">
-              <div className="w-2 h-2 bg-gray-500 rounded-full"></div>
+              <div className="w-2 h-2 bg-yellow-600 rounded-full"></div>
               <span className="text-gray-600">Full</span>
             </div>
           </div>

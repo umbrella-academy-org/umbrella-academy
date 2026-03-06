@@ -111,7 +111,7 @@ export function BlogGrid() {
     return (
         <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
             <div ref={ref} className={`space-y-12 reveal ${isVisible ? 'visible' : ''}`}>
-                <h2 className="text-3xl font-black text-black tracking-tight">
+                <h2 className="text-3xl font-black text-gray-900 tracking-tight">
                     Recent blog posts
                 </h2>
 
@@ -128,7 +128,7 @@ export function BlogGrid() {
                 </div>
 
                 <div className="pt-12 flex justify-center">
-                    <button className="bg-black text-white px-8 py-3 rounded-lg font-black tracking-tight hover:bg-[#525252] transition-colors interactive-button">
+                    <button className="bg-yellow-600 text-white px-8 py-3 rounded-lg font-black tracking-tight hover:bg-[#ca8a04] transition-colors interactive-button">
                         Loading more...
                     </button>
                 </div>

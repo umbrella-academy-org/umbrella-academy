@@ -120,7 +120,7 @@ export default function MentorActivityFeed() {
                     >
                         {/* Student Avatar */}
                         <div className="relative">
-                            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform duration-500">
+                            <div className="w-12 h-12 rounded-full bg-linear-to-br from-gray-100 to-gray-200 flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform duration-500">
                                 <span className="text-gray-700 font-semibold text-sm ">{activity.student.initials}</span>
                             </div>
                             <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-white rounded-full flex items-center justify-center shadow-sm border border-gray-50 overflow-hidden">
@@ -149,17 +149,17 @@ export default function MentorActivityFeed() {
                             {selectedActivity === activity.id && (
                                 <div className="flex items-center gap-2 mt-4 animate-fade-in">
                                     {activity.type === 'roadmap' && (
-                                        <button className="px-4 py-2 bg-gray-600 text-white text-xs font-semibold   rounded-lg hover:bg-gray-700 shadow-lg shadow-gray-600/20 transition-all active:scale-95">
+                                        <button className="px-4 py-2 bg-yellow-600 text-white text-xs font-semibold   rounded-lg hover:bg-yellow-700 shadow-lg shadow-gray-600/20 transition-all active:scale-95">
                                             Approve Roadmap
                                         </button>
                                     )}
                                     {activity.type === 'session' && (
-                                        <button className="px-4 py-2 bg-gray-600 text-white text-xs font-semibold   rounded-lg hover:bg-gray-700 shadow-lg shadow-gray-600/20 transition-all active:scale-95">
+                                        <button className="px-4 py-2 bg-yellow-600 text-white text-xs font-semibold   rounded-lg hover:bg-yellow-700 shadow-lg shadow-gray-600/20 transition-all active:scale-95">
                                             Review Submission
                                         </button>
                                     )}
                                     {activity.type === 'sync' && (
-                                        <button className="px-4 py-2 bg-gray-900 text-white text-xs font-semibold   rounded-lg hover:bg-gray-800 shadow-lg shadow-gray-200 transition-all active:scale-95">
+                                        <button className="px-4 py-2 bg-black text-white text-xs font-semibold   rounded-lg hover:bg-gray-800 shadow-lg shadow-gray-200 transition-all active:scale-95">
                                             Schedule Meeting
                                         </button>
                                     )}

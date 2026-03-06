@@ -227,7 +227,7 @@ export default function RoadmapPhases({ onPhaseSelect, onLessonSelect, selectedP
                                     <ul className="text-xs text-gray-600 space-y-1">
                                       {session.objectives.map((objective, index) => (
                                         <li key={index} className="flex items-start gap-1">
-                                          <Target className="w-3 h-3 text-gray-400 mt-0.5 flex-shrink-0" />
+                                          <Target className="w-3 h-3 text-gray-400 mt-0.5 shrink-0" />
                                           {objective}
                                         </li>
                                       ))}

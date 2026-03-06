@@ -147,7 +147,7 @@ export default function MentorRoadmapApprovalsPage() {
                     {pendingRoadmaps.map((roadmap) => (
                       <div
                         key={roadmap.id}
-                        className={`p-4 cursor-pointer hover:bg-gray-50 transition-colors ${selectedRoadmap === roadmap.id ? 'bg-gray-50 border-r-4 border-gray-600' : ''
+                        className={`p-4 cursor-pointer hover:bg-gray-50 transition-colors ${selectedRoadmap === roadmap.id ? 'bg-gray-50 border-r-4 border-yellow-600' : ''
                           }`}
                         onClick={() => setSelectedRoadmap(roadmap.id)}
                       >
@@ -187,20 +187,20 @@ export default function MentorRoadmapApprovalsPage() {
                         <div className="flex items-center gap-2">
                           <button
                             onClick={() => handleApprove(selectedRoadmapData.id)}
-                            className="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
+                            className="flex items-center gap-2 px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors"
                           >
                             <CheckCircle className="w-4 h-4" />
                             Approve
                           </button>
                           <button
                             onClick={() => handleRequestChanges(selectedRoadmapData.id)}
-                            className="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
+                            className="flex items-center gap-2 px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors"
                           >
                             Request Changes
                           </button>
                           <button
                             onClick={() => handleReject(selectedRoadmapData.id)}
-                            className="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
+                            className="flex items-center gap-2 px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors"
                           >
                             <XCircle className="w-4 h-4" />
                             Reject
@@ -259,7 +259,7 @@ export default function MentorRoadmapApprovalsPage() {
                         {selectedRoadmapData.phases.map((phase, index) => (
                           <div key={phase.id} className="border border-gray-200 rounded-lg p-4">
                             <div className="flex items-start gap-4">
-                              <div className="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                              <div className="w-8 h-8 bg-yellow-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
                                 {index + 1}
                               </div>
                               <div className="flex-1">

@@ -72,7 +72,7 @@ export default function CreatePasswordPage() {
           <div className="flex flex-col items-center justify-center flex-1">
             {/* Logo */}
             <div className="mb-8">
-              <div className="w-16 h-16 bg-gray-600 rounded-2xl flex items-center justify-center">
+              <div className="w-16 h-16 bg-yellow-600 rounded-2xl flex items-center justify-center">
                 <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" />
                 </svg>
@@ -104,7 +104,7 @@ export default function CreatePasswordPage() {
                       setErrors(prev => ({ ...prev, password: '' }));
                     }}
                     placeholder="••••••••"
-                    className={`w-full px-4 py-3 pr-12 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${
+                    className={`w-full px-4 py-3 pr-12 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${
                       errors.password ? 'border-gray-500' : 'border-gray-300'
                     }`}
                     required
@@ -144,7 +144,7 @@ export default function CreatePasswordPage() {
                       setErrors(prev => ({ ...prev, confirmPassword: '' }));
                     }}
                     placeholder="••••••••"
-                    className={`w-full px-4 py-3 pr-12 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${
+                    className={`w-full px-4 py-3 pr-12 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${
                       errors.confirmPassword ? 'border-gray-500' : 'border-gray-300'
                     }`}
                     required
@@ -219,7 +219,7 @@ export default function CreatePasswordPage() {
 
               <button
                 type="submit"
-                className="w-full bg-black text-white py-3 rounded-lg font-medium hover:bg-gray-900 transition-colors"
+                className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-colors"
               >
                 Continue
               </button>

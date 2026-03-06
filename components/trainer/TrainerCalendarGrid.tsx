@@ -221,7 +221,7 @@ export default function TrainerCalendarGrid({
             ))}
           </div>
 
-          <button className="px-3 py-2 bg-gray-600 text-white text-sm font-medium rounded-lg hover:bg-gray-700 transition-all duration-200 interactive-button">
+          <button className="px-3 py-2 bg-yellow-600 text-white text-sm font-medium rounded-lg hover:bg-yellow-700 transition-all duration-200 interactive-button">
             <Plus className="w-4 h-4 mr-1" />
             Add Session
           </button>

@@ -103,7 +103,7 @@ export default function UpcomingSessions() {
                 <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-medium ${
                   session.type === 'group' 
                     ? 'bg-gray-500' 
-                    : 'bg-gradient-to-br from-gray-400 to-gray-600'
+                    : 'bg-linear-to-br from-gray-400 to-gray-600'
                 }`}>
                   {session.avatar}
                 </div>
@@ -173,12 +173,12 @@ export default function UpcomingSessions() {
             {/* Action Buttons */}
             <div className="flex gap-2 mt-3">
               {session.status === 'live' ? (
-                <button className="flex-1 px-3 py-1.5 bg-gray-600 text-white text-xs font-medium rounded hover:bg-gray-700 transition-colors">
+                <button className="flex-1 px-3 py-1.5 bg-yellow-600 text-white text-xs font-medium rounded hover:bg-yellow-700 transition-colors">
                   Join Live Session
                 </button>
               ) : (
                 <>
-                  <button className="flex-1 px-3 py-1.5 bg-gray-600 text-white text-xs font-medium rounded hover:bg-gray-700 transition-colors">
+                  <button className="flex-1 px-3 py-1.5 bg-yellow-600 text-white text-xs font-medium rounded hover:bg-yellow-700 transition-colors">
                     Start Session
                   </button>
                   <button className="px-3 py-1.5 border border-gray-300 text-gray-700 text-xs font-medium rounded hover:bg-gray-50 transition-colors">

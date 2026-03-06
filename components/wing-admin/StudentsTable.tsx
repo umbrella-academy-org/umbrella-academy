@@ -34,7 +34,7 @@ export default function StudentsTable({ students }: StudentsTableProps) {
       <div className="flex items-center">
         <div className="w-16 bg-gray-200 rounded-full h-2 mr-2">
           <div
-            className="bg-gray-600 h-2 rounded-full"
+            className="bg-yellow-600 h-2 rounded-full"
             style={{ width: `${student.progress}%` }}
           />
         </div>
@@ -94,7 +94,7 @@ export default function StudentsTable({ students }: StudentsTableProps) {
               <button className="px-3 py-1.5 text-xs font-medium text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
                 Send Message
               </button>
-              <button className="px-3 py-1.5 text-xs font-medium text-white bg-gray-600 rounded-lg hover:bg-gray-700 transition-colors">
+              <button className="px-3 py-1.5 text-xs font-medium text-white bg-yellow-600 rounded-lg hover:bg-yellow-700 transition-colors">
                 Suspend Selected
               </button>
             </div>

@@ -93,7 +93,7 @@ export default function LiveSessionNotifications() {
             >
               <div className="flex items-start justify-between mb-3">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-gray-600 rounded-lg flex items-center justify-center">
+                  <div className="w-10 h-10 bg-yellow-600 rounded-lg flex items-center justify-center">
                     <Video className="w-5 h-5 text-white" />
                   </div>
                   <div>
@@ -132,7 +132,7 @@ export default function LiveSessionNotifications() {
                 </div>
                 
                 {session.status === 'starting-soon' ? (
-                  <button className="flex items-center gap-2 px-3 py-2 bg-gray-600 text-white text-sm font-medium rounded-lg hover:bg-gray-700 transition-colors">
+                  <button className="flex items-center gap-2 px-3 py-2 bg-yellow-600 text-white text-sm font-medium rounded-lg hover:bg-yellow-700 transition-colors">
                     <Play className="w-4 h-4" />
                     Start Session
                   </button>
@@ -165,7 +165,7 @@ export default function LiveSessionNotifications() {
               className="flex items-start gap-3 p-3 hover:bg-gray-50 rounded-lg transition-colors animate-fade-in"
               style={{ animationDelay: `${index * 50}ms` }}
             >
-              <div className="flex-shrink-0 mt-1">
+              <div className="shrink-0 mt-1">
                 {notification.icon}
               </div>
               <div className="flex-1 min-w-0">

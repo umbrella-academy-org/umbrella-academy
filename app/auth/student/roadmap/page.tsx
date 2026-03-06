@@ -114,7 +114,7 @@ export default function CreateRoadmapPage() {
           <div className="flex flex-col items-center flex-1">
             {/* Logo */}
             <div className="mb-8">
-              <div className="w-16 h-16 bg-gray-600 rounded-2xl flex items-center justify-center">
+              <div className="w-16 h-16 bg-yellow-600 rounded-2xl flex items-center justify-center">
                 <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" />
                 </svg>
@@ -137,9 +137,9 @@ export default function CreateRoadmapPage() {
             {/* Progress dots */}
             <div className="flex justify-center gap-2 py-8">
               {[1, 2, 3, 4, 5, 6].map((i) => (
-                <div key={i} className="w-8 h-2 bg-gray-600 rounded-full"></div>
+                <div key={i} className="w-8 h-2 bg-yellow-600 rounded-full"></div>
               ))}
-              <div className="w-8 h-2 bg-gray-600 rounded-full"></div>
+              <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
             </div>
           </div>
         </div>

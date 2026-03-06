@@ -23,7 +23,7 @@ export default function CurrentPhase({ activeRoadmap }: CurrentPhaseProps) {
           <p className="text-xs text-gray-500 mb-4">Start a roadmap to see your current phase</p>
           <button 
             onClick={() => navigate('/post-signup/roadmap')}
-            className="px-3 py-2 bg-gray-600 text-white text-xs font-medium rounded-lg hover:bg-gray-700 transition-colors"
+            className="px-3 py-2 bg-yellow-600 text-white text-xs font-medium rounded-lg hover:bg-yellow-700 transition-colors"
           >
             Browse Roadmaps
           </button>
@@ -89,7 +89,7 @@ export default function CurrentPhase({ activeRoadmap }: CurrentPhaseProps) {
         
         <div className="w-full bg-gray-200 rounded-full h-2 mt-3 overflow-hidden">
           <div 
-            className="bg-gradient-to-r from-gray-500 to-gray-600 h-2 rounded-full transition-all duration-1000 ease-out relative"
+            className="bg-linear-to-r from-gray-500 to-gray-600 h-2 rounded-full transition-all duration-1000 ease-out relative"
             style={{ width: `${phaseProgress}%` }}
           >
             <div className="absolute inset-0 bg-white opacity-30 animate-shimmer"></div>
@@ -112,7 +112,7 @@ export default function CurrentPhase({ activeRoadmap }: CurrentPhaseProps) {
         {/* Action Button */}
         <button 
           onClick={() => navigate('/post-signup/roadmap')}
-          className="w-full mt-3 px-3 py-2 bg-gray-600 text-white text-xs font-medium rounded-lg hover:bg-gray-700 transition-all duration-200 interactive-button transform hover:scale-105 focus:ring-2 focus:ring-gray-300"
+          className="w-full mt-3 px-3 py-2 bg-yellow-600 text-white text-xs font-medium rounded-lg hover:bg-yellow-700 transition-all duration-200 interactive-button transform hover:scale-105 focus:ring-2 focus:ring-gray-300"
         >
           View Phase Details
         </button>

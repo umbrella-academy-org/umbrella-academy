@@ -51,7 +51,7 @@ export default function TrainerSessionStats() {
       <div className="flex items-center justify-between mb-6 px-1">
         <h2 className="text-lg font-bold text-gray-900  ">Session Performance</h2>
         <div className="flex items-center gap-2">
-          <select className="text-[10px] font-bold    bg-white border border-gray-100 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-600 shadow-sm">
+          <select className="text-[10px] font-bold    bg-white border border-gray-100 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-600 shadow-sm">
             <option>Current Week</option>
             <option>This Month</option>
             <option>Last Quarter</option>

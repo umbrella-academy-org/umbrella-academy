@@ -73,7 +73,7 @@ export default function ForgotPasswordPage() {
                   setError('');
                 }}
                 placeholder="Enter your email"
-                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${error ? 'border-gray-500' : 'border-gray-300'
+                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${error ? 'border-gray-500' : 'border-gray-300'
                   }`}
                 required
               />
@@ -82,7 +82,7 @@ export default function ForgotPasswordPage() {
 
             <button
               type="submit"
-              className="w-full bg-black text-white py-3 rounded-lg font-medium hover:bg-gray-900 transition-colors"
+              className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-colors"
             >
               Continue
             </button>

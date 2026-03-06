@@ -43,11 +43,11 @@ export default function MentorWalletBalance() {
             </span>
           </div>
           <div className="w-full bg-gray-200 rounded-full h-2">
-            <div className="bg-gray-600 h-2 rounded-full" style={{ width: '90%' }}></div>
+            <div className="bg-yellow-600 h-2 rounded-full" style={{ width: '90%' }}></div>
           </div>
         </div>
 
-        <button className="w-full bg-gray-600 text-white py-3 rounded-lg font-medium hover:bg-gray-700 transition-colors">
+        <button className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-colors">
           Request Withdrawal
         </button>
       </div>

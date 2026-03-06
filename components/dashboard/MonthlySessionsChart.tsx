@@ -145,7 +145,7 @@ export default function MonthlySessionsChart({ userType }: MonthlySessionsChartP
                   {/* Bar */}
                   <div className="flex justify-center mb-2 w-full">
                     <div
-                      className="bg-gray-500 rounded-t-sm transition-all duration-300 hover:bg-gray-600"
+                      className="bg-yellow-200 rounded-t-sm transition-all duration-300 hover:bg-yellow-600"
                       style={{
                         width: '16px',
                         height: `${Math.max((data.sessions / maxSessions) * 100, 8)}px`
@@ -170,7 +170,7 @@ export default function MonthlySessionsChart({ userType }: MonthlySessionsChartP
         {/* Legend and Date */}
         <div className="flex items-center justify-between mt-4 lg:mt-6">
           <div className="flex items-center gap-2">
-            <div className="w-2 h-2 bg-gray-500 rounded-full"></div>
+            <div className="w-2 h-2 bg-yellow-600 rounded-full"></div>
             <span className="text-xs text-gray-600">Session Completed</span>
           </div>
           <span className="text-xs text-gray-500">January</span>

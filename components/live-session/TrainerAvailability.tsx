@@ -79,7 +79,7 @@ export default function TrainerAvailability({ onBookSession }: TrainerAvailabili
             value={selectedDate}
             onChange={(e) => setSelectedDate(e.target.value)}
             min={new Date().toISOString().split('T')[0]}
-            className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600"
+            className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600"
           />
         </div>
       </div>
@@ -94,7 +94,7 @@ export default function TrainerAvailability({ onBookSession }: TrainerAvailabili
             <div
               key={trainer.id}
               className={`p-4 border rounded-lg cursor-pointer transition-colors ${selectedTrainer === trainer.id
-                  ? 'border-gray-600 bg-gray-50'
+                  ? 'border-yellow-600 bg-gray-50'
                   : 'border-gray-200 hover:border-gray-300'
                 }`}
               onClick={() => setSelectedTrainer(trainer.id)}
@@ -132,7 +132,7 @@ export default function TrainerAvailability({ onBookSession }: TrainerAvailabili
                 className={`p-3 border rounded-lg text-sm font-medium transition-colors ${!slot.available
                     ? 'border-gray-200 bg-gray-100 text-gray-400 cursor-not-allowed'
                     : selectedTimeSlot === slot.id
-                      ? 'border-gray-600 bg-gray-50 text-gray-600'
+                      ? 'border-yellow-600 bg-gray-50 text-gray-600'
                       : 'border-gray-200 hover:border-gray-300 text-gray-700'
                   }`}
               >
@@ -150,7 +150,7 @@ export default function TrainerAvailability({ onBookSession }: TrainerAvailabili
       {selectedTrainer && selectedTimeSlot && (
         <button
           onClick={handleBookSession}
-          className="w-full bg-gray-600 text-white py-3 rounded-lg font-medium hover:bg-gray-700 transition-colors flex items-center justify-center gap-2"
+          className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-colors flex items-center justify-center gap-2"
         >
           <Video className="w-4 h-4" />
           Book Live Session

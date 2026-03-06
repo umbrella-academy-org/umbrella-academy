@@ -70,9 +70,9 @@ export default function PaymentPage() {
 
               {/* Progress dots */}
               <div className="flex justify-center gap-2 pt-6">
-                <div className="w-8 h-2 bg-gray-600 rounded-full"></div>
-                <div className="w-8 h-2 bg-gray-600 rounded-full"></div>
-                <div className="w-8 h-2 bg-gray-600 rounded-full"></div>
+                <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
+                <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
+                <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
                 <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
                 <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
               </div>

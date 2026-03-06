@@ -47,7 +47,7 @@ export default function PaymentPage() {
     return (
       <div className="flex h-screen items-center justify-center bg-white">
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-black border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <div className="w-16 h-16 border-4 border-yellow-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-gray-600">Loading payment details...</p>
         </div>
       </div>
@@ -74,7 +74,7 @@ export default function PaymentPage() {
             <div className="text-center">
               {/* Logo */}
               <div className="mb-8">
-                <div className="w-16 h-16 bg-gray-600 rounded-2xl flex items-center justify-center mx-auto">
+                <div className="w-16 h-16 bg-yellow-600 rounded-2xl flex items-center justify-center mx-auto">
                   <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" />
                   </svg>
@@ -134,11 +134,11 @@ export default function PaymentPage() {
 
               {/* Progress dots */}
               <div className="flex justify-center gap-2 pt-6">
-                <div className="w-2 h-2 bg-black/30 rounded-full"></div>
-                <div className="w-8 h-2 bg-black rounded-full"></div>
-                <div className="w-12 h-2 bg-black rounded-full shadow-lg"></div>
-                <div className="w-12 h-2 bg-black rounded-full shadow-lg"></div>
-                <div className="w-12 h-2 bg-black rounded-full shadow-lg"></div>
+                <div className="w-2 h-2 bg-yellow-600/30 rounded-full"></div>
+                <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
+                <div className="w-12 h-2 bg-yellow-600 rounded-full shadow-lg"></div>
+                <div className="w-12 h-2 bg-yellow-600 rounded-full shadow-lg"></div>
+                <div className="w-12 h-2 bg-yellow-600 rounded-full shadow-lg"></div>
               </div>
 
               {/* Footer */}

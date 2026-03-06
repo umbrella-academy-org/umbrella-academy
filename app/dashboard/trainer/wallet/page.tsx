@@ -105,7 +105,7 @@ export default function TrainerWalletPage() {
 
             {/* Balance Cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-              <div className="bg-gradient-to-br from-gray-500 to-gray-600 rounded-lg p-6 text-white">
+              <div className="bg-linear-to-br from-gray-500 to-gray-600 rounded-lg p-6 text-white">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-lg font-semibold">Current Balance</h3>
                   <DollarSign className="w-8 h-8 opacity-80" />
@@ -140,12 +140,12 @@ export default function TrainerWalletPage() {
                   <h3 className="text-lg font-semibold text-gray-900">Withdrawal</h3>
                   <p className="text-sm text-gray-600">Next payout in 5 days (Jan 25, 2026)</p>
                 </div>
-                <button className="px-6 py-2.5 bg-gray-600 text-white rounded-lg font-medium hover:bg-gray-700 transition-colors">
+                <button className="px-6 py-2.5 bg-yellow-600 text-white rounded-lg font-medium hover:bg-yellow-700 transition-colors">
                   Request Withdrawal
                 </button>
               </div>
               <div className="w-full bg-gray-200 rounded-full h-2">
-                <div className="bg-gray-600 h-2 rounded-full" style={{ width: '83%' }}></div>
+                <div className="bg-yellow-600 h-2 rounded-full" style={{ width: '83%' }}></div>
               </div>
             </div>
 

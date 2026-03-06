@@ -186,7 +186,7 @@ export default function AssignmentList({ activeTab }: AssignmentListProps) {
                       <Eye className="w-4 h-4" />
                       Review
                     </button>
-                    <button className="flex items-center gap-1 px-3 py-2 text-sm text-white bg-gray-600 rounded-lg hover:bg-gray-700 transition-colors">
+                    <button className="flex items-center gap-1 px-3 py-2 text-sm text-white bg-yellow-600 rounded-lg hover:bg-yellow-700 transition-colors">
                       <CheckCircle className="w-4 h-4" />
                       Grade
                     </button>
@@ -213,7 +213,7 @@ export default function AssignmentList({ activeTab }: AssignmentListProps) {
                       <Eye className="w-4 h-4" />
                       Edit
                     </button>
-                    <button className="flex items-center gap-1 px-3 py-2 text-sm text-white bg-gray-600 rounded-lg hover:bg-gray-700 transition-colors">
+                    <button className="flex items-center gap-1 px-3 py-2 text-sm text-white bg-yellow-600 rounded-lg hover:bg-yellow-700 transition-colors">
                       Publish
                     </button>
                   </>
@@ -229,7 +229,7 @@ export default function AssignmentList({ activeTab }: AssignmentListProps) {
                   <span className="text-gray-600">Priority: Normal</span>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div className="bg-gray-600 h-2 rounded-full w-1/3" />
+                  <div className="bg-yellow-600 h-2 rounded-full w-1/3" />
                 </div>
               </div>
             )}

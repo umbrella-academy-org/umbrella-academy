@@ -151,7 +151,7 @@ export default function LiveSessionDetails({ selectedPhaseId, selectedSessionId 
           onClick={() => setActiveTab('upcoming')}
           className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
             activeTab === 'upcoming'
-              ? 'border-gray-600 text-gray-600'
+              ? 'border-yellow-600 text-gray-600'
               : 'border-transparent text-gray-500 hover:text-gray-700'
           }`}
         >
@@ -161,7 +161,7 @@ export default function LiveSessionDetails({ selectedPhaseId, selectedSessionId 
           onClick={() => setActiveTab('completed')}
           className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
             activeTab === 'completed'
-              ? 'border-gray-600 text-gray-600'
+              ? 'border-yellow-600 text-gray-600'
               : 'border-transparent text-gray-500 hover:text-gray-700'
           }`}
         >
@@ -171,7 +171,7 @@ export default function LiveSessionDetails({ selectedPhaseId, selectedSessionId 
           onClick={() => setActiveTab('cancelled')}
           className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
             activeTab === 'cancelled'
-              ? 'border-gray-600 text-gray-600'
+              ? 'border-yellow-600 text-gray-600'
               : 'border-transparent text-gray-500 hover:text-gray-700'
           }`}
         >
@@ -220,13 +220,13 @@ export default function LiveSessionDetails({ selectedPhaseId, selectedSessionId 
                     {session.status}
                   </span>
                   {session.status === 'scheduled' && session.meetingLink && (
-                    <button className="flex items-center gap-1 px-3 py-1.5 bg-gray-600 text-white text-xs font-medium rounded-lg hover:bg-gray-700 transition-colors">
+                    <button className="flex items-center gap-1 px-3 py-1.5 bg-yellow-600 text-white text-xs font-medium rounded-lg hover:bg-yellow-700 transition-colors">
                       <ExternalLink className="w-3 h-3" />
                       Join
                     </button>
                   )}
                   {session.status === 'completed' && session.recordingUrl && (
-                    <button className="flex items-center gap-1 px-3 py-1.5 bg-gray-600 text-white text-xs font-medium rounded-lg hover:bg-gray-700 transition-colors">
+                    <button className="flex items-center gap-1 px-3 py-1.5 bg-yellow-600 text-white text-xs font-medium rounded-lg hover:bg-yellow-700 transition-colors">
                       <Play className="w-3 h-3" />
                       Recording
                     </button>
@@ -256,7 +256,7 @@ export default function LiveSessionDetails({ selectedPhaseId, selectedSessionId 
               {/* Trainer Info */}
               <div className="border-t border-gray-100 pt-3 mt-3">
                 <div className="flex items-center gap-2">
-                  <div className="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center">
+                  <div className="w-6 h-6 bg-yellow-600 rounded-full flex items-center justify-center">
                     <span className="text-xs font-medium text-white">
                       {session.trainerName.charAt(0)}
                     </span>

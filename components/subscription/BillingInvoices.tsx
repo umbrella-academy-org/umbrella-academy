@@ -107,7 +107,7 @@ export default function BillingInvoices() {
               <tr key={invoice.id} className="border-b border-gray-100 hover:bg-gray-50">
                 <td className="py-4 px-4">
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-gray-100 rounded flex items-center justify-center flex-shrink-0">
+                    <div className="w-8 h-8 bg-gray-100 rounded flex items-center justify-center shrink-0">
                       <FileText className="w-4 h-4 text-gray-600" />
                     </div>
                     <span className="text-sm text-gray-900">{invoice.number}</span>

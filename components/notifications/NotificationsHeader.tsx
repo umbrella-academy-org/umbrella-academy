@@ -10,7 +10,7 @@ export default function NotificationsHeader() {
         <p className="text-gray-600 mt-1">Manage your mentorship sessions, deadlines, and learning activities in one place.</p>
       </div>
       
-      <button className="bg-gray-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-gray-700 transition-colors flex items-center gap-2">
+      <button className="bg-yellow-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-yellow-700 transition-colors flex items-center gap-2">
         <Plus className="w-4 h-4" />
         Submit Assignment
       </button>

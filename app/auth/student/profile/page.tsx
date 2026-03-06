@@ -94,7 +94,7 @@ export default function ProfilePage() {
           <div className="flex flex-col items-center justify-center flex-1">
             {/* Logo */}
             <div className="mb-8">
-              <div className="w-16 h-16 bg-gray-600 rounded-2xl flex items-center justify-center">
+              <div className="w-16 h-16 bg-yellow-600 rounded-2xl flex items-center justify-center">
                 <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" />
                 </svg>
@@ -123,7 +123,7 @@ export default function ProfilePage() {
                     value={formData.firstName}
                     onChange={(e) => handleChange('firstName', e.target.value)}
                     placeholder="eg. John"
-                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${errors.firstName ? 'border-gray-500' : 'border-gray-300'
+                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${errors.firstName ? 'border-gray-500' : 'border-gray-300'
                       }`}
                     required
                   />
@@ -139,7 +139,7 @@ export default function ProfilePage() {
                     value={formData.lastName}
                     onChange={(e) => handleChange('lastName', e.target.value)}
                     placeholder="eg. Doe"
-                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${errors.lastName ? 'border-gray-500' : 'border-gray-300'
+                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${errors.lastName ? 'border-gray-500' : 'border-gray-300'
                       }`}
                     required
                   />
@@ -157,7 +157,7 @@ export default function ProfilePage() {
                     id="gender"
                     value={formData.gender}
                     onChange={(e) => handleChange('gender', e.target.value)}
-                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent appearance-none bg-white text-gray-900 ${errors.gender ? 'border-gray-500' : 'border-gray-300'
+                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white text-gray-900 ${errors.gender ? 'border-gray-500' : 'border-gray-300'
                       }`}
                     required
                   >
@@ -179,7 +179,7 @@ export default function ProfilePage() {
                     value={formData.dateOfBirth}
                     onChange={(e) => handleChange('dateOfBirth', e.target.value)}
                     placeholder="DD / MM / YY"
-                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 ${errors.dateOfBirth ? 'border-gray-500' : 'border-gray-300'
+                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 ${errors.dateOfBirth ? 'border-gray-500' : 'border-gray-300'
                       }`}
                     required
                   />
@@ -198,7 +198,7 @@ export default function ProfilePage() {
                   placeholder="eg. johndoe@example.com"
                   value={formData.email}
                   onChange={(e) => handleChange('email', e.target.value)}
-                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent appearance-none bg-white text-gray-900 ${errors.email ? 'border-gray-500' : 'border-gray-300'
+                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white text-gray-900 ${errors.email ? 'border-gray-500' : 'border-gray-300'
                     }`}
                   required
                 />
@@ -214,7 +214,7 @@ export default function ProfilePage() {
                   <select
                     value={formData.phoneCode}
                     onChange={(e) => handleChange('phoneCode', e.target.value)}
-                    className="w-24 px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent appearance-none bg-white text-gray-900"
+                    className="w-24 px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent appearance-none bg-white text-gray-900"
                   >
                     <option value="+250">+250</option>
                     <option value="+1">+1</option>
@@ -229,7 +229,7 @@ export default function ProfilePage() {
                       value={formData.phoneNumber}
                       onChange={(e) => handleChange('phoneNumber', e.target.value)}
                       placeholder="7XXX-XXX-XXX"
-                      className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${errors.phoneNumber ? 'border-gray-500' : 'border-gray-300'
+                      className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${errors.phoneNumber ? 'border-gray-500' : 'border-gray-300'
                         }`}
                       required
                     />
@@ -246,7 +246,7 @@ export default function ProfilePage() {
                   type="button"
                   onClick={() => setIsOpen(!isOpen)}
                   className={`w-full flex items-center justify-between p-2 border rounded-lg transition-all ${selectedLevel
-                      ? 'border-black bg-gray-50'
+                      ? 'border-yellow-600 bg-gray-50'
                       : 'border-gray-200 bg-white hover:border-gray-300'
                     }`}
                 >
@@ -258,7 +258,7 @@ export default function ProfilePage() {
                           const Icon = selected?.icon || GraduationCap;
                           return (
                             <>
-                              <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-black text-white">
+                              <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-yellow-600 text-white">
                                 <Icon className="w-5 h-5" />
                               </div>
                               <span className="text-sm font-medium text-gray-900">{selectedLevel}</span>
@@ -295,7 +295,7 @@ export default function ProfilePage() {
                             } ${index !== educationLevels.length - 1 ? 'border-b border-gray-100' : ''}`}
                         >
                           <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-colors ${selectedLevel === level.value
-                              ? 'bg-black text-white'
+                              ? 'bg-yellow-600 text-white'
                               : 'bg-gray-100 text-gray-400'
                             }`}>
                             <Icon className="w-5 h-5" />
@@ -316,14 +316,14 @@ export default function ProfilePage() {
 
               <button
                 type="submit"
-                className="w-full bg-black text-white py-3 rounded-lg font-medium hover:bg-gray-900 transition-colors"
+                className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-colors"
               >
                 Continue
               </button>
 
               {/* Progress dots */}
               <div className="flex justify-center gap-2 pt-4">
-                <div className="w-8 h-2 bg-gray-600 rounded-full"></div>
+                <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
                 <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
                 <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
                 <div className="w-2 h-2 bg-gray-300 rounded-full"></div>

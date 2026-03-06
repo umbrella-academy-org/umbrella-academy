@@ -112,7 +112,7 @@ export default function CoursesCalendar() {
                 <button
                   className={`w-full h-full text-xs rounded transition-colors ${
                     isToday(date)
-                      ? 'bg-gray-600 text-white font-medium'
+                      ? 'bg-yellow-600 text-white font-medium'
                       : hasEvent(date)
                         ? 'bg-gray-100 text-gray-800 font-medium'
                         : 'text-gray-700 hover:bg-gray-100'

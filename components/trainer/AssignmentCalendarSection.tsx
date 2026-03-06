@@ -153,7 +153,7 @@ export default function AssignmentCalendarSection() {
                     <button
                       className={`w-full h-full text-xs rounded transition-colors ${
                         isToday(date)
-                          ? 'bg-gray-600 text-white font-medium'
+                          ? 'bg-yellow-600 text-white font-medium'
                           : hasAssignment(date)
                             ? 'bg-gray-100 text-gray-800 font-medium'
                             : 'text-gray-700 hover:bg-gray-100'
@@ -229,7 +229,7 @@ export default function AssignmentCalendarSection() {
                     <Eye className="w-4 h-4" />
                     View Details
                   </button>
-                  <button className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors">
+                  <button className="px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors">
                     Submissions
                   </button>
                 </div>

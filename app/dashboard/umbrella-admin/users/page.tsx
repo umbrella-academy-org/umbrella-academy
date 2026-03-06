@@ -172,7 +172,7 @@ export default function UmbrellaAdminUsersPage() {
                   <h1 className="text-2xl font-semibold text-gray-900 mb-2">User Management</h1>
                   <p className="text-gray-600">Manage all users across the system</p>
                 </div>
-                <button className="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-lg font-medium hover:bg-gray-700 transition-colors">
+                <button className="flex items-center gap-2 px-4 py-2 bg-yellow-600 text-white rounded-lg font-medium hover:bg-yellow-700 transition-colors">
                   <Plus className="w-4 h-4" />
                   Add User
                 </button>
@@ -231,7 +231,7 @@ export default function UmbrellaAdminUsersPage() {
                   key={tab.key}
                   onClick={() => setSelectedTab(tab.key as any)}
                   className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${selectedTab === tab.key
-                    ? 'border-gray-600 text-gray-600'
+                    ? 'border-yellow-600 text-gray-600'
                     : 'border-transparent text-gray-500 hover:text-gray-700'
                     }`}
                 >

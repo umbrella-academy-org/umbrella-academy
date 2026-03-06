@@ -37,10 +37,10 @@ export default function StudentProfilePage() {
         totalHours: 142,
         engagementScore: 88,
         skills: [
-            { name: 'React Architecture', level: 'Advanced', color: 'bg-gray-500' },
-            { name: 'Node.js Systems', level: 'Intermediate', color: 'bg-gray-600' },
-            { name: 'TypeScript', level: 'Intermediate', color: 'bg-gray-600' },
-            { name: 'UI/UX Principles', level: 'Advanced', color: 'bg-gray-500' },
+            { name: 'React Architecture', level: 'Advanced', color: 'bg-yellow-600' },
+            { name: 'Node.js Systems', level: 'Intermediate', color: 'bg-yellow-600' },
+            { name: 'TypeScript', level: 'Intermediate', color: 'bg-yellow-600' },
+            { name: 'UI/UX Principles', level: 'Advanced', color: 'bg-yellow-600' },
         ],
         liveRoadmap: [
             { title: 'Core JavaScript', status: 'Completed', date: 'Oct 2024' },
@@ -64,7 +64,7 @@ export default function StudentProfilePage() {
                                 fill
                                 className="object-cover opacity-90"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-r from-gray-900/40 to-transparent" />
+                            <div className="absolute inset-0 bg-linear-to-r from-gray-900/40 to-transparent" />
                             <div className="absolute top-4 right-4">
                                 <button className="p-2 bg-white/20 backdrop-blur-md rounded-lg text-white hover:bg-white/30 transition-all border border-white/20">
                                     <Camera className="w-5 h-5" />
@@ -79,12 +79,12 @@ export default function StudentProfilePage() {
                                     {user?.avatar ? (
                                         <Image src={user.avatar} alt="Avatar" width={128} height={128} className="w-full h-full object-cover rounded-lg" />
                                     ) : (
-                                        <div className="w-full h-full bg-gradient-to-br from-gray-400 to-gray-600 flex items-center justify-center text-white text-4xl font-black rounded-lg">
+                                        <div className="w-full h-full bg-linear-to-br from-yellow-500 to-yellow-600 flex items-center justify-center text-white text-4xl font-black rounded-lg">
                                             {profileData.name.charAt(0)}
                                         </div>
                                     )}
                                 </div>
-                                <div className="absolute bottom-2 right-2 w-4 h-4 bg-gray-500 border-2 border-white rounded-full" />
+                                <div className="absolute bottom-2 right-2 w-4 h-4 bg-yellow-600 border-2 border-white rounded-full" />
                             </div>
 
                             <div className="flex-1 pb-2">
@@ -97,7 +97,7 @@ export default function StudentProfilePage() {
                                         </div>
                                     </div>
                                     <div className="flex items-center gap-3">
-                                        <button className="px-5 py-2.5 bg-gray-600 text-white font-bold rounded-lg hover:bg-gray-700 transition-all shadow-md active:scale-95 text-sm">
+                                        <button className="px-5 py-2.5 bg-yellow-600 text-white font-bold rounded-lg hover:bg-yellow-700 transition-all shadow-md active:scale-95 text-sm">
                                             Edit Details
                                         </button>
                                         <button className="p-2.5 bg-white border border-gray-200 text-gray-600 rounded-lg hover:bg-gray-50 shadow-sm transition-all">
@@ -111,10 +111,10 @@ export default function StudentProfilePage() {
 
                     {/* Stats Grid - Rounded LG */}
                     <div className="max-w-[1400px] mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6 mt-10">
-                        <SimpleStat icon={<Video className="w-5 h-5" />} label="Live Sessions" value={profileData.sessionsAttended} color="text-gray-600" />
-                        <SimpleStat icon={<Users className="w-5 h-5" />} label="Attendance" value={profileData.attendanceRate} color="text-gray-600" />
-                        <SimpleStat icon={<Clock className="w-5 h-5" />} label="Live Hours" value={profileData.totalHours} color="text-gray-600" />
-                        <SimpleStat icon={<TrendingUp className="w-5 h-5" />} label="Engagement" value={`${profileData.engagementScore}%`} color="text-gray-600" />
+                        <SimpleStat icon={<Video className="w-5 h-5" />} label="Live Sessions" value={profileData.sessionsAttended} color="text-yellow-600" />
+                        <SimpleStat icon={<Users className="w-5 h-5" />} label="Attendance" value={profileData.attendanceRate} color="text-yellow-600" />
+                        <SimpleStat icon={<Clock className="w-5 h-5" />} label="Live Hours" value={profileData.totalHours} color="text-yellow-600" />
+                        <SimpleStat icon={<TrendingUp className="w-5 h-5" />} label="Engagement" value={`${profileData.engagementScore}%`} color="text-yellow-600" />
                     </div>
 
                     <div className="max-w-[1400px] mx-auto p-6 grid grid-cols-1 lg:grid-cols-3 gap-8 pb-20">
@@ -208,7 +208,7 @@ export default function StudentProfilePage() {
                             </div>
 
                             {/* Preferences Recap */}
-                            <div className="bg-gray-900 rounded-lg p-8 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
+                            <div className="bg-black rounded-lg p-8 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
                                 <div className="space-y-2">
                                     <h4 className="text-lg font-bold">Trainee Academic Preferences</h4>
                                     <p className="text-gray-400 text-sm font-medium">Your current session availability and learning style</p>

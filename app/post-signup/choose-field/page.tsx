@@ -162,12 +162,12 @@ export default function ChooseFieldPage() {
                       <div
                         key={field.id}
                         className={`border rounded-lg transition-all duration-300 overflow-hidden ${isSelected
-                          ? 'border-gray-600 bg-gray-50 shadow-md ring-1 ring-gray-600/20'
+                          ? 'border-yellow-600 bg-gray-50 shadow-md ring-1 ring-gray-600/20'
                           : 'border-gray-200 bg-white hover:border-gray-300'
                           }`}
                       >
                         <div className="p-5 flex items-center gap-5">
-                          <div className={`w-14 h-14 rounded-lg flex items-center justify-center text-2xl shadow-sm transition-all ${isSelected ? 'bg-gray-600 text-white' : 'bg-gray-50 text-gray-400'}`}>
+                          <div className={`w-14 h-14 rounded-lg flex items-center justify-center text-2xl shadow-sm transition-all ${isSelected ? 'bg-yellow-600 text-white' : 'bg-gray-50 text-gray-400'}`}>
                             {field.icon}
                           </div>
 
@@ -176,7 +176,7 @@ export default function ChooseFieldPage() {
                               <h3 className={`text-sm font-semibold truncate ${isSelected ? 'text-gray-900' : 'text-gray-700'}`}>
                                 {field.title}
                               </h3>
-                              {isSelected && <CheckCircle className="w-5 h-5 text-gray-600" />}
+                              {isSelected && <CheckCircle className="w-5 h-5 text-yellow-600" />}
                             </div>
 
                             <div className="flex items-center justify-between">
@@ -195,7 +195,7 @@ export default function ChooseFieldPage() {
                                   type="button"
                                   onClick={() => handleFieldSelect(field.id)}
                                   className={`px-4 py-1.5 rounded text-xs font-black  transition-all ${isSelected
-                                    ? 'bg-gray-600 text-white shadow-lg'
+                                    ? 'bg-yellow-600 text-white shadow-lg'
                                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
                                 >
                                   {isSelected ? 'Selected' : 'Select'}
@@ -220,15 +220,15 @@ export default function ChooseFieldPage() {
 
                 <button
                   type="submit"
-                  className="w-full bg-gray-600 text-white py-3 rounded-lg font-medium hover:bg-gray-700 transition-all active:scale-95"
+                  className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-all active:scale-95"
                 >
                   Continue to Payment
                 </button>
 
                 {/* Progress dots */}
                 <div className="flex justify-center gap-2 pt-6">
-                  <div className="w-8 h-2 bg-gray-600 rounded-full"></div>
-                  <div className="w-8 h-2 bg-gray-600 rounded-full"></div>
+                  <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
+                  <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
                   <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
                   <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
                   <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
@@ -246,7 +246,7 @@ export default function ChooseFieldPage() {
 
       {/* Field Details Modal */}
       {viewingField && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-in fade-in duration-300">
+        <div className="fixed inset-0 bg-yellow-600/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-in fade-in duration-300">
           <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl animate-in zoom-in-95 duration-200">
             {/* Header */}
             <div className="flex items-center justify-between p-8 border-b border-gray-100 sticky top-0 bg-white z-10">
@@ -343,7 +343,7 @@ export default function ChooseFieldPage() {
                     handleFieldSelect(viewingField.id);
                     setViewingField(null);
                   }}
-                  className="flex-1 bg-gray-600 text-white py-4 rounded-lg text-sm font-black   hover:bg-gray-700 transition-all shadow-lg active:scale-95"
+                  className="flex-1 bg-yellow-600 text-white py-4 rounded-lg text-sm font-black   hover:bg-yellow-700 transition-all shadow-lg active:scale-95"
                 >
                   Apply to this Field
                 </button>

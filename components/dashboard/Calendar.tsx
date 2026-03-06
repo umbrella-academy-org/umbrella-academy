@@ -87,7 +87,7 @@ export default function Calendar({ selectedDateRange, onDateRangeChange, userTyp
           onMouseLeave={() => setHoveredDay(null)}
           className={`w-7 h-7 sm:w-8 sm:h-8 text-xs rounded-full transition-all duration-200 flex items-center justify-center relative transform hover:scale-110 ${
             isSelected
-              ? 'bg-gray-600 text-white font-medium shadow-lg animate-pulse-glow'
+              ? 'bg-yellow-600 text-white font-medium shadow-lg animate-pulse-glow'
               : isToday
                 ? 'bg-gray-100 text-gray-600 font-medium'
                 : 'text-gray-700 hover:bg-gray-100'
@@ -95,7 +95,7 @@ export default function Calendar({ selectedDateRange, onDateRangeChange, userTyp
         >
           {day}
           {hasEvent && !isSelected && (
-            <div className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-gray-600 rounded-full transition-all duration-200 ${
+            <div className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-yellow-600 rounded-full transition-all duration-200 ${
               hoveredDay === day ? 'animate-pulse scale-150' : ''
             }`}></div>
           )}

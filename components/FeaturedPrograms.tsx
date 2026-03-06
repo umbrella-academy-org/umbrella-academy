@@ -13,7 +13,7 @@ const programs = [
         duration: "12 Months",
         students: "1.2k",
         image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800",
-        color: "#525252"
+        color: "#ca8a04"
     },
     {
         title: "Cinematic Storytelling",
@@ -23,7 +23,7 @@ const programs = [
         duration: "6 Months",
         students: "850",
         image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800",
-        color: "#737373"
+        color: "#fbbf24"
     },
     {
         title: "AI Interface Design",
@@ -47,13 +47,13 @@ export function FeaturedPrograms() {
                 <div className={`flex items-end justify-between mb-20 reveal ${isVisible ? 'visible' : ''}`}>
                     <div>
                         <h2 className="text-sm font-bold tracking-[0.4em] text-gray-400  mb-4">Featured Selection</h2>
-                        <h3 className="text-4xl md:text-6xl font-black tracking-tighter text-black  leading-none">
-                            POPULAR <span className="text-[#525252]">PROGRAMS</span>
+                        <h3 className="text-4xl md:text-6xl font-black tracking-tighter text-gray-900  leading-none">
+                            POPULAR <span className="text-[#ca8a04]">PROGRAMS</span>
                         </h3>
                     </div>
                     <button
                         onClick={() => router.push("/courses")}
-                        className="hidden md:flex items-center space-x-2 text-sm font-bold tracking-widest  hover:text-[#525252] transition-colors"
+                        className="hidden md:flex items-center space-x-2 text-sm font-bold tracking-widest  hover:text-[#ca8a04] transition-colors"
                     >
                         <span>View All</span>
                         <ArrowRight size={16} />
@@ -74,7 +74,7 @@ export function FeaturedPrograms() {
                                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                                 />
                                 <div className="absolute top-6 left-6">
-                                    <span className="px-4 py-2 bg-white/90 backdrop-blur-md rounded-full text-[10px] font-black tracking-widest text-black  shadow-lg">
+                                    <span className="px-4 py-2 bg-white/90 backdrop-blur-md rounded-full text-[10px] font-black tracking-widest text-gray-900  shadow-lg">
                                         {prog.field}
                                     </span>
                                 </div>
@@ -85,30 +85,30 @@ export function FeaturedPrograms() {
                                 <div>
                                     <div className="flex items-center justify-between mb-4">
                                         <div className="flex items-center space-x-1">
-                                            <Star className="w-4 h-4 fill-[#525252] text-[#525252]" />
+                                            <Star className="w-4 h-4 fill-[#ca8a04] text-[#ca8a04]" />
                                             <span className="text-sm font-bold">{prog.rating}</span>
                                         </div>
                                         <div className="text-xs font-bold text-gray-400 tracking-widest ">{prog.company}</div>
                                     </div>
-                                    <h4 className="text-2xl md:text-3xl font-black tracking-tight text-black  leading-tight group-hover:text-[#525252] transition-colors">
+                                    <h4 className="text-2xl md:text-3xl font-black tracking-tight text-gray-900  leading-tight group-hover:text-[#ca8a04] transition-colors">
                                         {prog.title}
                                     </h4>
                                 </div>
 
                                 <div className="grid grid-cols-2 gap-4 py-6 border-y border-gray-100">
                                     <div className="flex items-center space-x-3 text-gray-500">
-                                        <Clock size={16} className="text-[#525252]" />
+                                        <Clock size={16} className="text-[#ca8a04]" />
                                         <span className="text-sm font-medium">{prog.duration}</span>
                                     </div>
                                     <div className="flex items-center space-x-3 text-gray-500">
-                                        <Users size={16} className="text-[#525252]" />
+                                        <Users size={16} className="text-[#ca8a04]" />
                                         <span className="text-sm font-medium">{prog.students} Students</span>
                                     </div>
                                 </div>
 
                                 <button
                                     onClick={() => router.push("/auth/signup")}
-                                    className="w-full py-4 md:py-5 bg-black text-white rounded-2xl font-black tracking-widest  hover:bg-[#525252] transition-all duration-300 flex items-center justify-center space-x-3"
+                                    className="w-full py-4 md:py-5 bg-yellow-600 text-white rounded-2xl font-black tracking-widest  hover:bg-[#ca8a04] transition-all duration-300 flex items-center justify-center space-x-3"
                                 >
                                     <span>Apply Now</span>
                                     <ArrowRight size={18} />

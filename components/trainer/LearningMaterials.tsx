@@ -47,7 +47,7 @@ export default function LearningMaterials() {
             style={{ animationDelay: `${index * 100}ms` }}
           >
             <div className="flex items-start justify-between mb-4">
-              <div className={`w-12 h-12 bg-gradient-to-br ${material.color} rounded-lg flex items-center justify-center text-white`}>
+              <div className={`w-12 h-12 bg-linear-to-br ${material.color} rounded-lg flex items-center justify-center text-white`}>
                 <BookOpen className="w-6 h-6" />
               </div>
               <button className="opacity-0 group-hover:opacity-100 transition-opacity p-1 hover:bg-gray-100 rounded">
@@ -65,7 +65,7 @@ export default function LearningMaterials() {
             </div>
 
             <div className="mt-4 pt-4 border-t border-gray-200">
-              <button className="w-full text-center py-2 text-sm font-medium text-gray-600 hover:text-gray-700 border border-gray-600 hover:border-gray-700 rounded-lg transition-colors group-hover:bg-gray-50">
+              <button className="w-full text-center py-2 text-sm font-medium text-gray-600 hover:text-gray-700 border border-yellow-600 hover:border-gray-700 rounded-lg transition-colors group-hover:bg-gray-50">
                 Access Material
               </button>
             </div>

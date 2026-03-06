@@ -27,7 +27,7 @@ export default function CalendarInfo() {
             </div>
             <div className="w-full bg-gray-100 rounded-full h-1.5">
               <div
-                className="bg-gray-600 h-1.5 rounded-full transition-all duration-1000"
+                className="bg-yellow-600 h-1.5 rounded-full transition-all duration-1000"
                 style={{ width: '65%' }}
               ></div>
             </div>
@@ -47,7 +47,7 @@ export default function CalendarInfo() {
 
           {/* Mentor Mention */}
           <div className="flex items-center gap-3 pt-2">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center border border-white shadow-sm">
+            <div className="w-10 h-10 rounded-full bg-linear-to-br from-gray-100 to-gray-200 flex items-center justify-center border border-white shadow-sm">
               <span className="text-xs font-bold text-gray-700">DW</span>
             </div>
             <div>
@@ -58,7 +58,7 @@ export default function CalendarInfo() {
         </div>
 
         {/* Action Button */}
-        <button className="w-full mt-6 py-3 bg-gray-600 text-white text-xs font-bold rounded-lg hover:bg-gray-800 transition-all active:scale-[0.98] shadow-lg shadow-gray-200">
+        <button className="w-full mt-6 py-3 bg-yellow-600 text-white text-xs font-bold rounded-lg hover:bg-gray-800 transition-all active:scale-[0.98] shadow-lg shadow-gray-200">
           View Full Roadmap
         </button>
       </div>

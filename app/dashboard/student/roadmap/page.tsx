@@ -77,7 +77,7 @@ export default function StudentRoadmapPage() {
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <button className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700">
+                    <button className="px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700">
                       Continue Learning
                     </button>
                   </div>
@@ -88,18 +88,18 @@ export default function StudentRoadmapPage() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="bg-white border border-gray-200 rounded-lg p-6">
                   <h3 className="font-semibold text-gray-900 mb-2">Current Phase</h3>
-                  <p className="text-2xl font-bold text-gray-600">Phase 2</p>
-                  <p className="text-sm text-gray-600">Intermediate Concepts</p>
+                  <p className="text-2xl font-bold text-yellow-600">Phase 2</p>
+                  <p className="text-sm text-yellow-600">Intermediate Concepts</p>
                 </div>
                 <div className="bg-white border border-gray-200 rounded-lg p-6">
                   <h3 className="font-semibold text-gray-900 mb-2">Completed Lessons</h3>
-                  <p className="text-2xl font-bold text-gray-600">{activeRoadmap.roadmap.progress.completedSessions}/{activeRoadmap.roadmap.progress.totalSessions}</p>
-                  <p className="text-sm text-gray-600">{Math.round((activeRoadmap.roadmap.progress.completedSessions / activeRoadmap.roadmap.progress.totalSessions) * 100)}% Complete</p>
+                  <p className="text-2xl font-bold text-yellow-600">{activeRoadmap.roadmap.progress.completedSessions}/{activeRoadmap.roadmap.progress.totalSessions}</p>
+                  <p className="text-sm text-yellow-600">{Math.round((activeRoadmap.roadmap.progress.completedSessions / activeRoadmap.roadmap.progress.totalSessions) * 100)}% Complete</p>
                 </div>
                 <div className="bg-white border border-gray-200 rounded-lg p-6">
                   <h3 className="font-semibold text-gray-900 mb-2">Next Session</h3>
-                  <p className="text-2xl font-bold text-gray-600">Tomorrow</p>
-                  <p className="text-sm text-gray-600">2:00 PM - 3:00 PM</p>
+                  <p className="text-2xl font-bold text-yellow-600">Tomorrow</p>
+                  <p className="text-sm text-yellow-600">2:00 PM - 3:00 PM</p>
                 </div>
               </div>
 
@@ -118,7 +118,7 @@ export default function StudentRoadmapPage() {
                           <span className="text-sm font-medium text-gray-900">{phase.status === 'completed' ? 100 : phase.status === 'active' ? 50 : 0}%</span>
                           <div className="w-20 h-2 bg-gray-200 rounded-full mt-1">
                             <div
-                              className="h-2 bg-gray-600 rounded-full"
+                              className="h-2 bg-yellow-600 rounded-full"
                               style={{ width: `${phase.status === 'completed' ? 100 : phase.status === 'active' ? 50 : 0}%` }}
                             ></div>
                           </div>
@@ -140,7 +140,7 @@ export default function StudentRoadmapPage() {
               <p className="text-gray-600 mb-4">Create your learning roadmap to get started</p>
               <button
                 onClick={() => navigate('/dashboard/student/roadmap/create')}
-                className="px-6 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700"
+                className="px-6 py-3 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700"
               >
                 Create Roadmap
               </button>

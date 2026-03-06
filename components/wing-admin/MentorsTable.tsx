@@ -60,7 +60,7 @@ export default function MentorsTable({ mentors }: MentorsTableProps) {
         </div>
         <div className="w-16 bg-gray-200 rounded-full h-1.5 mt-1">
           <div
-            className="bg-gray-600 h-1.5 rounded-full"
+            className="bg-yellow-600 h-1.5 rounded-full"
             style={{ width: `${(mentor.currentStudents / mentor.maxStudents) * 100}%` }}
           />
         </div>
@@ -130,7 +130,7 @@ export default function MentorsTable({ mentors }: MentorsTableProps) {
               <button className="px-3 py-1.5 text-xs font-medium text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
                 Send Message
               </button>
-              <button className="px-3 py-1.5 text-xs font-medium text-white bg-gray-600 rounded-lg hover:bg-gray-700 transition-colors">
+              <button className="px-3 py-1.5 text-xs font-medium text-white bg-yellow-600 rounded-lg hover:bg-yellow-700 transition-colors">
                 Deactivate Selected
               </button>
             </div>

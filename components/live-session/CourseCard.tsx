@@ -18,16 +18,16 @@ export default function CourseCard({ user, userType = 'student' }: CourseCardPro
 
       <div className="flex flex-col md:flex-row gap-8 relative z-10">
         {/* Course Discovery Image */}
-        <div className="w-full md:w-48 h-36 bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl flex-shrink-0 overflow-hidden relative shadow-lg">
-          <div className="absolute inset-0 bg-black/40 flex items-center justify-center p-4">
+        <div className="w-full md:w-48 h-36 bg-linear-to-br from-gray-900 to-gray-800 rounded-2xl shrink-0 overflow-hidden relative shadow-lg">
+          <div className="absolute inset-0 bg-yellow-600/40 flex items-center justify-center p-4">
             <h4 className="text-white text-sm font-semibold text-center italic leading-tight decoration-gray-600 decoration-2 underline-offset-4 underline">
               Programming & Development
             </h4>
           </div>
           <div className="absolute bottom-2 left-2 right-2 flex justify-between">
-            <span className="text-[10px] font-medium text-gray-500 bg-black/60 px-2 py-0.5 rounded">Core Track</span>
+            <span className="text-[10px] font-medium text-gray-500 bg-yellow-600/60 px-2 py-0.5 rounded">Core Track</span>
             <div className="flex -space-x-1">
-              {[1, 2].map(i => <div key={i} className="w-4 h-4 rounded-full border border-black bg-gray-600 shadow-sm"></div>)}
+              {[1, 2].map(i => <div key={i} className="w-4 h-4 rounded-full border border-yellow-600 bg-yellow-600 shadow-sm"></div>)}
             </div>
           </div>
         </div>
@@ -45,7 +45,7 @@ export default function CourseCard({ user, userType = 'student' }: CourseCardPro
               </button>
               <a
                 href="/post-signup/live-session/call"
-                className="px-6 py-3 bg-gray-600 text-white text-sm  rounded-lg hover:bg-gray-700 transition-all duration-300 active:scale-95 shadow-sm"
+                className="px-6 py-3 bg-yellow-600 text-white text-sm  rounded-lg hover:bg-yellow-700 transition-all duration-300 active:scale-95 shadow-sm"
               >
                 Join Live Sync
               </a>
@@ -58,7 +58,7 @@ export default function CourseCard({ user, userType = 'student' }: CourseCardPro
 
           {/* Combined Trainer Section */}
           <div className="flex items-center gap-4 bg-gray-50 p-4 rounded-lg border border-gray-100 group/mentor transition-all duration-300">
-            <div className="w-10 h-10 rounded-lg bg-gray-600 flex items-center justify-center p-0.5 shadow-sm">
+            <div className="w-10 h-10 rounded-lg bg-yellow-600 flex items-center justify-center p-0.5 shadow-sm">
               <div className="w-full h-full bg-white rounded-md flex items-center justify-center overflow-hidden">
                 <User className="w-5 h-5 text-gray-900" />
               </div>
@@ -66,7 +66,7 @@ export default function CourseCard({ user, userType = 'student' }: CourseCardPro
             <div className="flex-1">
               <div className="flex items-center gap-2">
                 <p className="text-sm font-semibold text-gray-900">{user?.name || 'Demi Wilkinson'}</p>
-                <span className="w-1.5 h-1.5 bg-gray-500 rounded-full"></span>
+                <span className="w-1.5 h-1.5 bg-yellow-600 rounded-full"></span>
               </div>
               <p className="text-xs text-gray-500 font-medium mt-0.5">{user?.expertise || 'Expert in Software Engineering'}</p>
             </div>

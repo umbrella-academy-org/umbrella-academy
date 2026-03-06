@@ -92,7 +92,7 @@ export default function CourseModules({ selectedCourse }: CourseModulesProps) {
             >
               <div className="flex items-start gap-4">
                 {/* Module Icon */}
-                <div className={`w-12 h-12 bg-gradient-to-br ${module.color} rounded-lg flex items-center justify-center text-white text-xl flex-shrink-0`}>
+                <div className={`w-12 h-12 bg-linear-to-br ${module.color} rounded-lg flex items-center justify-center text-white text-xl shrink-0`}>
                   {module.icon}
                 </div>
 
@@ -128,14 +128,14 @@ export default function CourseModules({ selectedCourse }: CourseModulesProps) {
                     </div>
                     <div className="w-full bg-gray-200 rounded-full h-2">
                       <div 
-                        className={`bg-gradient-to-r ${module.color} h-2 rounded-full transition-all duration-500`}
+                        className={`bg-linear-to-r ${module.color} h-2 rounded-full transition-all duration-500`}
                         style={{ width: `${module.progress}%` }}
                       />
                     </div>
                   </div>
 
                   {/* Action Button */}
-                  <button className="w-full text-center py-2 text-sm font-medium text-gray-600 hover:text-gray-700 border border-gray-600 hover:border-gray-700 rounded-lg transition-colors">
+                  <button className="w-full text-center py-2 text-sm font-medium text-gray-600 hover:text-gray-700 border border-yellow-600 hover:border-gray-700 rounded-lg transition-colors">
                     {module.status === 'completed' ? 'Review Module' : 'Continue Learning'}
                   </button>
                 </div>
@@ -151,7 +151,7 @@ export default function CourseModules({ selectedCourse }: CourseModulesProps) {
             <span className="text-sm font-medium text-gray-900">68% Complete</span>
           </div>
           <div className="w-full bg-gray-200 rounded-full h-3">
-            <div className="bg-gray-600 h-3 rounded-full transition-all duration-500" style={{ width: '68%' }} />
+            <div className="bg-yellow-600 h-3 rounded-full transition-all duration-500" style={{ width: '68%' }} />
           </div>
           <div className="flex items-center justify-between mt-2 text-sm text-gray-600">
             <span>3 of 4 modules in progress</span>

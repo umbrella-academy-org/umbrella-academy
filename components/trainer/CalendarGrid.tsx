@@ -137,7 +137,7 @@ export default function CalendarGrid({ selectedDate, onDateSelect }: CalendarGri
                   onClick={() => onDateSelect(date)}
                   className={`w-full h-full p-2 rounded-lg text-left transition-all duration-200 hover:bg-gray-50 ${
                     isSelected(date)
-                      ? 'bg-gray-600 text-white'
+                      ? 'bg-yellow-600 text-white'
                       : isToday(date)
                         ? 'bg-gray-100 text-gray-800'
                         : 'text-gray-900'

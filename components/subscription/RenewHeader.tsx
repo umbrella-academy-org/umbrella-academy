@@ -15,7 +15,7 @@ export default function RenewHeader() {
           <FileText className="w-4 h-4" />
           Generate a Report
         </button>
-        <button className="bg-gray-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-gray-700 transition-colors flex items-center gap-2">
+        <button className="bg-yellow-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-yellow-700 transition-colors flex items-center gap-2">
           <RotateCcw className="w-4 h-4" />
           Renew Plan
         </button>

@@ -55,7 +55,7 @@ export default function ChooseFieldPage() {
           <div className="text-center">
             {/* Logo */}
             <div className="mb-10">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gray-600 rounded-4xl flex items-center justify-center shadow-xl shadow-gray-600/20 mx-auto transform -rotate-6">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-yellow-600 rounded-4xl flex items-center justify-center shadow-xl shadow-gray-600/20 mx-auto transform -rotate-6">
                 <svg className="w-10 h-10 sm:w-12 sm:h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" />
                 </svg>
@@ -64,7 +64,7 @@ export default function ChooseFieldPage() {
 
             {/* Title */}
             <div className="mb-12">
-              <h1 className="text-2xl font-semibold text-black mb-4 ">
+              <h1 className="text-2xl font-semibold text-gray-900 mb-4 ">
                 Choose Your Field
               </h1>
               <p className="text-slate-500 max-w-xl mx-auto text-sm sm:text-base font-medium leading-relaxed">
@@ -81,14 +81,14 @@ export default function ChooseFieldPage() {
                       key={field.id}
                       onClick={() => handleFieldSelect(field.id)}
                       className={`relative p-8 rounded-xl text-left transition-all duration-300 cursor-pointer group hover:scale-[1.03] ${isSelected
-                        ? 'bg-white border-2 border-black shadow-2xl shadow-gray-600/10'
+                        ? 'bg-white border-2 border-yellow-600 shadow-2xl shadow-gray-600/10'
                         : 'bg-white border border-slate-100 shadow-sm hover:shadow-xl hover:border-gray-200'
                         }`}
                     >
                       {/* Selection Indicator */}
                       <div className="absolute top-6 right-6">
                         {isSelected && (
-                          <div className="bg-black text-white p-1 rounded-full animate-in zoom-in-50 duration-500">
+                          <div className="bg-yellow-600 text-white p-1 rounded-full animate-in zoom-in-50 duration-500">
                             <CheckCircle className="w-4 h-4" />
                           </div>
                         )}
@@ -100,7 +100,7 @@ export default function ChooseFieldPage() {
                           <h3 className={`text-xl font-black  mb-3 transition-colors ${isSelected ? 'text-gray-800' : 'text-slate-800'}`}>
                             {field.name}
                           </h3>
-                          <div className={`w-10 h-10 rounded-lg flex items-center justify-center text-xl shadow-inner transition-all duration-500 ${isSelected ? 'bg-black text-white rotate-6' : 'bg-slate-50 text-slate-400 group-hover:bg-gray-50 group-hover:text-gray-600 group-hover:rotate-6'
+                          <div className={`w-10 h-10 rounded-lg flex items-center justify-center text-xl shadow-inner transition-all duration-500 ${isSelected ? 'bg-yellow-600 text-white rotate-6' : 'bg-slate-50 text-slate-400 group-hover:bg-gray-50 group-hover:text-gray-600 group-hover:rotate-6'
                             }`}>
                             {field.icon}
                           </div>
@@ -122,7 +122,7 @@ export default function ChooseFieldPage() {
                             }`}
                         >
                           <span className="  text-[10px]">Learn more</span>
-                          <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${isSelected ? 'bg-black text-white translate-x-1 shadow-lg shadow-gray-600/20' : 'bg-slate-50 text-slate-400 group-hover/btn:bg-gray-600 group-hover/btn:text-white group-hover/btn:translate-x-1 group-hover/btn:shadow-lg group-hover/btn:shadow-gray-600/20'
+                          <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${isSelected ? 'bg-yellow-600 text-white translate-x-1 shadow-lg shadow-gray-600/20' : 'bg-slate-50 text-slate-400 group-hover/btn:bg-yellow-600 group-hover/btn:text-white group-hover/btn:translate-x-1 group-hover/btn:shadow-lg group-hover/btn:shadow-gray-600/20'
                             }`}>
                             <ArrowRight className="w-4 h-4" />
                           </div>
@@ -137,8 +137,8 @@ export default function ChooseFieldPage() {
 
               {/* Progress dots */}
               <div className="flex justify-center gap-2 pt-6">
-                <div className="w-8 h-2 bg-gray-600 rounded-full"></div>
-                <div className="w-8 h-2 bg-gray-600 rounded-full"></div>
+                <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
+                <div className="w-8 h-2 bg-yellow-600 rounded-full"></div>
                 <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
                 <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
                 <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
@@ -155,7 +155,7 @@ export default function ChooseFieldPage() {
 
       {/* Field Details Modal */}
       {viewingField && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-in fade-in duration-300">
+        <div className="fixed inset-0 bg-yellow-600/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-in fade-in duration-300">
           <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl animate-in zoom-in-95 duration-200">
             {/* Header */}
             <div className="flex items-center justify-between p-8 border-b border-gray-100 sticky top-0 bg-white z-10">
@@ -170,7 +170,7 @@ export default function ChooseFieldPage() {
                       <Star className="w-3.5 h-3.5 fill-gray-400 text-gray-400" />
                       <span className="text-sm font-black text-gray-700">{viewingField.rating}</span>
                     </div>
-                    <span className="text-xs font-semibold text-black border-l border-gray-200 pl-3">
+                    <span className="text-xs font-semibold text-gray-900 border-l border-gray-200 pl-3">
                       {viewingField.successRate}% Success Rate
                     </span>
                   </div>
@@ -187,7 +187,7 @@ export default function ChooseFieldPage() {
             {/* Content */}
             <div className="p-10 space-y-10">
               <div className="space-y-4">
-                <h4 className="text-sm font-semibold text-black border-b border-gray-100 pb-2">Field Description</h4>
+                <h4 className="text-sm font-semibold text-gray-900 border-b border-gray-100 pb-2">Field Description</h4>
                 <p className="text-sm font-bold text-gray-600 leading-relaxed italic">
                   &quot;{viewingField.description}&quot;
                 </p>
@@ -195,7 +195,7 @@ export default function ChooseFieldPage() {
 
               <div className="grid grid-cols-2 gap-10">
                 <div className="space-y-4"  >
-                  <h4 className="text-xs font-black text-black border-b border-gray-100 pb-2">Focus Areas</h4>
+                  <h4 className="text-xs font-black text-gray-900 border-b border-gray-100 pb-2">Focus Areas</h4>
                   <div className="flex flex-wrap gap-2">
                     {viewingField.specializations.map((spec, index) => (
                       <span key={index} className="px-3 py-1.5 bg-gray-50 border border-gray-100 text-gray-600 text-sm font-black rounded shadow-sm">
@@ -206,7 +206,7 @@ export default function ChooseFieldPage() {
                 </div>
 
                 <div className="space-y-4">
-                  <h4 className="font-semibold text-black border-b border-gray-100 pb-2">Experience Stats</h4>
+                  <h4 className="font-semibold text-gray-900 border-b border-gray-100 pb-2">Experience Stats</h4>
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
                       <span className="text-sm font-semibold text-gray-500 flex items-center gap-2"><Users className="w-3 h-3" /> Students</span>
@@ -225,7 +225,7 @@ export default function ChooseFieldPage() {
               </div>
 
               <div className="space-y-6">
-                <h4 className="text-xs font-black text-black border-b border-gray-100 pb-2">Top Live Trainers</h4>
+                <h4 className="text-xs font-black text-gray-900 border-b border-gray-100 pb-2">Top Live Trainers</h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {viewingField.selectionTrainers?.topTrainers.map((trainer, index) => (
                     <div key={index} className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg border border-gray-100 group hover:border-gray-200 transition-all">
@@ -252,7 +252,7 @@ export default function ChooseFieldPage() {
                     handleFieldSelect(viewingField.id);
                     setViewingField(null);
                   }}
-                  className="flex-1 bg-black text-white py-4 rounded-lg text-sm font-black hover:bg-gray-900 transition-all shadow-lg active:scale-95"
+                  className="flex-1 bg-yellow-600 text-white py-4 rounded-lg text-sm font-black hover:bg-yellow-700 transition-all shadow-lg active:scale-95"
                 >
                   Apply to this Field
                 </button>

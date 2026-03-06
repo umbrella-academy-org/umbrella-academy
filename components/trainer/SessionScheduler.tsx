@@ -69,7 +69,7 @@ export default function SessionScheduler({ selectedDate }: SessionSchedulerProps
             onClick={() => setSessionType('individual')}
             className={`flex-1 px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
               sessionType === 'individual'
-                ? 'bg-gray-600 text-white'
+                ? 'bg-yellow-600 text-white'
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
             }`}
           >
@@ -80,7 +80,7 @@ export default function SessionScheduler({ selectedDate }: SessionSchedulerProps
             onClick={() => setSessionType('group')}
             className={`flex-1 px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
               sessionType === 'group'
-                ? 'bg-gray-600 text-white'
+                ? 'bg-yellow-600 text-white'
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
             }`}
           >
@@ -106,7 +106,7 @@ export default function SessionScheduler({ selectedDate }: SessionSchedulerProps
               onClick={() => setSelectedTime(time)}
               className={`px-2 py-1.5 text-xs font-medium rounded transition-all duration-200 ${
                 selectedTime === time
-                  ? 'bg-gray-600 text-white'
+                  ? 'bg-yellow-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
@@ -124,7 +124,7 @@ export default function SessionScheduler({ selectedDate }: SessionSchedulerProps
         <select
           value={duration}
           onChange={(e) => setDuration(e.target.value)}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-sm"
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-sm"
         >
           <option value="30">30 minutes</option>
           <option value="60">1 hour</option>
@@ -142,7 +142,7 @@ export default function SessionScheduler({ selectedDate }: SessionSchedulerProps
           <select
             value={student}
             onChange={(e) => setStudent(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-sm"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-sm"
           >
             <option value="">Choose a student...</option>
             {students.map((studentName) => (
@@ -157,7 +157,7 @@ export default function SessionScheduler({ selectedDate }: SessionSchedulerProps
             value={student}
             onChange={(e) => setStudent(e.target.value)}
             placeholder="e.g., React Fundamentals Group Session"
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent text-sm"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-sm"
           />
         )}
       </div>
@@ -166,7 +166,7 @@ export default function SessionScheduler({ selectedDate }: SessionSchedulerProps
       <button
         onClick={handleSchedule}
         disabled={!selectedTime || !student}
-        className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-gray-600 text-white text-sm font-medium rounded-lg hover:bg-gray-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-all duration-200 interactive-button"
+        className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-yellow-600 text-white text-sm font-medium rounded-lg hover:bg-yellow-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-all duration-200 interactive-button"
       >
         <Plus className="w-4 h-4" />
         Schedule Session

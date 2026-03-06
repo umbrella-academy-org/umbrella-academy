@@ -26,7 +26,7 @@ export default function FieldAdminProfilePage() {
                     <div className="max-w-5xl mx-auto animate-fade-in">
                         {/* Profile Header Card */}
                         <div className="bg-white rounded-lg border border-gray-100 shadow-xl shadow-gray-200/50 overflow-hidden mb-8 ">
-                            <div className="h-48 bg-gradient-to-br from-gray-400 via-gray-500 to-gray-600 relative overflow-hidden">
+                            <div className="h-48 bg-linear-to-br from-gray-400 via-gray-500 to-gray-600 relative overflow-hidden">
                                 {/* Decorative Abstract Shapes */}
                                 <div className="absolute top-0 left-0 w-full h-full opacity-20">
                                     <div className="absolute -top-24 -left-24 w-64 h-64 bg-white rounded-full blur-3xl" />
@@ -38,11 +38,11 @@ export default function FieldAdminProfilePage() {
                                 <div className="flex flex-col md:flex-row md:items-end -mt-16 gap-8">
                                     <div className="relative group">
                                         <div className="w-32 h-32 rounded-full bg-white p-1.5 shadow-2xl shadow-gray-200/50 transform group-hover:scale-105 transition-all duration-500">
-                                            <div className="w-full h-full bg-gradient-to-br from-gray-50 to-gray-100 rounded-full flex items-center justify-center text-gray-700 text-4xl font-extrabold border border-gray-200   er">
+                                            <div className="w-full h-full bg-linear-to-br from-gray-50 to-gray-100 rounded-full flex items-center justify-center text-gray-700 text-4xl font-extrabold border border-gray-200   er">
                                                 {profileData.name.split(' ').map(n => n[0]).join('')}
                                             </div>
                                         </div>
-                                        <div className="absolute -bottom-1 -right-1 w-10 h-10 bg-gray-500 border-4 border-white rounded-full flex items-center justify-center shadow-lg">
+                                        <div className="absolute -bottom-1 -right-1 w-10 h-10 bg-yellow-600 border-4 border-white rounded-full flex items-center justify-center shadow-lg">
                                             <Shield className="w-5 h-5 text-white" />
                                         </div>
                                     </div>
@@ -93,12 +93,12 @@ export default function FieldAdminProfilePage() {
                                 <div className="bg-white rounded-lg border border-gray-100 shadow-xl shadow-gray-200/30 p-10 ">
                                     <h3 className="text-xl font-semibold text-gray-900 mb-8">Field Stats Oversight</h3>
                                     <div className="grid grid-cols-2 gap-6">
-                                        <div className="p-8 bg-gray-900 rounded-lg text-white relative overflow-hidden group">
+                                        <div className="p-8 bg-black rounded-lg text-white relative overflow-hidden group">
                                             <Users className="w-8 h-8 text-gray-500 mb-4 transform group-hover:scale-110 transition-transform" />
                                             <p className="text-3xl font-black mb-1">50+</p>
                                             <p className="text-xs text-gray-400 font-semibold   ">Active Trainers</p>
                                         </div>
-                                        <div className="p-8 bg-gray-600 rounded-lg text-white relative overflow-hidden group">
+                                        <div className="p-8 bg-yellow-600 rounded-lg text-white relative overflow-hidden group">
                                             <BookOpen className="w-8 h-8 text-white mb-4 transform group-hover:scale-110 transition-transform" />
                                             <p className="text-3xl font-black mb-1">500+</p>
                                             <p className="text-xs text-gray-100 font-semibold   ">Enrolled Students</p>
@@ -117,15 +117,15 @@ export default function FieldAdminProfilePage() {
                                     </div>
                                 </div>
 
-                                <div className="p-8 bg-gray-900 rounded-lg text-white shadow-2xl shadow-gray-900/40 relative overflow-hidden group">
+                                <div className="p-8 bg-black rounded-lg text-white shadow-2xl shadow-gray-900/40 relative overflow-hidden group">
                                     <div className="relative z-10">
                                         <h4 className="text-xl font-black mb-2  ">Field Support</h4>
                                         <p className="text-gray-400 text-xs font-medium mb-6 leading-relaxed">Need help managing your field? Contact system admin.</p>
-                                        <button className="w-full py-4 bg-gray-600 hover:bg-gray-500 rounded-[1.2rem] font-black text-sm transition-all shadow-xl shadow-gray-600/20">
+                                        <button className="w-full py-4 bg-yellow-600 hover:bg-gray-500 rounded-[1.2rem] font-black text-sm transition-all shadow-xl shadow-gray-600/20">
                                             Get Support
                                         </button>
                                     </div>
-                                    <div className="absolute top-0 right-0 w-32 h-32 bg-gray-600/10 rounded-full -mr-16 -mt-16 blur-2xl group-hover:bg-gray-600/20 transition-all opacity-50" />
+                                    <div className="absolute top-0 right-0 w-32 h-32 bg-yellow-600/10 rounded-full -mr-16 -mt-16 blur-2xl group-hover:bg-yellow-600/20 transition-all opacity-50" />
                                 </div>
                             </div>
                         </div>
@@ -140,7 +140,7 @@ function ManagementItem({ icon, label }: { icon: React.ReactNode, label: string 
     return (
         <button className="w-full flex items-center justify-between p-4 rounded-lg hover:bg-gray-50 transition-all group border border-transparent hover:border-gray-100">
             <div className="flex items-center gap-4">
-                <div className="w-10 h-10 bg-gray-50 rounded-lg flex items-center justify-center text-gray-400 group-hover:bg-gray-600 group-hover:text-white transition-all shadow-sm">
+                <div className="w-10 h-10 bg-gray-50 rounded-lg flex items-center justify-center text-gray-400 group-hover:bg-yellow-600 group-hover:text-white transition-all shadow-sm">
                     {icon}
                 </div>
                 <span className="text-sm font-semibold text-gray-700 group-hover:text-gray-900">{label}</span>

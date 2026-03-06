@@ -58,7 +58,7 @@ export default function PaymentMethod() {
                     <div className="text-xs text-gray-500 flex items-center gap-1">
                       {method.phoneNumber}
                       {method.status === 'verified' && (
-                        <CheckCircle className="w-3 h-3 text-gray-500" />
+                        <CheckCircle className="w-3 h-3 text-yellow-600" />
                       )}
                     </div>
                   </div>

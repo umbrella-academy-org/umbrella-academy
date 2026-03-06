@@ -39,7 +39,7 @@ export default function NoRoadmapState() {
       <div className="max-w-4xl w-full">
         {/* Hero Section */}
         <div className="text-center mb-12">
-          <div className="w-24 h-24 bg-gray-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <div className="w-24 h-24 bg-yellow-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
             <Map className="w-12 h-12 text-white" />
           </div>
           <h1 className="text-3xl font-semibold text-gray-900 mb-4">
@@ -78,7 +78,7 @@ export default function NoRoadmapState() {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <button
               onClick={handleCreateRoadmap}
-              className="inline-flex items-center gap-2 px-8 py-3 bg-gray-600 text-white font-medium rounded-lg hover:bg-gray-700 transition-colors"
+              className="inline-flex items-center gap-2 px-8 py-3 bg-yellow-600 text-white font-medium rounded-lg hover:bg-yellow-700 transition-colors"
             >
               Complete Profile
               <ArrowRight className="w-4 h-4" />

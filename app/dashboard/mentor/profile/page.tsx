@@ -38,7 +38,7 @@ export default function MentorProfilePage() {
                     <div className="max-w-full mx-auto animate-fade-in">
                         {/* Profile Header Card */}
                         <div className="bg-white rounded-lg border border-gray-100 shadow-xl shadow-gray-200/50 overflow-hidden mb-8">
-                            <div className="h-48 bg-gradient-to-br from-gray-600 to-gray-800 relative overflow-hidden">
+                            <div className="h-48 bg-linear-to-br from-gray-600 to-gray-800 relative overflow-hidden">
                                 {/* Decorative Abstract Shapes */}
                                 <div className="absolute top-0 left-0 w-full h-full opacity-20">
                                     <div className="absolute -top-24 -left-24 w-64 h-64 bg-white rounded-full blur-3xl" />
@@ -50,11 +50,11 @@ export default function MentorProfilePage() {
                                 <div className="flex flex-col md:flex-row md:items-end -mt-16 gap-20">
                                     <div className="relative group">
                                         <div className="w-32 h-32 rounded-full bg-white p-1.5 shadow-2xl shadow-gray-200/50 transform group-hover:scale-105 transition-all duration-500">
-                                            <div className="w-full h-full bg-gradient-to-br from-gray-50 to-gray-100 rounded-full flex items-center justify-center text-gray-700 text-4xl font-extrabold border border-gray-200 ">
+                                            <div className="w-full h-full bg-linear-to-br from-gray-50 to-gray-100 rounded-full flex items-center justify-center text-gray-700 text-4xl font-extrabold border border-gray-200 ">
                                                 {profileData.name.split(' ').map(n => n[0]).join('')}
                                             </div>
                                         </div>
-                                        <div className="absolute -bottom-0 -right-0 w-10 h-10 bg-gray-600 border-4 border-white rounded-full flex items-center justify-center shadow-lg">
+                                        <div className="absolute -bottom-0 -right-0 w-10 h-10 bg-yellow-600 border-4 border-white rounded-full flex items-center justify-center shadow-lg">
                                             <Shield className="w-5 h-5 text-white" />
                                         </div>
                                     </div>
@@ -77,10 +77,10 @@ export default function MentorProfilePage() {
                                             {isEditing ? (
                                                 <>
                                                     <button onClick={() => setIsEditing(false)} className="px-6 py-3 border border-gray-200 text-gray-600 rounded-lg font-bold hover:bg-gray-50 transition-all active:scale-95">Cancel</button>
-                                                    <button onClick={handleSave} className="px-8 py-3 bg-gray-900 text-white rounded-lg font-bold hover:bg-black shadow-xl shadow-gray-200 active:scale-95 transition-all">Save Changes</button>
+                                                    <button onClick={handleSave} className="px-8 py-3 bg-black text-white rounded-lg font-bold hover:bg-yellow-600 shadow-xl shadow-gray-200 active:scale-95 transition-all">Save Changes</button>
                                                 </>
                                             ) : (
-                                                <button onClick={() => setIsEditing(true)} className="flex items-center gap-2.5 px-8 py-3 bg-white border border-gray-200 text-gray-800 rounded-lg font-bold hover:border-gray-600 hover:text-gray-600 shadow-sm hover:shadow-gray-100/50 transition-all active:scale-95 group">
+                                                <button onClick={() => setIsEditing(true)} className="flex items-center gap-2.5 px-8 py-3 bg-white border border-gray-200 text-gray-800 rounded-lg font-bold hover:border-yellow-600 hover:text-gray-600 shadow-sm hover:shadow-gray-100/50 transition-all active:scale-95 group">
                                                     <Edit2 className="w-4.5 h-4.5 group-hover:rotate-12 transition-transform" />
                                                     Edit Profile
                                                 </button>
@@ -119,7 +119,7 @@ export default function MentorProfilePage() {
                                         <div className="space-y-2">
                                             <label className="text-xs font-semibold text-gray-400   ml-1">Role Status</label>
                                             <div className="px-5 py-3.5 bg-gray-50/50 border border-gray-100 rounded-[1.2rem] flex items-center gap-2">
-                                                <div className="w-2 h-2 bg-gray-500 rounded-full animate-pulse" />
+                                                <div className="w-2 h-2 bg-yellow-600 rounded-full animate-pulse" />
                                                 <p className="text-gray-700 font-semibold text-xs   ">Active Member</p>
                                             </div>
                                         </div>
@@ -187,7 +187,7 @@ export default function MentorProfilePage() {
 
 function SettingsItem({ icon, label, color }: { icon: React.ReactNode, label: string, color: string }) {
     const colors = {
-        gray: 'bg-gray-50 text-gray-600 group-hover:bg-gray-600',
+        gray: 'bg-gray-50 text-gray-600 group-hover:bg-yellow-600',
     };
     const colorClasses = colors[color as keyof typeof colors] || colors.gray;
 

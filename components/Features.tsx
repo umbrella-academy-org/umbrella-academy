@@ -6,13 +6,13 @@ const features = [
     icon: BookOpen,
     title: "Multi-Field Learning Domains",
     description: "Access diverse learning fields from technology to creative arts, all structured for maximum impact.",
-    color: "#525252",
+    color: "#ca8a04",
   },
   {
     icon: Users,
     title: "Company-Based Learning Programs",
     description: "Learn within organized companies that provide structured curricula and professional environments.",
-    color: "#737373",
+    color: "#fbbf24",
   },
   {
     icon: Target,
@@ -24,13 +24,13 @@ const features = [
     icon: Award,
     title: "Trainer-Led Lessons & Live Sessions",
     description: "Engage with expert trainers in interactive sessions designed for real-world skill development.",
-    color: "#525252",
+    color: "#ca8a04",
   },
   {
     icon: TrendingUp,
     title: "Progress Tracking Dashboard",
     description: "Monitor your growth with comprehensive analytics and milestone tracking throughout your journey.",
-    color: "#737373",
+    color: "#fbbf24",
   },
   {
     icon: Shield,
@@ -49,11 +49,11 @@ export function Features() {
         {/* Section Header */}
         <div className={`text-center max-w-3xl mx-auto mb-16 reveal ${isVisible ? 'visible' : ''}`}>
           <div>
-            <span className="inline-block px-4 py-2 bg-[#525252]/10 text-[#525252] rounded-full text-sm font-medium mb-4 border border-[#525252]/20">
+            <span className="inline-block px-4 py-2 bg-[#ca8a04]/10 text-[#ca8a04] rounded-full text-sm font-medium mb-4 border border-[#ca8a04]/20">
               Features
             </span>
-            <h2 className="text-4xl md:text-5xl font-bold text-black mb-6">
-              Everything You Need to <span className="text-[#525252]">Excel</span>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              Everything You Need to <span className="text-[#ca8a04]">Excel</span>
             </h2>
             <p className="text-xl text-gray-600">
               A comprehensive platform designed to deliver world-class learning experiences
@@ -69,7 +69,7 @@ export function Features() {
             return (
               <div
                 key={index}
-                className={`group relative bg-white rounded-2xl border-2 border-gray-200 p-8 hover:shadow-xl hover:border-[#525252]/30 transition-all duration-300 ${isVisible ? 'animate-fade-in' : 'opacity-0'} ${delays[index]}`}
+                className={`group relative bg-white rounded-2xl border-2 border-gray-200 p-8 hover:shadow-xl hover:border-[#ca8a04]/30 transition-all duration-300 ${isVisible ? 'animate-fade-in' : 'opacity-0'} ${delays[index]}`}
               >
                 {/* Icon */}
                 <div
@@ -88,7 +88,7 @@ export function Features() {
                 </p>
 
                 {/* Hover Effect */}
-                <div className="absolute inset-0 rounded-2xl bg-[#525252]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                <div className="absolute inset-0 rounded-2xl bg-[#ca8a04]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
               </div>
             );
           })}

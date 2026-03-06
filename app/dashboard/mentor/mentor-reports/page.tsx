@@ -220,7 +220,7 @@ export default function MentorWingReportsPage() {
                       <select
                         value={filterStatus}
                         onChange={(e) => setFilterStatus(e.target.value)}
-                        className="px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-600"
+                        className="px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-600"
                       >
                         <option value="all">All Status</option>
                         <option value="draft">Draft</option>
@@ -232,7 +232,7 @@ export default function MentorWingReportsPage() {
                       <select
                         value={filterType}
                         onChange={(e) => setFilterType(e.target.value)}
-                        className="px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-600"
+                        className="px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-600"
                       >
                         <option value="all">All Types</option>
                         <option value="monthly">Monthly</option>
@@ -299,7 +299,7 @@ export default function MentorWingReportsPage() {
                             <div className="text-sm font-medium text-gray-900">{report.completionRate}%</div>
                             <div className="ml-2 w-16 bg-gray-200 rounded-full h-2">
                               <div
-                                className="bg-gray-500 h-2 rounded-full"
+                                className="bg-yellow-600 h-2 rounded-full"
                                 style={{ width: `${report.completionRate}%` }}
                               ></div>
                             </div>
@@ -338,7 +338,7 @@ export default function MentorWingReportsPage() {
 
       {/* Report Details Modal */}
       {showReportModal && selectedReport && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div className="fixed inset-0 bg-yellow-600 bg-opacity-50 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
             {/* Modal Header */}
             <div className="flex items-center justify-between p-6 border-b border-gray-200">

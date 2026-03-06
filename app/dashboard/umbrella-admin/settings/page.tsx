@@ -71,7 +71,7 @@ export default function UmbrellaAdminSettingsPage() {
                                     </div>
                                     <button
                                         onClick={() => setShowAddCompany(true)}
-                                        className="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
+                                        className="flex items-center gap-2 px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors"
                                     >
                                         <Plus className="w-4 h-4" />
                                         Add Company
@@ -89,7 +89,7 @@ export default function UmbrellaAdminSettingsPage() {
                                                     type="text"
                                                     value={newCompany.name}
                                                     onChange={(e) => setNewCompany({ ...newCompany, name: e.target.value })}
-                                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600"
+                                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600"
                                                     placeholder="e.g. TechCorp Inc."
                                                 />
                                             </div>
@@ -98,7 +98,7 @@ export default function UmbrellaAdminSettingsPage() {
                                                 <select
                                                     value={newCompany.industry}
                                                     onChange={(e) => setNewCompany({ ...newCompany, industry: e.target.value })}
-                                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600"
+                                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600"
                                                 >
                                                     <option value="">Select Industry</option>
                                                     <option value="Technology">Technology</option>
@@ -114,7 +114,7 @@ export default function UmbrellaAdminSettingsPage() {
                                         <div className="flex gap-3">
                                             <button
                                                 onClick={handleAddCompany}
-                                                className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
+                                                className="px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors"
                                             >
                                                 Add Company
                                             </button>
@@ -187,7 +187,7 @@ export default function UmbrellaAdminSettingsPage() {
                                             type="text"
                                             value={systemSettings.platformName}
                                             onChange={(e) => setSystemSettings({ ...systemSettings, platformName: e.target.value })}
-                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600"
+                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600"
                                         />
                                     </div>
                                     <div>
@@ -195,7 +195,7 @@ export default function UmbrellaAdminSettingsPage() {
                                         <select
                                             value={systemSettings.defaultCurrency}
                                             onChange={(e) => setSystemSettings({ ...systemSettings, defaultCurrency: e.target.value })}
-                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600"
+                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600"
                                         >
                                             <option value="RWF">RWF - Rwandan Franc</option>
                                             <option value="USD">USD - US Dollar</option>
@@ -207,7 +207,7 @@ export default function UmbrellaAdminSettingsPage() {
                                         <select
                                             value={systemSettings.timezone}
                                             onChange={(e) => setSystemSettings({ ...systemSettings, timezone: e.target.value })}
-                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600"
+                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600"
                                         >
                                             <option value="Africa/Kigali">Africa/Kigali (CAT)</option>
                                             <option value="UTC">UTC</option>
@@ -221,7 +221,7 @@ export default function UmbrellaAdminSettingsPage() {
                                             type="number"
                                             value={systemSettings.sessionTimeout}
                                             onChange={(e) => setSystemSettings({ ...systemSettings, sessionTimeout: parseInt(e.target.value) })}
-                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600"
+                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600"
                                         />
                                     </div>
                                 </div>
@@ -246,7 +246,7 @@ export default function UmbrellaAdminSettingsPage() {
                                                 onChange={(e) => setSystemSettings({ ...systemSettings, requireMFA: e.target.checked })}
                                                 className="sr-only peer"
                                             />
-                                            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-gray-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gray-600"></div>
+                                            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-gray-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-yellow-600"></div>
                                         </label>
                                     </div>
 
@@ -262,7 +262,7 @@ export default function UmbrellaAdminSettingsPage() {
                                                 onChange={(e) => setSystemSettings({ ...systemSettings, autoBackup: e.target.checked })}
                                                 className="sr-only peer"
                                             />
-                                            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-gray-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gray-600"></div>
+                                            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-gray-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-yellow-600"></div>
                                         </label>
                                     </div>
 
@@ -278,7 +278,7 @@ export default function UmbrellaAdminSettingsPage() {
                                                 onChange={(e) => setSystemSettings({ ...systemSettings, maintenanceMode: e.target.checked })}
                                                 className="sr-only peer"
                                             />
-                                            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-gray-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gray-600"></div>
+                                            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-gray-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-yellow-600"></div>
                                         </label>
                                     </div>
                                 </div>
@@ -288,7 +288,7 @@ export default function UmbrellaAdminSettingsPage() {
                             <div className="flex gap-4 pb-8">
                                 <button
                                     onClick={handleSaveSettings}
-                                    className="bg-gray-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-gray-700 transition-colors"
+                                    className="bg-yellow-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-yellow-700 transition-colors"
                                 >
                                     Save All Settings
                                 </button>

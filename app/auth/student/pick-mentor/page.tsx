@@ -145,7 +145,7 @@ export default function PickMentorPage() {
 
           <div className="flex flex-col items-center justify-center flex-1">
             <div className="mb-8">
-              <div className="w-16 h-16 bg-gray-600 rounded-2xl flex items-center justify-center shadow-lg shadow-gray-600/20">
+              <div className="w-16 h-16 bg-yellow-600 rounded-2xl flex items-center justify-center shadow-lg shadow-gray-600/20">
                 <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" />
                 </svg>
@@ -168,11 +168,11 @@ export default function PickMentorPage() {
                   <div
                     key={mentor.id}
                     className={`flex items-start gap-4 p-4 border rounded-lg transition-all ${selectedMentor === mentor.id
-                      ? 'border-black bg-gray-50'
+                      ? 'border-yellow-600 bg-gray-50'
                       : 'border-gray-200 bg-white hover:border-gray-300'
                       }`}
                   >
-                    <div className={`w-14 h-14 rounded-full flex items-center justify-center text-white font-semibold flex-shrink-0 ${selectedMentor === mentor.id ? 'bg-gray-600' : 'bg-gradient-to-br from-gray-500 to-gray-600'
+                    <div className={`w-14 h-14 rounded-full flex items-center justify-center text-white font-semibold shrink-0 ${selectedMentor === mentor.id ? 'bg-yellow-600' : 'bg-linear-to-br from-gray-500 to-gray-600'
                       }`}>
                       {mentor.avatar}
                     </div>
@@ -210,7 +210,7 @@ export default function PickMentorPage() {
                             type="button"
                             onClick={() => setSelectedMentor(mentor.id)}
                             className={`px-3 py-1 text-xs rounded transition-colors ${selectedMentor === mentor.id
-                              ? 'bg-black text-white'
+                              ? 'bg-yellow-600 text-white'
                               : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
                               }`}
                           >
@@ -242,14 +242,14 @@ export default function PickMentorPage() {
 
               <button
                 type="submit"
-                className="w-full bg-black text-white py-3 rounded-lg font-medium hover:bg-gray-900 transition-colors"
+                className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-colors"
               >
                 Continue to Pick Trainer
               </button>
 
               <div className="flex justify-center gap-2 pt-6">
                 {[1, 2, 3, 4, 5, 6, 7].map((i) => (
-                  <div key={i} className={`h-2 rounded-full transition-all ${i === 5 ? 'w-8 bg-gray-600' : 'w-2 bg-gray-300'}`}></div>
+                  <div key={i} className={`h-2 rounded-full transition-all ${i === 5 ? 'w-8 bg-yellow-600' : 'w-2 bg-gray-300'}`}></div>
                 ))}
               </div>
             </form>
@@ -274,7 +274,7 @@ export default function PickMentorPage() {
 
       {/* Profile Modal */}
       {viewingProfile && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div className="fixed inset-0 bg-yellow-600 bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
             {/* Modal Header */}
             <div className="flex items-center justify-between p-6 border-b">
@@ -291,7 +291,7 @@ export default function PickMentorPage() {
             <div className="p-6">
               {/* Mentor Header */}
               <div className="flex items-start gap-4 mb-6">
-                <div className="w-16 h-16 bg-gradient-to-br from-gray-500 to-gray-600 rounded-full flex items-center justify-center text-white font-semibold text-lg">
+                <div className="w-16 h-16 bg-linear-to-br from-gray-500 to-gray-600 rounded-full flex items-center justify-center text-white font-semibold text-lg">
                   {viewingProfile.avatar}
                 </div>
                 <div className="flex-1">
@@ -401,7 +401,7 @@ export default function PickMentorPage() {
                     setSelectedMentor(viewingProfile.id);
                     handleCloseProfile();
                   }}
-                  className="flex-1 bg-black text-white py-2 px-4 rounded-lg font-medium hover:bg-gray-900 transition-colors"
+                  className="flex-1 bg-yellow-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-yellow-700 transition-colors"
                 >
                   Select This Mentor
                 </button>

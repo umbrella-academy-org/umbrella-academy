@@ -147,7 +147,7 @@ export default function AssignmentStats() {
               className="flex items-start gap-3 animate-fade-in"
               style={{ animationDelay: `${index * 50}ms` }}
             >
-              <div className="w-2 h-2 bg-gray-600 rounded-full mt-2 flex-shrink-0" />
+              <div className="w-2 h-2 bg-yellow-600 rounded-full mt-2 shrink-0" />
               <div className="flex-1 min-w-0">
                 <p className="text-sm text-gray-900">
                   <span className="font-medium">{activity.action}</span>

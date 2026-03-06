@@ -11,7 +11,7 @@ export default function CourseOverview() {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
         {/* Course Discovery */}
         <div className="flex items-center gap-5">
-          <div className="w-16 h-16 bg-gradient-to-br from-gray-500 to-gray-600 rounded-lg flex items-center justify-center shadow-lg shadow-gray-600/20 transform group-hover:scale-105 transition-transform duration-500">
+          <div className="w-16 h-16 bg-linear-to-br from-yellow-500 to-yellow-600 rounded-lg flex items-center justify-center shadow-lg shadow-yellow-600/20 transform group-hover:scale-105 transition-transform duration-500">
             <Play className="w-8 h-8 text-white fill-current" />
           </div>
 
@@ -44,7 +44,7 @@ export default function CourseOverview() {
 
           <div className="relative">
             <div className="w-12 h-12 rounded-lg overflow-hidden shadow-sm border border-white">
-              <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+              <div className="w-full h-full bg-linear-to-br from-yellow-50 to-yellow-100 flex items-center justify-center">
                 <User className="w-6 h-6 text-gray-700" />
               </div>
             </div>

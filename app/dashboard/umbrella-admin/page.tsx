@@ -189,7 +189,7 @@ export default function UmbrellaAdminDashboard() {
                         <div className="flex items-center gap-3">
                           <div className="w-16 bg-gray-200 rounded-full h-2">
                             <div
-                              className="bg-gray-600 h-2 rounded-full transition-all duration-1000"
+                              className="bg-yellow-600 h-2 rounded-full transition-all duration-1000"
                               style={{ width: `${field.performance}%` }}
                             ></div>
                           </div>

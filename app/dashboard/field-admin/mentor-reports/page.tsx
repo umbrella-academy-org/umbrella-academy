@@ -218,7 +218,7 @@ export default function FieldAdminMentorReportsPage() {
                       <select
                         value={filterStatus}
                         onChange={(e) => setFilterStatus(e.target.value)}
-                        className="px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-600"
+                        className="px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-600"
                       >
                         <option value="all">All Status</option>
                         <option value="pending">Pending</option>
@@ -230,7 +230,7 @@ export default function FieldAdminMentorReportsPage() {
                       <select
                         value={filterType}
                         onChange={(e) => setFilterType(e.target.value)}
-                        className="px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-600"
+                        className="px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-600"
                       >
                         <option value="all">All Types</option>
                         <option value="monthly">Monthly</option>
@@ -339,7 +339,7 @@ export default function FieldAdminMentorReportsPage() {
 
       {/* Report Details Modal */}
       {selectedReportData && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div className="fixed inset-0 bg-yellow-600 bg-opacity-50 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
             {/* Modal Header */}
             <div className="flex items-center justify-between p-6 border-b border-gray-200">
@@ -362,14 +362,14 @@ export default function FieldAdminMentorReportsPage() {
                   <>
                     <button
                       onClick={() => handleStatusUpdate(selectedReportData.id, 'reviewed')}
-                      className="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors text-sm"
+                      className="flex items-center gap-2 px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors text-sm"
                     >
                       <Eye className="w-4 h-4" />
                       Mark Reviewed
                     </button>
                     <button
                       onClick={() => handleStatusUpdate(selectedReportData.id, 'approved')}
-                      className="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors text-sm"
+                      className="flex items-center gap-2 px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors text-sm"
                     >
                       <CheckCircle className="w-4 h-4" />
                       Approve
@@ -469,11 +469,11 @@ export default function FieldAdminMentorReportsPage() {
                       onChange={(e) => setAdminNotes(e.target.value)}
                       placeholder="Add your notes or feedback..."
                       rows={3}
-                      className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent"
+                      className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
                     />
                     <button
                       onClick={() => handleAddNotes(selectedReportData.id)}
-                      className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
+                      className="px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors"
                       disabled={!adminNotes.trim()}
                     >
                       Add Notes

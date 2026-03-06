@@ -35,18 +35,18 @@ export default function VideoTutorials() {
             <input
               type="text"
               placeholder="Search here..."
-              className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent"
+              className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
             />
           </div>
           
-          <select className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent">
+          <select className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent">
             <option>All Courses</option>
             <option>Web Development</option>
             <option>Backend Development</option>
             <option>Frontend Development</option>
           </select>
           
-          <select className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent">
+          <select className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent">
             <option>By Date</option>
             <option>By Duration</option>
             <option>By Popularity</option>
@@ -63,19 +63,19 @@ export default function VideoTutorials() {
             style={{ animationDelay: `${index * 100}ms` }}
           >
             {/* Video Thumbnail */}
-            <div className={`relative h-48 bg-gradient-to-br ${tutorial.thumbnail} flex items-center justify-center`}>
-              <div className="absolute inset-0 bg-black bg-opacity-20" />
+            <div className={`relative h-48 bg-linear-to-br ${tutorial.thumbnail} flex items-center justify-center`}>
+              <div className="absolute inset-0 bg-yellow-600 bg-opacity-20" />
               <button className="relative z-10 w-16 h-16 bg-white bg-opacity-90 rounded-full flex items-center justify-center group-hover:bg-opacity-100 transition-all duration-200 transform group-hover:scale-110">
                 <Play className="w-8 h-8 text-gray-800 ml-1" />
               </button>
               
               {/* Duration Badge */}
-              <div className="absolute bottom-3 right-3 px-2 py-1 bg-black bg-opacity-70 text-white text-xs rounded">
+              <div className="absolute bottom-3 right-3 px-2 py-1 bg-yellow-600 bg-opacity-70 text-white text-xs rounded">
                 {tutorial.duration}
               </div>
               
               {/* Title Overlay */}
-              <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent">
+              <div className="absolute bottom-0 left-0 right-0 p-4 bg-linear-to-t from-black to-transparent">
                 <h3 className="text-white font-bold text-lg leading-tight">
                   {tutorial.title}
                 </h3>
@@ -98,7 +98,7 @@ export default function VideoTutorials() {
                 <button className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm">
                   Cancel
                 </button>
-                <button className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors text-sm font-medium">
+                <button className="px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors text-sm font-medium">
                   Continue
                 </button>
               </div>

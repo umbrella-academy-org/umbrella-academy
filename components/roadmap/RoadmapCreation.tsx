@@ -72,7 +72,7 @@ export default function RoadmapCreation({ roadmap, onRoadmapCreated }: RoadmapCr
         </div>
         <h3 className="text-xl font-semibold text-gray-900 mb-2">Processing Payment</h3>
         <p className="text-gray-600 mb-6">Please wait while we process your payment...</p>
-        <div className="w-8 h-8 border-4 border-gray-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
+        <div className="w-8 h-8 border-4 border-yellow-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
       </div>
     );
   }
@@ -85,7 +85,7 @@ export default function RoadmapCreation({ roadmap, onRoadmapCreated }: RoadmapCr
         </div>
         <h3 className="text-xl font-semibold text-gray-900 mb-2">Creating Your Roadmap</h3>
         <p className="text-gray-600 mb-6">Setting up your personalized learning path...</p>
-        <div className="w-8 h-8 border-4 border-gray-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
+        <div className="w-8 h-8 border-4 border-yellow-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
       </div>
     );
   }
@@ -114,8 +114,8 @@ export default function RoadmapCreation({ roadmap, onRoadmapCreated }: RoadmapCr
       {/* Roadmap Preview */}
       <div className="border border-gray-200 rounded-lg p-4 mb-6">
         <div className="flex items-start gap-4">
-          <div className="w-16 h-12 bg-gradient-to-br from-gray-900 to-gray-700 rounded-lg flex-shrink-0 flex items-center justify-center">
-            <div className="w-6 h-6 bg-gray-600 rounded-full"></div>
+          <div className="w-16 h-12 bg-linear-to-br from-gray-900 to-gray-700 rounded-lg shrink-0 flex items-center justify-center">
+            <div className="w-6 h-6 bg-yellow-600 rounded-full"></div>
           </div>
           <div className="flex-1">
             <h4 className="font-semibold text-gray-900 mb-1">{roadmap.title}</h4>
@@ -188,7 +188,7 @@ export default function RoadmapCreation({ roadmap, onRoadmapCreated }: RoadmapCr
       <button
         onClick={handleCreateRoadmap}
         disabled={isCreating}
-        className="w-full bg-gray-600 text-white py-3 rounded-lg font-medium hover:bg-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+        className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
       >
         {isCreating ? (
           <>
