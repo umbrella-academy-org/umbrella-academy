@@ -250,7 +250,7 @@ export default function LoginPage() {
       {/* Right side - Image */}
       <div className="hidden lg:block flex-1 relative overflow-hidden">
         <Image
-          src="/auth/login/image.png"
+          src="/real/image.jpeg"
           alt="Beach with palm tree"
           fill
           className="object-cover object-center scale-105"

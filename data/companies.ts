@@ -1,7 +1,7 @@
 import { Company } from '@/types';
 
 export const mockCompanies: Company[] = [
-    
+
     {
         id: 'comp-se-1',
         name: 'DREAMIZE Africa',
@@ -115,7 +115,7 @@ export const mockCompanies: Company[] = [
             'Post-Production & Editing'
         ],
         images: [
-             '/real/greenlandlogo.jpeg',
+            '/real/greenlandlogo.jpeg',
         ],
         description: 'Learn by Doing - Transform Your Passion into a Profession. We nurture creativity, technical expertise, and professional discipline through hands-on learning in filmmaking, design, and visual storytelling.',
         fieldId: 'media-production-and-storytelling',
@@ -201,10 +201,15 @@ export const mockCompanies: Company[] = [
                 level: 'Beginner',
                 image: '/real/greenlandlogo.jpeg',
                 description: 'Master design principles and photography techniques'
-         
+
             }
         ]
     },
 
- 
+
+];
+
+export const top4Coursers = [
+    ...(mockCompanies[0]?.courses?.slice(0, 2) || []),
+    ...(mockCompanies[1]?.courses?.slice(0, 2) || [])
 ];
