@@ -12,29 +12,42 @@ import {
     Sparkles, GraduationCap, Flame, Layout, Video,
     Users, CalendarDays
 } from 'lucide-react';
-import { useAuth } from '@/contexts';
+import { useAuth, useRoadmaps } from '@/contexts';
 import Image from 'next/image';
 import { StudentUser } from '@/types';
 
 export default function StudentProfilePage() {
-    const { user } = useAuth();
+    const { user, isLoading: authLoading } = useAuth();
+    const { getStudentRoadmaps, isLoading: roadmapLoading } = useRoadmaps();
     const studentUser = user?.role === 'student' ? user as StudentUser : null;
     const [activeTab, setActiveTab] = useState('Overview');
 
-    // Data tailored for Live Session based E-Learning
+    const roadmaps = getStudentRoadmaps();
+    const activeRoadmap = roadmaps.find(r => r.status === 'active') ?? roadmaps[0] ?? null;
+
+    // Compute stats from active roadmap progress
+    const sessionsAttended = activeRoadmap?.roadmap.progress.completedSessions ?? 0;
+    const totalHours = activeRoadmap?.roadmap.progress.hoursCompleted ?? 0;
+    const attendanceRate = activeRoadmap && activeRoadmap.roadmap.progress.totalSessions > 0
+        ? `${Math.round((activeRoadmap.roadmap.progress.completedSessions / activeRoadmap.roadmap.progress.totalSessions) * 100)}%`
+        : '0%';
+
+    // Map roadmap phases to liveRoadmap display format
+    const liveRoadmap = activeRoadmap?.roadmap.phases.map(phase => ({
+        title: phase.title,
+        status: phase.status === 'completed' ? 'Completed'
+            : phase.status === 'active' ? 'In Progress'
+            : 'Upcoming',
+        date: phase.status === 'completed' && phase.sessions[0]?.completedAt
+            ? new Date(phase.sessions[0].completedAt).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
+            : 'Upcoming',
+    })) ?? [];
+
+    // Static data that remains hardcoded
     const profileData = {
-        name: user?.name || 'Jane Mukamana',
         role: 'Software Engineering Trainee',
-        email: user?.email || 'jane.mukamana@student.umbrella.rw',
         phone: '+250 788 000 000',
         location: 'Kigali, Rwanda',
-        portfolio: 'janemukamana.dev',
-        bio: user?.profileData?.bio || 'Dedicated trainee focusing on live collaborative sessions and practical software implementation within the Umbrella Tech Field.',
-        field: user?.fieldId?.replace(/-/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase()) || 'Tech Companies Field',
-        joinDate: user?.joinDate || 'Sep 2024',
-        sessionsAttended: 42,
-        attendanceRate: '94%',
-        totalHours: 142,
         engagementScore: 88,
         skills: [
             { name: 'React Architecture', level: 'Advanced', color: 'bg-yellow-600' },
@@ -42,12 +55,14 @@ export default function StudentProfilePage() {
             { name: 'TypeScript', level: 'Intermediate', color: 'bg-yellow-600' },
             { name: 'UI/UX Principles', level: 'Advanced', color: 'bg-yellow-600' },
         ],
-        liveRoadmap: [
-            { title: 'Core JavaScript', status: 'Completed', date: 'Oct 2024' },
-            { title: 'React & State Management', status: 'In Progress', date: 'Ongoing' },
-            { title: 'Full Stack Integration', status: 'Upcoming', date: 'Dec 2024' },
-        ]
     };
+
+    // Derived from user context
+    const name = user?.name || 'Jane Mukamana';
+    const email = user?.email || 'jane.mukamana@student.umbrella.rw';
+    const bio = user?.profileData?.bio || 'Dedicated trainee focusing on live collaborative sessions and practical software implementation within the Umbrella Tech Field.';
+    const field = user?.fieldId?.replace(/-/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase()) || 'Tech Companies Field';
+    const joinDate = user?.joinDate || 'Sep 2024';
 
     return (
         <div className="flex h-screen bg-[#FDFDFC]">
@@ -80,7 +95,7 @@ export default function StudentProfilePage() {
                                         <Image src={user.avatar} alt="Avatar" width={128} height={128} className="w-full h-full object-cover rounded-lg" />
                                     ) : (
                                         <div className="w-full h-full bg-linear-to-br from-yellow-500 to-yellow-600 flex items-center justify-center text-white text-4xl font-black rounded-lg">
-                                            {profileData.name.charAt(0)}
+                                            {name.charAt(0)}
                                         </div>
                                     )}
                                 </div>
@@ -90,7 +105,7 @@ export default function StudentProfilePage() {
                             <div className="flex-1 pb-2">
                                 <div className="flex flex-wrap items-center justify-between gap-4">
                                     <div className="space-y-1">
-                                        <h1 className="text-3xl font-bold text-gray-900">{profileData.name}</h1>
+                                        <h1 className="text-3xl font-bold text-gray-900">{name}</h1>
                                         <div className="flex items-center gap-4 text-sm font-medium text-gray-500">
                                             <span className="flex items-center gap-1.5"><MapPin className="w-4 h-4 text-gray-600" /> {profileData.location}</span>
                                             <span className="flex items-center gap-1.5 text-gray-700 font-bold"><Zap className="w-4 h-4" /> {profileData.role}</span>
@@ -111,10 +126,24 @@ export default function StudentProfilePage() {
 
                     {/* Stats Grid - Rounded LG */}
                     <div className="max-w-[1400px] mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6 mt-10">
-                        <SimpleStat icon={<Video className="w-5 h-5" />} label="Live Sessions" value={profileData.sessionsAttended} color="text-yellow-600" />
-                        <SimpleStat icon={<Users className="w-5 h-5" />} label="Attendance" value={profileData.attendanceRate} color="text-yellow-600" />
-                        <SimpleStat icon={<Clock className="w-5 h-5" />} label="Live Hours" value={profileData.totalHours} color="text-yellow-600" />
-                        <SimpleStat icon={<TrendingUp className="w-5 h-5" />} label="Engagement" value={`${profileData.engagementScore}%`} color="text-yellow-600" />
+                        {authLoading || roadmapLoading ? (
+                            <>
+                                {[...Array(4)].map((_, i) => (
+                                    <div key={i} className="p-6 bg-white rounded-lg border border-gray-100 shadow-sm animate-pulse">
+                                        <div className="h-10 w-10 bg-gray-100 rounded-lg mx-auto mb-3" />
+                                        <div className="h-3 bg-gray-100 rounded w-2/3 mx-auto mb-2" />
+                                        <div className="h-7 bg-gray-100 rounded w-1/2 mx-auto" />
+                                    </div>
+                                ))}
+                            </>
+                        ) : (
+                            <>
+                                <SimpleStat icon={<Video className="w-5 h-5" />} label="Live Sessions" value={sessionsAttended} color="text-yellow-600" />
+                                <SimpleStat icon={<Users className="w-5 h-5" />} label="Attendance" value={attendanceRate} color="text-yellow-600" />
+                                <SimpleStat icon={<Clock className="w-5 h-5" />} label="Live Hours" value={totalHours} color="text-yellow-600" />
+                                <SimpleStat icon={<TrendingUp className="w-5 h-5" />} label="Engagement" value={`${profileData.engagementScore}%`} color="text-yellow-600" />
+                            </>
+                        )}
                     </div>
 
                     <div className="max-w-[1400px] mx-auto p-6 grid grid-cols-1 lg:grid-cols-3 gap-8 pb-20">
@@ -143,7 +172,7 @@ export default function StudentProfilePage() {
                             {/* Bio Block */}
                             <div className="bg-white rounded-lg border border-gray-100 shadow-sm p-8 space-y-4">
                                 <h3 className="text-xs font-black text-gray-400  ">About Me</h3>
-                                <p className="text-sm font-medium text-gray-600 leading-relaxed italic">{profileData.bio}</p>
+                                <p className="text-sm font-medium text-gray-600 leading-relaxed italic">{bio}</p>
                                 <div className="flex gap-2 pt-2">
                                     <SocialLink icon={<Linkedin className="w-4 h-4" />} />
                                     <SocialLink icon={<Github className="w-4 h-4" />} />
@@ -159,20 +188,34 @@ export default function StudentProfilePage() {
                             <div className="bg-white rounded-lg border border-gray-100 shadow-sm p-8 space-y-8">
                                 <div className="flex items-center justify-between">
                                     <h3 className="text-xl font-bold text-gray-900">Live Session Roadmap</h3>
-                                    <span className="text-[10px] font-black text-gray-600  bg-gray-50 px-2.5 py-1 rounded-full border border-gray-100">Active Field: {profileData.field}</span>
+                                    <span className="text-[10px] font-black text-gray-600  bg-gray-50 px-2.5 py-1 rounded-full border border-gray-100">Active Field: {field}</span>
                                 </div>
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                    {profileData.liveRoadmap.map((item, i) => (
-                                        <div key={i} className={`p-5 rounded-lg border ${item.status === 'Completed' ? 'bg-gray-50/30 border-gray-100' : item.status === 'In Progress' ? 'bg-gray-50/30 border-gray-100' : 'bg-gray-50/30 border-gray-100'}`}>
-                                            <div className="flex items-center justify-between mb-3">
-                                                <span className={`text-[9px] font-black  px-2 py-0.5 rounded ${item.status === 'Completed' ? 'bg-gray-100 text-gray-700' : item.status === 'In Progress' ? 'bg-gray-100 text-gray-700' : 'bg-gray-200 text-gray-600'}`}>{item.status}</span>
-                                                <Clock className="w-3.5 h-3.5 text-gray-400" />
+                                {authLoading || roadmapLoading ? (
+                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-pulse">
+                                        {[...Array(3)].map((_, i) => (
+                                            <div key={i} className="p-5 rounded-lg border border-gray-100 bg-gray-50/30">
+                                                <div className="h-4 bg-gray-100 rounded w-1/2 mb-3" />
+                                                <div className="h-4 bg-gray-100 rounded w-3/4 mb-2" />
+                                                <div className="h-3 bg-gray-100 rounded w-1/3" />
                                             </div>
-                                            <h4 className="font-bold text-gray-800 text-sm mb-1">{item.title}</h4>
-                                            <p className="text-[10px] text-gray-500 font-bold">{item.date}</p>
-                                        </div>
-                                    ))}
-                                </div>
+                                        ))}
+                                    </div>
+                                ) : activeRoadmap === null ? (
+                                    <p className="text-sm text-gray-400 font-medium text-center py-6">No active roadmap.</p>
+                                ) : (
+                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                        {liveRoadmap.map((item, i) => (
+                                            <div key={i} className={`p-5 rounded-lg border ${item.status === 'Completed' ? 'bg-gray-50/30 border-gray-100' : item.status === 'In Progress' ? 'bg-gray-50/30 border-gray-100' : 'bg-gray-50/30 border-gray-100'}`}>
+                                                <div className="flex items-center justify-between mb-3">
+                                                    <span className={`text-[9px] font-black  px-2 py-0.5 rounded ${item.status === 'Completed' ? 'bg-gray-100 text-gray-700' : item.status === 'In Progress' ? 'bg-gray-100 text-gray-700' : 'bg-gray-200 text-gray-600'}`}>{item.status}</span>
+                                                    <Clock className="w-3.5 h-3.5 text-gray-400" />
+                                                </div>
+                                                <h4 className="font-bold text-gray-800 text-sm mb-1">{item.title}</h4>
+                                                <p className="text-[10px] text-gray-500 font-bold">{item.date}</p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
                             </div>
 
                             {/* Technical Arsenal & Info Grid */}
@@ -200,9 +243,9 @@ export default function StudentProfilePage() {
                                 <div className="md:col-span-2 bg-white rounded-lg border border-gray-100 shadow-sm p-8 space-y-6">
                                     <h3 className="text-xl font-bold text-gray-900">Contact Details</h3>
                                     <div className="space-y-6">
-                                        <MiniInfo label="Academy Email" value={profileData.email} icon={<Mail className="w-4 h-4" />} />
+                                        <MiniInfo label="Academy Email" value={email} icon={<Mail className="w-4 h-4" />} />
                                         <MiniInfo label="Phone Number" value={profileData.phone} icon={<Phone className="w-4 h-4" />} />
-                                        <MiniInfo label="Join Date" value={profileData.joinDate} icon={<Calendar className="w-4 h-4" />} />
+                                        <MiniInfo label="Join Date" value={joinDate} icon={<Calendar className="w-4 h-4" />} />
                                     </div>
                                 </div>
                             </div>
