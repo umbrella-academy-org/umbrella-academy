@@ -31,3 +31,24 @@ export interface SocketResponse<T> {
   message: string;
 }
 
+
+export interface Negotiation {
+  id: string;
+  orderId: string;
+  status: 'pending' | 'accepted' | 'rejected' | 'countered';
+  proposedPrice?: number;
+  agreedPrice?: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface SetAgreedPriceRequest {
+  agreedPrice: number;
+}
+
+export interface Message {
+  id: string;
+  senderId: string;
+  content: string;
+  createdAt: string;
+}

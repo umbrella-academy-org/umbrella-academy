@@ -100,7 +100,7 @@ export default function StudentsTable({ searchQuery, selectedStatus, selectedCou
     const sessionsCompleted = 0;
     const totalSessions = 0;
     const lastActivity = 'N/A';
-    const trend: 'up' | 'down' | 'stable' = 'stable';
+    const trend: string = 'stable';
 
     return {
       id: student.id,

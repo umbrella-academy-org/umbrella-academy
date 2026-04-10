@@ -29,6 +29,20 @@ export const API_ENDPOINTS = {
   FIELD_TRAINERS: (id: string) => `/api/fields/${id}/trainers`,
   FIELD_MENTORS: (id: string) => `/api/fields/${id}/mentors`,
   FIELD_COMPANIES: (id: string) => `/api/fields/${id}/companies`,
+  NEGOTIATION: {
+    BY_ID: (id: string) => `/api/negotiations/${id}`,
+    SET_AGREED_PRICE: (id: string) => `/api/negotiations/${id}/agreed-price`,
+    BUYER: '/api/negotiations/buyer',
+    SELLER: '/api/negotiations/seller',
+  },
+  ORDER: {
+    BY_ID: (id: string) => `/api/orders/${id}`,
+  },
+  FILES: {
+    UPLOAD_AVATAR: '/api/files/avatar',
+    UPLOAD_MESSAGE: '/api/files/message',
+    UPLOAD_GENERIC: '/api/files/upload',
+  },
 };
 
 export const SOCKET_EVENTS = {

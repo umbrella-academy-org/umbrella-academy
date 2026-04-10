@@ -1,326 +1,129 @@
-import axios, { AxiosInstance, AxiosResponse, AxiosProgressEvent, CancelToken } from 'axios';
 import { BASE_URL } from './constants';
 import { ApiResponse } from '@/types';
-import { withRetry, retryConfigs, RetryOptions } from '@/lib/retry';
-import { withTimeout, timeoutConfigs, TimeoutError } from '@/lib/timeout';
 
-const HTTP_STATUS = { UNAUTHORIZED: 401, FORBIDDEN: 403 };
 const API_CONFIG = { BASE_URL, TIMEOUT: 20000 };
+const HTTP_STATUS = { UNAUTHORIZED: 401, FORBIDDEN: 403 };
 
 class ApiClient {
-  private axiosInstance: AxiosInstance;
-
   private logoutListeners: (() => void)[] = [];
-  private maxRefreshAttempts: number = 3;
 
-  constructor() {
-    this.axiosInstance = axios.create({
-      baseURL: API_CONFIG.BASE_URL,
-      timeout: API_CONFIG.TIMEOUT,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-
-    // Request interceptor to add auth token
-    this.axiosInstance.interceptors.request.use(
-      async config => {
-        try {
-          const token = this.getAuthToken();
-          if (token) {
-            config.headers.Authorization = `Bearer ${token}`;
-          }
-          return config;
-        } catch (error) {
-          return Promise.reject(error);
-        }
-      },
-      error => {
-        return Promise.reject(error);
-      }
-    );
-
-    // Response interceptor to handle errors
-    this.axiosInstance.interceptors.response.use(
-      (response: AxiosResponse) => response,
-      async error => {
-        const originalRequest = error.config;
-        // Initialize retry count per request
-        if (!originalRequest._retryCount) {
-          originalRequest._retryCount = 0;
-        }
-
-        try {
-          if (error.response) {
-            const status = error.response.status;
-
-            if (status === HTTP_STATUS.UNAUTHORIZED || status === HTTP_STATUS.FORBIDDEN) {
-              this.logout();
-              throw error;
-            }
-
-            // Retry only server-side errors (5xx)
-            if (
-              status >= 500 &&
-              status < 600 &&
-              originalRequest._retryCount < this.maxRefreshAttempts
-            ) {
-              originalRequest._retryCount++;
-              const delay = 1000 * originalRequest._retryCount; // 1s, 2s, 3s backoff
-              await new Promise(res => setTimeout(res, delay));
-              return this.axiosInstance(originalRequest);
-            }
-
-            throw error;
-          }
-
-          // Handle network or timeout errors
-          if (error.code === 'ECONNABORTED' || error.message === 'Network Error') {
-            if (originalRequest._retryCount < this.maxRefreshAttempts) {
-              originalRequest._retryCount++;
-              const delay = 1000 * originalRequest._retryCount;
-              await new Promise(res => setTimeout(res, delay));
-              return this.axiosInstance(originalRequest);
-            }
-            throw new Error('Network error after multiple retries');
-          }
-
-          throw error;
-        } catch (err) {
-          return Promise.reject(err);
-        }
-      }
-    );
-  }
-
-  private getAuthToken() {
+  private getAuthToken(): string | null {
     try {
       return localStorage.getItem('auth_token');
     } catch {
-      this.logout();
       return null;
     }
   }
 
-  // private async handleUnauthorized() {
-  //   try {
+  private getHeaders(extra?: Record<string, string>): Record<string, string> {
+    const headers: Record<string, string> = { 'Content-Type': 'application/json', ...extra };
+    const token = this.getAuthToken();
+    if (token) headers['Authorization'] = `Bearer ${token}`;
+    return headers;
+  }
 
-  //     if (this.refreshAttempts >= this.maxRefreshAttempts) {
-  //       this.logout();
-  //       throw new Error('Max refresh attempts exceeded');
-  //     }
-  //     this.refreshAttempts++;
-  //     const refreshToken = await SecureStore.getItemAsync('refresh_token');
-  //     if (!refreshToken) {
-  //       throw new Error('No refresh token available');
-  //     }
-  //     const response = await axios.post(
-  //       `${API_CONFIG.BASE_URL}/api/${API_CONFIG.API_VERSION}/auth/refresh`,
-  //       { refreshToken },
-  //       { headers: { 'Content-Type': 'application/json' } }
-  //     );
-  //     if (response.status === HTTP_STATUS.OK) {
-  //       const { accessToken } = response.data;
-  //       await SecureStore.setItemAsync('access_token', accessToken);
-  //       this.refreshAttempts = 0;
-  //     } else {
-  //       throw new Error('Refresh token invalid or expired');
-  //     }
-  //   } catch (error) {
-  //     this.logout();
-  //     throw error;
-  //   }
-  // }
-
-  public async logout() {
+  public async logout(): Promise<void> {
     try {
-      localStorage.removeItem('auth_token');
-      localStorage.removeItem('user');
-      localStorage.removeItem('farmer');
-      localStorage.removeItem('supplier');
-      localStorage.removeItem('buyer');
       localStorage.clear();
-    } catch {
+    } catch { /* ignore */ } finally {
+      this.logoutListeners.forEach(cb => { try { cb(); } catch { /* ignore */ } });
+    }
+  }
+
+  public onLogout(callback: () => void): void {
+    this.logoutListeners.push(callback);
+  }
+
+  public removeLogoutListener(callback: () => void): void {
+    this.logoutListeners = this.logoutListeners.filter(cb => cb !== callback);
+  }
+
+  private async request<T>(method: string, endpoint: string, body?: unknown, timeout = API_CONFIG.TIMEOUT): Promise<T> {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeout);
+
+    try {
+      const res = await fetch(`${API_CONFIG.BASE_URL}${endpoint}`, {
+        method,
+        headers: this.getHeaders(),
+        body: body !== undefined ? JSON.stringify(body) : undefined,
+        signal: controller.signal,
+      });
+
+      if (res.status === HTTP_STATUS.UNAUTHORIZED || res.status === HTTP_STATUS.FORBIDDEN) {
+        await this.logout();
+        throw new Error(`HTTP ${res.status}`);
+      }
+
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return res.json() as Promise<T>;
+    } catch (error) {
+      if (error instanceof Error && error.name === 'AbortError') {
+        throw new Error(`Request timed out after ${timeout}ms`);
+      }
+      throw error;
     } finally {
-      this.logoutListeners.forEach(callback => {
-        try {
-          callback();
-        } catch { }
-      });
+      clearTimeout(timer);
     }
   }
 
-  public onLogout(callback: () => void) {
-    try {
-      this.logoutListeners.push(callback);
-    } catch { }
+  async get<T>(endpoint: string, params?: Record<string, unknown>): Promise<T> {
+    const query = params ? '?' + new URLSearchParams(params as Record<string, string>).toString() : '';
+    return this.request<T>('GET', endpoint + query);
   }
 
-  public removeLogoutListener(callback: () => void) {
-    try {
-      this.logoutListeners = this.logoutListeners.filter(cb => cb !== callback);
-    } catch { }
+  async post<T>(endpoint: string, data?: unknown): Promise<T> {
+    return this.request<T>('POST', endpoint, data);
   }
 
-  async get<T>(endpoint: string, params?: Record<string, unknown>, options?: { timeout?: number; retry?: RetryOptions }): Promise<T> {
-    const operation = async () => {
-      const response = await this.axiosInstance.get<T>(endpoint, {
-        params,
-        timeout: options?.timeout || timeoutConfigs.standard
-      });
-      return response.data;
-    };
-
-    if (options?.retry) {
-      return withRetry(operation, options.retry);
-    }
-
-    try {
-      return await withTimeout(operation(), options?.timeout || timeoutConfigs.standard);
-    } catch (error) {
-      if (error instanceof TimeoutError) {
-        throw new Error(`Request timed out after ${error.timeout}ms`);
-      }
-      throw error;
-    }
+  async put<T>(endpoint: string, data?: unknown): Promise<T> {
+    return this.request<T>('PUT', endpoint, data);
   }
 
-  async post<T>(endpoint: string, data?: unknown, options?: { timeout?: number; retry?: RetryOptions }): Promise<T> {
-    const operation = async () => {
-      const response = await this.axiosInstance.post<T>(endpoint, data, {
-        timeout: options?.timeout || timeoutConfigs.standard
-      });
-      return response.data;
-    };
-
-    if (options?.retry) {
-      return withRetry(operation, options.retry);
-    }
-
-    try {
-      return await withTimeout(operation(), options?.timeout || timeoutConfigs.standard);
-    } catch (error) {
-      if (error instanceof TimeoutError) {
-        throw new Error(`Request timed out after ${error.timeout}ms`);
-      }
-      throw error;
-    }
+  async patch<T>(endpoint: string, data?: unknown): Promise<T> {
+    return this.request<T>('PATCH', endpoint, data);
   }
 
-  async put<T>(endpoint: string, data?: unknown, options?: { timeout?: number; retry?: RetryOptions }): Promise<T> {
-    const operation = async () => {
-      const response = await this.axiosInstance.put<T>(endpoint, data, {
-        timeout: options?.timeout || timeoutConfigs.standard
-      });
-      return response.data;
-    };
-
-    if (options?.retry) {
-      return withRetry(operation, options.retry);
-    }
-
-    try {
-      return await withTimeout(operation(), options?.timeout || timeoutConfigs.standard);
-    } catch (error) {
-      if (error instanceof TimeoutError) {
-        throw new Error(`Request timed out after ${error.timeout}ms`);
-      }
-      throw error;
-    }
-  }
-
-  async patch<T>(endpoint: string, data?: unknown, options?: { timeout?: number; retry?: RetryOptions }): Promise<T> {
-    const operation = async () => {
-      const response = await this.axiosInstance.patch<T>(endpoint, data, {
-        timeout: options?.timeout || timeoutConfigs.standard
-      });
-      return response.data;
-    };
-
-    if (options?.retry) {
-      return withRetry(operation, options.retry);
-    }
-
-    try {
-      return await withTimeout(operation(), options?.timeout || timeoutConfigs.standard);
-    } catch (error) {
-      if (error instanceof TimeoutError) {
-        throw new Error(`Request timed out after ${error.timeout}ms`);
-      }
-      throw error;
-    }
-  }
-
-  async delete<T>(endpoint: string, options?: { timeout?: number; retry?: RetryOptions }): Promise<T> {
-    const operation = async () => {
-      const response = await this.axiosInstance.delete<T>(endpoint, {
-        timeout: options?.timeout || timeoutConfigs.standard
-      });
-      return response.data;
-    };
-
-    if (options?.retry) {
-      return withRetry(operation, options.retry);
-    }
-
-    try {
-      return await withTimeout(operation(), options?.timeout || timeoutConfigs.standard);
-    } catch (error) {
-      if (error instanceof TimeoutError) {
-        throw new Error(`Request timed out after ${error.timeout}ms`);
-      }
-      throw error;
-    }
+  async delete<T>(endpoint: string): Promise<T> {
+    return this.request<T>('DELETE', endpoint);
   }
 
   async uploadFile<T>(
     endpoint: string,
     file: File,
-    onUploadProgress?: (event: AxiosProgressEvent) => void,
-    cancelToken?: CancelToken,
-    timeout?: number
+    onUploadProgress?: (event: { loaded: number; total?: number }) => void
   ): Promise<T> {
-    const operation = async () => {
-      const formData = new FormData();
-      formData.append("file", file);
+    const formData = new FormData();
+    formData.append('file', file);
 
-      const response = await this.axiosInstance.post<T>(endpoint, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        onUploadProgress,
-        cancelToken,
-        timeout: timeout ?? timeoutConfigs.long,
-      });
+    const token = this.getAuthToken();
+    const headers: Record<string, string> = {};
+    if (token) headers['Authorization'] = `Bearer ${token}`;
 
-      return response.data;
-    };
+    const res = await fetch(`${API_CONFIG.BASE_URL}${endpoint}`, {
+      method: 'POST',
+      headers,
+      body: formData,
+    });
 
-    // Use file upload retry configuration for uploads
-    return withRetry(operation, retryConfigs.fileUpload);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return res.json() as Promise<T>;
   }
 
-  // Convenience methods with pre-configured retry and timeout settings
   async getWithRetry<T>(endpoint: string, params?: Record<string, unknown>): Promise<ApiResponse<T>> {
-    return this.get(endpoint, params, { retry: retryConfigs.networkRequest });
+    return this.get(endpoint, params);
   }
 
   async postWithRetry<T>(endpoint: string, data?: unknown): Promise<ApiResponse<T>> {
-    return this.post(endpoint, data, { retry: retryConfigs.networkRequest });
+    return this.post(endpoint, data);
   }
 
   async getCritical<T>(endpoint: string, params?: Record<string, unknown>): Promise<ApiResponse<T>> {
-    return this.get(endpoint, params, {
-      timeout: timeoutConfigs.critical,
-      retry: retryConfigs.critical
-    });
+    return this.get(endpoint, params);
   }
 
   async postCritical<T>(endpoint: string, data?: unknown): Promise<ApiResponse<T>> {
-    return this.post(endpoint, data, {
-      timeout: timeoutConfigs.critical,
-      retry: retryConfigs.critical
-    });
+    return this.post(endpoint, data);
   }
 }
 
