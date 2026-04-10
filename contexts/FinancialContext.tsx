@@ -2,14 +2,8 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Wallet, Transaction, Subscription } from '@/types';
-import {
-  mockWallets,
-  mockTransactions,
-  mockSubscriptions,
-  getWalletByOwnerId,
-  getWalletsByType,
-  getTransactionsByType
-} from '@/data';
+import { apiClient } from '@/services/client';
+import { API_ENDPOINTS } from '@/services/constants';
 import { useAuth } from './AuthContext';
 
 interface FinancialContextType {
@@ -30,10 +24,10 @@ interface FinancialContextType {
 const FinancialContext = createContext<FinancialContextType | undefined>(undefined);
 
 export function FinancialProvider({ children }: { children: React.ReactNode }) {
-  const { user: currentUser, hasPermission } = useAuth();
+  const { user: currentUser } = useAuth();
   const [wallets, setWallets] = useState<Wallet[]>([]);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
-  const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
+  const [subscriptions] = useState<Subscription[]>([]);
   const [userWallet, setUserWallet] = useState<Wallet | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -41,68 +35,41 @@ export function FinancialProvider({ children }: { children: React.ReactNode }) {
   const loadFinancialData = async () => {
     setIsLoading(true);
     setError(null);
-
     try {
-      await new Promise(resolve => setTimeout(resolve, 400));
-
       if (!currentUser) {
         setWallets([]);
         setTransactions([]);
-        setSubscriptions([]);
         setUserWallet(null);
         return;
       }
 
-      let filteredWallets: Wallet[] = [];
-      let filteredTransactions: Transaction[] = [];
-      let filteredSubscriptions: Subscription[] = [];
-
-      if (currentUser.role === 'umbrella-admin') {
-        // Umbrella admin can see all financial data
-        filteredWallets = mockWallets;
-        filteredTransactions = mockTransactions;
-        filteredSubscriptions = mockSubscriptions;
-      } else if (currentUser.role === 'field-admin') {
-        // Field admin can see field wallet and related transactions
-        filteredWallets = mockWallets.filter(wallet =>
-          wallet.ownerId === currentUser.fieldId || wallet.ownerType === 'umbrella'
-        );
-        filteredTransactions = mockTransactions.filter(transaction =>
-          transaction.reference?.includes(currentUser.fieldId || '') ||
-          transaction.type === 'income'
-        );
-        filteredSubscriptions = mockSubscriptions; // Can see all subscriptions for analytics
-      } else if (currentUser.role === 'trainer') {
-        // Trainers can see their own wallet and transactions
-        const trainerWallet = mockWallets.find(wallet => wallet.ownerId === currentUser.id);
-        filteredWallets = trainerWallet ? [trainerWallet] : [];
-        filteredTransactions = trainerWallet?.transactions || [];
-        filteredSubscriptions = []; // Trainers don't need subscription data
-      } else if (currentUser.role === 'mentor') {
-        // Mentors can see revenue analytics but not detailed transactions
-        filteredWallets = [];
-        filteredTransactions = mockTransactions.filter(t => t.type === 'income');
-        filteredSubscriptions = mockSubscriptions; // For analytics
+      if (currentUser.role === 'trainer' || currentUser.role === 'field-admin') {
+        // Fetch personal/field wallet
+        const walletRes = await apiClient.get<{ success: boolean; data: Wallet }>(API_ENDPOINTS.WALLET_ME);
+        const wallet = walletRes.data ?? null;
+        setUserWallet(wallet);
+        setWallets(wallet ? [wallet] : []);
+        setTransactions(wallet?.transactions ?? []);
+      } else if (currentUser.role === 'umbrella-admin') {
+        // Fetch all wallets
+        const walletsRes = await apiClient.get<{ success: boolean; data: Wallet[] }>(API_ENDPOINTS.WALLET);
+        const allWallets = walletsRes.data ?? [];
+        setWallets(allWallets);
+        setTransactions(allWallets.flatMap(w => w.transactions ?? []));
+        setUserWallet(null);
       } else if (currentUser.role === 'student') {
-        // Students can see their subscription info only
-        filteredWallets = [];
-        filteredTransactions = mockTransactions.filter(t =>
-          t.type === 'payment' && t.reference?.includes('PAY')
-        );
-        filteredSubscriptions = mockSubscriptions.filter(sub => sub.planId === 'plan_basic'); // Mock: student's subscription
+        // Fetch payment history
+        const paymentsRes = await apiClient.get<{ success: boolean; data: Transaction[] }>(API_ENDPOINTS.PAYMENTS);
+        setTransactions(paymentsRes.data ?? []);
+        setWallets([]);
+        setUserWallet(null);
+      } else {
+        setWallets([]);
+        setTransactions([]);
+        setUserWallet(null);
       }
-
-      setWallets(filteredWallets);
-      setTransactions(filteredTransactions);
-      setSubscriptions(filteredSubscriptions);
-
-      // Set user's personal wallet
-      const personalWallet = mockWallets.find(wallet => wallet.ownerId === currentUser.id);
-      setUserWallet(personalWallet || null);
-
-    } catch (err) {
+    } catch {
       setError('Failed to load financial data');
-      console.error('Error loading financial data:', err);
     } finally {
       setIsLoading(false);
     }
@@ -114,86 +81,47 @@ export function FinancialProvider({ children }: { children: React.ReactNode }) {
     } else {
       setWallets([]);
       setTransactions([]);
-      setSubscriptions([]);
       setUserWallet(null);
       setIsLoading(false);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser]);
 
-  const getWalletByOwnerIdFromContext = (ownerId: string): Wallet | undefined => {
-    return wallets.find(wallet => wallet.ownerId === ownerId);
-  };
+  const getWalletByOwnerIdFromContext = (ownerId: string) => wallets.find(w => w.ownerId === ownerId);
 
-  const getUserTransactions = (): Transaction[] => {
+  const getUserTransactions = () => {
     if (!currentUser) return [];
-
-    if (currentUser.role === 'trainer') {
-      return userWallet?.transactions || [];
-    } else if (currentUser.role === 'student') {
-      return transactions.filter(t => t.type === 'payment');
-    }
-
+    if (currentUser.role === 'trainer') return userWallet?.transactions ?? [];
     return transactions;
   };
 
-  const getUserSubscriptions = (): Subscription[] => {
-    if (currentUser?.role === 'student') {
-      return subscriptions;
-    }
-    return [];
-  };
+  const getUserSubscriptions = () => subscriptions;
 
-  const getTotalBalance = (): number => {
+  const getTotalBalance = () => {
     if (!currentUser) return 0;
-
-    if (currentUser.role === 'umbrella-admin') {
-      return wallets.reduce((total, wallet) => total + wallet.balance, 0);
-    } else if (currentUser.role === 'field-admin') {
-      const fieldWallet = wallets.find(w => w.ownerId === currentUser.fieldId);
-      return fieldWallet?.balance || 0;
-    } else if (currentUser.role === 'trainer') {
-      return userWallet?.balance || 0;
-    }
-
-    return 0;
+    if (currentUser.role === 'umbrella-admin') return wallets.reduce((sum, w) => sum + w.balance, 0);
+    return userWallet?.balance ?? 0;
   };
 
-  const getMonthlyRevenue = (): number => {
-    const currentMonth = new Date().getMonth();
-    const currentYear = new Date().getFullYear();
-
+  const getMonthlyRevenue = () => {
+    const now = new Date();
     return transactions
       .filter(t => {
-        const transactionDate = new Date(t.date);
-        return t.type === 'payment' &&
-          t.status === 'completed' &&
-          transactionDate.getMonth() === currentMonth &&
-          transactionDate.getFullYear() === currentYear;
+        const d = new Date(t.date);
+        return t.type === 'payment' && t.status === 'completed' &&
+          d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
       })
-      .reduce((total, t) => total + t.amount, 0);
-  };
-
-  const refreshFinancialData = async () => {
-    await loadFinancialData();
-  };
-
-  const value: FinancialContextType = {
-    wallets,
-    transactions,
-    subscriptions,
-    userWallet,
-    isLoading,
-    error,
-    getWalletByOwnerIdFromContext,
-    getUserTransactions,
-    getUserSubscriptions,
-    getTotalBalance,
-    getMonthlyRevenue,
-    refreshFinancialData
+      .reduce((sum, t) => sum + t.amount, 0);
   };
 
   return (
-    <FinancialContext.Provider value={value}>
+    <FinancialContext.Provider value={{
+      wallets, transactions, subscriptions, userWallet,
+      isLoading, error,
+      getWalletByOwnerIdFromContext, getUserTransactions,
+      getUserSubscriptions, getTotalBalance, getMonthlyRevenue,
+      refreshFinancialData: loadFinancialData,
+    }}>
       {children}
     </FinancialContext.Provider>
   );
@@ -201,8 +129,6 @@ export function FinancialProvider({ children }: { children: React.ReactNode }) {
 
 export function useFinancial() {
   const context = useContext(FinancialContext);
-  if (context === undefined) {
-    throw new Error('useFinancial must be used within a FinancialProvider');
-  }
+  if (!context) throw new Error('useFinancial must be used within a FinancialProvider');
   return context;
 }

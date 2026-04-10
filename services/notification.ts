@@ -1,27 +1,25 @@
 import { apiClient } from './client';
-import { Notification, NotificationFilter } from '@/types';
-import { ApiResponse } from '@/types';
+import { API_ENDPOINTS } from './constants';
+
+export interface Notification {
+  _id: string;
+  userId: string;
+  type: 'roadmap-submitted' | 'roadmap-approved' | 'roadmap-rejected' | 'session-scheduled' | 'payment-completed';
+  title: string;
+  message: string;
+  isRead: boolean;
+  relatedId?: string;
+  createdAt: string;
+}
 
 class NotificationService {
-    async getNotifications(filter?: NotificationFilter): Promise<ApiResponse<Notification[]>> {
-        return apiClient.get('/notifications', filter as Record<string, unknown>);
-    }
+  async getNotifications(): Promise<{ success: boolean; data: Notification[] }> {
+    return apiClient.get<{ success: boolean; data: Notification[] }>(API_ENDPOINTS.NOTIFICATIONS);
+  }
 
-    async markAsRead(notificationId: string): Promise<ApiResponse<void>> {
-        return apiClient.put(`/notifications/${notificationId}/read`);
-    }
-
-    async markAllAsRead(): Promise<ApiResponse<void>> {
-        return apiClient.put('/notifications/read-all');
-    }
-
-    async deleteNotification(notificationId: string): Promise<ApiResponse<void>> {
-        return apiClient.delete(`/notifications/${notificationId}`);
-    }
-
-    async deleteAllNotifications(): Promise<ApiResponse<void>> {
-        return apiClient.delete('/notifications');
-    }
+  async markAsRead(id: string): Promise<{ success: boolean; data: Notification }> {
+    return apiClient.put<{ success: boolean; data: Notification }>(API_ENDPOINTS.NOTIFICATION_BY_ID(id));
+  }
 }
 
 export const notificationService = new NotificationService();

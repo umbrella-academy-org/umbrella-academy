@@ -1,8 +1,11 @@
 import axios, { AxiosInstance, AxiosResponse, AxiosProgressEvent, CancelToken } from 'axios';
-import { API_CONFIG, HTTP_STATUS } from './constants';
+import { BASE_URL } from './constants';
 import { ApiResponse } from '@/types';
 import { withRetry, retryConfigs, RetryOptions } from '@/lib/retry';
 import { withTimeout, timeoutConfigs, TimeoutError } from '@/lib/timeout';
+
+const HTTP_STATUS = { UNAUTHORIZED: 401, FORBIDDEN: 403 };
+const API_CONFIG = { BASE_URL, TIMEOUT: 20000 };
 
 class ApiClient {
   private axiosInstance: AxiosInstance;
@@ -12,7 +15,7 @@ class ApiClient {
 
   constructor() {
     this.axiosInstance = axios.create({
-      baseURL: `${API_CONFIG.BASE_URL}/api/${API_CONFIG.API_VERSION}`,
+      baseURL: API_CONFIG.BASE_URL,
       timeout: API_CONFIG.TIMEOUT,
       headers: {
         'Content-Type': 'application/json',

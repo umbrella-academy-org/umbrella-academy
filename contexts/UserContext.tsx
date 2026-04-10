@@ -2,12 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { User, UserType } from '@/types';
-import {
-  mockUsers,
-  getFieldAdmins,
-  getUsersByField,
-  getUserById
-} from '@/data';
+import { userService } from '@/services/users';
 import { useAuth } from './AuthContext';
 
 interface UserContextType {
@@ -27,52 +22,19 @@ interface UserContextType {
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
-  const { user: currentUser, hasPermission } = useAuth();
+  const { user: currentUser } = useAuth();
   const [users, setUsers] = useState<User[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Load users based on current user's permissions
   const loadUsers = async () => {
     setIsLoading(true);
     setError(null);
-
     try {
-      // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 500));
-
-      let filteredUsers: User[] = [];
-
-      if (!currentUser) {
-        filteredUsers = [];
-      } else if (currentUser.role === 'umbrella-admin') {
-        // Umbrella admin can see all users
-        filteredUsers = mockUsers;
-      } else if (currentUser.role === 'field-admin') {
-        // Field admin can see users in their field
-        filteredUsers = mockUsers.filter(user =>
-          user.fieldId === currentUser.fieldId || user.role === 'umbrella-admin'
-        );
-      } else if (currentUser.role === 'mentor') {
-        // Mentors can see students and trainers in their field
-        filteredUsers = mockUsers.filter(user =>
-          user.fieldId === currentUser.fieldId &&
-          ['student', 'trainer'].includes(user.role)
-        );
-      } else if (currentUser.role === 'trainer') {
-        // Trainers can see students in their field
-        filteredUsers = mockUsers.filter(user =>
-          user.fieldId === currentUser.fieldId && user.role === 'student'
-        );
-      } else {
-        // Students can only see themselves
-        filteredUsers = [currentUser];
-      }
-
-      setUsers(filteredUsers);
-    } catch (err) {
+      const response = await userService.getUsers();
+      setUsers(response.users ?? []);
+    } catch {
       setError('Failed to load users');
-      console.error('Error loading users:', err);
     } finally {
       setIsLoading(false);
     }
@@ -85,50 +47,25 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       setUsers([]);
       setIsLoading(false);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser]);
 
-  // Derived data
-  const students = users.filter(user => user.role === 'student');
-  const trainers = users.filter(user => user.role === 'trainer');
-  const mentors = users.filter(user => user.role === 'mentor');
-  const fieldAdmins = users.filter(user => user.role === 'field-admin');
+  const students = users.filter(u => u.role === 'student');
+  const trainers = users.filter(u => u.role === 'trainer');
+  const mentors = users.filter(u => u.role === 'mentor');
+  const fieldAdmins = users.filter(u => u.role === 'field-admin');
 
-  const getUsersByRole = (role: UserType): User[] => {
-    return users.filter(user => user.role === role);
-  };
-
-  const getUsersByFieldId = (fieldId: string): User[] => {
-    // Check permission
-    if (!hasPermission('view_field_analytics') && currentUser?.fieldId !== fieldId) {
-      return [];
-    }
-    return users.filter(user => user.fieldId === fieldId);
-  };
-
-  const getUserByIdFromContext = (id: string): User | undefined => {
-    return users.find(user => user.id === id);
-  };
-
-  const refreshUsers = async () => {
-    await loadUsers();
-  };
-
-  const value: UserContextType = {
-    users,
-    students,
-    trainers,
-    mentors,
-    fieldAdmins,
-    isLoading,
-    error,
-    getUsersByRole,
-    getUsersByFieldId,
-    getUserByIdFromContext,
-    refreshUsers
-  };
+  const getUsersByRole = (role: UserType) => users.filter(u => u.role === role);
+  const getUsersByFieldId = (fieldId: string) => users.filter(u => u.fieldId === fieldId);
+  const getUserByIdFromContext = (id: string) => users.find(u => u.id === id);
 
   return (
-    <UserContext.Provider value={value}>
+    <UserContext.Provider value={{
+      users, students, trainers, mentors, fieldAdmins,
+      isLoading, error,
+      getUsersByRole, getUsersByFieldId, getUserByIdFromContext,
+      refreshUsers: loadUsers,
+    }}>
       {children}
     </UserContext.Provider>
   );
@@ -136,8 +73,6 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
 export function useUsers() {
   const context = useContext(UserContext);
-  if (context === undefined) {
-    throw new Error('useUsers must be used within a UserProvider');
-  }
+  if (!context) throw new Error('useUsers must be used within a UserProvider');
   return context;
 }

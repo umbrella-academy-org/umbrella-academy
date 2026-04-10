@@ -1,11 +1,9 @@
-// Export all services
+// Umbrella Academy services barrel export
 export * from './constants';
-export * from './dashboardService';
 export * from './client';
-
-// You can add other service exports here as they are created
-export * from './products';
-export * from './orders';
-export * from './users';
-export * from './auth';
-export * from './farmers';
+export { authService } from './auth';
+export { userService } from './users';
+export { paymentService } from './payments';
+export { notificationService } from './notification';
+export { messageService } from './messages';
+export { default as socketService } from './socket';
