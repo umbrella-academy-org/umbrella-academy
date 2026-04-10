@@ -9,14 +9,13 @@ import ScheduledEvents from '@/components/dashboard/ScheduledEvents';
 import Calendar from '@/components/dashboard/Calendar';
 import { useAuth, useRoadmaps, useUsers, useFinancial } from '@/contexts';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
-import { getFieldDashboardStats, getWalletsByType } from '@/data';
 import { Users, GraduationCap, DollarSign, TrendingUp, Settings, Eye, Wallet } from 'lucide-react';
 
 export default function FieldAdminDashboard() {
   const { user, isAuthenticated, isLoading: authLoading } = useAuth();
   const { studentRoadmaps, isLoading: roadmapsLoading } = useRoadmaps();
   const { users, isLoading: usersLoading } = useUsers();
-  const { } = useFinancial();
+  const { userWallet } = useFinancial();
   const { navigate } = useNavigationWithLoading();
   const [selectedDateRange, setSelectedDateRange] = useState('This month');
 
@@ -78,10 +77,6 @@ export default function FieldAdminDashboard() {
     fieldStudents.some(student => student.id === roadmap.studentId)
   );
 
-  const fieldWallets = getWalletsByType('field');
-  const fieldWallet = fieldWallets.find((w: any) => w.ownerId === user.fieldId);
-  const fieldStats = getFieldDashboardStats(user.fieldId || '');
-
   const activeRoadmaps = fieldRoadmaps.filter(r => r.status === 'active');
   const completedRoadmaps = fieldRoadmaps.filter(r => r.status === 'completed');
 
@@ -136,7 +131,7 @@ export default function FieldAdminDashboard() {
                   <div>
                     <p className="text-xs font-medium text-gray-600">Field Wallet</p>
                     <p className="text-lg lg:text-xl font-bold text-gray-900">
-                      {(fieldWallet?.balance || 0).toLocaleString()} RWF
+                      {(userWallet?.balance || 0).toLocaleString()} RWF
                     </p>
                   </div>
                 </div>
