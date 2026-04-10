@@ -7,7 +7,7 @@ import { useNavigationWithLoading } from '@/lib/utils/navigation';
 
 export default function StudentRoadmapPage() {
   const { user, isAuthenticated, isLoading: authLoading } = useAuth();
-  const { studentRoadmaps, isLoading: roadmapsLoading } = useRoadmaps();
+  const { studentRoadmaps, isLoading: roadmapsLoading, getUpcomingLiveSessions } = useRoadmaps();
   const { navigate } = useNavigationWithLoading();
 
   // Redirect if not authenticated or not a student
@@ -51,6 +51,18 @@ export default function StudentRoadmapPage() {
   const activeRoadmap = studentRoadmaps.find(roadmap =>
     roadmap.studentId === user.id && roadmap.status === 'active'
   );
+
+  const upcomingSessions = getUpcomingLiveSessions();
+  const nextSession = upcomingSessions.sort(
+    (a, b) => new Date(a.scheduledAt).getTime() - new Date(b.scheduledAt).getTime()
+  )[0];
+  const nextSessionDate = nextSession ? new Date(nextSession.scheduledAt) : null;
+  const nextSessionDisplay = nextSessionDate
+    ? nextSessionDate.toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' })
+    : 'No upcoming sessions';
+  const nextSessionTime = nextSessionDate
+    ? nextSessionDate.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })
+    : '';
 
   return (
     <div className="flex h-screen bg-white">
@@ -98,8 +110,8 @@ export default function StudentRoadmapPage() {
                 </div>
                 <div className="bg-white border border-gray-200 rounded-lg p-6">
                   <h3 className="font-semibold text-gray-900 mb-2">Next Session</h3>
-                  <p className="text-2xl font-bold text-yellow-600">Tomorrow</p>
-                  <p className="text-sm text-yellow-600">2:00 PM - 3:00 PM</p>
+                  <p className="text-2xl font-bold text-yellow-600">{nextSessionDisplay}</p>
+                  {nextSessionTime && <p className="text-sm text-yellow-600">{nextSessionTime}</p>}
                 </div>
               </div>
 
