@@ -5,6 +5,17 @@ import { DollarSign, TrendingUp, ArrowUpRight, ArrowDownLeft, Download, Award } 
 import { useFinancial } from '@/contexts';
 import { Transaction } from '@/types';
 
+function computeNextPayoutDate(): string {
+  const now = new Date();
+  // Next payout is on the 23rd of the current or next month
+  const payoutDay = 23;
+  const next = new Date(now.getFullYear(), now.getMonth(), payoutDay);
+  if (next <= now) {
+    next.setMonth(next.getMonth() + 1);
+  }
+  return next.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
 const formatAmount = (t: Transaction): string => {
   const sign = t.type === 'withdrawal' ? '-' : '+';
   return `${sign}RWF ${t.amount.toLocaleString()}`;
@@ -35,6 +46,8 @@ export default function MentorWalletPage() {
   const transactions = getUserTransactions();
   const currentBalance = getTotalBalance();
   const monthlyEarnings = getMonthlyRevenue();
+  const nextPayoutDate = computeNextPayoutDate();
+  const nextPayoutDate = computeNextPayoutDate();
 
   return (
     <div className="flex h-screen bg-white">
@@ -110,7 +123,7 @@ export default function MentorWalletPage() {
               <div className="flex items-center justify-between mb-4">
                 <div>
                   <h3 className="text-lg font-semibold text-gray-900">Withdrawal</h3>
-                  <p className="text-sm text-gray-600">Next payout in 3 days (Jan 23, 2026)</p>
+                  <p className="text-sm text-gray-600">Next payout: {nextPayoutDate}</p>
                 </div>
                 <button className="px-6 py-2.5 bg-yellow-600 text-white rounded-lg font-medium hover:bg-yellow-700 transition-colors">
                   Request Withdrawal
