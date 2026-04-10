@@ -1,8 +1,9 @@
 'use client';
 
-import { Bell, ChevronRight, Calendar, Clock, MapPin } from 'lucide-react';
+import { Bell, ChevronRight, Calendar, Clock } from 'lucide-react';
 import { useState } from 'react';
 import { UserType } from '@/types';
+import { useRoadmaps } from '@/contexts';
 
 interface ScheduledEventsProps {
   userType: UserType;
@@ -10,158 +11,9 @@ interface ScheduledEventsProps {
 
 export default function ScheduledEvents({ userType }: ScheduledEventsProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const { getUpcomingLiveSessions, isLoading } = useRoadmaps();
 
-  // Generate events based on user type
-  const getUpcomingEvents = () => {
-    switch (userType) {
-      case 'trainer':
-        return [
-          {
-            id: 1,
-            title: 'Training Session - React Basics',
-            time: '09:00 AM',
-            type: 'training',
-            color: 'bg-yellow-600'
-          },
-          {
-            id: 2,
-            title: 'Student Progress Review',
-            time: '02:30 PM',
-            type: 'review',
-            color: 'bg-yellow-600'
-          },
-          {
-            id: 3,
-            title: 'Weekly Team Meeting',
-            time: '04:00 PM',
-            type: 'meeting',
-            color: 'bg-yellow-600'
-          }
-        ];
-      case 'mentor':
-        return [
-          {
-            id: 1,
-            title: 'Roadmap Review Session',
-            time: '10:00 AM',
-            type: 'review',
-            color: 'bg-yellow-600'
-          },
-          {
-            id: 2,
-            title: 'Student Check-in Call',
-            time: '01:00 PM',
-            type: 'mentoring',
-            color: 'bg-yellow-600'
-          },
-          {
-            id: 3,
-            title: 'Course Planning Meeting',
-            time: '03:30 PM',
-            type: 'planning',
-            color: 'bg-yellow-600'
-          }
-        ];
-      case 'student':
-        return [
-          {
-            id: 1,
-            title: 'JavaScript Fundamentals',
-            time: '09:00 AM',
-            type: 'lesson',
-            color: 'bg-yellow-600'
-          },
-          {
-            id: 2,
-            title: 'Mentor Check-in',
-            time: '02:00 PM',
-            type: 'mentoring',
-            color: 'bg-yellow-600'
-          },
-          {
-            id: 3,
-            title: 'Project Submission',
-            time: '05:00 PM',
-            type: 'deadline',
-            color: 'bg-yellow-600'
-          }
-        ];
-      case 'field-admin':
-        return [
-          {
-            id: 1,
-            title: 'Field Performance Review',
-            time: '10:00 AM',
-            type: 'review',
-            color: 'bg-yellow-600'
-          },
-          {
-            id: 2,
-            title: 'Trainer Coordination Meeting',
-            time: '02:30 PM',
-            type: 'meeting',
-            color: 'bg-yellow-600'
-          },
-          {
-            id: 3,
-            title: 'Monthly Financial Report',
-            time: '04:00 PM',
-            type: 'report',
-            color: 'bg-yellow-600'
-          }
-        ];
-      case 'umbrella-admin':
-        return [
-          {
-            id: 1,
-            title: 'System Health Check',
-            time: '09:00 AM',
-            type: 'system',
-            color: 'bg-yellow-600'
-          },
-          {
-            id: 2,
-            title: 'Fields Coordination Meeting',
-            time: '01:00 PM',
-            type: 'meeting',
-            color: 'bg-yellow-600'
-          },
-          {
-            id: 3,
-            title: 'Quarterly Board Review',
-            time: '03:30 PM',
-            type: 'review',
-            color: 'bg-yellow-600'
-          }
-        ];
-      default:
-        return [
-          {
-            id: 1,
-            title: 'Team Standup Meeting',
-            time: '09:00 AM',
-            type: 'meeting',
-            color: 'bg-yellow-600'
-          },
-          {
-            id: 2,
-            title: 'Code Review Session',
-            time: '02:30 PM',
-            type: 'review',
-            color: 'bg-yellow-600'
-          },
-          {
-            id: 3,
-            title: 'Client Presentation',
-            time: '04:00 PM',
-            type: 'presentation',
-            color: 'bg-yellow-600'
-          }
-        ];
-    }
-  };
-
-  const upcomingEvents = getUpcomingEvents();
+  const upcomingEvents = getUpcomingLiveSessions();
 
   const getTitle = () => {
     switch (userType) {
@@ -215,25 +67,41 @@ export default function ScheduledEvents({ userType }: ScheduledEventsProps) {
       {/* Today's Events Preview */}
       <div className="space-y-2">
         <h4 className="text-xs font-medium text-gray-600 mb-2">Today's Schedule</h4>
-        {upcomingEvents.map((event, index) => (
-          <div
-            key={event.id}
-            className={`flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 transition-all duration-200 animate-slide-up cursor-pointer group`}
-            style={{ animationDelay: `${index * 100}ms` }}
-          >
-            <div className={`w-2 h-2 rounded-full ${event.color} group-hover:scale-150 transition-transform duration-200`}></div>
-            <div className="flex-1 min-w-0">
-              <p className="text-xs font-medium text-gray-900 truncate group-hover:text-gray-600 transition-colors">
-                {event.title}
-              </p>
-              <div className="flex items-center gap-1 text-xs text-gray-500">
-                <Clock className="w-3 h-3" />
-                <span>{event.time}</span>
+        {isLoading ? (
+          <>
+            {[0, 1, 2].map((i) => (
+              <div key={i} className="flex items-center gap-3 p-2 rounded-lg animate-pulse">
+                <div className="w-2 h-2 rounded-full bg-gray-200"></div>
+                <div className="flex-1 min-w-0 space-y-1">
+                  <div className="h-3 bg-gray-200 rounded w-3/4"></div>
+                  <div className="h-3 bg-gray-200 rounded w-1/3"></div>
+                </div>
               </div>
+            ))}
+          </>
+        ) : upcomingEvents.length === 0 ? (
+          <p className="text-xs text-gray-500 text-center py-4">No events scheduled for today.</p>
+        ) : (
+          upcomingEvents.map((session, index) => (
+            <div
+              key={session.id}
+              className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 transition-all duration-200 animate-slide-up cursor-pointer group"
+              style={{ animationDelay: `${index * 100}ms` }}
+            >
+              <div className="w-2 h-2 rounded-full bg-yellow-600 group-hover:scale-150 transition-transform duration-200"></div>
+              <div className="flex-1 min-w-0">
+                <p className="text-xs font-medium text-gray-900 truncate group-hover:text-gray-600 transition-colors">
+                  {session.title}
+                </p>
+                <div className="flex items-center gap-1 text-xs text-gray-500">
+                  <Clock className="w-3 h-3" />
+                  <span>{new Date(session.scheduledAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                </div>
+              </div>
+              <ChevronRight className="w-3 h-3 text-gray-400 group-hover:text-gray-600 group-hover:translate-x-1 transition-all duration-200" />
             </div>
-            <ChevronRight className="w-3 h-3 text-gray-400 group-hover:text-gray-600 group-hover:translate-x-1 transition-all duration-200" />
-          </div>
-        ))}
+          ))
+        )}
       </div>
 
       {/* Quick Actions */}
