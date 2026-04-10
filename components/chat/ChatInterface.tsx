@@ -70,7 +70,7 @@ export default function ChatInterface({ userType }: { userType: string }) {
                             senderId: msg.senderId,
                             text: msg.text,
                             timestamp: formatTime(msg.createdAt),
-                            isMe: msg.senderId === user?._id,
+                            isMe: msg.senderId === user?.id,
                         },
                     ]);
                 }
@@ -82,7 +82,7 @@ export default function ChatInterface({ userType }: { userType: string }) {
         return () => {
             socketService.removeMessageListener(handleIncoming);
         };
-    }, [user?._id]);
+    }, [user?.id]);
 
     // Fetch messages when a contact is selected
     const handleSelectContact = useCallback(async (entry: ChatContactEntry) => {
@@ -97,7 +97,7 @@ export default function ChatInterface({ userType }: { userType: string }) {
                         senderId: m.senderId,
                         text: m.text,
                         timestamp: formatTime(m.createdAt),
-                        isMe: m.senderId === user?._id,
+                        isMe: m.senderId === user?.id,
                     }))
                 );
             }
@@ -106,7 +106,7 @@ export default function ChatInterface({ userType }: { userType: string }) {
         } finally {
             setMessagesLoading(false);
         }
-    }, [user?._id]);
+    }, [user?.id]);
 
     const handleSend = (e: React.FormEvent) => {
         e.preventDefault();
@@ -118,7 +118,7 @@ export default function ChatInterface({ userType }: { userType: string }) {
         // Optimistic append
         const optimistic: DisplayMessage = {
             id: tempId,
-            senderId: user?._id ?? 'me',
+            senderId: user?.id ?? 'me',
             text,
             timestamp: formatTime(new Date().toISOString()),
             isMe: true,
@@ -274,7 +274,7 @@ export default function ChatInterface({ userType }: { userType: string }) {
                                                 }`}>
                                                 {msg.text}
                                                 {msg.failed && (
-                                                    <AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0" title="Failed to send" />
+                                                    <AlertCircle className="w-4 h-4 text-red-500 shrink-0" aria-label="Failed to send" />
                                                 )}
                                             </div>
                                             <p className={`text-[10px] text-gray-400 font-medium mt-1 ${msg.isMe ? 'text-right' : 'text-left'}`}>

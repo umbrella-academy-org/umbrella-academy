@@ -87,9 +87,6 @@ export default function TrainerDashboard() {
     roadmap.roadmap.trainerId === user.id
   );
 
-  const MAX_CAPACITY = 20;
-  const WEEKLY_HOURS = 32;
-
   const activeRoadmaps = trainerStudentRoadmaps.filter(roadmap => roadmap.status === 'active');
   const recentTransactions = getUserTransactions().slice(0, 5);
 

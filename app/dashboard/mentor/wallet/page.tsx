@@ -47,7 +47,6 @@ export default function MentorWalletPage() {
   const currentBalance = getTotalBalance();
   const monthlyEarnings = getMonthlyRevenue();
   const nextPayoutDate = computeNextPayoutDate();
-  const nextPayoutDate = computeNextPayoutDate();
 
   return (
     <div className="flex h-screen bg-white">
