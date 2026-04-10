@@ -1,65 +1,19 @@
 'use client';
 
-import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
+import { useFinancial } from '@/contexts';
 import { DollarSign, TrendingUp, Download, ArrowUpRight, ArrowDownLeft, Building2 } from 'lucide-react';
-
-interface Transaction {
-  id: string;
-  type: 'income' | 'withdrawal' | 'fee';
-  description: string;
-  amount: string;
-  date: string;
-  status: 'completed' | 'pending' | 'processing';
-}
+import { Transaction } from '@/types';
 
 export default function FieldAdminWalletPage() {
-  const [currentBalance] = useState(3675000);
-  const [monthlyIncome] = useState(1837500);
-  const [totalWithdrawn] = useState(13125000);
+  const { userWallet, isLoading, getUserTransactions, getMonthlyRevenue } = useFinancial();
 
-  const transactions: Transaction[] = [
-    {
-      id: '1',
-      type: 'income',
-      description: 'Student Enrollment Fee',
-      amount: '+RWF 175,000',
-      date: 'Jan 22, 2026',
-      status: 'completed'
-    },
-    {
-      id: '2',
-      type: 'withdrawal',
-      description: 'Field Operations Withdrawal',
-      amount: '-RWF 500,000',
-      date: 'Jan 20, 2026',
-      status: 'completed'
-    },
-    {
-      id: '3',
-      type: 'income',
-      description: 'Training Session Revenue',
-      amount: '+RWF 125,000',
-      date: 'Jan 19, 2026',
-      status: 'completed'
-    },
-    {
-      id: '4',
-      type: 'fee',
-      description: 'Platform Commission',
-      amount: '-RWF 25,000',
-      date: 'Jan 18, 2026',
-      status: 'completed'
-    },
-    {
-      id: '5',
-      type: 'income',
-      description: 'Subscription Revenue',
-      amount: '+RWF 350,000',
-      date: 'Jan 17, 2026',
-      status: 'pending'
-    }
-  ];
+  const currentBalance = userWallet?.balance ?? 0;
+  const monthlyIncome = getMonthlyRevenue();
+  const transactions = getUserTransactions();
+  const totalWithdrawn = transactions
+    .filter(t => t.type === 'withdrawal' && t.status === 'completed')
+    .reduce((sum, t) => sum + t.amount, 0);
 
   const getTransactionIcon = (type: string) => {
     switch (type) {
@@ -86,6 +40,36 @@ export default function FieldAdminWalletPage() {
         return null;
     }
   };
+
+  const formatAmount = (t: Transaction) => {
+    const sign = t.type === 'income' ? '+' : '-';
+    return `${sign}RWF ${t.amount.toLocaleString()}`;
+  };
+
+  if (isLoading) {
+    return (
+      <div className="flex h-screen bg-white">
+        <Sidebar activeItem="Wallet" userType="field-admin" />
+        <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
+          <main className="flex-1 overflow-auto">
+            <div className="p-3 lg:p-6">
+              <div className="mb-8">
+                <div className="h-8 w-48 bg-gray-200 rounded animate-pulse mb-2" />
+                <div className="h-4 w-72 bg-gray-100 rounded animate-pulse" />
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                {[1, 2, 3].map(i => (
+                  <div key={i} className="bg-gray-100 rounded-lg p-6 animate-pulse h-36" />
+                ))}
+              </div>
+              <div className="bg-gray-100 rounded-lg p-6 mb-8 animate-pulse h-24" />
+              <div className="bg-gray-100 rounded-lg animate-pulse h-64" />
+            </div>
+          </main>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex h-screen bg-white">
@@ -116,7 +100,7 @@ export default function FieldAdminWalletPage() {
                   <TrendingUp className="w-8 h-8 text-gray-500" />
                 </div>
                 <div className="text-3xl font-bold text-gray-900 mb-2">RWF {monthlyIncome.toLocaleString()}</div>
-                <div className="text-gray-600 text-sm">+18% vs last month</div>
+                <div className="text-gray-600 text-sm">Monthly revenue</div>
               </div>
 
               <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
@@ -155,49 +139,55 @@ export default function FieldAdminWalletPage() {
                 </button>
               </div>
 
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead className="bg-gray-50">
-                    <tr>
-                      <th className="text-left py-3 px-6 text-sm font-medium text-gray-600">Transaction</th>
-                      <th className="text-left py-3 px-6 text-sm font-medium text-gray-600">Date</th>
-                      <th className="text-left py-3 px-6 text-sm font-medium text-gray-600">Status</th>
-                      <th className="text-left py-3 px-6 text-sm font-medium text-gray-600">Amount</th>
-                      <th className="text-left py-3 px-6 text-sm font-medium text-gray-600">Type</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gray-200">
-                    {transactions.map((transaction) => (
-                      <tr key={transaction.id} className="hover:bg-gray-50">
-                        <td className="py-4 px-6">
-                          <div className="flex items-center gap-3">
-                            <div className={`w-8 h-8 rounded flex items-center justify-center shrink-0 ${transaction.type === 'income' ? 'bg-gray-100' :
-                              transaction.type === 'withdrawal' ? 'bg-gray-100' : 'bg-gray-100'
-                              }`}>
-                              {getTransactionIcon(transaction.type)}
-                            </div>
-                            <span className="text-sm text-gray-900 font-medium">{transaction.description}</span>
-                          </div>
-                        </td>
-                        <td className="py-4 px-6 text-sm text-gray-600">{transaction.date}</td>
-                        <td className="py-4 px-6">{getStatusBadge(transaction.status)}</td>
-                        <td className="py-4 px-6">
-                          <span className={`text-sm font-medium ${transaction.amount.startsWith('+') ? 'text-gray-600' : 'text-gray-600'
-                            }`}>
-                            {transaction.amount}
-                          </span>
-                        </td>
-                        <td className="py-4 px-6">
-                          <div className="flex items-center gap-2 text-sm text-gray-600">
-                            <Building2 className="w-3 h-3" />
-                            {transaction.type.charAt(0).toUpperCase() + transaction.type.slice(1)}
-                          </div>
-                        </td>
+              {transactions.length === 0 ? (
+                <div className="p-12 text-center text-gray-500">
+                  <p className="text-lg font-medium">No transactions yet</p>
+                  <p className="text-sm mt-1">Transactions will appear here once activity occurs.</p>
+                </div>
+              ) : (
+                <div className="overflow-x-auto">
+                  <table className="w-full">
+                    <thead className="bg-gray-50">
+                      <tr>
+                        <th className="text-left py-3 px-6 text-sm font-medium text-gray-600">Transaction</th>
+                        <th className="text-left py-3 px-6 text-sm font-medium text-gray-600">Date</th>
+                        <th className="text-left py-3 px-6 text-sm font-medium text-gray-600">Status</th>
+                        <th className="text-left py-3 px-6 text-sm font-medium text-gray-600">Amount</th>
+                        <th className="text-left py-3 px-6 text-sm font-medium text-gray-600">Type</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                    </thead>
+                    <tbody className="divide-y divide-gray-200">
+                      {transactions.map((transaction, idx) => (
+                        <tr key={transaction.id ?? idx} className="hover:bg-gray-50">
+                          <td className="py-4 px-6">
+                            <div className="flex items-center gap-3">
+                              <div className="w-8 h-8 rounded bg-gray-100 flex items-center justify-center shrink-0">
+                                {getTransactionIcon(transaction.type)}
+                              </div>
+                              <span className="text-sm text-gray-900 font-medium">{transaction.description}</span>
+                            </div>
+                          </td>
+                          <td className="py-4 px-6 text-sm text-gray-600">
+                            {new Date(transaction.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                          </td>
+                          <td className="py-4 px-6">{getStatusBadge(transaction.status)}</td>
+                          <td className="py-4 px-6">
+                            <span className="text-sm font-medium text-gray-600">
+                              {formatAmount(transaction)}
+                            </span>
+                          </td>
+                          <td className="py-4 px-6">
+                            <div className="flex items-center gap-2 text-sm text-gray-600">
+                              <Building2 className="w-3 h-3" />
+                              {transaction.type.charAt(0).toUpperCase() + transaction.type.slice(1)}
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
             </div>
           </div>
         </main>

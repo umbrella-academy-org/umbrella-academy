@@ -2,38 +2,26 @@
 
 import Sidebar from '@/components/dashboard/Sidebar';
 import StudentsTable from '@/components/wing-admin/StudentsTable';
-
+import { useAuth } from '@/contexts/AuthContext';
+import { useUsers } from '@/contexts/UserContext';
 
 export default function FieldAdminStudentsPage() {
-  const students = [
-    {
-      id: 1,
-      name: 'Alice Johnson',
-      email: 'alice@example.com',
-      trainer: 'John Smith',
-      status: 'active',
-      progress: 75,
-      lastSession: '2024-01-22'
-    },
-    {
-      id: 2,
-      name: 'Bob Wilson',
-      email: 'bob@example.com',
-      trainer: 'Sarah Johnson',
-      status: 'active',
-      progress: 45,
-      lastSession: '2024-01-21'
-    },
-    {
-      id: 3,
-      name: 'Carol Davis',
-      email: 'carol@example.com',
-      trainer: 'Mike Wilson',
-      status: 'paused',
-      progress: 30,
-      lastSession: '2024-01-15'
-    }
-  ];
+  const { user } = useAuth();
+  const { getUsersByFieldId, isLoading } = useUsers();
+
+  const fieldStudents = user?.fieldId
+    ? getUsersByFieldId(user.fieldId).filter(u => u.role === 'student')
+    : [];
+
+  const students = fieldStudents.map((s, index) => ({
+    id: index + 1,
+    name: s.name,
+    email: s.email,
+    trainer: (s as { trainerId?: string }).trainerId ?? '—',
+    status: s.status,
+    progress: (s as { progress?: number }).progress ?? 0,
+    lastSession: (s as { lastSession?: string }).lastSession ?? '—',
+  }));
 
   return (
     <div className="flex h-screen bg-white">
@@ -47,7 +35,20 @@ export default function FieldAdminStudentsPage() {
               <p className="text-gray-600">Monitor student learning progress and engagement</p>
             </div>
 
-            <StudentsTable students={students} />
+            {isLoading ? (
+              <div className="space-y-3">
+                {[...Array(5)].map((_, i) => (
+                  <div key={i} className="h-12 bg-gray-100 rounded-lg animate-pulse" />
+                ))}
+              </div>
+            ) : students.length === 0 ? (
+              <div className="flex flex-col items-center justify-center py-16 text-center">
+                <p className="text-gray-500 text-lg font-medium">No students found</p>
+                <p className="text-gray-400 text-sm mt-1">There are no students enrolled in your field yet.</p>
+              </div>
+            ) : (
+              <StudentsTable students={students} />
+            )}
           </div>
         </main>
       </div>
