@@ -16,7 +16,7 @@ interface StudentsTableProps {
 }
 
 export default function StudentsTable({ searchQuery, selectedStatus, selectedCourse }: StudentsTableProps) {
-  const [selectedStudents, setSelectedStudents] = useState<any[]>([]);
+  const [selectedStudents, setSelectedStudents] = useState<Record<string, unknown>[]>([]);
   const [showReportForm, setShowReportForm] = useState(false);
   const [selectedStudent, setSelectedStudent] = useState<User | null>(null);
 
@@ -64,7 +64,7 @@ export default function StudentsTable({ searchQuery, selectedStatus, selectedCou
     setShowReportForm(true);
   };
 
-  const handleReportSubmit = (report: any) => {
+  const handleReportSubmit = (report: unknown) => {
     console.log('Report submitted:', report);
     alert('Report submitted successfully! It will be sent to the mentor for review.');
     setShowReportForm(false);
@@ -184,11 +184,11 @@ export default function StudentsTable({ searchQuery, selectedStatus, selectedCou
     { key: 'actions', label: 'Actions', sortable: false, filterable: false, searchable: false }
   ];
 
-  const handleSelectionChange = (selectedItems: any[]) => {
+  const handleSelectionChange = (selectedItems: Record<string, unknown>[]) => {
     setSelectedStudents(selectedItems);
   };
 
-  const handleFilterChange = (filters: any) => {
+  const handleFilterChange = (filters: Record<string, unknown>) => {
     console.log('Filters:', filters);
   };
 

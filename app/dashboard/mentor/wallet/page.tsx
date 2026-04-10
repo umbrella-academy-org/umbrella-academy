@@ -1,95 +1,40 @@
 'use client';
 
-import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
-import { DollarSign, TrendingUp, Calendar, ArrowUpRight, ArrowDownLeft, Download, Award } from 'lucide-react';
+import { DollarSign, TrendingUp, ArrowUpRight, ArrowDownLeft, Download, Award } from 'lucide-react';
+import { useFinancial } from '@/contexts';
+import { Transaction } from '@/types';
 
-interface Transaction {
-  id: string;
-  type: 'earning' | 'withdrawal' | 'bonus';
-  description: string;
-  wing?: string;
-  date: string;
-  amount: string;
-  status: 'completed' | 'pending' | 'processing';
-}
+const formatAmount = (t: Transaction): string => {
+  const sign = t.type === 'withdrawal' ? '-' : '+';
+  return `${sign}RWF ${t.amount.toLocaleString()}`;
+};
+
+const getTransactionIcon = (type: Transaction['type']) => {
+  if (type === 'withdrawal') {
+    return <ArrowUpRight className="w-4 h-4 text-gray-600" />;
+  }
+  return <ArrowDownLeft className="w-4 h-4 text-gray-600" />;
+};
+
+const getStatusBadge = (status: string) => {
+  switch (status) {
+    case 'completed':
+      return <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">✓ Completed</span>;
+    case 'pending':
+      return <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">⏳ Pending</span>;
+    case 'failed':
+      return <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">✗ Failed</span>;
+    default:
+      return null;
+  }
+};
 
 export default function MentorWalletPage() {
-  const [currentBalance] = useState(485000);
-  const [monthlyEarnings] = useState(85000);
-  const [totalEarned] = useState(1650000);
-
-  const transactions: Transaction[] = [
-    {
-      id: '1',
-      type: 'earning',
-      description: 'Mentorship Fee',
-      wing: 'Programming Wing',
-      date: 'Jan 18, 2026',
-      amount: '+RWF 15,000',
-      status: 'completed'
-    },
-    {
-      id: '2',
-      type: 'withdrawal',
-      description: 'Bank Transfer',
-      date: 'Jan 15, 2026',
-      amount: '-RWF 100,000',
-      status: 'completed'
-    },
-    {
-      id: '3',
-      type: 'earning',
-      description: 'Trainer Approval Fee',
-      wing: 'Design Wing',
-      date: 'Jan 17, 2026',
-      amount: '+RWF 5,000',
-      status: 'completed'
-    },
-    {
-      id: '4',
-      type: 'bonus',
-      description: 'Excellence Bonus',
-      date: 'Jan 16, 2026',
-      amount: '+RWF 25,000',
-      status: 'completed'
-    },
-    {
-      id: '5',
-      type: 'earning',
-      description: 'Roadmap Review Fee',
-      wing: 'Programming Wing',
-      date: 'Jan 16, 2026',
-      amount: '+RWF 8,000',
-      status: 'pending'
-    }
-  ];
-
-  const getTransactionIcon = (type: string) => {
-    switch (type) {
-      case 'earning':
-        return <ArrowDownLeft className="w-4 h-4 text-gray-600" />;
-      case 'withdrawal':
-        return <ArrowUpRight className="w-4 h-4 text-gray-600" />;
-      case 'bonus':
-        return <ArrowDownLeft className="w-4 h-4 text-gray-600" />;
-      default:
-        return <ArrowDownLeft className="w-4 h-4 text-gray-600" />;
-    }
-  };
-
-  const getStatusBadge = (status: string) => {
-    switch (status) {
-      case 'completed':
-        return <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">✓ Completed</span>;
-      case 'pending':
-        return <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">⏳ Pending</span>;
-      case 'processing':
-        return <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">🔄 Processing</span>;
-      default:
-        return null;
-    }
-  };
+  const { getUserTransactions, getTotalBalance, getMonthlyRevenue, userWallet, isLoading } = useFinancial();
+  const transactions = getUserTransactions();
+  const currentBalance = getTotalBalance();
+  const monthlyEarnings = getMonthlyRevenue();
 
   return (
     <div className="flex h-screen bg-white">
@@ -110,8 +55,17 @@ export default function MentorWalletPage() {
                   <h3 className="text-lg font-semibold">Current Balance</h3>
                   <DollarSign className="w-8 h-8 opacity-80" />
                 </div>
-                <div className="text-3xl font-bold mb-2">RWF {currentBalance.toLocaleString()}</div>
-                <div className="text-gray-100 text-sm">Available for withdrawal</div>
+                {isLoading ? (
+                  <div className="animate-pulse">
+                    <div className="h-9 bg-gray-300 rounded w-40 mb-2"></div>
+                    <div className="h-4 bg-gray-300 rounded w-32"></div>
+                  </div>
+                ) : (
+                  <>
+                    <div className="text-3xl font-bold mb-2">RWF {currentBalance.toLocaleString()}</div>
+                    <div className="text-gray-100 text-sm">Available for withdrawal</div>
+                  </>
+                )}
               </div>
 
               <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
@@ -119,17 +73,35 @@ export default function MentorWalletPage() {
                   <h3 className="text-lg font-semibold text-gray-900">This Month</h3>
                   <TrendingUp className="w-8 h-8 text-gray-500" />
                 </div>
-                <div className="text-3xl font-bold text-gray-900 mb-2">RWF {monthlyEarnings.toLocaleString()}</div>
-                <div className="text-gray-600 text-sm">+22% vs last month</div>
+                {isLoading ? (
+                  <div className="animate-pulse">
+                    <div className="h-9 bg-gray-200 rounded w-40 mb-2"></div>
+                    <div className="h-4 bg-gray-200 rounded w-32"></div>
+                  </div>
+                ) : (
+                  <>
+                    <div className="text-3xl font-bold text-gray-900 mb-2">RWF {monthlyEarnings.toLocaleString()}</div>
+                    <div className="text-gray-600 text-sm">Monthly earnings</div>
+                  </>
+                )}
               </div>
 
               <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-lg font-semibold text-gray-900">Total Earned</h3>
-                  <Calendar className="w-8 h-8 text-gray-500" />
+                  <h3 className="text-lg font-semibold text-gray-900">Wallet Balance</h3>
+                  <Award className="w-8 h-8 text-gray-500" />
                 </div>
-                <div className="text-3xl font-bold text-gray-900 mb-2">RWF {totalEarned.toLocaleString()}</div>
-                <div className="text-gray-600 text-sm">All time earnings</div>
+                {isLoading ? (
+                  <div className="animate-pulse">
+                    <div className="h-9 bg-gray-200 rounded w-40 mb-2"></div>
+                    <div className="h-4 bg-gray-200 rounded w-32"></div>
+                  </div>
+                ) : (
+                  <>
+                    <div className="text-3xl font-bold text-gray-900 mb-2">RWF {(userWallet?.balance ?? 0).toLocaleString()}</div>
+                    <div className="text-gray-600 text-sm">Wallet total</div>
+                  </>
+                )}
               </div>
             </div>
 
@@ -170,44 +142,64 @@ export default function MentorWalletPage() {
                       <th className="text-left py-3 px-6 text-sm font-medium text-gray-600">Date</th>
                       <th className="text-left py-3 px-6 text-sm font-medium text-gray-600">Status</th>
                       <th className="text-left py-3 px-6 text-sm font-medium text-gray-600">Amount</th>
-                      <th className="text-left py-3 px-6 text-sm font-medium text-gray-600">Wing</th>
+                      <th className="text-left py-3 px-6 text-sm font-medium text-gray-600">Reference</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200">
-                    {transactions.map((transaction) => (
-                      <tr key={transaction.id} className="hover:bg-gray-50">
-                        <td className="py-4 px-6">
-                          <div className="flex items-center gap-3">
-                            <div className={`w-8 h-8 rounded flex items-center justify-center shrink-0 ${
-                              transaction.type === 'earning' ? 'bg-gray-100' :
-                              transaction.type === 'withdrawal' ? 'bg-gray-100' : 'bg-gray-100'
-                            }`}>
-                              {getTransactionIcon(transaction.type)}
+                    {isLoading ? (
+                      Array.from({ length: 4 }).map((_, i) => (
+                        <tr key={i}>
+                          <td className="py-4 px-6">
+                            <div className="animate-pulse flex items-center gap-3">
+                              <div className="w-8 h-8 bg-gray-200 rounded"></div>
+                              <div className="h-4 bg-gray-200 rounded w-32"></div>
                             </div>
-                            <span className="text-sm text-gray-900 font-medium">{transaction.description}</span>
-                          </div>
-                        </td>
-                        <td className="py-4 px-6 text-sm text-gray-600">{transaction.date}</td>
-                        <td className="py-4 px-6">{getStatusBadge(transaction.status)}</td>
-                        <td className="py-4 px-6">
-                          <span className={`text-sm font-medium ${
-                            transaction.amount.startsWith('+') ? 'text-gray-600' : 'text-gray-600'
-                          }`}>
-                            {transaction.amount}
-                          </span>
-                        </td>
-                        <td className="py-4 px-6">
-                          {transaction.wing ? (
-                            <div className="flex items-center gap-2 text-sm text-gray-600">
-                              <Award className="w-3 h-3" />
-                              {transaction.wing}
-                            </div>
-                          ) : (
-                            <span className="text-sm text-gray-400">—</span>
-                          )}
+                          </td>
+                          <td className="py-4 px-6"><div className="animate-pulse h-4 bg-gray-200 rounded w-24"></div></td>
+                          <td className="py-4 px-6"><div className="animate-pulse h-4 bg-gray-200 rounded w-20"></div></td>
+                          <td className="py-4 px-6"><div className="animate-pulse h-4 bg-gray-200 rounded w-24"></div></td>
+                          <td className="py-4 px-6"><div className="animate-pulse h-4 bg-gray-200 rounded w-16"></div></td>
+                        </tr>
+                      ))
+                    ) : transactions.length === 0 ? (
+                      <tr>
+                        <td colSpan={5} className="py-8 px-6 text-center text-sm text-gray-500">
+                          No transactions yet.
                         </td>
                       </tr>
-                    ))}
+                    ) : (
+                      transactions.map((transaction) => (
+                        <tr key={transaction.id} className="hover:bg-gray-50">
+                          <td className="py-4 px-6">
+                            <div className="flex items-center gap-3">
+                              <div className="w-8 h-8 rounded bg-gray-100 flex items-center justify-center shrink-0">
+                                {getTransactionIcon(transaction.type)}
+                              </div>
+                              <span className="text-sm text-gray-900 font-medium">{transaction.description}</span>
+                            </div>
+                          </td>
+                          <td className="py-4 px-6 text-sm text-gray-600">
+                            {new Date(transaction.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                          </td>
+                          <td className="py-4 px-6">{getStatusBadge(transaction.status)}</td>
+                          <td className="py-4 px-6">
+                            <span className="text-sm font-medium text-gray-600">
+                              {formatAmount(transaction)}
+                            </span>
+                          </td>
+                          <td className="py-4 px-6">
+                            {transaction.reference ? (
+                              <div className="flex items-center gap-2 text-sm text-gray-600">
+                                <Award className="w-3 h-3" />
+                                {transaction.reference}
+                              </div>
+                            ) : (
+                              <span className="text-sm text-gray-400">—</span>
+                            )}
+                          </td>
+                        </tr>
+                      ))
+                    )}
                   </tbody>
                 </table>
               </div>

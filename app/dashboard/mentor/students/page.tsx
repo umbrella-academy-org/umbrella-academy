@@ -4,14 +4,13 @@ import { useState, useMemo } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
 
 import StudentsHeader from '@/components/trainer/StudentsHeader';
-import StudentsFilters from '@/components/trainer/StudentsFilters';
 import StudentsTable from '@/components/trainer/StudentsTable';
 import { useUsers, useAuth, useRoadmaps } from '@/hooks';
 
 export default function MentorStudentsPage() {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedStatus, setSelectedStatus] = useState('all');
-  const [selectedCourse, setSelectedCourse] = useState('all');
+  const [searchQuery] = useState('');
+  const [selectedStatus] = useState('all');
+  const [selectedCourse] = useState('all');
 
   const { students } = useUsers();
   const { user } = useAuth();
