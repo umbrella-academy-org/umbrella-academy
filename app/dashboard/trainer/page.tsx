@@ -75,6 +75,9 @@ export default function TrainerDashboard() {
     return null;
   }
 
+  const MAX_CAPACITY = 20;
+  const WEEKLY_HOURS = 32;
+
   // Get trainer-specific data
   const trainerStudents = students.filter(student =>
     student.fieldId === user.fieldId // In real app, would filter by assigned trainer
@@ -83,6 +86,9 @@ export default function TrainerDashboard() {
   const trainerStudentRoadmaps = studentRoadmaps.filter(roadmap =>
     roadmap.roadmap.trainerId === user.id
   );
+
+  const MAX_CAPACITY = 20;
+  const WEEKLY_HOURS = 32;
 
   const activeRoadmaps = trainerStudentRoadmaps.filter(roadmap => roadmap.status === 'active');
   const recentTransactions = getUserTransactions().slice(0, 5);
@@ -147,8 +153,8 @@ export default function TrainerDashboard() {
                 <div className="animate-slide-up" style={{ animationDelay: '500ms' }}>
                   <TrainingCapacity
                     assignedStudents={trainerStudents.length}
-                    maxCapacity={20} // Mock capacity
-                    weeklyHours={32} // Mock hours
+                    maxCapacity={MAX_CAPACITY}
+                    weeklyHours={WEEKLY_HOURS}
                   />
                 </div>
 
