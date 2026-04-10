@@ -18,6 +18,7 @@ interface RoadmapContextType {
   getUpcomingLiveSessions: () => LiveSession[];
   refreshRoadmaps: () => Promise<void>;
   refreshStudentRoadmaps: () => Promise<void>;
+  refreshSessions: () => Promise<void>;
 }
 
 const RoadmapContext = createContext<RoadmapContextType | undefined>(undefined);
@@ -103,6 +104,7 @@ export function RoadmapProvider({ children }: { children: React.ReactNode }) {
       getStudentRoadmaps, getUpcomingLiveSessions,
       refreshRoadmaps: loadRoadmaps,
       refreshStudentRoadmaps: loadStudentRoadmaps,
+      refreshSessions: loadLiveSessions,
     }}>
       {children}
     </RoadmapContext.Provider>

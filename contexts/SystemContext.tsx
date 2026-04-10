@@ -1,23 +1,20 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import { SystemMetric, SystemAlert } from '@/types';
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import { SystemMetric, SystemAlert, ServiceStatus } from '@/types';
 import {
   mockSystemMetrics,
   mockSystemAlerts,
   mockSystemStats,
-  getHealthyMetrics,
-  getWarningMetrics,
-  getErrorMetrics,
-  getRecentAlerts,
-  getCriticalAlerts,
-  getSystemHealthScore
 } from '@/data';
+import { apiClient } from '@/services/client';
+import { API_ENDPOINTS } from '@/services/constants';
 import { useAuth } from './AuthContext';
 
 interface SystemContextType {
   metrics: SystemMetric[];
   alerts: SystemAlert[];
+  services: ServiceStatus[];
   systemStats: typeof mockSystemStats;
   healthScore: number;
   isLoading: boolean;
@@ -36,21 +33,21 @@ export function SystemProvider({ children }: { children: React.ReactNode }) {
   const { user: currentUser, hasPermission } = useAuth();
   const [metrics, setMetrics] = useState<SystemMetric[]>([]);
   const [alerts, setAlerts] = useState<SystemAlert[]>([]);
+  const [services, setServices] = useState<ServiceStatus[]>([]);
   const [systemStats, setSystemStats] = useState(mockSystemStats);
   const [healthScore, setHealthScore] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const loadSystemData = async () => {
+  const loadSystemData = useCallback(async () => {
     setIsLoading(true);
     setError(null);
 
     try {
-      await new Promise(resolve => setTimeout(resolve, 600));
-
       if (!currentUser) {
         setMetrics([]);
         setAlerts([]);
+        setServices([]);
         setHealthScore(0);
         return;
       }
@@ -59,19 +56,56 @@ export function SystemProvider({ children }: { children: React.ReactNode }) {
       if (!hasPermission('manage_system') && !hasPermission('view_field_analytics')) {
         setMetrics([]);
         setAlerts([]);
+        setServices([]);
         setHealthScore(0);
         return;
       }
 
+      const response = await apiClient.get<{
+        success: boolean;
+        data: {
+          metrics: SystemMetric[];
+          alerts: SystemAlert[];
+          services: ServiceStatus[];
+        };
+      }>(API_ENDPOINTS.SYSTEM);
+
+      let fetchedMetrics = response.data.metrics;
+      let fetchedAlerts = response.data.alerts;
+      const fetchedServices = response.data.services;
+
+      // Field admins see a limited subset
+      if (currentUser.role === 'field-admin') {
+        fetchedMetrics = fetchedMetrics.filter(metric =>
+          ['Active Users', 'API Response Time', 'Video Streaming', 'Payment Gateway'].includes(metric.name)
+        );
+        fetchedAlerts = fetchedAlerts.filter(alert =>
+          alert.severity !== 'high' || alert.type !== 'error'
+        );
+      }
+
+      setMetrics(fetchedMetrics);
+      setAlerts(fetchedAlerts);
+      setServices(fetchedServices);
+      setSystemStats(mockSystemStats);
+
+      // Compute health score: percentage of metrics with status === 'healthy'
+      const total = fetchedMetrics.length;
+      const healthy = fetchedMetrics.filter(m => m.status === 'healthy').length;
+      setHealthScore(total > 0 ? Math.round((healthy / total) * 100) : 0);
+
+    } catch (err) {
+      console.error('Error loading system data:', err);
+      setError('Failed to load system data');
+
+      // Fall back to mock data
       let filteredMetrics: SystemMetric[] = [];
       let filteredAlerts: SystemAlert[] = [];
 
-      if (currentUser.role === 'umbrella-admin') {
-        // Umbrella admin can see all system metrics and alerts
+      if (currentUser?.role === 'umbrella-admin') {
         filteredMetrics = mockSystemMetrics;
         filteredAlerts = mockSystemAlerts;
-      } else if (currentUser.role === 'field-admin') {
-        // Field admin can see limited system metrics
+      } else if (currentUser?.role === 'field-admin') {
         filteredMetrics = mockSystemMetrics.filter(metric =>
           ['Active Users', 'API Response Time', 'Video Streaming', 'Payment Gateway'].includes(metric.name)
         );
@@ -82,37 +116,35 @@ export function SystemProvider({ children }: { children: React.ReactNode }) {
 
       setMetrics(filteredMetrics);
       setAlerts(filteredAlerts);
+      setServices([]);
       setSystemStats(mockSystemStats);
-      setHealthScore(getSystemHealthScore());
 
-    } catch (err) {
-      setError('Failed to load system data');
-      console.error('Error loading system data:', err);
+      const total = filteredMetrics.length;
+      const healthy = filteredMetrics.filter(m => m.status === 'healthy').length;
+      setHealthScore(total > 0 ? Math.round((healthy / total) * 100) : 0);
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [currentUser, hasPermission]);
 
   useEffect(() => {
     if (currentUser) {
       loadSystemData();
 
-      // Set up real-time updates for system monitoring
+      // Re-fetch every 30 seconds for real-time system monitoring
       const interval = setInterval(() => {
-        if (hasPermission('manage_system')) {
-          // Simulate real-time metric updates
-          setHealthScore(getSystemHealthScore());
-        }
-      }, 30000); // Update every 30 seconds
+        loadSystemData();
+      }, 30000);
 
       return () => clearInterval(interval);
     } else {
       setMetrics([]);
       setAlerts([]);
+      setServices([]);
       setHealthScore(0);
       setIsLoading(false);
     }
-  }, [currentUser]);
+  }, [currentUser, loadSystemData]);
 
   const getHealthyMetricsFromContext = (): SystemMetric[] => {
     return metrics.filter(metric => metric.status === 'healthy');
@@ -144,6 +176,7 @@ export function SystemProvider({ children }: { children: React.ReactNode }) {
   const value: SystemContextType = {
     metrics,
     alerts,
+    services,
     systemStats,
     healthScore,
     isLoading,

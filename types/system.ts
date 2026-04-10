@@ -14,3 +14,8 @@ export interface SystemAlert {
   time: string;
   severity: 'low' | 'medium' | 'high';
 }
+
+export interface ServiceStatus {
+  name: string;
+  status: 'operational' | 'degraded' | 'down';
+}

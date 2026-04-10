@@ -26,6 +26,7 @@ export const API_ENDPOINTS = {
   NOTIFICATIONS: '/api/notifications',
   NOTIFICATION_BY_ID: (id: string) => `/api/notifications/${id}`,
   FIELDS: '/api/fields',
+  SYSTEM: '/api/system',
   FIELD_TRAINERS: (id: string) => `/api/fields/${id}/trainers`,
   FIELD_MENTORS: (id: string) => `/api/fields/${id}/mentors`,
   FIELD_COMPANIES: (id: string) => `/api/fields/${id}/companies`,
