@@ -2,6 +2,7 @@
 
 // User types
 export * from './user';
+export * from './api'
 
 // Live session and learning activity types
 export * from './course';
