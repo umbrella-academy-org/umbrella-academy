@@ -1,16 +1,37 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
 
 import StudentsHeader from '@/components/trainer/StudentsHeader';
 import StudentsFilters from '@/components/trainer/StudentsFilters';
 import StudentsTable from '@/components/trainer/StudentsTable';
+import { useUsers, useAuth, useRoadmaps } from '@/hooks';
 
 export default function MentorStudentsPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedStatus, setSelectedStatus] = useState('all');
   const [selectedCourse, setSelectedCourse] = useState('all');
+
+  const { students } = useUsers();
+  const { user } = useAuth();
+  const { studentRoadmaps } = useRoadmaps();
+
+  const filteredStudents = useMemo(() => {
+    if (!user) return [];
+    if (user.role === 'trainer') {
+      return students.filter(s => s.fieldId === user.fieldId);
+    }
+    if (user.role === 'mentor') {
+      const myStudentIds = new Set(
+        studentRoadmaps
+          .filter(r => r.roadmap.mentorId === user.id)
+          .map(r => r.studentId)
+      );
+      return students.filter(s => myStudentIds.has(s.id));
+    }
+    return students;
+  }, [students, user, studentRoadmaps]);
 
   return (
     <div className="flex h-screen bg-white">
@@ -21,7 +42,7 @@ export default function MentorStudentsPage() {
         <main className="flex-1 p-3 sm:p-4 lg:p-6 overflow-y-auto">
           <div className="max-w-fullmx-auto space-y-4 sm:space-y-6 lg:space-y-8">
             {/* Students Header */}
-            <StudentsHeader />
+            <StudentsHeader students={filteredStudents} />
 
          
 

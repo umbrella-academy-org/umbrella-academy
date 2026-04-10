@@ -1,20 +1,28 @@
 'use client';
 
 import { Users, TrendingUp, Clock, Star } from 'lucide-react';
+import { User } from '@/types/user';
 
-export default function StudentsHeader() {
+interface StudentsHeaderProps {
+  students: User[];
+}
+
+export default function StudentsHeader({ students }: StudentsHeaderProps) {
+  const total = students.length;
+  const active = students.filter(s => s.status === 'active').length;
+
   const stats = [
     {
       icon: <Users className="w-5 h-5" />,
       label: 'Total Students',
-      value: '24',
+      value: String(total),
       change: '+3 this month',
       color: 'text-gray-600 bg-gray-100'
     },
     {
       icon: <TrendingUp className="w-5 h-5" />,
       label: 'Active Students',
-      value: '18',
+      value: String(active),
       change: '+2 this week',
       color: 'text-gray-600 bg-gray-100'
     },
@@ -42,7 +50,7 @@ export default function StudentsHeader() {
           My Students
         </h1>
         <p className="text-sm sm:text-base text-gray-600">
-          Manage and track your students' progress and performance.
+          Manage and track your students&apos; progress and performance.
         </p>
       </div>
 
