@@ -23,11 +23,12 @@ export default function ForgotPasswordPage() {
       return;
     }
 
-    console.log('Reset password for:', email);
-    // Store email and flow type for verification
+    // Store email and flow type for the reset flow
     localStorage.setItem('resetEmail', email);
     localStorage.setItem('authFlow', 'reset-password');
-    router.push('/auth/verify');
+    // Note: backend has no OTP/forgot-password endpoint yet.
+    // Redirect directly to reset-password page.
+    router.push('/auth/reset-password');
   };
 
   return (

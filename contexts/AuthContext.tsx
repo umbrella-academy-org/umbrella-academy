@@ -2,13 +2,14 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { User, UserType } from '@/types';
-import { authService } from '@/services/auth';
+import { authService, RegisterRequest } from '@/services/auth';
 
 interface AuthContextType {
   user: User | null;
   isAuthenticated: boolean;
   isLoading: boolean;
   login: (email: string, password: string) => Promise<boolean>;
+  register: (data: RegisterRequest) => Promise<{ success: boolean; error?: string }>;
   logout: () => void;
   hasRole: (role: UserType) => boolean;
   hasPermission: (permission: string) => boolean;
@@ -57,6 +58,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  const register = async (data: RegisterRequest): Promise<{ success: boolean; error?: string }> => {
+    setIsLoading(true);
+    try {
+      const response = await authService.register(data);
+      if (response.success && response.user) {
+        setUser(response.user);
+        return { success: true };
+      }
+      return { success: false, error: 'Registration failed' };
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Registration failed. Please try again.';
+      return { success: false, error: message };
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const logout = async () => {
     try {
       await authService.logout();
@@ -88,7 +106,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated: !!user, isLoading, login, logout, hasRole, hasPermission, canAccessField }}>
+    <AuthContext.Provider value={{ user, isAuthenticated: !!user, isLoading, login, register, logout, hasRole, hasPermission, canAccessField }}>
       {children}
     </AuthContext.Provider>
   );

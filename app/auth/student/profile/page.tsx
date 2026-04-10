@@ -69,9 +69,11 @@ export default function ProfilePage() {
     }
 
     console.log('Profile data:', formData);
-    // Store user type and email for verification
+    // Store user type and profile data for final registration step
     localStorage.setItem('userType', 'student');
     localStorage.setItem('signupEmail', formData.email);
+    localStorage.setItem('signupFirstName', formData.firstName);
+    localStorage.setItem('signupLastName', formData.lastName);
     router.push('/auth/verify');
   };
 

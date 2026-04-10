@@ -38,7 +38,8 @@ export default function ResetPasswordPage() {
     }
     
     console.log('Password reset successfully');
-    // Clear localStorage and redirect to login
+    // Note: backend has no reset-password endpoint yet.
+    // Clear localStorage and redirect to login.
     localStorage.removeItem('resetEmail');
     localStorage.removeItem('authFlow');
     router.push('/auth/login');

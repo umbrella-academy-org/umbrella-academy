@@ -16,27 +16,56 @@ export interface RegisterRequest {
   fieldId?: string;
 }
 
+// Backend returns _id, firstName, lastName — map to our User shape
+interface BackendUser {
+  _id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  role: string;
+  fieldId?: string;
+  status: string;
+}
+
+interface BackendAuthResponse {
+  success: boolean;
+  token: string;
+  user: BackendUser;
+}
+
 export interface AuthResponse {
   success: boolean;
   token: string;
   user: User;
 }
 
+function mapBackendUser(u: BackendUser): User {
+  return {
+    id: u._id,
+    name: `${u.firstName} ${u.lastName}`,
+    email: u.email,
+    role: u.role as User['role'],
+    fieldId: u.fieldId,
+    status: (u.status as User['status']) ?? 'active',
+    joinDate: new Date().toISOString(),
+  } as User;
+}
+
 class AuthService {
   async login(email: string, password: string): Promise<AuthResponse> {
-    const response = await apiClient.post<AuthResponse>(API_ENDPOINTS.AUTH_LOGIN, { email, password });
+    const response = await apiClient.post<BackendAuthResponse>(API_ENDPOINTS.AUTH_LOGIN, { email, password });
     if (response.token) {
       localStorage.setItem('auth_token', response.token);
     }
-    return response;
+    return { success: response.success, token: response.token, user: mapBackendUser(response.user) };
   }
 
   async register(data: RegisterRequest): Promise<AuthResponse> {
-    const response = await apiClient.post<AuthResponse>(API_ENDPOINTS.AUTH_REGISTER, data);
+    const response = await apiClient.post<BackendAuthResponse>(API_ENDPOINTS.AUTH_REGISTER, data);
     if (response.token) {
       localStorage.setItem('auth_token', response.token);
     }
-    return response;
+    return { success: response.success, token: response.token, user: mapBackendUser(response.user) };
   }
 
   async logout(): Promise<void> {
@@ -50,7 +79,8 @@ class AuthService {
   }
 
   async checkToken(): Promise<{ success: boolean; user: User }> {
-    return apiClient.get<{ success: boolean; user: User }>(API_ENDPOINTS.USERS_ME);
+    const response = await apiClient.get<{ success: boolean; user: BackendUser }>(API_ENDPOINTS.USERS_ME);
+    return { success: response.success, user: mapBackendUser(response.user) };
   }
 }
 
