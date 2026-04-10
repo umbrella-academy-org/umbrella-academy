@@ -11,8 +11,8 @@ class UserService {
     return apiClient.put<{ success: boolean; user: User }>(API_ENDPOINTS.USER_PROFILE, data);
   }
 
-  async getUsers(): Promise<{ success: boolean; users: User[] }> {
-    return apiClient.get<{ success: boolean; users: User[] }>(API_ENDPOINTS.USERS);
+  async getUsers(): Promise<{ success: boolean; data: User[] }> {
+    return apiClient.get<{ success: boolean; data: User[] }>(API_ENDPOINTS.USERS);
   }
 
   async updateUserStatus(id: string, status: 'active' | 'inactive' | 'suspended'): Promise<{ success: boolean; user: User }> {

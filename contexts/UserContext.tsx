@@ -32,7 +32,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     setError(null);
     try {
       const response = await userService.getUsers();
-      setUsers(response.users ?? []);
+      setUsers(response.data ?? []);
     } catch {
       setError('Failed to load users');
     } finally {
