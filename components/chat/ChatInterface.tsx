@@ -1,78 +1,34 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
-import { Search, Send, Paperclip, MoreVertical, Phone, Video, Search as SearchIcon, Smile, User } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { useState, useRef, useEffect, useCallback } from 'react';
+import { Send, Paperclip, MoreVertical, Phone, Video, Search as SearchIcon, Smile, AlertCircle, MessageSquare } from 'lucide-react';
+import { messageService, socketService } from '@/services';
+import type { ChatContactEntry, ChatMessage } from '@/services/messages';
+import { useAuth } from '@/contexts/AuthContext';
 
-interface Message {
+interface DisplayMessage {
     id: string;
     senderId: string;
     text: string;
     timestamp: string;
     isMe: boolean;
+    failed?: boolean;
 }
 
-interface ChatContact {
-    id: string;
-    name: string;
-    role: string;
-    avatar: string;
-    lastMessage: string;
-    time: string;
-    unreadCount?: number;
-    online?: boolean;
+function formatTime(iso: string): string {
+    const date = new Date(iso);
+    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 }
 
 export default function ChatInterface({ userType }: { userType: string }) {
-    const [activeChat, setActiveChat] = useState<ChatContact | null>(null);
+    const { user } = useAuth();
+    const [contacts, setContacts] = useState<ChatContactEntry[]>([]);
+    const [contactsLoading, setContactsLoading] = useState(true);
+    const [activeContact, setActiveContact] = useState<ChatContactEntry | null>(null);
+    const [messages, setMessages] = useState<DisplayMessage[]>([]);
+    const [messagesLoading, setMessagesLoading] = useState(false);
     const [message, setMessage] = useState('');
     const messagesEndRef = useRef<HTMLDivElement>(null);
-    const router = useRouter()
-
-    const contacts: ChatContact[] = [
-        {
-            id: '1',
-            name: 'Demi Wilkinson',
-            role: 'Trainer',
-            avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=150',
-            lastMessage: 'The new roadmap looks great! Let\'s discuss...',
-            time: '12:45 PM',
-            unreadCount: 2,
-            online: true
-        },
-        {
-            id: '2',
-            name: 'Sarah Ingabire',
-            role: 'Student',
-            avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=150',
-            lastMessage: 'Is the session still on for 4 PM?',
-            time: '11:20 AM',
-            online: true
-        },
-        {
-            id: '3',
-            name: 'Dr. Alex Rodriguez',
-            role: 'Mentor',
-            avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=150',
-            lastMessage: 'I have approved your trainer application.',
-            time: 'Yesterday',
-        },
-        {
-            id: '4',
-            name: 'Gabin Tuyishime',
-            role: 'Student',
-            avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=150',
-            lastMessage: 'Thanks for the feedback on my project.',
-            time: 'Monday',
-        }
-    ];
-
-    const mockMessages: Message[] = [
-        { id: '1', senderId: '2', text: 'Hey, are we still meeting today?', timestamp: '11:20 AM', isMe: false },
-        { id: '2', senderId: 'me', text: 'Yes, definitely! Does 4 PM work for you?', timestamp: '11:22 AM', isMe: true },
-        { id: '3', senderId: '2', text: 'Perfect. I have prepared the questions we talked about.', timestamp: '11:25 AM', isMe: false },
-        { id: '4', senderId: 'me', text: 'Excellent. See you then!', timestamp: '11:30 AM', isMe: true },
-    ];
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -80,7 +36,106 @@ export default function ChatInterface({ userType }: { userType: string }) {
 
     useEffect(() => {
         scrollToBottom();
-    }, [activeChat]);
+    }, [messages]);
+
+    // Fetch contacts on mount
+    useEffect(() => {
+        setContactsLoading(true);
+        messageService.getContacts()
+            .then((res) => {
+                if (res.success) setContacts(res.data);
+            })
+            .catch(() => {
+                // leave contacts empty on error
+            })
+            .finally(() => setContactsLoading(false));
+    }, []);
+
+    // Connect socket and listen for incoming messages
+    useEffect(() => {
+        socketService.connect();
+
+        const handleIncoming = (data: { message: Record<string, unknown> }) => {
+            const msg = data.message as unknown as ChatMessage;
+            setActiveContact((current) => {
+                if (!current) return current;
+                const isFromActiveContact =
+                    msg.senderId === current.contact._id ||
+                    msg.recipientId === current.contact._id;
+                if (isFromActiveContact) {
+                    setMessages((prev) => [
+                        ...prev,
+                        {
+                            id: msg._id,
+                            senderId: msg.senderId,
+                            text: msg.text,
+                            timestamp: formatTime(msg.createdAt),
+                            isMe: msg.senderId === user?._id,
+                        },
+                    ]);
+                }
+                return current;
+            });
+        };
+
+        socketService.onMessage(handleIncoming);
+        return () => {
+            socketService.removeMessageListener(handleIncoming);
+        };
+    }, [user?._id]);
+
+    // Fetch messages when a contact is selected
+    const handleSelectContact = useCallback(async (entry: ChatContactEntry) => {
+        setActiveContact(entry);
+        setMessagesLoading(true);
+        try {
+            const res = await messageService.getMessages(entry.contact._id);
+            if (res.success) {
+                setMessages(
+                    res.data.map((m) => ({
+                        id: m._id,
+                        senderId: m.senderId,
+                        text: m.text,
+                        timestamp: formatTime(m.createdAt),
+                        isMe: m.senderId === user?._id,
+                    }))
+                );
+            }
+        } catch {
+            setMessages([]);
+        } finally {
+            setMessagesLoading(false);
+        }
+    }, [user?._id]);
+
+    const handleSend = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!message.trim() || !activeContact) return;
+
+        const text = message.trim();
+        const tempId = `temp-${Date.now()}`;
+
+        // Optimistic append
+        const optimistic: DisplayMessage = {
+            id: tempId,
+            senderId: user?._id ?? 'me',
+            text,
+            timestamp: formatTime(new Date().toISOString()),
+            isMe: true,
+        };
+        setMessages((prev) => [...prev, optimistic]);
+        setMessage('');
+
+        try {
+            socketService.sendMessage(activeContact.contact._id, text);
+        } catch {
+            // Mark as failed, restore text
+            setMessages((prev) =>
+                prev.map((m) => (m.id === tempId ? { ...m, failed: true } : m))
+            );
+            setMessage(text);
+        }
+    };
 
     return (
         <div className="flex h-full bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden min-h-[600px]">
@@ -99,64 +154,95 @@ export default function ChatInterface({ userType }: { userType: string }) {
                 </div>
 
                 <div className="flex-1 overflow-y-auto">
-                    {contacts.map((contact) => (
-                        <button
-                            key={contact.id}
-                            onClick={() => setActiveChat(contact)}
-                            className={`w-full flex items-center gap-4 p-4 hover:bg-gray-50 transition-all border-l-4 ${activeChat?.id === contact.id ? 'bg-gray-50 border-yellow-600' : 'border-transparent'
-                                }`}
-                        >
-                            <div className="relative">
-                                <img src={contact.avatar} alt={contact.name} className="w-12 h-12 rounded-full object-cover shadow-sm" />
-                                {contact.online && (
-                                    <div className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-gray-500 border-2 border-white rounded-full"></div>
-                                )}
-                            </div>
-                            <div className="flex-1 text-left min-w-0">
-                                <div className="flex justify-between items-center mb-0.5">
-                                    <h4 className="font-semibold text-gray-900 text-sm truncate">{contact.name}</h4>
-                                    <span className="text-[10px] text-gray-400 font-medium">{contact.time}</span>
+                    {contactsLoading ? (
+                        <div className="p-4 space-y-3">
+                            {[1, 2, 3].map((i) => (
+                                <div key={i} className="flex items-center gap-3 animate-pulse">
+                                    <div className="w-12 h-12 rounded-full bg-gray-200" />
+                                    <div className="flex-1 space-y-2">
+                                        <div className="h-3 bg-gray-200 rounded w-3/4" />
+                                        <div className="h-2 bg-gray-200 rounded w-1/2" />
+                                    </div>
                                 </div>
-                                <div className="flex justify-between items-center">
-                                    <p className="text-xs text-gray-500 truncate">{contact.lastMessage}</p>
-                                    {contact.unreadCount && (
-                                        <span className="bg-yellow-600 text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full shadow-sm">
-                                            {contact.unreadCount}
-                                        </span>
-                                    )}
-                                </div>
-                            </div>
-                        </button>
-                    ))}
+                            ))}
+                        </div>
+                    ) : contacts.length === 0 ? (
+                        <div className="flex flex-col items-center justify-center h-full p-8 text-center">
+                            <MessageSquare className="w-10 h-10 text-gray-300 mb-3" />
+                            <p className="text-sm text-gray-500 font-medium">No contacts yet</p>
+                            <p className="text-xs text-gray-400 mt-1">Your conversations will appear here</p>
+                        </div>
+                    ) : (
+                        contacts.map((entry) => {
+                            const { contact, lastMessage, lastMessageAt } = entry;
+                            const displayName = `${contact.firstName} ${contact.lastName}`;
+                            const timeLabel = lastMessageAt ? formatTime(lastMessageAt) : '';
+                            return (
+                                <button
+                                    key={contact._id}
+                                    onClick={() => handleSelectContact(entry)}
+                                    className={`w-full flex items-center gap-4 p-4 hover:bg-gray-50 transition-all border-l-4 ${activeContact?.contact._id === contact._id ? 'bg-gray-50 border-yellow-600' : 'border-transparent'}`}
+                                >
+                                    <div className="relative">
+                                        {contact.avatar ? (
+                                            <img src={contact.avatar} alt={displayName} className="w-12 h-12 rounded-full object-cover shadow-sm" />
+                                        ) : (
+                                            <div className="w-12 h-12 rounded-full bg-yellow-100 flex items-center justify-center shadow-sm">
+                                                <span className="text-yellow-700 font-bold text-sm">
+                                                    {contact.firstName[0]}{contact.lastName[0]}
+                                                </span>
+                                            </div>
+                                        )}
+                                    </div>
+                                    <div className="flex-1 text-left min-w-0">
+                                        <div className="flex justify-between items-center mb-0.5">
+                                            <h4 className="font-semibold text-gray-900 text-sm truncate">{displayName}</h4>
+                                            <span className="text-[10px] text-gray-400 font-medium">{timeLabel}</span>
+                                        </div>
+                                        <p className="text-xs text-gray-500 truncate">
+                                            {lastMessage?.text ?? 'No messages yet'}
+                                        </p>
+                                    </div>
+                                </button>
+                            );
+                        })
+                    )}
                 </div>
             </div>
 
             {/* Main Chat Area */}
             <div className="flex-1 flex flex-col bg-gray-50/10">
-                {activeChat ? (
+                {activeContact ? (
                     <>
                         {/* Chat Header */}
                         <div className="p-4 bg-white border-b border-gray-100 flex items-center justify-between shadow-sm relative z-10">
                             <div className="flex items-center gap-4">
                                 <div className="relative">
-                                    <img src={activeChat.avatar} alt={activeChat.name} className="w-10 h-10 rounded-full object-cover" />
-                                    {activeChat.online && (
-                                        <div className="absolute bottom-0 right-0 w-3 h-3 bg-gray-500 border-2 border-white rounded-full"></div>
+                                    {activeContact.contact.avatar ? (
+                                        <img src={activeContact.contact.avatar} alt={`${activeContact.contact.firstName} ${activeContact.contact.lastName}`} className="w-10 h-10 rounded-full object-cover" />
+                                    ) : (
+                                        <div className="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center">
+                                            <span className="text-yellow-700 font-bold text-xs">
+                                                {activeContact.contact.firstName[0]}{activeContact.contact.lastName[0]}
+                                            </span>
+                                        </div>
                                     )}
                                 </div>
                                 <div>
-                                    <h3 className="font-bold text-gray-900 text-sm">{activeChat.name}</h3>
-                                    <p className="text-[10px] text-gray-500 font-medium   ">{activeChat.role} • {activeChat.online ? 'Online' : 'Away'}</p>
+                                    <h3 className="font-bold text-gray-900 text-sm">
+                                        {activeContact.contact.firstName} {activeContact.contact.lastName}
+                                    </h3>
+                                    <p className="text-[10px] text-gray-500 font-medium capitalize">{activeContact.contact.role}</p>
                                 </div>
                             </div>
                             <div className="flex items-center gap-2">
-                                <button className="p-2 text-gray-400 hover:text-gray-900 transition-colors hover:bg-gray-100 rounded-lg">
+                                <button type="button" className="p-2 text-gray-400 hover:text-gray-900 transition-colors hover:bg-gray-100 rounded-lg">
                                     <Phone className="w-5 h-5" />
                                 </button>
-                                <button className="p-2 text-gray-400 hover:text-gray-900 transition-colors hover:bg-gray-100 rounded-lg">
+                                <button type="button" className="p-2 text-gray-400 hover:text-gray-900 transition-colors hover:bg-gray-100 rounded-lg">
                                     <Video className="w-5 h-5" />
                                 </button>
-                                <button className="p-2 text-gray-400 hover:text-gray-900 transition-colors hover:bg-gray-100 rounded-lg">
+                                <button type="button" className="p-2 text-gray-400 hover:text-gray-900 transition-colors hover:bg-gray-100 rounded-lg">
                                     <MoreVertical className="w-5 h-5" />
                                 </button>
                             </div>
@@ -164,32 +250,46 @@ export default function ChatInterface({ userType }: { userType: string }) {
 
                         {/* Messages Area */}
                         <div className="flex-1 overflow-y-auto p-6 space-y-4">
-                            {mockMessages.map((msg) => (
-                                <div key={msg.id}
-                                    onClick={() => router.push('/post-signup/roadmap')}
-                                    className={`flex ${msg.isMe ? 'justify-end' : 'justify-start'} animate-fade-in`}>
-                                    <div className={`max-w-[70%] group ${msg.isMe ? 'items-end' : 'items-start'}`}>
-                                        <div className={`px-4 py-3 rounded-2xl text-sm shadow-sm ${msg.isMe
-                                            ? 'bg-yellow-600 text-white rounded-tr-none'
-                                            : 'bg-white text-gray-800 border border-gray-100 rounded-tl-none'
-                                            }`}>
-                                            {msg.text}
+                            {messagesLoading ? (
+                                <div className="space-y-4">
+                                    {[1, 2, 3].map((i) => (
+                                        <div key={i} className={`flex ${i % 2 === 0 ? 'justify-end' : 'justify-start'} animate-pulse`}>
+                                            <div className="h-10 bg-gray-200 rounded-2xl w-48" />
                                         </div>
-                                        <p className={`text-[10px] text-gray-400 font-medium mt-1 ${msg.isMe ? 'text-right' : 'text-left'}`}>
-                                            {msg.timestamp}
-                                        </p>
-                                    </div>
+                                    ))}
                                 </div>
-                            ))}
+                            ) : messages.length === 0 ? (
+                                <div className="flex flex-col items-center justify-center h-full text-center">
+                                    <p className="text-sm text-gray-400">No messages yet. Say hello!</p>
+                                </div>
+                            ) : (
+                                messages.map((msg) => (
+                                    <div key={msg.id} className={`flex ${msg.isMe ? 'justify-end' : 'justify-start'} animate-fade-in`}>
+                                        <div className={`max-w-[70%] group ${msg.isMe ? 'items-end' : 'items-start'}`}>
+                                            <div className={`px-4 py-3 rounded-2xl text-sm shadow-sm flex items-center gap-2 ${msg.isMe
+                                                ? msg.failed
+                                                    ? 'bg-red-100 text-red-800 border border-red-200 rounded-tr-none'
+                                                    : 'bg-yellow-600 text-white rounded-tr-none'
+                                                : 'bg-white text-gray-800 border border-gray-100 rounded-tl-none'
+                                                }`}>
+                                                {msg.text}
+                                                {msg.failed && (
+                                                    <AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0" title="Failed to send" />
+                                                )}
+                                            </div>
+                                            <p className={`text-[10px] text-gray-400 font-medium mt-1 ${msg.isMe ? 'text-right' : 'text-left'}`}>
+                                                {msg.failed ? 'Failed to send' : msg.timestamp}
+                                            </p>
+                                        </div>
+                                    </div>
+                                ))
+                            )}
                             <div ref={messagesEndRef} />
                         </div>
 
                         {/* Message Input */}
                         <div className="p-4 bg-white border-t border-gray-100 relative z-10">
-                            <form
-                                onSubmit={(e) => { e.preventDefault(); setMessage(''); }}
-                                className="flex items-center gap-3"
-                            >
+                            <form onSubmit={handleSend} className="flex items-center gap-3">
                                 <button type="button" className="p-2 text-gray-400 hover:text-gray-900 transition-colors">
                                     <Paperclip className="w-5 h-5" />
                                 </button>
@@ -207,7 +307,8 @@ export default function ChatInterface({ userType }: { userType: string }) {
                                 </div>
                                 <button
                                     type="submit"
-                                    className="w-11 h-11 bg-yellow-600 text-white rounded-lg flex items-center justify-center shadow-lg shadow-gray-600/20 hover:bg-yellow-700 transition-all active:scale-95"
+                                    disabled={!message.trim()}
+                                    className="w-11 h-11 bg-yellow-600 text-white rounded-lg flex items-center justify-center shadow-lg shadow-gray-600/20 hover:bg-yellow-700 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
                                     <Send className="w-5 h-5" />
                                 </button>

@@ -1,18 +1,57 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
 import TransactionsTable from '@/components/umbrella-admin/TransactionsTable';
+import { useFinancial } from '@/contexts/FinancialContext';
+import { fieldsService, Field } from '@/services/fields';
 
 import { TrendingUp, DollarSign, CreditCard, PieChart } from 'lucide-react';
 
+const UMBRELLA_SHARE = 0.65;
+const FIELDS_SHARE = 0.35;
+
+function StatSkeleton() {
+  return (
+    <div className="rounded-lg p-6 bg-gray-100 animate-pulse h-28" />
+  );
+}
+
 export default function UmbrellaAdminFinancialPage() {
-  const transactions = [
-    { id: 1, description: 'Student Payment - Alice Johnson', field: 'Programming', amount: 500, umbrellaShare: 325, date: '2024-01-22' },
-    { id: 2, description: 'Student Payment - Bob Wilson', field: 'Design', amount: 450, umbrellaShare: 292.5, date: '2024-01-22' },
-    { id: 3, description: 'Student Payment - Carol Davis', field: 'Marketing', amount: 400, umbrellaShare: 260, date: '2024-01-21' },
-    { id: 4, description: 'Student Payment - David Wilson', field: 'Data Science', amount: 550, umbrellaShare: 357.5, date: '2024-01-21' },
-    { id: 5, description: 'Student Payment - Eva Martinez', field: 'Business', amount: 380, umbrellaShare: 247, date: '2024-01-20' }
-  ];
+  const { getTotalBalance, getUserTransactions, isLoading } = useFinancial();
+  const [fields, setFields] = useState<Field[]>([]);
+  const [fieldsLoading, setFieldsLoading] = useState(true);
+
+  useEffect(() => {
+    fieldsService.getFields()
+      .then(res => setFields(res.data ?? []))
+      .catch(() => setFields([]))
+      .finally(() => setFieldsLoading(false));
+  }, []);
+
+  const totalRevenue = getTotalBalance();
+  const umbrellaShare = totalRevenue * UMBRELLA_SHARE;
+  const fieldsShare = totalRevenue * FIELDS_SHARE;
+
+  const rawTransactions = getUserTransactions();
+  const transactions = rawTransactions.map((t, idx) => ({
+    id: idx + 1,
+    description: t.description,
+    field: '—',
+    amount: t.amount,
+    umbrellaShare: Math.round(t.amount * UMBRELLA_SHARE * 100) / 100,
+    date: t.date,
+  }));
+
+  // Compute per-field revenue breakdown from total, distributed evenly across fields
+  const fieldCount = fields.length;
+  const fieldBreakdown = fields.map((field, idx) => {
+    // Distribute total revenue evenly across fields as a simple approximation
+    const fieldRevenue = fieldCount > 0 ? Math.round((totalRevenue / fieldCount) * 100) / 100 : 0;
+    const sharePercent = fieldCount > 0 ? Math.round((100 / fieldCount) * 10) / 10 : 0;
+    return { name: field.name, revenue: fieldRevenue, share: sharePercent };
+  });
+
   return (
     <div className="flex h-screen bg-white">
       <Sidebar activeItem="Financial" userType="umbrella-admin" />
@@ -27,45 +66,56 @@ export default function UmbrellaAdminFinancialPage() {
 
             {/* Financial Stats */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-              <div className="bg-linear-to-r from-gray-500 to-gray-600 rounded-lg p-6 text-white">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-gray-100 text-sm">Total Revenue</p>
-                    <p className="text-3xl font-bold">RWF 67,845,000</p>
+              {isLoading ? (
+                <>
+                  <StatSkeleton />
+                  <StatSkeleton />
+                  <StatSkeleton />
+                  <StatSkeleton />
+                </>
+              ) : (
+                <>
+                  <div className="bg-linear-to-r from-gray-500 to-gray-600 rounded-lg p-6 text-white">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-gray-100 text-sm">Total Revenue</p>
+                        <p className="text-3xl font-bold">RWF {totalRevenue.toLocaleString()}</p>
+                      </div>
+                      <DollarSign className="w-8 h-8 text-gray-200" />
+                    </div>
                   </div>
-                  <DollarSign className="w-8 h-8 text-gray-200" />
-                </div>
-              </div>
 
-              <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-gray-500 text-sm">Umbrella Share (65%)</p>
-                    <p className="text-2xl font-bold text-gray-900">RWF 44,100,000</p>
+                  <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-gray-500 text-sm">Umbrella Share (65%)</p>
+                        <p className="text-2xl font-bold text-gray-900">RWF {umbrellaShare.toLocaleString()}</p>
+                      </div>
+                      <PieChart className="w-8 h-8 text-gray-500" />
+                    </div>
                   </div>
-                  <PieChart className="w-8 h-8 text-gray-500" />
-                </div>
-              </div>
 
-              <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-gray-500 text-sm">Fields Share (35%)</p>
-                    <p className="text-2xl font-bold text-gray-900">RWF 23,745,000</p>
+                  <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-gray-500 text-sm">Fields Share (35%)</p>
+                        <p className="text-2xl font-bold text-gray-900">RWF {fieldsShare.toLocaleString()}</p>
+                      </div>
+                      <CreditCard className="w-8 h-8 text-gray-500" />
+                    </div>
                   </div>
-                  <CreditCard className="w-8 h-8 text-gray-500" />
-                </div>
-              </div>
 
-              <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-gray-500 text-sm">Growth Rate</p>
-                    <p className="text-2xl font-bold text-gray-600">+12.5%</p>
+                  <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-gray-500 text-sm">Growth Rate</p>
+                        <p className="text-2xl font-bold text-gray-600">+12.5%</p>
+                      </div>
+                      <TrendingUp className="w-8 h-8 text-gray-500" />
+                    </div>
                   </div>
-                  <TrendingUp className="w-8 h-8 text-gray-500" />
-                </div>
-              </div>
+                </>
+              )}
             </div>
 
             {/* Field Revenue Breakdown */}
@@ -74,34 +124,37 @@ export default function UmbrellaAdminFinancialPage() {
                 <h3 className="text-lg font-semibold text-gray-900">Revenue by Field</h3>
               </div>
               <div className="p-6">
-                <div className="space-y-4">
-                  {[
-                    { name: 'Programming Field', revenue: 12450, share: 27.5, growth: '+15%' },
-                    { name: 'Design Field', revenue: 10230, share: 22.6, growth: '+8%' },
-                    { name: 'Marketing Field', revenue: 9180, share: 20.3, growth: '+12%' },
-                    { name: 'Data Science Field', revenue: 7890, share: 17.4, growth: '+18%' },
-                    { name: 'Business Field', revenue: 5480, share: 12.1, growth: '+5%' }
-                  ].map((field, index) => (
-                    <div key={index} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                      <div className="flex-1">
-                        <div className="font-medium text-gray-900">{field.name}</div>
-                        <div className="text-sm text-gray-500">{field.share}% of total revenue</div>
-                      </div>
-                      <div className="flex items-center gap-4">
-                        <div className="text-right">
-                          <div className="font-semibold text-gray-900">RWF {field.revenue.toLocaleString()}</div>
-                          <div className="text-sm text-gray-600">{field.growth}</div>
+                {fieldsLoading ? (
+                  <div className="space-y-4">
+                    {[1, 2, 3].map(i => (
+                      <div key={i} className="h-16 bg-gray-100 rounded-lg animate-pulse" />
+                    ))}
+                  </div>
+                ) : fieldBreakdown.length === 0 ? (
+                  <p className="text-gray-500 text-sm">No fields available.</p>
+                ) : (
+                  <div className="space-y-4">
+                    {fieldBreakdown.map((field, index) => (
+                      <div key={index} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                        <div className="flex-1">
+                          <div className="font-medium text-gray-900">{field.name}</div>
+                          <div className="text-sm text-gray-500">{field.share}% of total revenue</div>
                         </div>
-                        <div className="w-16 bg-gray-200 rounded-full h-2">
-                          <div
-                            className="bg-yellow-600 h-2 rounded-full"
-                            style={{ width: `${field.share * 4}%` }}
-                          ></div>
+                        <div className="flex items-center gap-4">
+                          <div className="text-right">
+                            <div className="font-semibold text-gray-900">RWF {field.revenue.toLocaleString()}</div>
+                          </div>
+                          <div className="w-16 bg-gray-200 rounded-full h-2">
+                            <div
+                              className="bg-yellow-600 h-2 rounded-full"
+                              style={{ width: `${Math.min(field.share * 4, 100)}%` }}
+                            />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
 
@@ -111,7 +164,17 @@ export default function UmbrellaAdminFinancialPage() {
                 <h3 className="text-lg font-semibold text-gray-900">Recent Transactions</h3>
               </div>
               <div className="p-6">
-                <TransactionsTable transactions={transactions} />
+                {isLoading ? (
+                  <div className="space-y-3">
+                    {[1, 2, 3, 4, 5].map(i => (
+                      <div key={i} className="h-12 bg-gray-100 rounded animate-pulse" />
+                    ))}
+                  </div>
+                ) : transactions.length === 0 ? (
+                  <p className="text-gray-500 text-sm">No transactions yet.</p>
+                ) : (
+                  <TransactionsTable transactions={transactions} />
+                )}
               </div>
             </div>
           </div>

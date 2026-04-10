@@ -4,22 +4,28 @@ import { useState, useEffect } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
 
 import MonthlySessionsChart from '@/components/dashboard/MonthlySessionsChart';
-import TotalRoadmaps from '@/components/dashboard/TotalRoadmaps';
 import ScheduledEvents from '@/components/dashboard/ScheduledEvents';
 import Calendar from '@/components/dashboard/Calendar';
 import { useAuth, useRoadmaps, useUsers, useFinancial } from '@/contexts';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
-import { getDashboardStats, mockFields, getWalletsByType } from '@/data';
-import { Building2, Users, DollarSign, Activity, Settings, Eye, BarChart3, Shield } from 'lucide-react';
-import { User, Field } from '@/types';
+import { fieldsService, Field as ServiceField } from '@/services/fields';
+import { Building2, Users, DollarSign, Activity, BarChart3, Shield } from 'lucide-react';
+import { User } from '@/types';
+
+interface FieldPerformance extends ServiceField {
+  studentsCount: number;
+  performance: number;
+}
 
 export default function UmbrellaAdminDashboard() {
   const { user, isAuthenticated, isLoading: authLoading } = useAuth();
   const { studentRoadmaps, isLoading: roadmapsLoading } = useRoadmaps();
-  const { users, isLoading: usersLoading } = useUsers();
-  const { } = useFinancial();
+  const { users, students, isLoading: usersLoading } = useUsers();
+  const { getTotalBalance, isLoading: financialLoading } = useFinancial();
   const { navigate } = useNavigationWithLoading();
   const [selectedDateRange, setSelectedDateRange] = useState('This month');
+  const [fieldPerformance, setFieldPerformance] = useState<FieldPerformance[]>([]);
+  const [fieldsLoading, setFieldsLoading] = useState(true);
 
   // Redirect if not authenticated or not an umbrella admin
   useEffect(() => {
@@ -29,7 +35,6 @@ export default function UmbrellaAdminDashboard() {
     }
 
     if (!authLoading && user && user.role !== 'umbrella-admin') {
-      // Redirect to appropriate dashboard based on role
       const dashboardRoutes: Record<string, string> = {
         'student': '/dashboard/student',
         'trainer': '/dashboard/trainer',
@@ -40,8 +45,48 @@ export default function UmbrellaAdminDashboard() {
     }
   }, [authLoading, isAuthenticated, user, navigate]);
 
-  // Show loading while checking auth or loading data
-  if (authLoading || roadmapsLoading || usersLoading) {
+  // Fetch fields and compute performance from real data
+  useEffect(() => {
+    if (!user || user.role !== 'umbrella-admin') return;
+
+    const loadFields = async () => {
+      setFieldsLoading(true);
+      try {
+        const response = await fieldsService.getFields();
+        const fields = response.data ?? [];
+
+        const performance = fields.map((field: ServiceField) => {
+          const fieldStudents = users.filter((u: User) => u.role === 'student' && u.fieldId === field._id);
+          const fieldRoadmaps = studentRoadmaps.filter(r =>
+            fieldStudents.some(s => s.id === r.studentId)
+          );
+          const completionRate = fieldRoadmaps.length > 0
+            ? Math.round(fieldRoadmaps.filter(r => r.status === 'completed').length / fieldRoadmaps.length * 100)
+            : 0;
+
+          return {
+            ...field,
+            studentsCount: fieldStudents.length,
+            performance: completionRate,
+          };
+        });
+
+        setFieldPerformance(performance);
+      } catch {
+        setFieldPerformance([]);
+      } finally {
+        setFieldsLoading(false);
+      }
+    };
+
+    if (!usersLoading && !roadmapsLoading) {
+      loadFields();
+    }
+  }, [user, users, studentRoadmaps, usersLoading, roadmapsLoading]);
+
+  const isLoading = authLoading || roadmapsLoading || usersLoading || financialLoading || fieldsLoading;
+
+  if (isLoading) {
     return (
       <div className="flex h-screen bg-white">
         <div className="w-64 bg-gray-900 animate-pulse"></div>
@@ -64,36 +109,13 @@ export default function UmbrellaAdminDashboard() {
     );
   }
 
-  // Don't render if user is not authenticated or not an umbrella admin
   if (!user || user.role !== 'umbrella-admin') {
     return null;
   }
 
-  // Get system-wide data
-  const systemStats = getDashboardStats();
-  const umbrellaWallets = getWalletsByType('umbrella');
-  const totalRevenue = umbrellaWallets.reduce((sum: number, wallet: any) => sum + wallet.balance, 0);
-
-  // Calculate field performance data
-  const fieldPerformance = mockFields.map((field: Field) => {
-    const fieldUsers = users.filter((u: User) => {
-      if ('fieldId' in u) return u.fieldId === field.id;
-      return false;
-    });
-    const fieldStudents = fieldUsers.filter(u => u.role === 'student');
-    const fieldRoadmaps = studentRoadmaps.filter(r =>
-      fieldStudents.some(s => s.id === r.studentId)
-    );
-    const completionRate = fieldRoadmaps.length > 0
-      ? Math.round(fieldRoadmaps.filter(r => r.status === 'completed').length / fieldRoadmaps.length * 100)
-      : 0;
-
-    return {
-      ...field,
-      studentsCount: fieldStudents.length,
-      performance: Math.max(completionRate, 75 + Math.random() * 20) // Ensure reasonable performance
-    };
-  });
+  const totalRevenue = getTotalBalance();
+  const totalStudents = students.length;
+  const totalFields = fieldPerformance.length;
 
   return (
     <div className="flex h-screen bg-white">
@@ -114,31 +136,31 @@ export default function UmbrellaAdminDashboard() {
 
             {/* System Stats Cards */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4 mb-4 sm:mb-6 lg:mb-8">
-              <div className="bg-white rounded-lg p-3 lg:p-4 shadow-sm border border-gray-100  hover:shadow-lg transition-all duration-300 animate-slide-up">
+              <div className="bg-white rounded-lg p-3 lg:p-4 shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300 animate-slide-up">
                 <div className="flex items-center gap-3">
                   <div className="p-2 bg-gray-100 rounded-lg">
                     <Building2 className="w-5 h-5 text-gray-600" />
                   </div>
                   <div>
                     <p className="text-xs font-medium text-gray-600">Total Fields</p>
-                    <p className="text-lg lg:text-xl font-bold text-gray-900">{systemStats.totalFields}</p>
+                    <p className="text-lg lg:text-xl font-bold text-gray-900">{totalFields}</p>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-white rounded-lg p-3 lg:p-4 shadow-sm border border-gray-100  hover:shadow-lg transition-all duration-300 animate-slide-up" style={{ animationDelay: '100ms' }}>
+              <div className="bg-white rounded-lg p-3 lg:p-4 shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300 animate-slide-up" style={{ animationDelay: '100ms' }}>
                 <div className="flex items-center gap-3">
                   <div className="p-2 bg-gray-100 rounded-lg">
                     <Users className="w-5 h-5 text-gray-600" />
                   </div>
                   <div>
                     <p className="text-xs font-medium text-gray-600">Total Students</p>
-                    <p className="text-lg lg:text-xl font-bold text-gray-900">{systemStats.totalStudents}</p>
+                    <p className="text-lg lg:text-xl font-bold text-gray-900">{totalStudents}</p>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-white rounded-lg p-3 lg:p-4 shadow-sm border border-gray-100  hover:shadow-lg transition-all duration-300 animate-slide-up" style={{ animationDelay: '200ms' }}>
+              <div className="bg-white rounded-lg p-3 lg:p-4 shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300 animate-slide-up" style={{ animationDelay: '200ms' }}>
                 <div className="flex items-center gap-3">
                   <div className="p-2 bg-gray-100 rounded-lg">
                     <DollarSign className="w-5 h-5 text-gray-600" />
@@ -152,14 +174,14 @@ export default function UmbrellaAdminDashboard() {
                 </div>
               </div>
 
-              <div className="bg-white rounded-lg p-3 lg:p-4 shadow-sm border border-gray-100  hover:shadow-lg transition-all duration-300 animate-slide-up" style={{ animationDelay: '300ms' }}>
+              <div className="bg-white rounded-lg p-3 lg:p-4 shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300 animate-slide-up" style={{ animationDelay: '300ms' }}>
                 <div className="flex items-center gap-3">
                   <div className="p-2 bg-gray-100 rounded-lg">
                     <Activity className="w-5 h-5 text-gray-600" />
                   </div>
                   <div>
                     <p className="text-xs font-medium text-gray-600">System Health</p>
-                    <p className="text-lg lg:text-xl font-bold text-gray-600">{systemStats.systemHealth}%</p>
+                    <p className="text-lg lg:text-xl font-bold text-gray-600">—</p>
                   </div>
                 </div>
               </div>
@@ -177,27 +199,31 @@ export default function UmbrellaAdminDashboard() {
                 {/* Fields Performance */}
                 <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100 animate-fade-in" style={{ animationDelay: '500ms' }}>
                   <h3 className="text-sm sm:text-base font-semibold text-gray-900 mb-4">Fields Performance</h3>
-                  <div className="space-y-3">
-                    {fieldPerformance.map((field, index) => (
-                      <div key={field.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-                        <div className="flex-1">
-                          <div className="font-medium text-gray-900 text-sm">{field.name}</div>
-                          <div className="text-xs text-gray-500">
-                            {field.studentsCount} students • {field.totalRevenue?.toLocaleString()} RWF
+                  {fieldPerformance.length === 0 ? (
+                    <p className="text-sm text-gray-500 text-center py-4">No fields available</p>
+                  ) : (
+                    <div className="space-y-3">
+                      {fieldPerformance.map((field) => (
+                        <div key={field._id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                          <div className="flex-1">
+                            <div className="font-medium text-gray-900 text-sm">{field.name}</div>
+                            <div className="text-xs text-gray-500">
+                              {field.studentsCount} students
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-3">
+                            <div className="w-16 bg-gray-200 rounded-full h-2">
+                              <div
+                                className="bg-yellow-600 h-2 rounded-full transition-all duration-1000"
+                                style={{ width: `${field.performance}%` }}
+                              ></div>
+                            </div>
+                            <span className="text-xs font-medium text-gray-900 w-8">{field.performance}%</span>
                           </div>
                         </div>
-                        <div className="flex items-center gap-3">
-                          <div className="w-16 bg-gray-200 rounded-full h-2">
-                            <div
-                              className="bg-yellow-600 h-2 rounded-full transition-all duration-1000"
-                              style={{ width: `${field.performance}%` }}
-                            ></div>
-                          </div>
-                          <span className="text-xs font-medium text-gray-900 w-8">{Math.round(field.performance)}%</span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 {/* Calendar */}
