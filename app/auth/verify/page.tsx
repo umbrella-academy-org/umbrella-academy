@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Logo } from '@/components/ui/Logo';
+import { authService } from '@/services/auth';
 
 export default function VerifyPage() {
   const router = useRouter();
@@ -53,7 +54,7 @@ export default function VerifyPage() {
     inputRefs.current[Math.min(pastedData.length, 5)]?.focus();
   };
 
-  const handleContinue = (e: React.FormEvent) => {
+  const handleContinue = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     const otpValue = otp.join('');
@@ -61,7 +62,17 @@ export default function VerifyPage() {
       setError('Please enter the complete 6-digit code');
       return;
     }
-    console.log('OTP:', otpValue);
+
+    const email = typeof window !== 'undefined'
+      ? (localStorage.getItem('signupEmail') || localStorage.getItem('resetEmail') || '')
+      : '';
+
+    try {
+      await authService.verifyOtp(email, otpValue);
+    } catch {
+      setError('Invalid or expired code. Please try again.');
+      return;
+    }
 
     // Check if this is a password reset flow
     const authFlow = typeof window !== 'undefined' ? localStorage.getItem('authFlow') : null;
@@ -72,9 +83,16 @@ export default function VerifyPage() {
     }
   };
 
-  const handleResend = () => {
+  const handleResend = async () => {
+    const email = typeof window !== 'undefined'
+      ? (localStorage.getItem('signupEmail') || localStorage.getItem('resetEmail') || '')
+      : '';
+    try {
+      await authService.resendOtp(email);
+    } catch {
+      // Silently fail — timer still resets
+    }
     setTimer(120);
-    console.log('Resend OTP');
   };
 
   const formatTime = (seconds: number) => {

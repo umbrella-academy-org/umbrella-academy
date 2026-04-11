@@ -4,7 +4,7 @@ import { useState } from 'react';
 import DataTable from '@/components/ui/DataTable';
 
 interface Trainer {
-  id: number;
+  id: number | string;
   name: string;
   email: string;
   capacity: number;
@@ -15,9 +15,11 @@ interface Trainer {
 
 interface TrainersTableProps {
   trainers: Trainer[];
+  onApprove?: (trainerId: string) => Promise<void>;
+  approvingId?: string | null;
 }
 
-export default function TrainersTable({ trainers }: TrainersTableProps) {
+export default function TrainersTable({ trainers, onApprove, approvingId }: TrainersTableProps) {
   const [selectedTrainers, setSelectedTrainers] = useState<any[]>([]);
 
   // Transform data for DataTable
@@ -42,9 +44,20 @@ export default function TrainersTable({ trainers }: TrainersTableProps) {
       </span>
     ),
     actions: (
-      <button className="text-gray-600 hover:text-gray-700">
-        View Details
-      </button>
+      <div className="flex items-center gap-2">
+        <button className="text-gray-600 hover:text-gray-700 text-sm font-medium">
+          View Details
+        </button>
+        {trainer.status === 'pending' && onApprove && (
+          <button
+            onClick={() => onApprove(String(trainer.id))}
+            disabled={approvingId === String(trainer.id)}
+            className="px-3 py-1 text-xs font-medium text-white bg-green-600 rounded-lg hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          >
+            {approvingId === String(trainer.id) ? 'Approving…' : 'Approve'}
+          </button>
+        )}
+      </div>
     ),
     // Store original data for filtering
     _original: trainer

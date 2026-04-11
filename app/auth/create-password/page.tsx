@@ -31,24 +31,50 @@ export default function CreatePasswordPage() {
     const email = localStorage.getItem('signupEmail') ?? '';
     const firstName = localStorage.getItem('signupFirstName') ?? '';
     const lastName = localStorage.getItem('signupLastName') ?? '';
-    const fieldId = localStorage.getItem('signupFieldId') ?? undefined;
-
-    const roleMap: Record<string, 'student' | 'trainer' | 'mentor' | 'field-admin' | 'umbrella-admin'> = {
-      student: 'student', trainer: 'trainer', mentor: 'mentor',
-      'field-admin': 'field-admin', 'umbrella-admin': 'umbrella-admin',
-    };
 
     const result = await register({
       email,
       password,
-      role: roleMap[userType] ?? 'student',
+      role: (userType as 'student' | 'trainer' | 'mentor' | 'field-admin' | 'umbrella-admin') ?? 'student',
       firstName: firstName || email.split('@')[0],
       lastName: lastName || '',
-      fieldId: fieldId || undefined,
-    });
+      // Student-specific fields
+      gender: localStorage.getItem('signupGender') ?? undefined,
+      dateOfBirth: localStorage.getItem('signupDateOfBirth') ?? undefined,
+      phoneCode: localStorage.getItem('signupPhoneCode') ?? localStorage.getItem('mentorPhoneCode') ?? undefined,
+      phoneNumber: localStorage.getItem('signupPhoneNumber') ?? localStorage.getItem('mentorPhoneNumber') ?? undefined,
+      educationLevel: localStorage.getItem('signupEducationLevel') ?? undefined,
+      fieldId: localStorage.getItem('signupFieldId') ?? undefined,
+      // Trainer/Mentor-specific fields
+      bio: localStorage.getItem('trainerBio') ?? localStorage.getItem('mentorBio') ?? undefined,
+      educationTitle: localStorage.getItem('trainerEducationTitle') ?? localStorage.getItem('mentorEducationTitle') ?? undefined,
+      school: localStorage.getItem('trainerSchool') ?? localStorage.getItem('mentorSchool') ?? undefined,
+      yearOfCompletion: localStorage.getItem('trainerYearOfCompletion') ?? localStorage.getItem('mentorYearOfCompletion') ?? undefined,
+      proofDocuments: (() => {
+        const raw = localStorage.getItem('trainerProofDocuments') ?? localStorage.getItem('mentorProofDocuments');
+        return raw ? JSON.parse(raw) : undefined;
+      })(),
+    } as Parameters<typeof register>[0]);
 
     if (result.success) {
-      ['signupEmail', 'signupFirstName', 'signupLastName', 'signupFieldId', 'userType', 'authFlow'].forEach(k => localStorage.removeItem(k));
+      // Clean up all onboarding keys
+      [
+        'signupEmail', 'signupFirstName', 'signupLastName', 'signupFieldId', 'userType', 'authFlow',
+        'signupGender', 'signupDateOfBirth', 'signupPhoneCode', 'signupPhoneNumber', 'signupEducationLevel',
+        'selectedCompany', 'selectedField',
+        'trainerBio', 'trainerEducationLevel', 'trainerEducationTitle', 'trainerSchool',
+        'trainerYearOfCompletion', 'trainerFieldId', 'trainerHoursPerDay', 'trainerTimeSlots',
+        'trainerProofDocuments',
+        'mentorBio', 'mentorPhoneCode', 'mentorPhoneNumber', 'mentorEducationTitle', 'mentorSchool',
+        'mentorYearOfCompletion', 'mentorEducationLevel', 'mentorProofDocuments',
+      ].forEach(k => localStorage.removeItem(k));
+
+      if (result.pending) {
+        // Trainer pending approval
+        router.push('/auth/trainer/pending');
+        return;
+      }
+
       const dashboardRoutes: Record<string, string> = {
         student: '/dashboard/student', trainer: '/dashboard/trainer',
         mentor: '/dashboard/mentor', 'field-admin': '/dashboard/field-admin',

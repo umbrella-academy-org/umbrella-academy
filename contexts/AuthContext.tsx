@@ -2,14 +2,14 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { User, UserType } from '@/types';
-import { authService, RegisterRequest } from '@/services/auth';
+import { authService, RegisterRequest, RegisterStudentRequest, RegisterTrainerRequest, RegisterMentorRequest } from '@/services/auth';
 
 interface AuthContextType {
   user: User | null;
   isAuthenticated: boolean;
   isLoading: boolean;
-  login: (email: string, password: string) => Promise<boolean>;
-  register: (data: RegisterRequest) => Promise<{ success: boolean; error?: string }>;
+  login: (email: string, password: string) => Promise<boolean | string>;
+  register: (data: RegisterRequest) => Promise<{ success: boolean; pending?: boolean; error?: string }>;
   logout: () => void;
   hasRole: (role: UserType) => boolean;
   hasPermission: (permission: string) => boolean;
@@ -42,7 +42,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     checkAuth();
   }, []);
 
-  const login = async (email: string, password: string): Promise<boolean> => {
+  const login = async (email: string, password: string): Promise<boolean | string> => {
     setIsLoading(true);
     try {
       const response = await authService.login(email, password);
@@ -51,22 +51,48 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         return true;
       }
       return false;
-    } catch {
-      return false;
+    } catch (err: unknown) {
+      // Propagate the backend error message so useLogin can surface it
+      const message = err instanceof Error ? err.message : 'Login failed. Please try again.';
+      return message;
     } finally {
       setIsLoading(false);
     }
   };
 
-  const register = async (data: RegisterRequest): Promise<{ success: boolean; error?: string }> => {
+  const register = async (data: RegisterRequest): Promise<{ success: boolean; pending?: boolean; error?: string }> => {
     setIsLoading(true);
     try {
-      const response = await authService.register(data);
-      if (response.success && response.user) {
-        setUser(response.user);
-        return { success: true };
+      if (data.role === 'student') {
+        const response = await authService.registerStudent(data as unknown as RegisterStudentRequest);
+        if (response.success && response.user) {
+          setUser(response.user);
+          return { success: true };
+        }
+        return { success: false, error: 'Registration failed' };
+      } else if (data.role === 'trainer') {
+        const response = await authService.registerTrainer(data as unknown as RegisterTrainerRequest);
+        if (response.success && response.pending) {
+          // Trainer is not logged in — pending approval
+          return { success: true, pending: true };
+        }
+        return { success: false, error: 'Registration failed' };
+      } else if (data.role === 'mentor') {
+        const response = await authService.registerMentor(data as unknown as RegisterMentorRequest);
+        if (response.success && response.user) {
+          setUser(response.user);
+          return { success: true };
+        }
+        return { success: false, error: 'Registration failed' };
+      } else {
+        // field-admin / umbrella-admin — use generic register
+        const response = await authService.register(data);
+        if (response.success && response.user) {
+          setUser(response.user);
+          return { success: true };
+        }
+        return { success: false, error: 'Registration failed' };
       }
-      return { success: false, error: 'Registration failed' };
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : 'Registration failed. Please try again.';
       return { success: false, error: message };

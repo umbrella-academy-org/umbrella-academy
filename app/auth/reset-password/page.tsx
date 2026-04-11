@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { authService } from '@/services/auth';
 
 export default function ResetPasswordPage() {
   const router = useRouter();
@@ -10,15 +11,15 @@ export default function ResetPasswordPage() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [errors, setErrors] = useState({ password: '', confirmPassword: '' });
+  const [errors, setErrors] = useState({ password: '', confirmPassword: '', api: '' });
 
   const hasMinLength = password.length >= 8;
   const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
   const hasNumber = /\d/.test(password);
 
-  const handleContinue = (e: React.FormEvent) => {
+  const handleContinue = async (e: React.FormEvent) => {
     e.preventDefault();
-    setErrors({ password: '', confirmPassword: '' });
+    setErrors({ password: '', confirmPassword: '', api: '' });
     
     if (!password) {
       setErrors(prev => ({ ...prev, password: 'Password is required' }));
@@ -36,12 +37,19 @@ export default function ResetPasswordPage() {
       setErrors(prev => ({ ...prev, confirmPassword: 'Passwords do not match' }));
       return;
     }
-    
-    console.log('Password reset successfully');
-    // Note: backend has no reset-password endpoint yet.
-    // Clear localStorage and redirect to login.
+
+    const resetToken = localStorage.getItem('resetToken') || '';
+
+    try {
+      await authService.resetPassword(resetToken, password);
+    } catch {
+      setErrors(prev => ({ ...prev, api: 'Failed to reset password. The link may have expired.' }));
+      return;
+    }
+
     localStorage.removeItem('resetEmail');
     localStorage.removeItem('authFlow');
+    localStorage.removeItem('resetToken');
     router.push('/auth/login');
   };
 
@@ -208,6 +216,12 @@ export default function ResetPasswordPage() {
                   </span>
                 </div>
               </div>
+
+              {errors.api && (
+                <div className="p-3 bg-red-50 border border-red-200 rounded-lg">
+                  <p className="text-sm text-red-600">{errors.api}</p>
+                </div>
+              )}
 
               <button
                 type="submit"

@@ -20,9 +20,11 @@ interface Mentor {
 
 interface MentorsTableProps {
   mentors: Mentor[];
+  onApprove?: (mentorId: string) => Promise<void>;
+  approvingId?: string | null;
 }
 
-export default function MentorsTable({ mentors }: MentorsTableProps) {
+export default function MentorsTable({ mentors, onApprove, approvingId }: MentorsTableProps) {
   const [selectedMentors, setSelectedMentors] = useState<any[]>([]);
 
   // Transform data for DataTable
@@ -83,13 +85,22 @@ export default function MentorsTable({ mentors }: MentorsTableProps) {
       </span>
     ),
     actions: (
-      <div className="text-sm font-medium">
-        <button className="text-gray-600 hover:text-gray-700 mr-3">
+      <div className="flex items-center gap-2 text-sm font-medium">
+        <button className="text-gray-600 hover:text-gray-700">
           View Details
         </button>
         <button className="text-gray-600 hover:text-gray-700">
           Edit
         </button>
+        {mentor.status === 'pending' && onApprove && (
+          <button
+            onClick={() => onApprove(String(mentor.id))}
+            disabled={approvingId === String(mentor.id)}
+            className="px-3 py-1 text-xs font-medium text-white bg-green-600 rounded-lg hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          >
+            {approvingId === String(mentor.id) ? 'Approving…' : 'Approve'}
+          </button>
+        )}
       </div>
     ),
     // Store original data for filtering

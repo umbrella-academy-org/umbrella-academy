@@ -37,7 +37,7 @@ export default function ChooseCompanyPage() {
     console.log('Selected company:', selectedCompanyId);
     console.log('Selected field:', selectedFieldId);
     localStorage.setItem('selectedCompany', selectedCompanyId);
-    localStorage.setItem('selectedField', selectedFieldId);
+    localStorage.setItem('signupFieldId', selectedFieldId);
     router.push('/auth/student/choose-course');
   };
 

@@ -5,6 +5,7 @@ import Sidebar from '@/components/dashboard/Sidebar';
 
 import { Plus, CheckCircle, XCircle, Users, UserCheck, Star, Award } from 'lucide-react';
 import MentorsTable from '@/components/wing-admin/MentorsTable';
+import { authService } from '@/services/auth';
 
 export default function FieldAdminMentorsPage() {
   const [showCreateForm, setShowCreateForm] = useState(false);
@@ -14,10 +15,12 @@ export default function FieldAdminMentorsPage() {
     expertise: '',
     maxStudents: 15
   });
+  const [approvingId, setApprovingId] = useState<string | null>(null);
+  const [approvalError, setApprovalError] = useState<string | null>(null);
 
-  const mentors = [
+  const [mentors, setMentors] = useState([
     {
-      id: 1,
+      id: '1',
       name: 'Dr. Sarah Wilson',
       email: 'sarah.wilson@example.com',
       expertise: ['JavaScript', 'React', 'Node.js'],
@@ -30,7 +33,7 @@ export default function FieldAdminMentorsPage() {
       approvedTrainers: 8
     },
     {
-      id: 2,
+      id: '2',
       name: 'Prof. Michael Chen',
       email: 'michael.chen@example.com',
       expertise: ['Python', 'Data Science', 'Machine Learning'],
@@ -43,19 +46,34 @@ export default function FieldAdminMentorsPage() {
       approvedTrainers: 12
     },
     {
-      id: 3,
+      id: '3',
       name: 'Dr. Emily Rodriguez',
       email: 'emily.rodriguez@example.com',
       expertise: ['UI/UX Design', 'Figma', 'Design Systems'],
       maxStudents: 12,
       currentStudents: 8,
       rating: 4.7,
-      status: 'active',
+      status: 'pending',
       joinDate: '2023-12-01',
       approvedRoadmaps: 23,
       approvedTrainers: 5
     }
-  ];
+  ]);
+
+  const handleApproveMentor = async (mentorId: string) => {
+    setApprovingId(mentorId);
+    setApprovalError(null);
+    try {
+      await authService.approveMentor(mentorId);
+      setMentors(prev =>
+        prev.map(m => m.id === mentorId ? { ...m, status: 'active' } : m)
+      );
+    } catch (err) {
+      setApprovalError(err instanceof Error ? err.message : 'Failed to approve mentor');
+    } finally {
+      setApprovingId(null);
+    }
+  };
 
   const handleCreateMentor = (e: React.FormEvent) => {
     e.preventDefault();
@@ -224,7 +242,12 @@ export default function FieldAdminMentorsPage() {
             )}
 
             {/* Mentors List */}
-            <MentorsTable mentors={mentors} />
+            {approvalError && (
+              <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">
+                {approvalError}
+              </div>
+            )}
+            <MentorsTable mentors={mentors} onApprove={handleApproveMentor} approvingId={approvingId} />
           </div>
         </main>
       </div>

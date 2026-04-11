@@ -25,7 +25,7 @@ export default function LoginPage() {
         'student': '/dashboard/student',
         'trainer': '/dashboard/trainer',
         'mentor': '/dashboard/mentor',
-        'wing-admin': '/dashboard/wing-admin',
+        'field-admin': '/dashboard/field-admin',
         'umbrella-admin': '/dashboard/umbrella-admin'
       };
       navigate(dashboardRoutes[user.role]);
@@ -113,10 +113,10 @@ export default function LoginPage() {
               </button>
               <button
                 type="button"
-                onClick={() => fillDemoCredentials('wing-admin')}
+                onClick={() => fillDemoCredentials('field-admin')}
                 className="text-xs px-2 py-1 bg-orange-100 text-orange-700 rounded hover:bg-orange-200 transition-colors"
               >
-                Wing Admin
+                Field Admin
               </button>
             </div>
             <button

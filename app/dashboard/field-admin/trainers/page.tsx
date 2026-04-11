@@ -1,13 +1,15 @@
 'use client';
 
+import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
 import TrainersTable from '@/components/wing-admin/TrainersTable';
 import { Users, UserCheck, UserX, TrendingUp } from 'lucide-react';
+import { authService } from '@/services/auth';
 
 export default function FieldAdminTrainersPage() {
-  const trainers = [
+  const [trainers, setTrainers] = useState([
     {
-      id: 1,
+      id: '1',
       name: 'John Smith',
       email: 'john@example.com',
       capacity: 20,
@@ -16,7 +18,7 @@ export default function FieldAdminTrainersPage() {
       status: 'active'
     },
     {
-      id: 2,
+      id: '2',
       name: 'Sarah Johnson',
       email: 'sarah@example.com',
       capacity: 25,
@@ -25,15 +27,32 @@ export default function FieldAdminTrainersPage() {
       status: 'active'
     },
     {
-      id: 3,
+      id: '3',
       name: 'Mike Wilson',
       email: 'mike@example.com',
       capacity: 18,
       assigned: 18,
       available: 0,
-      status: 'full'
+      status: 'pending'
     }
-  ];
+  ]);
+  const [approvingId, setApprovingId] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleApproveTrainer = async (trainerId: string) => {
+    setApprovingId(trainerId);
+    setError(null);
+    try {
+      await authService.approveTrainer(trainerId);
+      setTrainers(prev =>
+        prev.map(t => t.id === trainerId ? { ...t, status: 'active' } : t)
+      );
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to approve trainer');
+    } finally {
+      setApprovingId(null);
+    }
+  };
 
   // Calculate summary stats
   const totalTrainers = trainers.length;
@@ -94,7 +113,12 @@ export default function FieldAdminTrainersPage() {
               </div>
             </div>
 
-            <TrainersTable trainers={trainers} />
+            {error && (
+              <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">
+                {error}
+              </div>
+            )}
+            <TrainersTable trainers={trainers} onApprove={handleApproveTrainer} approvingId={approvingId} />
           </div>
         </main>
       </div>

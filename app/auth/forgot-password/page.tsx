@@ -4,13 +4,14 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Logo } from '@/components/ui/Logo';
+import { authService } from '@/services/auth';
 
 export default function ForgotPasswordPage() {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
 
-  const handleContinue = (e: React.FormEvent) => {
+  const handleContinue = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
 
@@ -23,12 +24,17 @@ export default function ForgotPasswordPage() {
       return;
     }
 
-    // Store email and flow type for the reset flow
+    try {
+      await authService.forgotPassword(email);
+    } catch {
+      setError('Something went wrong. Please try again.');
+      return;
+    }
+
+    // Store email and flow type for the OTP + reset flow
     localStorage.setItem('resetEmail', email);
     localStorage.setItem('authFlow', 'reset-password');
-    // Note: backend has no OTP/forgot-password endpoint yet.
-    // Redirect directly to reset-password page.
-    router.push('/auth/reset-password');
+    router.push('/auth/verify');
   };
 
   return (

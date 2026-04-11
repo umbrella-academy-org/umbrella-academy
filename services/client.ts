@@ -24,7 +24,7 @@ class ApiClient {
 
   public async logout(): Promise<void> {
     try {
-      localStorage.clear();
+      localStorage.removeItem('auth_token');
     } catch { /* ignore */ } finally {
       this.logoutListeners.forEach(cb => { try { cb(); } catch { /* ignore */ } });
     }
@@ -51,7 +51,8 @@ class ApiClient {
       });
 
       if (res.status === HTTP_STATUS.UNAUTHORIZED || res.status === HTTP_STATUS.FORBIDDEN) {
-        await this.logout();
+        localStorage.removeItem('auth_token');
+        this.logoutListeners.forEach(cb => { try { cb(); } catch { /* ignore */ } });
         throw new Error(`HTTP ${res.status}`);
       }
 

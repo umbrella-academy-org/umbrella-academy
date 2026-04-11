@@ -33,8 +33,11 @@ export default function MentorEducationPage() {
 
   const handleContinue = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Mentor education:', education);
-    router.push('/auth/mentor/profile');
+    localStorage.setItem('mentorEducationTitle', education.title);
+    localStorage.setItem('mentorSchool', education.school);
+    localStorage.setItem('mentorYearOfCompletion', education.year);
+    localStorage.setItem('mentorEducationLevel', education.level);
+    router.push('/auth/mentor/upload-proofs');
   };
 
   return (

@@ -22,14 +22,16 @@ export function useLogin(): UseLoginReturn {
     setError(null);
 
     try {
-      const success = await authLogin(data.email, data.password);
-      
-      if (!success) {
-        setError('Invalid email or password');
-        return false;
+      const result = await authLogin(data.email, data.password);
+
+      if (result === true) {
+        return true;
       }
 
-      return true;
+      // result is either false or an error message string from the backend
+      const errorMsg = typeof result === 'string' ? result : 'Invalid email or password';
+      setError(errorMsg);
+      return false;
     } catch (err) {
       setError('Login failed. Please try again.');
       console.error('Login error:', err);

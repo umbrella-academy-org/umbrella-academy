@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Award, BookMarked, BookOpen, Briefcase, CheckCircle, ChevronDown, FileText, GraduationCap, Trophy } from 'lucide-react';
+import { authService } from '@/services/auth';
 
 export default function ProfilePage() {
   const router = useRouter();
@@ -44,7 +45,7 @@ export default function ProfilePage() {
     setErrors((prev) => ({ ...prev, [field]: '' }));
   };
 
-  const handleContinue = (e: React.FormEvent) => {
+  const handleContinue = async (e: React.FormEvent) => {
     e.preventDefault();
     const newErrors = {
       firstName: '',
@@ -74,6 +75,18 @@ export default function ProfilePage() {
     localStorage.setItem('signupEmail', formData.email);
     localStorage.setItem('signupFirstName', formData.firstName);
     localStorage.setItem('signupLastName', formData.lastName);
+    // Persist all profile fields so create-password can include them in the register payload
+    localStorage.setItem('signupGender', formData.gender);
+    localStorage.setItem('signupDateOfBirth', formData.dateOfBirth);
+    localStorage.setItem('signupPhoneCode', formData.phoneCode);
+    localStorage.setItem('signupPhoneNumber', formData.phoneNumber);
+    if (selectedLevel) localStorage.setItem('signupEducationLevel', selectedLevel);
+    // Send OTP before navigating to verify page
+    try {
+      await authService.sendOtp(formData.email);
+    } catch {
+      // Continue even if OTP send fails — user can resend on verify page
+    }
     router.push('/auth/verify');
   };
 

@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Upload, X, FileText, File, Image as ImageIcon, FileCheck } from 'lucide-react';
+import { apiClient } from '@/services/client';
 
 export default function UploadProofsPage() {
   const router = useRouter();
@@ -53,7 +54,7 @@ export default function UploadProofsPage() {
     return FileCheck;
   };
 
-  const handleContinue = (e: React.FormEvent) => {
+  const handleContinue = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (uploadedFiles.length === 0) {
@@ -61,8 +62,23 @@ export default function UploadProofsPage() {
       return;
     }
 
-    console.log('Uploaded files:', uploadedFiles);
-    router.push('/auth/trainer/pending');
+    try {
+      // Upload each file to the backend and collect returned URLs
+      const urls: string[] = [];
+      for (const file of uploadedFiles) {
+        const response = await apiClient.uploadFile<{ success: boolean; url: string }>(
+          '/api/files/upload',
+          file
+        );
+        if (response.success && response.url) {
+          urls.push(response.url);
+        }
+      }
+      localStorage.setItem('trainerProofDocuments', JSON.stringify(urls));
+      router.push('/auth/trainer/pending');
+    } catch {
+      setError('Failed to upload files. Please try again.');
+    }
   };
 
   return (

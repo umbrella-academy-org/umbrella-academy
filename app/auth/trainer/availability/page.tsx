@@ -30,6 +30,8 @@ export default function MentorAvailabilityPage() {
             return;
         }
         console.log('Mentor Availability:', { hoursPerDay, timeSlots });
+        localStorage.setItem('trainerHoursPerDay', hoursPerDay);
+        localStorage.setItem('trainerTimeSlots', JSON.stringify(timeSlots));
         router.push('/auth/trainer/upload-proofs');
     };
 

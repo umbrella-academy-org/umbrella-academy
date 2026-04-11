@@ -23,6 +23,7 @@ export default function TrainerProfilePage() {
     }
     
     console.log('Trainer bio:', bio);
+    localStorage.setItem('trainerBio', bio);
     router.push('/auth/trainer/education');
   };
 

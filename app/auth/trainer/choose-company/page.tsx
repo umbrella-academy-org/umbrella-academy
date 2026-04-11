@@ -39,7 +39,7 @@ export default function TrainerChooseCompanyPage() {
     console.log('Selected company:', selectedCompanyId);
     console.log('Selected field:', selectedFieldId);
     localStorage.setItem('selectedCompany', selectedCompanyId);
-    localStorage.setItem('selectedField', selectedFieldId);
+    localStorage.setItem('trainerFieldId', selectedFieldId);
     router.push('/auth/trainer/referral');
   };
 
