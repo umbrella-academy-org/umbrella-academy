@@ -2,92 +2,104 @@
 
 import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
-
-import { Plus, CheckCircle, XCircle, Users, UserCheck, Star, Award } from 'lucide-react';
 import MentorsTable from '@/components/wing-admin/MentorsTable';
-import { authService } from '@/services/auth';
+import { Plus, XCircle, Users, UserCheck, Star, Award } from 'lucide-react';
+import { useAdminContext } from '@/contexts';
+import { useMentors, useUsers } from '@/hooks/admin';
 
 export default function FieldAdminMentorsPage() {
+  const {
+    mentors,
+    pendingMentors,
+    mentorsLoading,
+    mentorsError,
+    refreshMentors,
+  } = useAdminContext();
+
+  const { approveMentor, rejectMentor, deleteMentor } = useMentors();
+  const { createUser } = useUsers();
+
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     expertise: '',
-    maxStudents: 15
+    maxStudents: 15,
   });
   const [approvingId, setApprovingId] = useState<string | null>(null);
-  const [approvalError, setApprovalError] = useState<string | null>(null);
-
-  const [mentors, setMentors] = useState([
-    {
-      id: '1',
-      name: 'Dr. Sarah Wilson',
-      email: 'sarah.wilson@example.com',
-      expertise: ['JavaScript', 'React', 'Node.js'],
-      maxStudents: 15,
-      currentStudents: 12,
-      rating: 4.8,
-      status: 'active',
-      joinDate: '2023-11-15',
-      approvedRoadmaps: 45,
-      approvedTrainers: 8
-    },
-    {
-      id: '2',
-      name: 'Prof. Michael Chen',
-      email: 'michael.chen@example.com',
-      expertise: ['Python', 'Data Science', 'Machine Learning'],
-      maxStudents: 20,
-      currentStudents: 18,
-      rating: 4.9,
-      status: 'active',
-      joinDate: '2023-10-20',
-      approvedRoadmaps: 67,
-      approvedTrainers: 12
-    },
-    {
-      id: '3',
-      name: 'Dr. Emily Rodriguez',
-      email: 'emily.rodriguez@example.com',
-      expertise: ['UI/UX Design', 'Figma', 'Design Systems'],
-      maxStudents: 12,
-      currentStudents: 8,
-      rating: 4.7,
-      status: 'pending',
-      joinDate: '2023-12-01',
-      approvedRoadmaps: 23,
-      approvedTrainers: 5
-    }
-  ]);
+  const [mutationError, setMutationError] = useState<string | null>(null);
+  const [createLoading, setCreateLoading] = useState(false);
 
   const handleApproveMentor = async (mentorId: string) => {
     setApprovingId(mentorId);
-    setApprovalError(null);
+    setMutationError(null);
     try {
-      await authService.approveMentor(mentorId);
-      setMentors(prev =>
-        prev.map(m => m.id === mentorId ? { ...m, status: 'active' } : m)
-      );
+      await approveMentor(mentorId);
+      await refreshMentors();
     } catch (err) {
-      setApprovalError(err instanceof Error ? err.message : 'Failed to approve mentor');
+      setMutationError(err instanceof Error ? err.message : 'Failed to approve mentor');
     } finally {
       setApprovingId(null);
     }
   };
 
-  const handleCreateMentor = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Creating mentor:', formData);
-    // Handle mentor creation
-    setShowCreateForm(false);
-    setFormData({ name: '', email: '', expertise: '', maxStudents: 15 });
+  const handleRejectMentor = async (mentorId: string) => {
+    setMutationError(null);
+    try {
+      await rejectMentor(mentorId);
+      await refreshMentors();
+    } catch (err) {
+      setMutationError(err instanceof Error ? err.message : 'Failed to reject mentor');
+    }
   };
 
-  // Calculate summary stats
-  const totalMentors = mentors.length;
+  const handleDeleteMentor = async (mentorId: string) => {
+    setMutationError(null);
+    try {
+      await deleteMentor(mentorId);
+      await refreshMentors();
+    } catch (err) {
+      setMutationError(err instanceof Error ? err.message : 'Failed to delete mentor');
+    }
+  };
+
+  const handleCreateMentor = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setMutationError(null);
+    setCreateLoading(true);
+    try {
+      const [firstName, ...rest] = formData.name.trim().split(' ');
+      const lastName = rest.join(' ') || '';
+      const result = await createUser({
+        email: formData.email,
+        password: Math.random().toString(36).slice(-10),
+        role: 'mentor',
+        firstName,
+        lastName,
+      });
+      if (result) {
+        await refreshMentors();
+        setShowCreateForm(false);
+        setFormData({ name: '', email: '', expertise: '', maxStudents: 15 });
+      }
+    } catch (err) {
+      setMutationError(err instanceof Error ? err.message : 'Failed to create mentor');
+    } finally {
+      setCreateLoading(false);
+    }
+  };
+
+  // Calculate summary stats from real data
+  const allMentors = [...mentors, ...pendingMentors];
+  const totalMentors = allMentors.length;
   const activeMentors = mentors.filter(m => m.status === 'active').length;
-  const totalStudents = mentors.reduce((sum, m) => sum + m.currentStudents, 0);
-  const avgRating = (mentors.reduce((sum, m) => sum + m.rating, 0) / mentors.length).toFixed(1);
+  const avgRating =
+    allMentors.length > 0
+      ? (
+          allMentors.reduce((sum, m) => sum + (('rating' in m ? (m as { rating?: number }).rating : 0) ?? 0), 0) /
+          allMentors.length
+        ).toFixed(1)
+      : '—';
 
   return (
     <div className="flex h-screen bg-white">
@@ -135,8 +147,8 @@ export default function FieldAdminMentorsPage() {
               <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-gray-600">Students Mentored</p>
-                    <p className="text-2xl font-bold text-gray-900">{totalStudents}</p>
+                    <p className="text-sm font-medium text-gray-600">Pending Approval</p>
+                    <p className="text-2xl font-bold text-gray-900">{pendingMentors.length}</p>
                   </div>
                   <Award className="w-8 h-8 text-gray-500" />
                 </div>
@@ -158,7 +170,7 @@ export default function FieldAdminMentorsPage() {
                 <div className="flex items-center justify-between mb-8 pb-4 border-b border-gray-50">
                   <div>
                     <h3 className="text-xl font-semibold text-gray-900">Create New Mentor</h3>
-                    <p className="text-sm text-gray-400 mt-1">Assign an official mentor to oversee this field's trainers.</p>
+                    <p className="text-sm text-gray-400 mt-1">Assign an official mentor to oversee this field&apos;s trainers.</p>
                   </div>
                   <button
                     onClick={() => setShowCreateForm(false)}
@@ -202,7 +214,6 @@ export default function FieldAdminMentorsPage() {
                       onChange={(e) => setFormData({ ...formData, expertise: e.target.value })}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 transition-all"
                       placeholder="eg. JavaScript, React, System Architecture"
-                      required
                     />
                   </div>
 
@@ -218,16 +229,16 @@ export default function FieldAdminMentorsPage() {
                       className="w-24 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 text-center font-bold"
                       min="5"
                       max="100"
-                      required
                     />
                   </div>
 
                   <div className="flex gap-4 pt-4">
                     <button
                       type="submit"
-                      className="flex-1 bg-yellow-600 text-white px-6 py-3.5 rounded-lg font-semibold hover:bg-yellow-700 transition-all shadow-md active:scale-95"
+                      disabled={createLoading}
+                      className="flex-1 bg-yellow-600 text-white px-6 py-3.5 rounded-lg font-semibold hover:bg-yellow-700 transition-all shadow-md active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      Verify and Activate Mentor
+                      {createLoading ? 'Creating…' : 'Verify and Activate Mentor'}
                     </button>
                     <button
                       type="button"
@@ -241,13 +252,64 @@ export default function FieldAdminMentorsPage() {
               </div>
             )}
 
-            {/* Mentors List */}
-            {approvalError && (
-              <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">
-                {approvalError}
+            {/* Loading state */}
+            {mentorsLoading && (
+              <div className="space-y-3">
+                {[1, 2, 3].map(i => (
+                  <div key={i} className="h-14 bg-gray-100 rounded-lg animate-pulse" />
+                ))}
               </div>
             )}
-            <MentorsTable mentors={mentors} onApprove={handleApproveMentor} approvingId={approvingId} />
+
+            {/* Error state */}
+            {!mentorsLoading && mentorsError && (
+              <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg flex items-center justify-between">
+                <span className="text-sm text-red-700">{mentorsError}</span>
+                <button
+                  onClick={refreshMentors}
+                  className="ml-4 px-3 py-1.5 text-xs font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition-colors"
+                >
+                  Retry
+                </button>
+              </div>
+            )}
+
+            {/* Mutation error */}
+            {mutationError && (
+              <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">
+                {mutationError}
+              </div>
+            )}
+
+            {/* Empty state */}
+            {!mentorsLoading && !mentorsError && allMentors.length === 0 && (
+              <div className="flex flex-col items-center justify-center py-16 text-gray-500">
+                <Users className="w-12 h-12 mb-3 text-gray-300" />
+                <p className="text-base font-medium">No mentors found</p>
+                <p className="text-sm mt-1">Mentors assigned to your field will appear here.</p>
+              </div>
+            )}
+
+            {/* Table */}
+            {!mentorsLoading && !mentorsError && allMentors.length > 0 && (
+              <MentorsTable
+                mentors={allMentors.map(m => ({
+                  id: m.id as unknown as number,
+                  name: m.name,
+                  email: m.email,
+                  expertise: ('expertise' in m ? (m as { expertise?: string[] }).expertise : undefined) ?? [],
+                  maxStudents: 0,
+                  currentStudents: 0,
+                  rating: ('rating' in m ? (m as { rating?: number }).rating : 0) ?? 0,
+                  status: m.status,
+                  joinDate: m.joinDate ?? '',
+                  approvedRoadmaps: 0,
+                  approvedTrainers: 0,
+                }))}
+                onApprove={handleApproveMentor}
+                approvingId={approvingId}
+              />
+            )}
           </div>
         </main>
       </div>

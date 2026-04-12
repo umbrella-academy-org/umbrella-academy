@@ -3,20 +3,10 @@
 import { useState } from 'react';
 import { Building2, Users, DollarSign } from 'lucide-react';
 import DataTable from '@/components/ui/DataTable';
-
-interface Field {
-  id: number;
-  name: string;
-  code: string;
-  admin: string;
-  students: number;
-  trainers: number;
-  revenue: number;
-  status: string;
-}
+import { AdminField } from '@/types/admin';
 
 interface FieldsTableProps {
-  fields: Field[];
+  fields: AdminField[];
 }
 
 export default function FieldsTable({ fields }: FieldsTableProps) {
@@ -24,7 +14,7 @@ export default function FieldsTable({ fields }: FieldsTableProps) {
 
   // Transform data for DataTable
   const tableData = fields.map(field => ({
-    id: field.id,
+    id: field._id,
     field: (
       <div className="flex items-center">
         <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mr-3">
@@ -32,35 +22,36 @@ export default function FieldsTable({ fields }: FieldsTableProps) {
         </div>
         <div>
           <div className="text-sm font-medium text-gray-900">{field.name}</div>
-          <div className="text-sm text-gray-500">{field.code}</div>
+          <div className="text-sm text-gray-500">{field.slug}</div>
         </div>
       </div>
     ),
-    administrator: field.admin,
+    administrator: field.adminUser
+      ? `${field.adminUser.firstName} ${field.adminUser.lastName}`
+      : '—',
     students: (
       <div className="flex items-center gap-2">
         <Users className="w-4 h-4 text-gray-400" />
-        <span className="text-sm text-gray-900">{field.students}</span>
+        <span className="text-sm text-gray-900">{field.studentsCount}</span>
       </div>
     ),
     trainers: (
       <div className="flex items-center gap-2">
         <Users className="w-4 h-4 text-gray-400" />
-        <span className="text-sm text-gray-900">{field.trainers}</span>
+        <span className="text-sm text-gray-900">{field.trainersCount}</span>
       </div>
     ),
     revenue: (
       <div className="flex items-center gap-2">
         <DollarSign className="w-4 h-4 text-gray-500" />
-        <span className="text-sm font-medium text-gray-900">RWF {field.revenue.toLocaleString()}</span>
+        <span className="text-sm font-medium text-gray-900">RWF {field.totalRevenue.toLocaleString()}</span>
       </div>
     ),
     status: (
-      <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${field.status === 'active'
-          ? 'bg-gray-100 text-gray-800'
-          : 'bg-gray-100 text-gray-800'
-        }`}>
-        {field.status}
+      <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
+        field.isActive ? 'bg-gray-100 text-gray-800' : 'bg-red-100 text-red-800'
+      }`}>
+        {field.isActive ? 'active' : 'inactive'}
       </span>
     ),
     actions: (
@@ -73,8 +64,7 @@ export default function FieldsTable({ fields }: FieldsTableProps) {
         </button>
       </div>
     ),
-    // Store original data for filtering
-    _original: field
+    _original: field,
   }));
 
   const columns = [
@@ -84,7 +74,7 @@ export default function FieldsTable({ fields }: FieldsTableProps) {
     { key: 'trainers', label: 'Trainers', sortable: true, filterable: false, searchable: false },
     { key: 'revenue', label: 'Revenue', sortable: true, filterable: false, searchable: false },
     { key: 'status', label: 'Status', sortable: true, filterable: true, searchable: false },
-    { key: 'actions', label: 'Actions', sortable: false, filterable: false, searchable: false }
+    { key: 'actions', label: 'Actions', sortable: false, filterable: false, searchable: false },
   ];
 
   const handleSelectionChange = (selectedItems: any[]) => {
@@ -101,7 +91,6 @@ export default function FieldsTable({ fields }: FieldsTableProps) {
 
   return (
     <div className="space-y-4">
-      {/* Selected Actions */}
       {selectedFields.length > 0 && (
         <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
           <div className="flex items-center justify-between">
@@ -120,7 +109,6 @@ export default function FieldsTable({ fields }: FieldsTableProps) {
         </div>
       )}
 
-      {/* DataTable */}
       <DataTable
         data={tableData}
         columns={columns}

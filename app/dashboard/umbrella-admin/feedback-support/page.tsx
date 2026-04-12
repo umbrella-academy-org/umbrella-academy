@@ -2,29 +2,15 @@
 
 import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
-import { MessageSquare, AlertCircle, CheckCircle, Clock, User, Star, Filter, Search, Eye, MessageCircle } from 'lucide-react';
-
-interface FeedbackItem {
-  id: string;
-  type: 'feedback' | 'support' | 'complaint' | 'suggestion';
-  userId: string;
-  userName: string;
-  userRole: 'student' | 'trainer' | 'mentor' | 'field-admin';
-  userAvatar: string;
-  subject: string;
-  message: string;
-  rating?: number;
-  category: string;
-  priority: 'low' | 'medium' | 'high' | 'urgent';
-  status: 'open' | 'in-progress' | 'resolved' | 'closed';
-  submittedAt: string;
-  resolvedAt?: string;
-  assignedTo?: string;
-  adminResponse?: string;
-  attachments?: string[];
-}
+import { MessageSquare, AlertCircle, CheckCircle, Clock, Star, Search, MessageCircle, RefreshCw } from 'lucide-react';
+import { useAdminContext } from '@/contexts';
+import { useFeedback } from '@/hooks/admin';
+import { FeedbackTicket } from '@/types/admin';
 
 export default function UmbrellaAdminFeedbackSupportPage() {
+  const { tickets, ticketsLoading, ticketsError, refreshTickets } = useAdminContext();
+  const { updateTicketStatus, addAdminResponse } = useFeedback();
+
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
   const [filterType, setFilterType] = useState('all');
   const [filterStatus, setFilterStatus] = useState('all');
@@ -32,128 +18,28 @@ export default function UmbrellaAdminFeedbackSupportPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [adminResponse, setAdminResponse] = useState('');
 
-  const feedbackItems: FeedbackItem[] = [
-    {
-      id: 'fb-1',
-      type: 'feedback',
-      userId: 'user-1',
-      userName: 'Alice Johnson',
-      userRole: 'student',
-      userAvatar: 'AJ',
-      subject: 'Excellent Training Experience',
-      message: 'I wanted to share my positive experience with the Full Stack Development program. My trainer Sarah was incredibly knowledgeable and patient. The curriculum was well-structured and the hands-on projects really helped me understand the concepts. The video call quality was excellent and the platform is very user-friendly.',
-      rating: 5,
-      category: 'Training Quality',
-      priority: 'low',
-      status: 'resolved',
-      submittedAt: '2024-01-28T14:30:00Z',
-      resolvedAt: '2024-01-29T09:15:00Z',
-      assignedTo: 'Admin Team',
-      adminResponse: 'Thank you for your wonderful feedback! We\'re thrilled to hear about your positive experience with Sarah and our program. We\'ll share your comments with the team.'
-    },
-    {
-      id: 'fb-2',
-      type: 'support',
-      userId: 'user-2',
-      userName: 'Bob Smith',
-      userRole: 'trainer',
-      userAvatar: 'BS',
-      subject: 'Technical Issue with Video Calls',
-      message: 'I\'ve been experiencing frequent disconnections during live sessions with my students. This has happened 3 times this week, affecting the quality of training. The issue seems to occur after about 45 minutes into the session. My internet connection is stable, so I suspect it might be a platform issue.',
-      category: 'Technical Support',
-      priority: 'high',
-      status: 'in-progress',
-      submittedAt: '2024-01-29T10:45:00Z',
-      assignedTo: 'Technical Team'
-    },
-    {
-      id: 'fb-3',
-      type: 'complaint',
-      userId: 'user-3',
-      userName: 'Carol Davis',
-      userRole: 'student',
-      userAvatar: 'CD',
-      subject: 'Trainer Availability Issues',
-      message: 'My assigned trainer has cancelled our last 2 sessions with very short notice (less than 2 hours). This is affecting my learning progress and I\'m falling behind on my roadmap. I understand emergencies happen, but this is becoming a pattern. I would like to request a different trainer or at least better communication.',
-      category: 'Service Quality',
-      priority: 'medium',
-      status: 'open',
-      submittedAt: '2024-01-29T16:20:00Z'
-    },
-    {
-      id: 'fb-4',
-      type: 'suggestion',
-      userId: 'user-4',
-      userName: 'Dr. Emily Rodriguez',
-      userRole: 'mentor',
-      userAvatar: 'ER',
-      subject: 'Mobile App for Better Accessibility',
-      message: 'I suggest developing a mobile application for the platform. Many of our students and trainers are often on the go, and having mobile access would greatly improve engagement. Features could include session scheduling, progress tracking, and basic communication tools.',
-      category: 'Platform Enhancement',
-      priority: 'low',
-      status: 'open',
-      submittedAt: '2024-01-28T11:15:00Z'
-    },
-    {
-      id: 'fb-5',
-      type: 'support',
-      userId: 'user-5',
-      userName: 'James Wilson',
-      userRole: 'field-admin',
-      userAvatar: 'JW',
-      subject: 'Mentor Report Export Issues',
-      message: 'I\'m unable to export mentor reports to PDF format. The export button appears to work but no file is generated. This is affecting my ability to share reports with upper management. I\'ve tried different browsers with the same result.',
-      category: 'Technical Support',
-      priority: 'medium',
-      status: 'open',
-      submittedAt: '2024-01-29T13:30:00Z'
-    },
-    {
-      id: 'fb-6',
-      type: 'feedback',
-      userId: 'user-6',
-      userName: 'Maria Garcia',
-      userRole: 'trainer',
-      userAvatar: 'MG',
-      subject: 'Great Platform Features',
-      message: 'I love the new report generation feature! It makes documenting student progress so much easier. The templates are comprehensive and the submission process is smooth. This has saved me hours of work each week.',
-      rating: 4,
-      category: 'Platform Features',
-      priority: 'low',
-      status: 'resolved',
-      submittedAt: '2024-01-27T09:45:00Z',
-      resolvedAt: '2024-01-27T14:20:00Z',
-      adminResponse: 'We\'re so glad you\'re finding the report generation feature helpful! Your feedback motivates us to continue improving our platform.'
-    }
-  ];
-
-  const filteredItems = feedbackItems.filter(item => {
+  const filteredItems = tickets.filter(item => {
     const typeMatch = filterType === 'all' || item.type === filterType;
     const statusMatch = filterStatus === 'all' || item.status === filterStatus;
     const priorityMatch = filterPriority === 'all' || item.priority === filterPriority;
     const searchMatch = searchQuery === '' ||
       item.subject.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.userName.toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.message.toLowerCase().includes(searchQuery.toLowerCase());
 
     return typeMatch && statusMatch && priorityMatch && searchMatch;
   });
 
-  const selectedItemData = feedbackItems.find(item => item.id === selectedItem);
+  const selectedItemData = tickets.find(item => item._id === selectedItem);
 
-  const handleStatusUpdate = (itemId: string, newStatus: 'in-progress' | 'resolved' | 'closed') => {
-    console.log(`Updating item ${itemId} status to ${newStatus}`);
-    // Handle status update logic
+  const handleStatusUpdate = async (itemId: string, newStatus: FeedbackTicket['status']) => {
+    await updateTicketStatus(itemId, newStatus);
+    await refreshTickets();
   };
 
-  const handleAssignTo = (itemId: string, assignee: string) => {
-    console.log(`Assigning item ${itemId} to ${assignee}`);
-    // Handle assignment logic
-  };
-
-  const handleAddResponse = (itemId: string) => {
-    console.log(`Adding response to item ${itemId}:`, adminResponse);
-    // Handle adding admin response
+  const handleAddResponse = async (itemId: string) => {
+    if (!adminResponse.trim()) return;
+    await addAdminResponse(itemId, adminResponse);
+    await refreshTickets();
     setAdminResponse('');
   };
 
@@ -187,16 +73,6 @@ export default function UmbrellaAdminFeedbackSupportPage() {
     }
   };
 
-  const getRoleColor = (role: string) => {
-    switch (role) {
-      case 'student': return 'bg-yellow-600';
-      case 'trainer': return 'bg-yellow-600';
-      case 'mentor': return 'bg-yellow-600';
-      case 'field-admin': return 'bg-yellow-600';
-      default: return 'bg-yellow-600';
-    }
-  };
-
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
       month: 'short',
@@ -218,13 +94,13 @@ export default function UmbrellaAdminFeedbackSupportPage() {
   };
 
   // Calculate summary stats
-  const totalItems = feedbackItems.length;
-  const openItems = feedbackItems.filter(item => item.status === 'open').length;
-  const urgentItems = feedbackItems.filter(item => item.priority === 'urgent').length;
-  const avgRating = feedbackItems
-    .filter(item => item.rating)
-    .reduce((sum, item) => sum + (item.rating || 0), 0) /
-    feedbackItems.filter(item => item.rating).length;
+  const totalItems = tickets.length;
+  const openItems = tickets.filter(item => item.status === 'open').length;
+  const urgentItems = tickets.filter(item => item.priority === 'urgent').length;
+  const ratedTickets = tickets.filter(item => item.rating);
+  const avgRating = ratedTickets.length > 0
+    ? ratedTickets.reduce((sum, item) => sum + (item.rating || 0), 0) / ratedTickets.length
+    : 0;
 
   return (
     <div className="flex h-screen bg-white">
@@ -238,44 +114,74 @@ export default function UmbrellaAdminFeedbackSupportPage() {
               <p className="text-sm text-gray-500">Manage user feedback, support requests, and platform suggestions.</p>
             </div>
 
+            {/* Error state */}
+            {ticketsError && (
+              <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-center justify-between">
+                <div className="flex items-center gap-2 text-red-700">
+                  <AlertCircle className="w-5 h-5" />
+                  <span className="text-sm">{ticketsError}</span>
+                </div>
+                <button
+                  onClick={refreshTickets}
+                  className="flex items-center gap-2 px-3 py-1.5 bg-red-100 text-red-700 rounded hover:bg-red-200 transition-colors text-sm"
+                >
+                  <RefreshCw className="w-4 h-4" />
+                  Retry
+                </button>
+              </div>
+            )}
+
             {/* Summary Stats */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-              <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm font-medium text-gray-600">Total Items</p>
-                    <p className="text-2xl font-bold text-gray-900">{totalItems}</p>
+              {ticketsLoading ? (
+                <>
+                  {[...Array(4)].map((_, i) => (
+                    <div key={i} className="bg-white rounded-lg shadow-sm border border-gray-100 p-6 animate-pulse">
+                      <div className="h-4 bg-gray-200 rounded w-24 mb-3" />
+                      <div className="h-8 bg-gray-200 rounded w-12" />
+                    </div>
+                  ))}
+                </>
+              ) : (
+                <>
+                  <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm font-medium text-gray-600">Total Items</p>
+                        <p className="text-2xl font-bold text-gray-900">{totalItems}</p>
+                      </div>
+                      <MessageSquare className="w-8 h-8 text-gray-500" />
+                    </div>
                   </div>
-                  <MessageSquare className="w-8 h-8 text-gray-500" />
-                </div>
-              </div>
-              <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm font-medium text-gray-600">Open Items</p>
-                    <p className="text-2xl font-bold text-gray-900">{openItems}</p>
+                  <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm font-medium text-gray-600">Open Items</p>
+                        <p className="text-2xl font-bold text-gray-900">{openItems}</p>
+                      </div>
+                      <Clock className="w-8 h-8 text-gray-500" />
+                    </div>
                   </div>
-                  <Clock className="w-8 h-8 text-gray-500" />
-                </div>
-              </div>
-              <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm font-medium text-gray-600">Urgent Items</p>
-                    <p className="text-2xl font-bold text-gray-900">{urgentItems}</p>
+                  <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm font-medium text-gray-600">Urgent Items</p>
+                        <p className="text-2xl font-bold text-gray-900">{urgentItems}</p>
+                      </div>
+                      <AlertCircle className="w-8 h-8 text-gray-500" />
+                    </div>
                   </div>
-                  <AlertCircle className="w-8 h-8 text-gray-500" />
-                </div>
-              </div>
-              <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm font-medium text-gray-600">Avg Rating</p>
-                    <p className="text-2xl font-bold text-gray-900">{avgRating.toFixed(1)}</p>
+                  <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm font-medium text-gray-600">Avg Rating</p>
+                        <p className="text-2xl font-bold text-gray-900">{ratedTickets.length > 0 ? avgRating.toFixed(1) : '—'}</p>
+                      </div>
+                      <Star className="w-8 h-8 text-gray-500" />
+                    </div>
                   </div>
-                  <Star className="w-8 h-8 text-gray-500" />
-                </div>
-              </div>
+                </>
+              )}
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -345,44 +251,63 @@ export default function UmbrellaAdminFeedbackSupportPage() {
                   </div>
 
                   <div className="divide-y divide-gray-200 max-h-96 overflow-y-auto">
-                    {filteredItems.map((item) => (
-                      <div
-                        key={item.id}
-                        className={`p-4 cursor-pointer hover:bg-gray-50 transition-colors ${selectedItem === item.id ? 'bg-gray-50 border-r-4 border-yellow-600' : ''
-                          }`}
-                        onClick={() => setSelectedItem(item.id)}
-                      >
-                        <div className="flex items-start justify-between mb-2">
-                          <div className="flex items-center gap-2">
-                            <div className={`w-8 h-8 ${getRoleColor(item.userRole)} rounded-full flex items-center justify-center text-white font-semibold text-xs`}>
-                              {item.userAvatar}
-                            </div>
-                            <div>
-                              <h4 className="font-medium text-gray-900 text-sm">{item.userName}</h4>
-                              <p className="text-xs text-gray-500 capitalize">{item.userRole}</p>
+                    {ticketsLoading ? (
+                      [...Array(4)].map((_, i) => (
+                        <div key={i} className="p-4 animate-pulse">
+                          <div className="flex items-center gap-2 mb-2">
+                            <div className="w-8 h-8 bg-gray-200 rounded-full" />
+                            <div className="flex-1">
+                              <div className="h-3 bg-gray-200 rounded w-24 mb-1" />
+                              <div className="h-2 bg-gray-200 rounded w-16" />
                             </div>
                           </div>
-                          <span className={`px-2 py-1 rounded-full text-xs font-medium ${getPriorityColor(item.priority)}`}>
-                            {item.priority}
-                          </span>
+                          <div className="h-3 bg-gray-200 rounded w-full mb-1" />
+                          <div className="h-2 bg-gray-200 rounded w-3/4" />
                         </div>
-
-                        <h5 className="font-medium text-gray-900 text-sm mb-1 line-clamp-1">{item.subject}</h5>
-                        <p className="text-xs text-gray-600 line-clamp-2 mb-2">{item.message}</p>
-
-                        <div className="flex items-center justify-between">
-                          <span className={`px-2 py-1 rounded text-xs font-medium ${getTypeColor(item.type)}`}>
-                            {item.type}
-                          </span>
-                          <div className="flex items-center gap-2">
-                            <span className={`px-2 py-1 rounded text-xs font-medium ${getStatusColor(item.status)}`}>
-                              {item.status}
-                            </span>
-                            <span className="text-xs text-gray-500">{formatDate(item.submittedAt)}</span>
-                          </div>
-                        </div>
+                      ))
+                    ) : filteredItems.length === 0 ? (
+                      <div className="p-8 text-center">
+                        <MessageSquare className="w-8 h-8 text-gray-300 mx-auto mb-2" />
+                        <p className="text-sm text-gray-500">No items found</p>
                       </div>
-                    ))}
+                    ) : (
+                      filteredItems.map((item) => (
+                        <div
+                          key={item._id}
+                          className={`p-4 cursor-pointer hover:bg-gray-50 transition-colors ${selectedItem === item._id ? 'bg-gray-50 border-r-4 border-yellow-600' : ''}`}
+                          onClick={() => setSelectedItem(item._id)}
+                        >
+                          <div className="flex items-start justify-between mb-2">
+                            <div className="flex items-center gap-2">
+                              <div className="w-8 h-8 bg-yellow-600 rounded-full flex items-center justify-center text-white font-semibold text-xs">
+                                {item.subject.charAt(0).toUpperCase()}
+                              </div>
+                              <div>
+                                <h4 className="font-medium text-gray-900 text-sm">{item.subject}</h4>
+                                <p className="text-xs text-gray-500 capitalize">{item.type}</p>
+                              </div>
+                            </div>
+                            <span className={`px-2 py-1 rounded-full text-xs font-medium ${getPriorityColor(item.priority)}`}>
+                              {item.priority}
+                            </span>
+                          </div>
+
+                          <p className="text-xs text-gray-600 line-clamp-2 mb-2">{item.message}</p>
+
+                          <div className="flex items-center justify-between">
+                            <span className={`px-2 py-1 rounded text-xs font-medium ${getTypeColor(item.type)}`}>
+                              {item.type}
+                            </span>
+                            <div className="flex items-center gap-2">
+                              <span className={`px-2 py-1 rounded text-xs font-medium ${getStatusColor(item.status)}`}>
+                                {item.status}
+                              </span>
+                              <span className="text-xs text-gray-500">{formatDate(item.createdAt)}</span>
+                            </div>
+                          </div>
+                        </div>
+                      ))
+                    )}
                   </div>
                 </div>
               </div>
@@ -395,12 +320,12 @@ export default function UmbrellaAdminFeedbackSupportPage() {
                     <div className="p-6 border-b border-gray-200">
                       <div className="flex items-start justify-between mb-4">
                         <div className="flex items-center gap-3">
-                          <div className={`w-12 h-12 ${getRoleColor(selectedItemData.userRole)} rounded-full flex items-center justify-center text-white font-semibold`}>
-                            {selectedItemData.userAvatar}
+                          <div className="w-12 h-12 bg-yellow-600 rounded-full flex items-center justify-center text-white font-semibold">
+                            {selectedItemData.subject.charAt(0).toUpperCase()}
                           </div>
                           <div>
-                            <h2 className="text-xl font-semibold text-gray-900">{selectedItemData.userName}</h2>
-                            <p className="text-gray-600 capitalize">{selectedItemData.userRole}</p>
+                            <h2 className="text-xl font-semibold text-gray-900">{selectedItemData.subject}</h2>
+                            <p className="text-gray-600 capitalize">{selectedItemData.category}</p>
                             <div className="flex items-center gap-2 mt-1">
                               <span className={`px-3 py-1 rounded-full text-sm font-medium ${getTypeColor(selectedItemData.type)}`}>
                                 {selectedItemData.type.charAt(0).toUpperCase() + selectedItemData.type.slice(1)}
@@ -414,7 +339,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
                         <div className="flex items-center gap-2">
                           {selectedItemData.status === 'open' && (
                             <button
-                              onClick={() => handleStatusUpdate(selectedItemData.id, 'in-progress')}
+                              onClick={() => handleStatusUpdate(selectedItemData._id, 'in-progress')}
                               className="flex items-center gap-2 px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors text-sm"
                             >
                               <Clock className="w-4 h-4" />
@@ -423,7 +348,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
                           )}
                           {selectedItemData.status === 'in-progress' && (
                             <button
-                              onClick={() => handleStatusUpdate(selectedItemData.id, 'resolved')}
+                              onClick={() => handleStatusUpdate(selectedItemData._id, 'resolved')}
                               className="flex items-center gap-2 px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors text-sm"
                             >
                               <CheckCircle className="w-4 h-4" />
@@ -441,18 +366,8 @@ export default function UmbrellaAdminFeedbackSupportPage() {
                           <span className="font-medium">Category:</span> {selectedItemData.category}
                         </div>
                         <div>
-                          <span className="font-medium">Submitted:</span> {formatDate(selectedItemData.submittedAt)}
+                          <span className="font-medium">Submitted:</span> {formatDate(selectedItemData.createdAt)}
                         </div>
-                        {selectedItemData.assignedTo && (
-                          <div>
-                            <span className="font-medium">Assigned to:</span> {selectedItemData.assignedTo}
-                          </div>
-                        )}
-                        {selectedItemData.resolvedAt && (
-                          <div>
-                            <span className="font-medium">Resolved:</span> {formatDate(selectedItemData.resolvedAt)}
-                          </div>
-                        )}
                       </div>
                     </div>
 
@@ -492,7 +407,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
                             className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
                           />
                           <button
-                            onClick={() => handleAddResponse(selectedItemData.id)}
+                            onClick={() => handleAddResponse(selectedItemData._id)}
                             className="px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors"
                             disabled={!adminResponse.trim()}
                           >
