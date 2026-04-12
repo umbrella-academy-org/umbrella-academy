@@ -26,8 +26,7 @@ function SkeletonCard() {
 const ROLES: { value: UserType; label: string }[] = [
   { value: 'student', label: 'Student' },
   { value: 'trainer', label: 'Trainer' },
-  { value: 'mentor', label: 'Mentor' },
-  { value: 'field-admin', label: 'Field Admin' },
+  { value: 'company-admin', label: 'Company Admin' },
 ];
 
 const EMPTY_FORM = { firstName: '', lastName: '', email: '', password: '', role: 'student' as UserType, fieldId: '' };
