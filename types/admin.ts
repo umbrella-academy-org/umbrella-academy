@@ -99,3 +99,73 @@ export interface Course {
   image: string;
   description: string;
 }
+
+// Enriched field for admin view (GET /api/admin/fields)
+export interface AdminField {
+  _id: string;
+  name: string;
+  slug: string;
+  description?: string;
+  monthlyPrice: number;
+  isActive: boolean;
+  studentsCount: number;
+  trainersCount: number;
+  mentorsCount: number;
+  totalRevenue: number;
+  adminUser?: {
+    _id: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+  };
+}
+
+// Feedback/support ticket
+export interface FeedbackTicket {
+  _id: string;
+  type: 'feedback' | 'support' | 'complaint' | 'suggestion';
+  userId: string;
+  userName: string;
+  userRole: 'student' | 'trainer' | 'mentor' | 'field-admin';
+  subject: string;
+  message: string;
+  rating?: number;
+  category: string;
+  priority: 'low' | 'medium' | 'high' | 'urgent';
+  status: 'open' | 'in-progress' | 'resolved' | 'closed';
+  submittedAt: string;
+  resolvedAt?: string;
+  assignedTo?: string;
+  adminResponse?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+// Platform-wide analytics
+export interface AdminAnalytics {
+  usersByRole: {
+    student: number;
+    trainer: number;
+    mentor: number;
+    fieldAdmin: number;
+  };
+  totalRevenue: number;
+  monthlyRevenue: number;
+  activeRoadmaps: number;
+  completedSessions: number;
+  fieldBreakdowns: Array<{
+    fieldId: string;
+    fieldName: string;
+    students: number;
+    revenue: number;
+    completionRate: number;
+  }>;
+}
+
+// Payment filter params
+export interface PaymentFilters {
+  fieldId?: string;
+  status?: 'pending' | 'completed' | 'failed';
+  from?: string; // ISO date string
+  to?: string;   // ISO date string
+}
