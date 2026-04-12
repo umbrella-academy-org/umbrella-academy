@@ -45,7 +45,7 @@ export default function ChooseCoursePage() {
     const selectedCourse = company?.courses?.find((c: Course) => c.id === selectedCourseId);
     if (selectedCourse) {
       localStorage.setItem('signupFieldId', selectedCourseId);
-      router.push('/auth/student/payment');
+      router.push('/auth/create-password');
     }
   };
 
