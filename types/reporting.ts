@@ -4,19 +4,18 @@ export interface StudentReport {
   id: string;
   trainerId: string;
   studentId: string;
-  mentorId: string;
   fieldId: string;
   reportType: 'progress' | 'roadmap_update' | 'session_summary';
   content: {
     achievements: string[];
     challenges: string[];
     nextSteps: string[];
-    roadmapProgress: number; // percentage
+    roadmapProgress: number;
   };
   status: 'draft' | 'submitted' | 'approved' | 'rejected';
   submittedAt?: Date;
   reviewedAt?: Date;
-  mentorFeedback?: string;
+  trainerFeedback?: string;
   createdAt: Date;
 }
 
@@ -24,7 +23,7 @@ export interface SupportTicket {
   id: string;
   userId: string;
   fieldId: string;
-  fieldAdminId?: string;
+  companyAdminId?: string;
   title: string;
   description: string;
   category: 'technical' | 'billing' | 'content' | 'other';
@@ -38,7 +37,7 @@ export interface SupportTicket {
 
 export interface ReportApprovalWorkflow {
   reportId: string;
-  mentorId: string;
+  trainerId: string;
   action: 'approve' | 'reject' | 'request_changes';
   feedback?: string;
   timestamp: Date;

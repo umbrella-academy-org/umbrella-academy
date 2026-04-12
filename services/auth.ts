@@ -12,7 +12,7 @@ export interface RegisterRequest {
   lastName: string;
   email: string;
   password: string;
-  role: 'student' | 'trainer' | 'mentor' | 'field-admin' | 'umbrella-admin';
+  role: 'student' | 'trainer' | 'company-admin' | 'umbrella-admin';
   fieldId?: string;
 }
 
@@ -44,21 +44,6 @@ export interface RegisterTrainerRequest {
   proofDocuments?: string[];
 }
 
-export interface RegisterMentorRequest {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  bio?: string;
-  educationLevel?: string;
-  educationTitle?: string;
-  school?: string;
-  yearOfCompletion?: string;
-  fieldId?: string;
-  expertise?: string[];
-}
-
-// Backend returns _id, firstName, lastName — map to our User shape
 interface BackendUser {
   _id: string;
   firstName: string;
@@ -96,42 +81,24 @@ function mapBackendUser(u: BackendUser): User {
 class AuthService {
   async login(email: string, password: string): Promise<AuthResponse> {
     const response = await apiClient.post<BackendAuthResponse>(API_ENDPOINTS.AUTH_LOGIN, { email, password });
-    if (response.token) {
-      localStorage.setItem('auth_token', response.token);
-    }
+    if (response.token) localStorage.setItem('auth_token', response.token);
     return { success: response.success, token: response.token, user: mapBackendUser(response.user) };
   }
 
   async register(data: RegisterRequest): Promise<AuthResponse> {
     const response = await apiClient.post<BackendAuthResponse>(API_ENDPOINTS.AUTH_REGISTER, data);
-    if (response.token) {
-      localStorage.setItem('auth_token', response.token);
-    }
+    if (response.token) localStorage.setItem('auth_token', response.token);
     return { success: response.success, token: response.token, user: mapBackendUser(response.user) };
   }
 
   async registerStudent(data: RegisterStudentRequest): Promise<AuthResponse> {
     const response = await apiClient.post<BackendAuthResponse>(API_ENDPOINTS.AUTH_REGISTER_STUDENT, data);
-    if (response.token) {
-      localStorage.setItem('auth_token', response.token);
-    }
+    if (response.token) localStorage.setItem('auth_token', response.token);
     return { success: response.success, token: response.token, user: mapBackendUser(response.user) };
   }
 
   async registerTrainer(data: RegisterTrainerRequest): Promise<{ success: boolean; pending: boolean }> {
-    const response = await apiClient.post<{ success: boolean; pending: boolean }>(
-      API_ENDPOINTS.AUTH_REGISTER_TRAINER,
-      data
-    );
-    return response;
-  }
-
-  async registerMentor(data: RegisterMentorRequest): Promise<AuthResponse> {
-    const response = await apiClient.post<BackendAuthResponse>(API_ENDPOINTS.AUTH_REGISTER_MENTOR, data);
-    if (response.token) {
-      localStorage.setItem('auth_token', response.token);
-    }
-    return { success: response.success, token: response.token, user: mapBackendUser(response.user) };
+    return apiClient.post<{ success: boolean; pending: boolean }>(API_ENDPOINTS.AUTH_REGISTER_TRAINER, data);
   }
 
   async sendOtp(email: string): Promise<void> {
@@ -158,15 +125,11 @@ class AuthService {
     await apiClient.patch(API_ENDPOINTS.AUTH_APPROVE_TRAINER(trainerId));
   }
 
-  async approveMentor(mentorId: string): Promise<void> {
-    await apiClient.patch(API_ENDPOINTS.AUTH_APPROVE_MENTOR(mentorId));
-  }
-
   async logout(): Promise<void> {
     try {
       await apiClient.post(API_ENDPOINTS.AUTH_LOGOUT);
     } catch {
-      // ignore errors on logout
+      // ignore
     } finally {
       localStorage.removeItem('auth_token');
     }

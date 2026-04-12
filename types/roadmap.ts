@@ -51,18 +51,17 @@ export interface Roadmap {
   description: string;
   studentId: string;
   trainerId?: string; // Trainer who helped create it
-  mentorId?: string; // Mentor assigned for approval
   status: 'draft' | 'pending-approval' | 'approved' | 'active' | 'paused' | 'completed' | 'rejected';
   createdAt: string;
   approvedAt?: string;
   startedAt?: string;
   completedAt?: string;
-  estimatedDuration: number; // in weeks
+  estimatedDuration: number;
   phases: RoadmapPhase[];
   tags: string[];
   difficulty: 'beginner' | 'intermediate' | 'advanced';
-  collaborationId?: string; // Link to collaboration session
-  approvalNotes?: string; // Mentor's notes during approval
+  collaborationId?: string;
+  approvalNotes?: string;
   progress: {
     overallProgress: number; // 0-100
     completedPhases: number;

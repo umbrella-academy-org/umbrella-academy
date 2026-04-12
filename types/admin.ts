@@ -1,8 +1,6 @@
 // Admin and organizational type definitions
 
-import { Wallet } from './payment';
-import { StudentRoadmap } from './roadmap';
-import { StudentUser, TrainerUser, User } from './user';
+import { TrainerUser, User } from './user';
 
 // Enhanced Field interface for field-based organizational hierarchy
 export interface Field {
@@ -11,7 +9,6 @@ export interface Field {
   description: string;
   industry: string;
   companies: Company[];
-  mentors: User[];
   trainers: TrainerUser[];
   selectionTrainers?: {
     total: number;
@@ -24,20 +21,17 @@ export interface Field {
     }[];
   };
   specializations: string[];
-  students: StudentUser[];
-  revenueShare: number; // 65% for fields
+  revenueShare: number;
   totalRevenue: number;
-  revenue?: number; // Alias for totalRevenue for compatibility
+  revenue?: number;
   createdAt: Date;
   isActive: boolean;
   icon: string;
   rating: number;
   successRate: number;
   studentsCount: number;
-  mentorsCount: number;
   averageCompletionTime: string;
   monthlyPrice: number;
-  // Legacy fields for backward compatibility
   code?: string;
   adminId?: string;
   adminName?: string;
@@ -110,7 +104,6 @@ export interface AdminField {
   isActive: boolean;
   studentsCount: number;
   trainersCount: number;
-  mentorsCount: number;
   totalRevenue: number;
   adminUser?: {
     _id: string;
@@ -126,7 +119,7 @@ export interface FeedbackTicket {
   type: 'feedback' | 'support' | 'complaint' | 'suggestion';
   userId: string;
   userName: string;
-  userRole: 'student' | 'trainer' | 'mentor' | 'field-admin';
+  userRole: 'student' | 'trainer' | 'company-admin';
   subject: string;
   message: string;
   rating?: number;
@@ -146,8 +139,7 @@ export interface AdminAnalytics {
   usersByRole: {
     student: number;
     trainer: number;
-    mentor: number;
-    fieldAdmin: number;
+    companyAdmin: number;
   };
   totalRevenue: number;
   monthlyRevenue: number;
@@ -178,7 +170,7 @@ export interface AdminCompany {
   website?: string;
   logo?: string;
   fields: string[];
-  mentorId?: {
+  adminId?: {
     _id: string;
     firstName: string;
     lastName: string;
@@ -188,5 +180,4 @@ export interface AdminCompany {
   createdAt: string;
   studentsCount: number;
   trainersCount: number;
-  mentorsCount: number;
 }
