@@ -95,6 +95,11 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
   const [ticketsLoading, setTicketsLoading] = useState(false);
   const [ticketsError, setTicketsError] = useState<string | null>(null);
 
+  // Companies
+  const [companies, setCompanies] = useState<AdminCompany[]>([]);
+  const [companiesLoading, setCompaniesLoading] = useState(false);
+  const [companiesError, setCompaniesError] = useState<string | null>(null);
+
   const isAdmin = user?.role === 'umbrella-admin' || user?.role === 'field-admin';
   const isUmbrellaAdmin = user?.role === 'umbrella-admin';
   const isFieldAdmin = user?.role === 'field-admin';
@@ -212,6 +217,20 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  const refreshCompanies = async () => {
+    if (!isUmbrellaAdmin) return;
+    setCompaniesLoading(true);
+    try {
+      const res = await apiClient.get<{ success: boolean; data: AdminCompany[] }>(API_ENDPOINTS.COMPANIES_ALL);
+      setCompanies(res.data ?? []);
+      setCompaniesError(null);
+    } catch (err) {
+      setCompaniesError(err instanceof Error ? err.message : 'Failed to load companies');
+    } finally {
+      setCompaniesLoading(false);
+    }
+  };
+
   useEffect(() => {
     if (!isAdmin) return;
 
@@ -224,6 +243,7 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
       refreshAnalytics();
       refreshFields();
       refreshTickets();
+      refreshCompanies();
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
@@ -237,6 +257,7 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
       analytics, analyticsLoading, analyticsError, refreshAnalytics,
       fields, fieldsLoading, fieldsError, refreshFields,
       tickets, ticketsLoading, ticketsError, refreshTickets,
+      companies, companiesLoading, companiesError, refreshCompanies,
     }}>
       {children}
     </AdminContext.Provider>

@@ -275,8 +275,8 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
           },
           {
             icon: <Map className="w-5 h-5" />,
-            label: 'Fields',
-            href: '/dashboard/umbrella-admin/fields'
+            label: 'Companies',
+            href: '/dashboard/umbrella-admin/companies'
           },
           {
             icon: <User className="w-5 h-5" />,
