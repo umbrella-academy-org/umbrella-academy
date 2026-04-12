@@ -9,3 +9,6 @@ export { usePayments } from './usePayments';
 export type { IPayment } from './usePayments';
 
 export { useFeedback } from './useFeedback';
+
+export { useCompanies } from './useCompanies';
+export type { CreateCompanyData } from './useCompanies';

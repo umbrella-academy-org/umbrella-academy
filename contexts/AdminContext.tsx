@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { User } from '@/types';
 import { IPayment } from '@/hooks/admin/usePayments';
-import { AdminField, FeedbackTicket, AdminAnalytics } from '@/types/admin';
+import { AdminField, FeedbackTicket, AdminAnalytics, AdminCompany } from '@/types/admin';
 import { apiClient } from '@/services/client';
 import { API_ENDPOINTS } from '@/services/constants';
 import { useAuth } from './AuthContext';
@@ -46,6 +46,11 @@ interface AdminContextType {
   ticketsLoading: boolean;
   ticketsError: string | null;
   refreshTickets: () => Promise<void>;
+  // Companies
+  companies: AdminCompany[];
+  companiesLoading: boolean;
+  companiesError: string | null;
+  refreshCompanies: () => Promise<void>;
 }
 
 const AdminContext = createContext<AdminContextType | undefined>(undefined);

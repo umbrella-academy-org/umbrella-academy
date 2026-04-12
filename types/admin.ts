@@ -169,3 +169,24 @@ export interface PaymentFilters {
   from?: string; // ISO date string
   to?: string;   // ISO date string
 }
+
+// Company for admin view (GET /api/companies/all)
+export interface AdminCompany {
+  _id: string;
+  name: string;
+  description?: string;
+  website?: string;
+  logo?: string;
+  fields: string[];
+  mentorId?: {
+    _id: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+  } | null;
+  isActive: boolean;
+  createdAt: string;
+  studentsCount: number;
+  trainersCount: number;
+  mentorsCount: number;
+}

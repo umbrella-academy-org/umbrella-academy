@@ -50,6 +50,10 @@ export const API_ENDPOINTS = {
   ADMIN_FEEDBACK_BY_ID: (id: string) => `/api/admin/feedback/${id}`,
   ADMIN_FEEDBACK_RESPONSE: (id: string) => `/api/admin/feedback/${id}/response`,
   ADMIN_FIELDS: '/api/admin/fields',
+  COMPANIES: '/api/companies',
+  COMPANIES_ALL: '/api/companies/all',
+  COMPANY_BY_ID: (id: string) => `/api/companies/${id}`,
+  COMPANY_ASSIGN_MENTOR: (id: string) => `/api/companies/${id}/assign-mentor`,
   NEGOTIATION: {
     BY_ID: (id: string) => `/api/negotiations/${id}`,
     SET_AGREED_PRICE: (id: string) => `/api/negotiations/${id}/agreed-price`,
