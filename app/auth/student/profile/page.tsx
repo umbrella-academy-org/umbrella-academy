@@ -81,9 +81,8 @@ export default function ProfilePage() {
     localStorage.setItem('signupPhoneCode', formData.phoneCode);
     localStorage.setItem('signupPhoneNumber', formData.phoneNumber);
     if (selectedLevel) localStorage.setItem('signupEducationLevel', selectedLevel);
-    // Send OTP before navigating to verify page
-
-    router.push('/auth/student/choose-company');
+ 
+    router.push('/auth/student/referral');
   };
 
   return (
