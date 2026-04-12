@@ -38,8 +38,7 @@ export default function UmbrellaAdminDashboard() {
       const dashboardRoutes: Record<string, string> = {
         'student': '/dashboard/student',
         'trainer': '/dashboard/trainer',
-        'mentor': '/dashboard/mentor',
-        'field-admin': '/dashboard/field-admin'
+        'company-admin': '/dashboard/field-admin'
       };
       navigate(dashboardRoutes[user.role] || '/');
     }

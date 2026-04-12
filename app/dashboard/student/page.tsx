@@ -54,8 +54,7 @@ export default function StudentDashboard() {
       // Redirect to appropriate dashboard based on role
       const dashboardRoutes = {
         'trainer': '/dashboard/trainer',
-        'mentor': '/dashboard/mentor',
-        'field-admin': '/dashboard/field-admin',
+        'company-admin': '/dashboard/field-admin',
         'umbrella-admin': '/dashboard/umbrella-admin'
       };
       navigate(dashboardRoutes[user.role as keyof typeof dashboardRoutes] || '/');

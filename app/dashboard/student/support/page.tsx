@@ -25,8 +25,7 @@ export default function StudentSupportPage() {
     if (!authLoading && user && user.role !== 'student') {
       const dashboardRoutes: Record<string, string> = {
         'trainer': '/dashboard/trainer',
-        'mentor': '/dashboard/mentor',
-        'field-admin': '/dashboard/field-admin',
+        'company-admin': '/dashboard/field-admin',
         'umbrella-admin': '/dashboard/umbrella-admin'
       };
       navigate(dashboardRoutes[user.role] || '/');

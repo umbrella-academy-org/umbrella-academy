@@ -102,8 +102,7 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
             label: 'Home',
             href: '/dashboard/trainer',
             active: true
-          },
-          {
+          },          {
             icon: <User className="w-5 h-5" />,
             label: 'Profile',
             href: '/dashboard/trainer/profile'
@@ -144,71 +143,7 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
             href: '/dashboard/trainer/settings'
           },
         ];
-      case 'mentor':
-        return [
-          {
-            icon: <Home className="w-5 h-5" />,
-            label: 'Home',
-            href: '/dashboard/mentor',
-            active: true
-          },
-          {
-            icon: <User className="w-5 h-5" />,
-            label: 'Profile',
-            href: '/dashboard/mentor/profile'
-          },
-          {
-            icon: <MessageSquare className="w-5 h-5" />,
-            label: 'Chat',
-            href: '/dashboard/mentor/chat'
-          },
-          {
-            icon: <User className="w-5 h-5" />,
-            label: 'My Students',
-            href: '/dashboard/mentor/students'
-          },
-          {
-            icon: <CheckCircle className="w-5 h-5" />,
-            label: 'Trainer Approvals',
-            href: '/dashboard/mentor/trainer-approvals'
-          },
-          {
-            icon: <AlertCircle className="w-5 h-5" />,
-            label: 'Trainer Reports',
-            href: '/dashboard/mentor/reports'
-          },
-          {
-            icon: <AlertCircle className="w-5 h-5" />,
-            label: 'Mentor Reports',
-            href: '/dashboard/mentor/mentor-reports'
-          },
-          {
-            icon: <Map className="w-5 h-5" />,
-            label: 'Roadmap Approvals',
-            href: '/dashboard/mentor/roadmap-approvals'
-          },
-          {
-            icon: <Bell className="w-5 h-5" />,
-            label: 'Notifications',
-            href: '/dashboard/mentor/notifications'
-          },
-          {
-            icon: <CreditCard className="w-5 h-5" />,
-            label: 'Wallet',
-            href: '/dashboard/mentor/wallet'
-          },
-          {
-            icon: <HelpCircle className="w-5 h-5" />,
-            label: 'Support',
-            href: '/dashboard/mentor/support'
-          },
-          {
-            icon: <Settings className="w-5 h-5" />,
-            label: 'Settings',
-            href: '/dashboard/mentor/settings'
-          }
-        ];
-      case 'field-admin':
+      case 'company-admin':
         return [
           {
             icon: <Home className="w-5 h-5" />,
@@ -227,18 +162,23 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
           },
           {
             icon: <User className="w-5 h-5" />,
-            label: 'Mentors',
-            href: '/dashboard/field-admin/mentors'
-          },
-          {
-            icon: <User className="w-5 h-5" />,
             label: 'Trainers',
             href: '/dashboard/field-admin/trainers'
           },
           {
             icon: <AlertCircle className="w-5 h-5" />,
-            label: 'Mentor Reports',
+            label: 'Trainer Reports',
             href: '/dashboard/field-admin/mentor-reports'
+          },
+          {
+            icon: <CheckCircle className="w-5 h-5" />,
+            label: 'Trainer Approvals',
+            href: '/dashboard/field-admin/trainer-approvals'
+          },
+          {
+            icon: <Map className="w-5 h-5" />,
+            label: 'Roadmap Approvals',
+            href: '/dashboard/field-admin/roadmap-approvals'
           },
           {
             icon: <Calendar className="w-5 h-5" />,
@@ -247,7 +187,7 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
           },
           {
             icon: <CreditCard className="w-5 h-5" />,
-            label: 'Field Wallet',
+            label: 'Company Wallet',
             href: '/dashboard/field-admin/wallet'
           },
           {
@@ -379,20 +319,12 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
           renewLabel: 'Manage Schedule',
           renewHref: '/dashboard/trainer/schedule'
         };
-      case 'mentor':
+      case 'company-admin':
         return {
-          displayName: 'Mentor',
-          progressLabel: '12 Students',
-          progressValue: 75,
-          renewLabel: 'View Students',
-          renewHref: '/dashboard/mentor/students'
-        };
-      case 'field-admin':
-        return {
-          displayName: 'Field Admin',
+          displayName: 'Company Admin',
           progressLabel: '24 Students',
           progressValue: 85,
-          renewLabel: 'Manage Field',
+          renewLabel: 'Manage Company',
           renewHref: '/dashboard/field-admin/settings'
         };
       case 'umbrella-admin':

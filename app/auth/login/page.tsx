@@ -24,8 +24,7 @@ export default function LoginPage() {
       const dashboardRoutes: Record<string, string> = {
         'student': '/dashboard/student',
         'trainer': '/dashboard/trainer',
-        'mentor': '/dashboard/mentor',
-        'field-admin': '/dashboard/field-admin',
+        'company-admin': '/dashboard/field-admin',
         'umbrella-admin': '/dashboard/umbrella-admin'
       };
       navigate(dashboardRoutes[user.role]);
