@@ -36,9 +36,8 @@ export default function ChooseCompanyPage() {
 
     console.log('Selected company:', selectedCompanyId);
     console.log('Selected field:', selectedFieldId);
-    localStorage.setItem('selectedCompany', selectedCompanyId);
-    localStorage.setItem('signupFieldId', selectedFieldId);
-    router.push('/auth/student/choose-course');
+    localStorage.setItem('signupCompanyId', selectedCompanyId);
+    router.push('/auth/student/choose-field');
   };
 
   // Group companies by field

@@ -82,12 +82,8 @@ export default function ProfilePage() {
     localStorage.setItem('signupPhoneNumber', formData.phoneNumber);
     if (selectedLevel) localStorage.setItem('signupEducationLevel', selectedLevel);
     // Send OTP before navigating to verify page
-    try {
-      await authService.sendOtp(formData.email);
-    } catch {
-      // Continue even if OTP send fails — user can resend on verify page
-    }
-    router.push('/auth/verify');
+
+    router.push('/auth/student/choose-company');
   };
 
   return (
