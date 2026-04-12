@@ -20,6 +20,16 @@ export default function VerifyPage() {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    async function sendEmail() {
+      const email = typeof window !== 'undefined'
+        ? (localStorage.getItem('signupEmail') || localStorage.getItem('resetEmail') || '')
+        : '';
+      await authService.resendOtp(email);
+    }
+    sendEmail();
+  }, [])
+
   const handleChange = (index: number, value: string) => {
     if (value.length > 1) return;
     if (!/^\d*$/.test(value)) return;
@@ -79,7 +89,7 @@ export default function VerifyPage() {
     if (authFlow === 'reset-password') {
       router.push('/auth/reset-password');
     } else {
-      router.push('/auth/create-password');
+      router.push('/auth/login');
     }
   };
 
@@ -185,7 +195,7 @@ export default function VerifyPage() {
             {/* Sign in link */}
             <p className="mt-6 text-sm text-gray-600">
               Have an account?{' '}
-              <a href="#" className="text-gray-600 hover:text-gray-700 font-medium">
+              <a href="/auth/login" className="text-gray-600 hover:text-gray-700 font-medium">
                 Sign In
               </a>
             </p>

@@ -28,7 +28,8 @@ export default function TrainerSignupPage() {
     localStorage.setItem('signupEmail', formData.email);
     localStorage.setItem('signupFirstName', formData.firstName);
     localStorage.setItem('signupLastName', formData.lastName);
-    router.push('/auth/verify');
+    router.push('/auth/trainer/profile');
+
   };
 
   return (

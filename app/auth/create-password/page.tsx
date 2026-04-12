@@ -58,16 +58,16 @@ export default function CreatePasswordPage() {
 
     if (result.success) {
       // Clean up all onboarding keys
-      [
-        'signupEmail', 'signupFirstName', 'signupLastName', 'signupFieldId', 'userType', 'authFlow',
-        'signupGender', 'signupDateOfBirth', 'signupPhoneCode', 'signupPhoneNumber', 'signupEducationLevel',
-        'selectedCompany', 'selectedField',
-        'trainerBio', 'trainerEducationLevel', 'trainerEducationTitle', 'trainerSchool',
-        'trainerYearOfCompletion', 'trainerFieldId', 'trainerHoursPerDay', 'trainerTimeSlots',
-        'trainerProofDocuments',
-        'mentorBio', 'mentorPhoneCode', 'mentorPhoneNumber', 'mentorEducationTitle', 'mentorSchool',
-        'mentorYearOfCompletion', 'mentorEducationLevel', 'mentorProofDocuments',
-      ].forEach(k => localStorage.removeItem(k));
+      // [
+      //   'signupEmail', 'signupFirstName', 'signupLastName', 'signupFieldId', 'userType', 'authFlow',
+      //   'signupGender', 'signupDateOfBirth', 'signupPhoneCode', 'signupPhoneNumber', 'signupEducationLevel',
+      //   'selectedCompany', 'selectedField',
+      //   'trainerBio', 'trainerEducationLevel', 'trainerEducationTitle', 'trainerSchool',
+      //   'trainerYearOfCompletion', 'trainerFieldId', 'trainerHoursPerDay', 'trainerTimeSlots',
+      //   'trainerProofDocuments',
+      //   'mentorBio', 'mentorPhoneCode', 'mentorPhoneNumber', 'mentorEducationTitle', 'mentorSchool',
+      //   'mentorYearOfCompletion', 'mentorEducationLevel', 'mentorProofDocuments',
+      // ].forEach(k => localStorage.removeItem(k));
 
       if (result.pending) {
         // Trainer pending approval
@@ -88,7 +88,7 @@ export default function CreatePasswordPage() {
 
   return (
     <div className="flex h-screen">
-      <div className="flex flex-[2] flex-col justify-between p-8 bg-white">
+      <div className="flex flex-2 flex-col justify-between p-8 bg-white">
         <div className="flex flex-col flex-1 max-w-md mx-auto w-full">
           <button onClick={() => window.history.back()} className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-8">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
