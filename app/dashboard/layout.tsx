@@ -1,14 +1,11 @@
-import type { Metadata } from "next";
+'use client';
 
-export const metadata: Metadata = {
-  title: "Dashboard",
-  description: "Manage your studies, track progress, and connect with mentors on your personal Umbrella Academy dashboard.",
-};
+import { AdminProvider } from '@/contexts';
 
 export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return children;
+  return <AdminProvider>{children}</AdminProvider>;
 }
