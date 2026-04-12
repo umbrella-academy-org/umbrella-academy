@@ -4,34 +4,36 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import MoMoPayment from '@/components/payment/MoMoPayment';
-import { Course } from '@/types';
+import { Company, Course } from '@/types';
+import { mockCompanies } from '@/data/companies';
 
 
 export default function PaymentPage() {
   const router = useRouter();
-  const [courseData, setCourseData] = useState<Course | null>(null);
-  const [companyName, setCompanyName] = useState('');
+  const [company, setCompany] = useState<Company | null>(null);
+  const [course, setCourse] = useState<Course | null>(null);
 
   useEffect(() => {
-    const courseJson = localStorage.getItem('selectedCourse');
-    const company = localStorage.getItem('selectedCompany');
+    const fieldId = localStorage.getItem('signupFieldId');
+    const companyId = localStorage.getItem('signupCompanyId');
     
-    if (!courseJson) {
+    if (!fieldId || !companyId) {
       router.push('/auth/student/choose-company');
       return;
     }
 
     try {
-      const course = JSON.parse(courseJson);
-      setCourseData(course);
-      
-      // Get company name from mockCompanies
-      const { mockCompanies } = require('@/data/companies');
-      const foundCompany = mockCompanies.find((c: any) => c.id === company);
+ 
+      const foundCompany = mockCompanies.find((c: any) => c.id === companyId);
       if (foundCompany) {
-        setCompanyName(foundCompany.name);
+        setCompany(foundCompany);
+        const foundCourse = foundCompany.courses.find((c: any) => c.id === fieldId);
+        if (foundCourse) {
+          setCourse(foundCourse);
+        }
       }
     } catch (error) {
+      console.error(error)
       console.error('Error parsing course data:', error);
       router.push('/auth/student/choose-company');
     }
@@ -43,7 +45,7 @@ export default function PaymentPage() {
     router.push('/dashboard/student');
   };
 
-  if (!courseData) {
+  if (!company || !course) {
     return (
       <div className="flex h-screen items-center justify-center bg-white">
         <div className="text-center">
@@ -94,24 +96,24 @@ export default function PaymentPage() {
                 <div className="flex items-start gap-4 mb-4">
                   <div className="relative w-20 h-20 rounded-lg overflow-hidden shrink-0">
                     <Image
-                      src={courseData.image}
-                      alt={courseData.name}
+                      src={course.image}
+                      alt={course.name}
                       fill
                       className="object-cover"
                     />
                   </div>
                   <div className="flex-1 text-left">
-                    <h3 className="font-black text-gray-900 text-lg mb-1">{courseData.name}</h3>
-                    <p className="text-sm text-gray-600 mb-2">{companyName}</p>
+                    <h3 className="font-black text-gray-900 text-lg mb-1">{course.name}</h3>
+                    <p className="text-sm text-gray-600 mb-2">{company.name}</p>
                     <div className="flex items-center gap-3 text-xs text-gray-500">
                       <span className="flex items-center gap-1">
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        {courseData.duration}
+                        {course.duration}
                       </span>
                       <span className="px-2 py-0.5 bg-gray-200 rounded font-medium">
-                        {courseData.level}
+                        {course.level}
                       </span>
                     </div>
                   </div>
@@ -119,7 +121,7 @@ export default function PaymentPage() {
                 <div className="flex items-center justify-between pt-4 border-t border-gray-200">
                   <span className="text-sm font-medium text-gray-600">Total Amount</span>
                   <div className="text-right">
-                    <div className="text-2xl font-black text-gray-900">${courseData.price}</div>
+                    <div className="text-2xl font-black text-gray-900">RWF {course.price}</div>
                   </div>
                 </div>
               </div>
@@ -127,7 +129,7 @@ export default function PaymentPage() {
               {/* MoMo Payment Component */}
               <div className="w-full">
                 <MoMoPayment
-                  amount={courseData.price}
+                  amount={course.price}
                   onPaymentSuccess={handlePaymentSuccess}
                 />
               </div>

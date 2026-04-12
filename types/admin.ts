@@ -87,7 +87,7 @@ export interface Company {
     includes: string[];
   };
   whyChoose?: string[];
-  courses?: Course[];
+  courses: Course[];
 }
 
 export interface Course {
