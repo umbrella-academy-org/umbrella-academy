@@ -77,7 +77,7 @@ export default function ChooseFieldPage() {
 
         console.log('Selected field:', selectedField);
         // Store selected field
-        localStorage.setItem('selectedField', selectedField);
+        localStorage.setItem('signupFieldId', selectedField);
         router.push('/auth/trainer/referral');
     };
 

@@ -39,8 +39,7 @@ export default function TrainerChooseCompanyPage() {
     console.log('Selected company:', selectedCompanyId);
     console.log('Selected field:', selectedFieldId);
     localStorage.setItem('signupCompanyId', selectedCompanyId);
-    localStorage.setItem('signupFieldId', selectedFieldId);
-    router.push('/auth/trainer/referral');
+    router.push('/auth/trainer/choose-field');
   };
 
   // Group companies by field

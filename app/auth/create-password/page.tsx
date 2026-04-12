@@ -46,12 +46,15 @@ export default function CreatePasswordPage() {
       educationLevel: localStorage.getItem('signupEducationLevel') ?? undefined,
       fieldId: localStorage.getItem('signupFieldId') ?? undefined,
       // Trainer/Mentor-specific fields
-      bio: localStorage.getItem('signupBio') ?? localStorage.getItem('mentorBio') ?? undefined,
-      educationTitle: localStorage.getItem('signupEducationTitle') ?? localStorage.getItem('mentorEducationTitle') ?? undefined,
-      school: localStorage.getItem('signupSchool') ?? localStorage.getItem('mentorSchool') ?? undefined,
-      yearOfCompletion: localStorage.getItem('signupYearOfCompletion') ?? localStorage.getItem('mentorYearOfCompletion') ?? undefined,
+      bio: localStorage.getItem('signupBio') ?? undefined,
+      educationTitle: localStorage.getItem('signupEducationTitle') ?? undefined,
+      school: localStorage.getItem('signupSchool') ?? undefined,
+      yearOfCompletion: localStorage.getItem('signupYearOfCompletion') ?? undefined,
+      hoursPerDay: localStorage.getItem('signupHoursPerDay') ?? undefined,
+      timeSlots: localStorage.getItem('signupTimeSlots') ?? undefined,
+      companyId: localStorage.getItem('signupCompanyId') ?? undefined,
       proofDocuments: (() => {
-        const raw = localStorage.getItem('signupProofDocuments') ?? localStorage.getItem('mentorProofDocuments');
+        const raw = localStorage.getItem('signupProofDocuments');
         return raw ? JSON.parse(raw) : undefined;
       })(),
     } as Parameters<typeof register>[0]);
