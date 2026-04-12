@@ -9,8 +9,7 @@ interface UserContextType {
   users: User[];
   students: User[];
   trainers: User[];
-  mentors: User[];
-  fieldAdmins: User[];
+  companyAdmins: User[];
   isLoading: boolean;
   error: string | null;
   getUsersByRole: (role: UserType) => User[];
@@ -52,8 +51,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
   const students = users.filter(u => u.role === 'student');
   const trainers = users.filter(u => u.role === 'trainer');
-  const mentors = users.filter(u => u.role === 'mentor');
-  const fieldAdmins = users.filter(u => u.role === 'field-admin');
+  const companyAdmins = users.filter(u => u.role === 'company-admin');
 
   const getUsersByRole = (role: UserType) => users.filter(u => u.role === role);
   const getUsersByFieldId = (fieldId: string) => users.filter(u => u.fieldId === fieldId);
@@ -61,7 +59,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <UserContext.Provider value={{
-      users, students, trainers, mentors, fieldAdmins,
+      users, students, trainers, companyAdmins,
       isLoading, error,
       getUsersByRole, getUsersByFieldId, getUserByIdFromContext,
       refreshUsers: loadUsers,

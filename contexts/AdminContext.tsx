@@ -20,12 +20,6 @@ interface AdminContextType {
   trainersLoading: boolean;
   trainersError: string | null;
   refreshTrainers: () => Promise<void>;
-  // Mentors
-  mentors: User[];
-  pendingMentors: User[];
-  mentorsLoading: boolean;
-  mentorsError: string | null;
-  refreshMentors: () => Promise<void>;
   // Payments
   payments: IPayment[];
   paymentsLoading: boolean;
@@ -58,51 +52,38 @@ const AdminContext = createContext<AdminContextType | undefined>(undefined);
 export function AdminProvider({ children }: { children: React.ReactNode }) {
   const { user } = useAuth();
 
-  // Users
   const [users, setUsers] = useState<User[]>([]);
   const [usersLoading, setUsersLoading] = useState(false);
   const [usersError, setUsersError] = useState<string | null>(null);
 
-  // Trainers
   const [trainers, setTrainers] = useState<User[]>([]);
   const [pendingTrainers, setPendingTrainers] = useState<User[]>([]);
   const [trainersLoading, setTrainersLoading] = useState(false);
   const [trainersError, setTrainersError] = useState<string | null>(null);
 
-  // Mentors
-  const [mentors, setMentors] = useState<User[]>([]);
-  const [pendingMentors, setPendingMentors] = useState<User[]>([]);
-  const [mentorsLoading, setMentorsLoading] = useState(false);
-  const [mentorsError, setMentorsError] = useState<string | null>(null);
-
-  // Payments
   const [payments, setPayments] = useState<IPayment[]>([]);
   const [paymentsLoading, setPaymentsLoading] = useState(false);
   const [paymentsError, setPaymentsError] = useState<string | null>(null);
 
-  // Analytics
   const [analytics, setAnalytics] = useState<AdminAnalytics | null>(null);
   const [analyticsLoading, setAnalyticsLoading] = useState(false);
   const [analyticsError, setAnalyticsError] = useState<string | null>(null);
 
-  // Fields
   const [fields, setFields] = useState<AdminField[]>([]);
   const [fieldsLoading, setFieldsLoading] = useState(false);
   const [fieldsError, setFieldsError] = useState<string | null>(null);
 
-  // Tickets
   const [tickets, setTickets] = useState<FeedbackTicket[]>([]);
   const [ticketsLoading, setTicketsLoading] = useState(false);
   const [ticketsError, setTicketsError] = useState<string | null>(null);
 
-  // Companies
   const [companies, setCompanies] = useState<AdminCompany[]>([]);
   const [companiesLoading, setCompaniesLoading] = useState(false);
   const [companiesError, setCompaniesError] = useState<string | null>(null);
 
-  const isAdmin = user?.role === 'umbrella-admin' || user?.role === 'field-admin';
+  const isAdmin = user?.role === 'umbrella-admin' || user?.role === 'company-admin';
   const isUmbrellaAdmin = user?.role === 'umbrella-admin';
-  const isFieldAdmin = user?.role === 'field-admin';
+  const isCompanyAdmin = user?.role === 'company-admin';
   const fieldId = user && 'fieldId' in user ? user.fieldId : undefined;
 
   const refreshUsers = async () => {
@@ -110,7 +91,7 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
     setUsersLoading(true);
     try {
       const params: Record<string, string> = {};
-      if (isFieldAdmin && fieldId) params.fieldId = fieldId;
+      if (isCompanyAdmin && fieldId) params.fieldId = fieldId;
       const res = await apiClient.get<{ success: boolean; data: User[] }>(API_ENDPOINTS.USERS, params);
       setUsers(res.data ?? []);
       setUsersError(null);
@@ -126,7 +107,7 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
     setTrainersLoading(true);
     try {
       const params: Record<string, string> = { role: 'trainer' };
-      if (isFieldAdmin && fieldId) params.fieldId = fieldId;
+      if (isCompanyAdmin && fieldId) params.fieldId = fieldId;
       const [trainersRes, pendingRes] = await Promise.all([
         apiClient.get<{ success: boolean; data: User[] }>(API_ENDPOINTS.USERS, params),
         apiClient.get<{ success: boolean; data: User[] }>(API_ENDPOINTS.TRAINERS_PENDING),
@@ -138,26 +119,6 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
       setTrainersError(err instanceof Error ? err.message : 'Failed to load trainers');
     } finally {
       setTrainersLoading(false);
-    }
-  };
-
-  const refreshMentors = async () => {
-    if (!isAdmin) return;
-    setMentorsLoading(true);
-    try {
-      const params: Record<string, string> = { role: 'mentor' };
-      if (isFieldAdmin && fieldId) params.fieldId = fieldId;
-      const [mentorsRes, pendingRes] = await Promise.all([
-        apiClient.get<{ success: boolean; data: User[] }>(API_ENDPOINTS.USERS, params),
-        apiClient.get<{ success: boolean; data: User[] }>(API_ENDPOINTS.MENTORS_PENDING),
-      ]);
-      setMentors(mentorsRes.data ?? []);
-      setPendingMentors(pendingRes.data ?? []);
-      setMentorsError(null);
-    } catch (err) {
-      setMentorsError(err instanceof Error ? err.message : 'Failed to load mentors');
-    } finally {
-      setMentorsLoading(false);
     }
   };
 
@@ -233,11 +194,8 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (!isAdmin) return;
-
     refreshUsers();
     refreshTrainers();
-    refreshMentors();
-
     if (isUmbrellaAdmin) {
       refreshPayments();
       refreshAnalytics();
@@ -252,7 +210,6 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
     <AdminContext.Provider value={{
       users, usersLoading, usersError, refreshUsers,
       trainers, pendingTrainers, trainersLoading, trainersError, refreshTrainers,
-      mentors, pendingMentors, mentorsLoading, mentorsError, refreshMentors,
       payments, paymentsLoading, paymentsError, refreshPayments,
       analytics, analyticsLoading, analyticsError, refreshAnalytics,
       fields, fieldsLoading, fieldsError, refreshFields,

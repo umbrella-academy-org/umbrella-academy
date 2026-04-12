@@ -16,7 +16,7 @@ interface UseCompaniesReturn {
   createCompany: (data: CreateCompanyData) => Promise<AdminCompany | null>;
   updateCompany: (id: string, data: Partial<CreateCompanyData & { isActive: boolean }>) => Promise<AdminCompany | null>;
   deleteCompany: (id: string) => Promise<boolean>;
-  assignMentor: (companyId: string, mentorId: string) => Promise<AdminCompany | null>;
+  assignAdmin: (companyId: string, adminId: string) => Promise<AdminCompany | null>;
 }
 
 export function useCompanies(): UseCompaniesReturn {
@@ -65,22 +65,22 @@ export function useCompanies(): UseCompaniesReturn {
     }
   };
 
-  const assignMentor = async (companyId: string, mentorId: string): Promise<AdminCompany | null> => {
+  const assignAdmin = async (companyId: string, adminId: string): Promise<AdminCompany | null> => {
     try {
       setIsLoading(true);
       const res = await apiClient.post<{ data: AdminCompany }>(
-        API_ENDPOINTS.COMPANY_ASSIGN_MENTOR(companyId),
-        { mentorId }
+        API_ENDPOINTS.COMPANY_ASSIGN_ADMIN(companyId),
+        { adminId }
       );
       setError(null);
       return res.data ?? null;
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to assign mentor');
+      setError(err instanceof Error ? err.message : 'Failed to assign admin');
       return null;
     } finally {
       setIsLoading(false);
     }
   };
 
-  return { isLoading, error, createCompany, updateCompany, deleteCompany, assignMentor };
+  return { isLoading, error, createCompany, updateCompany, deleteCompany, assignAdmin };
 }
