@@ -1,6 +1,6 @@
 import { apiClient } from './client';
 import { API_ENDPOINTS } from './constants';
-import { User } from '@/types';
+import { Availability, User } from '@/types';
 
 export interface LoginRequest {
   email: string;
@@ -40,7 +40,7 @@ export interface RegisterTrainerRequest {
   school?: string;
   yearOfCompletion?: string;
   fieldId?: string;
-  availability?: unknown;
+  availability?: Availability;
   proofDocuments?: string[];
 }
 

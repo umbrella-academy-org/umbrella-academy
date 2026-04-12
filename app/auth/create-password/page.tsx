@@ -50,8 +50,11 @@ export default function CreatePasswordPage() {
       educationTitle: localStorage.getItem('signupEducationTitle') ?? undefined,
       school: localStorage.getItem('signupSchool') ?? undefined,
       yearOfCompletion: localStorage.getItem('signupYearOfCompletion') ?? undefined,
-      hoursPerDay: localStorage.getItem('signupHoursPerDay') ?? undefined,
-      timeSlots: localStorage.getItem('signupTimeSlots') ?? undefined,
+      availability: {
+        weeklyAvailableHours: localStorage.getItem('signupHoursPerDay') ?? undefined,
+        preferredTimeSlots: localStorage.getItem('signupTimeSlots') ?? undefined,
+        preferredDays: localStorage.getItem('signupPreferredDays') ?? undefined,
+      },
       companyId: localStorage.getItem('signupCompanyId') ?? undefined,
       proofDocuments: (() => {
         const raw = localStorage.getItem('signupProofDocuments');

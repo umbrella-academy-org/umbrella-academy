@@ -1,6 +1,11 @@
 import { Wallet } from './payment';
 
 export type UserType = 'student' | 'trainer' | 'mentor' | 'field-admin' | 'umbrella-admin';
+export interface Availability {
+  weeklyAvailableHours?: number;
+  preferredTimeSlots?: string[];
+  preferredDays?: string[];
+}
 
 export interface BaseUser {
   id: string;
