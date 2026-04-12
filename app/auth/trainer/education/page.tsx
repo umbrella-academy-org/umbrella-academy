@@ -27,10 +27,10 @@ export default function TrainerEducationPage() {
   const handleContinue = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Trainer education:', education);
-    localStorage.setItem('trainerEducationLevel', education.level);
-    localStorage.setItem('trainerEducationTitle', education.title);
-    localStorage.setItem('trainerSchool', education.school);
-    localStorage.setItem('trainerYearOfCompletion', education.year);
+    localStorage.setItem('signupEducationLevel', education.level);
+    localStorage.setItem('signupEducationTitle', education.title);
+    localStorage.setItem('signupSchool', education.school);
+    localStorage.setItem('signupYearOfCompletion', education.year);
     router.push('/auth/trainer/choose-company');
   };
 

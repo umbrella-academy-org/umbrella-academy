@@ -25,6 +25,7 @@ export default function ReferralPage() {
       return;
     }
     console.log('Selected source:', selectedSource);
+    localStorage.setItem('signupReferralSource', selectedSource[0]);
     // Navigate to choose-company page
     router.push('/auth/trainer/availability');
   };

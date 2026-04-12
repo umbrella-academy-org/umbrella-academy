@@ -74,7 +74,7 @@ export default function UploadProofsPage() {
           urls.push(response.url);
         }
       }
-      localStorage.setItem('trainerProofDocuments', JSON.stringify(urls));
+      localStorage.setItem('signupProofDocuments', JSON.stringify(urls));
       router.push('/auth/create-password');
     } catch {
       setError('Failed to upload files. Please try again.');

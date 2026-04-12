@@ -38,8 +38,8 @@ export default function TrainerChooseCompanyPage() {
 
     console.log('Selected company:', selectedCompanyId);
     console.log('Selected field:', selectedFieldId);
-    localStorage.setItem('selectedCompany', selectedCompanyId);
-    localStorage.setItem('trainerFieldId', selectedFieldId);
+    localStorage.setItem('signupCompanyId', selectedCompanyId);
+    localStorage.setItem('signupFieldId', selectedFieldId);
     router.push('/auth/trainer/referral');
   };
 
