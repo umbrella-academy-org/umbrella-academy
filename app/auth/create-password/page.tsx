@@ -51,7 +51,7 @@ export default function CreatePasswordPage() {
       school: localStorage.getItem('signupSchool') ?? undefined,
       yearOfCompletion: localStorage.getItem('signupYearOfCompletion') ?? undefined,
       availability: {
-        weeklyAvailableHours: localStorage.getItem('signupHoursPerDay') ?? undefined,
+        weeklyAvailableHours: Number(localStorage.getItem('signupHoursPerDay')) || undefined,
         preferredTimeSlots: localStorage.getItem('signupTimeSlots') ?? undefined,
         preferredDays: localStorage.getItem('signupPreferredDays') ?? undefined,
       },
