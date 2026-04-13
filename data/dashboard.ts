@@ -212,16 +212,6 @@ export const learningJourneySteps = [
     icon: 'target'
   },
   {
-    id: 'step-2',
-    title: 'Pick a Company',
-    description: 'Browse and enroll in programs from leading companies and institutions.',
-    color: 'from-gray-50 to-white',
-    borderColor: 'border-gray-200',
-    iconBg: 'bg-gradient-to-br from-black to-gray-800 text-white',
-    hoverBg: 'hover:from-gray-100 hover:to-gray-50',
-    icon: 'users'
-  },
-  {
     id: 'step-3',
     title: 'Meet Your Mentor',
     description: 'Connect with experienced professionals who guide your learning.',

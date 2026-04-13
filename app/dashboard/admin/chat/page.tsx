@@ -7,11 +7,11 @@ import ChatInterface from '@/components/chat/ChatInterface';
 export default function UmbrellaAdminChatPage() {
     return (
         <div className="flex h-screen bg-white">
-            <Sidebar activeItem="Chat" userType="umbrella-admin" />
+            <Sidebar activeItem="Chat" userType="admin" />
 
             <div className="flex-1 flex flex-col min-w-0">
                 <main className="flex-1 overflow-hidden bg-gray-50/30">
-                    <ChatInterface userType="umbrella-admin" />
+                    <ChatInterface userType="admin" />
                 </main>
             </div>
         </div>

@@ -1,4 +1,4 @@
-// Mock user data for Umbrella Academy LMS
+// Mock user data for Dreamize LMS
 
 import { User, StudentUser, TrainerUser, AdminUser } from '@/types';
 
@@ -9,7 +9,6 @@ export const mockUsers: User[] = [
     name: 'Jane Mukamana',
     email: 'jane.mukamana@student.umbrella.rw',
     role: 'student',
-    fieldId: 'software-engineering', // Updated to match field IDs
     status: 'active',
     joinDate: '2024-09-15',
     avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face',
@@ -37,7 +36,6 @@ export const mockUsers: User[] = [
     name: 'Eric Nshimiyimana',
     email: 'eric.nshimiyimana@student.umbrella.rw',
     role: 'student',
-    fieldId: 'software-engineering',
     status: 'active',
     joinDate: '2024-08-22',
     avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
@@ -65,7 +63,6 @@ export const mockUsers: User[] = [
     name: 'Grace Uwimana',
     email: 'grace.uwimana@student.umbrella.rw',
     role: 'student',
-    fieldId: 'ux-innovation',
     status: 'active',
     joinDate: '2024-10-01',
     avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face',
@@ -93,7 +90,6 @@ export const mockUsers: User[] = [
     name: 'David Habimana',
     email: 'david.habimana@student.umbrella.rw',
     role: 'student',
-    fieldId: 'ai-intelligence',
     status: 'paused',
     joinDate: '2024-07-10',
     avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
@@ -123,7 +119,6 @@ export const mockUsers: User[] = [
     name: 'Sarah Ingabire',
     email: 'sarah.ingabire@trainer.umbrella.rw',
     role: 'trainer',
-    fieldId: 'software-engineering',
     status: 'active',
     joinDate: '2023-03-15',
     avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop&crop=face',
@@ -153,7 +148,6 @@ export const mockUsers: User[] = [
     name: 'Jean Baptiste Nzeyimana',
     email: 'jean.nzeyimana@trainer.umbrella.rw',
     role: 'trainer',
-    fieldId: 'ai-intelligence',
     status: 'active',
     joinDate: '2023-01-20',
     avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face',
@@ -178,14 +172,11 @@ export const mockUsers: User[] = [
       specializations: ['Data Science', 'Machine Learning', 'AI Development']
     }
   } as TrainerUser,
-
-  // Trainers (continued)
   {
     id: 'user_201',
     name: 'David Nkurunziza',
     email: 'david.nkurunziza@trainer.umbrella.rw',
     role: 'trainer',
-    fieldId: 'software-engineering',
     status: 'active',
     joinDate: '2022-06-10',
     avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
@@ -215,7 +206,6 @@ export const mockUsers: User[] = [
     name: 'Alice Mukamazimpaka',
     email: 'alice.mukamazimpaka@trainer.umbrella.rw',
     role: 'trainer',
-    fieldId: 'ux-innovation',
     status: 'active',
     joinDate: '2022-08-15',
     avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face',
@@ -241,64 +231,24 @@ export const mockUsers: User[] = [
     }
   } as TrainerUser,
 
-  // Field Admins
-  {
-    id: 'user_301',
-    name: 'Marie Uwimana',
-    email: 'marie.uwimana@admin.umbrella.rw',
-    role: 'field-admin',
-    fieldId: 'software-engineering',
-    status: 'active',
-    joinDate: '2022-01-15',
-    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face',
-    profileData: {
-      bio: 'Experienced administrator specializing in tech field operations and team management',
-      skills: ['Team Management', 'Operations', 'Strategic Planning', 'Performance Analysis'],
-      experience: '12 years in educational administration and technology sector management'
-    },
-    createdAt: new Date('2022-01-15'),
-    lastLogin: new Date('2024-12-09'),
-    isActive: true,
-    permissions: ['manage_field', 'view_reports', 'manage_trainers', 'manage_students']
-  } as AdminUser,
-  {
-    id: 'user_302',
-    name: 'Paul Kagame Jr',
-    email: 'paul.kagame@admin.umbrella.rw',
-    role: 'field-admin',
-    fieldId: 'ux-innovation',
-    status: 'active',
-    joinDate: '2022-02-20',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
-    profileData: {
-      bio: 'Business operations expert with extensive experience in corporate training and development',
-      skills: ['Business Operations', 'Corporate Training', 'Strategic Development', 'Team Leadership'],
-      experience: '15 years in business management and educational program development'
-    },
-    createdAt: new Date('2022-02-20'),
-    lastLogin: new Date('2024-12-08'),
-    isActive: true,
-    permissions: ['manage_field', 'view_reports', 'manage_trainers', 'manage_students']
-  } as AdminUser,
-
-  // Umbrella Admin
+  // Admin
   {
     id: 'user_401',
     name: 'System Administrator',
-    email: 'admin@umbrella.rw',
-    role: 'umbrella-admin',
+    email: 'admin@dreamize.rw',
+    role: 'admin',
     status: 'active',
     joinDate: '2022-01-01',
     avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
     profileData: {
-      bio: 'System administrator overseeing all field operations and platform management',
+      bio: 'System administrator overseeing all operations and platform management',
       skills: ['System Administration', 'Platform Management', 'Data Analytics', 'Strategic Oversight'],
       experience: '20 years in educational technology and system administration'
     },
     createdAt: new Date('2022-01-01'),
     lastLogin: new Date('2024-12-09'),
     isActive: true,
-    permissions: ['manage_system', 'manage_fields', 'manage_users', 'view_all_reports', 'financial_management']
+    permissions: ['manage_system', 'manage_users', 'view_all_reports', 'financial_management']
   } as AdminUser
 ];
 
@@ -309,21 +259,8 @@ export const getStudents = (): StudentUser[] =>
 export const getTrainers = (): TrainerUser[] =>
   mockUsers.filter(user => user.role === 'trainer') as TrainerUser[];
 
-export const getFieldAdmins = (): AdminUser[] =>
-  mockUsers.filter(user => user.role === 'field-admin') as AdminUser[];
-
-export const getUmbrellaAdmins = (): AdminUser[] =>
-  mockUsers.filter(user => user.role === 'umbrella-admin') as AdminUser[];
-
-// Get users by field - core functionality for field-based organization
-export const getUsersByField = (fieldId: string): User[] =>
-  mockUsers.filter(user => user.fieldId === fieldId);
-
-export const getStudentsByField = (fieldId: string): StudentUser[] =>
-  mockUsers.filter(user => user.role === 'student' && user.fieldId === fieldId) as StudentUser[];
-
-export const getTrainersByField = (fieldId: string): TrainerUser[] =>
-  mockUsers.filter(user => user.role === 'trainer' && user.fieldId === fieldId) as TrainerUser[];
+export const getAdmins = (): AdminUser[] =>
+  mockUsers.filter(user => user.role === 'admin') as AdminUser[];
 
 // Get user by ID
 export const getUserById = (id: string): User | undefined =>
@@ -332,24 +269,3 @@ export const getUserById = (id: string): User | undefined =>
 // Get user by email
 export const getUserByEmail = (email: string): User | undefined =>
   mockUsers.find(user => user.email === email);
-
-// Field assignment functions
-export const assignUserToField = (userId: string, fieldId: string): boolean => {
-  const userIndex = mockUsers.findIndex(user => user.id === userId);
-  if (userIndex === -1) return false;
-
-  mockUsers[userIndex].fieldId = fieldId;
-  return true;
-};
-
-// Validate field-based access control
-export const validateFieldAccess = (userId: string, resourceFieldId: string): boolean => {
-  const user = getUserById(userId);
-  if (!user) return false;
-
-  // Umbrella admins have access to all fields
-  if (user.role === 'umbrella-admin') return true;
-
-  // All other users can only access resources in their field
-  return user.fieldId === resourceFieldId;
-};

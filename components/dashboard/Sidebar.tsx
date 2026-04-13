@@ -26,7 +26,7 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
   // Use user data from context, fallback to prop
   const currentUserType = user?.role || userType || 'student';
   const userName = user?.name || 'User';
-  const userEmail = user?.email || 'user@umbrella.rw';
+  const userEmail = user?.email || 'user@dreamize.rw';
   const userInitials = userName.split(' ').map(n => n[0]).join('').toUpperCase();
 
   // Get completion status for new user steps
@@ -143,105 +143,52 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
             href: '/dashboard/trainer/settings'
           },
         ];
-      case 'company-admin':
+      case 'admin':
         return [
           {
             icon: <Home className="w-5 h-5" />,
             label: 'Home',
-            href: '/dashboard/field-admin'
+            href: '/dashboard/admin'
           },
           {
             icon: <User className="w-5 h-5" />,
             label: 'Profile',
-            href: '/dashboard/field-admin/profile'
+            href: '/dashboard/admin/profile'
           },
           {
             icon: <MessageSquare className="w-5 h-5" />,
             label: 'Chat',
-            href: '/dashboard/field-admin/chat'
-          },
-          {
-            icon: <User className="w-5 h-5" />,
-            label: 'Trainers',
-            href: '/dashboard/field-admin/trainers'
-          },
-          {
-            icon: <AlertCircle className="w-5 h-5" />,
-            label: 'Trainer Reports',
-            href: '/dashboard/field-admin/trainer-reports'
-          },
-          {
-            icon: <CheckCircle className="w-5 h-5" />,
-            label: 'Trainer Approvals',
-            href: '/dashboard/field-admin/trainer-approvals'
-          },
-          {
-            icon: <Map className="w-5 h-5" />,
-            label: 'Roadmap Approvals',
-            href: '/dashboard/field-admin/roadmap-approvals'
-          },
-          {
-            icon: <Calendar className="w-5 h-5" />,
-            label: 'Student Activity',
-            href: '/dashboard/field-admin/students'
-          },
-          {
-            icon: <CreditCard className="w-5 h-5" />,
-            label: 'Company Wallet',
-            href: '/dashboard/field-admin/wallet'
-          },
-          {
-            icon: <Settings className="w-5 h-5" />,
-            label: 'Settings',
-            href: '/dashboard/field-admin/settings'
-          }
-        ];
-      case 'umbrella-admin':
-        return [
-          {
-            icon: <Home className="w-5 h-5" />,
-            label: 'Home',
-            href: '/dashboard/umbrella-admin'
-          },
-          {
-            icon: <User className="w-5 h-5" />,
-            label: 'Profile',
-            href: '/dashboard/umbrella-admin/profile'
-          },
-          {
-            icon: <MessageSquare className="w-5 h-5" />,
-            label: 'Chat',
-            href: '/dashboard/umbrella-admin/chat'
+            href: '/dashboard/admin/chat'
           },
           {
             icon: <Map className="w-5 h-5" />,
             label: 'Companies',
-            href: '/dashboard/umbrella-admin/companies'
+            href: '/dashboard/admin/companies'
           },
           {
             icon: <User className="w-5 h-5" />,
             label: 'Users',
-            href: '/dashboard/umbrella-admin/users'
+            href: '/dashboard/admin/users'
           },
           {
             icon: <HelpCircle className="w-5 h-5" />,
             label: 'Feedback & Support',
-            href: '/dashboard/umbrella-admin/feedback-support'
+            href: '/dashboard/admin/feedback-support'
           },
           {
             icon: <CreditCard className="w-5 h-5" />,
             label: 'Financial',
-            href: '/dashboard/umbrella-admin/financial'
+            href: '/dashboard/admin/financial'
           },
           {
             icon: <Bell className="w-5 h-5" />,
             label: 'System Health',
-            href: '/dashboard/umbrella-admin/system'
+            href: '/dashboard/admin/system'
           },
           {
             icon: <Settings className="w-5 h-5" />,
             label: 'Settings',
-            href: '/dashboard/umbrella-admin/settings'
+            href: '/dashboard/admin/settings'
           }
         ];
       default: // student
@@ -319,21 +266,13 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
           renewLabel: 'Manage Schedule',
           renewHref: '/dashboard/trainer/schedule'
         };
-      case 'company-admin':
-        return {
-          displayName: 'Company Admin',
-          progressLabel: '24 Students',
-          progressValue: 85,
-          renewLabel: 'Manage Company',
-          renewHref: '/dashboard/field-admin/settings'
-        };
-      case 'umbrella-admin':
+      case 'admin':
         return {
           displayName: 'System Admin',
           progressLabel: '5 Fields',
           progressValue: 95,
           renewLabel: 'System Health',
-          renewHref: '/dashboard/umbrella-admin/system'
+          renewHref: '/dashboard/admin/system'
         };
       default:
         return {

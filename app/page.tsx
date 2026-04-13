@@ -27,8 +27,7 @@ export default function Home() {
       const dashboardRoutes: Record<string, string> = {
         'student': '/dashboard/student',
         'trainer': '/dashboard/trainer',
-        'company-admin': '/dashboard/field-admin',
-        'umbrella-admin': '/dashboard/umbrella-admin'
+        'admin': '/dashboard/admin'
       };
       if (dashboardRoutes[user.role]) {
         navigate(dashboardRoutes[user.role]);

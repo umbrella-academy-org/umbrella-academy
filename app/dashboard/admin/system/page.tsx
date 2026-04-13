@@ -35,7 +35,7 @@ export default function UmbrellaAdminSystemPage() {
 
   return (
     <div className="flex h-screen bg-white">
-      <Sidebar activeItem="System Health" userType="umbrella-admin" />
+      <Sidebar activeItem="System Health" userType="admin" />
 
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
         <main className="flex-1 overflow-auto">
