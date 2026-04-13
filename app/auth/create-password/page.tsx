@@ -35,7 +35,7 @@ export default function CreatePasswordPage() {
     const result = await register({
       email,
       password,
-      role: (userType as 'student' | 'trainer' | 'field-admin' | 'umbrella-admin') ?? 'student',
+      role: (userType as 'student' | 'trainer' | 'admin') ?? 'student',
       firstName: firstName || email.split('@')[0],
       lastName: lastName || '',
       // Student-specific fields
@@ -44,7 +44,6 @@ export default function CreatePasswordPage() {
       phoneCode: localStorage.getItem('signupPhoneCode') ?? localStorage.getItem('mentorPhoneCode') ?? undefined,
       phoneNumber: localStorage.getItem('signupPhoneNumber') ?? localStorage.getItem('mentorPhoneNumber') ?? undefined,
       educationLevel: localStorage.getItem('signupEducationLevel') ?? undefined,
-      fieldId: localStorage.getItem('signupFieldId') ?? undefined,
       // Trainer/Mentor-specific fields
       bio: localStorage.getItem('signupBio') ?? undefined,
       educationTitle: localStorage.getItem('signupEducationTitle') ?? undefined,
@@ -55,7 +54,6 @@ export default function CreatePasswordPage() {
         preferredTimeSlots: localStorage.getItem('signupTimeSlots') ?? undefined,
         preferredDays: localStorage.getItem('signupPreferredDays') ?? undefined,
       },
-      companyId: localStorage.getItem('signupCompanyId') ?? undefined,
       proofDocuments: (() => {
         const raw = localStorage.getItem('signupProofDocuments');
         return raw ? JSON.parse(raw) : undefined;
@@ -83,8 +81,7 @@ export default function CreatePasswordPage() {
 
       const dashboardRoutes: Record<string, string> = {
         student: '/dashboard/student', trainer: '/dashboard/trainer',
-        mentor: '/dashboard/mentor', 'field-admin': '/dashboard/field-admin',
-        'umbrella-admin': '/dashboard/umbrella-admin',
+        admin: '/dashboard/admin',
       };
       router.push(dashboardRoutes[userType] ?? '/dashboard/student');
     } else {

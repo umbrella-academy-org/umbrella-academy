@@ -31,7 +31,7 @@ export default function TrainerEducationPage() {
     localStorage.setItem('signupEducationTitle', education.title);
     localStorage.setItem('signupSchool', education.school);
     localStorage.setItem('signupYearOfCompletion', education.year);
-    router.push('/auth/trainer/choose-company');
+    router.push('/auth/trainer/referral');
   };
 
   return (
