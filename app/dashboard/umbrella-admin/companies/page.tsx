@@ -292,7 +292,7 @@ export default function UmbrellaAdminCompaniesPage() {
                       {[
                         { label: 'Students', value: company.studentsCount },
                         { label: 'Trainers', value: company.trainersCount },
-                        { label: 'Mentors', value: company.mentorsCount },
+                        { label: 'Trainers', value: company.trainersCount },
                       ].map(stat => (
                         <div key={stat.label} className="bg-gray-50 rounded-lg py-2">
                           <p className="text-base font-bold text-gray-900">{stat.value}</p>
@@ -301,7 +301,7 @@ export default function UmbrellaAdminCompaniesPage() {
                       ))}
                     </div>
 
-                    {/* Mentor */}
+                    {/* Company Admin */}
                     <div className="flex items-center justify-between pt-1 border-t border-gray-100">
                       <div className="flex items-center gap-2">
                         <UserCheck className="w-4 h-4 text-gray-400" />
@@ -310,7 +310,7 @@ export default function UmbrellaAdminCompaniesPage() {
                             {company.mentorId.firstName} {company.mentorId.lastName}
                           </span>
                         ) : (
-                          <span className="text-xs text-gray-400 italic">No mentor assigned</span>
+                          <span className="text-xs text-gray-400 italic">No admin assigned</span>
                         )}
                       </div>
                       <button

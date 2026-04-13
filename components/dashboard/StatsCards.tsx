@@ -150,28 +150,6 @@ export default function StatsCards() {
         color: 'text-yellow-600',
       },
     ];
-  } else if (role === 'mentor' && stats?.mentor) {
-    const s = stats.mentor;
-    statCards = [
-      {
-        icon: <User className="w-5 h-5 lg:w-6 lg:h-6" />,
-        title: 'Pending Approvals',
-        value: s.pendingApprovals,
-        color: 'text-orange-600',
-      },
-      {
-        icon: <BarChart3 className="w-5 h-5 lg:w-6 lg:h-6" />,
-        title: 'Approved Roadmaps',
-        value: s.approvedRoadmaps,
-        color: 'text-green-600',
-      },
-      {
-        icon: <Calendar className="w-5 h-5 lg:w-6 lg:h-6" />,
-        title: 'Students Supervised',
-        value: s.totalStudentsSupervised,
-        color: 'text-blue-600',
-      },
-    ];
   } else if (role === 'field-admin' && stats?.['field-admin']) {
     const s = stats['field-admin'];
     statCards = [

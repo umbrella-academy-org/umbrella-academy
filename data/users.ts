@@ -1,6 +1,6 @@
 // Mock user data for Umbrella Academy LMS
 
-import { User, StudentUser, TrainerUser, MentorUser, AdminUser } from '@/types';
+import { User, StudentUser, TrainerUser, AdminUser } from '@/types';
 
 export const mockUsers: User[] = [
   // Students
@@ -179,35 +179,42 @@ export const mockUsers: User[] = [
     }
   } as TrainerUser,
 
-  // Mentors
+  // Trainers (continued)
   {
     id: 'user_201',
     name: 'David Nkurunziza',
-    email: 'david.nkurunziza@mentor.umbrella.rw',
-    role: 'mentor',
+    email: 'david.nkurunziza@trainer.umbrella.rw',
+    role: 'trainer',
     fieldId: 'software-engineering',
     status: 'active',
     joinDate: '2022-06-10',
     avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
     profileData: {
-      bio: 'Senior software architect and technical leader with extensive mentoring experience',
+      bio: 'Senior software architect and technical leader with extensive training experience',
       skills: ['Software Architecture', 'System Design', 'Team Leadership', 'Technical Strategy'],
       experience: '10 years in software development and 5 years in technical leadership'
     },
     createdAt: new Date('2022-06-10'),
     lastLogin: new Date('2024-12-09'),
     isActive: true,
+    availability: {
+      weeklyAvailableHours: 30,
+      maxStudentsPerSession: 8,
+      preferredSessionDuration: 2,
+      availableTimeSlots: ['morning', 'afternoon'],
+      availableDays: ['monday', 'tuesday', 'wednesday', 'thursday', 'friday']
+    },
     expertise: ['Software Architecture', 'Project Management', 'Team Leadership'],
     experience: {
       yearsOfExperience: 10,
-      specializations: ['Software Architecture', 'Technical Leadership', 'Mentoring']
+      specializations: ['Software Architecture', 'Technical Leadership', 'Training']
     }
-  } as MentorUser,
+  } as TrainerUser,
   {
     id: 'user_202',
     name: 'Alice Mukamazimpaka',
-    email: 'alice.mukamazimpaka@mentor.umbrella.rw',
-    role: 'mentor',
+    email: 'alice.mukamazimpaka@trainer.umbrella.rw',
+    role: 'trainer',
     fieldId: 'ux-innovation',
     status: 'active',
     joinDate: '2022-08-15',
@@ -220,12 +227,19 @@ export const mockUsers: User[] = [
     createdAt: new Date('2022-08-15'),
     lastLogin: new Date('2024-12-08'),
     isActive: true,
+    availability: {
+      weeklyAvailableHours: 25,
+      maxStudentsPerSession: 6,
+      preferredSessionDuration: 2,
+      availableTimeSlots: ['morning', 'afternoon', 'evening'],
+      availableDays: ['monday', 'tuesday', 'wednesday', 'thursday', 'friday']
+    },
     expertise: ['UX/UI Design', 'Product Management', 'Design Thinking'],
     experience: {
       yearsOfExperience: 8,
       specializations: ['User Experience Design', 'Product Strategy', 'Design Leadership']
     }
-  } as MentorUser,
+  } as TrainerUser,
 
   // Field Admins
   {
@@ -295,9 +309,6 @@ export const getStudents = (): StudentUser[] =>
 export const getTrainers = (): TrainerUser[] =>
   mockUsers.filter(user => user.role === 'trainer') as TrainerUser[];
 
-export const getMentors = (): MentorUser[] =>
-  mockUsers.filter(user => user.role === 'mentor') as MentorUser[];
-
 export const getFieldAdmins = (): AdminUser[] =>
   mockUsers.filter(user => user.role === 'field-admin') as AdminUser[];
 
@@ -313,9 +324,6 @@ export const getStudentsByField = (fieldId: string): StudentUser[] =>
 
 export const getTrainersByField = (fieldId: string): TrainerUser[] =>
   mockUsers.filter(user => user.role === 'trainer' && user.fieldId === fieldId) as TrainerUser[];
-
-export const getMentorsByField = (fieldId: string): MentorUser[] =>
-  mockUsers.filter(user => user.role === 'mentor' && user.fieldId === fieldId) as MentorUser[];
 
 // Get user by ID
 export const getUserById = (id: string): User | undefined =>

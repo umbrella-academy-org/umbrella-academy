@@ -31,7 +31,6 @@ export default function FieldAdminDashboard() {
       const dashboardRoutes = {
         'student': '/dashboard/student',
         'trainer': '/dashboard/trainer',
-        'mentor': '/dashboard/mentor',
         'umbrella-admin': '/dashboard/umbrella-admin'
       };
       navigate(dashboardRoutes[user.role as keyof typeof dashboardRoutes] || '/');
@@ -71,7 +70,6 @@ export default function FieldAdminDashboard() {
   const fieldUsers = users.filter(u => u.fieldId === user.fieldId);
   const fieldStudents = fieldUsers.filter(u => u.role === 'student');
   const fieldTrainers = fieldUsers.filter(u => u.role === 'trainer');
-  const fieldMentors = fieldUsers.filter(u => u.role === 'mentor');
 
   const fieldRoadmaps = studentRoadmaps.filter(roadmap =>
     fieldStudents.some(student => student.id === roadmap.studentId)

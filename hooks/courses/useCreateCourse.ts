@@ -10,7 +10,6 @@ interface CreateRoadmapData {
   tags: string[];
   studentId: string;
   trainerId?: string;
-  mentorId?: string;
 }
 
 interface UseCreateRoadmapReturn {
@@ -56,7 +55,6 @@ export function useCreateRoadmap(): UseCreateRoadmapReturn {
         description: data.description,
         studentId: data.studentId,
         trainerId: data.trainerId,
-        mentorId: data.mentorId,
         status: 'draft',
         createdAt: new Date().toISOString().split('T')[0],
         estimatedDuration: data.estimatedDuration,

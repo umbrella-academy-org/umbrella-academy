@@ -1,6 +1,6 @@
 // Auth flow management utilities
 
-export type UserType = 'student' | 'mentor';
+export type UserType = 'student' | 'trainer';
 export type AuthFlow = 'signup' | 'reset-password';
 
 // Storage keys
@@ -75,8 +75,8 @@ export const clearAuthData = (): void => {
 // Get next route after password creation based on user type
 export const getNextRouteAfterPassword = (): string => {
   const userType = getUserType();
-  if (userType === 'mentor') {
-    return '/auth/mentor/profile';
+  if (userType === 'trainer') {
+    return '/auth/trainer/profile';
   }
   return '/auth/student/profile';
 };

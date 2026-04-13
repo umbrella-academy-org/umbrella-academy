@@ -1,4 +1,4 @@
-// Table management interface definitions for mentor management system
+// Table management interface definitions for trainer management system
 
 export interface DataTableProps {
   data: any[];

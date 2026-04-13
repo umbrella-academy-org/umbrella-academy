@@ -15,7 +15,6 @@ import {
     getUsersByField,
     getStudentsByField,
     getTrainersByField,
-    getMentorsByField,
     assignUserToField,
     validateFieldAccess
 } from '@/data/users';
@@ -28,8 +27,7 @@ export class FieldService {
         return mockFields.map(field => ({
             ...field,
             students: getStudentsByField(field.id),
-            trainers: getTrainersByField(field.id),
-            mentors: getMentorsByField(field.id)
+            trainers: getTrainersByField(field.id)
         }));
     }
 
@@ -41,8 +39,7 @@ export class FieldService {
         return activeFields.map(field => ({
             ...field,
             students: getStudentsByField(field.id),
-            trainers: getTrainersByField(field.id),
-            mentors: getMentorsByField(field.id)
+            trainers: getTrainersByField(field.id)
         }));
     }
 
@@ -56,8 +53,7 @@ export class FieldService {
         return {
             ...field,
             students: getStudentsByField(field.id),
-            trainers: getTrainersByField(field.id),
-            mentors: getMentorsByField(field.id)
+            trainers: getTrainersByField(field.id)
         };
     }
 
@@ -78,12 +74,11 @@ export class FieldService {
     /**
      * Create a new field
      */
-    static async createField(fieldData: Omit<Field, 'id' | 'createdAt' | 'students' | 'trainers' | 'mentors'>): Promise<Field> {
+    static async createField(fieldData: Omit<Field, 'id' | 'createdAt' | 'students' | 'trainers'>): Promise<Field> {
         const newField = createField({
             ...fieldData,
             students: [],
-            trainers: [],
-            mentors: []
+            trainers: []
         });
         return newField;
     }
@@ -129,7 +124,6 @@ export class FieldService {
     static async getFieldStatistics(fieldId: string): Promise<{
         totalStudents: number;
         totalTrainers: number;
-        totalMentors: number;
         totalRevenue: number;
         activeCompanies: number;
     } | null> {
@@ -139,7 +133,6 @@ export class FieldService {
         return {
             totalStudents: field.students.length,
             totalTrainers: field.trainers.length,
-            totalMentors: field.mentors.length,
             totalRevenue: field.totalRevenue,
             activeCompanies: field.companies.filter(c => c.isActive).length
         };

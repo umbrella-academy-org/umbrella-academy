@@ -168,7 +168,7 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
           {
             icon: <AlertCircle className="w-5 h-5" />,
             label: 'Trainer Reports',
-            href: '/dashboard/field-admin/mentor-reports'
+            href: '/dashboard/field-admin/trainer-reports'
           },
           {
             icon: <CheckCircle className="w-5 h-5" />,

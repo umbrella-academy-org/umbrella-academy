@@ -1,17 +1,15 @@
 // User management service - Data access layer for user operations
 
-import { User, StudentUser, TrainerUser, MentorUser, AdminUser } from '@/types';
+import { User, StudentUser, TrainerUser, AdminUser } from '@/types';
 import {
   mockUsers,
   getStudents,
   getTrainers,
-  getMentors,
   getFieldAdmins,
   getUmbrellaAdmins,
   getUsersByField,
   getStudentsByField,
   getTrainersByField,
-  getMentorsByField,
   getUserById,
   getUserByEmail,
   assignUserToField,
@@ -49,8 +47,6 @@ export class UserService {
         return getStudents();
       case 'trainer':
         return getTrainers();
-      case 'mentor':
-        return getMentors();
       case 'field-admin':
         return getFieldAdmins();
       case 'umbrella-admin':
@@ -79,13 +75,6 @@ export class UserService {
    */
   static async getTrainersByField(fieldId: string): Promise<TrainerUser[]> {
     return getTrainersByField(fieldId);
-  }
-
-  /**
-   * Get mentors by field ID
-   */
-  static async getMentorsByField(fieldId: string): Promise<MentorUser[]> {
-    return getMentorsByField(fieldId);
   }
 
   /**
@@ -180,7 +169,6 @@ export class UserService {
     totalUsers: number;
     students: number;
     trainers: number;
-    mentors: number;
     activeUsers: number;
     inactiveUsers: number;
   }> {
@@ -190,7 +178,6 @@ export class UserService {
       totalUsers: users.length,
       students: users.filter(u => u.role === 'student').length,
       trainers: users.filter(u => u.role === 'trainer').length,
-      mentors: users.filter(u => u.role === 'mentor').length,
       activeUsers: users.filter(u => u.isActive && u.status === 'active').length,
       inactiveUsers: users.filter(u => !u.isActive || u.status !== 'active').length
     };

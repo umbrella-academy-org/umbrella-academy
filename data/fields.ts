@@ -9,7 +9,6 @@ export const mockFields: Field[] = [
         description: 'Master the art of building scalable enterprise systems. From cloud-native architecture to full-stack mastery, gain the technical edge needed to lead in the modern tech landscape.',
         industry: 'Technology',
         companies: mockCompanies.filter(c => c.fieldId === 'software-engineering'),
-        mentors: [],
         trainers: [],
         selectionTrainers: {
             total: 32,
@@ -31,7 +30,7 @@ export const mockFields: Field[] = [
         rating: 4.9,
         successRate: 98,
         studentsCount: 2450,
-        mentorsCount: 12,
+        trainersCount: 12,
         averageCompletionTime: '6-9 months',
         monthlyPrice: 85000
     },
@@ -41,7 +40,6 @@ export const mockFields: Field[] = [
         description: 'Go beyond interfaces. Design immersive digital ecosystems using psychology-driven UX, motion design, and strategic product thinking that users love.',
         industry: 'Design',
         companies: mockCompanies.filter(c => c.fieldId === 'ux-innovation'),
-        mentors: [],
         trainers: [],
         selectionTrainers: {
             total: 22,
@@ -63,7 +61,7 @@ export const mockFields: Field[] = [
         rating: 4.8,
         successRate: 95,
         studentsCount: 1820,
-        mentorsCount: 10,
+        trainersCount: 10,
         averageCompletionTime: '5-7 months',
         monthlyPrice: 72000
     },
@@ -73,7 +71,6 @@ export const mockFields: Field[] = [
         description: 'Harness the power of neural networks and big data. Build intelligent systems that predict, automate, and solve complex global challenges at scale.',
         industry: 'Artificial Intelligence',
         companies: mockCompanies.filter(c => c.fieldId === 'ai-intelligence'),
-        mentors: [],
         trainers: [],
         selectionTrainers: {
             total: 28,
@@ -95,7 +92,7 @@ export const mockFields: Field[] = [
         rating: 4.9,
         successRate: 92,
         studentsCount: 1560,
-        mentorsCount: 15,
+        trainersCount: 15,
         averageCompletionTime: '8-12 months',
         monthlyPrice: 95000
     },
@@ -105,7 +102,6 @@ export const mockFields: Field[] = [
         description: 'Defend the digital frontier. Master offensive security, advanced cryptography, and zero-trust architectures to protect global infrastructure from emerging threats.',
         industry: 'Cybersecurity',
         companies: mockCompanies.filter(c => c.fieldId === 'cyber-resilience'),
-        mentors: [],
         trainers: [],
         selectionTrainers: {
             total: 18,
@@ -127,7 +123,7 @@ export const mockFields: Field[] = [
         rating: 4.7,
         successRate: 89,
         studentsCount: 980,
-        mentorsCount: 8,
+        trainersCount: 8,
         averageCompletionTime: '7-10 months',
         monthlyPrice: 78000
     }

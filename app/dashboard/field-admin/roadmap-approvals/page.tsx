@@ -2,55 +2,23 @@
 
 import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
-
 import { CheckCircle, XCircle, Clock, User, Calendar, Target } from 'lucide-react';
 
-export default function MentorRoadmapApprovalsPage() {
+export default function FieldAdminRoadmapApprovalsPage() {
   const [selectedRoadmap, setSelectedRoadmap] = useState<string | null>(null);
 
   const pendingRoadmaps = [
     {
       id: 'rm-001',
-      student: {
-        name: 'Alice Johnson',
-        email: 'alice@example.com',
-        wing: 'Programming Wing'
-      },
-      trainer: {
-        name: 'John Smith',
-        email: 'john@example.com'
-      },
+      student: { name: 'Alice Johnson', email: 'alice@example.com', wing: 'Programming Wing' },
+      trainer: { name: 'John Smith', email: 'john@example.com' },
       goal: 'Learn Full-Stack Web Development',
       submittedAt: '2024-01-22T10:30:00Z',
       phases: [
-        {
-          id: 'phase-1',
-          title: 'HTML & CSS Fundamentals',
-          description: 'Learn the basics of web structure and styling',
-          estimatedWeeks: 3,
-          sessions: 6
-        },
-        {
-          id: 'phase-2',
-          title: 'JavaScript Programming',
-          description: 'Master JavaScript fundamentals and DOM manipulation',
-          estimatedWeeks: 4,
-          sessions: 8
-        },
-        {
-          id: 'phase-3',
-          title: 'React Development',
-          description: 'Build modern web applications with React',
-          estimatedWeeks: 5,
-          sessions: 10
-        },
-        {
-          id: 'phase-4',
-          title: 'Backend with Node.js',
-          description: 'Create server-side applications and APIs',
-          estimatedWeeks: 4,
-          sessions: 8
-        }
+        { id: 'phase-1', title: 'HTML & CSS Fundamentals', description: 'Learn the basics of web structure and styling', estimatedWeeks: 3, sessions: 6 },
+        { id: 'phase-2', title: 'JavaScript Programming', description: 'Master JavaScript fundamentals and DOM manipulation', estimatedWeeks: 4, sessions: 8 },
+        { id: 'phase-3', title: 'React Development', description: 'Build modern web applications with React', estimatedWeeks: 5, sessions: 10 },
+        { id: 'phase-4', title: 'Backend with Node.js', description: 'Create server-side applications and APIs', estimatedWeeks: 4, sessions: 8 }
       ],
       totalWeeks: 16,
       totalSessions: 32,
@@ -58,39 +26,14 @@ export default function MentorRoadmapApprovalsPage() {
     },
     {
       id: 'rm-002',
-      student: {
-        name: 'Bob Wilson',
-        email: 'bob@example.com',
-        wing: 'Design Wing'
-      },
-      trainer: {
-        name: 'Sarah Johnson',
-        email: 'sarah@example.com'
-      },
+      student: { name: 'Bob Wilson', email: 'bob@example.com', wing: 'Design Wing' },
+      trainer: { name: 'Sarah Johnson', email: 'sarah@example.com' },
       goal: 'Master UI/UX Design',
       submittedAt: '2024-01-21T15:45:00Z',
       phases: [
-        {
-          id: 'phase-1',
-          title: 'Design Principles',
-          description: 'Learn fundamental design principles and theory',
-          estimatedWeeks: 2,
-          sessions: 4
-        },
-        {
-          id: 'phase-2',
-          title: 'Figma Mastery',
-          description: 'Master Figma for professional design work',
-          estimatedWeeks: 3,
-          sessions: 6
-        },
-        {
-          id: 'phase-3',
-          title: 'User Research & Testing',
-          description: 'Learn user research methods and usability testing',
-          estimatedWeeks: 3,
-          sessions: 6
-        }
+        { id: 'phase-1', title: 'Design Principles', description: 'Learn fundamental design principles and theory', estimatedWeeks: 2, sessions: 4 },
+        { id: 'phase-2', title: 'Figma Mastery', description: 'Master Figma for professional design work', estimatedWeeks: 3, sessions: 6 },
+        { id: 'phase-3', title: 'User Research & Testing', description: 'Learn user research methods and usability testing', estimatedWeeks: 3, sessions: 6 }
       ],
       totalWeeks: 8,
       totalSessions: 16,
@@ -98,35 +41,17 @@ export default function MentorRoadmapApprovalsPage() {
     }
   ];
 
-  const handleApprove = (roadmapId: string) => {
-    console.log('Approving roadmap:', roadmapId);
-    // Handle approval logic
-  };
+  const handleApprove = (roadmapId: string) => console.log('Approving roadmap:', roadmapId);
+  const handleReject = (roadmapId: string) => console.log('Rejecting roadmap:', roadmapId);
+  const handleRequestChanges = (roadmapId: string) => console.log('Requesting changes for roadmap:', roadmapId);
 
-  const handleReject = (roadmapId: string) => {
-    console.log('Rejecting roadmap:', roadmapId);
-    // Handle rejection logic
-  };
-
-  const handleRequestChanges = (roadmapId: string) => {
-    console.log('Requesting changes for roadmap:', roadmapId);
-    // Handle request changes logic
-  };
-
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
-  };
+  const formatDate = (dateString: string) => new Date(dateString).toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
 
   const selectedRoadmapData = pendingRoadmaps.find(rm => rm.id === selectedRoadmap);
 
   return (
     <div className="flex h-screen bg-white">
-      <Sidebar activeItem="Roadmap Approvals" userType="mentor" />
+      <Sidebar activeItem="Roadmap Approvals" userType="company-admin" />
 
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
         <main className="flex-1 overflow-auto">
@@ -137,7 +62,6 @@ export default function MentorRoadmapApprovalsPage() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              {/* Roadmap List */}
               <div className="lg:col-span-1">
                 <div className="bg-white rounded-lg shadow-sm border border-gray-100">
                   <div className="p-4 border-b border-gray-200">
@@ -147,8 +71,7 @@ export default function MentorRoadmapApprovalsPage() {
                     {pendingRoadmaps.map((roadmap) => (
                       <div
                         key={roadmap.id}
-                        className={`p-4 cursor-pointer hover:bg-gray-50 transition-colors ${selectedRoadmap === roadmap.id ? 'bg-gray-50 border-r-4 border-yellow-600' : ''
-                          }`}
+                        className={`p-4 cursor-pointer hover:bg-gray-50 transition-colors ${selectedRoadmap === roadmap.id ? 'bg-gray-50 border-r-4 border-yellow-600' : ''}`}
                         onClick={() => setSelectedRoadmap(roadmap.id)}
                       >
                         <div className="flex items-start justify-between mb-2">
@@ -165,7 +88,6 @@ export default function MentorRoadmapApprovalsPage() {
                         <div className="flex items-center gap-4 text-xs text-gray-500">
                           <span>{roadmap.totalWeeks} weeks</span>
                           <span>{roadmap.phases.length} phases</span>
-                          <span>€{roadmap.monthlyPrice}/month</span>
                         </div>
                       </div>
                     ))}
@@ -173,11 +95,9 @@ export default function MentorRoadmapApprovalsPage() {
                 </div>
               </div>
 
-              {/* Roadmap Details */}
               <div className="lg:col-span-2">
                 {selectedRoadmapData ? (
                   <div className="bg-white rounded-lg shadow-sm border border-gray-100">
-                    {/* Header */}
                     <div className="p-6 border-b border-gray-200">
                       <div className="flex items-start justify-between mb-4">
                         <div>
@@ -185,30 +105,18 @@ export default function MentorRoadmapApprovalsPage() {
                           <p className="text-gray-600 mt-1">Submitted by {selectedRoadmapData.student.name}</p>
                         </div>
                         <div className="flex items-center gap-2">
-                          <button
-                            onClick={() => handleApprove(selectedRoadmapData.id)}
-                            className="flex items-center gap-2 px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors"
-                          >
-                            <CheckCircle className="w-4 h-4" />
-                            Approve
+                          <button onClick={() => handleApprove(selectedRoadmapData.id)} className="flex items-center gap-2 px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors">
+                            <CheckCircle className="w-4 h-4" /> Approve
                           </button>
-                          <button
-                            onClick={() => handleRequestChanges(selectedRoadmapData.id)}
-                            className="flex items-center gap-2 px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors"
-                          >
+                          <button onClick={() => handleRequestChanges(selectedRoadmapData.id)} className="flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors">
                             Request Changes
                           </button>
-                          <button
-                            onClick={() => handleReject(selectedRoadmapData.id)}
-                            className="flex items-center gap-2 px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors"
-                          >
-                            <XCircle className="w-4 h-4" />
-                            Reject
+                          <button onClick={() => handleReject(selectedRoadmapData.id)} className="flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors">
+                            <XCircle className="w-4 h-4" /> Reject
                           </button>
                         </div>
                       </div>
 
-                      {/* Student & Trainer Info */}
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
                           <User className="w-5 h-5 text-gray-600" />
@@ -229,51 +137,29 @@ export default function MentorRoadmapApprovalsPage() {
                       </div>
                     </div>
 
-                    {/* Roadmap Summary */}
                     <div className="p-6 border-b border-gray-200">
                       <h3 className="font-semibold text-gray-900 mb-4">Roadmap Summary</h3>
                       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                        <div className="text-center p-3 bg-gray-50 rounded-lg">
-                          <div className="text-2xl font-bold text-gray-600">{selectedRoadmapData.phases.length}</div>
-                          <div className="text-sm text-gray-600">Phases</div>
-                        </div>
-                        <div className="text-center p-3 bg-gray-50 rounded-lg">
-                          <div className="text-2xl font-bold text-gray-600">{selectedRoadmapData.totalWeeks}</div>
-                          <div className="text-sm text-gray-600">Weeks</div>
-                        </div>
-                        <div className="text-center p-3 bg-gray-50 rounded-lg">
-                          <div className="text-2xl font-bold text-gray-600">{selectedRoadmapData.totalSessions}</div>
-                          <div className="text-sm text-gray-600">Sessions</div>
-                        </div>
-                        <div className="text-center p-3 bg-gray-50 rounded-lg">
-                          <div className="text-2xl font-bold text-gray-600">€{selectedRoadmapData.monthlyPrice}</div>
-                          <div className="text-sm text-gray-600">Monthly</div>
-                        </div>
+                        <div className="text-center p-3 bg-gray-50 rounded-lg"><div className="text-2xl font-bold text-gray-600">{selectedRoadmapData.phases.length}</div><div className="text-sm text-gray-600">Phases</div></div>
+                        <div className="text-center p-3 bg-gray-50 rounded-lg"><div className="text-2xl font-bold text-gray-600">{selectedRoadmapData.totalWeeks}</div><div className="text-sm text-gray-600">Weeks</div></div>
+                        <div className="text-center p-3 bg-gray-50 rounded-lg"><div className="text-2xl font-bold text-gray-600">{selectedRoadmapData.totalSessions}</div><div className="text-sm text-gray-600">Sessions</div></div>
+                        <div className="text-center p-3 bg-gray-50 rounded-lg"><div className="text-2xl font-bold text-gray-600">RWF {selectedRoadmapData.monthlyPrice.toLocaleString()}</div><div className="text-sm text-gray-600">Monthly</div></div>
                       </div>
                     </div>
 
-                    {/* Phases Details */}
                     <div className="p-6">
                       <h3 className="font-semibold text-gray-900 mb-4">Learning Phases</h3>
                       <div className="space-y-4">
                         {selectedRoadmapData.phases.map((phase, index) => (
                           <div key={phase.id} className="border border-gray-200 rounded-lg p-4">
                             <div className="flex items-start gap-4">
-                              <div className="w-8 h-8 bg-yellow-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
-                                {index + 1}
-                              </div>
+                              <div className="w-8 h-8 bg-yellow-600 rounded-full flex items-center justify-center text-white font-bold text-sm">{index + 1}</div>
                               <div className="flex-1">
                                 <h4 className="font-medium text-gray-900 mb-1">{phase.title}</h4>
                                 <p className="text-sm text-gray-600 mb-3">{phase.description}</p>
                                 <div className="flex items-center gap-4 text-sm text-gray-500">
-                                  <div className="flex items-center gap-1">
-                                    <Calendar className="w-4 h-4" />
-                                    <span>{phase.estimatedWeeks} weeks</span>
-                                  </div>
-                                  <div className="flex items-center gap-1">
-                                    <Target className="w-4 h-4" />
-                                    <span>{phase.sessions} sessions</span>
-                                  </div>
+                                  <div className="flex items-center gap-1"><Calendar className="w-4 h-4" /><span>{phase.estimatedWeeks} weeks</span></div>
+                                  <div className="flex items-center gap-1"><Target className="w-4 h-4" /><span>{phase.sessions} sessions</span></div>
                                 </div>
                               </div>
                             </div>
@@ -284,9 +170,7 @@ export default function MentorRoadmapApprovalsPage() {
                   </div>
                 ) : (
                   <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-12 text-center">
-                    <div className="text-gray-400 mb-4">
-                      <Target className="w-12 h-12 mx-auto" />
-                    </div>
+                    <div className="text-gray-400 mb-4"><Target className="w-12 h-12 mx-auto" /></div>
                     <h3 className="text-lg font-medium text-gray-900 mb-2">Select a Roadmap</h3>
                     <p className="text-gray-600">Choose a roadmap from the list to review its details</p>
                   </div>

@@ -30,6 +30,7 @@ export interface Field {
   rating: number;
   successRate: number;
   studentsCount: number;
+  trainersCount: number;
   averageCompletionTime: string;
   monthlyPrice: number;
   code?: string;

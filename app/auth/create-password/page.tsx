@@ -35,7 +35,7 @@ export default function CreatePasswordPage() {
     const result = await register({
       email,
       password,
-      role: (userType as 'student' | 'trainer' | 'mentor' | 'field-admin' | 'umbrella-admin') ?? 'student',
+      role: (userType as 'student' | 'trainer' | 'field-admin' | 'umbrella-admin') ?? 'student',
       firstName: firstName || email.split('@')[0],
       lastName: lastName || '',
       // Student-specific fields

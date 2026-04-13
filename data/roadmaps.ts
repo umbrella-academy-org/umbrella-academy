@@ -41,7 +41,6 @@ export const mockRoadmaps: Roadmap[] = [
     description: 'A comprehensive roadmap to become a full-stack web developer using modern technologies',
     studentId: 'user_001',
     trainerId: 'user_101',
-    mentorId: 'user_201',
     status: 'active',
     createdAt: '2024-09-20',
     approvedAt: '2024-09-22',
@@ -113,7 +112,6 @@ export const mockRoadmaps: Roadmap[] = [
     description: 'Complete journey from data analysis basics to machine learning implementation',
     studentId: 'user_002',
     trainerId: 'user_102',
-    mentorId: 'user_201',
     status: 'approved',
     createdAt: '2024-08-25',
     approvedAt: '2024-08-28',
@@ -185,7 +183,6 @@ export const mockRoadmaps: Roadmap[] = [
     description: 'Learn user experience and interface design principles',
     studentId: 'user_003',
     trainerId: 'user_101',
-    mentorId: 'user_202',
     status: 'pending-approval',
     createdAt: '2024-10-05',
     estimatedDuration: 16,
@@ -387,7 +384,6 @@ export const mockStudentRoadmaps: StudentRoadmap[] = [
 export const getRoadmapById = (id: string) => mockRoadmaps.find(roadmap => roadmap.id === id);
 export const getRoadmapsByStudent = (studentId: string) => mockRoadmaps.filter(roadmap => roadmap.studentId === studentId);
 export const getRoadmapsByTrainer = (trainerId: string) => mockRoadmaps.filter(roadmap => roadmap.trainerId === trainerId);
-export const getRoadmapsByMentor = (mentorId: string) => mockRoadmaps.filter(roadmap => roadmap.mentorId === mentorId);
 export const getRoadmapsByStatus = (status: string) => mockRoadmaps.filter(roadmap => roadmap.status === status);
 export const getCollaborationByRoadmap = (roadmapId: string) => mockCollaborations.find(collab => collab.roadmapId === roadmapId);
 export const getStudentRoadmapByStudent = (studentId: string) => mockStudentRoadmaps.filter(sr => sr.studentId === studentId);

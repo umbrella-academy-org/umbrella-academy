@@ -30,14 +30,6 @@ export default function StudentsTable({ searchQuery, selectedStatus, selectedCou
     if (user.role === 'trainer') {
       return students.filter(s => s.fieldId === user.fieldId);
     }
-    if (user.role === 'mentor') {
-      const myStudentIds = new Set(
-        studentRoadmaps
-          .filter(r => r.roadmap.mentorId === user.id)
-          .map(r => r.studentId)
-      );
-      return students.filter(s => myStudentIds.has(s.id));
-    }
     return students;
   }, [students, user, studentRoadmaps]);
 

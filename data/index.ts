@@ -45,7 +45,6 @@ export const getDashboardStats = () => ({
   totalUsers: mockUsers.length,
   totalStudents: mockUsers.filter(u => u.role === 'student').length,
   totalTrainers: mockUsers.filter(u => u.role === 'trainer').length,
-  totalMentors: mockUsers.filter(u => u.role === 'mentor').length,
   totalFields: mockFields.length,
   activeFields: mockFields.filter(f => f.status === 'active').length,
   totalRoadmaps: mockRoadmaps.length,
@@ -85,18 +84,18 @@ export const getTrainerDashboardStats = (trainerId: string) => {
   };
 };
 
-export const getMentorDashboardStats = (mentorId: string) => {
-  const mentorRoadmaps = mockRoadmaps.filter(r => r.mentorId === mentorId);
-  const mentorStudentRoadmaps = mockStudentRoadmaps.filter(r =>
-    r.roadmap.mentorId === mentorId
+export const getTrainerDashboardStatsByRoadmap = (trainerId: string) => {
+  const trainerRoadmaps = mockRoadmaps.filter(r => r.trainerId === trainerId);
+  const trainerStudentRoadmaps = mockStudentRoadmaps.filter(r =>
+    r.roadmap.trainerId === trainerId
   );
 
   return {
-    totalRoadmaps: mentorRoadmaps.length,
-    totalStudents: mentorStudentRoadmaps.length,
-    activeStudents: mentorStudentRoadmaps.filter(r => r.status === 'active').length,
-    averageProgress: mentorStudentRoadmaps.reduce((sum, r) => sum + r.roadmap.progress.overallProgress, 0) / mentorStudentRoadmaps.length || 0,
-    pendingApprovals: mentorRoadmaps.filter(r => r.status === 'pending-approval').length,
+    totalRoadmaps: trainerRoadmaps.length,
+    totalStudents: trainerStudentRoadmaps.length,
+    activeStudents: trainerStudentRoadmaps.filter(r => r.status === 'active').length,
+    averageProgress: trainerStudentRoadmaps.reduce((sum, r) => sum + r.roadmap.progress.overallProgress, 0) / trainerStudentRoadmaps.length || 0,
+    pendingApprovals: trainerRoadmaps.filter(r => r.status === 'pending-approval').length,
     monthlyRevenue: 450000 // RWF
   };
 };

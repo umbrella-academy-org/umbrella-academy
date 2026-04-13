@@ -144,7 +144,6 @@ export const sampleRoadmap: Roadmap = {
   description: 'A comprehensive roadmap to become a full-stack web developer using modern technologies',
   studentId: 'user_001',
   trainerId: 'user_101',
-  mentorId: 'user_201',
   status: 'active',
   createdAt: '2024-09-20',
   approvedAt: '2024-09-22',
