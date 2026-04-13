@@ -7,7 +7,7 @@ export const mockUsers: User[] = [
   {
     id: 'user_001',
     name: 'Jane Mukamana',
-    email: 'jane.mukamana@student.umbrella.rw',
+    email: 'jane.mukamana@student.dreamize.rw',
     role: 'student',
     status: 'active',
     joinDate: '2024-09-15',
@@ -34,7 +34,7 @@ export const mockUsers: User[] = [
   {
     id: 'user_002',
     name: 'Eric Nshimiyimana',
-    email: 'eric.nshimiyimana@student.umbrella.rw',
+    email: 'eric.nshimiyimana@student.dreamize.rw',
     role: 'student',
     status: 'active',
     joinDate: '2024-08-22',
@@ -61,7 +61,7 @@ export const mockUsers: User[] = [
   {
     id: 'user_003',
     name: 'Grace Uwimana',
-    email: 'grace.uwimana@student.umbrella.rw',
+    email: 'grace.uwimana@student.dreamize.rw',
     role: 'student',
     status: 'active',
     joinDate: '2024-10-01',
@@ -88,7 +88,7 @@ export const mockUsers: User[] = [
   {
     id: 'user_004',
     name: 'David Habimana',
-    email: 'david.habimana@student.umbrella.rw',
+    email: 'david.habimana@student.dreamize.rw',
     role: 'student',
     status: 'paused',
     joinDate: '2024-07-10',
@@ -117,7 +117,7 @@ export const mockUsers: User[] = [
   {
     id: 'user_101',
     name: 'Sarah Ingabire',
-    email: 'sarah.ingabire@trainer.umbrella.rw',
+    email: 'sarah.ingabire@trainer.dreamize.rw',
     role: 'trainer',
     status: 'active',
     joinDate: '2023-03-15',
@@ -146,7 +146,7 @@ export const mockUsers: User[] = [
   {
     id: 'user_102',
     name: 'Jean Baptiste Nzeyimana',
-    email: 'jean.nzeyimana@trainer.umbrella.rw',
+    email: 'jean.nzeyimana@trainer.dreamize.rw',
     role: 'trainer',
     status: 'active',
     joinDate: '2023-01-20',
@@ -175,7 +175,7 @@ export const mockUsers: User[] = [
   {
     id: 'user_201',
     name: 'David Nkurunziza',
-    email: 'david.nkurunziza@trainer.umbrella.rw',
+    email: 'david.nkurunziza@trainer.dreamize.rw',
     role: 'trainer',
     status: 'active',
     joinDate: '2022-06-10',
@@ -204,7 +204,7 @@ export const mockUsers: User[] = [
   {
     id: 'user_202',
     name: 'Alice Mukamazimpaka',
-    email: 'alice.mukamazimpaka@trainer.umbrella.rw',
+    email: 'alice.mukamazimpaka@trainer.dreamize.rw',
     role: 'trainer',
     status: 'active',
     joinDate: '2022-08-15',

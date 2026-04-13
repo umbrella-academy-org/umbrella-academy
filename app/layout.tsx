@@ -24,24 +24,24 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: "Umbrella Academy | Next-Gen Learning Platform",
-    template: "%s | Umbrella Academy"
+    default: "Dreamize | Next-Gen Learning Platform",
+    template: "%s | Dreamize"
   },
-  description: "Join Umbrella Academy LMS and learn from industry trainers, guided by expert mentors, inside structured learning companies. Accelerate your career with real-world skills and professional guidance.",
+  description: "Join Dreamize LMS and learn from industry trainers, guided by expert mentors, inside structured learning companies. Accelerate your career with real-world skills and professional guidance.",
   keywords: [
     "LMS",
     "Learning Management System",
     "Professional Mentorship",
     "Skills Development",
     "Industry Training",
-    "Umbrella Academy",
+    "Dreamize",
     "Career Growth Rwanda",
     "Digital Learning Platform"
   ],
-  authors: [{ name: "Umbrella Academy Team" }],
-  creator: "Umbrella Academy",
-  publisher: "Umbrella Academy",
-  metadataBase: new URL("https://umbrella-academy.com"), // Replace with actual production URL
+  authors: [{ name: "Dreamize" }],
+  creator: "Dreamize",
+  publisher: "Dreamize",
+  metadataBase: new URL("https://dreamize.rw"),
   alternates: {
     canonical: "/",
   },
@@ -49,24 +49,24 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "/",
-    title: "Umbrella Academy | Next-Gen Learning Platform",
+    title: "Dreamize | Next-Gen Learning Platform",
     description: "Structured learning platform connecting students with expert trainers and mentors across multiple fields. Real skills, real growth.",
-    siteName: "Umbrella Academy",
+    siteName: "Dreamize",
     images: [
       {
         url: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200",
         width: 1200,
         height: 630,
-        alt: "Umbrella Academy - Professional Learning Environment",
+        alt: "Dreamize - Professional Learning Environment",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Umbrella Academy | Next-Gen Learning Platform",
-    description: "Accelerate your career with industry-led training and expert mentorship. Join Umbrella Academy today.",
+    title: "Dreamize | Next-Gen Learning Platform",
+    description: "Accelerate your career with industry-led training and expert mentorship. Join Dreamize today.",
     images: ["https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200"],
-    creator: "@umbrellaacademy",
+    creator: "@dreamize",
   },
   robots: {
     index: true,

@@ -108,7 +108,7 @@ export function Hero() {
             onClick={() => router.push("/auth/signup")}
             className="group w-full md:w-auto px-8 md:px-12 py-4 md:py-6 bg-white text-black rounded-none hover:bg-[#ca8a04] hover:text-white transition-all duration-500 flex items-center justify-center space-x-4 font-black text-lg md:text-xl  active:scale-95"
           >
-            <span>JOIN THE ACADEMY</span>
+            <span>JOIN DREAMIZE</span>
             <ArrowRight className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-2 transition-transform" />
           </button>
 

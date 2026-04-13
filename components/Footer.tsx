@@ -89,7 +89,7 @@ export function Footer() {
               </li>
               <li className="flex items-start space-x-3">
                 <Mail className="w-5 h-5 text-[#fbbf24] shrink-0 mt-0.5" />
-                <span className="text-sm">hello@umbrellaacademy.com</span>
+                <span className="text-sm">hello@dreamize.rw</span>
               </li>
             </ul>
           </div>
@@ -99,7 +99,7 @@ export function Footer() {
         <div className="pt-8 border-t border-gray-900">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-sm text-gray-400">
-              © 2026 Umbrella Academy LMS. All rights reserved.
+              © 2026 Dreamize LMS. All rights reserved.
             </div>
             <div className="flex space-x-6 text-sm">
               <a href="#" className="text-gray-400 hover:text-[#fbbf24] transition-colors">Privacy Policy</a>
