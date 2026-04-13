@@ -1,4 +1,4 @@
-// Centralized type exports for Umbrella Academy LMS
+// Centralized type exports for Dreamize LMS
 
 // User types
 export * from './user';

@@ -1,6 +1,6 @@
 import { Wallet } from './payment';
 
-export type UserType = 'student' | 'trainer' | 'company-admin' | 'umbrella-admin';
+export type UserType = 'student' | 'trainer' | 'admin';
 
 export interface Availability {
   weeklyAvailableHours?: number;
@@ -13,8 +13,6 @@ export interface BaseUser {
   name: string;
   email: string;
   role: UserType;
-  fieldId?: string;
-  field?: string;
   status: 'active' | 'inactive' | 'suspended' | 'paused';
   joinDate: string;
   avatar?: string;
@@ -67,10 +65,8 @@ export interface TrainerUser extends BaseUser {
   wallet?: Wallet;
 }
 
-export interface AdminUser extends Omit<BaseUser, 'fieldId' | 'field'> {
-  role: 'company-admin' | 'umbrella-admin';
-  fieldId?: string;
-  field?: string;
+export interface AdminUser extends BaseUser {
+  role: 'admin';
   permissions: string[];
 }
 

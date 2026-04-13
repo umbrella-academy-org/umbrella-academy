@@ -9,11 +9,9 @@ interface UserContextType {
   users: User[];
   students: User[];
   trainers: User[];
-  companyAdmins: User[];
   isLoading: boolean;
   error: string | null;
   getUsersByRole: (role: UserType) => User[];
-  getUsersByFieldId: (fieldId: string) => User[];
   getUserByIdFromContext: (id: string) => User | undefined;
   refreshUsers: () => Promise<void>;
 }
@@ -51,17 +49,15 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
   const students = users.filter(u => u.role === 'student');
   const trainers = users.filter(u => u.role === 'trainer');
-  const companyAdmins = users.filter(u => u.role === 'company-admin');
 
   const getUsersByRole = (role: UserType) => users.filter(u => u.role === role);
-  const getUsersByFieldId = (fieldId: string) => users.filter(u => u.fieldId === fieldId);
   const getUserByIdFromContext = (id: string) => users.find(u => u.id === id);
 
   return (
     <UserContext.Provider value={{
-      users, students, trainers, companyAdmins,
+      users, students, trainers,
       isLoading, error,
-      getUsersByRole, getUsersByFieldId, getUserByIdFromContext,
+      getUsersByRole, getUserByIdFromContext,
       refreshUsers: loadUsers,
     }}>
       {children}

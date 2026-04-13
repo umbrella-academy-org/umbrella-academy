@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { User } from '@/types';
 import { IPayment } from '@/hooks/admin/usePayments';
-import { AdminField, FeedbackTicket, AdminAnalytics, AdminCompany } from '@/types/admin';
+import { FeedbackTicket, AdminAnalytics } from '@/types/admin';
 import { apiClient } from '@/services/client';
 import { API_ENDPOINTS } from '@/services/constants';
 import { useAuth } from './AuthContext';
@@ -30,21 +30,11 @@ interface AdminContextType {
   analyticsLoading: boolean;
   analyticsError: string | null;
   refreshAnalytics: () => Promise<void>;
-  // Fields
-  fields: AdminField[];
-  fieldsLoading: boolean;
-  fieldsError: string | null;
-  refreshFields: () => Promise<void>;
   // Feedback
   tickets: FeedbackTicket[];
   ticketsLoading: boolean;
   ticketsError: string | null;
   refreshTickets: () => Promise<void>;
-  // Companies
-  companies: AdminCompany[];
-  companiesLoading: boolean;
-  companiesError: string | null;
-  refreshCompanies: () => Promise<void>;
 }
 
 const AdminContext = createContext<AdminContextType | undefined>(undefined);
@@ -69,30 +59,17 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
   const [analyticsLoading, setAnalyticsLoading] = useState(false);
   const [analyticsError, setAnalyticsError] = useState<string | null>(null);
 
-  const [fields, setFields] = useState<AdminField[]>([]);
-  const [fieldsLoading, setFieldsLoading] = useState(false);
-  const [fieldsError, setFieldsError] = useState<string | null>(null);
-
   const [tickets, setTickets] = useState<FeedbackTicket[]>([]);
   const [ticketsLoading, setTicketsLoading] = useState(false);
   const [ticketsError, setTicketsError] = useState<string | null>(null);
 
-  const [companies, setCompanies] = useState<AdminCompany[]>([]);
-  const [companiesLoading, setCompaniesLoading] = useState(false);
-  const [companiesError, setCompaniesError] = useState<string | null>(null);
-
-  const isAdmin = user?.role === 'umbrella-admin' || user?.role === 'company-admin';
-  const isUmbrellaAdmin = user?.role === 'umbrella-admin';
-  const isCompanyAdmin = user?.role === 'company-admin';
-  const fieldId = user && 'fieldId' in user ? user.fieldId : undefined;
+  const isAdmin = user?.role === 'admin';
 
   const refreshUsers = async () => {
     if (!isAdmin) return;
     setUsersLoading(true);
     try {
-      const params: Record<string, string> = {};
-      if (isCompanyAdmin && fieldId) params.fieldId = fieldId;
-      const res = await apiClient.get<{ success: boolean; data: User[] }>(API_ENDPOINTS.USERS, params);
+      const res = await apiClient.get<{ success: boolean; data: User[] }>(API_ENDPOINTS.USERS);
       setUsers(res.data ?? []);
       setUsersError(null);
     } catch (err) {
@@ -107,7 +84,6 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
     setTrainersLoading(true);
     try {
       const params: Record<string, string> = { role: 'trainer' };
-      if (isCompanyAdmin && fieldId) params.fieldId = fieldId;
       const [trainersRes, pendingRes] = await Promise.all([
         apiClient.get<{ success: boolean; data: User[] }>(API_ENDPOINTS.USERS, params),
         apiClient.get<{ success: boolean; data: User[] }>(API_ENDPOINTS.TRAINERS_PENDING),
@@ -123,7 +99,7 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
   };
 
   const refreshPayments = async () => {
-    if (!isUmbrellaAdmin) return;
+    if (!isAdmin) return;
     setPaymentsLoading(true);
     try {
       const res = await apiClient.get<{ success: boolean; data: IPayment[] }>(API_ENDPOINTS.PAYMENTS);
@@ -137,7 +113,7 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
   };
 
   const refreshAnalytics = async () => {
-    if (!isUmbrellaAdmin) return;
+    if (!isAdmin) return;
     setAnalyticsLoading(true);
     try {
       const res = await apiClient.get<{ success: boolean; data: AdminAnalytics }>(API_ENDPOINTS.ADMIN_ANALYTICS);
@@ -150,22 +126,8 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const refreshFields = async () => {
-    if (!isUmbrellaAdmin) return;
-    setFieldsLoading(true);
-    try {
-      const res = await apiClient.get<{ success: boolean; data: AdminField[] }>(API_ENDPOINTS.ADMIN_FIELDS);
-      setFields(res.data ?? []);
-      setFieldsError(null);
-    } catch (err) {
-      setFieldsError(err instanceof Error ? err.message : 'Failed to load fields');
-    } finally {
-      setFieldsLoading(false);
-    }
-  };
-
   const refreshTickets = async () => {
-    if (!isUmbrellaAdmin) return;
+    if (!isAdmin) return;
     setTicketsLoading(true);
     try {
       const res = await apiClient.get<{ success: boolean; data: FeedbackTicket[] }>(API_ENDPOINTS.ADMIN_FEEDBACK);
@@ -178,31 +140,13 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const refreshCompanies = async () => {
-    if (!isUmbrellaAdmin) return;
-    setCompaniesLoading(true);
-    try {
-      const res = await apiClient.get<{ success: boolean; data: AdminCompany[] }>(API_ENDPOINTS.COMPANIES_ALL);
-      setCompanies(res.data ?? []);
-      setCompaniesError(null);
-    } catch (err) {
-      setCompaniesError(err instanceof Error ? err.message : 'Failed to load companies');
-    } finally {
-      setCompaniesLoading(false);
-    }
-  };
-
   useEffect(() => {
     if (!isAdmin) return;
     refreshUsers();
     refreshTrainers();
-    if (isUmbrellaAdmin) {
-      refreshPayments();
-      refreshAnalytics();
-      refreshFields();
-      refreshTickets();
-      refreshCompanies();
-    }
+    refreshPayments();
+    refreshAnalytics();
+    refreshTickets();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
@@ -212,9 +156,7 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
       trainers, pendingTrainers, trainersLoading, trainersError, refreshTrainers,
       payments, paymentsLoading, paymentsError, refreshPayments,
       analytics, analyticsLoading, analyticsError, refreshAnalytics,
-      fields, fieldsLoading, fieldsError, refreshFields,
       tickets, ticketsLoading, ticketsError, refreshTickets,
-      companies, companiesLoading, companiesError, refreshCompanies,
     }}>
       {children}
     </AdminContext.Provider>

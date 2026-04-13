@@ -1,118 +1,6 @@
 // Admin and organizational type definitions
 
-import { TrainerUser, User } from './user';
-
-// Enhanced Field interface for field-based organizational hierarchy
-export interface Field {
-  id: string;
-  name: string;
-  description: string;
-  industry: string;
-  companies: Company[];
-  trainers: TrainerUser[];
-  selectionTrainers?: {
-    total: number;
-    available: number;
-    topTrainers: {
-      name: string;
-      avatar: string;
-      specialization: string;
-      rating: number;
-    }[];
-  };
-  specializations: string[];
-  revenueShare: number;
-  totalRevenue: number;
-  revenue?: number;
-  createdAt: Date;
-  isActive: boolean;
-  icon: string;
-  rating: number;
-  successRate: number;
-  studentsCount: number;
-  trainersCount: number;
-  averageCompletionTime: string;
-  monthlyPrice: number;
-  code?: string;
-  adminId?: string;
-  adminName?: string;
-  status?: 'active' | 'maintenance' | 'inactive';
-  settings?: {
-    maxStudentsPerTrainer: number;
-    minHoursPerWeek: number;
-    fieldSharePercentage?: number;
-    bankAccount?: string;
-  };
-}
-
-// Company interface for field-based structure
-export interface Company {
-  id: string;
-  name: string;
-  website: string;
-  achievements: string[];
-  teachingFocus: string[];
-  images: string[];
-  description: string;
-  fieldId: string;
-  isActive: boolean;
-  createdAt: Date;
-  rating: number;
-  successRate: number;
-  featured?: boolean;
-  stats?: {
-    alumni: number;
-    hiringRate: number;
-    partnerSince: string;
-  };
-  programDetails?: {
-    curriculum: string;
-    duration: {
-      minimum: string;
-      extended: string;
-    };
-    schedule: {
-      days: string;
-      flexibility: string;
-    };
-    projects: string[];
-  };
-  pricing?: {
-    tuition: string;
-    includes: string[];
-  };
-  whyChoose?: string[];
-  courses: Course[];
-}
-
-export interface Course {
-  id: string;
-  name: string;
-  price: number;
-  duration: string;
-  level: 'Beginner' | 'Intermediate' | 'Advanced';
-  image: string;
-  description: string;
-}
-
-// Enriched field for admin view (GET /api/admin/fields)
-export interface AdminField {
-  _id: string;
-  name: string;
-  slug: string;
-  description?: string;
-  monthlyPrice: number;
-  isActive: boolean;
-  studentsCount: number;
-  trainersCount: number;
-  totalRevenue: number;
-  adminUser?: {
-    _id: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-  };
-}
+import { User } from './user';
 
 // Feedback/support ticket
 export interface FeedbackTicket {
@@ -120,7 +8,7 @@ export interface FeedbackTicket {
   type: 'feedback' | 'support' | 'complaint' | 'suggestion';
   userId: string;
   userName: string;
-  userRole: 'student' | 'trainer' | 'company-admin';
+  userRole: 'student' | 'trainer';
   subject: string;
   message: string;
   rating?: number;
@@ -140,45 +28,16 @@ export interface AdminAnalytics {
   usersByRole: {
     student: number;
     trainer: number;
-    companyAdmin: number;
   };
   totalRevenue: number;
   monthlyRevenue: number;
   activeRoadmaps: number;
   completedSessions: number;
-  fieldBreakdowns: Array<{
-    fieldId: string;
-    fieldName: string;
-    students: number;
-    revenue: number;
-    completionRate: number;
-  }>;
 }
 
 // Payment filter params
 export interface PaymentFilters {
-  fieldId?: string;
   status?: 'pending' | 'completed' | 'failed';
   from?: string; // ISO date string
   to?: string;   // ISO date string
-}
-
-// Company for admin view (GET /api/companies/all)
-export interface AdminCompany {
-  _id: string;
-  name: string;
-  description?: string;
-  website?: string;
-  logo?: string;
-  fields: string[];
-  adminId?: {
-    _id: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-  } | null;
-  isActive: boolean;
-  createdAt: string;
-  studentsCount: number;
-  trainersCount: number;
 }

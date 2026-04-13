@@ -13,7 +13,6 @@ interface AuthContextType {
   logout: () => void;
   hasRole: (role: UserType) => boolean;
   hasPermission: (permission: string) => boolean;
-  canAccessField: (fieldId: string) => boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -64,7 +63,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         if (response.success && response.pending) return { success: true, pending: true };
         return { success: false, error: 'Registration failed' };
       } else {
-        // company-admin / umbrella-admin
+        // any other role
         const response = await authService.register(data);
         if (response.success && response.user) { setUser(response.user); return { success: true }; }
         return { success: false, error: 'Registration failed' };
@@ -87,20 +86,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const permissions: Record<UserType, string[]> = {
       'student': ['view_own_roadmap', 'view_own_sessions', 'view_own_subscription'],
       'trainer': ['view_students', 'manage_sessions', 'view_wallet', 'create_assignments'],
-      'company-admin': ['manage_company', 'view_company_analytics', 'manage_trainers', 'view_company_wallet'],
-      'umbrella-admin': ['manage_system', 'view_all_analytics', 'manage_companies', 'system_settings'],
+      'admin': ['manage_system', 'view_all_analytics', 'system_settings'],
     };
     return permissions[user.role]?.includes(permission) ?? false;
   };
 
-  const canAccessField = (fieldId: string): boolean => {
-    if (!user) return false;
-    if (user.role === 'umbrella-admin') return true;
-    return user.fieldId === fieldId;
-  };
-
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated: !!user, isLoading, login, register, logout, hasRole, hasPermission, canAccessField }}>
+    <AuthContext.Provider value={{ user, isAuthenticated: !!user, isLoading, login, register, logout, hasRole, hasPermission }}>
       {children}
     </AuthContext.Provider>
   );

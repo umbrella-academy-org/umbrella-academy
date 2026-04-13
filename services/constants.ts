@@ -1,4 +1,4 @@
-// Umbrella Academy API Configuration
+// Dreamize API Configuration
 
 export const BASE_URL = 'http://localhost:5000';
 
@@ -19,6 +19,7 @@ export const API_ENDPOINTS = {
   USERS: '/api/users',
   USER_STATUS: (id: string) => `/api/users/${id}/status`,
   USER_PROFILE: '/api/users/profile',
+  USER_BY_ID: (id: string) => `/api/users/${id}`,
   ROADMAPS: '/api/roadmaps',
   ROADMAP_BY_ID: (id: string) => `/api/roadmaps/${id}`,
   ROADMAP_SUBMIT: (id: string) => `/api/roadmaps/${id}/submit`,
@@ -34,22 +35,12 @@ export const API_ENDPOINTS = {
   STATS_ME: '/api/stats/me',
   NOTIFICATIONS: '/api/notifications',
   NOTIFICATION_BY_ID: (id: string) => `/api/notifications/${id}`,
-  FIELDS: '/api/fields',
   SYSTEM: '/api/system',
-  FIELD_TRAINERS: (id: string) => `/api/fields/${id}/trainers`,
-  FIELD_COMPANIES: (id: string) => `/api/fields/${id}/companies`,
-  USER_BY_ID: (id: string) => `/api/users/${id}`,
-  AUTH_REJECT_TRAINER: (id: string) => `/api/auth/trainers/${id}/reject`,
   TRAINERS_PENDING: '/api/trainers/pending',
   ADMIN_ANALYTICS: '/api/admin/analytics',
   ADMIN_FEEDBACK: '/api/admin/feedback',
   ADMIN_FEEDBACK_BY_ID: (id: string) => `/api/admin/feedback/${id}`,
   ADMIN_FEEDBACK_RESPONSE: (id: string) => `/api/admin/feedback/${id}/response`,
-  ADMIN_FIELDS: '/api/admin/fields',
-  COMPANIES: '/api/companies',
-  COMPANIES_ALL: '/api/companies/all',
-  COMPANY_BY_ID: (id: string) => `/api/companies/${id}`,
-  COMPANY_ASSIGN_ADMIN: (id: string) => `/api/companies/${id}/assign-admin`,
   NEGOTIATION: {
     BY_ID: (id: string) => `/api/negotiations/${id}`,
     SET_AGREED_PRICE: (id: string) => `/api/negotiations/${id}/agreed-price`,
