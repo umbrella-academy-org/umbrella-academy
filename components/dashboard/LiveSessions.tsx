@@ -19,8 +19,6 @@ export default function LiveSessions({ userType }: LiveSessionsProps) {
     switch (userType) {
       case 'trainer':
         return 'Training Sessions';
-      case 'mentor':
-        return 'Mentoring Sessions';
       case 'student':
         return 'Live Sessions';
       default:

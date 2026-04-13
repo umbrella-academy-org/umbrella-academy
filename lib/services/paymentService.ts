@@ -9,26 +9,21 @@ export class PaymentService {
    */
   static async processMoMoPayment(
     studentId: string,
-    fieldId: string,
     amount: number,
     momoDetails: MoMoPaymentData
   ): Promise<Payment | null> {
     try {
-      // Simulate MoMo API call
       const momoTransactionId = await this.callMoMoAPI(momoDetails);
 
       if (!momoTransactionId) {
-        return null; // Payment failed
+        return null;
       }
 
-      // Calculate revenue distribution
-      const revenueDistribution = this.calculateRevenueDistribution(amount, fieldId);
+      const revenueDistribution = this.calculateRevenueDistribution(amount);
 
-      // Create payment record
       const payment: Payment = {
         id: `payment_${Date.now()}`,
         studentId,
-        fieldId,
         amount,
         currency: 'RWF',
         paymentMethod: 'momo',
@@ -48,18 +43,15 @@ export class PaymentService {
   }
 
   /**
-   * Calculate revenue distribution (65% field, 25% academy, 10% processing)
+   * Calculate revenue distribution (25% academy, 10% processing)
    */
-  private static calculateRevenueDistribution(amount: number, fieldId: string): RevenueDistribution {
-    const fieldShare = Math.round(amount * 0.65);
+  private static calculateRevenueDistribution(amount: number): RevenueDistribution {
     const academyShare = Math.round(amount * 0.25);
-    const processingFee = amount - fieldShare - academyShare; // Remaining amount
+    const processingFee = Math.round(amount * 0.10);
 
     return {
-      fieldShare,
       academyShare,
       processingFee,
-      fieldId,
       transactionId: `payment_${Date.now()}`
     };
   }
@@ -68,15 +60,11 @@ export class PaymentService {
    * Simulate MoMo API call
    */
   private static async callMoMoAPI(momoDetails: MoMoPaymentData): Promise<string | null> {
-    // Simulate API delay
     await new Promise(resolve => setTimeout(resolve, 2000));
-
-    // Simulate success/failure (90% success rate)
     if (Math.random() > 0.1) {
       return `momo_tx_${Date.now()}`;
     }
-
-    return null; // Payment failed
+    return null;
   }
 
   /**
@@ -94,88 +82,36 @@ export class PaymentService {
   }
 
   /**
-   * Get payments by field ID
-   */
-  static async getPaymentsByField(fieldId: string): Promise<Payment[]> {
-    return mockPayments.filter(payment => payment.fieldId === fieldId);
-  }
-
-  /**
-   * Get payment statistics for a field
-   */
-  static async getFieldPaymentStatistics(fieldId: string): Promise<{
-    totalPayments: number;
-    totalRevenue: number;
-    fieldRevenue: number;
-    academyRevenue: number;
-    processingFees: number;
-    averagePayment: number;
-    completedPayments: number;
-    failedPayments: number;
-  }> {
-    const payments = mockPayments.filter(payment => payment.fieldId === fieldId);
-    const completedPayments = payments.filter(p => p.status === 'completed');
-
-    const totalRevenue = completedPayments.reduce((sum, p) => sum + p.amount, 0);
-    const fieldRevenue = completedPayments.reduce((sum, p) => sum + p.revenueDistribution.fieldShare, 0);
-    const academyRevenue = completedPayments.reduce((sum, p) => sum + p.revenueDistribution.academyShare, 0);
-    const processingFees = completedPayments.reduce((sum, p) => sum + p.revenueDistribution.processingFee, 0);
-
-    return {
-      totalPayments: payments.length,
-      totalRevenue,
-      fieldRevenue,
-      academyRevenue,
-      processingFees,
-      averagePayment: completedPayments.length > 0 ? totalRevenue / completedPayments.length : 0,
-      completedPayments: completedPayments.length,
-      failedPayments: payments.filter(p => p.status === 'failed').length
-    };
-  }
-
-  /**
-   * Get overall payment statistics for Umbrella Academy
+   * Get overall payment statistics
    */
   static async getOverallPaymentStatistics(): Promise<{
     totalRevenue: number;
     totalAcademyRevenue: number;
-    totalFieldRevenue: number;
     totalProcessingFees: number;
-    paymentsByField: Record<string, number>;
   }> {
     const completedPayments = mockPayments.filter(p => p.status === 'completed');
 
     const totalRevenue = completedPayments.reduce((sum, p) => sum + p.amount, 0);
     const totalAcademyRevenue = completedPayments.reduce((sum, p) => sum + p.revenueDistribution.academyShare, 0);
-    const totalFieldRevenue = completedPayments.reduce((sum, p) => sum + p.revenueDistribution.fieldShare, 0);
     const totalProcessingFees = completedPayments.reduce((sum, p) => sum + p.revenueDistribution.processingFee, 0);
-
-    // Group payments by field
-    const paymentsByField: Record<string, number> = {};
-    completedPayments.forEach(payment => {
-      paymentsByField[payment.fieldId] = (paymentsByField[payment.fieldId] || 0) + payment.amount;
-    });
 
     return {
       totalRevenue,
       totalAcademyRevenue,
-      totalFieldRevenue,
       totalProcessingFees,
-      paymentsByField
     };
   }
 
   /**
    * Refund a payment
    */
-  static async refundPayment(paymentId: string, reason?: string): Promise<Payment | null> {
+  static async refundPayment(paymentId: string): Promise<Payment | null> {
     const paymentIndex = mockPayments.findIndex(p => p.id === paymentId);
     if (paymentIndex === -1) return null;
 
     const payment = mockPayments[paymentIndex];
     if (payment.status !== 'completed') return null;
 
-    // Update payment status
     mockPayments[paymentIndex] = {
       ...payment,
       status: 'refunded'
@@ -193,22 +129,19 @@ export class PaymentService {
   } {
     const errors: string[] = [];
 
-    // Validate phone number (Rwanda format)
     const phoneRegex = /^(\+250|250)?[0-9]{9}$/;
     if (!phoneRegex.test(momoDetails.phoneNumber)) {
       errors.push('Invalid phone number format');
     }
 
-    // Validate amount
     if (momoDetails.amount <= 0) {
       errors.push('Amount must be greater than 0');
     }
 
-    if (momoDetails.amount < 1000) { // Minimum 1000 RWF
+    if (momoDetails.amount < 1000) {
       errors.push('Minimum payment amount is 1000 RWF');
     }
 
-    // Validate currency
     if (momoDetails.currency !== 'RWF') {
       errors.push('Only RWF currency is supported');
     }
@@ -220,21 +153,14 @@ export class PaymentService {
   }
 
   /**
-   * Get payment history for a field range
+   * Get payment history
    */
   static async getPaymentHistory(
-    fieldId?: string,
     startDate?: Date,
     endDate?: Date
   ): Promise<Payment[]> {
     let payments = mockPayments;
 
-    // Filter by field if specified
-    if (fieldId) {
-      payments = payments.filter(p => p.fieldId === fieldId);
-    }
-
-    // Filter by date range if specified
     if (startDate || endDate) {
       payments = payments.filter(payment => {
         const paymentDate = payment.createdAt;

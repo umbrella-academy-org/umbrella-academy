@@ -127,39 +127,11 @@ export const mockWallets: Wallet[] = [
     transactions: []
   },
 
-  // Field wallets
-  {
-    id: 'wallet_201',
-    ownerId: 'kigali-central',
-    ownerType: 'field',
-    balance: 427500, // RWF
-    currency: 'RWF',
-    transactions: [
-      mockTransactions.find(t => t.id === 'txn_201')!
-    ]
-  },
-  {
-    id: 'wallet_202',
-    ownerId: 'northern-field',
-    ownerType: 'field',
-    balance: 288000, // RWF
-    currency: 'RWF',
-    transactions: []
-  },
-  {
-    id: 'wallet_203',
-    ownerId: 'southern-field',
-    ownerType: 'field',
-    balance: 252000, // RWF
-    currency: 'RWF',
-    transactions: []
-  },
-
-  // Umbrella wallet
+  // Admin wallet (formerly field and umbrella wallets)
   {
     id: 'wallet_301',
-    ownerId: 'umbrella-admin',
-    ownerType: 'umbrella',
+    ownerId: 'admin',
+    ownerType: 'admin',
     balance: 5680000, // RWF
     currency: 'RWF',
     transactions: [
@@ -220,7 +192,7 @@ export const mockSubscriptions: Subscription[] = [
 export const getWalletByOwnerId = (ownerId: string) =>
   mockWallets.find(wallet => wallet.ownerId === ownerId);
 
-export const getWalletsByType = (ownerType: 'trainer' | 'field' | 'umbrella') =>
+export const getWalletsByType = (ownerType: 'trainer' | 'admin') =>
   mockWallets.filter(wallet => wallet.ownerType === ownerType);
 
 export const getTransactionsByType = (type: 'income' | 'withdrawal' | 'payment') =>
@@ -242,11 +214,6 @@ export const getTotalTrainerPayouts = () =>
     .filter(t => t.type === 'income' && t.status === 'completed')
     .reduce((total, t) => total + t.amount, 0);
 
-export const getTotalFieldRevenue = () =>
+export const getAdminRevenue = () =>
   mockWallets
-    .filter(w => w.ownerType === 'field')
-    .reduce((total, w) => total + w.balance, 0);
-
-export const getUmbrellaRevenue = () =>
-  mockWallets
-    .find(w => w.ownerType === 'umbrella')?.balance || 0;
+    .find(w => w.ownerType === 'admin')?.balance || 0;

@@ -32,9 +32,7 @@ export default function TrainerDashboard() {
       // Redirect to appropriate dashboard based on role
       const dashboardRoutes: Record<string, string> = {
         'student': '/dashboard/student',
-        'mentor': '/dashboard/mentor',
-        'field-admin': '/dashboard/field-admin',
-        'umbrella-admin': '/dashboard/umbrella-admin'
+        'admin': '/dashboard/admin',
       };
       navigate(dashboardRoutes[user.role] || '/');
     }
@@ -80,7 +78,7 @@ export default function TrainerDashboard() {
 
   // Get trainer-specific data
   const trainerStudents = students.filter(student =>
-    student.fieldId === user.fieldId // In real app, would filter by assigned trainer
+    studentRoadmaps.some(r => r.roadmap.trainerId === user.id && r.studentId === student.id)
   );
 
   const trainerStudentRoadmaps = studentRoadmaps.filter(roadmap =>

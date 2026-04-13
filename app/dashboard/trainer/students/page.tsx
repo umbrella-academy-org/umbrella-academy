@@ -18,9 +18,6 @@ export default function TrainerStudentsPage() {
 
   const filteredStudents = useMemo(() => {
     if (!user) return [];
-    if (user.role === 'trainer') {
-      return students.filter(s => s.fieldId === user.fieldId);
-    }
     return students;
   }, [students, user, studentRoadmaps]);
 

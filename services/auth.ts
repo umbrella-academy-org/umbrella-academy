@@ -12,8 +12,7 @@ export interface RegisterRequest {
   lastName: string;
   email: string;
   password: string;
-  role: 'student' | 'trainer' | 'company-admin' | 'umbrella-admin';
-  fieldId?: string;
+  role: 'student' | 'trainer' | 'admin';
 }
 
 export interface RegisterStudentRequest {
@@ -26,7 +25,6 @@ export interface RegisterStudentRequest {
   phoneCode?: string;
   phoneNumber?: string;
   educationLevel?: string;
-  fieldId?: string;
 }
 
 export interface RegisterTrainerRequest {
@@ -39,7 +37,6 @@ export interface RegisterTrainerRequest {
   educationTitle?: string;
   school?: string;
   yearOfCompletion?: string;
-  fieldId?: string;
   availability?: Availability;
   proofDocuments?: string[];
 }
@@ -50,7 +47,6 @@ interface BackendUser {
   lastName: string;
   email: string;
   role: string;
-  fieldId?: string;
   status: string;
 }
 
@@ -72,7 +68,6 @@ function mapBackendUser(u: BackendUser): User {
     name: `${u.firstName} ${u.lastName}`,
     email: u.email,
     role: u.role as User['role'],
-    fieldId: u.fieldId,
     status: (u.status as User['status']) ?? 'active',
     joinDate: new Date().toISOString(),
   } as User;

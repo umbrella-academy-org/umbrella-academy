@@ -25,8 +25,7 @@ export default function StudentSupportPage() {
     if (!authLoading && user && user.role !== 'student') {
       const dashboardRoutes: Record<string, string> = {
         'trainer': '/dashboard/trainer',
-        'company-admin': '/dashboard/field-admin',
-        'umbrella-admin': '/dashboard/umbrella-admin'
+        'admin': '/dashboard/admin',
       };
       navigate(dashboardRoutes[user.role] || '/');
     }
@@ -172,7 +171,7 @@ export default function StudentSupportPage() {
                     </div>
                     <div>
                       <h4 className="text-sm font-medium text-gray-900">Field Focus</h4>
-                      <p className="text-sm text-gray-600 capitalize">{(studentUser.fieldId || 'Not assigned').replace(/-/g, ' ')}</p>
+                      <p className="text-sm text-gray-600">Not assigned</p>
                     </div>
                     <div>
                       <h4 className="text-sm font-medium text-gray-900">Support Hours</h4>

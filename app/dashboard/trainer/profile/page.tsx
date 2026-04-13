@@ -21,7 +21,7 @@ export default function TrainerProfilePage() {
         bio: 'Senior Software Engineer with 8+ years of experience in React, Node.js and Cloud Architecture. Passionate about mentoring the next generation of African developers.',
         expertise: ['Full Stack Development', 'Cloud Architecture', 'React & Next.js', 'System Design'],
         experience: '8+ Years',
-        field: trainerUser?.fieldId || 'Software Engineering',
+        field: 'Software Engineering',
         joinDate: user?.joinDate || 'Jan 2023'
     });
 

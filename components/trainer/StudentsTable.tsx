@@ -27,16 +27,13 @@ export default function StudentsTable({ searchQuery, selectedStatus, selectedCou
   // Filter students by role
   const filteredByRole = useMemo(() => {
     if (!user) return [];
-    if (user.role === 'trainer') {
-      return students.filter(s => s.fieldId === user.fieldId);
-    }
     return students;
   }, [students, user, studentRoadmaps]);
 
   // Filter students based on search and filters
   const filteredStudents = useMemo(() => {
     return filteredByRole.filter(student => {
-      const course = student.fieldId ?? 'N/A';
+      const course = 'N/A';
       const matchesSearch = searchQuery === '' ||
         student.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         student.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -86,7 +83,7 @@ export default function StudentsTable({ searchQuery, selectedStatus, selectedCou
   // Transform data for DataTable
   const tableData = filteredStudents.map(student => {
     const avatar = student.name.slice(0, 2).toUpperCase();
-    const course = student.fieldId ?? 'N/A';
+    const course = 'N/A';
     const joinDate = student.joinDate ?? 'N/A';
     const progress = 0;
     const sessionsCompleted = 0;

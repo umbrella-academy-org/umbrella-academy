@@ -1,19 +1,12 @@
 // User management service - Data access layer for user operations
 
-import { User, StudentUser, TrainerUser, AdminUser } from '@/types';
+import { User, StudentUser, TrainerUser } from '@/types';
 import {
   mockUsers,
   getStudents,
   getTrainers,
-  getFieldAdmins,
-  getUmbrellaAdmins,
-  getUsersByField,
-  getStudentsByField,
-  getTrainersByField,
   getUserById,
   getUserByEmail,
-  assignUserToField,
-  validateFieldAccess
 } from '@/data/users';
 
 export class UserService {
@@ -47,34 +40,9 @@ export class UserService {
         return getStudents();
       case 'trainer':
         return getTrainers();
-      case 'field-admin':
-        return getFieldAdmins();
-      case 'umbrella-admin':
-        return getUmbrellaAdmins();
       default:
         return [];
     }
-  }
-
-  /**
-   * Get users by field ID
-   */
-  static async getUsersByField(fieldId: string): Promise<User[]> {
-    return getUsersByField(fieldId);
-  }
-
-  /**
-   * Get students by field ID
-   */
-  static async getStudentsByField(fieldId: string): Promise<StudentUser[]> {
-    return getStudentsByField(fieldId);
-  }
-
-  /**
-   * Get trainers by field ID
-   */
-  static async getTrainersByField(fieldId: string): Promise<TrainerUser[]> {
-    return getTrainersByField(fieldId);
   }
 
   /**
@@ -119,24 +87,10 @@ export class UserService {
   }
 
   /**
-   * Assign user to field
+   * Get available trainers
    */
-  static async assignUserToField(userId: string, fieldId: string): Promise<boolean> {
-    return assignUserToField(userId, fieldId);
-  }
-
-  /**
-   * Validate field-based access control
-   */
-  static async validateFieldAccess(userId: string, resourceFieldId: string): Promise<boolean> {
-    return validateFieldAccess(userId, resourceFieldId);
-  }
-
-  /**
-   * Get available trainers for a field
-   */
-  static async getAvailableTrainers(fieldId: string): Promise<TrainerUser[]> {
-    const trainers = getTrainersByField(fieldId);
+  static async getAvailableTrainers(): Promise<TrainerUser[]> {
+    const trainers = getTrainers();
     return trainers.filter(trainer =>
       trainer.status === 'active' &&
       trainer.isActive
@@ -146,59 +100,28 @@ export class UserService {
   /**
    * Search users by name or email
    */
-  static async searchUsers(query: string, fieldId?: string): Promise<User[]> {
-    let users = mockUsers;
-
-    // Filter by field if specified
-    if (fieldId) {
-      users = getUsersByField(fieldId);
-    }
-
-    // Search by name or email
+  static async searchUsers(query: string): Promise<User[]> {
     const searchQuery = query.toLowerCase();
-    return users.filter(user =>
+    return mockUsers.filter(user =>
       user.name.toLowerCase().includes(searchQuery) ||
       user.email.toLowerCase().includes(searchQuery)
     );
   }
 
   /**
-   * Get user statistics for a field
-   */
-  static async getFieldUserStatistics(fieldId: string): Promise<{
-    totalUsers: number;
-    students: number;
-    trainers: number;
-    activeUsers: number;
-    inactiveUsers: number;
-  }> {
-    const users = getUsersByField(fieldId);
-
-    return {
-      totalUsers: users.length,
-      students: users.filter(u => u.role === 'student').length,
-      trainers: users.filter(u => u.role === 'trainer').length,
-      activeUsers: users.filter(u => u.isActive && u.status === 'active').length,
-      inactiveUsers: users.filter(u => !u.isActive || u.status !== 'active').length
-    };
-  }
-
-  /**
    * Validate user registration data
    */
-  static async validateRegistration(email: string, fieldId?: string): Promise<{
+  static async validateRegistration(email: string): Promise<{
     isValid: boolean;
     errors: string[];
   }> {
     const errors: string[] = [];
 
-    // Check if email already exists
     const existingUser = getUserByEmail(email);
     if (existingUser) {
       errors.push('Email already registered');
     }
 
-    // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       errors.push('Invalid email format');

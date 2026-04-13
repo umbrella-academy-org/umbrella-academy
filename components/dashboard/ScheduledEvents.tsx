@@ -19,13 +19,9 @@ export default function ScheduledEvents({ userType }: ScheduledEventsProps) {
     switch (userType) {
       case 'trainer':
         return 'Training Schedule';
-      case 'mentor':
-        return 'Mentoring Sessions';
       case 'student':
         return 'Upcoming Classes';
-      case 'field-admin':
-        return 'Field Management';
-      case 'umbrella-admin':
+      case 'admin':
         return 'System Events';
       default:
         return 'Scheduled Events';

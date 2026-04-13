@@ -52,7 +52,7 @@ export function SystemProvider({ children }: { children: React.ReactNode }) {
         return;
       }
 
-      // Only umbrella admins and field admins can see system data
+      // Only admins can see system data
       if (!hasPermission('manage_system') && !hasPermission('view_field_analytics')) {
         setMetrics([]);
         setAlerts([]);
@@ -74,14 +74,9 @@ export function SystemProvider({ children }: { children: React.ReactNode }) {
       let fetchedAlerts = response.data.alerts;
       const fetchedServices = response.data.services;
 
-      // Field admins see a limited subset
-      if (currentUser.role === 'field-admin') {
-        fetchedMetrics = fetchedMetrics.filter(metric =>
-          ['Active Users', 'API Response Time', 'Video Streaming', 'Payment Gateway'].includes(metric.name)
-        );
-        fetchedAlerts = fetchedAlerts.filter(alert =>
-          alert.severity !== 'high' || alert.type !== 'error'
-        );
+      // Field admins see a limited subset — now only admin role exists
+      if (currentUser.role === 'admin') {
+        // Admin sees all metrics
       }
 
       setMetrics(fetchedMetrics);
@@ -102,16 +97,9 @@ export function SystemProvider({ children }: { children: React.ReactNode }) {
       let filteredMetrics: SystemMetric[] = [];
       let filteredAlerts: SystemAlert[] = [];
 
-      if (currentUser?.role === 'umbrella-admin') {
+      if (currentUser?.role === 'admin') {
         filteredMetrics = mockSystemMetrics;
         filteredAlerts = mockSystemAlerts;
-      } else if (currentUser?.role === 'field-admin') {
-        filteredMetrics = mockSystemMetrics.filter(metric =>
-          ['Active Users', 'API Response Time', 'Video Streaming', 'Payment Gateway'].includes(metric.name)
-        );
-        filteredAlerts = mockSystemAlerts.filter(alert =>
-          alert.severity !== 'high' || alert.type !== 'error'
-        );
       }
 
       setMetrics(filteredMetrics);

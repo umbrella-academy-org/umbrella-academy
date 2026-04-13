@@ -150,36 +150,8 @@ export default function StatsCards() {
         color: 'text-yellow-600',
       },
     ];
-  } else if (role === 'field-admin' && stats?.['field-admin']) {
-    const s = stats['field-admin'];
-    statCards = [
-      {
-        icon: <User className="w-5 h-5 lg:w-6 lg:h-6" />,
-        title: 'Total Students',
-        value: s.totalStudents,
-        color: 'text-green-600',
-      },
-      {
-        icon: <Calendar className="w-5 h-5 lg:w-6 lg:h-6" />,
-        title: 'Total Trainers',
-        value: s.totalTrainers,
-        color: 'text-blue-600',
-      },
-      {
-        icon: <BarChart3 className="w-5 h-5 lg:w-6 lg:h-6" />,
-        title: 'Active Roadmaps',
-        value: s.activeRoadmaps,
-        color: 'text-yellow-600',
-      },
-      {
-        icon: <Video className="w-5 h-5 lg:w-6 lg:h-6" />,
-        title: 'Field Revenue',
-        value: `RWF ${s.totalFieldRevenue.toLocaleString()}`,
-        color: 'text-purple-600',
-      },
-    ];
-  } else if (role === 'umbrella-admin' && stats?.['umbrella-admin']) {
-    const s = stats['umbrella-admin'];
+  } else if (role === 'admin' && stats?.['admin']) {
+    const s = stats['admin'];
     statCards = [
       {
         icon: <BarChart3 className="w-5 h-5 lg:w-6 lg:h-6" />,

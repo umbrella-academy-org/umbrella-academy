@@ -43,14 +43,14 @@ export function FinancialProvider({ children }: { children: React.ReactNode }) {
         return;
       }
 
-      if (currentUser.role === 'trainer' || currentUser.role === 'field-admin') {
-        // Fetch personal/field wallet
+      if (currentUser.role === 'trainer') {
+        // Fetch personal wallet
         const walletRes = await apiClient.get<{ success: boolean; data: Wallet }>(API_ENDPOINTS.WALLET_ME);
         const wallet = walletRes.data ?? null;
         setUserWallet(wallet);
         setWallets(wallet ? [wallet] : []);
         setTransactions(wallet?.transactions ?? []);
-      } else if (currentUser.role === 'umbrella-admin') {
+      } else if (currentUser.role === 'admin') {
         // Fetch all wallets
         const walletsRes = await apiClient.get<{ success: boolean; data: Wallet[] }>(API_ENDPOINTS.WALLET);
         const allWallets = walletsRes.data ?? [];
@@ -99,7 +99,7 @@ export function FinancialProvider({ children }: { children: React.ReactNode }) {
 
   const getTotalBalance = () => {
     if (!currentUser) return 0;
-    if (currentUser.role === 'umbrella-admin') return wallets.reduce((sum, w) => sum + w.balance, 0);
+    if (currentUser.role === 'admin') return wallets.reduce((sum, w) => sum + w.balance, 0);
     return userWallet?.balance ?? 0;
   };
 

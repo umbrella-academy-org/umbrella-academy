@@ -61,7 +61,7 @@ export default function StudentProfilePage() {
     const name = user?.name || 'Jane Mukamana';
     const email = user?.email || 'jane.mukamana@student.umbrella.rw';
     const bio = user?.profileData?.bio || 'Dedicated trainee focusing on live collaborative sessions and practical software implementation within the Umbrella Tech Field.';
-    const field = user?.fieldId?.replace(/-/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase()) || 'Tech Companies Field';
+    const field = 'Tech Field';
     const joinDate = user?.joinDate || 'Sep 2024';
 
     return (

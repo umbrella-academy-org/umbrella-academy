@@ -18,8 +18,7 @@ export {
   getTransactionsByStatus,
   getSubscriptionsByStatus,
   getTotalTrainerPayouts,
-  getTotalFieldRevenue,
-  getUmbrellaRevenue
+  getAdminRevenue
 } from './transactions';
 export { getTotalRevenue as getTransactionsTotalRevenue } from './transactions';
 

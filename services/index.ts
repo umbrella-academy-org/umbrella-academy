@@ -1,4 +1,4 @@
-// Umbrella Academy services barrel export
+// Dreamize services barrel export
 export * from './constants';
 export * from './client';
 export { authService } from './auth';
@@ -9,5 +9,3 @@ export { messageService } from './messages';
 export { default as socketService } from './socket';
 export { statsService } from './stats';
 export type { StatsResponse } from './stats';
-export { fieldsService } from './fields';
-export type { Field } from './fields';

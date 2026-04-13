@@ -26,14 +26,14 @@ function SkeletonCard() {
 const ROLES: { value: UserType; label: string }[] = [
   { value: 'student', label: 'Student' },
   { value: 'trainer', label: 'Trainer' },
-  { value: 'company-admin', label: 'Company Admin' },
+  { value: 'admin', label: 'Admin' },
 ];
 
-const EMPTY_FORM = { firstName: '', lastName: '', email: '', password: '', role: 'student' as UserType, fieldId: '' };
+const EMPTY_FORM = { firstName: '', lastName: '', email: '', password: '', role: 'student' as UserType };
 
 export default function UmbrellaAdminUsersPage() {
   const [selectedTab, setSelectedTab] = useState<'students' | 'trainers' | 'admins'>('students');
-  const { students, trainers, companyAdmins, isLoading } = useUsers();
+  const { students, trainers, isLoading } = useUsers();
   const { refreshUsers } = useAdminContext();
   const { createUser, isLoading: creating, error: createError } = useAdminUsers();
 
@@ -45,13 +45,13 @@ export default function UmbrellaAdminUsersPage() {
   const getCurrentData = () => {
     switch (selectedTab) {
       case 'trainers': return trainers;
-      case 'admins': return companyAdmins;
+      case 'admins': return [];
       default: return students;
     }
   };
 
-  const totalUsers = students.length + trainers.length + companyAdmins.length;
-  const activeUsers = [...students, ...trainers, ...companyAdmins].filter(u => u.status === 'active').length;
+  const totalUsers = students.length + trainers.length;
+  const activeUsers = [...students, ...trainers].filter(u => u.status === 'active').length;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -69,7 +69,6 @@ export default function UmbrellaAdminUsersPage() {
       email: form.email.trim(),
       password: form.password,
       role: form.role,
-      fieldId: form.fieldId || undefined,
     });
 
     if (result) {
@@ -142,7 +141,7 @@ export default function UmbrellaAdminUsersPage() {
                     <div className="flex items-center justify-between">
                       <div>
                         <p className="text-sm font-medium text-gray-600">Staff</p>
-                        <p className="text-2xl font-bold text-gray-900">{trainers.length + companyAdmins.length}</p>
+                        <p className="text-2xl font-bold text-gray-900">{trainers.length}</p>
                       </div>
                       <Shield className="w-8 h-8 text-gray-500" />
                     </div>
@@ -156,7 +155,7 @@ export default function UmbrellaAdminUsersPage() {
               {[
                 { key: 'students', label: 'Students', count: students.length },
                 { key: 'trainers', label: 'Trainers', count: trainers.length },
-                { key: 'admins', label: 'Admins', count: companyAdmins.length },
+                { key: 'admins', label: 'Admins', count: 0 },
               ].map((tab) => (
                 <button
                   key={tab.key}
@@ -262,17 +261,6 @@ export default function UmbrellaAdminUsersPage() {
                     <option key={r.value} value={r.value}>{r.label}</option>
                   ))}
                 </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Field ID <span className="text-gray-400 font-normal">(optional)</span></label>
-                <input
-                  type="text"
-                  value={form.fieldId}
-                  onChange={e => setForm({ ...form, fieldId: e.target.value })}
-                  placeholder="e.g. software-engineering"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500"
-                />
               </div>
 
               <div className="flex gap-3 pt-2">

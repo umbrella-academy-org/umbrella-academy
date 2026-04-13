@@ -1,16 +1,20 @@
 "use client";
 
-import { ArrowRight, Star, Users, Clock } from "lucide-react";
+import { ArrowRight, Clock } from "lucide-react";
 import { useReveal } from "@/hooks/system/useReveal";
 import { useRouter } from "next/navigation";
-import { top4Coursers } from "@/data/companies";
+
+const programs = [
+  { name: 'Software Engineering', duration: '6 months', image: '/real/image.jpeg' },
+  { name: 'Data Science', duration: '4 months', image: '/real/image.jpeg' },
+  { name: 'UI/UX Design', duration: '3 months', image: '/real/image.jpeg' },
+  { name: 'Cloud Computing', duration: '5 months', image: '/real/image.jpeg' },
+];
 
 
 export function FeaturedPrograms() {
     const { ref, isVisible } = useReveal();
     const router = useRouter();
-
-    const programs = top4Coursers
 
     return (
         <section id="programs" className="py-16 md:py-32 px-4 sm:px-6 lg:px-8 bg-gray-50">

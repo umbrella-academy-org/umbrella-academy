@@ -1,6 +1,5 @@
-// Service layer exports for field-based data access
+// Service layer exports for Dreamize LMS
 
-export { FieldService } from './fieldService';
 export { UserService } from './userService';
 export { SessionService } from './sessionService';
 export { PaymentService } from './paymentService';

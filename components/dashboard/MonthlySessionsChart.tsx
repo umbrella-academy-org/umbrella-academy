@@ -33,13 +33,9 @@ export default function MonthlySessionsChart({ userType }: MonthlySessionsChartP
     switch (userType) {
       case 'trainer':
         return 'Training Sessions';
-      case 'mentor':
-        return 'Mentoring Sessions';
       case 'student':
         return 'Learning Sessions';
-      case 'field-admin':
-        return 'Field Activities';
-      case 'umbrella-admin':
+      case 'admin':
         return 'System Activities';
       default:
         return 'Monthly Sessions';
@@ -50,13 +46,9 @@ export default function MonthlySessionsChart({ userType }: MonthlySessionsChartP
     switch (userType) {
       case 'trainer':
         return 'Track your training sessions with students over time';
-      case 'mentor':
-        return 'Monitor your mentoring activities and student interactions';
       case 'student':
         return 'View your learning sessions and study time';
-      case 'field-admin':
-        return 'Track field-wide activities and performance metrics';
-      case 'umbrella-admin':
+      case 'admin':
         return 'Monitor system-wide activities across all fields';
       default:
         return 'Track how you interact with sessions over time';
