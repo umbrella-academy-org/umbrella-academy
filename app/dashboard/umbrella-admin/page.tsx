@@ -242,14 +242,14 @@ export default function UmbrellaAdminDashboard() {
                   <h3 className="text-sm sm:text-base font-semibold text-gray-900 mb-4">Quick Actions</h3>
                   <div className="space-y-3">
                     <button
-                      onClick={() => navigate('/dashboard/umbrella-admin/fields')}
+                      onClick={() => navigate('/dashboard/umbrella-admin/companies')}
                       className="w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors group"
                     >
                       <div className="flex items-center gap-3">
                         <Building2 className="w-4 h-4 text-gray-500 group-hover:text-gray-600" />
                         <div>
-                          <div className="font-medium text-gray-900 text-sm">Manage Fields</div>
-                          <div className="text-xs text-gray-500">View all field performance</div>
+                          <div className="font-medium text-gray-900 text-sm">Manage Companies</div>
+                          <div className="text-xs text-gray-500">View companies and their fields</div>
                         </div>
                       </div>
                     </button>

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { User, Shield, GraduationCap, Users } from 'lucide-react';
+import { User, Shield, GraduationCap } from 'lucide-react';
 import DataTable from '@/components/ui/DataTable';
 
 interface UsersTableProps {
@@ -89,40 +89,6 @@ export default function UsersTable({ selectedTab, data }: UsersTableProps) {
             )
           };
 
-        case 'mentors':
-          return {
-            ...baseData,
-            mentor: (
-              <div className="flex items-center">
-                <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mr-3">
-                  <Users className="w-5 h-5 text-gray-600" />
-                </div>
-                <div>
-                  <div className="text-sm font-medium text-gray-900">{user.name}</div>
-                  <div className="text-sm text-gray-500">{user.email}</div>
-                </div>
-              </div>
-            ),
-            field: user.fieldName || user.field || user.wingName || user.wing || 'Unassigned',
-            expertise: user.expertise || user.specialization || 'General',
-            students: `${user.studentCount || user.students || 0}/${user.maxStudents || 25}`,
-            experience: `${user.experience || 0}`,
-            status: (
-              <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${user.status === 'active' ? 'bg-gray-100 text-gray-800' :
-                  user.status === 'inactive' ? 'bg-gray-100 text-gray-800' :
-                    'bg-gray-100 text-gray-800'
-                }`}>
-                {user.status}
-              </span>
-            ),
-            actions: (
-              <div className="text-sm font-medium">
-                <button className="text-gray-600 hover:text-gray-700 mr-3">View</button>
-                <button className="text-gray-600 hover:text-gray-700">Edit</button>
-              </div>
-            )
-          };
-
         case 'admins':
           return {
             ...baseData,
@@ -183,17 +149,6 @@ export default function UsersTable({ selectedTab, data }: UsersTableProps) {
           { key: 'field', label: 'Field', sortable: true, filterable: true, searchable: true },
           { key: 'specialization', label: 'Specialization', sortable: true, filterable: true, searchable: true },
           { key: 'capacity', label: 'Capacity', sortable: true, filterable: false, searchable: false },
-          { key: 'experience', label: 'Experience', sortable: true, filterable: false, searchable: false },
-          { key: 'status', label: 'Status', sortable: true, filterable: true, searchable: false },
-          { key: 'actions', label: 'Actions', sortable: false, filterable: false, searchable: false }
-        ];
-
-      case 'mentors':
-        return [
-          { key: 'mentor', label: 'Mentor', sortable: true, filterable: true, searchable: true },
-          { key: 'field', label: 'Field', sortable: true, filterable: true, searchable: true },
-          { key: 'expertise', label: 'Expertise', sortable: true, filterable: true, searchable: true },
-          { key: 'students', label: 'Students', sortable: true, filterable: false, searchable: false },
           { key: 'experience', label: 'Experience', sortable: true, filterable: false, searchable: false },
           { key: 'status', label: 'Status', sortable: true, filterable: true, searchable: false },
           { key: 'actions', label: 'Actions', sortable: false, filterable: false, searchable: false }

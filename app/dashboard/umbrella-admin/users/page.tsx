@@ -32,8 +32,8 @@ const ROLES: { value: UserType; label: string }[] = [
 const EMPTY_FORM = { firstName: '', lastName: '', email: '', password: '', role: 'student' as UserType, fieldId: '' };
 
 export default function UmbrellaAdminUsersPage() {
-  const [selectedTab, setSelectedTab] = useState<'students' | 'trainers' | 'mentors' | 'admins'>('students');
-  const { students, trainers, mentors, fieldAdmins, isLoading } = useUsers();
+  const [selectedTab, setSelectedTab] = useState<'students' | 'trainers' | 'admins'>('students');
+  const { students, trainers, companyAdmins, isLoading } = useUsers();
   const { refreshUsers } = useAdminContext();
   const { createUser, isLoading: creating, error: createError } = useAdminUsers();
 
@@ -45,14 +45,13 @@ export default function UmbrellaAdminUsersPage() {
   const getCurrentData = () => {
     switch (selectedTab) {
       case 'trainers': return trainers;
-      case 'mentors': return mentors;
-      case 'admins': return fieldAdmins;
+      case 'admins': return companyAdmins;
       default: return students;
     }
   };
 
-  const totalUsers = students.length + trainers.length + mentors.length + fieldAdmins.length;
-  const activeUsers = [...students, ...trainers, ...mentors, ...fieldAdmins].filter(u => u.status === 'active').length;
+  const totalUsers = students.length + trainers.length + companyAdmins.length;
+  const activeUsers = [...students, ...trainers, ...companyAdmins].filter(u => u.status === 'active').length;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -143,7 +142,7 @@ export default function UmbrellaAdminUsersPage() {
                     <div className="flex items-center justify-between">
                       <div>
                         <p className="text-sm font-medium text-gray-600">Staff</p>
-                        <p className="text-2xl font-bold text-gray-900">{trainers.length + mentors.length + fieldAdmins.length}</p>
+                        <p className="text-2xl font-bold text-gray-900">{trainers.length + companyAdmins.length}</p>
                       </div>
                       <Shield className="w-8 h-8 text-gray-500" />
                     </div>
@@ -157,8 +156,7 @@ export default function UmbrellaAdminUsersPage() {
               {[
                 { key: 'students', label: 'Students', count: students.length },
                 { key: 'trainers', label: 'Trainers', count: trainers.length },
-                { key: 'mentors', label: 'Mentors', count: mentors.length },
-                { key: 'admins', label: 'Admins', count: fieldAdmins.length },
+                { key: 'admins', label: 'Admins', count: companyAdmins.length },
               ].map((tab) => (
                 <button
                   key={tab.key}

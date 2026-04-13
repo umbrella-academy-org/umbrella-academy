@@ -8,7 +8,7 @@ import { useCompanies } from '@/hooks/admin';
 import { AdminCompany } from '@/types/admin';
 
 export default function UmbrellaAdminCompaniesPage() {
-  const { companies, companiesLoading, companiesError, refreshCompanies, mentors } = useAdminContext();
+  const { companies, companiesLoading, companiesError, refreshCompanies, users } = useAdminContext();
   const { createCompany, updateCompany, deleteCompany, assignMentor, isLoading, error: mutationError } = useCompanies();
 
   const [showCreateForm, setShowCreateForm] = useState(false);
@@ -17,6 +17,9 @@ export default function UmbrellaAdminCompaniesPage() {
   const [selectedMentorId, setSelectedMentorId] = useState('');
   const [formData, setFormData] = useState({ name: '', description: '', website: '' });
   const [localError, setLocalError] = useState<string | null>(null);
+
+  // Company admins available for assignment
+  const companyAdmins = users.filter(u => u.role === 'company-admin');
 
   const totalCompanies = companies.length;
   const activeCompanies = companies.filter(c => c.isActive).length;
@@ -84,7 +87,7 @@ export default function UmbrellaAdminCompaniesPage() {
             <div className="flex items-center justify-between mb-6">
               <div>
                 <h1 className="text-2xl font-semibold text-gray-900">Companies</h1>
-                <p className="text-sm text-gray-500 mt-1">Manage companies and their assigned mentors</p>
+                <p className="text-sm text-gray-500 mt-1">Manage companies and their assigned admins</p>
               </div>
               <button
                 onClick={() => { resetForm(); setShowCreateForm(true); }}
@@ -186,28 +189,28 @@ export default function UmbrellaAdminCompaniesPage() {
               </div>
             )}
 
-            {/* Assign Mentor Modal */}
+            {/* Assign Admin Modal */}
             {assigningCompany && (
               <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4">
                 <div className="bg-white rounded-xl shadow-xl w-full max-w-md p-6">
                   <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-lg font-semibold text-gray-900">Assign Mentor</h3>
+                    <h3 className="text-lg font-semibold text-gray-900">Assign Admin</h3>
                     <button onClick={() => setAssigningCompany(null)} className="text-gray-400 hover:text-gray-700">
                       <X className="w-5 h-5" />
                     </button>
                   </div>
                   <p className="text-sm text-gray-500 mb-4">
-                    Assigning a mentor to <span className="font-medium text-gray-900">{assigningCompany.name}</span>
+                    Assigning an admin to <span className="font-medium text-gray-900">{assigningCompany.name}</span>
                   </p>
                   <select
                     value={selectedMentorId}
                     onChange={e => setSelectedMentorId(e.target.value)}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 mb-4"
                   >
-                    <option value="">Select a mentor…</option>
-                    {mentors.map((m: any) => (
+                    <option value="">Select an admin…</option>
+                    {companyAdmins.map((m: any) => (
                       <option key={m._id ?? m.id} value={m._id ?? m.id}>
-                        {m.firstName ?? ''} {m.lastName ?? ''} — {m.email}
+                        {m.name ?? `${m.firstName ?? ''} ${m.lastName ?? ''}`.trim()} — {m.email}
                       </option>
                     ))}
                   </select>
@@ -220,7 +223,7 @@ export default function UmbrellaAdminCompaniesPage() {
                       disabled={!selectedMentorId || isLoading}
                       className="flex-1 py-2 bg-yellow-600 text-white rounded-lg text-sm font-medium hover:bg-yellow-700 transition-colors disabled:opacity-50"
                     >
-                      {isLoading ? 'Assigning…' : 'Assign Mentor'}
+                      {isLoading ? 'Assigning…' : 'Assign Admin'}
                     </button>
                     <button onClick={() => setAssigningCompany(null)} className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg text-sm hover:bg-gray-50">
                       Cancel
@@ -292,7 +295,7 @@ export default function UmbrellaAdminCompaniesPage() {
                       {[
                         { label: 'Students', value: company.studentsCount },
                         { label: 'Trainers', value: company.trainersCount },
-                        { label: 'Trainers', value: company.trainersCount },
+                        { label: 'Fields', value: (company.fields ?? []).length },
                       ].map(stat => (
                         <div key={stat.label} className="bg-gray-50 rounded-lg py-2">
                           <p className="text-base font-bold text-gray-900">{stat.value}</p>
