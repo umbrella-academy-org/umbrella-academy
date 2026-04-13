@@ -26,7 +26,7 @@ export default function ReferralPage() {
     }
     console.log('Selected source:', selectedSource);
     // Navigate to choose-company page
-    router.push('/auth/student/choose-company');
+    router.push('/auth/student/payment');
   };
 
   return (

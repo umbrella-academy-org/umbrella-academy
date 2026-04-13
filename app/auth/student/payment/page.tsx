@@ -10,7 +10,7 @@ export default function PaymentPage() {
   const handlePaymentSuccess = () => {
     console.log('Payment completed successfully');
     localStorage.setItem('paymentCompleted', 'true');
-    router.push('/dashboard/student');
+    // router.push('/dashboard/student');
   };
 
   return (
