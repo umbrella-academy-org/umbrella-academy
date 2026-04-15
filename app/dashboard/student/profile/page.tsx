@@ -14,12 +14,12 @@ import {
 } from 'lucide-react';
 import { useAuth, useRoadmaps } from '@/contexts';
 import Image from 'next/image';
-import { StudentUser } from '@/types';
+import { Student } from '@/types';
 
 export default function StudentProfilePage() {
     const { user, isLoading: authLoading } = useAuth();
     const { getStudentRoadmaps, isLoading: roadmapLoading } = useRoadmaps();
-    const studentUser = user?.role === 'student' ? user as StudentUser : null;
+    const studentUser = user?.role === 'student' ? user as Student : null;
     const [activeTab, setActiveTab] = useState('Overview');
 
     const roadmaps = getStudentRoadmaps();
@@ -58,15 +58,15 @@ export default function StudentProfilePage() {
     };
 
     // Derived from user context
-    const name = user?.name || 'Jane Mukamana';
+    const name = user?.firstName && user?.lastName ? `${user.firstName} ${user.lastName}` : 'Jane Mukamana';
     const email = user?.email || 'jane.mukamana@student.umbrella.rw';
     const bio = user?.profileData?.bio || 'Dedicated trainee focusing on live collaborative sessions and practical software implementation within the Umbrella Tech Field.';
     const field = 'Tech Field';
-    const joinDate = user?.joinDate || 'Sep 2024';
+    const joinDate = user?.createdAt.toLocaleDateString() || 'Sep 2024';
 
     return (
         <div className="flex h-screen bg-[#FDFDFC]">
-            <Sidebar activeItem="Profile" userType="student" />
+            <Sidebar activeItem="Profile" userType={UserRole.STUDENT} />
 
             <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
                 <main className="flex-1 overflow-y-auto">
@@ -245,7 +245,7 @@ export default function StudentProfilePage() {
                                     <div className="space-y-6">
                                         <MiniInfo label="Academy Email" value={email} icon={<Mail className="w-4 h-4" />} />
                                         <MiniInfo label="Phone Number" value={profileData.phone} icon={<Phone className="w-4 h-4" />} />
-                                        <MiniInfo label="Join Date" value={joinDate} icon={<Calendar className="w-4 h-4" />} />
+                                        <MiniInfo label="Join Date" value={createdAt.toLocaleDateString()} icon={<Calendar className="w-4 h-4" />} />
                                     </div>
                                 </div>
                             </div>

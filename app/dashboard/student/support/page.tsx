@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
 import { useAuth } from '@/contexts';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
-import { StudentUser } from '@/types';
+import { Student, UserRole } from '@/types';
 
 export default function StudentSupportPage() {
   const { user, isAuthenticated, isLoading: authLoading } = useAuth();
@@ -46,7 +46,7 @@ export default function StudentSupportPage() {
     return null;
   }
 
-  const studentUser = user as StudentUser;
+  const studentUser = user as Student;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -67,7 +67,7 @@ export default function StudentSupportPage() {
 
   return (
     <div className="flex h-screen bg-white">
-      <Sidebar activeItem="Support" userType="student" />
+      <Sidebar activeItem="Support" userType={UserRole.STUDENT} />
 
       <div className="flex-1 flex flex-col overflow-hidden">
         <main className="flex-1 overflow-auto p-6">

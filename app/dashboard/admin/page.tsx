@@ -68,7 +68,7 @@ export default function UmbrellaAdminDashboard() {
 
   return (
     <div className="flex h-screen bg-white">
-      <Sidebar activeItem="Home" userType="admin" />
+      <Sidebar activeItem="Home" userType={UserRole.ADMIN} />
 
       <div className="flex-1 flex flex-col min-w-0">
         <main className="flex-1 p-3 sm:p-4 lg:p-6 overflow-y-auto">
@@ -76,7 +76,7 @@ export default function UmbrellaAdminDashboard() {
             {/* Welcome Section */}
             <div className="mb-4 sm:mb-6 lg:mb-8 animate-fade-in">
               <h1 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-gray-900 mb-2">
-                Welcome back, {user.name.split(' ')[0]} ⚡
+                Welcome back, {user.firstName + " " + user.lastName.split(' ')[0]} ⚡
               </h1>
               <p className="text-sm sm:text-base text-gray-600">
                 Monitor and manage the entire Dreamize system.
@@ -130,7 +130,7 @@ export default function UmbrellaAdminDashboard() {
               <div className="lg:col-span-3 space-y-4 sm:space-y-6 lg:space-y-8">
                 {/* System Overview Chart */}
                 <div className="animate-fade-in" style={{ animationDelay: '400ms' }}>
-                  <MonthlySessionsChart userType="admin" />
+                  <MonthlySessionsChart userType={UserRole.ADMIN} />
                 </div>
 
                 {/* Calendar */}
@@ -138,7 +138,7 @@ export default function UmbrellaAdminDashboard() {
                   <Calendar
                     selectedDateRange={selectedDateRange}
                     onDateRangeChange={setSelectedDateRange}
-                    userType="admin"
+                    userType={UserRole.ADMIN}
                   />
                 </div>
               </div>
@@ -192,7 +192,7 @@ export default function UmbrellaAdminDashboard() {
 
                 {/* Scheduled Events */}
                 <div className="animate-slide-up" style={{ animationDelay: '700ms' }}>
-                  <ScheduledEvents userType="admin" />
+                  <ScheduledEvents userType={UserRole.ADMIN} />
                 </div>
               </div>
             </div>

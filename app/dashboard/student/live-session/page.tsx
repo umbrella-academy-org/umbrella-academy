@@ -20,7 +20,7 @@ export default function LiveSessionPage() {
   return (
     <div className="flex h-screen bg-white">
       {/* Sidebar - Fixed */}
-      <Sidebar activeItem="Live Session" userType="student" />
+      <Sidebar activeItem="Live Session" userType={UserRole.STUDENT} />
 
       {/* Main Content - Scrollable */}
       <div className="flex flex-1 flex-col overflow-hidden lg:ml-0">
@@ -35,7 +35,7 @@ export default function LiveSessionPage() {
               {/* Primary Content (List) */}
               <div className="flex-1 space-y-6">
                 {/* Course Card Summary */}
-                <CourseCard userType="student" />
+                <CourseCard userType={UserRole.STUDENT} />
 
                 {/* Session Navigation & List Container */}
                 <div className="space-y-4">

@@ -155,7 +155,7 @@ export default function StudentDashboard() {
                 <div
                   className="bg-green-600 h-3 rounded-full transition-all duration-300"
                   style={{ width: `${progressPercentage}%` }}
-                />
+                 />
               </div>
             </div>
           </div>

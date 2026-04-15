@@ -4,20 +4,21 @@ import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
 import { User, Mail, Shield, Bell, Calendar, MapPin, Camera, Edit2, Check, X, Phone, Globe, BookOpen, Award, Zap, Briefcase, Activity, Server, Database, Lock } from 'lucide-react';
 import { useAuth } from '@/contexts';
+import { UserRole } from '@/types';
 
 export default function UmbrellaAdminProfilePage() {
     const { user } = useAuth();
 
     const [profileData] = useState({
-        name: user?.name || 'Super Admin',
+        name: user?.firstName && user?.lastName ? `${user.firstName} ${user.lastName}` : 'Super Admin',
         email: user?.email || 'admin@umbrellaacademy.rw',
         role: 'Umbrella System Administrator',
-        joinDate: user?.joinDate || 'Jan 2020'
+        joinDate: user?.createdAt.toLocaleDateString() || 'Jan 2020'
     });
 
     return (
         <div className="flex h-screen bg-[#FDFDFC]">
-            <Sidebar activeItem="Profile" userType="admin" />
+            <Sidebar activeItem="Profile" userType={UserRole.ADMIN} />
 
             <div className="flex-1 flex flex-col min-w-0">
                 <main className="flex-1 p-4 lg:p-8 overflow-y-auto bg-gray-50/30">
@@ -100,7 +101,7 @@ export default function UmbrellaAdminProfilePage() {
                                         </div>
                                         <div className="p-6 bg-gray-50 rounded-[1.5rem] border border-transparent hover:border-gray-100 transition-all">
                                             <label className="text-[10px] font-black text-gray-400    mb-1 block">Creation Date</label>
-                                            <p className="text-gray-900 font-semibold">{profileData.joinDate}</p>
+                                            <p className="text-gray-900 font-semibold">{profileData.createdAt.toLocaleDateString()}</p>
                                         </div>
                                     </div>
                                 </div>

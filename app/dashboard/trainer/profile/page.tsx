@@ -4,17 +4,17 @@ import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
 import { User, Mail, Shield, Bell, Calendar, MapPin, Camera, Edit2, Check, X, Phone, Globe, BookOpen, Briefcase, Award, ChevronRight, Settings, Star, Zap } from 'lucide-react';
 import { useAuth } from '@/contexts';
-import { TrainerUser } from '@/types';
+import { Trainer, UserRole } from '@/types';
 
 export default function TrainerProfilePage() {
     const { user } = useAuth();
     const [isEditing, setIsEditing] = useState(false);
 
-    // Cast user to TrainerUser if available
-    const trainerUser = user as TrainerUser;
+    // Cast user to Trainer if available
+    const trainerUser = user as Trainer;
 
     const [profileData, setProfileData] = useState({
-        name: user?.name || 'Demi Wilkinson',
+        name: user?.firstName && user?.lastName ? `${user.firstName} ${user.lastName}` : 'Demi Wilkinson',
         email: user?.email || 'd.wilkinson@dreamize.rw',
         phone: '+250 788 111 222',
         location: 'Kigali, Rwanda',
@@ -22,7 +22,7 @@ export default function TrainerProfilePage() {
         expertise: ['Full Stack Development', 'Cloud Architecture', 'React & Next.js', 'System Design'],
         experience: '8+ Years',
         field: 'Software Engineering',
-        joinDate: user?.joinDate || 'Jan 2023'
+        joinDate: user?.createdAt.toLocaleDateString() || 'Jan 2023'
     });
 
     const handleSave = () => {
@@ -31,7 +31,7 @@ export default function TrainerProfilePage() {
 
     return (
         <div className="flex h-screen bg-[#FDFDFC]">
-            <Sidebar activeItem="Profile" userType="trainer" />
+            <Sidebar activeItem="Profile" userType={UserRole.TRAINER} />
 
             <div className="flex-1 flex flex-col min-w-0">
                 <main className="flex-1 p-2  overflow-y-auto bg-gray-50/30">

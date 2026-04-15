@@ -5,7 +5,23 @@ import Sidebar from '@/components/dashboard/Sidebar';
 import { MessageSquare, AlertCircle, CheckCircle, Clock, Star, Search, MessageCircle, RefreshCw } from 'lucide-react';
 import { useAdminContext } from '@/contexts';
 import { useFeedback } from '@/hooks/admin';
-import { FeedbackTicket } from '@/types/admin';
+import { UserRole } from '@/types';
+
+interface FeedbackTicket {
+  id: string;
+  userId: string;
+  userName: string;
+  userEmail: string;
+  type: 'bug' | 'feature' | 'complaint' | 'suggestion';
+  priority: 'low' | 'medium' | 'high' | 'urgent';
+  status: 'open' | 'in_progress' | 'resolved' | 'closed';
+  subject: string;
+  message: string;
+  createdAt: string;
+  updatedAt: string;
+  adminResponse?: string;
+  adminRespondedAt?: string;
+}
 
 export default function UmbrellaAdminFeedbackSupportPage() {
   const { tickets, ticketsLoading, ticketsError, refreshTickets } = useAdminContext();
@@ -56,7 +72,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'open': return 'bg-gray-100 text-gray-800';
-      case 'in-progress': return 'bg-gray-100 text-gray-800';
+      case 'in_progress': return 'bg-gray-100 text-gray-800';
       case 'resolved': return 'bg-gray-100 text-gray-800';
       case 'closed': return 'bg-gray-100 text-gray-800';
       default: return 'bg-gray-100 text-gray-800';
@@ -104,7 +120,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
 
   return (
     <div className="flex h-screen bg-white">
-      <Sidebar activeItem="Feedback & Support" userType="admin" />
+      <Sidebar activeItem="Feedback & Support" userType={UserRole.ADMIN} />
 
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
         <main className="flex-1 overflow-auto">
@@ -228,7 +244,7 @@ export default function UmbrellaAdminFeedbackSupportPage() {
                         >
                           <option value="all">All Status</option>
                           <option value="open">Open</option>
-                          <option value="in-progress">In Progress</option>
+                          <option value="in_progress">In Progress</option>
                           <option value="resolved">Resolved</option>
                           <option value="closed">Closed</option>
                         </select>
@@ -339,14 +355,14 @@ export default function UmbrellaAdminFeedbackSupportPage() {
                         <div className="flex items-center gap-2">
                           {selectedItemData.status === 'open' && (
                             <button
-                              onClick={() => handleStatusUpdate(selectedItemData._id, 'in-progress')}
+                              onClick={() => handleStatusUpdate(selectedItemData._id, 'in_progress')}
                               className="flex items-center gap-2 px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors text-sm"
                             >
                               <Clock className="w-4 h-4" />
                               Start Progress
                             </button>
                           )}
-                          {selectedItemData.status === 'in-progress' && (
+                          {selectedItemData.status === 'in_progress' && (
                             <button
                               onClick={() => handleStatusUpdate(selectedItemData._id, 'resolved')}
                               className="flex items-center gap-2 px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors text-sm"

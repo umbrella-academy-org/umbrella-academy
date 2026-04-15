@@ -21,7 +21,7 @@ export default function UmbrellaAdminSettingsPage() {
 
     return (
         <div className="flex h-screen bg-white">
-            <Sidebar activeItem="Settings" userType="admin" />
+            <Sidebar activeItem="Settings" userType={UserRole.ADMIN} />
 
             <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
                 <main className="flex-1 overflow-auto">

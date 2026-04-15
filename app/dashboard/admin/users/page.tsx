@@ -7,7 +7,15 @@ import UsersTable from '@/components/umbrella-admin/UsersTable';
 import { useUsers } from '@/contexts/UserContext';
 import { useAdminContext } from '@/contexts';
 import { useUsers as useAdminUsers } from '@/hooks/admin';
-import type { UserType } from '@/types';
+import { BaseUser, UserRole } from '@/types';
+
+interface CreateUserForm {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  role: UserRole;
+}
 
 function SkeletonCard() {
   return (
@@ -23,13 +31,13 @@ function SkeletonCard() {
   );
 }
 
-const ROLES: { value: UserType; label: string }[] = [
-  { value: 'student', label: 'Student' },
-  { value: 'trainer', label: 'Trainer' },
-  { value: 'admin', label: 'Admin' },
+const ROLES: { value: UserRole; label: string }[] = [
+  { value: UserRole.STUDENT, label: 'Student' },
+  { value: UserRole.TRAINER, label: 'Trainer' },
+  { value: UserRole.ADMIN, label: 'Admin' },
 ];
 
-const EMPTY_FORM = { firstName: '', lastName: '', email: '', password: '', role: 'student' as UserType };
+const EMPTY_FORM: CreateUserForm = { firstName: '', lastName: '', email: '', password: '', role: UserRole.STUDENT };
 
 export default function UmbrellaAdminUsersPage() {
   const [selectedTab, setSelectedTab] = useState<'students' | 'trainers' | 'admins'>('students');
@@ -38,7 +46,7 @@ export default function UmbrellaAdminUsersPage() {
   const { createUser, isLoading: creating, error: createError } = useAdminUsers();
 
   const [showModal, setShowModal] = useState(false);
-  const [form, setForm] = useState(EMPTY_FORM);
+  const [form, setForm] = useState<CreateUserForm>(EMPTY_FORM);
   const [success, setSuccess] = useState(false);
   const [localError, setLocalError] = useState<string | null>(null);
 
@@ -83,7 +91,7 @@ export default function UmbrellaAdminUsersPage() {
 
   return (
     <div className="flex h-screen bg-white">
-      <Sidebar activeItem="Users" userType="admin" />
+      <Sidebar activeItem="Users" userType={UserRole.ADMIN} />
 
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
         <main className="flex-1 overflow-auto">
@@ -254,7 +262,7 @@ export default function UmbrellaAdminUsersPage() {
                 <label className="block text-sm font-medium text-gray-700 mb-1">Role *</label>
                 <select
                   value={form.role}
-                  onChange={e => setForm({ ...form, role: e.target.value as UserType })}
+                  onChange={e => setForm({ ...form, role: e.target.value as UserRole })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500"
                 >
                   {ROLES.map(r => (

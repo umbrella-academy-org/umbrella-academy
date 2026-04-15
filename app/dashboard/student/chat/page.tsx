@@ -22,7 +22,7 @@ function ChatPageContent() {
                     </Link>
                 </div>
             )}
-            <ChatInterface userType="student" />
+            <ChatInterface userType={UserRole.STUDENT} />
         </>
     );
 }
@@ -30,11 +30,11 @@ function ChatPageContent() {
 export default function StudentChatPage() {
     return (
         <div className="flex h-screen bg-white">
-            <Sidebar activeItem="Chat" userType="student" />
+            <Sidebar activeItem="Chat" userType={UserRole.STUDENT} />
 
             <div className="flex-1 flex flex-col min-w-0">
                 <main className="flex-1 overflow-hidden bg-gray-50/30 relative">
-                    <Suspense fallback={<ChatInterface userType="student" />}>
+                    <Suspense fallback={<ChatInterface userType={UserRole.STUDENT} />}>
                         <ChatPageContent />
                     </Suspense>
                 </main>
