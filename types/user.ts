@@ -79,6 +79,7 @@ export interface Trainer extends BaseUser {
   cvUrl: string;
   experience: Experience;
   skills: string[];
+  introVideoUrl: string;
   availability: Availability;
   approvalStatus: 'pending' | 'approved' | 'rejected'
 }

@@ -13,6 +13,7 @@ export default function TrainerDetailsPage() {
     dateOfBirth: '',
     gender: '',
     cvUrl: '',
+    introVideoUrl: '',
     yearsOfExperience: '',
     specializations: [] as string[],
     skills: [] as string[],
@@ -26,6 +27,7 @@ export default function TrainerDetailsPage() {
     dateOfBirth: '',
     gender: '',
     cvUrl: '',
+    introVideoUrl: '',
     yearsOfExperience: '',
     specializations: '',
     skills: '',
@@ -94,6 +96,7 @@ export default function TrainerDetailsPage() {
       dateOfBirth: '',
       gender: '',
       cvUrl: '',
+      introVideoUrl: '',
       yearsOfExperience: '',
       specializations: '',
       skills: '',
@@ -103,6 +106,7 @@ export default function TrainerDetailsPage() {
     if (!formData.dateOfBirth) newErrors.dateOfBirth = 'Date of birth is required';
     if (!formData.gender) newErrors.gender = 'Please select your gender';
     if (!formData.cvUrl) newErrors.cvUrl = 'CV URL is required';
+    if (!formData.introVideoUrl) newErrors.introVideoUrl = 'Intro video URL is required';
     if (!formData.yearsOfExperience) newErrors.yearsOfExperience = 'Years of experience is required';
     if (formData.specializations.length === 0) newErrors.specializations = 'Please select at least one specialization';
     if (formData.skills.length === 0) newErrors.skills = 'Please select at least one skill';
@@ -144,6 +148,7 @@ export default function TrainerDetailsPage() {
         createdAt: new Date(),
         updatedAt: new Date(),
         cvUrl: formData.cvUrl,
+        introVideoUrl: formData.introVideoUrl,
         experience: {
           yearsOfExperience: parseInt(formData.yearsOfExperience) || 0,
           specializations: formData.specializations
@@ -267,6 +272,25 @@ export default function TrainerDetailsPage() {
                     required
                   />
                   {errors.cvUrl && <p className="mt-1 text-sm text-red-500">{errors.cvUrl}</p>}
+                </div>
+                
+                {/* Intro Video URL */}
+                <div className="mt-4">
+                  <label htmlFor="introVideoUrl" className="block text-sm font-medium text-gray-700 mb-2">
+                    <Video className="w-4 h-4 inline mr-1" />
+                    Intro Video URL
+                  </label>
+                  <input
+                    type="url"
+                    id="introVideoUrl"
+                    value={formData.introVideoUrl}
+                    onChange={(e) => handleChange('introVideoUrl', e.target.value)}
+                    placeholder="https://example.com/intro-video.mp4"
+                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${errors.introVideoUrl ? 'border-red-500' : 'border-gray-300'
+                      }`}
+                    required
+                  />
+                  {errors.introVideoUrl && <p className="mt-1 text-sm text-red-500">{errors.introVideoUrl}</p>}
                 </div>
               </div>
 
