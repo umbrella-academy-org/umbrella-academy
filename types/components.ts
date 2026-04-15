@@ -1,4 +1,4 @@
-import { UserRole } from "./user";
+import { UserRole, OnboardingChecklist } from "./user";
 
 export interface SidebarItem {
   icon: any;
@@ -7,11 +7,14 @@ export interface SidebarItem {
   active?: boolean;
   hasDropdown?: boolean;
   badge?: string;
+  disabled?: boolean;
+  disabledReason?: string;
 }
 
 export interface SidebarProps {
   activeItem?: string;
   userType?: UserRole;
+  onboardingChecklist?: OnboardingChecklist;
 }
 
 

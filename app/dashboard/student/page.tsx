@@ -1,13 +1,14 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { CheckCircle, Lock, CreditCard, Calendar, BookOpen, Award, MessageSquare, User, Settings, LogOut } from 'lucide-react';
+import { CheckCircle, Lock, CreditCard, Calendar, BookOpen } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
 import { OnboardingChecklist, UserRole } from '@/types';
 import OrientationPaymentModal from '@/components/payment/OrientationPaymentModal';
 import SubscriptionPaymentModal from '@/components/payment/SubscriptionPaymentModal';
 import BookingCalendar from '@/components/booking/BookingCalendar';
+import Sidebar from '@/components/dashboard/Sidebar';
 
 export default function StudentDashboard() { 
   const { user, isAuthenticated, isLoading: authLoading } = useAuth();
@@ -101,58 +102,11 @@ export default function StudentDashboard() {
   return (
     <div className="flex h-screen bg-white">
       {/* Sidebar */}
-      <div className="w-64 bg-gray-900 text-white">
-        <div className="p-6">
-          <h2 className="text-xl font-bold mb-8">Dreamize</h2>
-
-          {/* User Info */}
-          <div className="mb-8">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center">
-                <User className="w-5 h-5" />
-              </div>
-              <div>
-                <p className="font-medium">{user.firstName} {user.lastName}</p>
-                <p className="text-sm text-gray-400">{user.email}</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Navigation Menu */}
-          <nav className="space-y-2">
-            {[
-              { icon: BookOpen, label: 'My Roadmap', href: '#', disabled: !onboardingChecklist.roadmapReceived },
-              { icon: Calendar, label: 'Sessions & Calendar', href: '#', disabled: !onboardingChecklist.orientationBooked },
-              { icon: Award, label: 'Certificates', href: '#', disabled: !onboardingChecklist.learningStarted },
-              { icon: Award, label: 'Portfolio', href: '#', disabled: !onboardingChecklist.learningStarted },
-              { icon: MessageSquare, label: 'Chat', href: '#', disabled: !onboardingChecklist.orientationBooked },
-              { icon: CreditCard, label: 'Subscription', href: '#', disabled: false },
-            ].map((item, index) => (
-              <button
-                key={index}
-                onClick={() => !item.disabled && navigate(item.href)}
-                className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${item.disabled
-                    ? 'bg-gray-800 text-gray-500 cursor-not-allowed'
-                    : 'hover:bg-gray-800 text-white'
-                  }`}
-                disabled={item.disabled}
-              >
-                <item.icon className="w-5 h-5" />
-                <span>{item.label}</span>
-                {item.disabled && <Lock className="w-4 h-4 ml-auto" />}
-              </button>
-            ))}
-          </nav>
-
-          {/* Logout */}
-          <div className="absolute bottom-6 left-6 right-6">
-            <button className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-800 text-white transition-colors">
-              <LogOut className="w-5 h-5" />
-              <span>Logout</span>
-            </button>
-          </div>
-        </div>
-      </div>
+      <Sidebar 
+        activeItem="Home" 
+        userType={UserRole.STUDENT} 
+        onboardingChecklist={onboardingChecklist}
+      />
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col">

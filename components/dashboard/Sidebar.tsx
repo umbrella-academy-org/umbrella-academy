@@ -1,13 +1,14 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Home, Calendar, Map, Bell, Video, CreditCard, HelpCircle, MessageSquare, X, Settings, Menu, User, LogOut, AlertCircle, CheckCircle, Flame } from 'lucide-react';
+import { Home, Calendar, Map, Bell, Video, CreditCard, HelpCircle, MessageSquare, X, Settings, Menu, User, LogOut, AlertCircle, CheckCircle, Flame, BookOpen, Award, Lock } from 'lucide-react';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
 import { useAuth } from '@/contexts';
 import { SidebarProps, SidebarItem } from '@/types';
 import { Logo } from '../ui/Logo';
+import { OnboardingChecklist } from '@/types';
 
-export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps) {
+export default function Sidebar({ activeItem = 'Home', userType, onboardingChecklist }: SidebarProps) {
   const [currentActive, setCurrentActive] = useState(activeItem);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isNewUser, setIsNewUser] = useState(false);
@@ -25,9 +26,9 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
 
   // Use user data from context, fallback to prop
   const currentUserType = user?.role || userType || 'student';
-  const userName = user?.name || 'User';
+  const userName = user?.firstName && user?.lastName ? `${user.firstName} ${user.lastName}` : 'User';
   const userEmail = user?.email || 'user@dreamize.rw';
-  const userInitials = userName.split(' ').map(n => n[0]).join('').toUpperCase();
+  const userInitials = userName.split(' ').map((n: string) => n[0]).join('').toUpperCase();
 
   // Get completion status for new user steps
   const getNewUserSteps = () => {
@@ -192,64 +193,58 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
           }
         ];
       default: // student
-        return [
+        const studentItems = [
           {
-            icon: <Home className="w-5 h-5" />,
-            label: 'Home',
-            href: '/dashboard/student',
-            active: true
+            icon: <BookOpen className="w-5 h-5" />,
+            label: 'My Roadmap',
+            href: '/dashboard/student/roadmap',
+            disabled: !(onboardingChecklist?.roadmapReceived || false),
+            disabledReason: 'Complete orientation session to unlock'
           },
           {
-            icon: <User className="w-5 h-5" />,
-            label: 'Profile',
-            href: '/dashboard/student/profile'
+            icon: <Calendar className="w-5 h-5" />,
+            label: 'Sessions & Calendar',
+            href: '/dashboard/student/calendar',
+            disabled: !(onboardingChecklist?.orientationBooked || false),
+            disabledReason: 'Book orientation session to unlock'
+          },
+          {
+            icon: <Award className="w-5 h-5" />,
+            label: 'Certificates',
+            href: '/dashboard/student/certificates',
+            disabled: !(onboardingChecklist?.learningStarted || false),
+            disabledReason: 'Start learning to unlock'
+          },
+          {
+            icon: <Award className="w-5 h-5" />,
+            label: 'Portfolio',
+            href: '/dashboard/student/portfolio',
+            disabled: !(onboardingChecklist?.learningStarted || false),
+            disabledReason: 'Start learning to unlock'
           },
           {
             icon: <MessageSquare className="w-5 h-5" />,
             label: 'Chat',
-            href: '/dashboard/student/chat'
-          },
-          {
-            icon: <Calendar className="w-5 h-5" />,
-            label: 'Smart Calendar',
-            href: '/dashboard/student/calendar'
-          },
-          {
-            icon: <Map className="w-5 h-5" />,
-            label: 'Roadmap',
-            href: '/dashboard/student/roadmap'
-          },
-          {
-            icon: <Bell className="w-5 h-5" />,
-            label: 'Notifications',
-            href: '/dashboard/student/notifications'
-          },
-          {
-            icon: <Video className="w-5 h-5" />,
-            label: 'Live Session',
-            href: '/dashboard/student/live-session'
+            href: '/dashboard/student/chat',
+            disabled: !(onboardingChecklist?.orientationBooked || false),
+            disabledReason: 'Book orientation session to unlock'
           },
           {
             icon: <CreditCard className="w-5 h-5" />,
             label: 'Subscription',
-            href: '/dashboard/student/subscription'
-          },
-          {
-            icon: <HelpCircle className="w-5 h-5" />,
-            label: 'Support',
-            href: '/dashboard/student/support'
-          },
-          {
-            icon: <MessageSquare className="w-5 h-5" />,
-            label: 'Feedback',
-            href: '/dashboard/student/feedback'
+            href: '/dashboard/student/subscription',
+            disabled: false,
+            disabledReason: ''
           },
           {
             icon: <Settings className="w-5 h-5" />,
             label: 'Settings',
-            href: '/dashboard/student/settings'
+            href: '/dashboard/student/settings',
+            disabled: false,
+            disabledReason: ''
           }
         ];
+        return studentItems;
     }
   };
 
@@ -333,28 +328,50 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
         {/* Navigation */}
         <nav className="flex-1 px-4 py-4 space-y-1">
           {sidebarItems.map((item) => (
-            <button
-              key={item.label}
-              onClick={() => handleNavigation(item)}
-              className={`
-                w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all duration-200 group
-                ${currentActive === item.label
-                  ? 'bg-yellow-500/10 text-yellow-500 font-medium border-l-4 border-yellow-500'
-                  : 'text-gray-400 hover:bg-gray-800 hover:text-white'}
-              `}
-            >
-              {/* Assuming item.icon is a React component, we can clone it to add props */}
-              {item.icon && React.cloneElement(item.icon, {
-                className: `w-5 h-5 ${currentActive === item.label ? 'text-yellow-500' : 'group-hover:scale-110 transition-transform'}`
-              })}
-              <span className="flex-1">{item.label}</span>
-              {/* Add badge if needed, based on original structure */}
-              {/* {item.badge && (
-                <span className="bg-yellow-500 text-white text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">
-                  {item.badge}
-                </span>
-              )} */}
-            </button>
+            <div key={item.label} className="relative group">
+              <button
+                onClick={() => !item.disabled && handleNavigation(item)}
+                disabled={item.disabled}
+                className={`
+                  w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all duration-200 group
+                  ${item.disabled
+                    ? 'bg-gray-800/50 text-gray-500 cursor-not-allowed'
+                    : currentActive === item.label
+                    ? 'bg-yellow-500/10 text-yellow-500 font-medium border-l-4 border-yellow-500'
+                    : 'text-gray-400 hover:bg-gray-800 hover:text-white'}
+                `}
+                title={item.disabled ? item.disabledReason : ''}
+              >
+                {/* Assuming item.icon is a React component, we can clone it to add props */}
+                {item.icon && React.cloneElement(item.icon, {
+                  className: `w-5 h-5 ${
+                    item.disabled
+                      ? 'text-gray-500'
+                      : currentActive === item.label
+                      ? 'text-yellow-500'
+                      : 'group-hover:scale-110 transition-transform'
+                  }`
+                })}
+                <span className="flex-1">{item.label}</span>
+                {item.disabled && (
+                  <Lock className="w-4 h-4 text-gray-500 ml-auto" />
+                )}
+                {/* Add badge if needed, based on original structure */}
+                {/* {item.badge && (
+                  <span className="bg-yellow-500 text-white text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">
+                    {item.badge}
+                  </span>
+                )} */}
+              </button>
+              
+              {/* Tooltip for disabled items */}
+              {item.disabled && (
+                <div className="absolute left-full ml-2 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50">
+                  {item.disabledReason}
+                  <div className="absolute right-full top-1/2 transform -translate-y-1/2 border-4 border-transparent border-r-gray-800"></div>
+                </div>
+              )}
+            </div>
           ))}
         </nav>
 
