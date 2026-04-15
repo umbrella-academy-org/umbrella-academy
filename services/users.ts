@@ -1,22 +1,23 @@
-import { Student } from '@/types';
+import { Student, BaseUser } from '@/types';
 import { apiClient } from './client';
 import { API_ENDPOINTS } from './constants';
+import { ApiResponse } from '@/types/api';
 
 class UserService {
-  async getStudent(): Promise<{ success: boolean; user: Student }> {
-    return apiClient.get<{ success: boolean; user: Student }>(API_ENDPOINTS.USERS_ME);
+  async getStudent(): Promise<ApiResponse<Student>> {
+    return apiClient.get<Student>(API_ENDPOINTS.USERS_ME);
   }
 
-  async updateProfile(data: Partial<User>): Promise<{ success: boolean; user: User }> {
-    return apiClient.put<{ success: boolean; user: User }>(API_ENDPOINTS.USER_PROFILE, data);
+  async updateProfile(data: Partial<BaseUser>): Promise<ApiResponse<BaseUser>> {
+    return apiClient.put<BaseUser>(API_ENDPOINTS.USER_PROFILE, data);
   }
 
-  async getUsers(): Promise<{ success: boolean; data: User[] }> {
-    return apiClient.get<{ success: boolean; data: User[] }>(API_ENDPOINTS.USERS);
+  async getUsers(): Promise<ApiResponse<BaseUser[]>> {
+    return apiClient.get<BaseUser[]>(API_ENDPOINTS.USERS);
   }
 
-  async updateUserStatus(id: string, status: 'active' | 'inactive' | 'suspended'): Promise<{ success: boolean; user: User }> {
-    return apiClient.put<{ success: boolean; user: User }>(API_ENDPOINTS.USER_STATUS(id), { status });
+  async updateUserStatus(id: string, status: 'active' | 'inactive' | 'suspended'): Promise<ApiResponse<BaseUser>> {
+    return apiClient.put<BaseUser>(API_ENDPOINTS.USER_STATUS(id), { status });
   }
 }
 

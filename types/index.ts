@@ -6,3 +6,4 @@ export * from './components';
 export * from './forms';
 export * from './project';
 export * from './table';
+export * from './dashboard';

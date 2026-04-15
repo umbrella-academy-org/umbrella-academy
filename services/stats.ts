@@ -1,5 +1,6 @@
 import { apiClient } from './client';
 import { API_ENDPOINTS } from './constants';
+import { ApiResponse } from '@/types/api';
 
 export interface StatsResponse {
   student?: { activeRoadmaps: number; completedSessions: number; upcomingSessions: number; roadmapProgress: number };
@@ -8,8 +9,8 @@ export interface StatsResponse {
 }
 
 class StatsService {
-  async getMyStats(): Promise<{ success: boolean; data: StatsResponse }> {
-    return apiClient.get<{ success: boolean; data: StatsResponse }>(API_ENDPOINTS.STATS_ME);
+  async getMyStats(): Promise<ApiResponse<StatsResponse>> {
+    return apiClient.get<StatsResponse>(API_ENDPOINTS.STATS_ME);
   }
 }
 
