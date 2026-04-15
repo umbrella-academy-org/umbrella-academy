@@ -82,6 +82,7 @@ export default function StudentDetailsPage() {
     try {
       // Get base registration data from localStorage
       const baseData = {
+        phoneNumber: localStorage.getItem('basePhoneNumber') || '',
         firstName: localStorage.getItem('baseFirstName') || '',
         lastName: localStorage.getItem('baseLastName') || '',
         email: localStorage.getItem('baseEmail') || '',
@@ -94,7 +95,7 @@ export default function StudentDetailsPage() {
         password: baseData.password,
         firstName: baseData.firstName,
         lastName: baseData.lastName,
-        phoneNumber: '', // Will be set by backend or from base registration
+        phoneNumber: baseData.phoneNumber,
         role: UserRole.STUDENT,
         isActive: true,
         status: 'active',

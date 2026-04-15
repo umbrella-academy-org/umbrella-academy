@@ -11,14 +11,16 @@ export default function TrainerRegisterPage() {
     lastName: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    phoneNumber: ''
   });
   const [errors, setErrors] = useState({
     firstName: '',
     lastName: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    phoneNumber: ''
   });
 
   const handleChange = (field: string, value: string) => {
@@ -31,6 +33,7 @@ export default function TrainerRegisterPage() {
     const newErrors = {
       firstName: '',
       lastName: '',
+      phoneNumber: '',
       email: '',
       password: '',
       confirmPassword: ''
@@ -44,6 +47,7 @@ export default function TrainerRegisterPage() {
     else if (formData.password.length < 8) newErrors.password = 'Password must be at least 8 characters';
     if (!formData.confirmPassword) newErrors.confirmPassword = 'Please confirm your password';
     else if (formData.password !== formData.confirmPassword) newErrors.confirmPassword = 'Passwords do not match';
+    if (!formData.phoneNumber) newErrors.phoneNumber = 'Phone number is required';
 
     setErrors(newErrors);
 
@@ -57,7 +61,8 @@ export default function TrainerRegisterPage() {
     localStorage.setItem('baseLastName', formData.lastName);
     localStorage.setItem('baseEmail', formData.email);
     localStorage.setItem('basePassword', formData.password);
-
+    localStorage.setItem('basePhoneNumber', formData.phoneNumber);
+ 
     router.push('/auth/trainer/details');
   };
 
@@ -185,6 +190,24 @@ export default function TrainerRegisterPage() {
                   required
                 />
                 {errors.confirmPassword && <p className="mt-1 text-sm text-red-500">{errors.confirmPassword}</p>}
+              </div>
+
+              {/* Phone Number */}
+              <div>
+                <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-700 mb-2">
+                  Phone Number
+                </label>
+                <input
+                  type="tel"
+                  id="phoneNumber"
+                  value={formData.phoneNumber}
+                  onChange={(e) => handleChange('phoneNumber', e.target.value)}
+                  placeholder="+250 7XX-XXX-XXX"
+                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${errors.phoneNumber ? 'border-red-500' : 'border-gray-300'
+                    }`}
+                  required
+                />
+                {errors.phoneNumber && <p className="mt-1 text-sm text-red-500">{errors.phoneNumber}</p>}
               </div>
 
               <button

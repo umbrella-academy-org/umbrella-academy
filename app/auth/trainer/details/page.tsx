@@ -125,7 +125,8 @@ export default function TrainerDetailsPage() {
         firstName: localStorage.getItem('baseFirstName') || '',
         lastName: localStorage.getItem('baseLastName') || '',
         email: localStorage.getItem('baseEmail') || '',
-        password: localStorage.getItem('basePassword') || ''
+        password: localStorage.getItem('basePassword') || '',
+        phoneNumber: localStorage.getItem('basePhoneNumber') || ''
       };
 
       // Create trainer data object matching Trainer interface
@@ -134,7 +135,7 @@ export default function TrainerDetailsPage() {
         password: baseData.password,
         firstName: baseData.firstName,
         lastName: baseData.lastName,
-        phoneNumber: '', // Will be set by backend
+        phoneNumber: baseData.phoneNumber,
         role: UserRole.TRAINER as const,
         isActive: true,
         status: 'pending_approval',
@@ -159,13 +160,14 @@ export default function TrainerDetailsPage() {
       };
 
       await registerTrainer(trainerData);
-      
+
       // Clear localStorage
       localStorage.removeItem('baseFirstName');
       localStorage.removeItem('baseLastName');
       localStorage.removeItem('baseEmail');
       localStorage.removeItem('basePassword');
-      
+      localStorage.removeItem('basePhoneNumber');
+
       // Redirect to pending approval page
       router.push('/auth/trainer/pending');
     } catch (error) {
@@ -214,7 +216,7 @@ export default function TrainerDetailsPage() {
               {/* Personal Information Section */}
               <div className="border-b border-gray-200 pb-4">
                 <h3 className="text-lg font-medium text-gray-900 mb-3">Personal Information</h3>
-                
+
                 {/* Date of Birth and Gender */}
                 <div className="grid grid-cols-2 gap-4">
                   <div>
@@ -273,7 +275,7 @@ export default function TrainerDetailsPage() {
                   />
                   {errors.cvUrl && <p className="mt-1 text-sm text-red-500">{errors.cvUrl}</p>}
                 </div>
-                
+
                 {/* Intro Video URL */}
                 <div className="mt-4">
                   <label htmlFor="introVideoUrl" className="block text-sm font-medium text-gray-700 mb-2">
@@ -331,8 +333,8 @@ export default function TrainerDetailsPage() {
                         type="button"
                         onClick={() => toggleSpecialization(specialization)}
                         className={`p-2 text-sm rounded-lg border transition-all ${formData.specializations.includes(specialization)
-                            ? 'border-green-600 bg-green-50 text-green-600'
-                            : 'border-gray-200 hover:border-gray-300 text-gray-600'
+                          ? 'border-green-600 bg-green-50 text-green-600'
+                          : 'border-gray-200 hover:border-gray-300 text-gray-600'
                           }`}
                       >
                         {specialization}
@@ -355,8 +357,8 @@ export default function TrainerDetailsPage() {
                         type="button"
                         onClick={() => toggleSkill(skill)}
                         className={`p-2 text-sm rounded-lg border transition-all ${formData.skills.includes(skill)
-                            ? 'border-green-600 bg-green-50 text-green-600'
-                            : 'border-gray-200 hover:border-gray-300 text-gray-600'
+                          ? 'border-green-600 bg-green-50 text-green-600'
+                          : 'border-gray-200 hover:border-gray-300 text-gray-600'
                           }`}
                       >
                         {skill}
@@ -372,7 +374,7 @@ export default function TrainerDetailsPage() {
                     <Clock className="w-4 h-4 inline mr-1" />
                     Availability
                   </label>
-                  
+
                   {/* Weekly Hours */}
                   <div className="mt-4">
                     <label htmlFor="weeklyAvailableHours" className="block text-sm font-medium text-gray-700 mb-2">
@@ -407,8 +409,8 @@ export default function TrainerDetailsPage() {
                             handleAvailabilityChange('preferredTimeSlots', newTimeSlots);
                           }}
                           className={`p-2 text-sm rounded-lg border transition-all ${formData.availability.preferredTimeSlots.includes(timeSlot)
-                              ? 'border-green-600 bg-green-50 text-green-600'
-                              : 'border-gray-200 hover:border-gray-300 text-gray-600'
+                            ? 'border-green-600 bg-green-50 text-green-600'
+                            : 'border-gray-200 hover:border-gray-300 text-gray-600'
                             }`}
                         >
                           {timeSlot}
@@ -434,8 +436,8 @@ export default function TrainerDetailsPage() {
                             handleAvailabilityChange('preferredDays', newDays);
                           }}
                           className={`p-2 text-sm rounded-lg border transition-all ${formData.availability.preferredDays.includes(day)
-                              ? 'border-green-600 bg-green-50 text-green-600'
-                              : 'border-gray-200 hover:border-gray-300 text-gray-600'
+                            ? 'border-green-600 bg-green-50 text-green-600'
+                            : 'border-gray-200 hover:border-gray-300 text-gray-600'
                             }`}
                         >
                           {day}
