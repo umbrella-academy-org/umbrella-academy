@@ -3,7 +3,7 @@ import { apiClient } from './client';
 import { API_ENDPOINTS } from './constants';
 
 class UserService {
-  async getStudent(): Promise<{ success: boolean; user: Student}> {
+  async getStudent(): Promise<{ success: boolean; user: Student }> {
     return apiClient.get<{ success: boolean; user: Student }>(API_ENDPOINTS.USERS_ME);
   }
 

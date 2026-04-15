@@ -161,15 +161,8 @@ export default function TrainerDetailsPage() {
 
       await registerTrainer(trainerData);
 
-      // Clear localStorage
-      localStorage.removeItem('baseFirstName');
-      localStorage.removeItem('baseLastName');
-      localStorage.removeItem('baseEmail');
-      localStorage.removeItem('basePassword');
-      localStorage.removeItem('basePhoneNumber');
-
       // Redirect to pending approval page
-      router.push('/auth/trainer/pending');
+      
     } catch (error) {
       console.error('Registration failed:', error);
     } finally {

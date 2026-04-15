@@ -115,14 +115,8 @@ export default function StudentDetailsPage() {
 
       await registerStudent(studentData);
       
-      // Clear localStorage
-      localStorage.removeItem('baseFirstName');
-      localStorage.removeItem('baseLastName');
-      localStorage.removeItem('baseEmail');
-      localStorage.removeItem('basePassword');
-      
       // Redirect to success or dashboard
-      router.push('/dashboard');
+      // router.push('/dashboard');
     } catch (error) {
       console.error('Registration failed:', error);
     } finally {
