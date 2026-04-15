@@ -12,24 +12,16 @@ export default function TrainerDetailsPage() {
   const [formData, setFormData] = useState({
     dateOfBirth: '',
     gender: '',
-    phoneCode: '+250',
-    phoneNumber: '',
-    country: '',
-    city: '',
     specialization: '',
     yearsOfExperience: '',
     teachingExperience: '',
     expertiseAreas: [] as string[],
     languages: [] as string[],
-    availability: '',
-    hourlyRate: '',
-    bio: ''
+    availability: ''
   });
   const [errors, setErrors] = useState({
     dateOfBirth: '',
     gender: '',
-    phoneNumber: '',
-    country: '',
     specialization: '',
     yearsOfExperience: '',
     teachingExperience: '',
@@ -86,8 +78,6 @@ export default function TrainerDetailsPage() {
     const newErrors = {
       dateOfBirth: '',
       gender: '',
-      phoneNumber: '',
-      country: '',
       specialization: '',
       yearsOfExperience: '',
       teachingExperience: '',
@@ -98,8 +88,6 @@ export default function TrainerDetailsPage() {
 
     if (!formData.dateOfBirth) newErrors.dateOfBirth = 'Date of birth is required';
     if (!formData.gender) newErrors.gender = 'Please select your gender';
-    if (!formData.phoneNumber) newErrors.phoneNumber = 'Phone number is required';
-    if (!formData.country) newErrors.country = 'Country is required';
     if (!formData.specialization) newErrors.specialization = 'Specialization is required';
     if (!formData.yearsOfExperience) newErrors.yearsOfExperience = 'Years of experience is required';
     if (!formData.teachingExperience) newErrors.teachingExperience = 'Teaching experience is required';
@@ -129,7 +117,7 @@ export default function TrainerDetailsPage() {
         password: baseData.password,
         firstName: baseData.firstName,
         lastName: baseData.lastName,
-        phoneNumber: formData.phoneCode + formData.phoneNumber,
+        phoneNumber: '', // Will be set by backend
         role: UserRole.TRAINER as const,
         isActive: true,
         status: 'pending_approval',

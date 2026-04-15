@@ -1,7 +1,7 @@
 import { AuthResponse } from '@/types/auth';
 import { apiClient } from './client';
 import { API_ENDPOINTS } from './constants';
-import { ApiResponse,  Student, Trainer } from '@/types';
+import { ApiResponse,  Student, StudentRegister, Trainer } from '@/types';
 
 export interface LoginRequest {
   email: string;
@@ -16,13 +16,13 @@ class AuthService {
     return response;
   }
 
-  async registerStudent(data: Student): Promise<ApiResponse<AuthResponse>> {
+  async registerStudent(data: Partial<StudentRegister>): Promise<ApiResponse<AuthResponse>> {
     const response = await apiClient.post<AuthResponse>(API_ENDPOINTS.AUTH_REGISTER_STUDENT, data);
     if (response.data) localStorage.setItem('auth_token', response.data.token);
     return response;
   }
 
-  async registerTrainer(data: Trainer): Promise<ApiResponse<AuthResponse>> {
+  async registerTrainer(data: Partial<Trainer>): Promise<ApiResponse<AuthResponse>> {
     const response = await apiClient.post<AuthResponse>(API_ENDPOINTS.AUTH_REGISTER_TRAINER, data);
     if (response.data) localStorage.setItem('auth_token', response.data.token);
     return response;

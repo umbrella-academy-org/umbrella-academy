@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { authService } from '@/services/auth';
-import { BaseUser, Student, Trainer, UserRole } from '@/types';
+import { BaseUser, Student, StudentRegister, Trainer, UserRole } from '@/types';
 
 interface AuthContextType {
   error: string | null;
@@ -10,8 +10,8 @@ interface AuthContextType {
   isAuthenticated: boolean;
   isLoading: boolean;
   login: (email: string, password: string) => Promise<void>;
-  registerStudent: (data: Student) => Promise<void>;
-  registerTrainer: (data: Trainer) => Promise<void>;
+  registerStudent: (data: Partial<StudentRegister>) => Promise<void>;
+  registerTrainer: (data: Partial<Trainer>) => Promise<void>;
   logout: () => void;
 }
 
@@ -37,7 +37,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const registerStudent = async (data: Student): Promise<void> => {
+  const registerStudent = async (data: Partial<StudentRegister>): Promise<void> => {
     setIsLoading(true);
     try {
       const response = await authService.registerStudent(data);
@@ -49,7 +49,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const registerTrainer = async (data: Trainer): Promise<void> => {
+  const registerTrainer = async (data: Partial<Trainer>): Promise<void> => {
     setIsLoading(true);
     try {
       const response = await authService.registerTrainer(data);

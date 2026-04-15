@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Award, BookMarked, BookOpen, Briefcase, CheckCircle, ChevronDown, FileText, GraduationCap, Trophy, Calendar, Phone, MapPin } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
-import { UserRole } from '@/types';
+import { UserRole, StudentRegister } from '@/types';
 
 export default function StudentDetailsPage() {
   const router = useRouter();
@@ -89,13 +89,13 @@ export default function StudentDetailsPage() {
       };
 
       // Create student data object matching the StudentRegister interface
-      const studentData = {
+      const studentData: StudentRegister = {
         email: baseData.email,
         password: baseData.password,
         firstName: baseData.firstName,
         lastName: baseData.lastName,
         phoneNumber: '', // Will be set by backend or from base registration
-        role: UserRole.STUDENT as const,
+        role: UserRole.STUDENT,
         isActive: true,
         status: 'active',
         gender: formData.gender,
@@ -205,73 +205,64 @@ export default function StudentDetailsPage() {
                 </div>
               </div>
 
-              {/* Phone Number */}
-              <div>
-                <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-700 mb-2">
-                  <Phone className="w-4 h-4 inline mr-1" />
-                  Phone Number
-                </label>
-                <div className="flex gap-2">
-                  <select
-                    value={formData.phoneCode}
-                    onChange={(e) => handleChange('phoneCode', e.target.value)}
-                    className="w-24 px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent appearance-none bg-white text-gray-900"
-                  >
-                    <option value="+250">+250</option>
-                    <option value="+1">+1</option>
-                    <option value="+44">+44</option>
-                    <option value="+254">+254</option>
-                    <option value="+256">+256</option>
-                  </select>
-                  <div className="flex-1">
+              {/* Guardian Fields - Show for students under 15 */}
+              {showGuardianFields && (
+                <div className="border-t border-gray-200 pt-4">
+                  <h3 className="text-lg font-medium text-gray-900 mb-3">Guardian Information (Required for students under 15)</h3>
+                  
+                  <div>
+                    <label htmlFor="guardianName" className="block text-sm font-medium text-gray-700 mb-2">
+                      Guardian Full Name
+                    </label>
                     <input
-                      type="tel"
-                      id="phoneNumber"
-                      value={formData.phoneNumber}
-                      onChange={(e) => handleChange('phoneNumber', e.target.value)}
-                      placeholder="7XX-XXX-XXX"
-                      className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${errors.phoneNumber ? 'border-red-500' : 'border-gray-300'
+                      type="text"
+                      id="guardianName"
+                      value={formData.guardianName}
+                      onChange={(e) => handleChange('guardianName', e.target.value)}
+                      placeholder="Enter guardian's full name"
+                      className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${errors.guardianName ? 'border-red-500' : 'border-gray-300'
                         }`}
-                      required
+                      required={showGuardianFields}
                     />
-                    {errors.phoneNumber && <p className="mt-1 text-sm text-red-500">{errors.phoneNumber}</p>}
+                    {errors.guardianName && <p className="mt-1 text-sm text-red-500">{errors.guardianName}</p>}
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4 mt-4">
+                    <div>
+                      <label htmlFor="guardianEmail" className="block text-sm font-medium text-gray-700 mb-2">
+                        Guardian Email
+                      </label>
+                      <input
+                        type="email"
+                        id="guardianEmail"
+                        value={formData.guardianEmail}
+                        onChange={(e) => handleChange('guardianEmail', e.target.value)}
+                        placeholder="guardian@example.com"
+                        className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${errors.guardianEmail ? 'border-red-500' : 'border-gray-300'
+                          }`}
+                        required={showGuardianFields}
+                      />
+                      {errors.guardianEmail && <p className="mt-1 text-sm text-red-500">{errors.guardianEmail}</p>}
+                    </div>
+                    <div>
+                      <label htmlFor="guardianPhoneNumber" className="block text-sm font-medium text-gray-700 mb-2">
+                        Guardian Phone
+                      </label>
+                      <input
+                        type="tel"
+                        id="guardianPhoneNumber"
+                        value={formData.guardianPhoneNumber}
+                        onChange={(e) => handleChange('guardianPhoneNumber', e.target.value)}
+                        placeholder="+250 7XX-XXX-XXX"
+                        className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${errors.guardianPhoneNumber ? 'border-red-500' : 'border-gray-300'
+                          }`}
+                        required={showGuardianFields}
+                      />
+                      {errors.guardianPhoneNumber && <p className="mt-1 text-sm text-red-500">{errors.guardianPhoneNumber}</p>}
+                    </div>
                   </div>
                 </div>
-              </div>
-
-              {/* Country and City */}
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label htmlFor="country" className="block text-sm font-medium text-gray-700 mb-2">
-                    <MapPin className="w-4 h-4 inline mr-1" />
-                    Country
-                  </label>
-                  <input
-                    type="text"
-                    id="country"
-                    value={formData.country}
-                    onChange={(e) => handleChange('country', e.target.value)}
-                    placeholder="e.g., Rwanda"
-                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${errors.country ? 'border-red-500' : 'border-gray-300'
-                      }`}
-                    required
-                  />
-                  {errors.country && <p className="mt-1 text-sm text-red-500">{errors.country}</p>}
-                </div>
-                <div>
-                  <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-2">
-                    City
-                  </label>
-                  <input
-                    type="text"
-                    id="city"
-                    value={formData.city}
-                    onChange={(e) => handleChange('city', e.target.value)}
-                    placeholder="e.g., Kigali"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent text-gray-900 placeholder:text-gray-400"
-                  />
-                </div>
-              </div>
+              )}
 
               <button
                 type="submit"
