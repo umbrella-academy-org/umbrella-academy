@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { User, UserType, ApiResponse } from '@/types';
+import { User, UserRole, ApiResponse } from '@/types';
 import { useUsers } from '@/contexts';
 import { apiClient } from '@/services/client';
 import { API_ENDPOINTS } from '@/services/constants';
@@ -7,7 +7,7 @@ import { API_ENDPOINTS } from '@/services/constants';
 interface UpdateUserData {
   name?: string;
   email?: string;
-  role?: UserType;
+  role?: UserRole;
   status?: 'active' | 'inactive' | 'suspended' | 'paused';
   fieldId?: string;
   field?: string;

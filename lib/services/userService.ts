@@ -1,6 +1,6 @@
 // User management service - Data access layer for user operations
 
-import { User, StudentUser, TrainerUser } from '@/types';
+import { BaseUser, Student, Trainer } from '@/types';
 import {
   mockUsers,
   getStudents,
@@ -34,7 +34,7 @@ export class UserService {
   /**
    * Get users by role
    */
-  static async getUsersByRole(role: User['role']): Promise<User[]> {
+  static async getUsersByRole(role: BaseUser['role']): Promise<User[]> {
     switch (role) {
       case 'student':
         return getStudents();
@@ -49,7 +49,7 @@ export class UserService {
    * Create a new user
    */
   static async createUser(userData: Omit<User, 'id' | 'createdAt' | 'lastLogin' | 'isActive'>): Promise<User> {
-    const newUser: User = {
+    const newUser: BaseUser = {
       ...userData,
       id: `user_${Date.now()}`,
       createdAt: new Date(),
@@ -89,10 +89,10 @@ export class UserService {
   /**
    * Get available trainers
    */
-  static async getAvailableTrainers(): Promise<TrainerUser[]> {
+  static async getAvailableTrainers(): Promise<Trainer[]> {
     const trainers = getTrainers();
     return trainers.filter(trainer =>
-      trainer.status === 'active' &&
+      trainer.approvalStatus === 'approved' &&
       trainer.isActive
     );
   }
@@ -100,10 +100,10 @@ export class UserService {
   /**
    * Search users by name or email
    */
-  static async searchUsers(query: string): Promise<User[]> {
+  static async searchUsers(query: string): Promise<BaseUser[]> {
     const searchQuery = query.toLowerCase();
     return mockUsers.filter(user =>
-      user.name.toLowerCase().includes(searchQuery) ||
+      (user.firstName + ' ' + user.lastName).toLowerCase().includes(searchQuery) ||
       user.email.toLowerCase().includes(searchQuery)
     );
   }

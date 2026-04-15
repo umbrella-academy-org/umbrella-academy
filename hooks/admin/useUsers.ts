@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { apiClient } from '@/services/client';
 import { API_ENDPOINTS } from '@/services/constants';
-import { User, UserType } from '@/types';
+import { BaseUser, UserRole } from '@/types';
 
 export type UserStatus = 'active' | 'inactive' | 'suspended' | 'paused';
 
 export interface CreateUserData {
   email: string;
   password: string;
-  role: UserType;
+  role: UserRole;
   firstName: string;
   lastName: string;
   fieldId?: string;
@@ -17,18 +17,18 @@ export interface CreateUserData {
 interface UseUsersReturn {
   isLoading: boolean;
   error: string | null;
-  createUser: (data: CreateUserData) => Promise<User | null>;
-  updateUser: (id: string, data: Partial<User>) => Promise<User | null>;
+  createUser: (data: CreateUserData) => Promise<BaseUser | null>;
+  updateUser: (id: string, data: Partial<BaseUser>) => Promise<BaseUser | null>;
   deleteUser: (id: string) => Promise<boolean>;
   updateUserStatus: (id: string, status: UserStatus) => Promise<void>;
-  filterByRole: (users: User[], role: UserType) => User[];
+  filterByRole: (users: BaseUser[], role: UserRole) => BaseUser[];
 }
 
 export function useUsers(): UseUsersReturn {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const createUser = async (data: CreateUserData): Promise<User | null> => {
+  const createUser = async (data: CreateUserData): Promise<BaseUser | null> => {
     try {
       setIsLoading(true);
       const res = await apiClient.post<{ data: User }>(API_ENDPOINTS.USERS, data);
@@ -42,7 +42,7 @@ export function useUsers(): UseUsersReturn {
     }
   };
 
-  const updateUser = async (id: string, data: Partial<User>): Promise<User | null> => {
+  const updateUser = async (id: string, data: Partial<BaseUser>): Promise<BaseUser | null> => {
     try {
       setIsLoading(true);
       const res = await apiClient.put<{ data: User }>(API_ENDPOINTS.USER_BY_ID(id), data);
