@@ -78,3 +78,10 @@ export interface Trainer extends BaseUser {
   availability: string;
   approvalStatus: 'pending' | 'approved' | 'rejected'
 }
+
+
+export interface StudentRegister extends BaseUser {
+    guardianName: string;
+    guardianEmail: string;
+    guardianPhoneNumber: string;
+}

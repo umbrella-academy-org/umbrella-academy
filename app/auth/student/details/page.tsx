@@ -4,79 +4,73 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Award, BookMarked, BookOpen, Briefcase, CheckCircle, ChevronDown, FileText, GraduationCap, Trophy, Calendar, Phone, MapPin } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
+import { UserRole } from '@/types';
 
 export default function StudentDetailsPage() {
   const router = useRouter();
   const [formData, setFormData] = useState({
     dateOfBirth: '',
     gender: '',
-    phoneCode: '+250',
-    phoneNumber: '',
-    country: '',
-    city: '',
-    educationLevel: '',
-    fieldOfStudy: '',
-    institution: '',
-    graduationYear: '',
-    interests: [] as string[]
+    guardianName: '',
+    guardianEmail: '',
+    guardianPhoneNumber: ''
   });
   const [errors, setErrors] = useState({
     dateOfBirth: '',
     gender: '',
-    phoneNumber: '',
-    country: '',
-    educationLevel: ''
+    guardianName: '',
+    guardianEmail: '',
+    guardianPhoneNumber: ''
   });
-
-  const [selectedLevel, setSelectedLevel] = useState('');
-  const [isOpen, setIsOpen] = useState(false);
-
-  const educationLevels = [
-    { value: "High School Diploma", icon: BookOpen },
-    { value: "Associate Degree", icon: Award },
-    { value: "Bachelor's Degree", icon: GraduationCap },
-    { value: "Master's Degree", icon: Trophy },
-    { value: "Doctoral Degree (PhD)", icon: Trophy },
-    { value: "Professional Degree", icon: Briefcase },
-    { value: "Certificate/Diploma", icon: FileText },
-    { value: "Some College (No Degree)", icon: BookMarked }
-  ];
-
-  const interests = [
-    "Web Development", "Mobile Development", "Data Science", "Machine Learning",
-    "UI/UX Design", "Digital Marketing", "Business Management", "Finance",
-    "Photography", "Video Production", "Content Writing", "Graphic Design"
-  ];
+  const [isLoading, setIsLoading] = useState(false);
+  const [showGuardianFields, setShowGuardianFields] = useState(false);
 
   const handleChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
     setErrors(prev => ({ ...prev, [field]: '' }));
+    
+    // Check if student is under 15 to show guardian fields
+    if (field === 'dateOfBirth' && value) {
+      const birthDate = new Date(value);
+      const today = new Date();
+      const age = today.getFullYear() - birthDate.getFullYear();
+      const monthDiff = today.getMonth() - birthDate.getMonth();
+      const actualAge = monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate()) ? age - 1 : age;
+      setShowGuardianFields(actualAge < 15);
+    }
   };
 
-  const toggleInterest = (interest: string) => {
-    setFormData(prev => ({
-      ...prev,
-      interests: prev.interests.includes(interest)
-        ? prev.interests.filter(i => i !== interest)
-        : [...prev.interests, interest]
-    }));
-  };
 
-  const handleContinue = (e: React.FormEvent) => {
+  const { registerStudent } = useAuth();
+
+  const handleContinue = async (e: React.FormEvent) => {
     e.preventDefault();
     const newErrors = {
       dateOfBirth: '',
       gender: '',
-      phoneNumber: '',
-      country: '',
-      educationLevel: ''
+      guardianName: '',
+      guardianEmail: '',
+      guardianPhoneNumber: ''
     };
 
     if (!formData.dateOfBirth) newErrors.dateOfBirth = 'Date of birth is required';
     if (!formData.gender) newErrors.gender = 'Please select your gender';
-    if (!formData.phoneNumber) newErrors.phoneNumber = 'Phone number is required';
-    if (!formData.country) newErrors.country = 'Country is required';
-    if (!selectedLevel) newErrors.educationLevel = 'Education level is required';
+    
+    // Check if guardian fields are required
+    if (formData.dateOfBirth) {
+      const birthDate = new Date(formData.dateOfBirth);
+      const today = new Date();
+      const age = today.getFullYear() - birthDate.getFullYear();
+      const monthDiff = today.getMonth() - birthDate.getMonth();
+      const actualAge = monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate()) ? age - 1 : age;
+      
+      if (actualAge < 15) {
+        if (!formData.guardianName) newErrors.guardianName = 'Guardian name is required for students under 15';
+        if (!formData.guardianEmail) newErrors.guardianEmail = 'Guardian email is required for students under 15';
+        if (!formData.guardianPhoneNumber) newErrors.guardianPhoneNumber = 'Guardian phone number is required for students under 15';
+      }
+    }
 
     setErrors(newErrors);
 
@@ -84,14 +78,55 @@ export default function StudentDetailsPage() {
       return;
     }
 
-    // Store all details data
-    localStorage.setItem('studentDetails', JSON.stringify({
-      ...formData,
-      educationLevel: selectedLevel
-    }));
+    setIsLoading(true);
+    try {
+      // Get base registration data from localStorage
+      const baseData = {
+        firstName: localStorage.getItem('baseFirstName') || '',
+        lastName: localStorage.getItem('baseLastName') || '',
+        email: localStorage.getItem('baseEmail') || '',
+        password: localStorage.getItem('basePassword') || ''
+      };
 
-    // Redirect to final step or success page
-    router.push('/auth/create-password');
+      // Create student data object matching the StudentRegister interface
+      const studentData = {
+        email: baseData.email,
+        password: baseData.password,
+        firstName: baseData.firstName,
+        lastName: baseData.lastName,
+        phoneNumber: '', // Will be set by backend or from base registration
+        role: UserRole.STUDENT as const,
+        isActive: true,
+        status: 'active',
+        gender: formData.gender,
+        dateOfBirth: new Date(formData.dateOfBirth),
+        isVerified: false,
+        otpCode: '',
+        otpExpiry: new Date(),
+        resetToken: '',
+        resetTokenExpiry: new Date(),
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        guardianName: formData.guardianName,
+        guardianEmail: formData.guardianEmail,
+        guardianPhoneNumber: formData.guardianPhoneNumber
+      };
+
+      await registerStudent(studentData);
+      
+      // Clear localStorage
+      localStorage.removeItem('baseFirstName');
+      localStorage.removeItem('baseLastName');
+      localStorage.removeItem('baseEmail');
+      localStorage.removeItem('basePassword');
+      
+      // Redirect to success or dashboard
+      router.push('/dashboard');
+    } catch (error) {
+      console.error('Registration failed:', error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -238,158 +273,12 @@ export default function StudentDetailsPage() {
                 </div>
               </div>
 
-              {/* Education Level */}
-              <div className="relative">
-                <label className='block text-sm font-medium text-gray-700 mb-2'>
-                  Education Level
-                </label>
-                <button
-                  type="button"
-                  onClick={() => setIsOpen(!isOpen)}
-                  className={`w-full flex items-center justify-between p-3 border rounded-lg transition-all ${selectedLevel
-                      ? 'border-blue-600 bg-gray-50'
-                      : 'border-gray-200 bg-white hover:border-gray-300'
-                    }`}
-                >
-                  <div className="flex items-center gap-4">
-                    {selectedLevel ? (
-                      <>
-                        {(() => {
-                          const selected = educationLevels.find(l => l.value === selectedLevel);
-                          const Icon = selected?.icon || GraduationCap;
-                          return (
-                            <>
-                              <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-blue-600 text-white">
-                                <Icon className="w-5 h-5" />
-                              </div>
-                              <span className="text-sm font-medium text-gray-900">{selectedLevel}</span>
-                            </>
-                          );
-                        })()}
-                      </>
-                    ) : (
-                      <>
-                        <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-gray-100 text-gray-400">
-                          <GraduationCap className="w-5 h-5" />
-                        </div>
-                        <span className="text-sm font-medium text-gray-500">Select your education level</span>
-                      </>
-                    )}
-                  </div>
-                  <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
-                </button>
-
-                {/* Dropdown menu */}
-                {isOpen && (
-                  <div className="absolute z-10 w-full mt-2 bg-white border border-gray-200 rounded-lg shadow-lg max-h-80 overflow-y-auto">
-                    {educationLevels.map((level, index) => {
-                      const Icon = level.icon;
-                      return (
-                        <button
-                          key={index}
-                          type="button"
-                          onClick={() => {
-                            setSelectedLevel(level.value);
-                            setIsOpen(false);
-                          }}
-                          className={`w-full flex items-center gap-4 p-4 transition-all hover:bg-gray-50 ${selectedLevel === level.value ? 'bg-gray-50' : ''
-                            } ${index !== educationLevels.length - 1 ? 'border-b border-gray-100' : ''}`}
-                        >
-                          <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-colors ${selectedLevel === level.value
-                              ? 'bg-blue-600 text-white'
-                              : 'bg-gray-100 text-gray-400'
-                            }`}>
-                            <Icon className="w-5 h-5" />
-                          </div>
-                          <span className={`flex-1 text-left text-sm font-medium ${selectedLevel === level.value ? 'text-gray-900' : 'text-gray-600'
-                            }`}>
-                            {level.value}
-                          </span>
-                          {selectedLevel === level.value && (
-                            <CheckCircle className="w-5 h-5 text-blue-600" />
-                          )}
-                        </button>
-                      );
-                    })}
-                  </div>
-                )}
-                {errors.educationLevel && <p className="mt-1 text-sm text-red-500">{errors.educationLevel}</p>}
-              </div>
-
-              {/* Field of Study */}
-              <div>
-                <label htmlFor="fieldOfStudy" className="block text-sm font-medium text-gray-700 mb-2">
-                  Field of Study
-                </label>
-                <input
-                  type="text"
-                  id="fieldOfStudy"
-                  value={formData.fieldOfStudy}
-                  onChange={(e) => handleChange('fieldOfStudy', e.target.value)}
-                  placeholder="e.g., Computer Science, Business, etc."
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent text-gray-900 placeholder:text-gray-400"
-                />
-              </div>
-
-              {/* Institution */}
-              <div>
-                <label htmlFor="institution" className="block text-sm font-medium text-gray-700 mb-2">
-                  Institution
-                </label>
-                <input
-                  type="text"
-                  id="institution"
-                  value={formData.institution}
-                  onChange={(e) => handleChange('institution', e.target.value)}
-                  placeholder="e.g., University of Rwanda"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent text-gray-900 placeholder:text-gray-400"
-                />
-              </div>
-
-              {/* Graduation Year */}
-              <div>
-                <label htmlFor="graduationYear" className="block text-sm font-medium text-gray-700 mb-2">
-                  Expected Graduation Year
-                </label>
-                <input
-                  type="number"
-                  id="graduationYear"
-                  value={formData.graduationYear}
-                  onChange={(e) => handleChange('graduationYear', e.target.value)}
-                  placeholder="e.g., 2025"
-                  min="2024"
-                  max="2030"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent text-gray-900 placeholder:text-gray-400"
-                />
-              </div>
-
-              {/* Interests */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Areas of Interest
-                </label>
-                <div className="grid grid-cols-2 gap-2">
-                  {interests.map((interest) => (
-                    <button
-                      key={interest}
-                      type="button"
-                      onClick={() => toggleInterest(interest)}
-                      className={`p-2 text-sm rounded-lg border transition-all ${formData.interests.includes(interest)
-                          ? 'border-blue-600 bg-blue-50 text-blue-600'
-                          : 'border-gray-200 hover:border-gray-300 text-gray-600'
-                        }`}
-                    >
-                      {interest}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
               <button
                 type="submit"
-                className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+                disabled={isLoading}
+                className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Complete Registration
+                {isLoading ? 'Creating Account...' : 'Complete Registration'}
               </button>
 
               {/* Progress dots */}

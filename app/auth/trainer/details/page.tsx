@@ -4,6 +4,8 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Award, Briefcase, Calendar, CheckCircle, ChevronDown, Clock, FileText, GraduationCap, MapPin, Phone, User, Video, Globe, Users } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
+import { UserRole } from '@/types';
 
 export default function TrainerDetailsPage() {
   const router = useRouter();
@@ -14,12 +16,8 @@ export default function TrainerDetailsPage() {
     phoneNumber: '',
     country: '',
     city: '',
-    highestEducation: '',
     specialization: '',
     yearsOfExperience: '',
-    currentOccupation: '',
-    linkedInProfile: '',
-    portfolio: '',
     teachingExperience: '',
     expertiseAreas: [] as string[],
     languages: [] as string[],
@@ -32,7 +30,6 @@ export default function TrainerDetailsPage() {
     gender: '',
     phoneNumber: '',
     country: '',
-    highestEducation: '',
     specialization: '',
     yearsOfExperience: '',
     teachingExperience: '',
@@ -40,18 +37,8 @@ export default function TrainerDetailsPage() {
     languages: '',
     availability: ''
   });
+  const [isLoading, setIsLoading] = useState(false);
 
-  const [selectedEducation, setSelectedEducation] = useState('');
-  const [isEducationOpen, setIsEducationOpen] = useState(false);
-
-  const educationLevels = [
-    { value: "High School Diploma", icon: FileText },
-    { value: "Associate Degree", icon: Award },
-    { value: "Bachelor's Degree", icon: GraduationCap },
-    { value: "Master's Degree", icon: Award },
-    { value: "Doctoral Degree (PhD)", icon: GraduationCap },
-    { value: "Professional Certification", icon: Briefcase }
-  ];
 
   const expertiseOptions = [
     "Web Development", "Mobile Development", "Data Science", "Machine Learning",
@@ -92,14 +79,15 @@ export default function TrainerDetailsPage() {
     }));
   };
 
-  const handleContinue = (e: React.FormEvent) => {
+  const { registerTrainer } = useAuth();
+
+  const handleContinue = async (e: React.FormEvent) => {
     e.preventDefault();
     const newErrors = {
       dateOfBirth: '',
       gender: '',
       phoneNumber: '',
       country: '',
-      highestEducation: '',
       specialization: '',
       yearsOfExperience: '',
       teachingExperience: '',
@@ -112,7 +100,6 @@ export default function TrainerDetailsPage() {
     if (!formData.gender) newErrors.gender = 'Please select your gender';
     if (!formData.phoneNumber) newErrors.phoneNumber = 'Phone number is required';
     if (!formData.country) newErrors.country = 'Country is required';
-    if (!selectedEducation) newErrors.highestEducation = 'Education level is required';
     if (!formData.specialization) newErrors.specialization = 'Specialization is required';
     if (!formData.yearsOfExperience) newErrors.yearsOfExperience = 'Years of experience is required';
     if (!formData.teachingExperience) newErrors.teachingExperience = 'Teaching experience is required';
@@ -126,14 +113,60 @@ export default function TrainerDetailsPage() {
       return;
     }
 
-    // Store all trainer details data
-    localStorage.setItem('trainerDetails', JSON.stringify({
-      ...formData,
-      highestEducation: selectedEducation
-    }));
+    setIsLoading(true);
+    try {
+      // Get base registration data from localStorage
+      const baseData = {
+        firstName: localStorage.getItem('baseFirstName') || '',
+        lastName: localStorage.getItem('baseLastName') || '',
+        email: localStorage.getItem('baseEmail') || '',
+        password: localStorage.getItem('basePassword') || ''
+      };
 
-    // Redirect to final step or pending approval page
-    router.push('/auth/trainer/pending');
+      // Create trainer data object matching Trainer interface
+      const trainerData = {
+        email: baseData.email,
+        password: baseData.password,
+        firstName: baseData.firstName,
+        lastName: baseData.lastName,
+        phoneNumber: formData.phoneCode + formData.phoneNumber,
+        role: UserRole.TRAINER as const,
+        isActive: true,
+        status: 'pending_approval',
+        gender: formData.gender,
+        dateOfBirth: new Date(formData.dateOfBirth),
+        isVerified: false,
+        otpCode: '',
+        otpExpiry: new Date(),
+        resetToken: '',
+        resetTokenExpiry: new Date(),
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        cvUrl: '',
+        experience: {
+          yearsOfExperience: parseInt(formData.yearsOfExperience.split('-')[1]) || parseInt(formData.yearsOfExperience) || 0,
+          specializations: formData.expertiseAreas
+        },
+        skills: formData.expertiseAreas,
+        availability: formData.availability,
+        approvalStatus: 'pending' as const
+      };
+
+      await registerTrainer(trainerData);
+      
+      // Clear localStorage
+      localStorage.removeItem('baseFirstName');
+      localStorage.removeItem('baseLastName');
+      localStorage.removeItem('baseEmail');
+      localStorage.removeItem('basePassword');
+      
+      // Redirect to pending approval page
+      router.push('/auth/trainer/pending');
+    } catch (error) {
+      console.error('Registration failed:', error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -290,84 +323,6 @@ export default function TrainerDetailsPage() {
               <div className="border-b border-gray-200 pb-4">
                 <h3 className="text-lg font-medium text-gray-900 mb-3">Professional Background</h3>
 
-                {/* Highest Education */}
-                <div className="relative">
-                  <label className='block text-sm font-medium text-gray-700 mb-2'>
-                    <GraduationCap className="w-4 h-4 inline mr-1" />
-                    Highest Education
-                  </label>
-                  <button
-                    type="button"
-                    onClick={() => setIsEducationOpen(!isEducationOpen)}
-                    className={`w-full flex items-center justify-between p-3 border rounded-lg transition-all ${selectedEducation
-                        ? 'border-green-600 bg-gray-50'
-                        : 'border-gray-200 bg-white hover:border-gray-300'
-                      }`}
-                  >
-                    <div className="flex items-center gap-4">
-                      {selectedEducation ? (
-                        <>
-                          {(() => {
-                            const selected = educationLevels.find(l => l.value === selectedEducation);
-                            const Icon = selected?.icon || GraduationCap;
-                            return (
-                              <>
-                                <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-green-600 text-white">
-                                  <Icon className="w-5 h-5" />
-                                </div>
-                                <span className="text-sm font-medium text-gray-900">{selectedEducation}</span>
-                              </>
-                            );
-                          })()}
-                        </>
-                      ) : (
-                        <>
-                          <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-gray-100 text-gray-400">
-                            <GraduationCap className="w-5 h-5" />
-                          </div>
-                          <span className="text-sm font-medium text-gray-500">Select your highest education</span>
-                        </>
-                      )}
-                    </div>
-                    <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform ${isEducationOpen ? 'rotate-180' : ''}`} />
-                  </button>
-
-                  {/* Dropdown menu */}
-                  {isEducationOpen && (
-                    <div className="absolute z-10 w-full mt-2 bg-white border border-gray-200 rounded-lg shadow-lg max-h-80 overflow-y-auto">
-                      {educationLevels.map((level, index) => {
-                        const Icon = level.icon;
-                        return (
-                          <button
-                            key={index}
-                            type="button"
-                            onClick={() => {
-                              setSelectedEducation(level.value);
-                              setIsEducationOpen(false);
-                            }}
-                            className={`w-full flex items-center gap-4 p-4 transition-all hover:bg-gray-50 ${selectedEducation === level.value ? 'bg-gray-50' : ''
-                              } ${index !== educationLevels.length - 1 ? 'border-b border-gray-100' : ''}`}
-                          >
-                            <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-colors ${selectedEducation === level.value
-                                ? 'bg-green-600 text-white'
-                                : 'bg-gray-100 text-gray-400'
-                              }`}>
-                              <Icon className="w-5 h-5" />
-                            </div>
-                            <span className={`flex-1 text-left text-sm font-medium ${selectedEducation === level.value ? 'text-gray-900' : 'text-gray-600'
-                              }`}>
-                              {level.value}
-                            </span>
-                            {selectedEducation === level.value && (
-                              <CheckCircle className="w-5 h-5 text-green-600" />
-                            )}
-                          </button>
-                        );
-                      })}
-                    </div>
-                  )}
-                  {errors.highestEducation && <p className="mt-1 text-sm text-red-500">{errors.highestEducation}</p>}
-                </div>
 
                 {/* Specialization */}
                 <div className="mt-4">
@@ -412,20 +367,6 @@ export default function TrainerDetailsPage() {
                   {errors.yearsOfExperience && <p className="mt-1 text-sm text-red-500">{errors.yearsOfExperience}</p>}
                 </div>
 
-                {/* Current Occupation */}
-                <div className="mt-4">
-                  <label htmlFor="currentOccupation" className="block text-sm font-medium text-gray-700 mb-2">
-                    Current Occupation
-                  </label>
-                  <input
-                    type="text"
-                    id="currentOccupation"
-                    value={formData.currentOccupation}
-                    onChange={(e) => handleChange('currentOccupation', e.target.value)}
-                    placeholder="e.g., Senior Developer, Marketing Manager"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent text-gray-900 placeholder:text-gray-400"
-                  />
-                </div>
               </div>
 
               {/* Teaching Information Section */}
@@ -520,79 +461,16 @@ export default function TrainerDetailsPage() {
                   {errors.availability && <p className="mt-1 text-sm text-red-500">{errors.availability}</p>}
                 </div>
 
-                {/* Hourly Rate */}
-                <div className="mt-4">
-                  <label htmlFor="hourlyRate" className="block text-sm font-medium text-gray-700 mb-2">
-                    Hourly Rate (USD)
-                  </label>
-                  <input
-                    type="number"
-                    id="hourlyRate"
-                    value={formData.hourlyRate}
-                    onChange={(e) => handleChange('hourlyRate', e.target.value)}
-                    placeholder="e.g., 50"
-                    min="0"
-                    step="5"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent text-gray-900 placeholder:text-gray-400"
-                  />
-                </div>
               </div>
 
-              {/* Professional Profiles */}
-              <div className="border-b border-gray-200 pb-4">
-                <h3 className="text-lg font-medium text-gray-900 mb-3">Professional Profiles</h3>
 
-                {/* LinkedIn Profile */}
-                <div>
-                  <label htmlFor="linkedInProfile" className="block text-sm font-medium text-gray-700 mb-2">
-                    LinkedIn Profile URL
-                  </label>
-                  <input
-                    type="url"
-                    id="linkedInProfile"
-                    value={formData.linkedInProfile}
-                    onChange={(e) => handleChange('linkedInProfile', e.target.value)}
-                    placeholder="https://linkedin.com/in/yourprofile"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent text-gray-900 placeholder:text-gray-400"
-                  />
-                </div>
-
-                {/* Portfolio */}
-                <div className="mt-4">
-                  <label htmlFor="portfolio" className="block text-sm font-medium text-gray-700 mb-2">
-                    Portfolio/Website URL
-                  </label>
-                  <input
-                    type="url"
-                    id="portfolio"
-                    value={formData.portfolio}
-                    onChange={(e) => handleChange('portfolio', e.target.value)}
-                    placeholder="https://yourportfolio.com"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent text-gray-900 placeholder:text-gray-400"
-                  />
-                </div>
-              </div>
-
-              {/* Bio */}
-              <div>
-                <label htmlFor="bio" className="block text-sm font-medium text-gray-700 mb-2">
-                  Professional Bio
-                </label>
-                <textarea
-                  id="bio"
-                  value={formData.bio}
-                  onChange={(e) => handleChange('bio', e.target.value)}
-                  placeholder="Tell us about yourself, your teaching philosophy, and what makes you a great trainer..."
-                  rows={4}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent text-gray-900 placeholder:text-gray-400"
-                />
-              </div>
 
               <button
                 type="submit"
-                className="w-full bg-green-600 text-white py-3 rounded-lg font-medium hover:bg-green-700 transition-colors"
+                disabled={isLoading}
+                className="w-full bg-green-600 text-white py-3 rounded-lg font-medium hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Submit Application
+                {isLoading ? 'Submitting Application...' : 'Submit Application'}
               </button>
 
               {/* Progress dots */}
