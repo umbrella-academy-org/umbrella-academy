@@ -49,13 +49,7 @@ export default function LoginPage() {
     await login(email, password);
   };
 
-  const fillDemoCredentials = (role: string) => {
-    const demoUser = mockUsers.find(u => u.role === role);
-    if (demoUser) {
-      setEmail(demoUser.email);
-      setPassword('demo123'); // Master demo password
-    }
-  };
+
 
   return (
     <div className="flex h-screen">
@@ -74,48 +68,7 @@ export default function LoginPage() {
             Sign in to your account to continue.
           </p>
 
-          {/* Demo Credentials */}
-          <div className="w-full mb-6 p-4 bg-gray-50 rounded-lg">
-            <p className="text-sm font-medium text-gray-700 mb-2">Demo Accounts:</p>
-            <div className="grid grid-cols-2 gap-2">
-              <button
-                type="button"
-                onClick={() => fillDemoCredentials('student')}
-                className="text-xs px-2 py-1 bg-blue-100 text-blue-700 rounded hover:bg-blue-200 transition-colors"
-              >
-                Student
-              </button>
-              <button
-                type="button"
-                onClick={() => fillDemoCredentials('trainer')}
-                className="text-xs px-2 py-1 bg-green-100 text-green-700 rounded hover:bg-green-200 transition-colors"
-              >
-                Trainer
-              </button>
-              <button
-                type="button"
-                onClick={() => fillDemoCredentials('mentor')}
-                className="text-xs px-2 py-1 bg-purple-100 text-purple-700 rounded hover:bg-purple-200 transition-colors"
-              >
-                Mentor
-              </button>
-              <button
-                type="button"
-                onClick={() => fillDemoCredentials('field-admin')}
-                className="text-xs px-2 py-1 bg-orange-100 text-orange-700 rounded hover:bg-orange-200 transition-colors"
-              >
-                Field Admin
-              </button>
-            </div>
-            <button
-              type="button"
-              onClick={() => fillDemoCredentials('umbrella-admin')}
-              className="text-xs px-2 py-1 bg-red-100 text-red-700 rounded hover:bg-red-200 transition-colors mt-2 w-full"
-            >
-              Umbrella Admin
-            </button>
-          </div>
-
+       
           {/* Form */}
           <form onSubmit={handleLogin} className="w-full space-y-4">
             <div>
