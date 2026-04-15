@@ -1,10 +1,10 @@
+import { Student } from '@/types';
 import { apiClient } from './client';
 import { API_ENDPOINTS } from './constants';
-import { User } from '@/types';
 
 class UserService {
-  async getMe(): Promise<{ success: boolean; user: User }> {
-    return apiClient.get<{ success: boolean; user: User }>(API_ENDPOINTS.USERS_ME);
+  async getStudent(): Promise<{ success: boolean; user: Student}> {
+    return apiClient.get<{ success: boolean; user: Student }>(API_ENDPOINTS.USERS_ME);
   }
 
   async updateProfile(data: Partial<User>): Promise<{ success: boolean; user: User }> {

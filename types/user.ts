@@ -1,73 +1,80 @@
-import { Wallet } from './payment';
+export enum UserRole {
+  STUDENT = 'student',
+  GUARDIAN = 'guardian',
+  TRAINER = 'trainer',
+  SALES_MANAGER = 'sales_manager',
+  ADMIN = 'admin'
+}
 
-export type UserType = 'student' | 'trainer' | 'admin';
+export enum GuardianInviteState {
+  INVITED = 'invited',
+  ACTIVE = 'active',
+  DECLINED = 'declined'
+}
 
 export interface Availability {
-  weeklyAvailableHours?: number;
-  preferredTimeSlots?: string[];
-  preferredDays?: string[];
+  weeklyAvailableHours: number;
+  preferredTimeSlots: string[];
+  preferredDays: string[];
 }
 
-export interface BaseUser {
-  id: string;
-  name: string;
+export interface OnboardingChecklist {
+  accountCreated: boolean; 
+  orientationBooked: boolean;
+  roadmapReceived: boolean;
+  learningStarted: boolean;
+}
+
+export interface Experience {
+  yearsOfExperience: number;
+  specializations: string[];
+}
+
+
+export interface BaseUser  {
   email: string;
-  role: UserType;
-  status: 'active' | 'inactive' | 'suspended' | 'paused';
-  joinDate: string;
-  avatar?: string;
-  profileData: {
-    bio?: string;
-    skills?: string[];
-    experience?: string;
-  };
-  createdAt: Date;
-  lastLogin: Date;
+  password: string;
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  role: UserRole;
   isActive: boolean;
+  status: string;
+  gender: string;
+  dateOfBirth: Date;
+  isVerified: boolean;
+  otpCode: string;
+  otpExpiry: Date;
+  resetToken: string;
+  resetTokenExpiry: Date;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
-export interface StudentUser extends BaseUser {
-  role: 'student';
-  availability: {
-    weeklyAvailableHours: number;
-    preferredSessionDuration: number;
-    preferredTimeSlots: ('morning' | 'afternoon' | 'evening')[];
-    preferredDays: ('monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday')[];
-  };
-  progress?: number;
-  lastSession?: string;
-  roadmapId?: string;
-  learningPreferences: {
-    pace: 'slow' | 'medium' | 'fast';
-    style: 'visual' | 'auditory' | 'kinesthetic' | 'mixed';
-  };
+export interface Guardian extends BaseUser {
+  role: UserRole.GUARDIAN;
+  linkedStudentIds: string[];
+  inviteState: GuardianInviteState;
+  inviteSentAt: Date;
+  passwordSetAt: Date | null;
 }
 
-export interface TrainerUser extends BaseUser {
-  role: 'trainer';
-  availability: {
-    weeklyAvailableHours: number;
-    maxStudentsPerSession: number;
-    preferredSessionDuration: number;
-    availableTimeSlots: ('morning' | 'afternoon' | 'evening')[];
-    availableDays: ('monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday')[];
-  };
-  expertise: string[];
-  experience: {
-    yearsOfExperience: number;
-    specializations: string[];
-  };
-  capacity?: number;
-  assigned?: number;
-  available?: number;
-  rating?: number;
-  totalSessions?: number;
-  wallet?: Wallet;
+export interface Student extends BaseUser {
+  role: UserRole.STUDENT;
+  guardianIds: string[];
+  hasPaidOrientation: boolean;
+  hasActiveSubscription: boolean;
+  subscriptionExpiryDate: Date | null;
+  onboardingStatus: OnboardingChecklist;
+  assignedTrainerId: string | null;
+  currentRoadmapId: string | null;
 }
 
-export interface AdminUser extends BaseUser {
-  role: 'admin';
-  permissions: string[];
+export interface Trainer extends BaseUser {
+  role: UserRole.TRAINER;
+  cvUrl: string;
+  experience: Experience;
+  skills: string[];
+  availability: string;
+  approvalStatus: 'pending' | 'approved' | 'rejected'
 }
-
-export type User = StudentUser | TrainerUser | AdminUser;

@@ -38,7 +38,7 @@ class ApiClient {
     this.logoutListeners = this.logoutListeners.filter(cb => cb !== callback);
   }
 
-  private async request<T>(method: string, endpoint: string, body?: unknown, timeout = API_CONFIG.TIMEOUT): Promise<T> {
+  private async request<T>(method: string, endpoint: string, body?: unknown, timeout = API_CONFIG.TIMEOUT): Promise<ApiResponse<T>> {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), timeout);
 
@@ -57,7 +57,7 @@ class ApiClient {
       }
 
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      return res.json() as Promise<T>;
+      return res.json() as Promise<ApiResponse<T>>;
     } catch (error) {
       if (error instanceof Error && error.name === 'AbortError') {
         throw new Error(`Request timed out after ${timeout}ms`);
@@ -68,24 +68,24 @@ class ApiClient {
     }
   }
 
-  async get<T>(endpoint: string, params?: Record<string, unknown>): Promise<T> {
+  async get<T>(endpoint: string, params?: Record<string, unknown>): Promise<ApiResponse<T>> {
     const query = params ? '?' + new URLSearchParams(params as Record<string, string>).toString() : '';
     return this.request<T>('GET', endpoint + query);
   }
 
-  async post<T>(endpoint: string, data?: unknown): Promise<T> {
+  async post<T>(endpoint: string, data?: unknown): Promise<ApiResponse<T>> {
     return this.request<T>('POST', endpoint, data);
   }
 
-  async put<T>(endpoint: string, data?: unknown): Promise<T> {
+  async put<T>(endpoint: string, data?: unknown): Promise<ApiResponse<T>> {
     return this.request<T>('PUT', endpoint, data);
   }
 
-  async patch<T>(endpoint: string, data?: unknown): Promise<T> {
+  async patch<T>(endpoint: string, data?: unknown): Promise<ApiResponse<T>> {
     return this.request<T>('PATCH', endpoint, data);
   }
 
-  async delete<T>(endpoint: string): Promise<T> {
+  async delete<T>(endpoint: string): Promise<ApiResponse<T>> {
     return this.request<T>('DELETE', endpoint);
   }
 

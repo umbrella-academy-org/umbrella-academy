@@ -1,75 +1,61 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { User, UserType } from '@/types';
-import { authService, RegisterRequest, RegisterStudentRequest, RegisterTrainerRequest } from '@/services/auth';
+import { authService } from '@/services/auth';
+import { BaseUser, Student, Trainer, UserRole } from '@/types';
 
 interface AuthContextType {
-  user: User | null;
+  error: string | null;
+  user: BaseUser | null;
   isAuthenticated: boolean;
   isLoading: boolean;
-  login: (email: string, password: string) => Promise<boolean | string>;
-  register: (data: RegisterRequest) => Promise<{ success: boolean; pending?: boolean; error?: string }>;
+  login: (email: string, password: string) => Promise<void>;
+  registerStudent: (data: Student) => Promise<void>;
+  registerTrainer: (data: Trainer) => Promise<void>;
   logout: () => void;
-  hasRole: (role: UserType) => boolean;
-  hasPermission: (permission: string) => boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<BaseUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const token = localStorage.getItem('auth_token');
-        if (token) {
-          const response = await authService.checkToken();
-          if (response.success && response.user) setUser(response.user);
-        }
-      } catch {
-        localStorage.removeItem('auth_token');
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    checkAuth();
-  }, []);
 
-  const login = async (email: string, password: string): Promise<boolean | string> => {
+
+  const login = async (email: string, password: string): Promise<void> => {
     setIsLoading(true);
     try {
       const response = await authService.login(email, password);
-      if (response.success && response.user) { setUser(response.user); return true; }
-      return false;
+      if (response.success && response.data) { setUser(response.data.user); }
     } catch (err: unknown) {
-      return err instanceof Error ? err.message : 'Login failed. Please try again.';
+     setError(err instanceof Error ? err.message : 'Login failed. Please try again.');
     } finally {
       setIsLoading(false);
     }
   };
 
-  const register = async (data: RegisterRequest): Promise<{ success: boolean; pending?: boolean; error?: string }> => {
+  const registerStudent = async (data: Student): Promise<void> => {
     setIsLoading(true);
     try {
-      if (data.role === 'student') {
-        const response = await authService.registerStudent(data as unknown as RegisterStudentRequest);
-        if (response.success && response.user) { setUser(response.user); return { success: true }; }
-        return { success: false, error: 'Registration failed' };
-      } else if (data.role === 'trainer') {
-        const response = await authService.registerTrainer(data as unknown as RegisterTrainerRequest);
-        if (response.success && response.pending) return { success: true, pending: true };
-        return { success: false, error: 'Registration failed' };
-      } else {
-        // any other role
-        const response = await authService.register(data);
-        if (response.success && response.user) { setUser(response.user); return { success: true }; }
-        return { success: false, error: 'Registration failed' };
-      }
+      const response = await authService.registerStudent(data);
+      if (response.success && response.data) { setUser(response.data.user); }
     } catch (err: unknown) {
-      return { success: false, error: err instanceof Error ? err.message : 'Registration failed. Please try again.' };
+      setError(err instanceof Error ? err.message : 'Registration failed. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const registerTrainer = async (data: Trainer): Promise<void> => {
+    setIsLoading(true);
+    try {
+      const response = await authService.registerTrainer(data);
+      if (response.success && response.data) { setUser(response.data.user); }
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Registration failed. Please try again.');
     } finally {
       setIsLoading(false);
     }
@@ -79,20 +65,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try { await authService.logout(); } catch { /* ignore */ } finally { setUser(null); }
   };
 
-  const hasRole = (role: UserType): boolean => user?.role === role;
-
-  const hasPermission = (permission: string): boolean => {
-    if (!user) return false;
-    const permissions: Record<UserType, string[]> = {
-      'student': ['view_own_roadmap', 'view_own_sessions', 'view_own_subscription'],
-      'trainer': ['view_students', 'manage_sessions', 'view_wallet', 'create_assignments'],
-      'admin': ['manage_system', 'view_all_analytics', 'system_settings'],
-    };
-    return permissions[user.role]?.includes(permission) ?? false;
-  };
 
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated: !!user, isLoading, login, register, logout, hasRole, hasPermission }}>
+    <AuthContext.Provider value={{ user,
+     isAuthenticated: !!user, 
+     isLoading, 
+     login, 
+     registerStudent, 
+     registerTrainer, 
+     logout, 
+     error
+     }}>
       {children}
     </AuthContext.Provider>
   );
