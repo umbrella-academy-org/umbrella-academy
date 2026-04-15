@@ -16,6 +16,7 @@ import { Testimonials } from "@/components/Testimonials";
 import { CTA } from "@/components/CTA";
 import { Footer } from "@/components/Footer";
 import { Logo } from "@/components/ui/Logo";
+import { UserRole } from '@/types';
 
 export default function Home() {
   const { navigate } = useNavigationWithLoading();
@@ -24,10 +25,12 @@ export default function Home() {
   // Redirect authenticated users to their dashboard
   useEffect(() => {
     if (isAuthenticated && user) {
-      const dashboardRoutes: Record<string, string> = {
+      const dashboardRoutes: Record<UserRole, string> = {
         'student': '/dashboard/student',
         'trainer': '/dashboard/trainer',
-        'admin': '/dashboard/admin'
+        'admin': '/dashboard/admin',
+        'guardian': '/dashboard/guardian',
+        'sales_manager': '/dashboard/sales_manager'
       };
       if (dashboardRoutes[user.role]) {
         navigate(dashboardRoutes[user.role]);

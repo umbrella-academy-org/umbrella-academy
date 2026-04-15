@@ -1,47 +1,32 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Sidebar from '@/components/dashboard/Sidebar';
-
-import StatsCards from '@/components/dashboard/StatsCards';
-import MonthlySessionsChart from '@/components/dashboard/MonthlySessionsChart';
-import CourseCard from '@/components/dashboard/CourseCard';
-import CurrentPhase from '@/components/dashboard/CurrentPhase';
-import ScheduledEvents from '@/components/dashboard/ScheduledEvents';
-import Calendar from '@/components/dashboard/Calendar';
-import LiveSessions from '@/components/dashboard/LiveSessions';
-import { useAuth, useRoadmaps } from '@/contexts';
+import { CheckCircle, Lock, CreditCard, Calendar, BookOpen, Award, MessageSquare, User, Settings, LogOut } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
+import { OnboardingChecklist, UserRole } from '@/types';
+import OrientationPaymentModal from '@/components/payment/OrientationPaymentModal';
+import SubscriptionPaymentModal from '@/components/payment/SubscriptionPaymentModal';
+import BookingCalendar from '@/components/booking/BookingCalendar';
 
-export default function StudentDashboard() {
+export default function StudentDashboard() { 
   const { user, isAuthenticated, isLoading: authLoading } = useAuth();
-  const { studentRoadmaps, isLoading: roadmapsLoading } = useRoadmaps();
   const { navigate } = useNavigationWithLoading();
-  const [selectedDateRange, setSelectedDateRange] = useState('Today');
 
-  // Check if dev mode is enabled from sidebar
-  const [isNewUserMode, setIsNewUserMode] = useState(false);
+  // State for onboarding checklist
+  const [onboardingChecklist, setOnboardingChecklist] = useState<OnboardingChecklist>({
+    accountCreated: true,
+    bookingPayed: false,
+    subscriptionPayed: false,
+    orientationBooked: false,
+    roadmapReceived: false,
+    learningStarted: false
+  });
 
-  useEffect(() => {
-    const checkDevMode = () => {
-      // Listen for dev mode changes from sidebar
-      const devModeEvent = (event: CustomEvent) => {
-        setIsNewUserMode(event.detail.isDevMode);
-      };
-
-      window.addEventListener('devModeChanged', devModeEvent as EventListener);
-
-      // Check initial state
-      const initialDevMode = localStorage.getItem('devNewUserMode') === 'true';
-      setIsNewUserMode(initialDevMode);
-
-      return () => {
-        window.removeEventListener('devModeChanged', devModeEvent as EventListener);
-      };
-    };
-
-    checkDevMode();
-  }, []);
+  // Modal states
+  const [showOrientationPayment, setShowOrientationPayment] = useState(false);
+  const [showSubscriptionPayment, setShowSubscriptionPayment] = useState(false);
+  const [showBookingCalendar, setShowBookingCalendar] = useState(false);
 
   // Redirect if not authenticated or not a student
   useEffect(() => {
@@ -51,21 +36,14 @@ export default function StudentDashboard() {
     }
 
     if (!authLoading && user && user.role !== 'student') {
-      // Redirect to appropriate dashboard based on role
-      const dashboardRoutes = {
-        'trainer': '/dashboard/trainer',
-        'company-admin': '/dashboard/field-admin',
-        'umbrella-admin': '/dashboard/umbrella-admin'
-      };
-      navigate(dashboardRoutes[user.role as keyof typeof dashboardRoutes] || '/');
+      navigate('/dashboard/trainer');
     }
   }, [authLoading, isAuthenticated, user, navigate]);
 
-  // Show loading while checking auth or loading data
-  if (authLoading || roadmapsLoading) {
+  // Show loading while checking auth
+  if (authLoading) {
     return (
       <div className="flex h-screen bg-white">
-        <div className="w-64 bg-gray-900 animate-pulse"></div>
         <div className="flex-1 flex flex-col">
           <div className="h-16 bg-gray-100 animate-pulse"></div>
           <div className="flex-1 p-6 space-y-6">
@@ -74,16 +52,6 @@ export default function StudentDashboard() {
               {[...Array(4)].map((_, i) => (
                 <div key={i} className="h-24 bg-gray-200 rounded animate-pulse"></div>
               ))}
-            </div>
-            <div className="grid grid-cols-1 xl:grid-cols-5 gap-4">
-              <div className="xl:col-span-3 space-y-4">
-                <div className="h-64 bg-gray-200 rounded animate-pulse"></div>
-                <div className="h-48 bg-gray-200 rounded animate-pulse"></div>
-              </div>
-              <div className="xl:col-span-2 space-y-4">
-                <div className="h-32 bg-gray-200 rounded animate-pulse"></div>
-                <div className="h-48 bg-gray-200 rounded animate-pulse"></div>
-              </div>
             </div>
           </div>
         </div>
@@ -96,235 +64,261 @@ export default function StudentDashboard() {
     return null;
   }
 
-  // Get student's active roadmap (empty if new user mode)
-  const activeRoadmap = isNewUserMode ? null : studentRoadmaps.find(roadmap =>
-    roadmap.studentId === user.id && roadmap.status === 'active'
-  );
+  // Calculate overall progress
+  const completedSteps = Object.values(onboardingChecklist).filter(Boolean).length;
+  const totalSteps = Object.keys(onboardingChecklist).length;
+  const progressPercentage = (completedSteps / totalSteps) * 100;
 
-  // New User Mode - Show empty state with setup prompt
-  if (isNewUserMode) {
-    return (
-      <div className="flex h-screen bg-white">
-        <Sidebar activeItem="Home" userType="student" />
+  // Handle orientation payment success
+  const handleOrientationPaymentSuccess = () => {
+    setOnboardingChecklist(prev => ({ ...prev, bookingPayed: true }));
+    setShowOrientationPayment(false);
+    setShowBookingCalendar(true);
+  };
 
-        <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
-          <main className="flex-1 overflow-auto">
-            <div className="p-3 lg:p-4">
-              {/* Welcome Section */}
-              <div className="mb-4 lg:mb-6">
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                  <div>
-                    <h1 className="text-xl lg:text-2xl font-semibold text-gray-900 flex items-center gap-2">
-                      <svg className="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 8h10m0 0V6a2 2 0 00-2-2H9a2 2 0 00-2 2v2m10 0v10a2 2 0 01-2 2H9a2 2 0 01-2-2V8m10 0H7" />
-                      </svg>
-                      Welcome back, {user.name.split(' ')[0]}
-                    </h1>
-                    <p className="text-gray-500 mt-1 text-sm lg:text-base">Learn with ease</p>
-                  </div>
-                </div>
-              </div>
+  // Handle subscription payment success
+  const handleSubscriptionPaymentSuccess = () => {
+    setOnboardingChecklist(prev => ({ ...prev, subscriptionPayed: true }));
+    setShowSubscriptionPayment(false);
+  };
 
-              {/* Setup Prompt Banner */}
-              <div className="bg-linear-to-r from-yellow-50 to-yellow-100 border border-yellow-200 rounded-lg p-6 mb-6">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-yellow-600 rounded-lg flex items-center justify-center shrink-0">
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2">Finish Setting Up Your Account</h3>
-                    <p className="text-gray-600 mb-4">
-                      Complete your profile setup to unlock your personalized learning experience, connect with trainers, and start your roadmap.
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-3">
-                      <button
-                        onClick={() => navigate('/post-signup/availability')}
-                        className="px-6 py-3 bg-yellow-600 text-white rounded-lg font-medium hover:bg-yellow-700 transition-colors"
-                      >
-                        Complete Setup
-                      </button>
-                      <button className="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-colors">
-                        Learn More
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
+  // Handle booking completion
+  const handleBookingComplete = () => {
+    setOnboardingChecklist(prev => ({ ...prev, orientationBooked: true }));
+    setShowBookingCalendar(false);
+  };
 
-              {/* Empty State Stats */}
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-3 lg:gap-4 mb-6">
-                {[
-                  { label: 'Learning Progress', value: '0%', icon: 'BookOpen' },
-                  { label: 'Completed Sessions', value: '0', icon: 'Target' },
-                  { label: 'Active Roadmaps', value: '0', icon: 'Map' },
-                  { label: 'Field Status', value: 'Not Selected', icon: 'Building' }
-                ].map((stat, index) => (
-                  <div key={index} className="bg-white border border-gray-200 rounded-lg p-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center">
-                        <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          {stat.icon === 'BookOpen' && <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />}
-                          {stat.icon === 'Target' && <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />}
-                          {stat.icon === 'Map' && <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />}
-                          {stat.icon === 'Building' && <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />}
-                        </svg>
-                      </div>
-                      <div>
-                        <p className="text-sm text-gray-500">{stat.label}</p>
-                        <p className="text-lg font-semibold text-gray-900">{stat.value}</p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+  // Handle roadmap creation
+  const handleRoadmapCreated = () => {
+    setOnboardingChecklist(prev => ({ ...prev, roadmapReceived: true }));
+  };
 
-              {/* Empty State Content */}
-              <div className="grid grid-cols-1 xl:grid-cols-5 gap-3 lg:gap-4">
-                <div className="xl:col-span-3 space-y-3 lg:space-y-4">
-                  {/* Empty Chart */}
-                  <div className="bg-white border border-gray-200 rounded-lg p-6">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Learning Progress</h3>
-                    <div className="flex items-center justify-center h-48 bg-gray-50 rounded-lg">
-                      <div className="text-center">
-                        <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
-                          <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                          </svg>
-                        </div>
-                        <p className="text-gray-500">No learning data yet</p>
-                        <p className="text-sm text-gray-400">Complete setup to start tracking progress</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Empty Course Card */}
-                  <div className="bg-white border border-gray-200 rounded-lg p-6">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Current Course</h3>
-                    <div className="flex items-center justify-center h-32 bg-gray-50 rounded-lg">
-                      <div className="text-center">
-                        <p className="text-gray-500">No active course</p>
-                        <p className="text-sm text-gray-400">Set up your roadmap to get started</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="xl:col-span-2 space-y-3 lg:space-y-4">
-                  {/* Empty Phase */}
-                  <div className="bg-white border border-gray-200 rounded-lg p-6">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Current Phase</h3>
-                    <div className="text-center py-8">
-                      <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-3">
-                        <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                      </div>
-                      <p className="text-gray-500">No active phase</p>
-                    </div>
-                  </div>
-
-                  {/* Empty Events */}
-                  <div className="bg-white border border-gray-200 rounded-lg p-6">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Upcoming Events</h3>
-                    <div className="text-center py-8">
-                      <p className="text-gray-500">No scheduled events</p>
-                    </div>
-                  </div>
-
-                  {/* Empty Sessions */}
-                  <div className="bg-white border border-gray-200 rounded-lg p-6">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Live Sessions</h3>
-                    <div className="text-center py-8">
-                      <p className="text-gray-500">No live sessions</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </main>
-        </div>
-      </div>
-    );
-  }
+  // Handle learning start
+  const handleLearningStarted = () => {
+    setOnboardingChecklist(prev => ({ ...prev, learningStarted: true }));
+  };
 
   return (
     <div className="flex h-screen bg-white">
-      {/* Sidebar - Fixed */}
-      <Sidebar activeItem="Home" userType="student" />
+      {/* Sidebar */}
+      <div className="w-64 bg-gray-900 text-white">
+        <div className="p-6">
+          <h2 className="text-xl font-bold mb-8">Dreamize</h2>
 
-      {/* Main Content - Scrollable */}
-      <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
-        {/* Dashboard Content - Scrollable */}
-        <main className="flex-1 overflow-auto">
-          <div className="p-3 lg:p-4">
-            {/* Welcome Section */}
-            <div className="mb-4 lg:mb-6">
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                <div>
-                  <h1 className="text-xl lg:text-2xl font-semibold text-gray-900 flex items-center gap-2">
-                    <svg className="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 8h10m0 0V6a2 2 0 00-2-2H9a2 2 0 00-2 2v2m10 0v10a2 2 0 01-2 2H9a2 2 0 01-2-2V8m10 0H7" />
-                    </svg>
-                    Welcome back, {user.name.split(' ')[0]}
-                  </h1>
-                  <p className="text-gray-500 mt-1 text-sm lg:text-base">Learn with ease</p>
-                </div>
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 lg:gap-3">
-                  <button className="flex items-center justify-center gap-2 px-3 lg:px-4 py-2 text-gray-600 hover:text-gray-900 transition-colors text-sm lg:text-base">
-                    <svg className="w-4 h-4 lg:w-5 lg:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
-                    <span className="hidden sm:inline">Generate a Report</span>
-                    <span className="sm:hidden">Report</span>
-                  </button>
-                  <button
-                    onClick={() => navigate('/post-signup/roadmap')}
-                    className="px-4 lg:px-6 py-2 bg-yellow-600 text-white rounded-lg font-medium hover:bg-yellow-700 transition-colors text-sm lg:text-base"
-                  >
-                    Continue Learning
-                  </button>
-                </div>
+          {/* User Info */}
+          <div className="mb-8">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center">
+                <User className="w-5 h-5" />
+              </div>
+              <div>
+                <p className="font-medium">{user.firstName} {user.lastName}</p>
+                <p className="text-sm text-gray-400">{user.email}</p>
               </div>
             </div>
+          </div>
 
-            {/* Stats Cards */}
-            <StatsCards />
+          {/* Navigation Menu */}
+          <nav className="space-y-2">
+            {[
+              { icon: BookOpen, label: 'My Roadmap', href: '#', disabled: !onboardingChecklist.roadmapReceived },
+              { icon: Calendar, label: 'Sessions & Calendar', href: '#', disabled: !onboardingChecklist.orientationBooked },
+              { icon: Award, label: 'Certificates', href: '#', disabled: !onboardingChecklist.learningStarted },
+              { icon: Award, label: 'Portfolio', href: '#', disabled: !onboardingChecklist.learningStarted },
+              { icon: MessageSquare, label: 'Chat', href: '#', disabled: !onboardingChecklist.orientationBooked },
+              { icon: CreditCard, label: 'Subscription', href: '#', disabled: false },
+            ].map((item, index) => (
+              <button
+                key={index}
+                onClick={() => !item.disabled && navigate(item.href)}
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${item.disabled
+                    ? 'bg-gray-800 text-gray-500 cursor-not-allowed'
+                    : 'hover:bg-gray-800 text-white'
+                  }`}
+                disabled={item.disabled}
+              >
+                <item.icon className="w-5 h-5" />
+                <span>{item.label}</span>
+                {item.disabled && <Lock className="w-4 h-4 ml-auto" />}
+              </button>
+            ))}
+          </nav>
 
-            {/* Main Dashboard Grid */}
-            <div className="grid grid-cols-1 xl:grid-cols-5 gap-3 lg:gap-4 mt-4 lg:mt-6">
-              {/* Left Column - Charts and Course (3 columns on xl) */}
-              <div className="xl:col-span-3 space-y-3 lg:space-y-4">
-                {/* Monthly Sessions Chart */}
-                <MonthlySessionsChart userType="student" />
+          {/* Logout */}
+          <div className="absolute bottom-6 left-6 right-6">
+            <button className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-800 text-white transition-colors">
+              <LogOut className="w-5 h-5" />
+              <span>Logout</span>
+            </button>
+          </div>
+        </div>
+      </div>
 
-                {/* Course Card */}
-                <CourseCard activeRoadmap={activeRoadmap || undefined} />
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col">
+        {/* Header */}
+        <header className="bg-white border-b border-gray-200 px-8 py-4">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-2xl font-bold text-gray-900">Welcome back, {user.firstName}</h1>
+              <p className="text-gray-500">Your mentorship journey starts here</p>
+            </div>
 
-                {/* Calendar - Moved below charts */}
-                <Calendar
-                  selectedDateRange={selectedDateRange}
-                  onDateRangeChange={setSelectedDateRange}
-                  userType="student"
+            {/* Main CTA Button */}
+            {!onboardingChecklist.bookingPayed && (
+              <button
+                onClick={() => setShowOrientationPayment(true)}
+                className="px-6 py-3 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors flex items-center gap-2"
+              >
+                <CreditCard className="w-5 h-5" />
+                Pay Orientation Fee (20,000 RWF)
+              </button>
+            )}
+
+            {onboardingChecklist.bookingPayed && !onboardingChecklist.subscriptionPayed && (
+              <button
+                onClick={() => setShowSubscriptionPayment(true)}
+                className="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center gap-2"
+              >
+                <CreditCard className="w-5 h-5" />
+                Pay Subscription (100,000 RWF/month)
+              </button>
+            )}
+          </div>
+        </header>
+
+        {/* Main Dashboard Content */}
+        <main className="flex-1 p-8 overflow-auto">
+          {/* Progress Overview */}
+          <div className="mb-8">
+            <h2 className="text-xl font-semibold text-gray-900 mb-4">Your Progress</h2>
+            <div className="bg-gray-50 rounded-lg p-6">
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-sm font-medium text-gray-700">Overall Progress</span>
+                <span className="text-sm font-medium text-gray-900">{Math.round(progressPercentage)}%</span>
+              </div>
+              <div className="w-full bg-gray-200 rounded-full h-3">
+                <div
+                  className="bg-green-600 h-3 rounded-full transition-all duration-300"
+                  style={{ width: `${progressPercentage}%` }}
                 />
               </div>
+            </div>
+          </div>
 
-              {/* Right Column - Sidebar Content (2 columns on xl) */}
-              <div className="xl:col-span-2 space-y-3 lg:space-y-4">
-                {/* Current Phase */}
-                <CurrentPhase activeRoadmap={activeRoadmap || undefined} />
+          {/* Onboarding Checklist */}
+          <div className="mb-8">
+            <h2 className="text-xl font-semibold text-gray-900 mb-4">Getting Started</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {[
+                { key: 'accountCreated', label: 'Account Created', description: 'Your account is ready to use' },
+                { key: 'bookingPayed', label: 'Orientation Fee Paid', description: '20,000 RWF for roadmap creation' },
+                { key: 'orientationBooked', label: 'Orientation Booked', description: 'Schedule your mentor session' },
+                { key: 'subscriptionPayed', label: 'Subscription Active', description: '100,000 RWF/month for mentorship' },
+                { key: 'roadmapReceived', label: 'Roadmap Created', description: 'Your personalized learning path' },
+                { key: 'learningStarted', label: 'Learning Started', description: 'Begin your mentorship journey' },
+              ].map((step) => (
+                <div
+                  key={step.key}
+                  className={`bg-white border rounded-lg p-4 ${onboardingChecklist[step.key as keyof OnboardingChecklist]
+                      ? 'border-green-200 bg-green-50'
+                      : 'border-gray-200'
+                    }`}
+                >
+                  <div className="flex items-start gap-3">
+                    <div className={`w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 ${onboardingChecklist[step.key as keyof OnboardingChecklist]
+                        ? 'bg-green-600'
+                        : 'bg-gray-200'
+                      }`}>
+                      {onboardingChecklist[step.key as keyof OnboardingChecklist] ? (
+                        <CheckCircle className="w-4 h-4 text-white" />
+                      ) : (
+                        <Lock className="w-4 h-4 text-gray-400" />
+                      )}
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-medium text-gray-900">{step.label}</h3>
+                      <p className="text-sm text-gray-500 mt-1">{step.description}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
 
-                {/* Scheduled Events */}
-                <ScheduledEvents userType="student" />
+          {/* Quick Actions */}
+          <div>
+            <h2 className="text-xl font-semibold text-gray-900 mb-4">Quick Actions</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {!onboardingChecklist.bookingPayed && (
+                <button
+                  onClick={() => setShowOrientationPayment(true)}
+                  className="bg-white border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors text-left"
+                >
+                  <CreditCard className="w-8 h-8 text-green-600 mb-2" />
+                  <h3 className="font-medium text-gray-900">Pay Orientation Fee</h3>
+                  <p className="text-sm text-gray-500 mt-1">Start your journey</p>
+                </button>
+              )}
 
-                {/* Live Sessions */}
-                <LiveSessions userType="student" />
-              </div>
+              {onboardingChecklist.bookingPayed && !onboardingChecklist.orientationBooked && (
+                <button
+                  onClick={() => setShowBookingCalendar(true)}
+                  className="bg-white border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors text-left"
+                >
+                  <Calendar className="w-8 h-8 text-blue-600 mb-2" />
+                  <h3 className="font-medium text-gray-900">Book Orientation</h3>
+                  <p className="text-sm text-gray-500 mt-1">Schedule your session</p>
+                </button>
+              )}
+
+              {onboardingChecklist.orientationBooked && !onboardingChecklist.subscriptionPayed && (
+                <button
+                  onClick={() => setShowSubscriptionPayment(true)}
+                  className="bg-white border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors text-left"
+                >
+                  <CreditCard className="w-8 h-8 text-purple-600 mb-2" />
+                  <h3 className="font-medium text-gray-900">Activate Subscription</h3>
+                  <p className="text-sm text-gray-500 mt-1">Unlock learning features</p>
+                </button>
+              )}
+
+              {onboardingChecklist.subscriptionPayed && (
+                <button
+                  onClick={handleLearningStarted}
+                  className="bg-white border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors text-left"
+                >
+                  <BookOpen className="w-8 h-8 text-green-600 mb-2" />
+                  <h3 className="font-medium text-gray-900">Start Learning</h3>
+                  <p className="text-sm text-gray-500 mt-1">Begin your roadmap</p>
+                </button>
+              )}
             </div>
           </div>
         </main>
       </div>
+
+      {/* Modals */}
+      {showOrientationPayment && (
+        <OrientationPaymentModal
+          onClose={() => setShowOrientationPayment(false)}
+          onSuccess={handleOrientationPaymentSuccess}
+        />
+      )}
+
+      {showSubscriptionPayment && (
+        <SubscriptionPaymentModal
+          onClose={() => setShowSubscriptionPayment(false)}
+          onSuccess={handleSubscriptionPaymentSuccess}
+        />
+      )}
+
+      {showBookingCalendar && (
+        <BookingCalendar
+          onClose={() => setShowBookingCalendar(false)}
+          onSuccess={handleBookingComplete}
+        />
+      )}
     </div>
   );
 }

@@ -30,6 +30,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const user = localStorage.getItem('user');
       if (user) {
         setUser(JSON.parse(user));
+        setIsAuthenticated(true);
       }
       setIsLoading(false);
     }
