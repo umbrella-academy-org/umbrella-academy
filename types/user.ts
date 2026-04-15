@@ -30,7 +30,11 @@ export interface Experience {
   specializations: string[];
 }
 
-
+export interface Availability {
+  weeklyAvailableHours: number;
+  preferredTimeSlots: string[];
+  preferredDays: string[];
+}
 export interface BaseUser  {
   email: string;
   password: string;
@@ -75,7 +79,7 @@ export interface Trainer extends BaseUser {
   cvUrl: string;
   experience: Experience;
   skills: string[];
-  availability: string;
+  availability: Availability;
   approvalStatus: 'pending' | 'approved' | 'rejected'
 }
 
