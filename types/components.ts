@@ -1,7 +1,4 @@
-// Component props and UI-related type definitions
-
-import { UserType } from './user';
-import { RoadmapPhase } from './roadmap';
+import { UserRole } from "./user";
 
 export interface SidebarItem {
   icon: any;
@@ -14,16 +11,9 @@ export interface SidebarItem {
 
 export interface SidebarProps {
   activeItem?: string;
-  userType?: UserType;
+  userType?: UserRole;
 }
 
-export interface RoadmapBuilderProps {
-  onSave: (roadmapData: {
-    goal: string;
-    phases: RoadmapPhase[];
-    totalEstimatedWeeks: number;
-  }) => void;
-}
 
 export interface FormError {
   field: string;

@@ -1,72 +1,69 @@
-// Payment and subscription-related type definitions
 
-export type Currency = 'RWF';
+export enum PaymentType {
+  ORIENTATION = 'orientation',
+  SUBSCRIPTION = 'subscription'
+}
+
+export enum SubscriptionColor {
+  GREEN = 'green',   // 20+ days
+  YELLOW = 'yellow', // 7-19 days
+  RED = 'red',       // 0-6 days
+  GRAY = 'gray'      // expired
+}
 
 export interface Subscription {
-  planId: string;
-  planName: string;
-  amount: number;
-  currency: Currency;
-  billingCycle: 'monthly' | 'yearly';
-  startDate: string;
-  endDate: string;
-  status: 'active' | 'cancelled' | 'expired';
+  id: string;
+  studentId: string;
+  startDate: Date;
+  expiryDate: Date;
+  isActive: boolean;
   autoRenew: boolean;
+  daysRemaining: number; // Calculated field
+  colorCode: SubscriptionColor;
+  lastReminderSent: {
+    sevenDay: boolean;
+    twoDay: boolean;
+    expired: boolean;
+  };
 }
 
-export interface Transaction {
-  id: string;
-  type: 'income' | 'withdrawal' | 'payment';
-  description: string;
-  amount: number;
-  currency: Currency;
-  date: string;
-  status: 'pending' | 'completed' | 'failed';
-  reference?: string;
+export interface PromoCode {
+  code: string;
+  assignedStudentEmail: string; 
+  assignedStudentId: string;
+  discountAmount: number;      
+  discountPercentage: number;  
+  isUsed: boolean;
+  usedAt: Date | null;
+  reason: string;              // Admin must record reason
+  createdByAdminId: string;
+  expiresAt: Date;
 }
-
-export interface Wallet {
-  id: string;
-  ownerId: string;
-  ownerType: 'trainer' | 'admin';
-  balance: number;
-  currency: Currency;
-  transactions: Transaction[];
-}
-
-// Enhanced Payment Models for Field-Based System
 
 export interface Payment {
   id: string;
   studentId: string;
-  amount: number;
-  currency: Currency;
-  paymentMethod: 'momo'; // Only MoMo payments allowed
-  momoTransactionId: string;
-  status: 'pending' | 'completed' | 'failed' | 'refunded';
-  revenueDistribution: RevenueDistribution;
-  createdAt: Date;
-  processedAt?: Date;
+  type: PaymentType;
+  amount: number; 
+  promoCodeApplied?: string;
+  finalAmount: number;
+  transactionRef: string;
+  status: 'pending' | 'success' | 'failed';
+  paidAt: Date;
 }
 
-export interface RevenueDistribution {
-  academyShare: number; // 25%
-  processingFee: number; // 10%
-  transactionId: string;
-}
-
-export interface MoMoPaymentData {
-  phoneNumber: string;
-  amount: number;
-  currency: Currency;
-  reference: string;
-  description: string;
-}
-
-// Payment Processing Interface Props
-export interface PaymentProcessorProps {
-  amount: number;
+export interface Subscription {
+  id: string;
   studentId: string;
-  paymentMethod: 'momo';
-  momoDetails: MoMoPaymentData;
+  startDate: Date;
+  expiryDate: Date;
+  isActive: boolean;
+  autoRenew: boolean;
+  daysRemaining: number; // Calculated field
+  colorCode: SubscriptionColor;
+  lastReminderSent: {
+    sevenDay: boolean;
+    twoDay: boolean;
+    expired: boolean;
+  };
 }
