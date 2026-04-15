@@ -114,9 +114,7 @@ export default function StudentDetailsPage() {
       };
 
       await registerStudent(studentData);
-      
-      // Redirect to success or dashboard
-      // router.push('/dashboard');
+      router.push('/auth/verify');
     } catch (error) {
       console.error('Registration failed:', error);
     } finally {

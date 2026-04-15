@@ -20,15 +20,7 @@ export default function VerifyPage() {
     return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {
-    async function sendEmail() {
-      const email = typeof window !== 'undefined'
-        ? (localStorage.getItem('signupEmail') || localStorage.getItem('resetEmail') || '')
-        : '';
-      await authService.resendOtp(email);
-    }
-    sendEmail();
-  }, [])
+
 
   const handleChange = (index: number, value: string) => {
     if (value.length > 1) return;
@@ -74,7 +66,7 @@ export default function VerifyPage() {
     }
 
     const email = typeof window !== 'undefined'
-      ? (localStorage.getItem('signupEmail') || localStorage.getItem('resetEmail') || '')
+      ? (localStorage.getItem('userEmail') || '')
       : '';
 
     try {
@@ -141,7 +133,7 @@ export default function VerifyPage() {
             </p>
             <p className="text-gray-600 text-sm mb-8">
               ({typeof window !== 'undefined' ?
-                localStorage.getItem('signupEmail') || localStorage.getItem('resetEmail') || 'johndoe@example.com'
+                localStorage.getItem('userEmail') || 'johndoe@example.com'
                 : 'johndoe@example.com'})
             </p>
 

@@ -3,21 +3,19 @@
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
-import { useLogin } from '@/hooks';
 import { useAuth } from '@/contexts';
 import { mockUsers } from '@/data/users';
 import { Logo } from '@/components/ui/Logo';
 
 export default function LoginPage() {
   const { navigate } = useNavigationWithLoading();
-  const { login, isLoading, error } = useLogin();
+  const { login, isLoading, error } = useAuth();
   const { isAuthenticated, user } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [localErrors, setLocalErrors] = useState({ email: '', password: '' });
 
-  // Redirect if already authenticated
   useEffect(() => {
     if (isAuthenticated && user) {
       // Redirect based on user role
@@ -48,18 +46,9 @@ export default function LoginPage() {
       setLocalErrors(prev => ({ ...prev, password: 'Password is required' }));
       return;
     }
-
-    // Attempt login
-    const success = await login({ email, password });
-
-    if (success) {
-      // Navigation will be handled by useEffect above
-      console.log('Login successful');
-    }
-    // Error handling is managed by the useLogin hook
+    await login(email, password);
   };
 
-  // Demo credentials helper
   const fillDemoCredentials = (role: string) => {
     const demoUser = mockUsers.find(u => u.role === role);
     if (demoUser) {

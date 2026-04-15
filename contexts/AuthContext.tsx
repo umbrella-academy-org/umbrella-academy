@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { authService } from '@/services/auth';
 import { BaseUser, Student, StudentRegister, Trainer, UserRole } from '@/types';
+import { useRouter } from 'next/navigation';
 
 interface AuthContextType {
   error: string | null;
@@ -22,6 +23,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter()
+
+  useEffect(() => {
+    const checkSession = async () => {
+      const user = localStorage.getItem('user');
+      if (user) {
+        setUser(JSON.parse(user));
+      }
+      setIsLoading(false);
+    }
+    checkSession();
+  }, []);
 
 
 
@@ -29,9 +42,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setIsLoading(true);
     try {
       const response = await authService.login(email, password);
-      if (response.success && response.data) { setUser(response.data.user); }
+      if (response.success && response.data) {
+        setUser(response.data.user);
+        setIsAuthenticated(true);
+      }
+      else {
+        setError(response.message);
+        if (response.message.includes('not verified')) {
+          localStorage.setItem('userEmail', email);
+          authService.sendOtp(email);
+          router.push('/auth/verify');
+        }
+      }
     } catch (err: unknown) {
-     setError(err instanceof Error ? err.message : 'Login failed. Please try again.');
+      setError(err instanceof Error ? err.message : 'Login failed. Please try again.');
     } finally {
       setIsLoading(false);
     }
@@ -67,15 +91,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
 
   return (
-    <AuthContext.Provider value={{ user,
-     isAuthenticated: !!user, 
-     isLoading, 
-     login, 
-     registerStudent, 
-     registerTrainer, 
-     logout, 
-     error
-     }}>
+    <AuthContext.Provider value={{
+      user,
+      isAuthenticated: !!user,
+      isLoading,
+      login,
+      registerStudent,
+      registerTrainer,
+      logout,
+      error
+    }}>
       {children}
     </AuthContext.Provider>
   );
