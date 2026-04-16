@@ -1,4 +1,4 @@
-import { Student, BaseUser } from '@/types';
+import { Student, BaseUser, Trainer } from '@/types';
 import { apiClient } from './client';
 import { API_ENDPOINTS } from './constants';
 import { ApiResponse } from '@/types/api';
@@ -14,6 +14,14 @@ class UserService {
 
   async getUsers(): Promise<ApiResponse<BaseUser[]>> {
     return apiClient.get<BaseUser[]>(API_ENDPOINTS.USERS);
+  }
+
+  async getTrainers(): Promise<ApiResponse<Trainer[]>> {
+    return apiClient.get<Trainer[]>(API_ENDPOINTS.USERS_TRAINERS);
+  }
+  
+  async getStudents(): Promise<ApiResponse<Student[]>> {
+    return apiClient.get<Student[]>(API_ENDPOINTS.USERS_STUDENTS);
   }
 
   async updateUserStatus(id: string, status: 'active' | 'inactive' | 'suspended'): Promise<ApiResponse<BaseUser>> {

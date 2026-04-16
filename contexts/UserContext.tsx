@@ -1,17 +1,17 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { User, UserType } from '@/types';
+import { Student, Trainer, BaseUser as User, UserRole } from '@/types';
 import { userService } from '@/services/users';
 import { useAuth } from './AuthContext';
 
 interface UserContextType {
   users: User[];
-  students: User[];
-  trainers: User[];
+  students: Student[];
+  trainers: Trainer[];
   isLoading: boolean;
   error: string | null;
-  getUsersByRole: (role: UserType) => User[];
+  getUsersByRole: (role: UserRole) => User[];
   getUserByIdFromContext: (id: string) => User | undefined;
   refreshUsers: () => Promise<void>;
 }
@@ -21,6 +21,8 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 export function UserProvider({ children }: { children: React.ReactNode }) {
   const { user: currentUser } = useAuth();
   const [users, setUsers] = useState<User[]>([]);
+  const [trainers, setTrainers] = useState<Trainer[]>([]);
+  const [students, setStudents] = useState<Student[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -28,14 +30,20 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await userService.getUsers();
-      setUsers(response.data ?? []);
+      const studentResponse = await userService.getStudents();
+      const trianerResponse = await userService.getTrainers();
+      const students = studentResponse.data;
+      const trainers = trianerResponse.data;
+      setTrainers(trainers || []);
+      setStudents(students || []);
     } catch {
       setError('Failed to load users');
     } finally {
       setIsLoading(false);
     }
   };
+
+
 
   useEffect(() => {
     if (currentUser) {
@@ -44,20 +52,22 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       setUsers([]);
       setIsLoading(false);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser]);
 
-  const students = users.filter(u => u.role === 'student');
-  const trainers = users.filter(u => u.role === 'trainer');
 
-  const getUsersByRole = (role: UserType) => users.filter(u => u.role === role);
+  const getUsersByRole = (role: UserRole) => users.filter(u => u.role === role);
   const getUserByIdFromContext = (id: string) => users.find(u => u.id === id);
 
   return (
     <UserContext.Provider value={{
-      users, students, trainers,
-      isLoading, error,
-      getUsersByRole, getUserByIdFromContext,
+      users,
+      students,
+      trainers,
+      isLoading,
+      error,
+      getUsersByRole,
+      getUserByIdFromContext,
       refreshUsers: loadUsers,
     }}>
       {children}

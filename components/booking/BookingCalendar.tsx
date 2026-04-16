@@ -2,18 +2,12 @@
 
 import { useState } from 'react';
 import { X, Calendar, Clock, User, CheckCircle, MessageSquare } from 'lucide-react';
+import { useUsers } from '@/contexts';
+import { Trainer } from '@/types';
 
 interface BookingCalendarProps {
   onClose: () => void;
   onSuccess: () => void;
-}
-
-interface Mentor {
-  id: string;
-  name: string;
-  expertise: string;
-  rating: number;
-  avatar: string;
 }
 
 interface TimeSlot {
@@ -22,36 +16,15 @@ interface TimeSlot {
 }
 
 export default function BookingCalendar({ onClose, onSuccess }: BookingCalendarProps) {
-  const [selectedMentor, setSelectedMentor] = useState<Mentor | null>(null);
+  const { trainers } = useUsers()
+  const [selectedTrainer, setSelectedTrainer] = useState<Trainer | null>(null);
   const [selectedDate, setSelectedDate] = useState<string>('');
   const [selectedTime, setSelectedTime] = useState<string>('');
   const [learningGoals, setLearningGoals] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [bookingStep, setBookingStep] = useState<'select' | 'confirm' | 'submitting' | 'success'>('select');
 
-  const mentors: Mentor[] = [
-    {
-      id: '1',
-      name: 'Dr. Sarah Johnson',
-      expertise: 'Web Development & AI',
-      rating: 4.9,
-      avatar: '/mentors/sarah.jpg'
-    },
-    {
-      id: '2',
-      name: 'Prof. Michael Chen',
-      expertise: 'Data Science & Machine Learning',
-      rating: 4.8,
-      avatar: '/mentors/michael.jpg'
-    },
-    {
-      id: '3',
-      name: 'Ms. Emily Rodriguez',
-      expertise: 'UI/UX Design & Product',
-      rating: 4.7,
-      avatar: '/mentors/emily.jpg'
-    }
-  ];
+
 
   const timeSlots: TimeSlot[] = [
     { time: '09:00 AM', available: true },
@@ -88,7 +61,7 @@ export default function BookingCalendar({ onClose, onSuccess }: BookingCalendarP
     }
   };
 
-  const canProceed = selectedMentor && selectedDate && selectedTime && learningGoals.trim();
+  const canProceed = selectedTrainer && selectedDate && selectedTime && learningGoals.trim();
 
   if (bookingStep === 'submitting') {
     return (
@@ -118,7 +91,7 @@ export default function BookingCalendar({ onClose, onSuccess }: BookingCalendarP
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
                   <User className="w-4 h-4 text-green-600" />
-                  <span className="text-sm text-green-700">Mentor: {selectedMentor?.name}</span>
+                  <span className="text-sm text-green-700">Trainer: {selectedTrainer?.firstName}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Calendar className="w-4 h-4 text-green-600" />
@@ -164,29 +137,24 @@ export default function BookingCalendar({ onClose, onSuccess }: BookingCalendarP
               <div>
                 <h3 className="font-medium text-gray-900 mb-3">Choose Your Mentor</h3>
                 <div className="space-y-3">
-                  {mentors.map((mentor) => (
+                  {trainers.map((trainer) => (
                     <button
-                      key={mentor.id}
-                      onClick={() => setSelectedMentor(mentor)}
-                      className={`w-full p-4 border rounded-lg text-left transition-colors ${
-                        selectedMentor?.id === mentor.id
-                          ? 'border-blue-500 bg-blue-50'
-                          : 'border-gray-200 hover:border-gray-300'
-                      }`}
+                      key={trainer.id}
+                      onClick={() => setSelectedTrainer(trainer)}
+                      className={`w-full p-4 border rounded-lg text-left transition-colors ${selectedTrainer?.id === trainer.id
+                        ? 'border-blue-500 bg-blue-50'
+                        : 'border-gray-200 hover:border-gray-300'
+                        }`}
                     >
                       <div className="flex items-center gap-3">
                         <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center">
                           <User className="w-6 h-6 text-gray-400" />
                         </div>
                         <div className="flex-1">
-                          <h4 className="font-medium text-gray-900">{mentor.name}</h4>
-                          <p className="text-sm text-gray-500">{mentor.expertise}</p>
-                          <div className="flex items-center gap-1 mt-1">
-                            <span className="text-yellow-500">{'\u2605'.repeat(Math.floor(mentor.rating))}</span>
-                            <span className="text-sm text-gray-500">({mentor.rating})</span>
-                          </div>
+                          <h4 className="font-medium text-gray-900">{trainer.firstName}</h4>
+                          <p className="text-sm text-gray-500">{trainer.experience.specializations}</p>
                         </div>
-                        {selectedMentor?.id === mentor.id && (
+                        {selectedTrainer?.id === trainer.id && (
                           <CheckCircle className="w-5 h-5 text-blue-600" />
                         )}
                       </div>
@@ -203,11 +171,10 @@ export default function BookingCalendar({ onClose, onSuccess }: BookingCalendarP
                     <button
                       key={date}
                       onClick={() => setSelectedDate(date)}
-                      className={`p-3 border rounded-lg text-center transition-colors ${
-                        selectedDate === date
-                          ? 'border-blue-500 bg-blue-50'
-                          : 'border-gray-200 hover:border-gray-300'
-                      }`}
+                      className={`p-3 border rounded-lg text-center transition-colors ${selectedDate === date
+                        ? 'border-blue-500 bg-blue-50'
+                        : 'border-gray-200 hover:border-gray-300'
+                        }`}
                     >
                       <div className="font-medium text-gray-900">
                         {new Date(date).toLocaleDateString('en-US', { weekday: 'short' })}
@@ -229,13 +196,12 @@ export default function BookingCalendar({ onClose, onSuccess }: BookingCalendarP
                       key={slot.time}
                       onClick={() => slot.available && setSelectedTime(slot.time)}
                       disabled={!slot.available}
-                      className={`p-3 border rounded-lg text-center transition-colors ${
-                        !slot.available
-                          ? 'border-gray-100 bg-gray-50 text-gray-400 cursor-not-allowed'
-                          : selectedTime === slot.time
+                      className={`p-3 border rounded-lg text-center transition-colors ${!slot.available
+                        ? 'border-gray-100 bg-gray-50 text-gray-400 cursor-not-allowed'
+                        : selectedTime === slot.time
                           ? 'border-blue-500 bg-blue-50'
                           : 'border-gray-200 hover:border-gray-300'
-                      }`}
+                        }`}
                     >
                       <div className="font-medium">{slot.time}</div>
                       {!slot.available && (
@@ -283,19 +249,19 @@ export default function BookingCalendar({ onClose, onSuccess }: BookingCalendarP
           {bookingStep === 'confirm' && (
             <div className="space-y-6">
               <h3 className="font-medium text-gray-900">Confirm Your Booking</h3>
-              
+
               {/* Booking Summary */}
               <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
                 <div className="space-y-3">
                   <div className="flex items-start gap-3">
                     <User className="w-5 h-5 text-gray-400 mt-0.5" />
                     <div>
-                      <p className="font-medium text-gray-900">Mentor</p>
-                      <p className="text-sm text-gray-600">{selectedMentor?.name}</p>
-                      <p className="text-sm text-gray-500">{selectedMentor?.expertise}</p>
+                      <p className="font-medium text-gray-900">Trainer</p>
+                      <p className="text-sm text-gray-600">{selectedTrainer?.firstName}</p>
+                      <p className="text-sm text-gray-500">{selectedTrainer?.experience.specializations}</p>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-start gap-3">
                     <Calendar className="w-5 h-5 text-gray-400 mt-0.5" />
                     <div>
@@ -303,7 +269,7 @@ export default function BookingCalendar({ onClose, onSuccess }: BookingCalendarP
                       <p className="text-sm text-gray-600">{selectedDate} at {selectedTime}</p>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-start gap-3">
                     <MessageSquare className="w-5 h-5 text-gray-400 mt-0.5" />
                     <div>

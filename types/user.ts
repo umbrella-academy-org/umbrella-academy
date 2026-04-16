@@ -38,6 +38,7 @@ export interface Availability {
   preferredDays: string[];
 }
 export interface BaseUser  {
+  id:string
   email: string;
   password: string;
   firstName: string;

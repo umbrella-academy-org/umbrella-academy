@@ -18,6 +18,8 @@ export const API_ENDPOINTS = {
   AUTH_ONBOARDING_CHECKLIST: '/api/auth/onboarding-checklist',
   USERS_ME: '/api/users/me',
   USERS: '/api/users',
+  USERS_TRAINERS: '/api/users/trainers',
+  USERS_STUDENTS: '/api/users/students',
   USER_STATUS: (id: string) => `/api/users/${id}/status`,
   USER_PROFILE: '/api/users/profile',
   USER_BY_ID: (id: string) => `/api/users/${id}`,
