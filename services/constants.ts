@@ -32,6 +32,7 @@ export const API_ENDPOINTS = {
   ROADMAP_BY_ID: (id: string) => `/api/roadmaps/${id}`,
   ROADMAP_SUBMIT: (id: string) => `/api/roadmaps/${id}/submit`,
   ROADMAP_APPROVE: (id: string) => `/api/roadmaps/${id}/approve`,
+  ROADMAP_REJECT: (id: string) => `/api/roadmaps/${id}/reject`,
   CHAT_CONTACTS: '/api/chat/contacts',
   CHAT_MESSAGES: (contactId: string) => `/api/chat/messages/${contactId}`,
   PAYMENT_ORIANTATION: '/api/payments/orientation',

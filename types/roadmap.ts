@@ -37,8 +37,6 @@ export interface StudentBookingRequest {
 }
 
 export interface Milestone {
-  id: string;
-  roadmapId: string;
   title: string;
   description: string;
   skillsToLearn: string[];
@@ -56,20 +54,12 @@ export interface Roadmap {
   studentId: string;
   trainerId: string;
   title: string;
+  status: RoadmapStatus;
+  approvedBy?: string;
+  approvedAt?: Date;
+  rejectionReason?: string;
   milestones: Milestone[];
   createdAt: Date;
   updatedAt: Date;
 }
 
-export interface OrientationBooking extends Document {
-  id: string;
-  studentId: string;
-  trainerId: string;
-  requestedTime: Date;
-  alternativeTime?: Date;
-  learningGoals: string;
-  status: BookingStatus;
-  rejectionReason?: string;
-  meetingLink?: string;
-  createdAt: Date;
-}

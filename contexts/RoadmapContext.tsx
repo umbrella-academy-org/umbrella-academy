@@ -1,118 +1,95 @@
-'use client';
+"use client";
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import { Roadmap, StudentRoadmap, LiveSession } from '@/types';
-import { apiClient } from '@/services/client';
-import { API_ENDPOINTS } from '@/services/constants';
-import { useAuth } from './AuthContext';
+import { createContext, useContext, useEffect, useState } from "react";
+import { Roadmap } from "@/types/roadmap";
+import { roadmapService } from "@/services/roadmap";
 
 interface RoadmapContextType {
-  roadmaps: Roadmap[];
-  studentRoadmaps: StudentRoadmap[];
-  liveSessions: LiveSession[];
-  isLoading: boolean;
-  error: string | null;
-  getRoadmapByIdFromContext: (id: string) => Roadmap | undefined;
-  getStudentRoadmapsByStudentId: (studentId: string) => StudentRoadmap[];
-  getStudentRoadmaps: () => StudentRoadmap[];
-  getUpcomingLiveSessions: () => LiveSession[];
-  refreshRoadmaps: () => Promise<void>;
-  refreshStudentRoadmaps: () => Promise<void>;
-  refreshSessions: () => Promise<void>;
+    roadmaps: Roadmap[];
+    studentRoadmaps: Roadmap[];
+    liveSessions: any[]; // For backward compatibility
+    loading: boolean;
+    isLoading: boolean;
+    error: string | null;
+    createRoadmap: (data: Partial<Roadmap>) => Promise<Roadmap>;
+    refreshRoadmaps: () => Promise<void>;
+    // Backward compatibility methods
+    getStudentRoadmaps: () => Roadmap[];
+    getRoadmapByIdFromContext: (id: string) => Roadmap | undefined;
+    getUpcomingLiveSessions: () => any[];
 }
 
-const RoadmapContext = createContext<RoadmapContextType | undefined>(undefined);
+const RoadmapContext = createContext<RoadmapContextType | null>(null);
 
-export function RoadmapProvider({ children }: { children: React.ReactNode }) {
-  const { user: currentUser } = useAuth();
-  const [roadmaps, setRoadmaps] = useState<Roadmap[]>([]);
-  const [studentRoadmaps, setStudentRoadmaps] = useState<StudentRoadmap[]>([]);
-  const [liveSessions, setLiveSessions] = useState<LiveSession[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+export const RoadmapProvider = ({ children }: { children: React.ReactNode }) => {
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string | null>(null);
+    const [roadmaps, setRoadmaps] = useState<Roadmap[]>([]);
 
-  const loadRoadmaps = async () => {
-    try {
-      const response = await apiClient.get<{ success: boolean; data: Roadmap[] }>(API_ENDPOINTS.ROADMAPS);
-      setRoadmaps(response.data ?? []);
-    } catch {
-      setError('Failed to load roadmaps');
-    }
-  };
+    const fetchRoadmaps = async () => {
+        try {
+            setLoading(true);
+            setError(null);
+            const response = await roadmapService.getRoadmaps();
+            setRoadmaps(response || []);
+        } catch (err) {
+            setError(err instanceof Error ? err.message : 'Failed to fetch roadmaps');
+            setRoadmaps([]);
+        } finally {
+            setLoading(false);
+        }
+    };
 
-  const loadStudentRoadmaps = async () => {
-    try {
-      const response = await apiClient.get<{ success: boolean; data: StudentRoadmap[] }>(API_ENDPOINTS.ROADMAPS);
-      setStudentRoadmaps(response.data ?? []);
-    } catch {
-      setError('Failed to load student roadmaps');
-    }
-  };
+    const createRoadmap = async (data: Partial<Roadmap>): Promise<Roadmap> => {
+        try {
+            setError(null);
+            const newRoadmap = await roadmapService.createRoadmap(data);
+            if (newRoadmap) {
+                setRoadmaps(prev => [...prev, newRoadmap]);
+            }
+            return newRoadmap!;
+        } catch (err) {
+            setError(err instanceof Error ? err.message : 'Failed to create roadmap');
+            throw err;
+        }
+    };
 
-  const loadLiveSessions = async () => {
-    try {
-      const response = await apiClient.get<{ success: boolean; data: LiveSession[] }>(API_ENDPOINTS.SESSIONS);
-      setLiveSessions(response.data ?? []);
-    } catch {
-      setError('Failed to load sessions');
-    }
-  };
+    const refreshRoadmaps = async () => {
+        await fetchRoadmaps();
+    };
 
-  const loadData = async () => {
-    setIsLoading(true);
-    setError(null);
-    try {
-      await Promise.all([loadRoadmaps(), loadStudentRoadmaps(), loadLiveSessions()]);
-    } catch {
-      setError('Failed to load roadmap data');
-    } finally {
-      setIsLoading(false);
-    }
-  };
+    // Backward compatibility methods
+    const getStudentRoadmaps = () => roadmaps;
+    const getRoadmapByIdFromContext = (id: string) => roadmaps.find(r => r.id === id);
+    const getUpcomingLiveSessions = () => []; // Empty array for backward compatibility
 
-  useEffect(() => {
-    if (currentUser) {
-      loadData();
-    } else {
-      setRoadmaps([]);
-      setStudentRoadmaps([]);
-      setLiveSessions([]);
-      setIsLoading(false);
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentUser]);
+    useEffect(() => {
+        fetchRoadmaps();
+    }, []);
 
-  const getRoadmapByIdFromContext = (id: string) => roadmaps.find(r => r.id === id);
-
-  const getStudentRoadmapsByStudentId = (studentId: string) =>
-    studentRoadmaps.filter(r => r.studentId === studentId);
-
-  const getStudentRoadmaps = () => {
-    if (currentUser?.role === 'student') {
-      return studentRoadmaps.filter(r => r.studentId === currentUser.id);
-    }
-    return studentRoadmaps;
-  };
-
-  const getUpcomingLiveSessions = () =>
-    liveSessions.filter(s => s.status === 'scheduled' && new Date(s.scheduledAt) > new Date());
-
-  return (
-    <RoadmapContext.Provider value={{
-      roadmaps, studentRoadmaps, liveSessions, isLoading, error,
-      getRoadmapByIdFromContext, getStudentRoadmapsByStudentId,
-      getStudentRoadmaps, getUpcomingLiveSessions,
-      refreshRoadmaps: loadRoadmaps,
-      refreshStudentRoadmaps: loadStudentRoadmaps,
-      refreshSessions: loadLiveSessions,
-    }}>
-      {children}
-    </RoadmapContext.Provider>
-  );
-}
+    return (
+        <RoadmapContext.Provider value={{
+            roadmaps,
+            studentRoadmaps: roadmaps, // For backward compatibility
+            liveSessions: [], // For backward compatibility
+            loading,
+            isLoading: loading, // For backward compatibility
+            error,
+            createRoadmap,
+            refreshRoadmaps,
+            getStudentRoadmaps,
+            getRoadmapByIdFromContext,
+            getUpcomingLiveSessions
+        }}>
+            {children}
+        </RoadmapContext.Provider>
+    );
+};
 
 export function useRoadmaps() {
-  const context = useContext(RoadmapContext);
-  if (!context) throw new Error('useRoadmaps must be used within a RoadmapProvider');
-  return context;
+    const context = useContext(RoadmapContext);
+    if (!context) {
+        throw new Error('useRoadmaps must be used within a RoadmapProvider');
+    }
+    return context;
 }

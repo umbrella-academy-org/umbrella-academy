@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
-import { useAuth } from '@/contexts';
+import { useAuth, useRoadmaps, useUsers } from '@/contexts';
+import { roadmapService } from '@/services/roadmap';
 import { Roadmap, Milestone, RoadmapStepStatus } from '@/types/roadmap';
 import { UserRole } from '@/types/user';
 import { Plus, Clock, CheckCircle, Edit, Trash2, Users, Target, Calendar, BookOpen, Award } from 'lucide-react';
@@ -18,8 +19,8 @@ interface Phase {
 
 export default function TrainerRoadmapsPage() {
   const { user } = useAuth();
-  const [roadmaps, setRoadmaps] = useState<Roadmap[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { students } = useUsers()
+  const { roadmaps, loading, createRoadmap, refreshRoadmaps } = useRoadmaps();
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [selectedRoadmap, setSelectedRoadmap] = useState<Roadmap | null>(null);
   const [viewMode, setViewMode] = useState<'list' | 'create' | 'edit'>('list');
@@ -36,74 +37,8 @@ export default function TrainerRoadmapsPage() {
     durationType: 'days' as 'hours' | 'days' | 'weeks'
   });
 
-  // Mock data - in real app, this would come from API
-  useEffect(() => {
-    const mockRoadmaps: Roadmap[] = [
-      {
-        id: '1',
-        studentId: 'student-1',
-        trainerId: user?.id || '',
-        title: 'Full Stack Web Development',
-        milestones: [
-          {
-            id: '1',
-            roadmapId: '1',
-            title: 'Frontend Fundamentals',
-            description: 'Learn HTML, CSS, and JavaScript basics',
-            skillsToLearn: ['HTML5', 'CSS3', 'JavaScript ES6+', 'Responsive Design'],
-            tasks: ['Build 3 static websites', 'Create responsive layouts', 'Implement interactive features'],
-            requiredProjects: ['Portfolio Website', 'Todo App', 'Weather App'],
-            estimatedDurationDays: 30,
-            order: 1,
-            status: RoadmapStepStatus.COMPLETED,
-            completedAt: new Date('2024-01-15'),
-            trainerFeedback: 'Excellent progress on frontend concepts!'
-          },
-          {
-            id: '2',
-            roadmapId: '1',
-            title: 'React Development',
-            description: 'Master React framework and ecosystem',
-            skillsToLearn: ['React', 'React Hooks', 'State Management', 'Component Architecture'],
-            tasks: ['Build React components', 'Implement state management', 'Create single-page applications'],
-            requiredProjects: ['E-commerce Frontend', 'Social Media Dashboard', 'Task Management App'],
-            estimatedDurationDays: 45,
-            order: 2,
-            status: RoadmapStepStatus.ACTIVE,
-            completedAt: null
-          }
-        ],
-        createdAt: new Date('2024-01-01'),
-        updatedAt: new Date('2024-01-20')
-      },
-      {
-        id: '2',
-        studentId: 'student-2',
-        trainerId: user?.id || '',
-        title: 'Data Science Fundamentals',
-        milestones: [
-          {
-            id: '3',
-            roadmapId: '2',
-            title: 'Python and Statistics',
-            description: 'Learn Python programming and statistical concepts',
-            skillsToLearn: ['Python', 'NumPy', 'Pandas', 'Statistics'],
-            tasks: ['Complete Python exercises', 'Analyze datasets', 'Create statistical reports'],
-            requiredProjects: ['Data Analysis Project', 'Statistical Study'],
-            estimatedDurationDays: 40,
-            order: 1,
-            status: RoadmapStepStatus.ACTIVE,
-            completedAt: null
-          }
-        ],
-        createdAt: new Date('2024-01-10'),
-        updatedAt: new Date('2024-01-18')
-      }
-    ];
-    
-    setRoadmaps(mockRoadmaps);
-    setLoading(false);
-  }, [user]);
+  // Filter roadmaps for current trainer
+  const trainerRoadmaps = roadmaps.filter(roadmap => roadmap.trainerId === user?.id);
 
   const handleAddPhase = () => {
     if (newPhase.title && newPhase.description && newPhase.duration) {
@@ -131,8 +66,6 @@ export default function TrainerRoadmapsPage() {
 
     // Convert phases to milestones
     const milestones: Milestone[] = phases.map((phase, index) => ({
-      id: Date.now().toString() + index,
-      roadmapId: '',
       title: phase.title,
       description: phase.description,
       skillsToLearn: [],
@@ -144,19 +77,22 @@ export default function TrainerRoadmapsPage() {
       completedAt: null
     }));
 
-    const newRoadmap: Roadmap = {
-      id: Date.now().toString(),
+    const newRoadmap: Partial<Roadmap> = {
       studentId: selectedStudentId,
       trainerId: user?.id || '',
       title: roadmapTitle,
+      status: 'draft',
       milestones,
-      createdAt: new Date(),
-      updatedAt: new Date()
     };
 
-    setRoadmaps([...roadmaps, newRoadmap]);
-    setViewMode('list');
-    resetForm();
+    try {
+      await createRoadmap(newRoadmap);
+      setViewMode('list');
+      resetForm();
+      await refreshRoadmaps();
+    } catch (error) {
+      console.error('Failed to create roadmap:', error);
+    }
   };
 
   const resetForm = () => {
@@ -165,6 +101,15 @@ export default function TrainerRoadmapsPage() {
     setPhases([]);
     setNewPhase({ title: '', description: '', duration: '', durationType: 'days' });
     setIsCreatingPhase(false);
+  };
+
+  const handleDeleteRoadmap = async (roadmapId: string) => {
+    try {
+      await roadmapService.deleteRoadmap(roadmapId);
+      await refreshRoadmaps();
+    } catch (error) {
+      console.error('Failed to delete roadmap:', error);
+    }
   };
 
   const getStepStatusColor = (status: RoadmapStepStatus) => {
@@ -180,14 +125,30 @@ export default function TrainerRoadmapsPage() {
     }
   };
 
+  const getRoadmapStatusColor = (status: string) => {
+    switch (status) {
+      case 'approved':
+        return 'bg-green-100 text-green-700 border-green-200';
+      case 'active':
+        return 'bg-blue-100 text-blue-700 border-blue-200';
+      case 'pending-approval':
+        return 'bg-yellow-100 text-yellow-700 border-yellow-200';
+      case 'rejected':
+        return 'bg-red-100 text-red-700 border-red-200';
+      case 'draft':
+        return 'bg-gray-100 text-gray-700 border-gray-200';
+      case 'paused':
+        return 'bg-orange-100 text-orange-700 border-orange-200';
+      case 'completed':
+        return 'bg-purple-100 text-purple-700 border-purple-200';
+      default:
+        return 'bg-gray-100 text-gray-700 border-gray-200';
+    }
+  };
+
   const getStudentName = (studentId: string) => {
-    // Mock student names - in real app, this would come from user data
-    const students: Record<string, string> = {
-      'student-1': 'John Smith',
-      'student-2': 'Sarah Johnson',
-      'student-3': 'Michael Chen'
-    };
-    return students[studentId] || 'Unknown Student';
+    const student = students.find(s => s.id === studentId);
+    return student?.firstName + ' ' + student?.lastName || 'Unknown Student';
   };
 
   if (loading) {
@@ -212,7 +173,7 @@ export default function TrainerRoadmapsPage() {
   return (
     <div className="flex h-screen bg-white">
       <Sidebar activeItem="Roadmaps" userType={UserRole.TRAINER} />
-      
+
       <div className="flex-1 flex flex-col min-w-0">
         {/* Header */}
         <header className="bg-white border-b border-gray-200 px-8 py-4">
@@ -244,30 +205,32 @@ export default function TrainerRoadmapsPage() {
                     </div>
                     <div>
                       <p className="text-sm text-gray-500">Total Roadmaps</p>
-                      <p className="text-2xl font-bold text-gray-900">{roadmaps.length}</p>
+                      <p className="text-2xl font-bold text-gray-900">{trainerRoadmaps.length}</p>
                     </div>
                   </div>
                 </div>
                 <div className="bg-white border border-gray-200 rounded-lg p-6">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
-                      <Users className="w-5 h-5 text-green-600" />
+                      <CheckCircle className="w-5 h-5 text-green-600" />
                     </div>
                     <div>
-                      <p className="text-sm text-gray-500">Active Students</p>
-                      <p className="text-2xl font-bold text-gray-900">{roadmaps.length}</p>
+                      <p className="text-sm text-gray-500">Approved</p>
+                      <p className="text-2xl font-bold text-gray-900">
+                        {trainerRoadmaps.filter(r => r.status === 'approved').length}
+                      </p>
                     </div>
                   </div>
                 </div>
                 <div className="bg-white border border-gray-200 rounded-lg p-6">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 bg-yellow-100 rounded-lg flex items-center justify-center">
-                      <BookOpen className="w-5 h-5 text-yellow-600" />
+                      <Clock className="w-5 h-5 text-yellow-600" />
                     </div>
                     <div>
-                      <p className="text-sm text-gray-500">Total Milestones</p>
+                      <p className="text-sm text-gray-500">Pending Approval</p>
                       <p className="text-2xl font-bold text-gray-900">
-                        {roadmaps.reduce((total, roadmap) => total + roadmap.milestones.length, 0)}
+                        {trainerRoadmaps.filter(r => r.status === 'pending-approval').length}
                       </p>
                     </div>
                   </div>
@@ -278,10 +241,10 @@ export default function TrainerRoadmapsPage() {
                       <Award className="w-5 h-5 text-purple-600" />
                     </div>
                     <div>
-                      <p className="text-sm text-gray-500">Completed</p>
+                      <p className="text-sm text-gray-500">Active Milestones</p>
                       <p className="text-2xl font-bold text-gray-900">
-                        {roadmaps.reduce((total, roadmap) => 
-                          total + roadmap.milestones.filter(m => m.status === RoadmapStepStatus.COMPLETED).length, 0
+                        {trainerRoadmaps.reduce((total, roadmap) =>
+                          total + roadmap.milestones.filter(m => m.status === RoadmapStepStatus.ACTIVE).length, 0
                         )}
                       </p>
                     </div>
@@ -291,73 +254,101 @@ export default function TrainerRoadmapsPage() {
 
               {/* Roadmaps List */}
               <div className="space-y-4">
-                {roadmaps.map((roadmap) => (
-                  <div key={roadmap.id} className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
-                    <div className="flex items-start justify-between mb-4">
-                      <div>
-                        <h3 className="text-lg font-semibold text-gray-900 mb-1">{roadmap.title}</h3>
-                        <p className="text-sm text-gray-500">Student: {getStudentName(roadmap.studentId)}</p>
-                        <p className="text-xs text-gray-400">Created: {roadmap.createdAt.toLocaleDateString()}</p>
-                      </div>
-                      <div className="flex gap-2">
-                        <button
-                          onClick={() => {
-                            setSelectedRoadmap(roadmap);
-                            setViewMode('edit');
-                          }}
-                          className="p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
-                        >
-                          <Edit className="w-4 h-4" />
-                        </button>
-                        <button
-                          onClick={() => {
-                            setRoadmaps(roadmaps.filter(r => r.id !== roadmap.id));
-                          }}
-                          className="p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </button>
-                      </div>
-                    </div>
-
-                    {/* Progress Overview */}
-                    <div className="mb-4">
-                      <div className="flex items-center justify-between text-sm text-gray-600 mb-2">
-                        <span>Progress</span>
-                        <span>
-                          {roadmap.milestones.filter(m => m.status === RoadmapStepStatus.COMPLETED).length} / {roadmap.milestones.length} completed
-                        </span>
-                      </div>
-                      <div className="w-full bg-gray-200 rounded-full h-2">
-                        <div 
-                          className="bg-blue-600 h-2 rounded-full transition-all"
-                          style={{ 
-                            width: `${(roadmap.milestones.filter(m => m.status === RoadmapStepStatus.COMPLETED).length / roadmap.milestones.length) * 100}%` 
-                          }}
-                        ></div>
-                      </div>
-                    </div>
-
-                    {/* Milestones Preview */}
-                    <div className="space-y-2">
-                      <h4 className="text-sm font-medium text-gray-700">Milestones</h4>
-                      <div className="space-y-2">
-                        {roadmap.milestones.slice(0, 3).map((milestone) => (
-                          <div key={milestone.id} className="flex items-center gap-3">
-                            <div className={`px-2 py-1 rounded-full text-xs font-medium border ${getStepStatusColor(milestone.status)}`}>
-                              {milestone.status}
-                            </div>
-                            <span className="text-sm text-gray-700">{milestone.title}</span>
-                            <span className="text-xs text-gray-500">{milestone.estimatedDurationDays} days</span>
-                          </div>
-                        ))}
-                        {roadmap.milestones.length > 3 && (
-                          <p className="text-xs text-gray-500">+{roadmap.milestones.length - 3} more milestones</p>
-                        )}
-                      </div>
-                    </div>
+                {trainerRoadmaps.length === 0 ? (
+                  <div className="text-center py-12">
+                    <BookOpen className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                    <h3 className="text-lg font-medium text-gray-900 mb-2">No Roadmaps Yet</h3>
+                    <p className="text-gray-500 mb-6">Create your first roadmap to get started with managing student learning paths.</p>
+                    <button
+                      onClick={() => setViewMode('create')}
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                    >
+                      <Plus className="w-4 h-4" />
+                      Create Roadmap
+                    </button>
                   </div>
-                ))}
+                ) : (
+                  trainerRoadmaps.map((roadmap) => (
+                    <div key={roadmap.id} className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
+                      <div className="flex items-start justify-between mb-4">
+                        <div>
+                          <div className="flex items-center gap-2 mb-2">
+                            <h3 className="text-lg font-semibold text-gray-900">{roadmap.title}</h3>
+                            <div className={`px-2 py-1 rounded-full text-xs font-medium border ${getRoadmapStatusColor(roadmap.status)}`}>
+                              {roadmap.status.replace('-', ' ').charAt(0).toUpperCase() + roadmap.status.slice(1).replace('-', ' ')}
+                            </div>
+                          </div>
+                          <p className="text-sm text-gray-500">Student: {getStudentName(roadmap.studentId)}</p>
+                          <p className="text-xs text-gray-400">Created: {roadmap.createdAt.toLocaleDateString()}</p>
+                          {roadmap.approvedAt && (
+                            <p className="text-xs text-gray-400">Approved: {roadmap.approvedAt.toLocaleDateString()}</p>
+                          )}
+                        </div>
+                        <div className="flex gap-2">
+                          <button
+                            onClick={() => {
+                              setSelectedRoadmap(roadmap);
+                              setViewMode('edit');
+                            }}
+                            className="p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                          >
+                            <Edit className="w-4 h-4" />
+                          </button>
+                          <button
+                            onClick={() => handleDeleteRoadmap(roadmap.id)}
+                            className="p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Rejection Reason */}
+                      {roadmap.status === 'rejected' && roadmap.rejectionReason && (
+                        <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded">
+                          <p className="text-sm font-medium text-red-700 mb-1">Rejection Reason</p>
+                          <p className="text-sm text-red-600">{roadmap.rejectionReason}</p>
+                        </div>
+                      )}
+
+                      {/* Progress Overview */}
+                      <div className="mb-4">
+                        <div className="flex items-center justify-between text-sm text-gray-600 mb-2">
+                          <span>Progress</span>
+                          <span>
+                            {roadmap.milestones.filter(m => m.status === RoadmapStepStatus.COMPLETED).length} / {roadmap.milestones.length} completed
+                          </span>
+                        </div>
+                        <div className="w-full bg-gray-200 rounded-full h-2">
+                          <div
+                            className="bg-blue-600 h-2 rounded-full transition-all"
+                            style={{
+                              width: `${(roadmap.milestones.filter(m => m.status === RoadmapStepStatus.COMPLETED).length / roadmap.milestones.length) * 100}%`
+                            }}
+                          ></div>
+                        </div>
+                      </div>
+
+                      {/* Milestones Preview */}
+                      <div className="space-y-2">
+                        <h4 className="text-sm font-medium text-gray-700">Milestones</h4>
+                        <div className="space-y-2">
+                          {roadmap.milestones.slice(0, 3).map((milestone, index) => (
+                            <div key={index} className="flex items-center gap-3">
+                              <div className={`px-2 py-1 rounded-full text-xs font-medium border ${getStepStatusColor(milestone.status)}`}>
+                                {milestone.status}
+                              </div>
+                              <span className="text-sm text-gray-700">{milestone.title}</span>
+                              <span className="text-xs text-gray-500">{milestone.estimatedDurationDays} days</span>
+                            </div>
+                          ))}
+                          {roadmap.milestones.length > 3 && (
+                            <p className="text-xs text-gray-500">+{roadmap.milestones.length - 3} more milestones</p>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  )))}
               </div>
             </div>
           )}
@@ -366,7 +357,7 @@ export default function TrainerRoadmapsPage() {
             <div className="max-w-4xl mx-auto">
               <div className="bg-white border border-gray-200 rounded-lg p-6">
                 <h2 className="text-xl font-semibold text-gray-900 mb-6">Create New Roadmap</h2>
-                
+
                 {/* Roadmap Title */}
                 <div className="mb-6">
                   <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -392,9 +383,11 @@ export default function TrainerRoadmapsPage() {
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   >
                     <option value="">Select a student</option>
-                    <option value="student-1">John Smith</option>
-                    <option value="student-2">Sarah Johnson</option>
-                    <option value="student-3">Michael Chen</option>
+                    {students.map((student) => (
+                      <option key={student.id} value={student.id}>
+                        {student.firstName} {student.lastName}
+                      </option>
+                    ))}
                   </select>
                 </div>
 
@@ -548,36 +541,51 @@ export default function TrainerRoadmapsPage() {
             <div className="max-w-4xl mx-auto">
               <div className="bg-white border border-gray-200 rounded-lg p-6">
                 <h2 className="text-xl font-semibold text-gray-900 mb-6">Edit Roadmap: {selectedRoadmap.title}</h2>
-                
+
                 {/* Roadmap Info */}
                 <div className="mb-6">
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <p className="text-sm text-gray-500">Student</p>
                       <p className="font-medium text-gray-900">{getStudentName(selectedRoadmap.studentId)}</p>
                     </div>
                     <div>
+                      <p className="text-sm text-gray-500">Status</p>
+                      <div className={`px-3 py-1 rounded-full text-sm font-medium border inline-block ${getRoadmapStatusColor(selectedRoadmap.status)}`}>
+                        {selectedRoadmap.status.replace('-', ' ').charAt(0).toUpperCase() + selectedRoadmap.status.slice(1).replace('-', ' ')}
+                      </div>
+                    </div>
+                    <div>
                       <p className="text-sm text-gray-500">Created</p>
                       <p className="font-medium text-gray-900">{selectedRoadmap.createdAt.toLocaleDateString()}</p>
                     </div>
+                    {selectedRoadmap.approvedAt && (
+                      <div>
+                        <p className="text-sm text-gray-500">Approved</p>
+                        <p className="font-medium text-gray-900">{selectedRoadmap.approvedAt.toLocaleDateString()}</p>
+                        {selectedRoadmap.approvedBy && (
+                          <p className="text-xs text-gray-500">by {selectedRoadmap.approvedBy}</p>
+                        )}
+                      </div>
+                    )}
                   </div>
+
+                  {/* Rejection Reason */}
+                  {selectedRoadmap.status === 'rejected' && selectedRoadmap.rejectionReason && (
+                    <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded">
+                      <p className="text-sm font-medium text-red-700 mb-1">Rejection Reason</p>
+                      <p className="text-sm text-red-600">{selectedRoadmap.rejectionReason}</p>
+                    </div>
+                  )}
                 </div>
 
-                {/* Milestones */}
                 <div className="space-y-4">
-                  <h3 className="text-lg font-medium text-gray-900">Milestones</h3>
                   {selectedRoadmap.milestones.map((milestone, index) => (
-                    <div key={milestone.id} className="border border-gray-200 rounded-lg p-4">
+                    <div key={index} className="border border-gray-200 rounded-lg p-4">
                       <div className="flex items-start justify-between mb-3">
                         <div className="flex items-center gap-3">
-                          <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                            milestone.status === RoadmapStepStatus.COMPLETED ? 'bg-green-100' :
-                            milestone.status === RoadmapStepStatus.ACTIVE ? 'bg-blue-100' : 'bg-gray-100'
-                          }`}>
-                            <span className={`text-sm font-medium ${
-                              milestone.status === RoadmapStepStatus.COMPLETED ? 'text-green-700' :
-                              milestone.status === RoadmapStepStatus.ACTIVE ? 'text-blue-700' : 'text-gray-700'
-                            }`}>
+                          <div className={`w-8 h-8 rounded-full flex items-center justify-center ${milestone.status === RoadmapStepStatus.ACTIVE ? 'bg-blue-100' : 'bg-gray-100'}`}>
+                            <span className={`text-sm font-medium ${milestone.status === RoadmapStepStatus.ACTIVE ? 'text-blue-700' : 'text-gray-700'}`}>
                               {index + 1}
                             </span>
                           </div>
@@ -611,8 +619,8 @@ export default function TrainerRoadmapsPage() {
                           <select
                             value={milestone.status}
                             onChange={(e) => {
-                              const updatedMilestones = selectedRoadmap.milestones.map(m =>
-                                m.id === milestone.id 
+                              const updatedMilestones = selectedRoadmap.milestones.map((m, i) =>
+                                i === index
                                   ? { ...m, status: e.target.value as RoadmapStepStatus }
                                   : m
                               );
@@ -646,10 +654,14 @@ export default function TrainerRoadmapsPage() {
                     Back to Roadmaps
                   </button>
                   <button
-                    onClick={() => {
-                      // Update the roadmap in the list
-                      setRoadmaps(roadmaps.map(r => r.id === selectedRoadmap.id ? selectedRoadmap : r));
-                      setViewMode('list');
+                    onClick={async () => {
+                      try {
+                        await roadmapService.updateRoadmap(selectedRoadmap.id, selectedRoadmap);
+                        await refreshRoadmaps();
+                        setViewMode('list');
+                      } catch (error) {
+                        console.error('Failed to update roadmap:', error);
+                      }
                     }}
                     className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
                   >
