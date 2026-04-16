@@ -1,54 +1,252 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
+import { useAuth } from '@/contexts';
+import { Booking, BookingStatus } from '@/types/booking';
+import { UserRole } from '@/types/user';
+import { Calendar, Clock, MapPin, Video, User } from 'lucide-react';
 
-import CalendarHeader from '@/components/calendar/CalendarHeader';
-import CalendarInfo from '@/components/calendar/CalendarInfo';
-import CalendarGrid from '@/components/calendar/CalendarGrid';
-import UpcomingSessions from '@/components/calendar/UpcomingSessions';
-import LiveSessionNotifications from '@/components/calendar/LiveSessionNotifications';
+export default function StudentCalendarPage() {
+  const { user } = useAuth();
+  const [sessions, setSessions] = useState<Booking[]>([]);
+  const [loading, setLoading] = useState(true);
 
-export default function SmartCalendarPage() {
-  const [selectedDateRange, setSelectedDateRange] = useState('Today');
+  // Mock approved sessions data - in real app, this would come from API
+  useEffect(() => {
+    // Simulate API call to get student's approved sessions
+    const mockSessions: Booking[] = [
+      {
+        id: '1',
+        studentId: user?.id || '',
+        trainerId: 'trainer-1',
+        requestedTime: new Date('2024-01-20T09:00:00'),
+        learningGoals: 'Learn React fundamentals and build first project',
+        status: BookingStatus.APPROVED,
+        approvalNotes: 'Great starting point for React development. We will cover components, state management, and hooks.',
+        sessionDuration: 60,
+        sessionFormat: 'online',
+        sessionLocation: 'https://zoom.us/j/123456789',
+        preparationRequirements: 'Please ensure you have Node.js and VS Code installed. Review basic JavaScript concepts.',
+        nextSteps: 'Complete the React fundamentals course and start your first project.',
+        approvedAt: new Date('2024-01-18T10:00:00'),
+        createdAt: new Date('2024-01-15T14:30:00'),
+        updatedAt: new Date('2024-01-18T10:00:00')
+      },
+      {
+        id: '2',
+        studentId: user?.id || '',
+        trainerId: 'trainer-1',
+        requestedTime: new Date('2024-01-22T14:00:00'),
+        learningGoals: 'Understand state management with Redux and context',
+        status: BookingStatus.APPROVED,
+        approvalNotes: 'We will dive deep into state management patterns and best practices.',
+        sessionDuration: 90,
+        sessionFormat: 'online',
+        sessionLocation: 'https://zoom.us/j/987654321',
+        preparationRequirements: 'Review React hooks and have a basic understanding of state concepts.',
+        nextSteps: 'Implement state management in your current project.',
+        approvedAt: new Date('2024-01-19T16:00:00'),
+        createdAt: new Date('2024-01-17T11:00:00'),
+        updatedAt: new Date('2024-01-19T16:00:00')
+      }
+    ];
+    
+    setSessions(mockSessions);
+    setLoading(false);
+  }, [user]);
+
+  const formatDate = (date: Date) => {
+    return new Date(date).toLocaleDateString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  };
+
+  const formatTime = (date: Date) => {
+    return new Date(date).toLocaleTimeString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  };
+
+  const getSessionStatus = (session: Booking) => {
+    const now = new Date();
+    const sessionTime = new Date(session.requestedTime);
+    
+    if (sessionTime < now) {
+      return { text: 'Completed', color: 'bg-gray-100 text-gray-700' };
+    } else {
+      const hoursUntil = Math.floor((sessionTime.getTime() - now.getTime()) / (1000 * 60 * 60));
+      if (hoursUntil <= 24) {
+        return { text: 'Today', color: 'bg-green-100 text-green-700' };
+      } else if (hoursUntil <= 72) {
+        return { text: 'This Week', color: 'bg-blue-100 text-blue-700' };
+      } else {
+        return { text: 'Upcoming', color: 'bg-yellow-100 text-yellow-700' };
+      }
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="flex h-screen bg-white">
+        <Sidebar activeItem="Sessions & Calendar" userType={UserRole.STUDENT} />
+        <div className="flex-1 flex flex-col">
+          <div className="h-16 bg-gray-100 animate-pulse"></div>
+          <div className="flex-1 p-6 space-y-6">
+            <div className="h-8 bg-gray-200 rounded animate-pulse"></div>
+            <div className="space-y-4">
+              {[...Array(3)].map((_, i) => (
+                <div key={i} className="h-32 bg-gray-200 rounded animate-pulse"></div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex h-screen bg-white">
-      {/* Sidebar - Fixed */}
-      <Sidebar activeItem="Smart Calendar" />
-
-      {/* Main Content - Scrollable */}
-      <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
-        {/* Calendar Content - Scrollable */}
-        <main className="flex-1 overflow-auto">
-          <div className="p-3 lg:p-4">
-            {/* Calendar Header */}
-            <CalendarHeader />
-
-            {/* Main Calendar Grid */}
-            <div className="grid grid-cols-1 xl:grid-cols-5 gap-3 lg:gap-4 mt-4 lg:mt-6">
-              {/* Left Column - Calendar (3 columns on xl) */}
-              <div className="xl:col-span-3 space-y-3 lg:space-y-4">
-                {/* Main Calendar Grid */}
-                <CalendarGrid
-                  selectedDateRange={selectedDateRange}
-                  onDateRangeChange={setSelectedDateRange}
-                />
-              </div>
-
-              {/* Right Column - Info and Sessions (2 columns on xl) */}
-              <div className="xl:col-span-2 space-y-3 lg:space-y-4">
-                {/* Calendar Info */}
-                <CalendarInfo />
-
-                {/* Upcoming Sessions */}
-                <UpcomingSessions />
-
-                {/* Live Session Notifications */}
-                <LiveSessionNotifications />
-              </div>
+      <Sidebar activeItem="Sessions & Calendar" userType={UserRole.STUDENT} />
+      
+      <div className="flex-1 flex flex-col min-w-0">
+        {/* Header */}
+        <header className="bg-white border-b border-gray-200 px-8 py-4">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-2xl font-bold text-gray-900">My Sessions</h1>
+              <p className="text-gray-500">Your approved mentorship sessions</p>
+            </div>
+            <div className="text-sm text-gray-500">
+              {sessions.length} session{sessions.length !== 1 ? 's' : ''} scheduled
             </div>
           </div>
+        </header>
+
+        {/* Main Content */}
+        <main className="flex-1 p-8 overflow-auto">
+          {sessions.length === 0 ? (
+            <div className="text-center py-12">
+              <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Calendar className="w-8 h-8 text-gray-400" />
+              </div>
+              <h3 className="text-lg font-medium text-gray-900 mb-2">No Sessions Yet</h3>
+              <p className="text-gray-500">
+                Your approved mentorship sessions will appear here once you book and complete your orientation.
+              </p>
+            </div>
+          ) : (
+            <div className="space-y-6">
+              {sessions.map((session) => {
+                const status = getSessionStatus(session);
+                return (
+                  <div key={session.id} className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
+                    <div className="flex items-start justify-between">
+                      <div className="flex-1">
+                        {/* Session Header */}
+                        <div className="flex items-center gap-3 mb-4">
+                          <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                            <Video className="w-5 h-5 text-blue-600" />
+                          </div>
+                          <div>
+                            <h3 className="font-medium text-gray-900">Mentorship Session</h3>
+                            <div className={`px-2 py-1 rounded-full text-xs font-medium ${status.color}`}>
+                              {status.text}
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Session Details */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                          <div className="flex items-center gap-2">
+                            <Calendar className="w-4 h-4 text-gray-400" />
+                            <div>
+                              <span className="text-sm text-gray-600">{formatDate(session.requestedTime)}</span>
+                              <span className="text-sm font-medium text-gray-900 ml-1">{formatTime(session.requestedTime)}</span>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Clock className="w-4 h-4 text-gray-400" />
+                            <span className="text-sm text-gray-600">Duration: {session.sessionDuration} minutes</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <MapPin className="w-4 h-4 text-gray-400" />
+                            <span className="text-sm text-gray-600">
+                              {session.sessionFormat === 'online' ? 'Online Session' : 'In-Person'}
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* Learning Goals */}
+                        <div className="mb-4">
+                          <h4 className="text-sm font-medium text-gray-700 mb-2">Learning Goals</h4>
+                          <p className="text-sm text-gray-600 bg-gray-50 rounded-lg p-3">
+                            {session.learningGoals}
+                          </p>
+                        </div>
+
+                        {/* Session Details */}
+                        {session.status === BookingStatus.APPROVED && (
+                          <div className="space-y-4">
+                            <div>
+                              <h4 className="text-sm font-medium text-gray-700 mb-2">Session Details</h4>
+                              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                                <p className="text-sm text-gray-700 mb-2">{session.approvalNotes}</p>
+                                {session.sessionLocation && (
+                                  <div className="mt-3 pt-3 border-t border-blue-200">
+                                    <p className="text-sm font-medium text-blue-700 mb-1">Meeting Link:</p>
+                                    <a 
+                                      href={session.sessionLocation} 
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="text-sm text-blue-600 hover:text-blue-800 underline"
+                                    >
+                                      {session.sessionLocation}
+                                    </a>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+
+                            {session.preparationRequirements && (
+                              <div>
+                                <h4 className="text-sm font-medium text-gray-700 mb-2">Preparation Required</h4>
+                                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                                  <p className="text-sm text-gray-700">{session.preparationRequirements}</p>
+                                </div>
+                              </div>
+                            )}
+
+                            {session.nextSteps && (
+                              <div>
+                                <h4 className="text-sm font-medium text-gray-700 mb-2">Next Steps</h4>
+                                <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                                  <p className="text-sm text-gray-700">{session.nextSteps}</p>
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Actions */}
+                      <div className="ml-4">
+                        {session.status === BookingStatus.APPROVED && new Date(session.requestedTime) > new Date() && (
+                          <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                            Join Session
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </main>
       </div>
     </div>

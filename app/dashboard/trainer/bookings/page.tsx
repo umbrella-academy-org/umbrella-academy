@@ -4,9 +4,9 @@ import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
 import { useBooking } from '@/contexts/BookingContext';
 import { useUsers } from '@/contexts';
-import { BookingStatus, Booking } from '@/types/booking';
+import { BookingStatus, Booking, TrainerApprovalRequest } from '@/types/booking';
 import { UserRole } from '@/types/user';
-import { Calendar, Clock, User, MessageSquare, CheckCircle, XCircle, AlertCircle, Filter, Search, RefreshCw } from 'lucide-react';
+import { Calendar, Clock, User, MessageSquare, CheckCircle, XCircle, AlertCircle, Filter, Search, RefreshCw, Video, MapPin, FileText } from 'lucide-react';
 
 export default function TrainerBookingsPage() {
   const { 
@@ -26,6 +26,18 @@ export default function TrainerBookingsPage() {
   const [rejectingBooking, setRejectingBooking] = useState<string | null>(null);
   const [rejectionReason, setRejectionReason] = useState('');
   const [showRejectModal, setShowRejectModal] = useState(false);
+  
+  // Approval modal state
+  const [approvingBooking, setApprovingBooking] = useState<string | null>(null);
+  const [showApproveModal, setShowApproveModal] = useState(false);
+  const [approvalData, setApprovalData] = useState<TrainerApprovalRequest>({
+    approvalNotes: '',
+    sessionDuration: 60, // default 60 minutes
+    sessionFormat: 'online',
+    sessionLocation: '',
+    preparationRequirements: '',
+    nextSteps: ''
+  });
 
   const getStudentName = (studentId: string) => {
     const student = students.find(s => s.id === studentId);
@@ -38,11 +50,41 @@ export default function TrainerBookingsPage() {
   };
 
   const handleApprove = async (bookingId: string) => {
+    setApprovingBooking(bookingId);
+    setApprovalData({
+      approvalNotes: '',
+      sessionDuration: 60,
+      sessionFormat: 'online',
+      sessionLocation: '',
+      preparationRequirements: '',
+      nextSteps: ''
+    });
+    setShowApproveModal(true);
+  };
+
+  const handleConfirmApprove = async () => {
+    if (!approvingBooking || !approvalData.approvalNotes.trim() || !approvalData.sessionLocation.trim()) return;
+    
     try {
-      await approveBooking(bookingId);
+      await approveBooking(approvingBooking, approvalData);
+      setShowApproveModal(false);
+      setApprovingBooking(null);
     } catch (err) {
       console.error('Failed to approve booking:', err);
     }
+  };
+
+  const closeApproveModal = () => {
+    setShowApproveModal(false);
+    setApprovingBooking(null);
+    setApprovalData({
+      approvalNotes: '',
+      sessionDuration: 60,
+      sessionFormat: 'online',
+      sessionLocation: '',
+      preparationRequirements: '',
+      nextSteps: ''
+    });
   };
 
   const handleReject = async () => {
@@ -288,6 +330,73 @@ export default function TrainerBookingsPage() {
                           </p>
                         </div>
                       )}
+
+                      {/* Approval Details */}
+                      {booking.status === BookingStatus.APPROVED && (
+                        <div className="mb-4 space-y-4">
+                          <div className="flex items-center gap-2 mb-2">
+                            <CheckCircle className="w-4 h-4 text-green-500" />
+                            <span className="text-sm font-medium text-green-700">Session Details</span>
+                          </div>
+                          
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="flex items-center gap-2">
+                              <Clock className="w-4 h-4 text-gray-400" />
+                              <span className="text-sm text-gray-600">
+                                Duration: {booking.sessionDuration} minutes
+                              </span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <Video className="w-4 h-4 text-gray-400" />
+                              <span className="text-sm text-gray-600">
+                                Format: {booking.sessionFormat}
+                              </span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <MapPin className="w-4 h-4 text-gray-400" />
+                              <span className="text-sm text-gray-600">
+                                Location: {booking.sessionLocation}
+                              </span>
+                            </div>
+                          </div>
+
+                          {booking.approvalNotes && (
+                            <div>
+                              <div className="flex items-center gap-2 mb-2">
+                                <MessageSquare className="w-4 h-4 text-gray-400" />
+                                <span className="text-sm font-medium text-gray-700">Approval Notes</span>
+                              </div>
+                              <p className="text-sm text-gray-600 bg-green-50 rounded-lg p-3">
+                                {booking.approvalNotes}
+                              </p>
+                            </div>
+                          )}
+
+                          {booking.preparationRequirements && (
+                            <div>
+                              <div className="flex items-center gap-2 mb-2">
+                                <FileText className="w-4 h-4 text-gray-400" />
+                                <span className="text-sm font-medium text-gray-700">Preparation Requirements</span>
+                              </div>
+                              <p className="text-sm text-gray-600 bg-blue-50 rounded-lg p-3">
+                                {booking.preparationRequirements}
+                              </p>
+                            </div>
+                          )}
+
+                          {booking.nextSteps && (
+                            <div>
+                              <div className="flex items-center gap-2 mb-2">
+                                <CheckCircle className="w-4 h-4 text-gray-400" />
+                                <span className="text-sm font-medium text-gray-700">Next Steps</span>
+                              </div>
+                              <p className="text-sm text-gray-600 bg-yellow-50 rounded-lg p-3">
+                                {booking.nextSteps}
+                              </p>
+                            </div>
+                          )}
+                        </div>
+                      )}
                     </div>
 
                     {/* Actions */}
@@ -347,6 +456,126 @@ export default function TrainerBookingsPage() {
                 className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Reject Booking
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Approval Modal */}
+      {showApproveModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg max-w-2xl w-full mx-4 p-6 max-h-[90vh] overflow-y-auto">
+            <h3 className="text-lg font-medium text-gray-900 mb-4">Approve Booking Request</h3>
+            <p className="text-sm text-gray-600 mb-6">
+              Provide session details and guidance for the student. This information will help them prepare for the orientation session.
+            </p>
+            
+            <div className="space-y-4">
+              {/* Session Format */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Session Format</label>
+                <div className="flex gap-4">
+                  <label className="flex items-center">
+                    <input
+                      type="radio"
+                      value="online"
+                      checked={approvalData.sessionFormat === 'online'}
+                      onChange={(e) => setApprovalData({...approvalData, sessionFormat: 'online'})}
+                      className="mr-2"
+                    />
+                    <span className="text-sm text-gray-700">Online</span>
+                  </label>
+                  <label className="flex items-center">
+                    <input
+                      type="radio"
+                      value="in-person"
+                      checked={approvalData.sessionFormat === 'in-person'}
+                      onChange={(e) => setApprovalData({...approvalData, sessionFormat: 'in-person'})}
+                      className="mr-2"
+                    />
+                    <span className="text-sm text-gray-700">In-Person</span>
+                  </label>
+                </div>
+              </div>
+
+              {/* Session Duration */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Session Duration (minutes)</label>
+                <input
+                  type="number"
+                  min="30"
+                  max="180"
+                  value={approvalData.sessionDuration}
+                  onChange={(e) => setApprovalData({...approvalData, sessionDuration: parseInt(e.target.value) || 60})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                />
+              </div>
+
+              {/* Session Location */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  {approvalData.sessionFormat === 'online' ? 'Meeting Link' : 'Location'}
+                </label>
+                <input
+                  type="text"
+                  value={approvalData.sessionLocation}
+                  onChange={(e) => setApprovalData({...approvalData, sessionLocation: e.target.value})}
+                  placeholder={approvalData.sessionFormat === 'online' ? 'https://zoom.us/j/...' : 'Enter physical address'}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                />
+              </div>
+
+              {/* Approval Notes */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Approval Notes</label>
+                <textarea
+                  value={approvalData.approvalNotes}
+                  onChange={(e) => setApprovalData({...approvalData, approvalNotes: e.target.value})}
+                  placeholder="Share your thoughts about this booking request..."
+                  rows={3}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                />
+              </div>
+
+              {/* Preparation Requirements */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Preparation Requirements</label>
+                <textarea
+                  value={approvalData.preparationRequirements}
+                  onChange={(e) => setApprovalData({...approvalData, preparationRequirements: e.target.value})}
+                  placeholder="What should the student prepare before the session?"
+                  rows={3}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                />
+              </div>
+
+              {/* Next Steps */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Next Steps</label>
+                <textarea
+                  value={approvalData.nextSteps}
+                  onChange={(e) => setApprovalData({...approvalData, nextSteps: e.target.value})}
+                  placeholder="What should the student do after this session?"
+                  rows={3}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                />
+              </div>
+            </div>
+
+            <div className="flex gap-3 mt-6">
+              <button
+                onClick={closeApproveModal}
+                className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleConfirmApprove}
+                disabled={!approvalData.approvalNotes.trim() || !approvalData.sessionLocation.trim()}
+                className="flex-1 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Approve Booking
               </button>
             </div>
           </div>

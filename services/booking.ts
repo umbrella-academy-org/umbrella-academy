@@ -1,7 +1,7 @@
 import { BookingStatus, StudentBookingRequest } from "@/types";
 import { apiClient } from "./client";
 import { API_ENDPOINTS } from "./constants";
-import { Booking } from "@/types/booking";
+import { Booking, TrainerApprovalRequest } from "@/types/booking";
 import { ApiResponse } from "@/types";
 
 class BookingService {
@@ -16,8 +16,8 @@ class BookingService {
         return response;
     }
 
-    async approveBooking(bookingId: string): Promise<ApiResponse<Booking>> {
-        const response = await apiClient.post<Booking>(API_ENDPOINTS.BOOKING_APPROVE(bookingId));
+    async approveBooking(bookingId: string, approvalData: TrainerApprovalRequest): Promise<ApiResponse<Booking>> {
+        const response = await apiClient.post<Booking>(API_ENDPOINTS.BOOKING_APPROVE(bookingId), approvalData);
         return response;
     }
 

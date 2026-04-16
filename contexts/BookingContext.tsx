@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
-import { Booking } from "@/types/booking";
+import { Booking, TrainerApprovalRequest } from "@/types/booking";
 import { bookingService } from "@/services/booking";
 
 interface BookingContextType {
@@ -9,7 +9,7 @@ interface BookingContextType {
     trainerAllBookings: Booking[];
     loading: boolean;
     error: string | null;
-    approveBooking: (bookingId: string) => Promise<void>;
+    approveBooking: (bookingId: string, approvalData: TrainerApprovalRequest) => Promise<void>;
     rejectBooking: (bookingId: string, reason: string) => Promise<void>;
     refreshBookings: () => Promise<void>;
 }
@@ -48,9 +48,9 @@ export const BookingProvider = ({ children }: { children: React.ReactNode }) => 
         fetchBookings();
     }, []);
 
-    const approveBooking = async (bookingId: string) => {
+    const approveBooking = async (bookingId: string, approvalData: TrainerApprovalRequest) => {
         try {
-            await bookingService.approveBooking(bookingId);
+            await bookingService.approveBooking(bookingId, approvalData);
             await fetchBookings(); // Refresh bookings
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Failed to approve booking');

@@ -13,6 +13,15 @@ export interface StudentBookingRequest {
   learningGoals: string;
 }
 
+export interface TrainerApprovalRequest {
+  approvalNotes: string;
+  sessionDuration: number; // in minutes
+  sessionFormat: 'online' | 'in-person';
+  sessionLocation: string; // URL or physical address
+  preparationRequirements: string;
+  nextSteps: string;
+}
+
 export interface Booking  {
   id: string;
   studentId: string;
@@ -21,6 +30,15 @@ export interface Booking  {
   learningGoals: string;
   status: BookingStatus;
   rejectionReason?: string;
+  
+  // Approval details (when approved)
+  approvalNotes?: string;
+  sessionDuration?: number; // in minutes
+  sessionFormat?: 'online' | 'in-person';
+  sessionLocation?: string; // URL or physical address
+  preparationRequirements?: string;
+  nextSteps?: string;
+  
   approvedAt?: Date;
   completedAt?: Date;
   createdAt: Date;
