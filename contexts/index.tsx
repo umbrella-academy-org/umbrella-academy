@@ -15,6 +15,7 @@ import { RoadmapProvider } from './RoadmapContext';
 import { FinancialProvider } from './FinancialContext';
 import { SystemProvider } from './SystemContext';
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
+import { BookingProvider } from './BookingContext';
 
 interface AppProvidersProps {
   children: React.ReactNode;
@@ -25,6 +26,7 @@ export function AppProviders({ children }: AppProvidersProps) {
     <ThemeProvider defaultMode="system" enableSystem={true}>
       <AuthProvider>
         <UserProvider>
+          <BookingProvider>
           <RoadmapProvider>
             <FinancialProvider>
               <SystemProvider>
@@ -32,6 +34,7 @@ export function AppProviders({ children }: AppProvidersProps) {
               </SystemProvider>
             </FinancialProvider>
           </RoadmapProvider>
+          </BookingProvider>
         </UserProvider>
       </AuthProvider>
     </ThemeProvider>

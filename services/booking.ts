@@ -1,4 +1,4 @@
-import { StudentBookingRequest } from "@/types";
+import { BookingStatus, StudentBookingRequest } from "@/types";
 import { apiClient } from "./client";
 import { API_ENDPOINTS } from "./constants";
 import { Booking } from "@/types/booking";
@@ -8,6 +8,11 @@ class BookingService {
 
     async createBooking(data: StudentBookingRequest): Promise<ApiResponse<Booking>> {
         const response = await apiClient.post<Booking>(API_ENDPOINTS.BOOKING, data);
+        return response;
+    }
+
+    async getTrainerPendingBookings(): Promise<ApiResponse<Booking[]>> {
+        const response = await apiClient.get<Booking[]>(API_ENDPOINTS.BOOKING_TRAINER, { status: BookingStatus.PENDING });
         return response;
     }
 
