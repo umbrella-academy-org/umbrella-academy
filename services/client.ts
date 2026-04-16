@@ -51,7 +51,7 @@ class ApiClient {
       });
 
       if (res.status === HTTP_STATUS.UNAUTHORIZED || res.status === HTTP_STATUS.FORBIDDEN) {
-        localStorage.removeItem('auth_token');
+        // localStorage.removeItem('auth_token');
         this.logoutListeners.forEach(cb => { try { cb(); } catch { /* ignore */ } });
         throw new Error(`HTTP ${res.status}`);
       }

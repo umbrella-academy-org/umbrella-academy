@@ -15,6 +15,7 @@ export const API_ENDPOINTS = {
   AUTH_RESET_PASSWORD: '/api/auth/reset-password',
   AUTH_APPROVE_TRAINER: (id: string) => `/api/auth/trainers/${id}/approve`,
   AUTH_REJECT_TRAINER: (id: string) => `/api/auth/trainers/${id}/reject`,
+  AUTH_ONBOARDING_CHECKLIST: '/api/auth/onboarding-checklist',
   USERS_ME: '/api/users/me',
   USERS: '/api/users',
   USER_STATUS: (id: string) => `/api/users/${id}/status`,

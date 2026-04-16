@@ -10,19 +10,9 @@ import SubscriptionPaymentModal from '@/components/payment/SubscriptionPaymentMo
 import BookingCalendar from '@/components/booking/BookingCalendar';
 import Sidebar from '@/components/dashboard/Sidebar';
 
-export default function StudentDashboard() { 
-  const { user, isAuthenticated, isLoading: authLoading } = useAuth();
+export default function StudentDashboard() {
+  const { user, isAuthenticated, isLoading: authLoading, onboardingChecklist } = useAuth();
   const { navigate } = useNavigationWithLoading();
-
-  // State for onboarding checklist
-  const [onboardingChecklist, setOnboardingChecklist] = useState<OnboardingChecklist>({
-    accountCreated: true,
-    bookingPayed: false,
-    subscriptionPayed: false,
-    orientationBooked: false,
-    roadmapReceived: false,
-    learningStarted: false
-  });
 
   // Modal states
   const [showOrientationPayment, setShowOrientationPayment] = useState(false);
@@ -70,41 +60,12 @@ export default function StudentDashboard() {
   const totalSteps = Object.keys(onboardingChecklist).length;
   const progressPercentage = (completedSteps / totalSteps) * 100;
 
-  // Handle orientation payment success
-  const handleOrientationPaymentSuccess = () => {
-    setOnboardingChecklist(prev => ({ ...prev, bookingPayed: true }));
-    setShowOrientationPayment(false);
-    setShowBookingCalendar(true);
-  };
-
-  // Handle subscription payment success
-  const handleSubscriptionPaymentSuccess = () => {
-    setOnboardingChecklist(prev => ({ ...prev, subscriptionPayed: true }));
-    setShowSubscriptionPayment(false);
-  };
-
-  // Handle booking completion
-  const handleBookingComplete = () => {
-    setOnboardingChecklist(prev => ({ ...prev, orientationBooked: true }));
-    setShowBookingCalendar(false);
-  };
-
-  // Handle roadmap creation
-  const handleRoadmapCreated = () => {
-    setOnboardingChecklist(prev => ({ ...prev, roadmapReceived: true }));
-  };
-
-  // Handle learning start
-  const handleLearningStarted = () => {
-    setOnboardingChecklist(prev => ({ ...prev, learningStarted: true }));
-  };
-
   return (
     <div className="flex h-screen bg-white">
       {/* Sidebar */}
-      <Sidebar 
-        activeItem="Home" 
-        userType={UserRole.STUDENT} 
+      <Sidebar
+        activeItem="Home"
+        userType={UserRole.STUDENT}
         onboardingChecklist={onboardingChecklist}
       />
 
@@ -155,7 +116,7 @@ export default function StudentDashboard() {
                 <div
                   className="bg-green-600 h-3 rounded-full transition-all duration-300"
                   style={{ width: `${progressPercentage}%` }}
-                 />
+                />
               </div>
             </div>
           </div>
@@ -175,14 +136,14 @@ export default function StudentDashboard() {
                 <div
                   key={step.key}
                   className={`bg-white border rounded-lg p-4 ${onboardingChecklist[step.key as keyof OnboardingChecklist]
-                      ? 'border-green-200 bg-green-50'
-                      : 'border-gray-200'
+                    ? 'border-green-200 bg-green-50'
+                    : 'border-gray-200'
                     }`}
                 >
                   <div className="flex items-start gap-3">
                     <div className={`w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 ${onboardingChecklist[step.key as keyof OnboardingChecklist]
-                        ? 'bg-green-600'
-                        : 'bg-gray-200'
+                      ? 'bg-green-600'
+                      : 'bg-gray-200'
                       }`}>
                       {onboardingChecklist[step.key as keyof OnboardingChecklist] ? (
                         <CheckCircle className="w-4 h-4 text-white" />
@@ -239,7 +200,7 @@ export default function StudentDashboard() {
 
               {onboardingChecklist.subscriptionPayed && (
                 <button
-                  onClick={handleLearningStarted}
+                  onClick={()=>{}}
                   className="bg-white border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors text-left"
                 >
                   <BookOpen className="w-8 h-8 text-green-600 mb-2" />
@@ -256,21 +217,21 @@ export default function StudentDashboard() {
       {showOrientationPayment && (
         <OrientationPaymentModal
           onClose={() => setShowOrientationPayment(false)}
-          onSuccess={handleOrientationPaymentSuccess}
+          onSuccess={() => {}}
         />
       )}
 
       {showSubscriptionPayment && (
         <SubscriptionPaymentModal
           onClose={() => setShowSubscriptionPayment(false)}
-          onSuccess={handleSubscriptionPaymentSuccess}
+          onSuccess={() => {}}
         />
       )}
 
       {showBookingCalendar && (
         <BookingCalendar
           onClose={() => setShowBookingCalendar(false)}
-          onSuccess={handleBookingComplete}
+          onSuccess={() => {}}
         />
       )}
     </div>

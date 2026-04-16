@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { authService } from '@/services/auth';
-import { BaseUser, Student, StudentRegister, Trainer, UserRole } from '@/types';
+import { BaseUser, OnboardingChecklist, Student, StudentRegister, Trainer, UserRole } from '@/types';
 import { useRouter } from 'next/navigation';
 
 interface AuthContextType {
@@ -14,6 +14,7 @@ interface AuthContextType {
   registerStudent: (data: Partial<StudentRegister>) => Promise<void>;
   registerTrainer: (data: Partial<Trainer>) => Promise<void>;
   logout: () => void;
+  onboardingChecklist: OnboardingChecklist
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -24,6 +25,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter()
+  const [onboardingChecklist, setOnboardingChecklist] = useState<OnboardingChecklist>({
+    accountCreated: false,
+    bookingPayed: false,
+    subscriptionPayed: false,
+    orientationBooked: false,
+    roadmapReceived: false,
+    learningStarted: false
+  })
 
   useEffect(() => {
     const checkSession = async () => {
@@ -31,6 +40,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       if (user) {
         setUser(JSON.parse(user));
         setIsAuthenticated(true);
+        if (JSON.parse(user).role === UserRole.STUDENT) {
+          const response = await authService.getOnboardingChecklist();
+          if (response.success && response.data) {
+            setOnboardingChecklist(response.data);
+          }
+        }
       }
       setIsLoading(false);
     }
@@ -46,6 +61,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       if (response.success && response.data) {
         setUser(response.data.user);
         setIsAuthenticated(true);
+        localStorage.setItem('auth_token', response.data.token);
+        localStorage.setItem('user', JSON.stringify(response.data.user));
       }
       else {
         setError(response.message);
@@ -100,7 +117,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       registerStudent,
       registerTrainer,
       logout,
-      error
+      error,
+      onboardingChecklist
     }}>
       {children}
     </AuthContext.Provider>

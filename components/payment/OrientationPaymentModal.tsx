@@ -16,7 +16,7 @@ export default function OrientationPaymentModal({ onClose, onSuccess }: Orientat
     phone: '',
     promoCode: ''
   });
-  const { paySubscriptionPayment } = usePayment();
+  const { payOriantaionPayment } = usePayment();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,7 +24,7 @@ export default function OrientationPaymentModal({ onClose, onSuccess }: Orientat
     setPaymentStep('processing');
 
     try {
-      await paySubscriptionPayment(formData.promoCode);
+      await payOriantaionPayment(formData.promoCode);
       setPaymentStep('success');
       onSuccess();
     } catch (error) {

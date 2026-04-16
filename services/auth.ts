@@ -1,7 +1,7 @@
 import { AuthResponse } from '@/types/auth';
 import { apiClient } from './client';
 import { API_ENDPOINTS } from './constants';
-import { ApiResponse,  Student, StudentRegister, Trainer } from '@/types';
+import { ApiResponse,  OnboardingChecklist,  Student, StudentRegister, Trainer } from '@/types';
 
 export interface LoginRequest {
   email: string;
@@ -12,7 +12,6 @@ export interface LoginRequest {
 class AuthService {
   async login(email: string, password: string): Promise<ApiResponse<AuthResponse>> {
     const response = await apiClient.post<AuthResponse>(API_ENDPOINTS.AUTH_LOGIN, { email, password });
-    if (response.data) localStorage.setItem('auth_token', response.data?.token);
     return response;
   }
 
@@ -60,6 +59,10 @@ class AuthService {
     } finally {
       localStorage.removeItem('auth_token');
     }
+  }
+
+  async getOnboardingChecklist(): Promise<ApiResponse<OnboardingChecklist>> {
+    return apiClient.get<OnboardingChecklist>(API_ENDPOINTS.AUTH_ONBOARDING_CHECKLIST);
   }
 
 }
