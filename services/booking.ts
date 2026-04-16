@@ -16,6 +16,21 @@ class BookingService {
         return response;
     }
 
+    async approveBooking(bookingId: string): Promise<ApiResponse<Booking>> {
+        const response = await apiClient.post<Booking>(API_ENDPOINTS.BOOKING_APPROVE(bookingId));
+        return response;
+    }
+
+    async rejectBooking(bookingId: string, reason: string): Promise<ApiResponse<Booking>> {
+        const response = await apiClient.post<Booking>(API_ENDPOINTS.BOOKING_REJECT(bookingId), { rejectionReason: reason });
+        return response;
+    }
+
+    async getTrainerAllBookings(): Promise<ApiResponse<Booking[]>> {
+        const response = await apiClient.get<Booking[]>(API_ENDPOINTS.BOOKING_TRAINER);
+        return response;
+    }
+
 }
 
 export const bookingService = new BookingService();

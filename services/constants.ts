@@ -25,6 +25,8 @@ export const API_ENDPOINTS = {
   USER_BY_ID: (id: string) => `/api/users/${id}`,
   BOOKING: '/api/bookings',
   BOOKING_TRAINER: '/api/bookings/trainer',
+  BOOKING_APPROVE:(id:string)=>`/api/bookings/${id}/approve`,
+  BOOKING_REJECT:(id:string)=>`/api/bookings/${id}/reject`,
   ROADMAPS: '/api/roadmaps',
   ROADMAP_BY_ID: (id: string) => `/api/roadmaps/${id}`,
   ROADMAP_SUBMIT: (id: string) => `/api/roadmaps/${id}/submit`,

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Home, Calendar, Map, Bell, Video, CreditCard, HelpCircle, MessageSquare, X, Settings, Menu, User, LogOut, AlertCircle, CheckCircle, Flame, BookOpen, Award, Lock } from 'lucide-react';
+import { Home, Calendar, CalendarCheck, Map, Bell, Video, CreditCard, HelpCircle, MessageSquare, X, Settings, Menu, User, LogOut, AlertCircle, CheckCircle, Flame, BookOpen, Award, Lock } from 'lucide-react';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
 import { useAuth } from '@/contexts';
 import { SidebarProps, SidebarItem } from '@/types';
@@ -123,6 +123,11 @@ export default function Sidebar({ activeItem = 'Home', userType, onboardingCheck
             icon: <User className="w-5 h-5" />,
             label: 'My Students',
             href: '/dashboard/trainer/students'
+          },
+          {
+            icon: <CalendarCheck className="w-5 h-5" />,
+            label: 'Bookings',
+            href: '/dashboard/trainer/bookings'
           },
           {
             icon: <Video className="w-5 h-5" />,
