@@ -34,7 +34,7 @@ export interface Experience {
 
 
 export interface BaseUser  {
-  id:string
+  _id:string
   email: string;
   password: string;
   firstName: string;
