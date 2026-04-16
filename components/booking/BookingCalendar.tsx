@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import { X, Calendar, Clock, User, CheckCircle, MessageSquare } from 'lucide-react';
 import { useUsers } from '@/contexts';
-import { Trainer, BookingStatus } from '@/types';
+import { Trainer, BookingStatus, StudentBookingRequest } from '@/types';
+import { useBooking } from '@/hooks/useBooking';
 
 interface OrientationBooking extends Document {
   id: string;
@@ -30,11 +31,11 @@ interface TimeSlot {
 
 export default function BookingCalendar({ onClose, onSuccess }: BookingCalendarProps) {
   const { trainers } = useUsers()
+  const { createBooking, isLoading, error } = useBooking();
   const [selectedTrainer, setSelectedTrainer] = useState<Trainer | null>(null);
   const [selectedDate, setSelectedDate] = useState<string>('');
   const [selectedTime, setSelectedTime] = useState<string>('');
   const [learningGoals, setLearningGoals] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [bookingStep, setBookingStep] = useState<'select' | 'confirm' | 'submitting' | 'success'>('select');
   const [currentTrainerIndex, setCurrentTrainerIndex] = useState(0);
 
@@ -45,33 +46,33 @@ export default function BookingCalendar({ onClose, onSuccess }: BookingCalendarP
     return date.toISOString().split('T')[0];
   });
 
-  // Fixed time slots for simplicity
-  const timeSlots = [
-    { time: '09:00 AM', available: true },
-    { time: '10:00 AM', available: true },
-    { time: '11:00 AM', available: true },
-    { time: '02:00 PM', available: true },
-    { time: '03:00 PM', available: true },
-    { time: '04:00 PM', available: true }
-  ];
-
-  const getTimeSlotsForDate = (date: string) => {
-    // Simply return the fixed time slots
-    return timeSlots;
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
+    
+    if (!selectedTrainer || !selectedDate || !selectedTime || !learningGoals.trim()) {
+      alert('Please fill in all fields');
+      return;
+    }
+    
     setBookingStep('submitting');
 
-    // Simulate booking submission
-    setTimeout(() => {
+    // Create booking request object
+    const bookingRequest: StudentBookingRequest = {
+      trainerId: selectedTrainer.id,
+      requestedTime: new Date(`${selectedDate}T${selectedTime}`),
+      learningGoals: learningGoals.trim()
+    };
+
+    try {
+      await createBooking(bookingRequest);
       setBookingStep('success');
       setTimeout(() => {
         onSuccess();
       }, 2000);
-    }, 3000);
+    } catch (err) {
+      console.error('Booking failed:', err);
+      setBookingStep('select');
+    }
   };
 
   const handleClose = () => {
@@ -114,7 +115,7 @@ export default function BookingCalendar({ onClose, onSuccess }: BookingCalendarP
                 </div>
                 <div className="flex items-center gap-2">
                   <Calendar className="w-4 h-4 text-green-600" />
-                  <span className="text-sm text-green-700">Date: {selectedDate}</span>
+                  <span className="text-sm text-green-700">Date: {selectedDate ? new Date(selectedDate).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }) : ''}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Clock className="w-4 h-4 text-green-600" />
@@ -204,61 +205,34 @@ export default function BookingCalendar({ onClose, onSuccess }: BookingCalendarP
                 </div>
               </div>
 
-              {/* Step 2: Select Date */}
+              {/* Step 2: Select Date - Use date picker */}
               <div>
                 <h3 className="font-medium text-gray-900 mb-3">Select Date</h3>
-                <div className="grid grid-cols-3 gap-2">
-                  {availableDates.map((date) => (
-                    <button
-                      key={date}
-                      onClick={() => setSelectedDate(date)}
-                      className={`p-3 border rounded-lg text-center transition-colors ${selectedDate === date
-                        ? 'border-blue-500 bg-blue-50'
-                        : 'border-gray-200 hover:border-gray-300'
-                        }`}
-                    >
-                      <div className="font-medium text-gray-900">
-                        {new Date(date).toLocaleDateString('en-US', { weekday: 'short' })}
-                      </div>
-                      <div className="text-sm text-gray-500">
-                        {new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
-                      </div>
-                    </button>
-                  ))}
-                </div>
+                <input
+                  type="date"
+                  value={selectedDate}
+                  onChange={(e) => setSelectedDate(e.target.value)}
+                  min={new Date().toISOString().split('T')[0]}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+                {selectedDate && (
+                  <p className="text-sm text-green-600 mt-2">Date selected: {selectedDate}</p>
+                )}
               </div>
 
-              {/* Step 3: Select Time - Only show when trainer and date are selected */}
-              {selectedTrainer && selectedDate && (
-                <div>
-                  <h3 className="font-medium text-gray-900 mb-3">Select Time</h3>
-                  <div className="grid grid-cols-3 gap-2">
-                    {getTimeSlotsForDate(selectedDate).map((slot) => (
-                      <button
-                        key={slot.time}
-                        onClick={() => slot.available && setSelectedTime(slot.time)}
-                        className={`p-3 border rounded-lg text-center transition-colors ${!slot.available
-                          ? 'bg-gray-50 text-gray-400 cursor-not-allowed'
-                          : selectedTime === slot.time
-                          ? 'border-blue-500 bg-blue-50'
-                          : 'border-gray-200 hover:border-gray-300'
-                          }`}
-                        disabled={!slot.available}
-                      >
-                        <div className={`font-medium ${
-                          !slot.available ? 'text-gray-400' : 
-                          selectedTime === slot.time ? 'text-blue-600' : 'text-gray-900'
-                        }`}>
-                          {slot.time}
-                        </div>
-                        {!slot.available && (
-                          <div className="text-xs text-gray-400 mt-1">Unavailable</div>
-                        )}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
+              {/* Step 3: Select Time - Use time picker */}
+              <div>
+                <h3 className="font-medium text-gray-900 mb-3">Select Time</h3>
+                <input
+                  type="time"
+                  value={selectedTime}
+                  onChange={(e) => setSelectedTime(e.target.value)}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+                {selectedTime && (
+                  <p className="text-sm text-green-600 mt-2">Time selected: {selectedTime}</p>
+                )}
+              </div>
               {/* Step 4: Learning Goals */}
               <div>
                 <h3 className="font-medium text-gray-900 mb-3">Your Learning Goals</h3>
@@ -344,9 +318,10 @@ export default function BookingCalendar({ onClose, onSuccess }: BookingCalendarP
                   </button>
                   <button
                     type="submit"
-                    className="flex-1 px-4 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
+                    disabled={isLoading}
+                    className="flex-1 px-4 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    Book Session
+                    {isLoading ? 'Creating Booking...' : 'Book Session'}
                   </button>
                 </div>
               </form>

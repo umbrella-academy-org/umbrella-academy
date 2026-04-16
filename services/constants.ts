@@ -23,6 +23,7 @@ export const API_ENDPOINTS = {
   USER_STATUS: (id: string) => `/api/users/${id}/status`,
   USER_PROFILE: '/api/users/profile',
   USER_BY_ID: (id: string) => `/api/users/${id}`,
+  BOOKING: '/api/bookings',
   ROADMAPS: '/api/roadmaps',
   ROADMAP_BY_ID: (id: string) => `/api/roadmaps/${id}`,
   ROADMAP_SUBMIT: (id: string) => `/api/roadmaps/${id}/submit`,

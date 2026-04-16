@@ -30,6 +30,12 @@ export interface OrientationBooking {
   createdAt: Date;
 }
 
+export interface StudentBookingRequest {
+  trainerId: string;
+  requestedTime: Date;
+  learningGoals: string;
+}
+
 export interface Milestone {
   id: string;
   roadmapId: string;
