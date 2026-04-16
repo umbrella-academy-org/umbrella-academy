@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { X, CreditCard, CheckCircle, Calendar, AlertCircle } from 'lucide-react';
+import { usePayment } from '@/hooks/usePayment';
 
 interface SubscriptionPaymentModalProps {
   onClose: () => void;
@@ -12,6 +13,7 @@ export default function SubscriptionPaymentModal({ onClose, onSuccess }: Subscri
   const [isProcessing, setIsProcessing] = useState(false);
   const [paymentStep, setPaymentStep] = useState<'form' | 'processing' | 'success'>('form');
   const [billingCycle, setBillingCycle] = useState<'monthly' | 'yearly'>('monthly');
+  const { paySubscriptionPayment } = usePayment();
   const [formData, setFormData] = useState({
     phone: '',
     promoCode: ''
@@ -26,18 +28,21 @@ export default function SubscriptionPaymentModal({ onClose, onSuccess }: Subscri
     setIsProcessing(true);
     setPaymentStep('processing');
 
-    // Simulate payment processing
-    setTimeout(() => {
+    try {
+      await paySubscriptionPayment(formData.promoCode);
       setPaymentStep('success');
-      setTimeout(() => {
-        onSuccess();
-      }, 2000);
-    }, 3000);
+      onSuccess();
+    } catch (error) {
+      console.error('Payment failed:', error);
+      setIsProcessing(false);
+      setPaymentStep('form');
+    }
   };
 
   const handleClose = () => {
     if (paymentStep !== 'processing') {
       onClose();
+
     }
   };
 

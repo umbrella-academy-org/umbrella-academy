@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { X, CreditCard, CheckCircle } from 'lucide-react';
+import { usePayment } from '@/hooks/usePayment';
 
 interface OrientationPaymentModalProps {
   onClose: () => void;
@@ -15,19 +16,22 @@ export default function OrientationPaymentModal({ onClose, onSuccess }: Orientat
     phone: '',
     promoCode: ''
   });
+  const { paySubscriptionPayment } = usePayment();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsProcessing(true);
     setPaymentStep('processing');
 
-    // Simulate payment processing
-    setTimeout(() => {
+    try {
+      await paySubscriptionPayment(formData.promoCode);
       setPaymentStep('success');
-      setTimeout(() => {
-        onSuccess();
-      }, 2000);
-    }, 3000);
+      onSuccess();
+    } catch (error) {
+      console.error('Payment failed:', error);
+      setIsProcessing(false);
+      setPaymentStep('form');
+    }
   };
 
   const handleClose = () => {
