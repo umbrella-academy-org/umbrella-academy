@@ -3,7 +3,20 @@
 import { useState } from 'react';
 import { X, Calendar, Clock, User, CheckCircle, MessageSquare } from 'lucide-react';
 import { useUsers } from '@/contexts';
-import { Trainer } from '@/types';
+import { Trainer, BookingStatus } from '@/types';
+
+interface OrientationBooking extends Document {
+  id: string;
+  studentId: string;
+  trainerId: string;
+  requestedTime: Date;
+  alternativeTime?: Date;
+  learningGoals: string;
+  status: BookingStatus;
+  rejectionReason?: string;
+  meetingLink?: string;
+  createdAt: Date;
+}
 
 interface BookingCalendarProps {
   onClose: () => void;
@@ -26,20 +39,25 @@ export default function BookingCalendar({ onClose, onSuccess }: BookingCalendarP
 
 
 
-  const timeSlots: TimeSlot[] = [
-    { time: '09:00 AM', available: true },
-    { time: '10:00 AM', available: true },
-    { time: '11:00 AM', available: false },
-    { time: '02:00 PM', available: true },
-    { time: '03:00 PM', available: true },
-    { time: '04:00 PM', available: false }
-  ];
-
   const availableDates = Array.from({ length: 7 }, (_, i) => {
     const date = new Date();
     date.setDate(date.getDate() + i + 1);
     return date.toISOString().split('T')[0];
   });
+
+  const getTimeSlotsForDate = (date: string) => {
+    // Simulate different availability based on date
+    const dayIndex = availableDates.indexOf(date);
+    const baseSlots = [
+      { time: '09:00 AM', available: true },
+      { time: '10:00 AM', available: true },
+      { time: '11:00 AM', available: dayIndex % 2 === 0 },
+      { time: '02:00 PM', available: true },
+      { time: '03:00 PM', available: dayIndex % 2 === 1 },
+      { time: '04:00 PM', available: false }
+    ];
+    return baseSlots;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -91,7 +109,7 @@ export default function BookingCalendar({ onClose, onSuccess }: BookingCalendarP
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
                   <User className="w-4 h-4 text-green-600" />
-                  <span className="text-sm text-green-700">Trainer: {selectedTrainer?.firstName}</span>
+                  <span className="text-sm text-green-700">Trainer: {selectedTrainer?.firstName} {selectedTrainer?.lastName}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Calendar className="w-4 h-4 text-green-600" />
@@ -151,8 +169,9 @@ export default function BookingCalendar({ onClose, onSuccess }: BookingCalendarP
                           <User className="w-6 h-6 text-gray-400" />
                         </div>
                         <div className="flex-1">
-                          <h4 className="font-medium text-gray-900">{trainer.firstName}</h4>
-                          <p className="text-sm text-gray-500">{trainer.experience.specializations}</p>
+                          <h4 className="font-medium text-gray-900">{trainer.firstName} {trainer.lastName}</h4>
+                          <p className="text-sm text-gray-500">{trainer.experience.yearsOfExperience} years experience</p>
+                          <p className="text-sm text-gray-500">{trainer.experience.specializations.join(', ')}</p>
                         </div>
                         {selectedTrainer?.id === trainer.id && (
                           <CheckCircle className="w-5 h-5 text-blue-600" />

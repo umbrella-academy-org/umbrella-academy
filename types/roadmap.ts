@@ -54,3 +54,16 @@ export interface Roadmap {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface OrientationBooking extends Document {
+  id: string;
+  studentId: string;
+  trainerId: string;
+  requestedTime: Date;
+  alternativeTime?: Date;
+  learningGoals: string;
+  status: BookingStatus;
+  rejectionReason?: string;
+  meetingLink?: string;
+  createdAt: Date;
+}
