@@ -103,7 +103,8 @@ export default function Sidebar({ activeItem = 'Home', userType, onboardingCheck
             label: 'Home',
             href: '/dashboard/trainer',
             active: true
-          },          {
+          },
+          {
             icon: <User className="w-5 h-5" />,
             label: 'Profile',
             href: '/dashboard/trainer/profile'
