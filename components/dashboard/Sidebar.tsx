@@ -115,8 +115,8 @@ export default function Sidebar({ activeItem = 'Home', userType, onboardingCheck
             href: '/dashboard/trainer/chat'
           },
           {
-            icon: <Calendar className="w-5 h-5" />,
-            label: 'Smart Calendar',
+            icon: <BookOpen className="w-5 h-5" />,
+            label: 'Roadmaps',
             href: '/dashboard/trainer/calendar'
           },
           {

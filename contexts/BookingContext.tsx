@@ -40,7 +40,6 @@ export const BookingProvider = ({ children }: { children: React.ReactNode }) => 
             if (allResponse.data) {
                 setTrainerAllBookings(allResponse.data);
             }
-            console.log(studentResponse)
             if (studentResponse.data) {
                 setStudentBookings(studentResponse.data);
             }
