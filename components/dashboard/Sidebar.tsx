@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Home, Calendar, CalendarCheck, Map, Bell, Video, CreditCard, HelpCircle, MessageSquare, X, Settings, Menu, User, LogOut, AlertCircle, CheckCircle, Flame, BookOpen, Award, Lock } from 'lucide-react';
+import { Home, Calendar, CalendarCheck, Map, Bell, Video, CreditCard, HelpCircle, MessageSquare, X, Settings, Menu, User, LogOut, AlertCircle, CheckCircle, Flame, BookOpen, Award, Lock, Users, Tag, UserCheck, BarChart3 } from 'lucide-react';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
 import { useAuth } from '@/contexts';
 import { SidebarProps, SidebarItem } from '@/types';
@@ -154,48 +154,33 @@ export default function Sidebar({ activeItem = 'Home', userType, onboardingCheck
         return [
           {
             icon: <Home className="w-5 h-5" />,
-            label: 'Home',
+            label: 'Dashboard',
             href: '/dashboard/admin'
           },
           {
-            icon: <User className="w-5 h-5" />,
-            label: 'Profile',
-            href: '/dashboard/admin/profile'
-          },
-          {
-            icon: <MessageSquare className="w-5 h-5" />,
-            label: 'Chat',
-            href: '/dashboard/admin/chat'
-          },
-          {
-            icon: <Map className="w-5 h-5" />,
-            label: 'Companies',
-            href: '/dashboard/admin/companies'
-          },
-          {
-            icon: <User className="w-5 h-5" />,
+            icon: <Users className="w-5 h-5" />,
             label: 'Users',
             href: '/dashboard/admin/users'
           },
           {
-            icon: <HelpCircle className="w-5 h-5" />,
-            label: 'Feedback & Support',
-            href: '/dashboard/admin/feedback-support'
-          },
-          {
             icon: <CreditCard className="w-5 h-5" />,
-            label: 'Financial',
-            href: '/dashboard/admin/financial'
+            label: 'Payments',
+            href: '/dashboard/admin/payments'
           },
           {
-            icon: <Bell className="w-5 h-5" />,
-            label: 'System Health',
-            href: '/dashboard/admin/system'
+            icon: <Tag className="w-5 h-5" />,
+            label: 'Promo Codes',
+            href: '/dashboard/admin/promo-codes'
           },
           {
-            icon: <Settings className="w-5 h-5" />,
-            label: 'Settings',
-            href: '/dashboard/admin/settings'
+            icon: <UserCheck className="w-5 h-5" />,
+            label: 'Trainer Approvals',
+            href: '/dashboard/admin/trainer-approvals'
+          },
+          {
+            icon: <BarChart3 className="w-5 h-5" />,
+            label: 'Reports',
+            href: '/dashboard/admin/reports'
           }
         ];
       default: // student

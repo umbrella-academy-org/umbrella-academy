@@ -2,21 +2,16 @@
 
 import { useState, useEffect } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
-
-import MonthlySessionsChart from '@/components/dashboard/MonthlySessionsChart';
-import ScheduledEvents from '@/components/dashboard/ScheduledEvents';
-import Calendar from '@/components/dashboard/Calendar';
-import { useAuth, useRoadmaps, useUsers, useFinancial } from '@/contexts';
+import { useAuth, useUsers, useFinancial } from '@/contexts';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
-import { Users, DollarSign, Activity, BarChart3, Shield } from 'lucide-react';
+import { Users, DollarSign, UserCheck, Tag, BarChart3 } from 'lucide-react';
+import { UserRole } from '@/types/user';
 
 export default function UmbrellaAdminDashboard() {
   const { user, isAuthenticated, isLoading: authLoading } = useAuth();
-  const { isLoading: roadmapsLoading } = useRoadmaps();
-  const { students, isLoading: usersLoading } = useUsers();
+  const { students, trainers, isLoading: usersLoading } = useUsers();
   const { getTotalBalance, isLoading: financialLoading } = useFinancial();
   const { navigate } = useNavigationWithLoading();
-  const [selectedDateRange, setSelectedDateRange] = useState('This month');
 
   // Redirect if not authenticated or not an admin
   useEffect(() => {
@@ -34,7 +29,7 @@ export default function UmbrellaAdminDashboard() {
     }
   }, [authLoading, isAuthenticated, user, navigate]);
 
-  const isLoading = authLoading || roadmapsLoading || usersLoading || financialLoading;
+  const isLoading = authLoading || usersLoading || financialLoading;
 
   if (isLoading) {
     return (
@@ -64,136 +59,148 @@ export default function UmbrellaAdminDashboard() {
   }
 
   const totalRevenue = getTotalBalance();
-  const totalStudents = students.length;
+  const totalStudents = students?.length || 0;
+  const totalTrainers = trainers?.length || 0;
+  const pendingTrainers = trainers?.filter(t => t.status === 'pending').length || 0;
 
   return (
     <div className="flex h-screen bg-white">
-      <Sidebar activeItem="Home" userType={UserRole.ADMIN} />
+      <Sidebar activeItem="Dashboard" userType={UserRole.ADMIN} />
 
       <div className="flex-1 flex flex-col min-w-0">
-        <main className="flex-1 p-3 sm:p-4 lg:p-6 overflow-y-auto">
+        <main className="flex-1 p-6 overflow-y-auto">
           <div className="max-w-full mx-auto">
             {/* Welcome Section */}
-            <div className="mb-4 sm:mb-6 lg:mb-8 animate-fade-in">
-              <h1 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-gray-900 mb-2">
-                Welcome back, {user.firstName + " " + user.lastName.split(' ')[0]} ⚡
+            <div className="mb-8">
+              <h1 className="text-3xl font-semibold text-gray-900 mb-2">
+                Admin Dashboard
               </h1>
-              <p className="text-sm sm:text-base text-gray-600">
-                Monitor and manage the entire Dreamize system.
+              <p className="text-gray-600">
+                Manage users, payments, and system operations.
               </p>
             </div>
 
-            {/* System Stats Cards */}
-            <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4 mb-4 sm:mb-6 lg:mb-8">
-              <div className="bg-white rounded-lg p-3 lg:p-4 shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300 animate-slide-up">
+            {/* Stats Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+              <div className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-gray-100 rounded-lg">
-                    <Users className="w-5 h-5 text-gray-600" />
+                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <Users className="w-6 h-6 text-blue-600" />
                   </div>
                   <div>
-                    <p className="text-xs font-medium text-gray-600">Total Students</p>
-                    <p className="text-lg lg:text-xl font-bold text-gray-900">{totalStudents}</p>
+                    <p className="text-sm text-gray-500">Total Students</p>
+                    <p className="text-2xl font-bold text-gray-900">{totalStudents}</p>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-white rounded-lg p-3 lg:p-4 shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300 animate-slide-up" style={{ animationDelay: '100ms' }}>
+              <div className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-gray-100 rounded-lg">
-                    <DollarSign className="w-5 h-5 text-gray-600" />
+                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                    <UserCheck className="w-6 h-6 text-green-600" />
                   </div>
                   <div>
-                    <p className="text-xs font-medium text-gray-600">Total Revenue</p>
-                    <p className="text-lg lg:text-xl font-bold text-gray-900">
-                      {totalRevenue.toLocaleString()} RWF
-                    </p>
+                    <p className="text-sm text-gray-500">Total Trainers</p>
+                    <p className="text-2xl font-bold text-gray-900">{totalTrainers}</p>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-white rounded-lg p-3 lg:p-4 shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300 animate-slide-up" style={{ animationDelay: '200ms' }}>
+              <div className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-gray-100 rounded-lg">
-                    <Activity className="w-5 h-5 text-gray-600" />
+                  <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
+                    <UserCheck className="w-6 h-6 text-yellow-600" />
                   </div>
                   <div>
-                    <p className="text-xs font-medium text-gray-600">System Health</p>
-                    <p className="text-lg lg:text-xl font-bold text-gray-600">—</p>
+                    <p className="text-sm text-gray-500">Pending Approvals</p>
+                    <p className="text-2xl font-bold text-gray-900">{pendingTrainers}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                    <DollarSign className="w-6 h-6 text-purple-600" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-500">Total Revenue</p>
+                    <p className="text-2xl font-bold text-gray-900">{totalRevenue.toLocaleString()} RWF</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Main Content Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 sm:gap-6 lg:gap-8">
-              {/* Left Column - Main Content */}
-              <div className="lg:col-span-3 space-y-4 sm:space-y-6 lg:space-y-8">
-                {/* System Overview Chart */}
-                <div className="animate-fade-in" style={{ animationDelay: '400ms' }}>
-                  <MonthlySessionsChart userType={UserRole.ADMIN} />
+            {/* Quick Actions */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
+                <div className="flex items-center gap-3 mb-4">
+                  <Users className="w-6 h-6 text-blue-600" />
+                  <h3 className="text-lg font-semibold text-gray-900">Users</h3>
                 </div>
-
-                {/* Calendar */}
-                <div className="animate-fade-in" style={{ animationDelay: '500ms' }}>
-                  <Calendar
-                    selectedDateRange={selectedDateRange}
-                    onDateRangeChange={setSelectedDateRange}
-                    userType={UserRole.ADMIN}
-                  />
-                </div>
+                <p className="text-gray-600 mb-4">Manage all system users and their roles.</p>
+                <button
+                  onClick={() => navigate('/dashboard/admin/users')}
+                  className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                >
+                  Manage Users
+                </button>
               </div>
 
-              {/* Right Column - Sidebar Content */}
-              <div className="lg:col-span-2 space-y-4 sm:space-y-6 lg:space-y-8">
-                {/* Quick Actions */}
-                <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100 animate-slide-up" style={{ animationDelay: '600ms' }}>
-                  <h3 className="text-sm sm:text-base font-semibold text-gray-900 mb-4">Quick Actions</h3>
-                  <div className="space-y-3">
-                    <button
-                      onClick={() => navigate('/dashboard/admin/users')}
-                      className="w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors group"
-                    >
-                      <div className="flex items-center gap-3">
-                        <Users className="w-4 h-4 text-gray-500 group-hover:text-gray-600" />
-                        <div>
-                          <div className="font-medium text-gray-900 text-sm">User Management</div>
-                          <div className="text-xs text-gray-500">Manage all system users</div>
-                        </div>
-                      </div>
-                    </button>
-
-                    <button
-                      onClick={() => navigate('/dashboard/admin/financial')}
-                      className="w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors group"
-                    >
-                      <div className="flex items-center gap-3">
-                        <BarChart3 className="w-4 h-4 text-gray-500 group-hover:text-gray-600" />
-                        <div>
-                          <div className="font-medium text-gray-900 text-sm">Financial Reports</div>
-                          <div className="text-xs text-gray-500">View revenue analytics</div>
-                        </div>
-                      </div>
-                    </button>
-
-                    <button
-                      onClick={() => navigate('/dashboard/admin/system')}
-                      className="w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors group"
-                    >
-                      <div className="flex items-center gap-3">
-                        <Shield className="w-4 h-4 text-gray-500 group-hover:text-gray-600" />
-                        <div>
-                          <div className="font-medium text-gray-900 text-sm">System Health</div>
-                          <div className="text-xs text-gray-500">Monitor system status</div>
-                        </div>
-                      </div>
-                    </button>
-                  </div>
+              <div className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
+                <div className="flex items-center gap-3 mb-4">
+                  <DollarSign className="w-6 h-6 text-green-600" />
+                  <h3 className="text-lg font-semibold text-gray-900">Payments</h3>
                 </div>
+                <p className="text-gray-600 mb-4">View payment history and transactions.</p>
+                <button
+                  onClick={() => navigate('/dashboard/admin/payments')}
+                  className="w-full px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+                >
+                  View Payments
+                </button>
+              </div>
 
-                {/* Scheduled Events */}
-                <div className="animate-slide-up" style={{ animationDelay: '700ms' }}>
-                  <ScheduledEvents userType={UserRole.ADMIN} />
+              <div className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
+                <div className="flex items-center gap-3 mb-4">
+                  <Tag className="w-6 h-6 text-purple-600" />
+                  <h3 className="text-lg font-semibold text-gray-900">Promo Codes</h3>
                 </div>
+                <p className="text-gray-600 mb-4">Create and manage discount codes.</p>
+                <button
+                  onClick={() => navigate('/dashboard/admin/promo-codes')}
+                  className="w-full px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+                >
+                  Manage Codes
+                </button>
+              </div>
+
+              <div className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
+                <div className="flex items-center gap-3 mb-4">
+                  <UserCheck className="w-6 h-6 text-yellow-600" />
+                  <h3 className="text-lg font-semibold text-gray-900">Trainer Approvals</h3>
+                </div>
+                <p className="text-gray-600 mb-4">Review and approve trainer applications.</p>
+                <button
+                  onClick={() => navigate('/dashboard/admin/trainer-approvals')}
+                  className="w-full px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors"
+                >
+                  Review Applications
+                </button>
+              </div>
+
+              <div className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
+                <div className="flex items-center gap-3 mb-4">
+                  <BarChart3 className="w-6 h-6 text-indigo-600" />
+                  <h3 className="text-lg font-semibold text-gray-900">Reports</h3>
+                </div>
+                <p className="text-gray-600 mb-4">View system analytics and reports.</p>
+                <button
+                  onClick={() => navigate('/dashboard/admin/reports')}
+                  className="w-full px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+                >
+                  View Reports
+                </button>
               </div>
             </div>
           </div>
