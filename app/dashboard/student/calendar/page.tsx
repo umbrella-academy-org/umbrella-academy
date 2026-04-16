@@ -1,60 +1,18 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+  import { useState, useEffect } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
 import { useAuth } from '@/contexts';
 import { Booking, BookingStatus } from '@/types/booking';
 import { UserRole } from '@/types/user';
 import { Calendar, Clock, MapPin, Video, User } from 'lucide-react';
+import { useBooking } from '@/contexts/BookingContext';
 
 export default function StudentCalendarPage() {
   const { user } = useAuth();
-  const [sessions, setSessions] = useState<Booking[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { studentBookings: sessions,loading } = useBooking();
 
-  // Mock approved sessions data - in real app, this would come from API
-  useEffect(() => {
-    // Simulate API call to get student's approved sessions
-    const mockSessions: Booking[] = [
-      {
-        id: '1',
-        studentId: user?.id || '',
-        trainerId: 'trainer-1',
-        requestedTime: new Date('2024-01-20T09:00:00'),
-        learningGoals: 'Learn React fundamentals and build first project',
-        status: BookingStatus.APPROVED,
-        approvalNotes: 'Great starting point for React development. We will cover components, state management, and hooks.',
-        sessionDuration: 60,
-        sessionFormat: 'online',
-        sessionLocation: 'https://zoom.us/j/123456789',
-        preparationRequirements: 'Please ensure you have Node.js and VS Code installed. Review basic JavaScript concepts.',
-        nextSteps: 'Complete the React fundamentals course and start your first project.',
-        approvedAt: new Date('2024-01-18T10:00:00'),
-        createdAt: new Date('2024-01-15T14:30:00'),
-        updatedAt: new Date('2024-01-18T10:00:00')
-      },
-      {
-        id: '2',
-        studentId: user?.id || '',
-        trainerId: 'trainer-1',
-        requestedTime: new Date('2024-01-22T14:00:00'),
-        learningGoals: 'Understand state management with Redux and context',
-        status: BookingStatus.APPROVED,
-        approvalNotes: 'We will dive deep into state management patterns and best practices.',
-        sessionDuration: 90,
-        sessionFormat: 'online',
-        sessionLocation: 'https://zoom.us/j/987654321',
-        preparationRequirements: 'Review React hooks and have a basic understanding of state concepts.',
-        nextSteps: 'Implement state management in your current project.',
-        approvedAt: new Date('2024-01-19T16:00:00'),
-        createdAt: new Date('2024-01-17T11:00:00'),
-        updatedAt: new Date('2024-01-19T16:00:00')
-      }
-    ];
-    
-    setSessions(mockSessions);
-    setLoading(false);
-  }, [user]);
+  console.log(sessions)
 
   const formatDate = (date: Date) => {
     return new Date(date).toLocaleDateString('en-US', {
@@ -75,7 +33,7 @@ export default function StudentCalendarPage() {
   const getSessionStatus = (session: Booking) => {
     const now = new Date();
     const sessionTime = new Date(session.requestedTime);
-    
+
     if (sessionTime < now) {
       return { text: 'Completed', color: 'bg-gray-100 text-gray-700' };
     } else {
@@ -112,7 +70,7 @@ export default function StudentCalendarPage() {
   return (
     <div className="flex h-screen bg-white">
       <Sidebar activeItem="Sessions & Calendar" userType={UserRole.STUDENT} />
-      
+
       <div className="flex-1 flex flex-col min-w-0">
         {/* Header */}
         <header className="bg-white border-b border-gray-200 px-8 py-4">
@@ -199,8 +157,8 @@ export default function StudentCalendarPage() {
                                 {session.sessionLocation && (
                                   <div className="mt-3 pt-3 border-t border-blue-200">
                                     <p className="text-sm font-medium text-blue-700 mb-1">Meeting Link:</p>
-                                    <a 
-                                      href={session.sessionLocation} 
+                                    <a
+                                      href={session.sessionLocation}
                                       target="_blank"
                                       rel="noopener noreferrer"
                                       className="text-sm text-blue-600 hover:text-blue-800 underline"

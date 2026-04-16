@@ -7,6 +7,7 @@ import { bookingService } from "@/services/booking";
 interface BookingContextType {
     trainerPendingBookings: Booking[];
     trainerAllBookings: Booking[];
+    studentBookings: Booking[];
     loading: boolean;
     error: string | null;
     approveBooking: (bookingId: string, approvalData: TrainerApprovalRequest) => Promise<void>;
@@ -21,14 +22,16 @@ export const BookingProvider = ({ children }: { children: React.ReactNode }) => 
     const [error, setError] = useState<string | null>(null);
     const [trainerPendingBookings, setTrainerPendingBookings] = useState<Booking[]>([]);
     const [trainerAllBookings, setTrainerAllBookings] = useState<Booking[]>([]);
+    const [studentBookings, setStudentBookings] = useState<Booking[]>([]);
 
     const fetchBookings = async () => {
         try {
             setLoading(true);
             setError(null);
-            const [pendingResponse, allResponse] = await Promise.all([
+            const [pendingResponse, allResponse, studentResponse] = await Promise.all([
                 bookingService.getTrainerPendingBookings(),
-                bookingService.getTrainerAllBookings()
+                bookingService.getTrainerAllBookings(),
+                bookingService.getStudentBookings()
             ]);
             
             if (pendingResponse.data) {
@@ -36,6 +39,10 @@ export const BookingProvider = ({ children }: { children: React.ReactNode }) => 
             }
             if (allResponse.data) {
                 setTrainerAllBookings(allResponse.data);
+            }
+            console.log(studentResponse)
+            if (studentResponse.data) {
+                setStudentBookings(studentResponse.data);
             }
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Failed to fetch bookings');
@@ -76,6 +83,7 @@ export const BookingProvider = ({ children }: { children: React.ReactNode }) => 
         <BookingContext.Provider value={{ 
             trainerPendingBookings,
             trainerAllBookings,
+            studentBookings,
             loading,
             error,
             approveBooking,

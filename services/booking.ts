@@ -30,6 +30,12 @@ class BookingService {
         const response = await apiClient.get<Booking[]>(API_ENDPOINTS.BOOKING_TRAINER);
         return response;
     }
+    
+    async getStudentBookings(): Promise<ApiResponse<Booking[]>> {
+        const response = await apiClient.get<Booking[]>(API_ENDPOINTS.BOOKING_STUDENT);
+        return response;
+    }
+
 
 }
 

@@ -25,6 +25,7 @@ export const API_ENDPOINTS = {
   USER_BY_ID: (id: string) => `/api/users/${id}`,
   BOOKING: '/api/bookings',
   BOOKING_TRAINER: '/api/bookings/trainer',
+  BOOKING_STUDENT: '/api/bookings/student',
   BOOKING_APPROVE:(id:string)=>`/api/bookings/${id}/approve`,
   BOOKING_REJECT:(id:string)=>`/api/bookings/${id}/reject`,
   ROADMAPS: '/api/roadmaps',
