@@ -48,6 +48,11 @@ class RoadmapService {
         const response = await apiClient.post<Roadmap>(API_ENDPOINTS.ROADMAP_REJECT(id), { rejectionReason });
         return response.data;
     }
+
+    async completeMilestone(roadmapId: string, milestoneId: string, projectData: any) {
+        const response = await apiClient.post<any>(`/api/roadmaps/${roadmapId}/milestones/${milestoneId}/complete`, projectData);
+        return response.data;
+    }
 }
 
 export const roadmapService = new RoadmapService()

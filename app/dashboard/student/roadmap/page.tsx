@@ -4,11 +4,23 @@ import { useState, useEffect } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
 import { useAuth, useRoadmaps } from '@/contexts';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
+import { roadmapService } from '@/services/roadmap';
+import { UserRole } from '@/types';
 
 export default function StudentRoadmapPage() {
   const { user, isAuthenticated, isLoading: authLoading } = useAuth();
-  const { studentRoadmaps, isLoading: roadmapsLoading, getUpcomingLiveSessions } = useRoadmaps();
+  const { studentRoadmaps, isLoading: roadmapsLoading, getUpcomingLiveSessions, refreshRoadmaps } = useRoadmaps();
   const { navigate } = useNavigationWithLoading();
+  
+  const [selectedMilestone, setSelectedMilestone] = useState<any>(null);
+  const [showProjectModal, setShowProjectModal] = useState(false);
+  const [projectSubmission, setProjectSubmission] = useState({
+    title: '',
+    description: '',
+    githubUrl: '',
+    liveUrl: ''
+  });
+  const [completingMilestone, setCompletingMilestone] = useState(false);
 
   // Redirect if not authenticated or not a student
   useEffect(() => {
@@ -48,7 +60,7 @@ export default function StudentRoadmapPage() {
   }
 
   const activeRoadmap = studentRoadmaps.find(roadmap =>
-    roadmap.studentId === user.id && roadmap.status === 'active'
+    roadmap.studentId === user._id && roadmap.status === 'approved'
   );
 
   const upcomingSessions = getUpcomingLiveSessions();
@@ -62,6 +74,35 @@ export default function StudentRoadmapPage() {
   const nextSessionTime = nextSessionDate
     ? nextSessionDate.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })
     : '';
+
+  const handleCompleteMilestone = async (milestone: any, index: number) => {
+    setSelectedMilestone(milestone);
+    setShowProjectModal(true);
+  };
+
+  const handleProjectSubmit = async () => {
+    if (!selectedMilestone || !projectSubmission.title.trim() || !projectSubmission.description.trim()) {
+      return;
+    }
+
+    setCompletingMilestone(true);
+    try {
+      // Submit project and complete milestone
+      await roadmapService.completeMilestone(selectedMilestone.id, projectSubmission);
+      
+      // Refresh roadmaps to get updated data
+      await refreshRoadmaps();
+      
+      // Reset form and close modal
+      setShowProjectModal(false);
+      setSelectedMilestone(null);
+      setProjectSubmission({ title: '', description: '', githubUrl: '', liveUrl: '' });
+    } catch (error) {
+      console.error('Failed to complete milestone:', error);
+    } finally {
+      setCompletingMilestone(false);
+    }
+  };
 
   return (
     <div className="flex h-screen bg-white">
@@ -80,11 +121,11 @@ export default function StudentRoadmapPage() {
               <div className="bg-white border border-gray-200 rounded-lg p-6">
                 <div className="flex items-start justify-between">
                   <div>
-                    <h2 className="text-xl font-semibold text-gray-900">{activeRoadmap.roadmap.title}</h2>
-                    <p className="text-gray-600 mt-1">{activeRoadmap.roadmap.description}</p>
+                    <h2 className="text-xl font-semibold text-gray-900">{activeRoadmap.title}</h2>
+                    <p className="text-gray-600 mt-1">Your personalized learning journey</p>
                     <div className="flex items-center gap-4 mt-3">
-                      <span className="text-sm text-gray-500">Duration: {activeRoadmap.roadmap.estimatedDuration} weeks</span>
-                      <span className="text-sm text-gray-500">Progress: {activeRoadmap.roadmap.progress.overallProgress}%</span>
+                      <span className="text-sm text-gray-500">Status: {activeRoadmap.status}</span>
+                      <span className="text-sm text-gray-500">Milestones: {activeRoadmap.milestones.length}</span>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
@@ -98,14 +139,14 @@ export default function StudentRoadmapPage() {
               {/* Progress Overview */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="bg-white border border-gray-200 rounded-lg p-6">
-                  <h3 className="font-semibold text-gray-900 mb-2">Current Phase</h3>
-                  <p className="text-2xl font-bold text-yellow-600">Phase 2</p>
-                  <p className="text-sm text-yellow-600">Intermediate Concepts</p>
+                  <h3 className="font-semibold text-gray-900 mb-2">Total Milestones</h3>
+                  <p className="text-2xl font-bold text-yellow-600">{activeRoadmap.milestones.length}</p>
+                  <p className="text-sm text-yellow-600">Learning phases</p>
                 </div>
                 <div className="bg-white border border-gray-200 rounded-lg p-6">
-                  <h3 className="font-semibold text-gray-900 mb-2">Completed Lessons</h3>
-                  <p className="text-2xl font-bold text-yellow-600">{activeRoadmap.roadmap.progress.completedSessions}/{activeRoadmap.roadmap.progress.totalSessions}</p>
-                  <p className="text-sm text-yellow-600">{Math.round((activeRoadmap.roadmap.progress.completedSessions / activeRoadmap.roadmap.progress.totalSessions) * 100)}% Complete</p>
+                  <h3 className="font-semibold text-gray-900 mb-2">Completed Milestones</h3>
+                  <p className="text-2xl font-bold text-yellow-600">{activeRoadmap.milestones.filter(m => m.status === 'completed').length}/{activeRoadmap.milestones.length}</p>
+                  <p className="text-sm text-yellow-600">{Math.round((activeRoadmap.milestones.filter(m => m.status === 'completed').length / activeRoadmap.milestones.length) * 100)}% Complete</p>
                 </div>
                 <div className="bg-white border border-gray-200 rounded-lg p-6">
                   <h3 className="font-semibold text-gray-900 mb-2">Next Session</h3>
@@ -114,27 +155,48 @@ export default function StudentRoadmapPage() {
                 </div>
               </div>
 
-              {/* Roadmap Phases */}
+              {/* Roadmap Milestones */}
               <div className="bg-white border border-gray-200 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Learning Phases</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">Learning Milestones</h3>
                 <div className="space-y-4">
-                  {activeRoadmap.roadmap.phases?.map((phase, index) => (
+                  {activeRoadmap.milestones?.map((milestone, index) => (
                     <div key={index} className="border border-gray-200 rounded-lg p-4">
                       <div className="flex items-center justify-between">
                         <div>
-                          <h4 className="font-medium text-gray-900">{phase.title}</h4>
-                          <p className="text-sm text-gray-600">{phase.description}</p>
+                          <h4 className="font-medium text-gray-900">{milestone.title}</h4>
+                          <p className="text-sm text-gray-600">{milestone.description}</p>
+                          <p className="text-xs text-gray-500 mt-1">Duration: {milestone.estimatedDurationDays} days</p>
                         </div>
                         <div className="text-right">
-                          <span className="text-sm font-medium text-gray-900">{phase.status === 'completed' ? 100 : phase.status === 'active' ? 50 : 0}%</span>
+                          <span className="text-sm font-medium text-gray-900">{milestone.status === 'completed' ? 100 : milestone.status === 'active' ? 50 : 0}%</span>
                           <div className="w-20 h-2 bg-gray-200 rounded-full mt-1">
                             <div
                               className="h-2 bg-yellow-600 rounded-full"
-                              style={{ width: `${phase.status === 'completed' ? 100 : phase.status === 'active' ? 50 : 0}%` }}
+                              style={{ width: `${milestone.status === 'completed' ? 100 : milestone.status === 'active' ? 50 : 0}%` }}
                             ></div>
                           </div>
+                          {milestone.status === 'active' && (
+                            <button
+                              onClick={() => handleCompleteMilestone(milestone, index)}
+                              className="mt-2 px-3 py-1 bg-green-600 text-white text-xs rounded hover:bg-green-700"
+                            >
+                              Complete Milestone
+                            </button>
+                          )}
                         </div>
                       </div>
+                      {milestone.skillsToLearn && milestone.skillsToLearn.length > 0 && (
+                        <div className="mt-3">
+                          <p className="text-xs font-medium text-gray-700 mb-1">Skills to Learn:</p>
+                          <div className="flex flex-wrap gap-1">
+                            {milestone.skillsToLearn.map((skill, skillIndex) => (
+                              <span key={skillIndex} className="px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs">
+                                {skill}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>
@@ -162,3 +224,5 @@ export default function StudentRoadmapPage() {
     </div>
   );
 }
+
+
