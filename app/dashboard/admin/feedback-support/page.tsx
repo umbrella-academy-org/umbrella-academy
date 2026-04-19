@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
 import { MessageSquare, AlertCircle, CheckCircle, Clock, Star, Search, MessageCircle, RefreshCw } from 'lucide-react';
 import { useAdminContext } from '@/contexts';
-import { useFeedback } from '@/hooks/admin';
+import { useFeedback } from '@/hooks/useAdmin';
 import { UserRole } from '@/types';
 
 interface FeedbackTicket {

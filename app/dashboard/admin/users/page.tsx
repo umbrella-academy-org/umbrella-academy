@@ -6,7 +6,7 @@ import { Plus, Users, UserCheck, Shield, GraduationCap, X } from 'lucide-react';
 import UsersTable from '@/components/umbrella-admin/UsersTable';
 import { useUsers } from '@/contexts/UserContext';
 import { useAdminContext } from '@/contexts';
-import { useUsers as useAdminUsers } from '@/hooks/admin';
+import { useAdmin } from '@/hooks/useAdmin';
 import { BaseUser, UserRole } from '@/types';
 
 interface CreateUserForm {
@@ -43,7 +43,7 @@ export default function UmbrellaAdminUsersPage() {
   const [selectedTab, setSelectedTab] = useState<'students' | 'trainers' | 'admins'>('students');
   const { students, trainers, isLoading } = useUsers();
   const { refreshUsers } = useAdminContext();
-  const { createUser, isLoading: creating, error: createError } = useAdminUsers();
+  const { createUser, isLoading: creating, error: createError } = useAdmin();
 
   const [showModal, setShowModal] = useState(false);
   const [form, setForm] = useState<CreateUserForm>(EMPTY_FORM);
