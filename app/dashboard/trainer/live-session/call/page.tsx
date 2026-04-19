@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
-
+import { UserRole } from '@/types/user';
 import VideoCallInterface from '@/components/live-session/VideoCallInterface';
 
 export default function LiveSessionCallPage() {
@@ -60,7 +60,7 @@ export default function LiveSessionCallPage() {
   return (
     <div className="flex h-screen bg-white">
       {/* Sidebar - Fixed */}
-      <Sidebar activeItem="Live Session" userType='trainer' />
+      <Sidebar activeItem="Live Session" userType={UserRole.TRAINER} />
 
       {/* Main Content - Video Call */}
       <div className="flex-1 flex flex-col overflow-hidden">

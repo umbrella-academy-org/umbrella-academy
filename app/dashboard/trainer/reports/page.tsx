@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
+import { UserRole } from '@/types/user';
 import { Plus, Send, FileText, Calendar, User, Clock, Target, TrendingUp, AlertCircle, Eye, X } from 'lucide-react';
 
 interface Student {
@@ -135,7 +136,7 @@ export default function TrainerReportsPage() {
 
   return (
     <div className="flex h-screen bg-white">
-      <Sidebar activeItem="Reports" userType="trainer" />
+      <Sidebar activeItem="Reports" userType={UserRole.TRAINER} />
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
         <main className="flex-1 overflow-auto">
           <div className="p-3 lg:p-6">

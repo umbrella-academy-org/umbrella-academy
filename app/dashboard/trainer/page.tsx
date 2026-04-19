@@ -12,6 +12,7 @@ import Calendar from '@/components/dashboard/Calendar';
 import LiveSessions from '@/components/dashboard/LiveSessions';
 import { useAuth, useRoadmaps, useUsers, useFinancial } from '@/contexts';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
+import { UserRole } from '@/types';
 
 export default function TrainerDashboard() {
   const { user, isAuthenticated, isLoading: authLoading } = useAuth();
@@ -78,11 +79,11 @@ export default function TrainerDashboard() {
 
   // Get trainer-specific data
   const trainerStudents = students.filter(student =>
-    studentRoadmaps.some(r => r.roadmap.trainerId === user.id && r.studentId === student.id)
+    studentRoadmaps.some(r => r.trainerId === user._id && r.studentId === student._id)
   );
 
   const trainerStudentRoadmaps = studentRoadmaps.filter(roadmap =>
-    roadmap.roadmap.trainerId === user.id
+    roadmap.trainerId === user._id
   );
 
   const activeRoadmaps = trainerStudentRoadmaps.filter(roadmap => roadmap.status === 'active');
@@ -90,7 +91,7 @@ export default function TrainerDashboard() {
 
   return (
     <div className="flex h-screen bg-white">
-      <Sidebar activeItem="Home" userType="trainer" />
+      <Sidebar activeItem="Home" userType={UserRole.TRAINER} />
 
       <div className="flex-1 flex flex-col min-w-0">
         <main className="flex-1 p-3 sm:p-4 lg:p-6 overflow-y-auto">

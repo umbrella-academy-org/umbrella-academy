@@ -2,12 +2,12 @@
 
 import { useState } from 'react';
 import { ChevronLeft, ChevronRight, Calendar as CalendarIcon } from 'lucide-react';
-import { UserType } from '@/types';
+import { UserRole } from '@/types/user';
 
 interface CalendarProps {
   selectedDateRange: string;
   onDateRangeChange: (range: string) => void;
-  userType: UserType;
+  userType: UserRole;
 }
 
 export default function Calendar({ selectedDateRange, onDateRangeChange, userType }: CalendarProps) {

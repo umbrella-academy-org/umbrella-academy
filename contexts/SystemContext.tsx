@@ -25,18 +25,27 @@ interface SystemContextType {
   getRecentAlertsFromContext: (hours?: number) => SystemAlert[];
   getCriticalAlertsFromContext: () => SystemAlert[];
   refreshSystemData: () => Promise<void>;
+  hasPermission: (permission: string) => boolean;
 }
 
 const SystemContext = createContext<SystemContextType | undefined>(undefined);
 
 export function SystemProvider({ children }: { children: React.ReactNode }) {
-  const { user: currentUser, hasPermission } = useAuth();
+  const { user: currentUser } = useAuth();
+
+  // Simple permission check function
+  const hasPermission = (permission: string): boolean => {
+    if (!currentUser) return false;
+    // Only admins have system permissions
+    return currentUser.role === 'admin';
+  };
+
   const [metrics, setMetrics] = useState<SystemMetric[]>([]);
   const [alerts, setAlerts] = useState<SystemAlert[]>([]);
   const [services, setServices] = useState<ServiceStatus[]>([]);
-  const [systemStats, setSystemStats] = useState(mockSystemStats);
+  const [systemStats, setSystemStats] = useState<typeof mockSystemStats>(mockSystemStats);
   const [healthScore, setHealthScore] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const loadSystemData = useCallback(async () => {
@@ -174,7 +183,8 @@ export function SystemProvider({ children }: { children: React.ReactNode }) {
     getErrorMetricsFromContext,
     getRecentAlertsFromContext,
     getCriticalAlertsFromContext,
-    refreshSystemData
+    refreshSystemData,
+    hasPermission
   };
 
   return (

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
-
+import { UserRole } from '@/types/user';
 import LiveSessionHeader from '@/components/live-session/LiveSessionHeader';
 import CourseCard from '@/components/live-session/CourseCard';
 import SessionTabs from '@/components/live-session/SessionTabs';
@@ -18,7 +18,7 @@ export default function LiveSessionPage() {
   return (
     <div className="flex h-screen bg-white">
       {/* Sidebar - Fixed */}
-      <Sidebar activeItem="Live Session" userType='trainer' />
+      <Sidebar activeItem="Live Session" userType={UserRole.TRAINER} />
 
       {/* Main Content - Scrollable */}
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">

@@ -1,12 +1,12 @@
 'use client';
 
+import { Roadmap, UserRole } from '@/types';
 import { Play, ChevronRight, Users, Clock, CheckCircle } from 'lucide-react';
 import { useState } from 'react';
-import { StudentRoadmap, UserType } from '@/types';
 
 interface TotalRoadmapsProps {
-  roadmaps: StudentRoadmap[];
-  userType: UserType;
+  roadmaps: Roadmap[];
+  userType: UserRole;
 }
 
 export default function TotalRoadmaps({ roadmaps, userType }: TotalRoadmapsProps) {
@@ -16,11 +16,17 @@ export default function TotalRoadmaps({ roadmaps, userType }: TotalRoadmapsProps
   const totalRoadmaps = roadmaps.length;
   const completedRoadmaps = roadmaps.filter(r => r.status === 'completed').length;
   const activeRoadmaps = roadmaps.filter(r => r.status === 'active').length;
-  const pendingRoadmaps = roadmaps.filter(r => r.status === 'enrolled').length;
+  const pendingRoadmaps = roadmaps.filter(r => r.status === 'pending-approval').length;
   
-  // Calculate overall progress
+  // Calculate overall progress based on milestones
+  const calculateRoadmapProgress = (roadmap: Roadmap) => {
+    if (!roadmap.milestones || roadmap.milestones.length === 0) return 0;
+    const completedMilestones = roadmap.milestones.filter(m => m.status === 'completed').length;
+    return Math.round((completedMilestones / roadmap.milestones.length) * 100);
+  };
+
   const overallProgress = totalRoadmaps > 0 
-    ? Math.round(roadmaps.reduce((sum, r) => sum + r.roadmap.progress.overallProgress, 0) / totalRoadmaps)
+    ? Math.round(roadmaps.reduce((sum, r) => sum + calculateRoadmapProgress(r), 0) / totalRoadmaps)
     : 0;
 
   // Get the most recent or active roadmap for display
@@ -28,12 +34,12 @@ export default function TotalRoadmaps({ roadmaps, userType }: TotalRoadmapsProps
   
   // Get roadmap info if roadmap exists
   const roadmapInfo = featuredRoadmap ? {
-    title: featuredRoadmap.roadmap.title,
-    description: featuredRoadmap.roadmap.description,
-    totalPhases: featuredRoadmap.roadmap.phases.length,
-    completedPhases: featuredRoadmap.roadmap.phases.filter(p => p.status === 'completed').length,
-    estimatedDuration: `${featuredRoadmap.roadmap.estimatedDuration} weeks`,
-    studentsCount: roadmaps.filter(r => r.roadmapId === featuredRoadmap.roadmapId).length
+    title: featuredRoadmap.title,
+    description: featuredRoadmap.title, // Using title as description since description field doesn't exist
+    totalPhases: featuredRoadmap.milestones.length,
+    completedPhases: featuredRoadmap.milestones.filter(m => m.status === 'completed').length,
+    estimatedDuration: `${featuredRoadmap.milestones.length} milestones`,
+    studentsCount: 1 // Since we're now working with individual roadmaps, not grouped by template
   } : null;
 
   if (!featuredRoadmap || !roadmapInfo) {

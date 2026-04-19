@@ -2,11 +2,29 @@
 
 import { Play, ChevronRight, Star } from 'lucide-react';
 import { useState } from 'react';
-import { StudentRoadmap } from '@/types';
+import { Roadmap } from '@/types/roadmap';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
 
+// Minimal interface for CourseCard to avoid type conflicts
+interface CourseCardRoadmap {
+  roadmap: {
+    title: string;
+    description: string;
+    progress: {
+      overallProgress: number;
+      completedPhases: number;
+      totalPhases: number;
+    };
+    difficulty: 'beginner' | 'intermediate' | 'advanced';
+    tags: string[];
+  };
+  studentId: string;
+  status: string;
+  enrolledAt: string;
+}
+
 interface CourseCardProps {
-  activeRoadmap?: StudentRoadmap;
+  activeRoadmap?: CourseCardRoadmap;
 }
 
 export default function CourseCard({ activeRoadmap }: CourseCardProps) {

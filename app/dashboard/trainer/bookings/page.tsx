@@ -40,12 +40,12 @@ export default function TrainerBookingsPage() {
   });
 
   const getStudentName = (studentId: string) => {
-    const student = students.find(s => s.id === studentId);
+    const student = students.find(s => s._id === studentId);
     return student ? `${student.firstName} ${student.lastName}` : 'Unknown Student';
   };
 
   const getStudentEmail = (studentId: string) => {
-    const student = students.find(s => s.id === studentId);
+    const student = students.find(s => s._id === studentId);
     return student?.email || 'unknown@example.com';
   };
 

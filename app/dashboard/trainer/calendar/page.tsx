@@ -8,15 +8,6 @@ import { Roadmap, Milestone, RoadmapStepStatus } from '@/types/roadmap';
 import { UserRole } from '@/types/user';
 import { Plus, Clock, CheckCircle, Edit, Trash2, Users, Target, Calendar, BookOpen, Award } from 'lucide-react';
 
-interface MilestoneForm {
-  id: string;
-  title: string;
-  description: string;
-  requiredProjects: string[];
-  duration: string;
-  durationType: 'hours' | 'days' | 'weeks';
-  status: 'pending' | 'active' | 'completed';
-}
 
 export default function TrainerRoadmapsPage() {
   const { user } = useAuth();
@@ -29,39 +20,34 @@ export default function TrainerRoadmapsPage() {
   // Create roadmap form state
   const [roadmapTitle, setRoadmapTitle] = useState('');
   const [selectedStudentId, setSelectedStudentId] = useState('');
-  const [milestones, setMilestones] = useState<MilestoneForm[]>([]);
+  const [milestones, setMilestones] = useState<Milestone[]>([]);
   const [isCreatingMilestone, setIsCreatingMilestone] = useState(false);
-  const [newMilestone, setNewMilestone] = useState({
+  const [newMilestone, setNewMilestone] = useState<Milestone>({
     title: '',
     description: '',
     requiredProjects: [],
-    duration: '',
-    durationType: 'days' as 'hours' | 'days' | 'weeks'
+    estimatedDurationDays: 0,
+    skillsToLearn: [],
+    tasks: [],
+    order: 0,
+    status: RoadmapStepStatus.LOCKED,
+    completedAt: null,
   });
 
   // Filter roadmaps for current trainer
   const trainerRoadmaps = roadmaps.filter(roadmap => roadmap.trainerId === user?._id);
-  console.log(roadmaps, user)
   const handleAddMilestone = () => {
-    if (newMilestone.title && newMilestone.description && newMilestone.duration) {
-      const milestone: MilestoneForm = {
-        id: Date.now().toString(),
-        title: newMilestone.title,
-        description: newMilestone.description,
-        requiredProjects: newMilestone.requiredProjects,
-        duration: newMilestone.duration,
-        durationType: newMilestone.durationType,
-        status: 'pending'
-      };
+    if (newMilestone.title && newMilestone.description && newMilestone.estimatedDurationDays) {
 
-      setMilestones([...milestones, milestone]);
-      setNewMilestone({ title: '', description: '', requiredProjects: [], duration: '', durationType: 'days' });
+
+      setMilestones([...milestones, newMilestone]);
+      setNewMilestone({ title: '', description: '', requiredProjects: [], estimatedDurationDays: 0, skillsToLearn: [], tasks: [], order: 0, status: RoadmapStepStatus.LOCKED, completedAt: null });
       setIsCreatingMilestone(false);
     }
   };
 
-  const handleRemoveMilestone = (milestoneId: string) => {
-    setMilestones(milestones.filter(milestone => milestone.id !== milestoneId));
+  const handleRemoveMilestone = (index: number) => {
+    setMilestones(milestones.filter((_, i) => i !== index));
   };
 
   const handleCreateRoadmap = async () => {
@@ -71,10 +57,10 @@ export default function TrainerRoadmapsPage() {
     const roadmapMilestones: Milestone[] = milestones.map((milestoneForm, index) => ({
       title: milestoneForm.title,
       description: milestoneForm.description,
-      skillsToLearn: [],
-      tasks: [],
+      skillsToLearn: milestoneForm.skillsToLearn,
+      tasks: milestoneForm.tasks,
       requiredProjects: milestoneForm.requiredProjects,
-      estimatedDurationDays: parseInt(milestoneForm.duration) * (milestoneForm.durationType === 'hours' ? 1 : milestoneForm.durationType === 'days' ? 1 : 7),
+      estimatedDurationDays: milestoneForm.estimatedDurationDays,
       order: index + 1,
       status: RoadmapStepStatus.LOCKED,
       completedAt: null
@@ -102,7 +88,17 @@ export default function TrainerRoadmapsPage() {
     setRoadmapTitle('');
     setSelectedStudentId('');
     setMilestones([]);
-    setNewMilestone({ title: '', description: '', requiredProjects: [], duration: '', durationType: 'days' });
+    setNewMilestone({
+      title: '',
+      description: '',
+      requiredProjects: [],
+      estimatedDurationDays: 0,
+      skillsToLearn: [],
+      tasks: [],
+      order: 0,
+      status: RoadmapStepStatus.LOCKED,
+      completedAt: null
+    });
     setIsCreatingMilestone(false);
   };
 
@@ -410,7 +406,7 @@ export default function TrainerRoadmapsPage() {
                   {/* Milestones List */}
                   <div className="space-y-4">
                     {milestones.map((milestone, index) => (
-                      <div key={milestone.id} className="border border-gray-200 rounded-lg p-4">
+                      <div key={index} className="border border-gray-200 rounded-lg p-4">
                         <div className="flex items-start justify-between mb-2">
                           <div className="flex items-center gap-3">
                             <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
@@ -419,12 +415,40 @@ export default function TrainerRoadmapsPage() {
                             <div>
                               <h4 className="font-medium text-gray-900">{milestone.title}</h4>
                               <p className="text-sm text-gray-600">{milestone.description}</p>
+                              {milestone.skillsToLearn.length > 0 && (
+                                <div className="mt-2">
+                                  <p className="text-xs text-gray-500 mb-1">Skills to Learn:</p>
+                                  <div className="flex flex-wrap gap-1">
+                                    {milestone.skillsToLearn.map((skill, i) => (
+                                      <span key={i} className="px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs">
+                                        {skill}
+                                      </span>
+                                    ))}
+                                  </div>
+                                </div>
+                              )}
+                              {milestone.tasks.length > 0 && (
+                                <div className="mt-2">
+                                  <p className="text-xs text-gray-500 mb-1">Learning Tasks:</p>
+                                  <div className="text-xs text-gray-600">
+                                    {milestone.tasks.slice(0, 2).map((task, i) => (
+                                      <div key={i} className="flex items-center gap-1">
+                                        <span className="w-1 h-1 bg-gray-400 rounded-full"></span>
+                                        {task}
+                                      </div>
+                                    ))}
+                                    {milestone.tasks.length > 2 && (
+                                      <div className="text-gray-500">+{milestone.tasks.length - 2} more tasks</div>
+                                    )}
+                                  </div>
+                                </div>
+                              )}
                               {milestone.requiredProjects.length > 0 && (
                                 <div className="mt-2">
                                   <p className="text-xs text-gray-500 mb-1">Required Projects:</p>
                                   <div className="flex flex-wrap gap-1">
                                     {milestone.requiredProjects.map((project, i) => (
-                                      <span key={i} className="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs">
+                                      <span key={i} className="px-2 py-1 bg-green-100 text-green-700 rounded text-xs">
                                         {project}
                                       </span>
                                     ))}
@@ -434,14 +458,14 @@ export default function TrainerRoadmapsPage() {
                             </div>
                           </div>
                           <button
-                            onClick={() => handleRemoveMilestone(milestone.id)}
+                            onClick={() => handleRemoveMilestone(index)}
                             className="text-red-600 hover:text-red-700"
                           >
                             <Trash2 className="w-4 h-4" />
                           </button>
                         </div>
                         <div className="text-sm text-gray-600">
-                          Duration: {milestone.duration} {milestone.durationType}
+                          Duration: {milestone.estimatedDurationDays} days
                         </div>
                       </div>
                     ))}
@@ -478,6 +502,38 @@ export default function TrainerRoadmapsPage() {
                         </div>
                         <div>
                           <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Skills to Learn
+                          </label>
+                          <input
+                            type="text"
+                            value={newMilestone.skillsToLearn.join(', ')}
+                            onChange={(e) => {
+                              const skills: string[] = e.target.value.split(',').map(s => s.trim()).filter(s => s.length > 0);
+                              setNewMilestone({ ...newMilestone, skillsToLearn: skills });
+                            }}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="e.g., React, Node.js, MongoDB (comma separated)"
+                          />
+                          <p className="text-xs text-gray-500 mt-1">Enter skills students will learn in this milestone</p>
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Learning Tasks
+                          </label>
+                          <textarea
+                            value={newMilestone.tasks.join('\n')}
+                            onChange={(e) => {
+                              const tasks: string[] = e.target.value.split('\n').map(t => t.trim()).filter(t => t.length > 0);
+                              setNewMilestone({ ...newMilestone, tasks: tasks });
+                            }}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            rows={3}
+                            placeholder="Enter learning tasks (one per line)"
+                          />
+                          <p className="text-xs text-gray-500 mt-1">Enter specific tasks students need to complete (one per line)</p>
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">
                             Required Projects
                           </label>
                           <input
@@ -495,29 +551,15 @@ export default function TrainerRoadmapsPage() {
                         <div className="grid grid-cols-2 gap-4">
                           <div>
                             <label className="block text-sm font-medium text-gray-700 mb-2">
-                              Duration
+                              Duration (days)
                             </label>
                             <input
                               type="number"
-                              value={newMilestone.duration}
-                              onChange={(e) => setNewMilestone({ ...newMilestone, duration: e.target.value })}
+                              value={newMilestone.estimatedDurationDays}
+                              onChange={(e) => setNewMilestone({ ...newMilestone, estimatedDurationDays: parseInt(e.target.value) })}
                               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                               placeholder="e.g., 30"
                             />
-                          </div>
-                          <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">
-                              Duration Type
-                            </label>
-                            <select
-                              value={newMilestone.durationType}
-                              onChange={(e) => setNewMilestone({ ...newMilestone, durationType: e.target.value as 'hours' | 'days' | 'weeks' })}
-                              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                            >
-                              <option value="hours">Hours</option>
-                              <option value="days">Days</option>
-                              <option value="weeks">Weeks</option>
-                            </select>
                           </div>
                         </div>
                         <div className="flex gap-3">

@@ -70,7 +70,7 @@ export default function ChatInterface({ userType }: { userType: string }) {
                             senderId: msg.senderId,
                             text: msg.text,
                             timestamp: formatTime(msg.createdAt),
-                            isMe: msg.senderId === user?.id,
+                            isMe: msg.senderId === user?._id,
                         },
                     ]);
                 }
@@ -82,7 +82,7 @@ export default function ChatInterface({ userType }: { userType: string }) {
         return () => {
             socketService.removeMessageListener(handleIncoming);
         };
-    }, [user?.id]);
+    }, [user?._id]);
 
     // Fetch messages when a contact is selected
     const handleSelectContact = useCallback(async (entry: ChatContactEntry) => {
@@ -97,7 +97,7 @@ export default function ChatInterface({ userType }: { userType: string }) {
                         senderId: m.senderId,
                         text: m.text,
                         timestamp: formatTime(m.createdAt),
-                        isMe: m.senderId === user?.id,
+                        isMe: m.senderId === user?._id,
                     }))
                 );
             }
@@ -106,7 +106,7 @@ export default function ChatInterface({ userType }: { userType: string }) {
         } finally {
             setMessagesLoading(false);
         }
-    }, [user?.id]);
+    }, [user?._id]);
 
     const handleSend = (e: React.FormEvent) => {
         e.preventDefault();
@@ -118,7 +118,7 @@ export default function ChatInterface({ userType }: { userType: string }) {
         // Optimistic append
         const optimistic: DisplayMessage = {
             id: tempId,
-            senderId: user?.id ?? 'me',
+            senderId: user?._id ?? 'me',
             text,
             timestamp: formatTime(new Date().toISOString()),
             isMe: true,

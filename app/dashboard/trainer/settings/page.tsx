@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
-
+import { UserRole } from '@/types/user';
 import { Settings, Lock, Bell, Moon, Globe, Shield, CreditCard, LogOut, ChevronRight, Save, Check, Users, Video } from 'lucide-react';
 import { useAuth } from '@/contexts';
 
@@ -19,7 +19,7 @@ export default function TrainerSettingsPage() {
 
     return (
         <div className="flex h-screen bg-white">
-            <Sidebar activeItem="Settings" userType="trainer" />
+            <Sidebar activeItem="Settings" userType={UserRole.TRAINER} />
 
             <div className="flex-1 flex flex-col min-w-0">
 

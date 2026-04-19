@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
+import { UserRole } from '@/types/user';
 import StudentsHeader from '@/components/trainer/StudentsHeader';
 import StudentsFilters from '@/components/trainer/StudentsFilters';
 import StudentsTable from '@/components/trainer/StudentsTable';
@@ -23,7 +24,7 @@ export default function TrainerStudentsPage() {
 
   return (
     <div className="flex h-screen bg-white">
-      <Sidebar activeItem="My Students" userType="trainer" />
+      <Sidebar activeItem="My Students" userType={UserRole.TRAINER} />
 
       <div className="flex-1 flex flex-col min-w-0">
         <main className="flex-1 p-3 sm:p-4 lg:p-6 overflow-y-auto">

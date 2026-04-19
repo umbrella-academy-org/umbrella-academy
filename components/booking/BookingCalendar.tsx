@@ -58,7 +58,7 @@ export default function BookingCalendar({ onClose, onSuccess }: BookingCalendarP
 
     // Create booking request object
     const bookingRequest: StudentBookingRequest = {
-      trainerId: selectedTrainer.id,
+      trainerId: selectedTrainer._id,
       requestedTime: new Date(`${selectedDate}T${selectedTime}`),
       learningGoals: learningGoals.trim()
     };
@@ -180,9 +180,9 @@ export default function BookingCalendar({ onClose, onSuccess }: BookingCalendarP
                 <div className="space-y-3">
                   <div>
                     <button
-                      key={trainers[currentTrainerIndex].id}
+                      key={trainers[currentTrainerIndex]._id}
                       onClick={() => setSelectedTrainer(trainers[currentTrainerIndex])}
-                      className={`w-full p-4 border rounded-lg text-left transition-colors ${selectedTrainer?.id === trainers[currentTrainerIndex].id
+                      className={`w-full p-4 border rounded-lg text-left transition-colors ${selectedTrainer?._id === trainers[currentTrainerIndex]._id
                         ? 'border-blue-500 bg-blue-50'
                         : 'border-gray-200 hover:border-gray-300'
                         }`}
@@ -196,7 +196,7 @@ export default function BookingCalendar({ onClose, onSuccess }: BookingCalendarP
                           <p className="text-sm text-gray-500">{trainers[currentTrainerIndex].experience.yearsOfExperience} years experience</p>
                           <p className="text-sm text-gray-500">{trainers[currentTrainerIndex].experience.specializations.join(', ')}</p>
                         </div>
-                        {selectedTrainer?.id === trainers[currentTrainerIndex].id && (
+                        {selectedTrainer?._id === trainers[currentTrainerIndex]._id && (
                           <CheckCircle className="w-5 h-5 text-blue-600" />
                         )}
                       </div>

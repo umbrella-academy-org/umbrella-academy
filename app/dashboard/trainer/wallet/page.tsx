@@ -1,6 +1,7 @@
 'use client';
 
 import Sidebar from '@/components/dashboard/Sidebar';
+import { UserRole } from '@/types/user';
 import { useFinancial } from '@/contexts';
 import { DollarSign, TrendingUp, Calendar, ArrowUpRight, ArrowDownLeft, Download, User } from 'lucide-react';
 
@@ -36,8 +37,8 @@ export default function TrainerWalletPage() {
   const monthlyEarnings = getMonthlyRevenue();
   const totalEarned = userWallet?.transactions
     ? userWallet.transactions
-        .filter(t => t.type === 'income' && t.status === 'completed')
-        .reduce((sum, t) => sum + (t.amount ?? 0), 0)
+        .filter((t: any) => t.type === 'income' && t.status === 'completed')
+        .reduce((sum: number, t: any) => sum + (t.amount ?? 0), 0)
     : 0;
   const transactions = getUserTransactions();
   const nextPayoutDate = computeNextPayoutDate();
@@ -71,7 +72,7 @@ export default function TrainerWalletPage() {
 
   return (
     <div className="flex h-screen bg-white">
-      <Sidebar activeItem="Wallet" userType="trainer" />
+      <Sidebar activeItem="Wallet" userType={UserRole.TRAINER} />
 
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
         <main className="flex-1 overflow-auto">
