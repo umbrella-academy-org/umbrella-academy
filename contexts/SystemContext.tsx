@@ -122,7 +122,7 @@ export function SystemProvider({ children }: { children: React.ReactNode }) {
     } finally {
       setIsLoading(false);
     }
-  }, [currentUser, hasPermission]);
+  }, [currentUser, currentUser?.role]);
 
   useEffect(() => {
     if (currentUser) {
