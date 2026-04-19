@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
 import { UserRole, Trainer } from '@/types/user';
 import { useAuth, useAdminContext } from '@/contexts';
+import { adminService } from '@/services/admin';
 import { UserCheck, Clock, X, Check, Mail, Calendar, Award, FileText, Eye, AlertCircle } from 'lucide-react';
 
 export default function TrainerApprovalsPage() {
@@ -18,11 +19,13 @@ export default function TrainerApprovalsPage() {
   const handleApprove = async (trainerId: string) => {
     setActionLoading(true);
     try {
-      // In a real app, this would call an API
-      console.log('Approving trainer:', trainerId);
-      // await trainerService.approveTrainer(trainerId);
+      // Call admin service to approve trainer
+      await adminService.approveTrainer(trainerId, user?._id || 'admin');
       
-      // For now, just close the details modal
+      // Refresh trainers list to get updated data
+      await refreshTrainers();
+      
+      // Close the details modal
       setShowDetails(false);
       setSelectedTrainer(null);
     } catch (error) {
@@ -37,9 +40,11 @@ export default function TrainerApprovalsPage() {
     
     setActionLoading(true);
     try {
-      // In a real app, this would call an API
-      console.log('Rejecting trainer:', selectedTrainer._id, 'Reason:', rejectionReason);
-      // await trainerService.rejectTrainer(selectedTrainer._id, rejectionReason);
+      // Call admin service to reject trainer
+      await adminService.rejectTrainer(selectedTrainer._id, rejectionReason);
+      
+      // Refresh trainers list to get updated data
+      await refreshTrainers();
       
       setShowRejectionModal(false);
       setShowDetails(false);
