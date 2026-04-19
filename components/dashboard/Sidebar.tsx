@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Home, Calendar, CalendarCheck, Map, Bell, Video, CreditCard, HelpCircle, MessageSquare, X, Settings, Menu, User, LogOut, AlertCircle, CheckCircle, Flame, BookOpen, Award, Lock, Users, Tag, UserCheck, BarChart3 } from 'lucide-react';
+import { Home, Calendar, CalendarCheck, Map, Bell, Video, CreditCard, HelpCircle, MessageSquare, X, Settings, Menu, User, LogOut, AlertCircle, CheckCircle, Flame, BookOpen, Award, Lock, Users, Tag, UserCheck, BarChart3, MapPin } from 'lucide-react';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
 import { useAuth } from '@/contexts';
 import { SidebarProps, SidebarItem } from '@/types';
@@ -181,6 +181,11 @@ export default function Sidebar({ activeItem = 'Home', userType, onboardingCheck
             icon: <BarChart3 className="w-5 h-5" />,
             label: 'Reports',
             href: '/dashboard/admin/reports'
+          },
+          {
+            icon: <MapPin className="w-5 h-5" />,
+            label: 'Roadmap Approvals',
+            href: '/dashboard/admin/roadmap-approvals'
           }
         ];
       default: // student

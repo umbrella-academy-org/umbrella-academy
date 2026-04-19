@@ -1,6 +1,7 @@
 import { apiClient } from './client';
 import { API_ENDPOINTS } from './constants';
 import { ApiResponse, BaseUser, Trainer, Student } from '@/types';
+import { Roadmap, RoadmapStatus, RoadmapStepStatus } from '@/types/roadmap';
 
 // Admin-specific types
 export interface AdminPayment {
@@ -219,6 +220,35 @@ class AdminService {
     };
   }
 
+  // Roadmaps Management
+  async getRoadmaps(): Promise<ApiResponse<Roadmap[]>> {
+    const response = await apiClient.get<Roadmap[]>(API_ENDPOINTS.ROADMAPS)
+    return response
+  }
+
+  async getPendingRoadmaps(): Promise<ApiResponse<Roadmap[]>> {
+    const allRoadmaps = await this.getRoadmaps();
+    const pendingRoadmaps = allRoadmaps.data?.filter(roadmap => roadmap.status === 'pending-approval') || [];
+
+    return {
+      success: true,
+      data: pendingRoadmaps,
+      message: 'Pending roadmaps retrieved successfully'
+    };
+  }
+
+  async approveRoadmap(roadmapId: string, approvedBy: string): Promise<ApiResponse<Roadmap>> {
+    // This would typically call API_ENDPOINTS.ROADMAP_APPROVE(roadmapId)
+    const response = await apiClient.post<Roadmap>(API_ENDPOINTS.ROADMAP_APPROVE(roadmapId), { approvedBy });
+    return response;
+  }
+
+  async rejectRoadmap(roadmapId: string, rejectionReason: string): Promise<ApiResponse<Roadmap>> {
+    // This would typically call API_ENDPOINTS.ROADMAP_REJECT(roadmapId)
+    const response = await apiClient.post<Roadmap>(API_ENDPOINTS.ROADMAP_REJECT(roadmapId), { rejectionReason });
+    return response;
+  }
+
   // Dashboard Data
   async getDashboardData(): Promise<ApiResponse<{
     users: BaseUser[];
@@ -227,17 +257,19 @@ class AdminService {
     payments: AdminPayment[];
     analytics: AdminAnalytics;
     tickets: FeedbackTicket[];
+    roadmaps: Roadmap[];
   }>> {
-    const [users, trainers, students, payments, analytics, tickets] = await Promise.all([
+    const [users, trainers, students, payments, analytics, tickets, roadmaps] = await Promise.all([
       this.getUsers(),
       this.getTrainers(),
       this.getStudents(),
       this.getPayments(),
       this.getAnalytics(),
       this.getFeedbackTickets(),
+      this.getRoadmaps(),
     ]);
 
-    if (!users.data || !trainers.data || !students.data || !payments.data || !analytics.data || !tickets.data) {
+    if (!users.data || !trainers.data || !students.data || !payments.data || !analytics.data || !tickets.data || !roadmaps.data) {
       return {
         success: false,
         data: {
@@ -252,7 +284,8 @@ class AdminService {
             totalRevenue: 0,
             pendingTrainers: 0
           },
-          tickets: []
+          tickets: [],
+          roadmaps: []
         },
         message: 'Failed to load dashboard data'
       };
@@ -266,7 +299,8 @@ class AdminService {
         students: students.data,
         payments: payments.data,
         analytics: analytics.data,
-        tickets: tickets.data
+        tickets: tickets.data,
+        roadmaps: roadmaps.data
       },
       message: 'Dashboard data retrieved successfully'
     };

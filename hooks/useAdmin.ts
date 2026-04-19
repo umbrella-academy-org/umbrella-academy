@@ -3,6 +3,7 @@ import { apiClient } from '@/services/client';
 import { API_ENDPOINTS } from '@/services/constants';
 import { BaseUser, UserRole, Trainer, Student } from '@/types';
 import { adminService, AdminPayment, FeedbackTicket } from '@/services/admin';
+import { Roadmap, RoadmapStatus } from '@/types/roadmap';
 
 // Types
 export type UserStatus = 'active' | 'inactive' | 'suspended' | 'paused';
@@ -52,6 +53,12 @@ interface UseAdminReturn {
     totalRevenue: number;
     pendingTrainers: number;
   } | null>;
+  
+  // Roadmaps Management
+  getRoadmaps: () => Promise<Roadmap[] | null>;
+  getPendingRoadmaps: () => Promise<Roadmap[] | null>;
+  approveRoadmap: (id: string, approvedBy: string) => Promise<void>;
+  rejectRoadmap: (id: string, rejectionReason: string) => Promise<void>;
 }
 
 export function useAdmin(): UseAdminReturn {
@@ -225,6 +232,59 @@ export function useAdmin(): UseAdminReturn {
     }
   };
 
+  // Roadmaps Management
+  const getRoadmaps = async (): Promise<Roadmap[] | null> => {
+    try {
+      setIsLoading(true);
+      const res = await adminService.getRoadmaps();
+      setError(null);
+      return res.data ?? null;
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Operation failed');
+      return null;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const getPendingRoadmaps = async (): Promise<Roadmap[] | null> => {
+    try {
+      setIsLoading(true);
+      const res = await adminService.getPendingRoadmaps();
+      setError(null);
+      return res.data ?? null;
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Operation failed');
+      return null;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const approveRoadmap = async (id: string, approvedBy: string): Promise<void> => {
+    try {
+      setIsLoading(true);
+      await adminService.approveRoadmap(id, approvedBy);
+      setError(null);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Operation failed');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const rejectRoadmap = async (id: string, rejectionReason: string): Promise<void> => {
+    try {
+      setIsLoading(true);
+      await adminService.rejectRoadmap(id, rejectionReason);
+      setError(null);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Operation failed');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return {
     isLoading,
     error,
@@ -242,5 +302,9 @@ export function useAdmin(): UseAdminReturn {
     updateTicketStatus,
     addAdminResponse,
     getAnalytics,
+    getRoadmaps,
+    getPendingRoadmaps,
+    approveRoadmap,
+    rejectRoadmap,
   };
 }
