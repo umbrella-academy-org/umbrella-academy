@@ -47,9 +47,6 @@ class AuthService {
     await apiClient.post(API_ENDPOINTS.AUTH_RESET_PASSWORD, { token, newPassword });
   }
 
-  async approveTrainer(trainerId: string): Promise<void> {
-    await apiClient.patch(API_ENDPOINTS.AUTH_APPROVE_TRAINER(trainerId));
-  }
 
   async logout(): Promise<void> {
     try {

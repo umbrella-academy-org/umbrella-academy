@@ -13,8 +13,6 @@ export const API_ENDPOINTS = {
   AUTH_RESEND_OTP: '/api/auth/resend-otp',
   AUTH_FORGOT_PASSWORD: '/api/auth/forgot-password',
   AUTH_RESET_PASSWORD: '/api/auth/reset-password',
-  AUTH_APPROVE_TRAINER: (id: string) => `/api/auth/trainers/${id}/approve`,
-  AUTH_REJECT_TRAINER: (id: string) => `/api/auth/trainers/${id}/reject`,
   AUTH_ONBOARDING_CHECKLIST: '/api/auth/onboarding-checklist',
   USERS_ME: '/api/users/me',
   USERS: '/api/users',
@@ -45,8 +43,11 @@ export const API_ENDPOINTS = {
   NOTIFICATION_BY_ID: (id: string) => `/api/notifications/${id}`,
   SYSTEM: '/api/system',
   TRAINERS_PENDING: '/api/trainers/pending',
+
   ADMIN_ANALYTICS: '/api/admin/analytics',
   ADMIN_FEEDBACK: '/api/admin/feedback',
+  ADMIN_APPROVE_TRAINER:(id:string)=>`/api/admin/trainers/${id}/approve`,
+  ADMIN_REJECT_TRAINER:(id:string)=>`/api/admin/trainers/${id}/reject`,
   ADMIN_FEEDBACK_BY_ID: (id: string) => `/api/admin/feedback/${id}`,
   ADMIN_FEEDBACK_RESPONSE: (id: string) => `/api/admin/feedback/${id}/response`,
   FILES: {

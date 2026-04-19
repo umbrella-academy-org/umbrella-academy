@@ -67,12 +67,12 @@ class AdminService {
   }
 
   async approveTrainer(trainerId: string, approvedBy: string): Promise<ApiResponse<Trainer>> {
-    const response = await apiClient.post<Trainer>(API_ENDPOINTS.AUTH_APPROVE_TRAINER(trainerId), { approvedBy });
+    const response = await apiClient.post<Trainer>(API_ENDPOINTS.ADMIN_APPROVE_TRAINER(trainerId), { approvedBy });
     return response;
   }
 
   async rejectTrainer(trainerId: string, rejectionReason: string): Promise<ApiResponse<Trainer>> {
-    const response = await apiClient.post<Trainer>(API_ENDPOINTS.AUTH_REJECT_TRAINER(trainerId), { rejectionReason });
+    const response = await apiClient.post<Trainer>(API_ENDPOINTS.ADMIN_REJECT_TRAINER(trainerId), { rejectionReason });
     return response;
   }
 

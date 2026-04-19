@@ -1,8 +1,9 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { BaseUser, Trainer, Student, Guardian } from '@/types/user';
+import { BaseUser, Trainer, Student, Guardian, UserRole } from '@/types/user';
 import { adminService, AdminPayment } from '@/services/admin';
+import { useAdmin, CreateUserData, UserStatus } from '@/hooks/useAdmin';
 import { useAuth } from './AuthContext';
 
 interface AdminContextType {
@@ -38,26 +39,50 @@ interface AdminContextType {
   ticketsLoading: boolean;
   ticketsError: string | null;
   refreshTickets: () => Promise<void>;
+  
+  // Admin hook operations
+  createUser: (data: CreateUserData) => Promise<BaseUser | null>;
+  updateUser: (id: string, data: Partial<BaseUser>) => Promise<BaseUser | null>;
+  deleteUser: (id: string) => Promise<boolean>;
+  updateUserStatus: (id: string, status: UserStatus) => Promise<void>;
+  filterByRole: (users: BaseUser[], role: UserRole) => BaseUser[];
+  approveTrainer: (id: string, approvedBy: string) => Promise<void>;
+  rejectTrainer: (id: string, rejectionReason: string) => Promise<void>;
+  deleteTrainer: (id: string) => Promise<void>;
+  getPaymentDetails: (id: string) => Promise<AdminPayment | null>;
+  filterPaymentsByStatus: (payments: AdminPayment[], status: string) => AdminPayment[];
+  filterPaymentsByField: (payments: AdminPayment[], fieldId: string) => AdminPayment[];
+  updateTicketStatus: (id: string, status: 'open' | 'in_progress' | 'resolved' | 'closed') => Promise<void>;
+  addAdminResponse: (id: string, response: string) => Promise<void>;
+  getAnalytics: () => Promise<{
+    totalUsers: number;
+    totalTrainers: number;
+    totalStudents: number;
+    totalRevenue: number;
+    pendingTrainers: number;
+  } | null>;
 }
 
 const AdminContext = createContext<AdminContextType | undefined>(undefined);
 
 export function AdminProvider({ children }: { children: React.ReactNode }) {
   const { user } = useAuth();
-
+  const adminHook = useAdmin();
+  
+  // State
   const [users, setUsers] = useState<BaseUser[]>([]);
   const [usersLoading, setUsersLoading] = useState(false);
   const [usersError, setUsersError] = useState<string | null>(null);
-
+  
   const [trainers, setTrainers] = useState<Trainer[]>([]);
   const [pendingTrainers, setPendingTrainers] = useState<Trainer[]>([]);
   const [trainersLoading, setTrainersLoading] = useState(false);
   const [trainersError, setTrainersError] = useState<string | null>(null);
-
+  
   const [payments, setPayments] = useState<AdminPayment[]>([]);
   const [paymentsLoading, setPaymentsLoading] = useState(false);
   const [paymentsError, setPaymentsError] = useState<string | null>(null);
-
+  
   const [analytics, setAnalytics] = useState<{
     totalUsers: number;
     totalTrainers: number;
@@ -67,7 +92,7 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
   } | null>(null);
   const [analyticsLoading, setAnalyticsLoading] = useState(false);
   const [analyticsError, setAnalyticsError] = useState<string | null>(null);
-
+  
   const [tickets, setTickets] = useState<any[]>([]);
   const [ticketsLoading, setTicketsLoading] = useState(false);
   const [ticketsError, setTicketsError] = useState<string | null>(null);
@@ -174,6 +199,21 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
       payments, paymentsLoading, paymentsError, refreshPayments,
       analytics, analyticsLoading, analyticsError, refreshAnalytics,
       tickets, ticketsLoading, ticketsError, refreshTickets,
+      // Admin hook operations
+      createUser: adminHook.createUser,
+      updateUser: adminHook.updateUser,
+      deleteUser: adminHook.deleteUser,
+      updateUserStatus: adminHook.updateUserStatus,
+      filterByRole: adminHook.filterByRole,
+      approveTrainer: adminHook.approveTrainer,
+      rejectTrainer: adminHook.rejectTrainer,
+      deleteTrainer: adminHook.deleteTrainer,
+      getPaymentDetails: adminHook.getPaymentDetails,
+      filterPaymentsByStatus: adminHook.filterPaymentsByStatus,
+      filterPaymentsByField: adminHook.filterPaymentsByField,
+      updateTicketStatus: adminHook.updateTicketStatus,
+      addAdminResponse: adminHook.addAdminResponse,
+      getAnalytics: adminHook.getAnalytics,
     }}>
       {children}
     </AdminContext.Provider>
