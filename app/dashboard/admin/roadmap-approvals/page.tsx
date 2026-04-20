@@ -172,11 +172,11 @@ export default function RoadmapApprovalsPage() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                       <div className="flex items-center gap-2 text-sm text-gray-600">
                         <User className="w-4 h-4" />
-                        Student: {roadmap.studentId}
+                        Student: {roadmap.student.firstName} {roadmap.student.lastName}
                       </div>
                       <div className="flex items-center gap-2 text-sm text-gray-600">
                         <Award className="w-4 h-4" />
-                        Trainer: {roadmap.trainerId}
+                        Trainer: {roadmap.trainer.firstName} {roadmap.trainer.lastName}
                       </div>
                       <div className="flex items-center gap-2 text-sm text-gray-600">
                         <Calendar className="w-4 h-4" />
@@ -241,11 +241,11 @@ export default function RoadmapApprovalsPage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="flex items-center gap-2 text-sm text-gray-600">
                       <User className="w-4 h-4" />
-                      Student: {selectedRoadmap.studentId}
+                      Student: {selectedRoadmap.student.firstName} {selectedRoadmap.student.lastName}
                     </div>
                     <div className="flex items-center gap-2 text-sm text-gray-600">
                       <Award className="w-4 h-4" />
-                      Trainer: {selectedRoadmap.trainerId}
+                      Trainer: {selectedRoadmap.trainer.firstName} {selectedRoadmap.trainer.lastName}
                     </div>
                     <div className="flex items-center gap-2 text-sm text-gray-600">
                       <Calendar className="w-4 h-4" />

@@ -82,7 +82,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       else {
         setError(response.message);
         if (response.message.includes('not verified')) {
-          localStorage.setItem('userEmail', email);
+          localStorage.setItem('baseEmail', email);
           authService.sendOtp(email);
           router.push('/auth/verify');
         }

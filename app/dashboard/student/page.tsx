@@ -231,7 +231,7 @@ export default function StudentDashboard() {
       {showBookingCalendar && (
         <BookingCalendar
           onClose={() => setShowBookingCalendar(false)}
-          onSuccess={() => {}}
+          onSuccess={() => {setShowBookingCalendar(false)}}
         />
       )}
     </div>

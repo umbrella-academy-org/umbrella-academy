@@ -41,14 +41,20 @@ export default function TrainerRoadmapsPage() {
     completedAt: null,
   });
 
+  // Separate state for input values to handle comma input properly
+  const [skillsInput, setSkillsInput] = useState('');
+  const [projectsInput, setProjectsInput] = useState('');
+
   // Filter roadmaps for current trainer
-  const trainerRoadmaps = roadmaps.filter(roadmap => roadmap.trainerId === user?._id);
+  const trainerRoadmaps = roadmaps.filter(roadmap => roadmap.trainer._id === user?._id);
   const handleAddMilestone = () => {
     if (newMilestone.title && newMilestone.description && newMilestone.estimatedDurationDays) {
 
 
       setMilestones([...milestones, newMilestone]);
       setNewMilestone({ title: '', description: '', requiredProjects: [], estimatedDurationDays: 0, skillsToLearn: [], tasks: [], order: 0, status: RoadmapStepStatus.LOCKED, completedAt: null });
+      setSkillsInput('');
+      setProjectsInput('');
       setIsCreatingMilestone(false);
     }
   };
@@ -104,8 +110,10 @@ export default function TrainerRoadmapsPage() {
       tasks: [],
       order: 0,
       status: RoadmapStepStatus.LOCKED,
-      completedAt: null
+      completedAt: null,
     });
+    setSkillsInput('');
+    setProjectsInput('');
     setIsCreatingMilestone(false);
   };
 
@@ -342,7 +350,7 @@ export default function TrainerRoadmapsPage() {
                               {roadmap.status.replace('-', ' ').charAt(0).toUpperCase() + roadmap.status.slice(1).replace('-', ' ')}
                             </div>
                           </div>
-                          <p className="text-sm text-gray-500">Student: {getStudentName(roadmap.studentId)}</p>
+                          <p className="text-sm text-gray-500">Student: {getStudentName(roadmap.student._id)}</p>
                           <p className="text-xs text-gray-400">Created: {new Date(roadmap.createdAt).toLocaleDateString()}</p>
                           {roadmap.approvedAt && (
                             <p className="text-xs text-gray-400">Approved: {new Date(roadmap.approvedAt).toLocaleDateString()}</p>
@@ -571,15 +579,16 @@ export default function TrainerRoadmapsPage() {
                           </label>
                           <input
                             type="text"
-                            value={newMilestone.skillsToLearn.join(', ')}
+                            value={skillsInput}
                             onChange={(e) => {
+                              setSkillsInput(e.target.value);
                               const skills: string[] = e.target.value.split(',').map(s => s.trim()).filter(s => s.length > 0);
                               setNewMilestone({ ...newMilestone, skillsToLearn: skills });
                             }}
                             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                             placeholder="e.g., React, Node.js, MongoDB (comma separated)"
                           />
-                          <p className="text-xs text-gray-500 mt-1">Enter skills students will learn in this milestone</p>
+                          <p className="text-xs text-gray-500 mt-1">Enter skills students will learn in this milestone (comma separated)</p>
                         </div>
                         <div>
                           <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -603,8 +612,9 @@ export default function TrainerRoadmapsPage() {
                           </label>
                           <input
                             type="text"
-                            value={newMilestone.requiredProjects.join(', ')}
+                            value={projectsInput}
                             onChange={(e) => {
+                              setProjectsInput(e.target.value);
                               const projects: string[] = e.target.value.split(',').map(p => p.trim()).filter(p => p.length > 0);
                               setNewMilestone({ ...newMilestone, requiredProjects: projects });
                             }}
@@ -687,7 +697,7 @@ export default function TrainerRoadmapsPage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <p className="text-sm text-gray-500">Student</p>
-                      <p className="font-medium text-gray-900">{getStudentName(selectedRoadmap.studentId)}</p>
+                      <p className="font-medium text-gray-900">{getStudentName(selectedRoadmap.student._id)}</p>
                     </div>
                     <div>
                       <p className="text-sm text-gray-500">Status</p>
@@ -823,7 +833,7 @@ export default function TrainerRoadmapsPage() {
                   <strong>Milestone:</strong> {selectedMilestone.milestone.title}
                 </p>
                 <p className="text-sm text-gray-600 mb-2">
-                  <strong>Student:</strong> {getStudentName(selectedMilestone.roadmap.studentId)}
+                  <strong>Student:</strong> {getStudentName(selectedMilestone.roadmap.student._id)}
                 </p>
                 <p className="text-sm text-gray-600 mb-4">
                   <strong>Duration:</strong> {selectedMilestone.milestone.estimatedDurationDays} days
@@ -873,7 +883,7 @@ export default function TrainerRoadmapsPage() {
                   <strong>Milestone:</strong> {selectedMilestone.milestone.title}
                 </p>
                 <p className="text-sm text-gray-600 mb-2">
-                  <strong>Student:</strong> {getStudentName(selectedMilestone.roadmap.studentId)}
+                  <strong>Student:</strong> {getStudentName(selectedMilestone.roadmap.student._id)}
                 </p>
                 <p className="text-sm text-gray-600 mb-4">
                   <strong>Duration:</strong> {selectedMilestone.milestone.estimatedDurationDays} days

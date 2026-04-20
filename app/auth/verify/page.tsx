@@ -66,11 +66,12 @@ export default function VerifyPage() {
     }
 
     const email = typeof window !== 'undefined'
-      ? (localStorage.getItem('userEmail') || '')
+      ? (localStorage.getItem('baseEmail') || '')
       : '';
 
     try {
-      await authService.verifyOtp(email, otpValue);
+      const res = await authService.verifyOtp(email, otpValue);
+      if (!res.data?.success) throw new Error("For now")
     } catch {
       setError('Invalid or expired code. Please try again.');
       return;

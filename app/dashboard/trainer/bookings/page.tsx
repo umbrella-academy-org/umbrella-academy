@@ -26,7 +26,7 @@ export default function TrainerBookingsPage() {
   const [rejectingBooking, setRejectingBooking] = useState<string | null>(null);
   const [rejectionReason, setRejectionReason] = useState('');
   const [showRejectModal, setShowRejectModal] = useState(false);
-  
+
   // Approval modal state
   const [approvingBooking, setApprovingBooking] = useState<string | null>(null);
   const [showApproveModal, setShowApproveModal] = useState(false);
@@ -113,8 +113,8 @@ export default function TrainerBookingsPage() {
   };
 
   const filteredBookings = (activeTab === 'pending' ? trainerPendingBookings : trainerAllBookings).filter(booking => {
-    const matchesSearch = getStudentName(booking.studentId).toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         getStudentEmail(booking.studentId).toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearch = getStudentName(booking.student._id).toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         getStudentEmail(booking.student._id).toLowerCase().includes(searchTerm.toLowerCase());
     const matchesStatus = statusFilter === 'all' || booking.status === statusFilter;
     return matchesSearch && matchesStatus;
   });
@@ -287,8 +287,8 @@ export default function TrainerBookingsPage() {
                           <User className="w-5 h-5 text-gray-400" />
                         </div>
                         <div>
-                          <h3 className="font-medium text-gray-900">{getStudentName(booking.studentId)}</h3>
-                          <p className="text-sm text-gray-500">{getStudentEmail(booking.studentId)}</p>
+                          <h3 className="font-medium text-gray-900">{booking.student.firstName} {booking.student.lastName}</h3>
+                          <p className="text-sm text-gray-500">{booking.student.email}</p>
                         </div>
                       </div>
 
@@ -464,7 +464,7 @@ export default function TrainerBookingsPage() {
 
       {/* Approval Modal */}
       {showApproveModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg max-w-2xl w-full mx-4 p-6 max-h-[90vh] overflow-y-auto">
             <h3 className="text-lg font-medium text-gray-900 mb-4">Approve Booking Request</h3>
             <p className="text-sm text-gray-600 mb-6">

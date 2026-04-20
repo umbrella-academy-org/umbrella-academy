@@ -17,11 +17,6 @@ export default function TrainerDetailsPage() {
     yearsOfExperience: '',
     specializations: [] as string[],
     skills: [] as string[],
-    availability: {
-      weeklyAvailableHours: 0,
-      preferredTimeSlots: [],
-      preferredDays: []
-    } as Availability
   });
   const [errors, setErrors] = useState({
     dateOfBirth: '',
@@ -31,7 +26,6 @@ export default function TrainerDetailsPage() {
     yearsOfExperience: '',
     specializations: '',
     skills: '',
-    availability: ''
   });
   const [isLoading, setIsLoading] = useState(false);
 
@@ -57,17 +51,6 @@ export default function TrainerDetailsPage() {
   const handleChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
     setErrors(prev => ({ ...prev, [field]: '' }));
-  };
-
-  const handleAvailabilityChange = (field: keyof Availability, value: any) => {
-    setFormData(prev => ({
-      ...prev,
-      availability: {
-        ...prev.availability,
-        [field]: value
-      }
-    }));
-    setErrors(prev => ({ ...prev, availability: '' }));
   };
 
   const toggleSkill = (skill: string) => {
@@ -100,7 +83,7 @@ export default function TrainerDetailsPage() {
       yearsOfExperience: '',
       specializations: '',
       skills: '',
-      availability: ''
+ 
     };
 
     if (!formData.dateOfBirth) newErrors.dateOfBirth = 'Date of birth is required';
@@ -110,7 +93,6 @@ export default function TrainerDetailsPage() {
     if (!formData.yearsOfExperience) newErrors.yearsOfExperience = 'Years of experience is required';
     if (formData.specializations.length === 0) newErrors.specializations = 'Please select at least one specialization';
     if (formData.skills.length === 0) newErrors.skills = 'Please select at least one skill';
-    if (!formData.availability.weeklyAvailableHours || formData.availability.preferredTimeSlots.length === 0 || formData.availability.preferredDays.length === 0) newErrors.availability = 'Please specify your availability';
 
     setErrors(newErrors);
 
@@ -155,7 +137,6 @@ export default function TrainerDetailsPage() {
           specializations: formData.specializations
         },
         skills: formData.skills,
-        availability: formData.availability,
         approvalStatus: 'pending' as const
       };
 
@@ -357,85 +338,6 @@ export default function TrainerDetailsPage() {
                     ))}
                   </div>
                   {errors.skills && <p className="mt-1 text-sm text-red-500">{errors.skills}</p>}
-                </div>
-
-                {/* Availability */}
-                <div className="mt-4">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    <Clock className="w-4 h-4 inline mr-1" />
-                    Availability
-                  </label>
-
-                  {/* Weekly Hours */}
-                  <div className="mt-4">
-                    <label htmlFor="weeklyAvailableHours" className="block text-sm font-medium text-gray-700 mb-2">
-                      Weekly Available Hours
-                    </label>
-                    <input
-                      type="number"
-                      id="weeklyAvailableHours"
-                      value={formData.availability.weeklyAvailableHours}
-                      onChange={(e) => handleAvailabilityChange('weeklyAvailableHours', parseInt(e.target.value))}
-                      placeholder="e.g., 40"
-                      min="0"
-                      max="168"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent text-gray-900 placeholder:text-gray-400"
-                    />
-                  </div>
-
-                  {/* Preferred Time Slots */}
-                  <div className="mt-4">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Preferred Time Slots
-                    </label>
-                    <div className="grid grid-cols-3 gap-2">
-                      {timeSlotOptions.map((timeSlot) => (
-                        <button
-                          key={timeSlot}
-                          type="button"
-                          onClick={() => {
-                            const newTimeSlots = formData.availability.preferredTimeSlots.includes(timeSlot)
-                              ? formData.availability.preferredTimeSlots.filter(t => t !== timeSlot)
-                              : [...formData.availability.preferredTimeSlots, timeSlot];
-                            handleAvailabilityChange('preferredTimeSlots', newTimeSlots);
-                          }}
-                          className={`p-2 text-sm rounded-lg border transition-all ${formData.availability.preferredTimeSlots.includes(timeSlot)
-                            ? 'border-green-600 bg-green-50 text-green-600'
-                            : 'border-gray-200 hover:border-gray-300 text-gray-600'
-                            }`}
-                        >
-                          {timeSlot}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Preferred Days */}
-                  <div className="mt-4">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Preferred Days
-                    </label>
-                    <div className="grid grid-cols-4 gap-2">
-                      {dayOptions.map((day) => (
-                        <button
-                          key={day}
-                          type="button"
-                          onClick={() => {
-                            const newDays = formData.availability.preferredDays.includes(day)
-                              ? formData.availability.preferredDays.filter(d => d !== day)
-                              : [...formData.availability.preferredDays, day];
-                            handleAvailabilityChange('preferredDays', newDays);
-                          }}
-                          className={`p-2 text-sm rounded-lg border transition-all ${formData.availability.preferredDays.includes(day)
-                            ? 'border-green-600 bg-green-50 text-green-600'
-                            : 'border-gray-200 hover:border-gray-300 text-gray-600'
-                            }`}
-                        >
-                          {day}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
                 </div>
               </div>
 

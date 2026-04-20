@@ -63,7 +63,7 @@ export default function StudentRoadmapPage() {
   }
 
   const activeRoadmap = studentRoadmaps.find(roadmap =>
-    roadmap.studentId === user._id && roadmap.status != 'draft'
+    roadmap.student._id === user._id && roadmap.status != 'draft'
   );
 
   const getMilestoneStatusColor = (status: RoadmapStepStatus) => {

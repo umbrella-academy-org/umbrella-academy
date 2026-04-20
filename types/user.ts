@@ -19,7 +19,7 @@ export interface Availability {
 }
 
 export interface OnboardingChecklist {
-  accountCreated: boolean; 
+  accountCreated: boolean;
   bookingPayed: boolean;
   subscriptionPayed: boolean;
   orientationBooked: boolean;
@@ -33,8 +33,8 @@ export interface Experience {
 }
 
 
-export interface BaseUser  {
-  _id:string
+export interface BaseUser {
+  _id: string
   email: string;
   password: string;
   firstName: string;
@@ -74,17 +74,19 @@ export interface Student extends BaseUser {
 }
 
 export interface Trainer extends BaseUser {
-  role: UserRole.TRAINER;
   cvUrl: string;
+  introVideoUrl: string;
   experience: Experience;
   skills: string[];
-  introVideoUrl: string;
-  approvalStatus: 'pending' | 'approved' | 'rejected'
+  approvalStatus: 'pending' | 'approved' | 'rejected';
+  approvedBy?: string; // Admin ID who approved/rejected
+  approvedAt?: Date;
+  rejectionReason?: string;
 }
 
 
 export interface StudentRegister extends BaseUser {
-    guardianName: string;
-    guardianEmail: string;
-    guardianPhoneNumber: string;
+  guardianName: string;
+  guardianEmail: string;
+  guardianPhoneNumber: string;
 }
