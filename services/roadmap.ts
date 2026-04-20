@@ -49,8 +49,8 @@ class RoadmapService {
         return response.data;
     }
 
-    async completeMilestone(roadmapId: string, milestoneId: string, projectData: any) {
-        const response = await apiClient.post<any>(`/api/roadmaps/${roadmapId}/milestones/${milestoneId}/complete`, projectData);
+    async completeMilestone(roadmapId: string, milestoneOrder: number, projectData: any) {
+        const response = await apiClient.post<any>(`/api/roadmaps/${roadmapId}/milestones/${milestoneOrder}/complete`, projectData);
         return response.data;
     }
 }

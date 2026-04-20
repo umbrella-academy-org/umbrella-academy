@@ -5,20 +5,23 @@ import Sidebar from '@/components/dashboard/Sidebar';
 import { useAuth, useRoadmaps } from '@/contexts';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
 import { roadmapService } from '@/services/roadmap';
-import { UserRole } from '@/types';
+import { Milestone, UserRole } from '@/types';
 
 export default function StudentRoadmapPage() {
   const { user, isAuthenticated, isLoading: authLoading } = useAuth();
   const { studentRoadmaps, isLoading: roadmapsLoading, getUpcomingLiveSessions, refreshRoadmaps } = useRoadmaps();
   const { navigate } = useNavigationWithLoading();
   
-  const [selectedMilestone, setSelectedMilestone] = useState<any>(null);
+  const [selectedMilestone, setSelectedMilestone] = useState<Milestone | null>(null);
   const [showProjectModal, setShowProjectModal] = useState(false);
   const [projectSubmission, setProjectSubmission] = useState({
-    title: '',
     description: '',
-    githubUrl: '',
-    liveUrl: ''
+    evidence: {
+      videoDemoLink: '',
+      designLink: '',
+      fileDownloadLink: ''
+    },
+    toolsUsed: [] as string[]
   });
   const [completingMilestone, setCompletingMilestone] = useState(false);
 
@@ -81,14 +84,14 @@ export default function StudentRoadmapPage() {
   };
 
   const handleProjectSubmit = async () => {
-    if (!selectedMilestone || !projectSubmission.title.trim() || !projectSubmission.description.trim()) {
+    if (!selectedMilestone || !projectSubmission.description.trim() || !activeRoadmap) {
       return;
     }
 
     setCompletingMilestone(true);
     try {
       // Submit project and complete milestone
-      await roadmapService.completeMilestone(selectedMilestone.id, projectSubmission);
+      await roadmapService.completeMilestone(activeRoadmap.id, selectedMilestone.order, projectSubmission);
       
       // Refresh roadmaps to get updated data
       await refreshRoadmaps();
@@ -96,7 +99,15 @@ export default function StudentRoadmapPage() {
       // Reset form and close modal
       setShowProjectModal(false);
       setSelectedMilestone(null);
-      setProjectSubmission({ title: '', description: '', githubUrl: '', liveUrl: '' });
+      setProjectSubmission({
+        description: '',
+        evidence: {
+          videoDemoLink: '',
+          designLink: '',
+          fileDownloadLink: ''
+        },
+        toolsUsed: []
+      });
     } catch (error) {
       console.error('Failed to complete milestone:', error);
     } finally {
@@ -221,7 +232,126 @@ export default function StudentRoadmapPage() {
           )}
         </main>
       </div>
+       {/* Project Submission Modal */}
+    {showProjectModal && selectedMilestone && (
+      <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50 flex justify-center items-center">
+        <div className="relative bg-white rounded-lg shadow-xl max-w-md w-full mx-4 p-6">
+          <button
+            className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
+            onClick={() => setShowProjectModal(false)}
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">
+            Complete Milestone: {selectedMilestone.title}
+          </h3>
+          
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Project Description
+              </label>
+              <textarea
+                value={projectSubmission.description}
+                onChange={(e) => setProjectSubmission({...projectSubmission, description: e.target.value})}
+                rows={4}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-yellow-500 focus:border-yellow-500"
+                placeholder="Describe your project and what you learned"
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Tools Used (comma-separated)
+              </label>
+              <input
+                type="text"
+                value={projectSubmission.toolsUsed.join(', ')}
+                onChange={(e) => setProjectSubmission({...projectSubmission, toolsUsed: e.target.value.split(',').map(tool => tool.trim()).filter(tool => tool)})}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-yellow-500 focus:border-yellow-500"
+                placeholder="React Native, Firebase, Redux, Expo"
+              />
+            </div>
+            
+            <div className="space-y-3">
+              <label className="block text-sm font-medium text-gray-700">
+                Project Evidence
+              </label>
+              
+              <div>
+                <label className="block text-xs font-medium text-gray-600 mb-1">
+                  Video Demo Link
+                </label>
+                <input
+                  type="url"
+                  value={projectSubmission.evidence.videoDemoLink}
+                  onChange={(e) => setProjectSubmission({
+                    ...projectSubmission, 
+                    evidence: {...projectSubmission.evidence, videoDemoLink: e.target.value}
+                  })}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-yellow-500 focus:border-yellow-500"
+                  placeholder="https://youtu.be/mobile-demo"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-xs font-medium text-gray-600 mb-1">
+                  Design Link (Figma, Adobe XD)
+                </label>
+                <input
+                  type="url"
+                  value={projectSubmission.evidence.designLink}
+                  onChange={(e) => setProjectSubmission({
+                    ...projectSubmission, 
+                    evidence: {...projectSubmission.evidence, designLink: e.target.value}
+                  })}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-yellow-500 focus:border-yellow-500"
+                  placeholder="https://figma.com/file/mobile-design"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-xs font-medium text-gray-600 mb-1">
+                  File Download Link
+                </label>
+                <input
+                  type="url"
+                  value={projectSubmission.evidence.fileDownloadLink}
+                  onChange={(e) => setProjectSubmission({
+                    ...projectSubmission, 
+                    evidence: {...projectSubmission.evidence, fileDownloadLink: e.target.value}
+                  })}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-yellow-500 focus:border-yellow-500"
+                  placeholder="https://drive.google.com/file/mobile-apk"
+                />
+              </div>
+            </div>
+          </div>
+          
+          <div className="mt-6 flex justify-end gap-3">
+            <button
+              onClick={() => setShowProjectModal(false)}
+              className="px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={handleProjectSubmit}
+              disabled={completingMilestone || !projectSubmission.description.trim()}
+              className="px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {completingMilestone ? 'Submitting...' : 'Submit Project'}
+            </button>
+          </div>
+        </div>
+      </div>
+    )}
     </div>
+
+   
   );
 }
 
