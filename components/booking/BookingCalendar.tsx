@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { X, Calendar, Clock, User, CheckCircle, MessageSquare } from 'lucide-react';
+import { X, Calendar, Clock, User, CheckCircle, MessageSquare, Users, AlertCircle } from 'lucide-react';
 import { useUsers } from '@/contexts';
 import { Trainer, BookingStatus, StudentBookingRequest } from '@/types';
 import { useBooking } from '@/hooks/useBooking';
@@ -30,14 +30,13 @@ interface TimeSlot {
 }
 
 export default function BookingCalendar({ onClose, onSuccess }: BookingCalendarProps) {
-  const { trainers } = useUsers()
+  const { trainers, isLoading: trainersLoading } = useUsers()
   const { createBooking, isLoading, error } = useBooking();
   const [selectedTrainer, setSelectedTrainer] = useState<Trainer | null>(null);
   const [selectedDate, setSelectedDate] = useState<string>('');
   const [selectedTime, setSelectedTime] = useState<string>('');
   const [learningGoals, setLearningGoals] = useState('');
   const [bookingStep, setBookingStep] = useState<'select' | 'confirm' | 'submitting' | 'success'>('select');
-  const [currentTrainerIndex, setCurrentTrainerIndex] = useState(0);
 
   // Generate available dates for the next 7 days
   const availableDates = Array.from({ length: 7 }, (_, i) => {
@@ -153,56 +152,74 @@ export default function BookingCalendar({ onClose, onSuccess }: BookingCalendarP
         <div className="p-6">
           {bookingStep === 'select' && (
             <div className="space-y-6">
-              {/* Step 1: Select Mentor - Show one at a time */}
+              {/* Step 1: Select Mentor - Show all available trainers */}
               <div>
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="font-medium text-gray-900">Choose Your Mentor</h3>
-                  <div className="flex items-center gap-2 text-sm text-gray-500">
-                    <span>{currentTrainerIndex + 1} of {trainers.length}</span>
-                    <div className="flex gap-2">
-                      <button
-                        onClick={() => setCurrentTrainerIndex(Math.max(0, currentTrainerIndex - 1))}
-                        disabled={currentTrainerIndex === 0}
-                        className="px-3 py-1 border border-gray-300 rounded hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
-                      >
-                        Previous
-                      </button>
-                      <button
-                        onClick={() => setCurrentTrainerIndex(Math.min(trainers.length - 1, currentTrainerIndex + 1))}
-                        disabled={currentTrainerIndex === trainers.length - 1}
-                        className="px-3 py-1 border border-gray-300 rounded hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
-                      >
-                        Next
-                      </button>
+                <h3 className="font-medium text-gray-900 mb-4">Choose Your Mentor</h3>
+                
+                {trainersLoading ? (
+                  <div className="flex items-center justify-center py-8">
+                    <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+                    <span className="ml-3 text-gray-600">Loading available mentors...</span>
+                  </div>
+                ) : trainers.length === 0 ? (
+                  <div className="text-center py-8 px-4">
+                    <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Users className="w-8 h-8 text-gray-400" />
+                    </div>
+                    <h4 className="text-lg font-medium text-gray-900 mb-2">No Mentors Available</h4>
+                    <p className="text-gray-500 mb-4">
+                      We're sorry, but there are currently no mentors available for booking.
+                      Please check back later or contact support for assistance.
+                    </p>
+                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-left">
+                      <div className="flex items-start gap-2">
+                        <AlertCircle className="w-5 h-5 text-blue-600 mt-0.5 shrink-0" />
+                        <div>
+                          <p className="text-sm font-medium text-blue-900">What you can do:</p>
+                          <ul className="text-sm text-blue-700 mt-1 space-y-1">
+                            <li>• Try booking again in a few hours</li>
+                            <li>• Contact our support team for help</li>
+                            <li>• Check your email for mentor availability updates</li>
+                          </ul>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="space-y-3">
-                  <div>
-                    <button
-                      key={trainers[currentTrainerIndex]._id}
-                      onClick={() => setSelectedTrainer(trainers[currentTrainerIndex])}
-                      className={`w-full p-4 border rounded-lg text-left transition-colors ${selectedTrainer?._id === trainers[currentTrainerIndex]._id
-                        ? 'border-blue-500 bg-blue-50'
-                        : 'border-gray-200 hover:border-gray-300'
+                ) : (
+                  <div className="space-y-3 max-h-64 overflow-y-auto">
+                    {trainers.map((trainer) => (
+                      <button
+                        key={trainer._id}
+                        onClick={() => setSelectedTrainer(trainer)}
+                        className={`w-full p-4 border rounded-lg text-left transition-colors ${
+                          selectedTrainer?._id === trainer._id
+                            ? 'border-blue-500 bg-blue-50'
+                            : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
                         }`}
-                    >
-                      <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center">
-                          <User className="w-6 h-6 text-gray-400" />
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center">
+                            <User className="w-6 h-6 text-gray-400" />
+                          </div>
+                          <div className="flex-1">
+                            <h4 className="font-medium text-gray-900">
+                              {trainer.firstName} {trainer.lastName}
+                            </h4>
+                            <p className="text-sm text-gray-500">
+                              {trainer.experience?.yearsOfExperience || 0} years experience
+                            </p>
+                            <p className="text-sm text-gray-500">
+                              {trainer.experience?.specializations?.join(', ') || 'General mentoring'}
+                            </p>
+                          </div>
+                          {selectedTrainer?._id === trainer._id && (
+                            <CheckCircle className="w-5 h-5 text-blue-600 shrink-0" />
+                          )}
                         </div>
-                        <div className="flex-1">
-                          <h4 className="font-medium text-gray-900">{trainers[currentTrainerIndex].firstName} {trainers[currentTrainerIndex].lastName}</h4>
-                          <p className="text-sm text-gray-500">{trainers[currentTrainerIndex].experience.yearsOfExperience} years experience</p>
-                          <p className="text-sm text-gray-500">{trainers[currentTrainerIndex].experience.specializations.join(', ')}</p>
-                        </div>
-                        {selectedTrainer?._id === trainers[currentTrainerIndex]._id && (
-                          <CheckCircle className="w-5 h-5 text-blue-600" />
-                        )}
-                      </div>
-                    </button>
+                      </button>
+                    ))}
                   </div>
-                </div>
+                )}
               </div>
 
               {/* Step 2: Select Date - Use date picker */}
