@@ -14,6 +14,7 @@ export enum BookingStatus {
 export enum RoadmapStepStatus {
   LOCKED = 'locked',
   ACTIVE = 'active',
+  PENDING_APPROVAL = 'pending-approval',
   COMPLETED = 'completed'
 }
 

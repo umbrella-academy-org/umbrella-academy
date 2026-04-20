@@ -5,13 +5,13 @@ import Sidebar from '@/components/dashboard/Sidebar';
 import { useAuth, useRoadmaps } from '@/contexts';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
 import { roadmapService } from '@/services/roadmap';
-import { Milestone, UserRole } from '@/types';
+import { Milestone, UserRole, RoadmapStepStatus } from '@/types';
 
 export default function StudentRoadmapPage() {
   const { user, isAuthenticated, isLoading: authLoading } = useAuth();
   const { studentRoadmaps, isLoading: roadmapsLoading, getUpcomingLiveSessions, refreshRoadmaps } = useRoadmaps();
   const { navigate } = useNavigationWithLoading();
-  
+
   const [selectedMilestone, setSelectedMilestone] = useState<Milestone | null>(null);
   const [showProjectModal, setShowProjectModal] = useState(false);
   const [projectSubmission, setProjectSubmission] = useState({
@@ -63,20 +63,25 @@ export default function StudentRoadmapPage() {
   }
 
   const activeRoadmap = studentRoadmaps.find(roadmap =>
-    roadmap.studentId === user._id && roadmap.status === 'approved'
+    roadmap.studentId === user._id && roadmap.status != 'draft'
   );
 
-  const upcomingSessions = getUpcomingLiveSessions();
-  const nextSession = upcomingSessions.sort(
-    (a, b) => new Date(a.scheduledAt).getTime() - new Date(b.scheduledAt).getTime()
-  )[0];
-  const nextSessionDate = nextSession ? new Date(nextSession.scheduledAt) : null;
-  const nextSessionDisplay = nextSessionDate
-    ? nextSessionDate.toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' })
-    : 'No upcoming sessions';
-  const nextSessionTime = nextSessionDate
-    ? nextSessionDate.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })
-    : '';
+  const getMilestoneStatusColor = (status: RoadmapStepStatus) => {
+    switch (status) {
+      case RoadmapStepStatus.COMPLETED:
+        return 'bg-green-100 text-green-700 border-green-200';
+      case RoadmapStepStatus.ACTIVE:
+        return 'bg-blue-100 text-blue-700 border-blue-200';
+      case RoadmapStepStatus.PENDING_APPROVAL:
+        return 'bg-yellow-100 text-yellow-700 border-yellow-200';
+      case RoadmapStepStatus.LOCKED:
+        return 'bg-gray-100 text-gray-700 border-gray-200';
+      default:
+        return 'bg-gray-100 text-gray-700 border-gray-200';
+    }
+  };
+
+
 
   const handleCompleteMilestone = async (milestone: any, index: number) => {
     setSelectedMilestone(milestone);
@@ -92,10 +97,10 @@ export default function StudentRoadmapPage() {
     try {
       // Submit project and complete milestone
       await roadmapService.completeMilestone(activeRoadmap.id, selectedMilestone.order, projectSubmission);
-      
+
       // Refresh roadmaps to get updated data
       await refreshRoadmaps();
-      
+
       // Reset form and close modal
       setShowProjectModal(false);
       setSelectedMilestone(null);
@@ -147,7 +152,7 @@ export default function StudentRoadmapPage() {
                 </div>
               </div>
 
-              
+
               {/* Roadmap Milestones */}
               <div className="bg-white border border-gray-200 rounded-lg p-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Learning Milestones</h3>
@@ -156,25 +161,28 @@ export default function StudentRoadmapPage() {
                     <div key={index} className="border border-gray-200 rounded-lg p-4">
                       <div className="flex items-center justify-between">
                         <div>
-                          <h4 className="font-medium text-gray-900">{milestone.title}</h4>
+                          <div className="flex items-center gap-2 mb-1">
+                            <h4 className="font-medium text-gray-900">{milestone.title}</h4>
+                            <div className={`px-2 py-1 rounded-full text-xs font-medium border ${getMilestoneStatusColor(milestone.status)}`}>
+                              {milestone.status.replace('-', ' ').charAt(0).toUpperCase() + milestone.status.slice(1).replace('-', ' ')}
+                            </div>
+                          </div>
                           <p className="text-sm text-gray-600">{milestone.description}</p>
                           <p className="text-xs text-gray-500 mt-1">Duration: {milestone.estimatedDurationDays} days</p>
                         </div>
                         <div className="text-right">
-                          <span className="text-sm font-medium text-gray-900">{milestone.status === 'completed' ? 100 : milestone.status === 'active' ? 50 : 0}%</span>
-                          <div className="w-20 h-2 bg-gray-200 rounded-full mt-1">
-                            <div
-                              className="h-2 bg-yellow-600 rounded-full"
-                              style={{ width: `${milestone.status === 'completed' ? 100 : milestone.status === 'active' ? 50 : 0}%` }}
-                            ></div>
-                          </div>
-                          {milestone.status === 'active' && (
+                          {milestone.status === RoadmapStepStatus.ACTIVE && (
                             <button
                               onClick={() => handleCompleteMilestone(milestone, index)}
-                              className="mt-2 px-3 py-1 bg-green-600 text-white text-xs rounded hover:bg-green-700"
+                              className="px-3 py-1 bg-green-600 text-white text-xs rounded hover:bg-green-700"
                             >
                               Complete Milestone
                             </button>
+                          )}
+                          {milestone.status === RoadmapStepStatus.PENDING_APPROVAL && (
+                            <div className="text-sm text-yellow-600 font-medium">
+                              Awaiting Trainer Approval
+                            </div>
                           )}
                         </div>
                       </div>
@@ -214,126 +222,126 @@ export default function StudentRoadmapPage() {
           )}
         </main>
       </div>
-       {/* Project Submission Modal */}
-    {showProjectModal && selectedMilestone && (
-      <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50 flex justify-center items-center">
-        <div className="relative bg-white rounded-lg shadow-xl max-w-md w-full mx-4 p-6">
-          <button
-            className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
-            onClick={() => setShowProjectModal(false)}
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-          
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">
-            Complete Milestone: {selectedMilestone.title}
-          </h3>
-          
-          <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Project Description
-              </label>
-              <textarea
-                value={projectSubmission.description}
-                onChange={(e) => setProjectSubmission({...projectSubmission, description: e.target.value})}
-                rows={4}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-yellow-500 focus:border-yellow-500"
-                placeholder="Describe your project and what you learned"
-              />
-            </div>
-            
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Tools Used (comma-separated)
-              </label>
-              <input
-                type="text"
-                value={projectSubmission.toolsUsed.join(', ')}
-                onChange={(e) => setProjectSubmission({...projectSubmission, toolsUsed: e.target.value.split(',').map(tool => tool.trim()).filter(tool => tool)})}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-yellow-500 focus:border-yellow-500"
-                placeholder="React Native, Firebase, Redux, Expo"
-              />
-            </div>
-            
-            <div className="space-y-3">
-              <label className="block text-sm font-medium text-gray-700">
-                Project Evidence
-              </label>
-              
-              <div>
-                <label className="block text-xs font-medium text-gray-600 mb-1">
-                  Video Demo Link
-                </label>
-                <input
-                  type="url"
-                  value={projectSubmission.evidence.videoDemoLink}
-                  onChange={(e) => setProjectSubmission({
-                    ...projectSubmission, 
-                    evidence: {...projectSubmission.evidence, videoDemoLink: e.target.value}
-                  })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-yellow-500 focus:border-yellow-500"
-                  placeholder="https://youtu.be/mobile-demo"
-                />
-              </div>
-              
-              <div>
-                <label className="block text-xs font-medium text-gray-600 mb-1">
-                  Design Link (Figma, Adobe XD)
-                </label>
-                <input
-                  type="url"
-                  value={projectSubmission.evidence.designLink}
-                  onChange={(e) => setProjectSubmission({
-                    ...projectSubmission, 
-                    evidence: {...projectSubmission.evidence, designLink: e.target.value}
-                  })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-yellow-500 focus:border-yellow-500"
-                  placeholder="https://figma.com/file/mobile-design"
-                />
-              </div>
-              
-              <div>
-                <label className="block text-xs font-medium text-gray-600 mb-1">
-                  File Download Link
-                </label>
-                <input
-                  type="url"
-                  value={projectSubmission.evidence.fileDownloadLink}
-                  onChange={(e) => setProjectSubmission({
-                    ...projectSubmission, 
-                    evidence: {...projectSubmission.evidence, fileDownloadLink: e.target.value}
-                  })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-yellow-500 focus:border-yellow-500"
-                  placeholder="https://drive.google.com/file/mobile-apk"
-                />
-              </div>
-            </div>
-          </div>
-          
-          <div className="mt-6 flex justify-end gap-3">
+      {/* Project Submission Modal */}
+      {showProjectModal && selectedMilestone && (
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50 flex justify-center items-center">
+          <div className="relative bg-white rounded-lg shadow-xl max-w-md w-full mx-4 p-6">
             <button
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
               onClick={() => setShowProjectModal(false)}
-              className="px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200"
             >
-              Cancel
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
             </button>
-            <button
-              onClick={handleProjectSubmit}
-              disabled={completingMilestone || !projectSubmission.description.trim()}
-              className="px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {completingMilestone ? 'Submitting...' : 'Submit Project'}
-            </button>
+
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">
+              Complete Milestone: {selectedMilestone.title}
+            </h3>
+
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Project Description
+                </label>
+                <textarea
+                  value={projectSubmission.description}
+                  onChange={(e) => setProjectSubmission({ ...projectSubmission, description: e.target.value })}
+                  rows={4}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-yellow-500 focus:border-yellow-500"
+                  placeholder="Describe your project and what you learned"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Tools Used (comma-separated)
+                </label>
+                <input
+                  type="text"
+                  value={projectSubmission.toolsUsed.join(', ')}
+                  onChange={(e) => setProjectSubmission({ ...projectSubmission, toolsUsed: e.target.value.split(',').map(tool => tool.trim()).filter(tool => tool) })}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-yellow-500 focus:border-yellow-500"
+                  placeholder="React Native, Firebase, Redux, Expo"
+                />
+              </div>
+
+              <div className="space-y-3">
+                <label className="block text-sm font-medium text-gray-700">
+                  Project Evidence
+                </label>
+
+                <div>
+                  <label className="block text-xs font-medium text-gray-600 mb-1">
+                    Video Demo Link
+                  </label>
+                  <input
+                    type="url"
+                    value={projectSubmission.evidence.videoDemoLink}
+                    onChange={(e) => setProjectSubmission({
+                      ...projectSubmission,
+                      evidence: { ...projectSubmission.evidence, videoDemoLink: e.target.value }
+                    })}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-yellow-500 focus:border-yellow-500"
+                    placeholder="https://youtu.be/mobile-demo"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-medium text-gray-600 mb-1">
+                    Design Link (Figma, Adobe XD)
+                  </label>
+                  <input
+                    type="url"
+                    value={projectSubmission.evidence.designLink}
+                    onChange={(e) => setProjectSubmission({
+                      ...projectSubmission,
+                      evidence: { ...projectSubmission.evidence, designLink: e.target.value }
+                    })}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-yellow-500 focus:border-yellow-500"
+                    placeholder="https://figma.com/file/mobile-design"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-medium text-gray-600 mb-1">
+                    File Download Link
+                  </label>
+                  <input
+                    type="url"
+                    value={projectSubmission.evidence.fileDownloadLink}
+                    onChange={(e) => setProjectSubmission({
+                      ...projectSubmission,
+                      evidence: { ...projectSubmission.evidence, fileDownloadLink: e.target.value }
+                    })}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-yellow-500 focus:border-yellow-500"
+                    placeholder="https://drive.google.com/file/mobile-apk"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-6 flex justify-end gap-3">
+              <button
+                onClick={() => setShowProjectModal(false)}
+                className="px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleProjectSubmit}
+                disabled={completingMilestone || !projectSubmission.description.trim()}
+                className="px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {completingMilestone ? 'Submitting...' : 'Submit Project'}
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    )}
+      )}
     </div>
 
-   
+
   );
 }
 

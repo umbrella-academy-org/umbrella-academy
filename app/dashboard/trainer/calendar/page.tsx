@@ -16,6 +16,13 @@ export default function TrainerRoadmapsPage() {
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [selectedRoadmap, setSelectedRoadmap] = useState<Roadmap | null>(null);
   const [viewMode, setViewMode] = useState<'list' | 'create' | 'edit'>('list');
+  
+  // Milestone approval state
+  const [selectedMilestone, setSelectedMilestone] = useState<{ roadmap: Roadmap; milestone: Milestone } | null>(null);
+  const [showApprovalModal, setShowApprovalModal] = useState(false);
+  const [showRejectionModal, setShowRejectionModal] = useState(false);
+  const [trainerFeedback, setTrainerFeedback] = useState('');
+  const [isApproving, setIsApproving] = useState(false);
 
   // Create roadmap form state
   const [roadmapTitle, setRoadmapTitle] = useState('');
@@ -111,12 +118,70 @@ export default function TrainerRoadmapsPage() {
     }
   };
 
+  const handleApproveMilestone = async () => {
+    if (!selectedMilestone || !trainerFeedback.trim()) return;
+    
+    setIsApproving(true);
+    try {
+      await roadmapService.approveMilestoneCompletion(
+        selectedMilestone.roadmap.id,
+        selectedMilestone.milestone.order,
+        trainerFeedback
+      );
+      await refreshRoadmaps();
+      setShowApprovalModal(false);
+      setSelectedMilestone(null);
+      setTrainerFeedback('');
+    } catch (error) {
+      console.error('Failed to approve milestone:', error);
+    } finally {
+      setIsApproving(false);
+    }
+  };
+
+  const handleRejectMilestone = async () => {
+    if (!selectedMilestone || !trainerFeedback.trim()) return;
+    
+    setIsApproving(true);
+    try {
+      // For rejection, we might need a different endpoint or update the milestone status back to active
+      // For now, let's use the same approval endpoint but with rejection feedback
+      await roadmapService.approveMilestoneCompletion(
+        selectedMilestone.roadmap.id,
+        selectedMilestone.milestone.order,
+        `REJECTED: ${trainerFeedback}`
+      );
+      await refreshRoadmaps();
+      setShowRejectionModal(false);
+      setSelectedMilestone(null);
+      setTrainerFeedback('');
+    } catch (error) {
+      console.error('Failed to reject milestone:', error);
+    } finally {
+      setIsApproving(false);
+    }
+  };
+
+  const openApprovalModal = (roadmap: Roadmap, milestone: Milestone) => {
+    setSelectedMilestone({ roadmap, milestone });
+    setShowApprovalModal(true);
+    setTrainerFeedback('');
+  };
+
+  const openRejectionModal = (roadmap: Roadmap, milestone: Milestone) => {
+    setSelectedMilestone({ roadmap, milestone });
+    setShowRejectionModal(true);
+    setTrainerFeedback('');
+  };
+
   const getStepStatusColor = (status: RoadmapStepStatus) => {
     switch (status) {
       case RoadmapStepStatus.COMPLETED:
         return 'bg-green-100 text-green-700 border-green-200';
       case RoadmapStepStatus.ACTIVE:
         return 'bg-blue-100 text-blue-700 border-blue-200';
+      case RoadmapStepStatus.PENDING_APPROVAL:
+        return 'bg-yellow-100 text-yellow-700 border-yellow-200';
       case RoadmapStepStatus.LOCKED:
         return 'bg-gray-100 text-gray-700 border-gray-200';
       default:
@@ -323,6 +388,22 @@ export default function TrainerRoadmapsPage() {
                               </div>
                               <span className="text-sm text-gray-700">{milestone.title}</span>
                               <span className="text-xs text-gray-500">{milestone.estimatedDurationDays} days</span>
+                              {milestone.status === RoadmapStepStatus.PENDING_APPROVAL && (
+                                <div className="flex gap-2 ml-auto">
+                                  <button
+                                    onClick={() => openApprovalModal(roadmap, milestone)}
+                                    className="px-2 py-1 bg-green-600 text-white text-xs rounded hover:bg-green-700 transition-colors"
+                                  >
+                                    Approve
+                                  </button>
+                                  <button
+                                    onClick={() => openRejectionModal(roadmap, milestone)}
+                                    className="px-2 py-1 bg-red-600 text-white text-xs rounded hover:bg-red-700 transition-colors"
+                                  >
+                                    Reject
+                                  </button>
+                                </div>
+                              )}
                             </div>
                           ))}
                           {roadmap.milestones.length > 3 && (
@@ -730,6 +811,107 @@ export default function TrainerRoadmapsPage() {
               </div>
             </div>
           )}
+
+        {/* Milestone Approval Modal */}
+        {showApprovalModal && selectedMilestone && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Approve Milestone Completion</h3>
+              
+              <div className="mb-4">
+                <p className="text-sm text-gray-600 mb-2">
+                  <strong>Milestone:</strong> {selectedMilestone.milestone.title}
+                </p>
+                <p className="text-sm text-gray-600 mb-2">
+                  <strong>Student:</strong> {getStudentName(selectedMilestone.roadmap.studentId)}
+                </p>
+                <p className="text-sm text-gray-600 mb-4">
+                  <strong>Duration:</strong> {selectedMilestone.milestone.estimatedDurationDays} days
+                </p>
+              </div>
+
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Trainer Feedback
+                </label>
+                <textarea
+                  value={trainerFeedback}
+                  onChange={(e) => setTrainerFeedback(e.target.value)}
+                  placeholder="Provide feedback on the student's work..."
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  rows={4}
+                />
+              </div>
+
+              <div className="flex gap-3">
+                <button
+                  onClick={() => setShowApprovalModal(false)}
+                  className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleApproveMilestone}
+                  disabled={!trainerFeedback.trim() || isApproving}
+                  className="flex-1 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isApproving ? 'Approving...' : 'Approve'}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Milestone Rejection Modal */}
+        {showRejectionModal && selectedMilestone && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Reject Milestone Completion</h3>
+              
+              <div className="mb-4">
+                <p className="text-sm text-gray-600 mb-2">
+                  <strong>Milestone:</strong> {selectedMilestone.milestone.title}
+                </p>
+                <p className="text-sm text-gray-600 mb-2">
+                  <strong>Student:</strong> {getStudentName(selectedMilestone.roadmap.studentId)}
+                </p>
+                <p className="text-sm text-gray-600 mb-4">
+                  <strong>Duration:</strong> {selectedMilestone.milestone.estimatedDurationDays} days
+                </p>
+              </div>
+
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Rejection Reason
+                </label>
+                <textarea
+                  value={trainerFeedback}
+                  onChange={(e) => setTrainerFeedback(e.target.value)}
+                  placeholder="Explain why the milestone completion is being rejected..."
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                  rows={4}
+                />
+              </div>
+
+              <div className="flex gap-3">
+                <button
+                  onClick={() => setShowRejectionModal(false)}
+                  className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleRejectMilestone}
+                  disabled={!trainerFeedback.trim() || isApproving}
+                  className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isApproving ? 'Rejecting...' : 'Reject'}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
         </main>
       </div>
     </div>
