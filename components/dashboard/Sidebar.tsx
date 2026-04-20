@@ -8,19 +8,13 @@ import { SidebarProps, SidebarItem } from '@/types';
 import { Logo } from '../ui/Logo';
 import { OnboardingChecklist } from '@/types';
 
-export default function Sidebar({ activeItem = 'Home', userType, onboardingChecklist }: SidebarProps) {
+export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps) {
   const [currentActive, setCurrentActive] = useState(activeItem);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isNewUser, setIsNewUser] = useState(false);
   const [showNewUserGuide, setShowNewUserGuide] = useState(false);
-  // Dev toggle for new user simulation (for development only)
-  const [devNewUserMode, setDevNewUserMode] = useState(false);
+  const { onboardingChecklist } = useAuth()
 
-  // Initialize dev mode from localStorage
-  useEffect(() => {
-    const savedDevMode = localStorage.getItem('devNewUserMode') === 'true';
-    setDevNewUserMode(savedDevMode);
-  }, []);
+
   const { navigate } = useNavigationWithLoading();
   const { user, logout } = useAuth();
 
@@ -69,19 +63,6 @@ export default function Sidebar({ activeItem = 'Home', userType, onboardingCheck
     ];
   };
 
-  // Check if user is new and what steps they've completed
-  useEffect(() => {
-    const newUserFlag = localStorage.getItem('isNewUser');
-    const hasCreatedRoadmap = localStorage.getItem('hasRoadmap');
-
-    if ((newUserFlag === 'true' || devNewUserMode) && currentUserType === 'student') {
-      setIsNewUser(true);
-      setShowNewUserGuide(!hasCreatedRoadmap);
-    } else {
-      setIsNewUser(false);
-      setShowNewUserGuide(false);
-    }
-  }, [currentUserType, devNewUserMode]);
 
   // Update current active when prop changes
   useEffect(() => {
@@ -333,20 +314,19 @@ export default function Sidebar({ activeItem = 'Home', userType, onboardingCheck
                   ${item.disabled
                     ? 'bg-gray-800/50 text-gray-500 cursor-not-allowed'
                     : currentActive === item.label
-                    ? 'bg-yellow-500/10 text-yellow-500 font-medium border-l-4 border-yellow-500'
-                    : 'text-gray-400 hover:bg-gray-800 hover:text-white'}
+                      ? 'bg-yellow-500/10 text-yellow-500 font-medium border-l-4 border-yellow-500'
+                      : 'text-gray-400 hover:bg-gray-800 hover:text-white'}
                 `}
                 title={item.disabled ? item.disabledReason : ''}
               >
                 {/* Assuming item.icon is a React component, we can clone it to add props */}
                 {item.icon && React.cloneElement(item.icon, {
-                  className: `w-5 h-5 ${
-                    item.disabled
-                      ? 'text-gray-500'
-                      : currentActive === item.label
+                  className: `w-5 h-5 ${item.disabled
+                    ? 'text-gray-500'
+                    : currentActive === item.label
                       ? 'text-yellow-500'
                       : 'group-hover:scale-110 transition-transform'
-                  }`
+                    }`
                 })}
                 <span className="flex-1">{item.label}</span>
                 {item.disabled && (
@@ -359,7 +339,7 @@ export default function Sidebar({ activeItem = 'Home', userType, onboardingCheck
                   </span>
                 )} */}
               </button>
-              
+
               {/* Tooltip for disabled items */}
               {item.disabled && (
                 <div className="absolute left-full ml-2 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50">
@@ -433,62 +413,7 @@ export default function Sidebar({ activeItem = 'Home', userType, onboardingCheck
             </div>
           </div>
         )}
-
-        {/* Dev Toggle & New User Guide */}
-        {currentUserType === 'student' && (
-          <div className="p-3 lg:p-4 border-t border-gray-800">
-            {/* Dev Toggle */}
-            <div className="mb-4">
-              <button
-                onClick={() => {
-                  const newDevMode = !devNewUserMode;
-                  setDevNewUserMode(newDevMode);
-
-                  // Store in localStorage
-                  localStorage.setItem('devNewUserMode', newDevMode.toString());
-
-                  // Dispatch event for student dashboard to listen
-                  window.dispatchEvent(new CustomEvent('devModeChanged', {
-                    detail: { isDevMode: newDevMode }
-                  }));
-
-                  if (newDevMode) {
-                    // Reset all progress when enabling dev mode
-                    localStorage.removeItem('availabilitySet');
-                    localStorage.removeItem('selectedField');
-                    localStorage.removeItem('paymentCompleted');
-                    localStorage.removeItem('hasRoadmap');
-                    localStorage.setItem('isNewUser', 'true');
-                  }
-                }}
-                className={`w-full px-3 py-2 rounded-lg text-xs font-medium transition-colors ${devNewUserMode
-                  ? 'bg-yellow-500 text-white'
-                  : 'bg-gray-800 text-gray-400 hover:text-white'
-                  }`}
-              >
-                DEV: {devNewUserMode ? 'New User Mode ON' : 'New User Mode OFF'}
-              </button>
-            </div>
-
-            {/* New User Guide */}
-            {showNewUserGuide && (
-              <div className="bg-gray-800 rounded-lg p-4">
-                <div className="flex items-center gap-2 mb-3">
-                  <AlertCircle className="w-4 h-4 text-yellow-500" />
-                  <span className="text-sm font-medium text-white">Finish Setting Your Account</span>
-                </div>
-                <p className="text-xs text-gray-400 mb-3">Complete your profile setup to start learning</p>
-                <button
-                  onClick={() => navigate('/post-signup/availability')}
-                  className="w-full bg-yellow-500 text-white px-3 py-2 rounded-lg text-xs font-medium hover:bg-yellow-700 transition-colors"
-                >
-                  Continue Setup
-                </button>
-              </div>
-            )}
-          </div>
-        )}
-
+        
         {/* User Profile */}
         <div className="p-3 lg:p-4 border-t border-gray-800">
           <div className="flex items-center gap-3">
