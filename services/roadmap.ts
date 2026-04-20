@@ -50,8 +50,12 @@ class RoadmapService {
     }
 
     async completeMilestone(roadmapId: string, milestoneOrder: number, projectData: any) {
-        const response = await apiClient.post<any>(`/api/roadmaps/${roadmapId}/milestones/${milestoneOrder}/complete`, projectData);
+        const response = await apiClient.post<any>(API_ENDPOINTS.MILESTONE_COMPLETE(roadmapId, milestoneOrder), projectData);
         return response.data;
+    }
+
+    async approveMilestoneCompletion(roadmapId: string, milestoneOrder: number, trainerFeedback: string) {
+        const response = await apiClient.post<any>(API_ENDPOINTS.MILESTONE_APPROVE(roadmapId, milestoneOrder), { trainerFeedback })
     }
 }
 

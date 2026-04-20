@@ -138,9 +138,7 @@ export default function StudentProfilePage() {
                             </>
                         ) : (
                             <>
-                                <SimpleStat icon={<Video className="w-5 h-5" />} label="Completed Milestones" value={completedMilestones} color="text-yellow-600" />
-                                <SimpleStat icon={<Users className="w-5 h-5" />} label="Progress" value={progressPercentage} color="text-yellow-600" />
-                                <SimpleStat icon={<Clock className="w-5 h-5" />} label="Total Milestones" value={totalMilestones} color="text-yellow-600" />
+                                <SimpleStat icon={<Video className="w-5 h-5" />} label="Total Milestones" value={totalMilestones} color="text-yellow-600" />
                                 <SimpleStat icon={<TrendingUp className="w-5 h-5" />} label="Engagement" value={`${profileData.engagementScore}%`} color="text-yellow-600" />
                             </>
                         )}

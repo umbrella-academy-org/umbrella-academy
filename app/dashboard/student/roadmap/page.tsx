@@ -147,25 +147,7 @@ export default function StudentRoadmapPage() {
                 </div>
               </div>
 
-              {/* Progress Overview */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="bg-white border border-gray-200 rounded-lg p-6">
-                  <h3 className="font-semibold text-gray-900 mb-2">Total Milestones</h3>
-                  <p className="text-2xl font-bold text-yellow-600">{activeRoadmap.milestones.length}</p>
-                  <p className="text-sm text-yellow-600">Learning phases</p>
-                </div>
-                <div className="bg-white border border-gray-200 rounded-lg p-6">
-                  <h3 className="font-semibold text-gray-900 mb-2">Completed Milestones</h3>
-                  <p className="text-2xl font-bold text-yellow-600">{activeRoadmap.milestones.filter(m => m.status === 'completed').length}/{activeRoadmap.milestones.length}</p>
-                  <p className="text-sm text-yellow-600">{Math.round((activeRoadmap.milestones.filter(m => m.status === 'completed').length / activeRoadmap.milestones.length) * 100)}% Complete</p>
-                </div>
-                <div className="bg-white border border-gray-200 rounded-lg p-6">
-                  <h3 className="font-semibold text-gray-900 mb-2">Next Session</h3>
-                  <p className="text-2xl font-bold text-yellow-600">{nextSessionDisplay}</p>
-                  {nextSessionTime && <p className="text-sm text-yellow-600">{nextSessionTime}</p>}
-                </div>
-              </div>
-
+              
               {/* Roadmap Milestones */}
               <div className="bg-white border border-gray-200 rounded-lg p-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Learning Milestones</h3>

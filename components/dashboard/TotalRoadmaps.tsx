@@ -18,16 +18,6 @@ export default function TotalRoadmaps({ roadmaps, userType }: TotalRoadmapsProps
   const activeRoadmaps = roadmaps.filter(r => r.status === 'active').length;
   const pendingRoadmaps = roadmaps.filter(r => r.status === 'pending-approval').length;
   
-  // Calculate overall progress based on milestones
-  const calculateRoadmapProgress = (roadmap: Roadmap) => {
-    if (!roadmap.milestones || roadmap.milestones.length === 0) return 0;
-    const completedMilestones = roadmap.milestones.filter(m => m.status === 'completed').length;
-    return Math.round((completedMilestones / roadmap.milestones.length) * 100);
-  };
-
-  const overallProgress = totalRoadmaps > 0 
-    ? Math.round(roadmaps.reduce((sum, r) => sum + calculateRoadmapProgress(r), 0) / totalRoadmaps)
-    : 0;
 
   // Get the most recent or active roadmap for display
   const featuredRoadmap = roadmaps.find(r => r.status === 'active') || roadmaps[0];
@@ -37,7 +27,6 @@ export default function TotalRoadmaps({ roadmaps, userType }: TotalRoadmapsProps
     title: featuredRoadmap.title,
     description: featuredRoadmap.title, // Using title as description since description field doesn't exist
     totalPhases: featuredRoadmap.milestones.length,
-    completedPhases: featuredRoadmap.milestones.filter(m => m.status === 'completed').length,
     estimatedDuration: `${featuredRoadmap.milestones.length} milestones`,
     studentsCount: 1 // Since we're now working with individual roadmaps, not grouped by template
   } : null;
@@ -138,7 +127,7 @@ export default function TotalRoadmaps({ roadmaps, userType }: TotalRoadmapsProps
                     <p className="text-sm font-semibold text-gray-900">
                       {userType === 'trainer' 
                         ? `${roadmapInfo.studentsCount}/${roadmapInfo.studentsCount + 2}` 
-                        : `${roadmapInfo.completedPhases}/${roadmapInfo.totalPhases}`
+                        : `${roadmapInfo.totalPhases}`
                       }
                     </p>
                   </div>
@@ -153,16 +142,8 @@ export default function TotalRoadmaps({ roadmaps, userType }: TotalRoadmapsProps
               </div>
             </div>
             
-            {/* Progress Section */}
+            {/* Action Section */}
             <div className="text-right shrink-0">
-              <div className={`text-2xl font-bold text-gray-900 mb-1 transition-all duration-300 ${
-                isHovered ? 'scale-110 text-gray-600' : ''
-              }`}>
-                {overallProgress}%
-              </div>
-              <p className="text-xs text-gray-500 mb-2 whitespace-nowrap">
-                {completedRoadmaps} of {totalRoadmaps} Roadmaps Completed
-              </p>
               <div className="flex gap-2">
                 <button className="px-3 py-1.5 border border-gray-300 text-gray-700 text-xs font-medium rounded-lg hover:bg-gray-50 transition-all duration-200 interactive-button">
                   View All
@@ -174,28 +155,6 @@ export default function TotalRoadmaps({ roadmaps, userType }: TotalRoadmapsProps
             </div>
           </div>
 
-          {/* Progress Bar */}
-          <div className="mt-4">
-            <div className="flex items-center justify-between text-xs text-gray-600 mb-2">
-              <span className="hover:text-gray-800 transition-colors">Overall Progress</span>
-              <ChevronRight className={`w-3 h-3 transition-transform duration-200 ${
-                isHovered ? 'translate-x-1' : ''
-              }`} />
-            </div>
-            <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
-              <div 
-                className="bg-linear-to-r from-gray-500 to-gray-600 h-2 rounded-full transition-all duration-1000 ease-out relative"
-                style={{ width: isHovered ? `${overallProgress}%` : `${Math.max(overallProgress - 10, 0)}%` }}
-              >
-                <div className="absolute inset-0 bg-white opacity-30 animate-shimmer"></div>
-              </div>
-            </div>
-            <div className="flex justify-between text-xs text-gray-400 mt-1">
-              <span>Started</span>
-              <span>In Progress</span>
-              <span>Complete</span>
-            </div>
-          </div>
 
           {/* Milestones */}
           <div className="mt-4 flex items-center gap-4 text-xs">

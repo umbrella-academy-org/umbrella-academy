@@ -53,15 +53,6 @@ export default function CourseCard({ activeRoadmap }: CourseCardProps) {
 
   const { roadmap } = activeRoadmap;
   
-  // Calculate progress based on milestone status
-  const calculateProgress = (roadmap: any) => {
-    if (!roadmap.milestones || roadmap.milestones.length === 0) return 0;
-    const completedMilestones = roadmap.milestones.filter((m: any) => m.status === 'completed').length;
-    return Math.round((completedMilestones / roadmap.milestones.length) * 100);
-  };
-  
-  const progress = calculateProgress(roadmap);
-  const completedPhases = roadmap.milestones?.filter((m: any) => m.status === 'completed').length || 0;
   const totalPhases = roadmap.milestones?.length || 0;
 
   return (
@@ -127,15 +118,8 @@ export default function CourseCard({ activeRoadmap }: CourseCardProps) {
               <p className="text-xs text-gray-600 mb-3 truncate">{roadmap.tags?.join(', ') || 'No tags'}</p>
             </div>
 
-            {/* Progress */}
+            {/* Action */}
             <div className="text-right shrink-0">
-              <div className={`text-lg sm:text-xl font-bold text-gray-900 mb-1 transition-all duration-300 ${isHovered ? 'scale-110 text-gray-600' : ''
-                }`}>
-                {Math.round(progress)}%
-              </div>
-              <p className="text-xs text-gray-500 mb-2 whitespace-nowrap">
-                {completedPhases} Out of {totalPhases} Phases
-              </p>
               <button
                 onClick={() => navigate('/post-signup/roadmap')}
                 className="px-3 py-1 bg-yellow-600 text-white text-xs font-medium rounded hover:bg-yellow-700 transition-all duration-200 interactive-button transform hover:scale-105 focus:ring-2 focus:ring-gray-300"
@@ -145,28 +129,7 @@ export default function CourseCard({ activeRoadmap }: CourseCardProps) {
             </div>
           </div>
 
-          {/* Progress Bar */}
-          <div className="mt-3">
-            <div className="flex items-center justify-between text-xs text-gray-600 mb-1">
-              <span className="hover:text-gray-800 transition-colors">Roadmap Progress</span>
-              <ChevronRight className={`w-3 h-3 transition-transform duration-200 ${isHovered ? 'translate-x-1' : ''
-                }`} />
-            </div>
-            <div className="w-full bg-gray-200 rounded-full h-1.5 overflow-hidden">
-              <div
-                className="bg-linear-to-r from-gray-500 to-gray-600 h-1.5 rounded-full transition-all duration-1000 ease-out relative"
-                style={{ width: `${progress}%` }}
-              >
-                <div className="absolute inset-0 bg-white opacity-30 animate-shimmer"></div>
-              </div>
-            </div>
-            <div className="flex justify-between text-xs text-gray-400 mt-1">
-              <span>Started</span>
-              <span>In Progress</span>
-              <span>Complete</span>
-            </div>
-          </div>
-        </div>
+                  </div>
       </div>
     </div>
   );

@@ -310,23 +310,7 @@ export default function TrainerRoadmapsPage() {
                         </div>
                       )}
 
-                      {/* Progress Overview */}
-                      <div className="mb-4">
-                        <div className="flex items-center justify-between text-sm text-gray-600 mb-2">
-                          <span>Progress</span>
-                          <span>
-                            {roadmap.milestones.filter(m => m.status === RoadmapStepStatus.COMPLETED).length} / {roadmap.milestones.length} completed
-                          </span>
-                        </div>
-                        <div className="w-full bg-gray-200 rounded-full h-2">
-                          <div
-                            className="bg-blue-600 h-2 rounded-full transition-all"
-                            style={{
-                              width: `${(roadmap.milestones.filter(m => m.status === RoadmapStepStatus.COMPLETED).length / roadmap.milestones.length) * 100}%`
-                            }}
-                          ></div>
-                        </div>
-                      </div>
+                     
 
                       {/* Milestones Preview */}
                       <div className="space-y-2">
