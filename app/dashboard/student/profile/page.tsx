@@ -25,21 +25,21 @@ export default function StudentProfilePage() {
     const roadmaps = getStudentRoadmaps();
     const activeRoadmap = roadmaps.find(r => r.status === 'active') ?? roadmaps[0] ?? null;
 
-    // Compute stats from active roadmap progress
-    const sessionsAttended = activeRoadmap?.roadmap.progress.completedSessions ?? 0;
-    const totalHours = activeRoadmap?.roadmap.progress.hoursCompleted ?? 0;
-    const attendanceRate = activeRoadmap && activeRoadmap.roadmap.progress.totalSessions > 0
-        ? `${Math.round((activeRoadmap.roadmap.progress.completedSessions / activeRoadmap.roadmap.progress.totalSessions) * 100)}%`
+    // Compute stats from active roadmap milestones
+    const completedMilestones = activeRoadmap?.milestones?.filter(m => m.status === 'completed').length ?? 0;
+    const totalMilestones = activeRoadmap?.milestones?.length ?? 0;
+    const progressPercentage = totalMilestones > 0
+        ? `${Math.round((completedMilestones / totalMilestones) * 100)}%`
         : '0%';
 
-    // Map roadmap phases to liveRoadmap display format
-    const liveRoadmap = activeRoadmap?.roadmap.phases.map(phase => ({
-        title: phase.title,
-        status: phase.status === 'completed' ? 'Completed'
-            : phase.status === 'active' ? 'In Progress'
+    // Map roadmap milestones to liveRoadmap display format
+    const liveRoadmap = activeRoadmap?.milestones?.map(milestone => ({
+        title: milestone.title,
+        status: milestone.status === 'completed' ? 'Completed'
+            : milestone.status === 'active' ? 'In Progress'
             : 'Upcoming',
-        date: phase.status === 'completed' && phase.sessions[0]?.completedAt
-            ? new Date(phase.sessions[0].completedAt).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
+        date: milestone.status === 'completed' && milestone.completedAt
+            ? new Date(milestone.completedAt).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
             : 'Upcoming',
     })) ?? [];
 
@@ -138,9 +138,9 @@ export default function StudentProfilePage() {
                             </>
                         ) : (
                             <>
-                                <SimpleStat icon={<Video className="w-5 h-5" />} label="Live Sessions" value={sessionsAttended} color="text-yellow-600" />
-                                <SimpleStat icon={<Users className="w-5 h-5" />} label="Attendance" value={attendanceRate} color="text-yellow-600" />
-                                <SimpleStat icon={<Clock className="w-5 h-5" />} label="Live Hours" value={totalHours} color="text-yellow-600" />
+                                <SimpleStat icon={<Video className="w-5 h-5" />} label="Completed Milestones" value={completedMilestones} color="text-yellow-600" />
+                                <SimpleStat icon={<Users className="w-5 h-5" />} label="Progress" value={progressPercentage} color="text-yellow-600" />
+                                <SimpleStat icon={<Clock className="w-5 h-5" />} label="Total Milestones" value={totalMilestones} color="text-yellow-600" />
                                 <SimpleStat icon={<TrendingUp className="w-5 h-5" />} label="Engagement" value={`${profileData.engagementScore}%`} color="text-yellow-600" />
                             </>
                         )}

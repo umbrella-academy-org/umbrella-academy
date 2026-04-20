@@ -5,18 +5,17 @@ import { useState } from 'react';
 import { Roadmap } from '@/types/roadmap';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
 
-// Minimal interface for CourseCard to avoid type conflicts
+// Minimal interface for CourseCard to match Roadmap type
 interface CourseCardRoadmap {
   roadmap: {
     title: string;
-    description: string;
-    progress: {
-      overallProgress: number;
-      completedPhases: number;
-      totalPhases: number;
-    };
-    difficulty: 'beginner' | 'intermediate' | 'advanced';
-    tags: string[];
+    description?: string;
+    milestones?: Array<{
+      title: string;
+      status: 'locked' | 'active' | 'completed';
+    }>;
+    difficulty?: 'beginner' | 'intermediate' | 'advanced';
+    tags?: string[];
   };
   studentId: string;
   status: string;
@@ -53,9 +52,17 @@ export default function CourseCard({ activeRoadmap }: CourseCardProps) {
   }
 
   const { roadmap } = activeRoadmap;
-  const progress = roadmap.progress.overallProgress;
-  const completedPhases = roadmap.progress.completedPhases;
-  const totalPhases = roadmap.progress.totalPhases;
+  
+  // Calculate progress based on milestone status
+  const calculateProgress = (roadmap: any) => {
+    if (!roadmap.milestones || roadmap.milestones.length === 0) return 0;
+    const completedMilestones = roadmap.milestones.filter((m: any) => m.status === 'completed').length;
+    return Math.round((completedMilestones / roadmap.milestones.length) * 100);
+  };
+  
+  const progress = calculateProgress(roadmap);
+  const completedPhases = roadmap.milestones?.filter((m: any) => m.status === 'completed').length || 0;
+  const totalPhases = roadmap.milestones?.length || 0;
 
   return (
     <div
@@ -117,7 +124,7 @@ export default function CourseCard({ activeRoadmap }: CourseCardProps) {
                   <span className="text-xs text-gray-500 ml-1">{roadmap.difficulty}</span>
                 </div>
               </div>
-              <p className="text-xs text-gray-600 mb-3 truncate">{roadmap.tags.join(', ')}</p>
+              <p className="text-xs text-gray-600 mb-3 truncate">{roadmap.tags?.join(', ') || 'No tags'}</p>
             </div>
 
             {/* Progress */}
