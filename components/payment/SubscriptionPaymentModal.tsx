@@ -47,7 +47,7 @@ export default function SubscriptionPaymentModal({ onClose, onSuccess }: Subscri
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 h-screen overflow-auto">
       <div className="bg-white rounded-lg max-w-md w-full mx-4">
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-200">
@@ -120,26 +120,6 @@ export default function SubscriptionPaymentModal({ onClose, onSuccess }: Subscri
                     </div>
                   </div>
                 </div>
-              </div>
-
-              {/* Features */}
-              <div className="mb-6">
-                <h4 className="font-medium text-gray-900 mb-3">What's included:</h4>
-                <ul className="space-y-2">
-                  {[
-                    'Personal mentor guidance',
-                    'Progress tracking',
-                    'Certificate generation',
-                    'Portfolio building',
-                    'Chat with mentors',
-                    'Session scheduling'
-                  ].map((feature, index) => (
-                    <li key={index} className="flex items-center gap-2 text-sm text-gray-600">
-                      <CheckCircle className="w-4 h-4 text-green-500" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-4">

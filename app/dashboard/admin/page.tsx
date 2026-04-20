@@ -27,7 +27,7 @@ export default function UmbrellaAdminDashboard() {
       };
       navigate(dashboardRoutes[user.role] || '/');
     }
-  }, [authLoading, isAuthenticated, user, navigate]);
+  }, [authLoading, isAuthenticated, user]);
 
   const isLoading = authLoading || usersLoading || financialLoading;
 

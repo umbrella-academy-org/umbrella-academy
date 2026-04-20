@@ -38,9 +38,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const checkSession = async () => {
       const user = localStorage.getItem('user');
       if (user) {
-        setUser(JSON.parse(user));
+        const parsedUser = JSON.parse(user);
+        setUser(parsedUser);
         setIsAuthenticated(true);
-        if (JSON.parse(user).role === UserRole.STUDENT) {
+        if (parsedUser.role === UserRole.STUDENT) {
           const response = await authService.getOnboardingChecklist();
           if (response.success && response.data) {
             setOnboardingChecklist(response.data);
@@ -51,6 +52,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
     checkSession();
   }, []);
+
+  // Separate effect to handle user changes (like login/logout)
+  useEffect(() => {
+    if (user) {
+      // User changed - handle any side effects here
+      if (user.role === UserRole.STUDENT && !onboardingChecklist) {
+        authService.getOnboardingChecklist().then(response => {
+          if (response.success && response.data) {
+            setOnboardingChecklist(response.data);
+          }
+        });
+      }
+    }
+  }, [user?._id]); // Only re-run when user ID changes, not the entire object
 
 
 

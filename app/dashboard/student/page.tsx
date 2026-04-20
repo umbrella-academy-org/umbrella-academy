@@ -29,7 +29,7 @@ export default function StudentDashboard() {
     if (!authLoading && user && user.role !== 'student') {
       navigate('/dashboard/trainer');
     }
-  }, [authLoading, isAuthenticated, user, navigate]);
+  }, [authLoading, isAuthenticated, user]);
 
   // Show loading while checking auth
   if (authLoading) {

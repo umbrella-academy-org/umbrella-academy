@@ -19,7 +19,7 @@ export default function SignupPage() {
 
           {/* Title */}
           <h1 className="text-3xl font-semibold text-gray-900 mb-2">
-            Join Umbrella Academy
+            Join Dreamizer
           </h1>
           <p className="text-gray-500 mb-8">
             Choose your role to get started.
@@ -30,7 +30,7 @@ export default function SignupPage() {
             <button
               onClick={() => {
                 localStorage.setItem('userType', 'student')
-                router.push('/auth/student/profile')
+                router.push('/auth/student/register')
               }}
               className="w-full p-6 border-2 border-gray-200 rounded-lg hover:border-yellow-600 hover:bg-yellow-50 transition-colors text-left"
             >
@@ -50,7 +50,7 @@ export default function SignupPage() {
             <button
               onClick={() => {
                 localStorage.setItem('userType', 'trainer')
-                router.push('/auth/trainer/signup')
+                router.push('/auth/trainer/register')
               }}
               className="w-full p-6 border-2 border-gray-200 rounded-lg hover:border-yellow-600 hover:bg-yellow-50 transition-colors text-left"
             >

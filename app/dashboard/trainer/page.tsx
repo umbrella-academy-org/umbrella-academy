@@ -37,7 +37,7 @@ export default function TrainerDashboard() {
       };
       navigate(dashboardRoutes[user.role] || '/');
     }
-  }, [authLoading, isAuthenticated, user, navigate]);
+  }, [authLoading, isAuthenticated, user]);
 
   // Show loading while checking auth or loading data
   if (authLoading || roadmapsLoading || usersLoading) {

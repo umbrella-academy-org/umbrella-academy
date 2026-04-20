@@ -87,7 +87,7 @@ export default function VerifyPage() {
 
   const handleResend = async () => {
     const email = typeof window !== 'undefined'
-      ? (localStorage.getItem('signupEmail') || localStorage.getItem('resetEmail') || '')
+      ? (localStorage.getItem('baseEmail') || localStorage.getItem('resetEmail') || '')
       : '';
     try {
       await authService.resendOtp(email);
@@ -133,7 +133,7 @@ export default function VerifyPage() {
             </p>
             <p className="text-gray-600 text-sm mb-8">
               ({typeof window !== 'undefined' ?
-                localStorage.getItem('userEmail') || 'johndoe@example.com'
+                localStorage.getItem('baseEmail') || 'johndoe@example.com'
                 : 'johndoe@example.com'})
             </p>
 

@@ -40,7 +40,7 @@ export default function StudentRoadmapPage() {
       };
       navigate(dashboardRoutes[user.role] || '/');
     }
-  }, [authLoading, isAuthenticated, user, navigate]);
+  }, [authLoading, isAuthenticated, user]);
 
   if (authLoading || roadmapsLoading) {
     return (

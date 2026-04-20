@@ -27,7 +27,7 @@ export default function LoginPage() {
       };
       navigate(dashboardRoutes[user.role]);
     }
-  }, [isAuthenticated, user, navigate]);
+  }, [isAuthenticated, user]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();

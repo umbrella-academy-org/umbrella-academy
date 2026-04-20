@@ -36,7 +36,7 @@ export default function Home() {
         navigate(dashboardRoutes[user.role]);
       }
     }
-  }, [isAuthenticated, user, navigate]);
+  }, [isAuthenticated, user]);
 
   if (isLoading) {
     return (
