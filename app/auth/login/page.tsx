@@ -22,12 +22,11 @@ export default function LoginPage() {
       const dashboardRoutes: Record<string, string> = {
         'student': '/dashboard/student',
         'trainer': '/dashboard/trainer',
-        'company-admin': '/dashboard/field-admin',
-        'umbrella-admin': '/dashboard/umbrella-admin'
+        'admin': '/dashboard/admin',
       };
       navigate(dashboardRoutes[user.role]);
     }
-  }, [isAuthenticated, user]);
+  }, [isAuthenticated, user,navigate]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();

@@ -6,7 +6,6 @@ import { useNavigationWithLoading } from '@/lib/utils/navigation';
 import { useAuth } from '@/contexts';
 import { SidebarProps, SidebarItem } from '@/types';
 import { Logo } from '../ui/Logo';
-import { OnboardingChecklist } from '@/types';
 
 export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps) {
   const [currentActive, setCurrentActive] = useState(activeItem);
@@ -23,45 +22,6 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
   const userName = user?.firstName && user?.lastName ? `${user.firstName} ${user.lastName}` : 'User';
   const userEmail = user?.email || 'user@dreamize.rw';
   const userInitials = userName.split(' ').map((n: string) => n[0]).join('').toUpperCase();
-
-  // Get completion status for new user steps
-  const getNewUserSteps = () => {
-    const hasAvailability = localStorage.getItem('availabilitySet');
-    const hasSelectedField = localStorage.getItem('selectedField');
-    const hasCompletedPayment = localStorage.getItem('paymentCompleted');
-    const hasCreatedRoadmap = localStorage.getItem('hasRoadmap');
-
-    return [
-      {
-        id: 'availability',
-        label: 'Set Availability',
-        completed: !!hasAvailability,
-        href: '/post-signup/availability',
-        description: 'Choose your learning hours'
-      },
-      {
-        id: 'field',
-        label: 'Choose Your Field',
-        completed: !!hasSelectedField,
-        href: '/post-signup/choose-field',
-        description: 'Select your industry focus'
-      },
-      {
-        id: 'payment',
-        label: 'Complete Payment',
-        completed: !!hasCompletedPayment,
-        href: '/post-signup/payment',
-        description: 'Pay for field access'
-      },
-      {
-        id: 'roadmap',
-        label: 'Create Learning Roadmap',
-        completed: !!hasCreatedRoadmap,
-        href: '/post-signup/roadmap',
-        description: 'Plan your learning journey'
-      }
-    ];
-  };
 
 
   // Update current active when prop changes

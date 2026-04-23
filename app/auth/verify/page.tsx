@@ -70,24 +70,30 @@ export default function VerifyPage() {
       : '';
 
     try {
-      await authService.verifyOtp(email, otpValue);
+      const response = await authService.verifyOtp(email, otpValue);
+      if (!response.success) {
+        setError(response.message || 'Verification failed. Please try again.');
+        return;
+      }
+
+      // Check if this is a password reset flow
+      const authFlow = typeof window !== 'undefined' ? localStorage.getItem('authFlow') : null;
+      if (authFlow === 'reset-password') {
+        router.push('/auth/reset-password');
+      } else {
+        router.push('/auth/login');
+      }
     } catch {
       setError('Invalid or expired code. Please try again.');
       return;
     }
 
-    // Check if this is a password reset flow
-    const authFlow = typeof window !== 'undefined' ? localStorage.getItem('authFlow') : null;
-    if (authFlow === 'reset-password') {
-      router.push('/auth/reset-password');
-    } else {
-      router.push('/auth/login');
-    }
+
   };
 
   const handleResend = async () => {
     const email = typeof window !== 'undefined'
-      ? (localStorage.getItem('baseEmail') || localStorage.getItem('resetEmail') || '')
+      ? (localStorage.getItem('userEmail') || '')
       : '';
     try {
       await authService.resendOtp(email);
@@ -133,7 +139,7 @@ export default function VerifyPage() {
             </p>
             <p className="text-gray-600 text-sm mb-8">
               ({typeof window !== 'undefined' ?
-                localStorage.getItem('baseEmail') || 'johndoe@example.com'
+                localStorage.getItem('userEmail') || 'johndoe@example.com'
                 : 'johndoe@example.com'})
             </p>
 

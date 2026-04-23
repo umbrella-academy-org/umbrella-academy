@@ -54,7 +54,7 @@ class AuthService {
     } catch {
       // ignore
     } finally {
-      localStorage.removeItem('auth_token');
+      localStorage.clear()
     }
   }
 
