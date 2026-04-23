@@ -12,11 +12,7 @@ export enum GuardianInviteState {
   DECLINED = 'declined'
 }
 
-export interface Availability {
-  weeklyAvailableHours: number;
-  preferredTimeSlots: string[];
-  preferredDays: string[];
-}
+
 
 export interface OnboardingChecklist {
   accountCreated: boolean; 
