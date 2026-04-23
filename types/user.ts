@@ -79,7 +79,7 @@ export interface Trainer extends BaseUser {
 }
 
 
-export interface StudentRegister extends BaseUser {
+export interface StudentRegister extends Partial<BaseUser> {
     guardianName: string;
     guardianEmail: string;
     guardianPhoneNumber: string;

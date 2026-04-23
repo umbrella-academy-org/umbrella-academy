@@ -82,11 +82,11 @@ export default function StudentDetailsPage() {
     try {
       // Get base registration data from localStorage
       const baseData = {
-        phoneNumber: localStorage.getItem('basePhoneNumber') || '',
-        firstName: localStorage.getItem('baseFirstName') || '',
-        lastName: localStorage.getItem('baseLastName') || '',
-        email: localStorage.getItem('baseEmail') || '',
-        password: localStorage.getItem('basePassword') || ''
+        phoneNumber: localStorage.getItem('userPhoneNumber') || '',
+        firstName: localStorage.getItem('userFirstName') || '',
+        lastName: localStorage.getItem('userLastName') || '',
+        email: localStorage.getItem('userEmail') || '',
+        password: localStorage.getItem('userPassword') || ''
       };
 
       // Create student data object matching the StudentRegister interface

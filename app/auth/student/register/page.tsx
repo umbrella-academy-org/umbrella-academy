@@ -57,11 +57,11 @@ export default function StudentRegisterPage() {
 
     // Store base registration data
     localStorage.setItem('userType', 'student');
-    localStorage.setItem('baseFirstName', formData.firstName);
-    localStorage.setItem('baseLastName', formData.lastName);
-    localStorage.setItem('baseEmail', formData.email);
-    localStorage.setItem('basePassword', formData.password);
-    localStorage.setItem('basePhoneNumber', formData.phoneNumber);
+    localStorage.setItem('userFirstName', formData.firstName);
+    localStorage.setItem('userLastName', formData.lastName);
+    localStorage.setItem('userEmail', formData.email);
+    localStorage.setItem('userPassword', formData.password);
+    localStorage.setItem('userPhoneNumber', formData.phoneNumber);
 
     router.push('/auth/student/details');
   };

@@ -140,7 +140,7 @@ export default function TrainerDetailsPage() {
       };
 
       await registerTrainer(trainerData);
-      router.push('/auth/verify');
+    
     } catch (error) {
       console.error('Registration failed:', error);
     } finally {

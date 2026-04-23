@@ -98,7 +98,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setIsLoading(true);
     try {
       const response = await authService.registerStudent(data);
-      if (response.success && response.data) { setUser(response.data.user); }
+      if (response.success && response.data) {
+        setUser(response.data.user);
+        router.push("/auth/verify")
+      }
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Registration failed. Please try again.');
     } finally {
@@ -110,7 +113,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setIsLoading(true);
     try {
       const response = await authService.registerTrainer(data);
-      if (response.success && response.data) { setUser(response.data.user); }
+      if (response.success && response.data) {
+        setUser(response.data.user);
+        router.push("/auth/verify")
+      }
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Registration failed. Please try again.');
     } finally {

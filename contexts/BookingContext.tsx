@@ -3,6 +3,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { Booking, TrainerApprovalRequest } from "@/types/booking";
 import { bookingService } from "@/services/booking";
+import { useAuth } from "./AuthContext";
 
 interface BookingContextType {
     trainerPendingBookings: Booking[];
@@ -23,25 +24,37 @@ export const BookingProvider = ({ children }: { children: React.ReactNode }) => 
     const [trainerPendingBookings, setTrainerPendingBookings] = useState<Booking[]>([]);
     const [trainerAllBookings, setTrainerAllBookings] = useState<Booking[]>([]);
     const [studentBookings, setStudentBookings] = useState<Booking[]>([]);
+    const { user } = useAuth()
 
-    const fetchBookings = async () => {
+    const fetchStudentBookings = async () => {
         try {
             setLoading(true);
             setError(null);
-            const [pendingResponse, allResponse, studentResponse] = await Promise.all([
+            const response = await bookingService.getStudentBookings();
+            if (response.data) {
+                setStudentBookings(response.data);
+            }
+        } catch (err) {
+            setError(err instanceof Error ? err.message : 'Failed to fetch student bookings');
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    const fetchTrainerBookings = async () => {
+        try {
+            setLoading(true);
+            setError(null);
+            const [pendingResponse, allResponse] = await Promise.all([
                 bookingService.getTrainerPendingBookings(),
                 bookingService.getTrainerAllBookings(),
-                bookingService.getStudentBookings()
             ]);
-            
+
             if (pendingResponse.data) {
                 setTrainerPendingBookings(pendingResponse.data);
             }
             if (allResponse.data) {
                 setTrainerAllBookings(allResponse.data);
-            }
-            if (studentResponse.data) {
-                setStudentBookings(studentResponse.data);
             }
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Failed to fetch bookings');
@@ -51,8 +64,13 @@ export const BookingProvider = ({ children }: { children: React.ReactNode }) => 
     };
 
     useEffect(() => {
-        fetchBookings();
-    }, []);
+        if (user?.role === 'student') {
+            fetchStudentBookings();
+        } else if (user?.role === 'trainer') {
+            fetchTrainerBookings();
+        }
+  
+    }, [user?._id]);
 
     const approveBooking = async (bookingId: string, approvalData: TrainerApprovalRequest) => {
         try {
@@ -79,7 +97,7 @@ export const BookingProvider = ({ children }: { children: React.ReactNode }) => 
     };
 
     return (
-        <BookingContext.Provider value={{ 
+        <BookingContext.Provider value={{
             trainerPendingBookings,
             trainerAllBookings,
             studentBookings,
@@ -88,7 +106,7 @@ export const BookingProvider = ({ children }: { children: React.ReactNode }) => 
             approveBooking,
             rejectBooking,
             refreshBookings
-         }}>
+        }}>
             {children}
         </BookingContext.Provider>
     );

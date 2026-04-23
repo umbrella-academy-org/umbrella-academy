@@ -217,21 +217,21 @@ export default function StudentDashboard() {
       {showOrientationPayment && (
         <OrientationPaymentModal
           onClose={() => setShowOrientationPayment(false)}
-          onSuccess={() => {}}
+          onSuccess={() => setShowOrientationPayment(false)}
         />
       )}
 
       {showSubscriptionPayment && (
         <SubscriptionPaymentModal
           onClose={() => setShowSubscriptionPayment(false)}
-          onSuccess={() => {}}
+          onSuccess={() => setShowSubscriptionPayment(false)}
         />
       )}
 
       {showBookingCalendar && (
         <BookingCalendar
           onClose={() => setShowBookingCalendar(false)}
-          onSuccess={() => {}}
+          onSuccess={() => setShowBookingCalendar(false)}
         />
       )}
     </div>
