@@ -944,7 +944,7 @@ export default function TrainerRoadmapsPage() {
         {/* Milestone Rejection Modal */}
         {showRejectionModal && selectedMilestone && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+            <div className="bg-white rounded-lg p-6 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Reject Milestone Completion</h3>
               
               <div className="mb-4">
@@ -958,6 +958,66 @@ export default function TrainerRoadmapsPage() {
                   <strong>Duration:</strong> {selectedMilestone.milestone.estimatedDurationDays} days
                 </p>
               </div>
+
+              {/* Submitted Project */}
+              {selectedMilestone.milestone.submittedProjectId && (
+                <div className="mb-6">
+                  <h4 className="text-md font-medium text-gray-900 mb-3">Submitted Project</h4>
+                  {loadingProject ? (
+                    <div className="text-center py-4">
+                      <div className="w-6 h-6 border-2 border-red-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
+                      <p className="text-sm text-gray-500 mt-2">Loading project...</p>
+                    </div>
+                  ) : submittedProject ? (
+                    <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                          <p className="text-sm font-medium text-gray-700">Title</p>
+                          <p className="text-sm text-gray-600">{submittedProject.title}</p>
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium text-gray-700">Category</p>
+                          <p className="text-sm text-gray-600">{submittedProject.category}</p>
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium text-gray-700">Tools Used</p>
+                          <p className="text-sm text-gray-600">{submittedProject.toolsUsed.join(', ')}</p>
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium text-gray-700">Student Role</p>
+                          <p className="text-sm text-gray-600">{submittedProject.studentRole}</p>
+                        </div>
+                      </div>
+                      <div className="mt-4">
+                        <p className="text-sm font-medium text-gray-700">Description</p>
+                        <p className="text-sm text-gray-600">{submittedProject.description}</p>
+                      </div>
+                      {submittedProject.evidence.demoLink && (
+                        <div className="mt-4">
+                          <p className="text-sm font-medium text-gray-700">Demo Link</p>
+                          <a href={submittedProject.evidence.demoLink} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 hover:underline">
+                            {submittedProject.evidence.demoLink}
+                          </a>
+                        </div>
+                      )}
+                      {submittedProject.attachments.images.length > 0 && (
+                        <div className="mt-4">
+                          <p className="text-sm font-medium text-gray-700">Images</p>
+                          <div className="flex gap-2 mt-2">
+                            {submittedProject.attachments.images.map((image, index) => (
+                              <img key={index} src={image} alt={`Project image ${index + 1}`} className="w-16 h-16 object-cover rounded" />
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <div className="text-center py-4 text-gray-500">
+                      <p>Failed to load submitted project.</p>
+                    </div>
+                  )}
+                </div>
+              )}
 
               <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
