@@ -37,7 +37,6 @@ export default function BookingCalendar({ onClose, onSuccess }: BookingCalendarP
   const [selectedTime, setSelectedTime] = useState<string>('');
   const [learningGoals, setLearningGoals] = useState('');
   const [bookingStep, setBookingStep] = useState<'select' | 'confirm' | 'submitting' | 'success'>('select');
-  const [currentTrainerIndex, setCurrentTrainerIndex] = useState(0);
 
   // Generate available dates for the next 7 days
   const availableDates = Array.from({ length: 7 }, (_, i) => {
@@ -153,100 +152,94 @@ export default function BookingCalendar({ onClose, onSuccess }: BookingCalendarP
         <div className="p-6">
           {bookingStep === 'select' && (
             <div className="space-y-6">
-              {/* Step 1: Select Mentor - Show one at a time */}
+              {/* Step 1: Select Mentor */}
               <div>
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="font-medium text-gray-900">Choose Your Mentor</h3>
-                  <div className="flex items-center gap-2 text-sm text-gray-500">
-                    <span>{currentTrainerIndex + 1} of {trainers.length}</span>
-                    <div className="flex gap-2">
-                      <button
-                        onClick={() => setCurrentTrainerIndex(Math.max(0, currentTrainerIndex - 1))}
-                        disabled={currentTrainerIndex === 0}
-                        className="px-3 py-1 border border-gray-300 rounded hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
-                      >
-                        Previous
-                      </button>
-                      <button
-                        onClick={() => setCurrentTrainerIndex(Math.min(trainers.length - 1, currentTrainerIndex + 1))}
-                        disabled={currentTrainerIndex === trainers.length - 1}
-                        className="px-3 py-1 border border-gray-300 rounded hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
-                      >
-                        Next
-                      </button>
-                    </div>
+                <h3 className="font-medium text-gray-900 mb-4">Choose Your Mentor</h3>
+                {trainers.length === 0 ? (
+                  <div className="text-center py-8">
+                    <p className="text-gray-500">No available trainers at this time. Booking cannot continue.</p>
                   </div>
-                </div>
-                <div className="space-y-3">
-                  <div>
-                    <button
-                      key={trainers[currentTrainerIndex]._id}
-                      onClick={() => setSelectedTrainer(trainers[currentTrainerIndex])}
-                      className={`w-full p-4 border rounded-lg text-left transition-colors ${selectedTrainer?._id === trainers[currentTrainerIndex]._id
-                        ? 'border-blue-500 bg-blue-50'
-                        : 'border-gray-200 hover:border-gray-300'
+                ) : (
+                  <div className="space-y-3 max-h-96 overflow-y-auto">
+                    {trainers.map((trainer) => (
+                      <div
+                        key={trainer._id}
+                        className={`p-4 border rounded-lg cursor-pointer transition-colors ${
+                          selectedTrainer?._id === trainer._id
+                            ? 'border-blue-500 bg-blue-50'
+                            : 'border-gray-200 hover:border-gray-300'
                         }`}
-                    >
-                      <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center">
-                          <User className="w-6 h-6 text-gray-400" />
+                        onClick={() => setSelectedTrainer(trainer)}
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center">
+                            <User className="w-6 h-6 text-gray-400" />
+                          </div>
+                          <div className="flex-1">
+                            <h4 className="font-medium text-gray-900">{trainer.firstName} {trainer.lastName}</h4>
+                            <p className="text-sm text-gray-500">{trainer.experience.yearsOfExperience} years experience</p>
+                            <p className="text-sm text-gray-500">Specializations: {trainer.experience.specializations.join(', ')}</p>
+                            <p className="text-sm text-gray-500">Skills: {trainer.skills.join(', ')}</p>
+                          </div>
+                          {selectedTrainer?._id === trainer._id && (
+                            <CheckCircle className="w-5 h-5 text-blue-600" />
+                          )}
                         </div>
-                        <div className="flex-1">
-                          <h4 className="font-medium text-gray-900">{trainers[currentTrainerIndex].firstName} {trainers[currentTrainerIndex].lastName}</h4>
-                          <p className="text-sm text-gray-500">{trainers[currentTrainerIndex].experience.yearsOfExperience} years experience</p>
-                          <p className="text-sm text-gray-500">{trainers[currentTrainerIndex].experience.specializations.join(', ')}</p>
-                        </div>
-                        {selectedTrainer?._id === trainers[currentTrainerIndex]._id && (
-                          <CheckCircle className="w-5 h-5 text-blue-600" />
-                        )}
                       </div>
-                    </button>
+                    ))}
                   </div>
-                </div>
+                )}
               </div>
 
               {/* Step 2: Select Date - Use date picker */}
-              <div>
-                <h3 className="font-medium text-gray-900 mb-3">Select Date</h3>
-                <input
-                  type="date"
-                  value={selectedDate}
-                  onChange={(e) => setSelectedDate(e.target.value)}
-                  min={new Date().toISOString().split('T')[0]}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-                {selectedDate && (
-                  <p className="text-sm text-green-600 mt-2">Date selected: {selectedDate}</p>
-                )}
-              </div>
+              {selectedTrainer && (
+                <div>
+                  <h3 className="font-medium text-gray-900 mb-3">Select Date</h3>
+                  <input
+                    type="date"
+                    value={selectedDate}
+                    onChange={(e) => setSelectedDate(e.target.value)}
+                    min={new Date().toISOString().split('T')[0]}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                  {selectedDate && (
+                    <p className="text-sm text-green-600 mt-2">Date selected: {selectedDate}</p>
+                  )}
+                </div>
+              )}
 
               {/* Step 3: Select Time - Use time picker */}
-              <div>
-                <h3 className="font-medium text-gray-900 mb-3">Select Time</h3>
-                <input
-                  type="time"
-                  value={selectedTime}
-                  onChange={(e) => setSelectedTime(e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-                {selectedTime && (
-                  <p className="text-sm text-green-600 mt-2">Time selected: {selectedTime}</p>
-                )}
-              </div>
+              {selectedTrainer && selectedDate && (
+                <div>
+                  <h3 className="font-medium text-gray-900 mb-3">Select Time</h3>
+                  <input
+                    type="time"
+                    value={selectedTime}
+                    onChange={(e) => setSelectedTime(e.target.value)}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                  {selectedTime && (
+                    <p className="text-sm text-green-600 mt-2">Time selected: {selectedTime}</p>
+                  )}
+                </div>
+              )}
+
               {/* Step 4: Learning Goals */}
-              <div>
-                <h3 className="font-medium text-gray-900 mb-3">Your Learning Goals</h3>
-                <textarea
-                  value={learningGoals}
-                  onChange={(e) => setLearningGoals(e.target.value)}
-                  placeholder="Tell your mentor what you want to learn and achieve..."
-                  rows={4}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-                <p className="text-sm text-gray-500 mt-1">
-                  This helps your mentor prepare for your session
-                </p>
-              </div>
+              {selectedTrainer && selectedDate && selectedTime && (
+                <div>
+                  <h3 className="font-medium text-gray-900 mb-3">Your Learning Goals</h3>
+                  <textarea
+                    value={learningGoals}
+                    onChange={(e) => setLearningGoals(e.target.value)}
+                    placeholder="Tell your mentor what you want to learn and achieve..."
+                    rows={4}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                  <p className="text-sm text-gray-500 mt-1">
+                    This helps your mentor prepare for your session
+                  </p>
+                </div>
+              )}
 
               {/* Action Buttons */}
               <div className="flex gap-3">
