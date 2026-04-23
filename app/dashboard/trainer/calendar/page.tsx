@@ -18,7 +18,7 @@ export default function TrainerRoadmapsPage() {
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [selectedRoadmap, setSelectedRoadmap] = useState<Roadmap | null>(null);
   const [viewMode, setViewMode] = useState<'list' | 'create' | 'edit'>('list');
-  
+
   // Milestone approval state
   const [selectedMilestone, setSelectedMilestone] = useState<{ roadmap: Roadmap; milestone: Milestone } | null>(null);
   const [showApprovalModal, setShowApprovalModal] = useState(false);
@@ -124,7 +124,7 @@ export default function TrainerRoadmapsPage() {
 
   const handleApproveMilestone = async () => {
     if (!selectedMilestone || !trainerFeedback.trim()) return;
-    
+
     setIsApproving(true);
     try {
       await roadmapService.approveMilestoneCompletion(
@@ -146,7 +146,7 @@ export default function TrainerRoadmapsPage() {
 
   const handleRejectMilestone = async () => {
     if (!selectedMilestone || !trainerFeedback.trim()) return;
-    
+
     setIsApproving(true);
     try {
       // For rejection, we might need a different endpoint or update the milestone status back to active
@@ -173,12 +173,12 @@ export default function TrainerRoadmapsPage() {
     setShowApprovalModal(true);
     setTrainerFeedback('');
     setSubmittedProject(null);
-    
-    if (milestone.submittedProjectId) {
+
+    if (milestone.submittedProjectIds) {
       setLoadingProject(true);
       try {
-        const response = await projectService.getProjectData(milestone.submittedProjectId);
-        setSubmittedProject(response.data);
+        const response = await projectService.getProjectData(milestone.submittedProjectIds[0]);
+        setSubmittedProject(response.data ?? null);
       } catch (error) {
         console.error('Failed to fetch submitted project:', error);
       } finally {
@@ -394,7 +394,7 @@ export default function TrainerRoadmapsPage() {
                         </div>
                       )}
 
-                     
+
 
                       {/* Milestones Preview */}
                       <div className="space-y-2">
@@ -831,225 +831,225 @@ export default function TrainerRoadmapsPage() {
             </div>
           )}
 
-        {/* Milestone Approval Modal */}
-        {showApprovalModal && selectedMilestone && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white rounded-lg p-6 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Approve Milestone Completion</h3>
-              
-              <div className="mb-4">
-                <p className="text-sm text-gray-600 mb-2">
-                  <strong>Milestone:</strong> {selectedMilestone.milestone.title}
-                </p>
-                <p className="text-sm text-gray-600 mb-2">
-                  <strong>Student:</strong> {getStudentName(selectedMilestone.roadmap.studentId)}
-                </p>
-                <p className="text-sm text-gray-600 mb-4">
-                  <strong>Duration:</strong> {selectedMilestone.milestone.estimatedDurationDays} days
-                </p>
-              </div>
+          {/* Milestone Approval Modal */}
+          {showApprovalModal && selectedMilestone && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+              <div className="bg-white rounded-lg p-6 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">Approve Milestone Completion</h3>
 
-              {/* Submitted Project */}
-              {selectedMilestone.milestone.submittedProjectId && (
-                <div className="mb-6">
-                  <h4 className="text-md font-medium text-gray-900 mb-3">Submitted Project</h4>
-                  {loadingProject ? (
-                    <div className="text-center py-4">
-                      <div className="w-6 h-6 border-2 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
-                      <p className="text-sm text-gray-500 mt-2">Loading project...</p>
-                    </div>
-                  ) : submittedProject ? (
-                    <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                          <p className="text-sm font-medium text-gray-700">Title</p>
-                          <p className="text-sm text-gray-600">{submittedProject.title}</p>
-                        </div>
-                        <div>
-                          <p className="text-sm font-medium text-gray-700">Category</p>
-                          <p className="text-sm text-gray-600">{submittedProject.category}</p>
-                        </div>
-                        <div>
-                          <p className="text-sm font-medium text-gray-700">Tools Used</p>
-                          <p className="text-sm text-gray-600">{submittedProject.toolsUsed.join(', ')}</p>
-                        </div>
-                        <div>
-                          <p className="text-sm font-medium text-gray-700">Student Role</p>
-                          <p className="text-sm text-gray-600">{submittedProject.studentRole}</p>
-                        </div>
+                <div className="mb-4">
+                  <p className="text-sm text-gray-600 mb-2">
+                    <strong>Milestone:</strong> {selectedMilestone.milestone.title}
+                  </p>
+                  <p className="text-sm text-gray-600 mb-2">
+                    <strong>Student:</strong> {getStudentName(selectedMilestone.roadmap.studentId)}
+                  </p>
+                  <p className="text-sm text-gray-600 mb-4">
+                    <strong>Duration:</strong> {selectedMilestone.milestone.estimatedDurationDays} days
+                  </p>
+                </div>
+
+                {/* Submitted Project */}
+                {selectedMilestone.milestone.submittedProjectIds && selectedMilestone.milestone.submittedProjectIds.length > 0 && (
+                  <div className="mb-6">
+                    <h4 className="text-md font-medium text-gray-900 mb-3">Submitted Project</h4>
+                    {loadingProject ? (
+                      <div className="text-center py-4">
+                        <div className="w-6 h-6 border-2 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
+                        <p className="text-sm text-gray-500 mt-2">Loading project...</p>
                       </div>
-                      <div className="mt-4">
-                        <p className="text-sm font-medium text-gray-700">Description</p>
-                        <p className="text-sm text-gray-600">{submittedProject.description}</p>
-                      </div>
-                      {submittedProject.evidence.demoLink && (
-                        <div className="mt-4">
-                          <p className="text-sm font-medium text-gray-700">Demo Link</p>
-                          <a href={submittedProject.evidence.demoLink} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 hover:underline">
-                            {submittedProject.evidence.demoLink}
-                          </a>
-                        </div>
-                      )}
-                      {submittedProject.attachments.images.length > 0 && (
-                        <div className="mt-4">
-                          <p className="text-sm font-medium text-gray-700">Images</p>
-                          <div className="flex gap-2 mt-2">
-                            {submittedProject.attachments.images.map((image, index) => (
-                              <img key={index} src={image} alt={`Project image ${index + 1}`} className="w-16 h-16 object-cover rounded" />
-                            ))}
+                    ) : submittedProject ? (
+                      <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div>
+                            <p className="text-sm font-medium text-gray-700">Title</p>
+                            <p className="text-sm text-gray-600">{submittedProject.title}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm font-medium text-gray-700">Category</p>
+                            <p className="text-sm text-gray-600">{submittedProject.category}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm font-medium text-gray-700">Tools Used</p>
+                            <p className="text-sm text-gray-600">{submittedProject.toolsUsed.join(', ')}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm font-medium text-gray-700">Student Role</p>
+                            <p className="text-sm text-gray-600">{submittedProject.studentRole}</p>
                           </div>
                         </div>
-                      )}
-                    </div>
-                  ) : (
-                    <div className="text-center py-4 text-gray-500">
-                      <p>Failed to load submitted project.</p>
-                    </div>
-                  )}
+                        <div className="mt-4">
+                          <p className="text-sm font-medium text-gray-700">Description</p>
+                          <p className="text-sm text-gray-600">{submittedProject.description}</p>
+                        </div>
+                        {submittedProject.evidence.demoLink && (
+                          <div className="mt-4">
+                            <p className="text-sm font-medium text-gray-700">Demo Link</p>
+                            <a href={submittedProject.evidence.demoLink} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 hover:underline">
+                              {submittedProject.evidence.demoLink}
+                            </a>
+                          </div>
+                        )}
+                        {submittedProject.attachments.images.length > 0 && (
+                          <div className="mt-4">
+                            <p className="text-sm font-medium text-gray-700">Images</p>
+                            <div className="flex gap-2 mt-2">
+                              {submittedProject.attachments.images.map((image, index) => (
+                                <img key={index} src={image} alt={`Project image ${index + 1}`} className="w-16 h-16 object-cover rounded" />
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <div className="text-center py-4 text-gray-500">
+                        <p>Failed to load submitted project.</p>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Trainer Feedback
+                  </label>
+                  <textarea
+                    value={trainerFeedback}
+                    onChange={(e) => setTrainerFeedback(e.target.value)}
+                    placeholder="Provide feedback on the student's work..."
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    rows={4}
+                  />
                 </div>
-              )}
 
-              <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Trainer Feedback
-                </label>
-                <textarea
-                  value={trainerFeedback}
-                  onChange={(e) => setTrainerFeedback(e.target.value)}
-                  placeholder="Provide feedback on the student's work..."
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  rows={4}
-                />
-              </div>
-
-              <div className="flex gap-3">
-                <button
-                  onClick={() => setShowApprovalModal(false)}
-                  className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={handleApproveMilestone}
-                  disabled={!trainerFeedback.trim() || isApproving}
-                  className="flex-1 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isApproving ? 'Approving...' : 'Approve'}
-                </button>
+                <div className="flex gap-3">
+                  <button
+                    onClick={() => setShowApprovalModal(false)}
+                    className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={handleApproveMilestone}
+                    disabled={!trainerFeedback.trim() || isApproving}
+                    className="flex-1 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isApproving ? 'Approving...' : 'Approve'}
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
 
-        {/* Milestone Rejection Modal */}
-        {showRejectionModal && selectedMilestone && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white rounded-lg p-6 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Reject Milestone Completion</h3>
-              
-              <div className="mb-4">
-                <p className="text-sm text-gray-600 mb-2">
-                  <strong>Milestone:</strong> {selectedMilestone.milestone.title}
-                </p>
-                <p className="text-sm text-gray-600 mb-2">
-                  <strong>Student:</strong> {getStudentName(selectedMilestone.roadmap.studentId)}
-                </p>
-                <p className="text-sm text-gray-600 mb-4">
-                  <strong>Duration:</strong> {selectedMilestone.milestone.estimatedDurationDays} days
-                </p>
-              </div>
+          {/* Milestone Rejection Modal */}
+          {showRejectionModal && selectedMilestone && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+              <div className="bg-white rounded-lg p-6 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">Reject Milestone Completion</h3>
 
-              {/* Submitted Project */}
-              {selectedMilestone.milestone.submittedProjectId && (
-                <div className="mb-6">
-                  <h4 className="text-md font-medium text-gray-900 mb-3">Submitted Project</h4>
-                  {loadingProject ? (
-                    <div className="text-center py-4">
-                      <div className="w-6 h-6 border-2 border-red-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
-                      <p className="text-sm text-gray-500 mt-2">Loading project...</p>
-                    </div>
-                  ) : submittedProject ? (
-                    <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                          <p className="text-sm font-medium text-gray-700">Title</p>
-                          <p className="text-sm text-gray-600">{submittedProject.title}</p>
-                        </div>
-                        <div>
-                          <p className="text-sm font-medium text-gray-700">Category</p>
-                          <p className="text-sm text-gray-600">{submittedProject.category}</p>
-                        </div>
-                        <div>
-                          <p className="text-sm font-medium text-gray-700">Tools Used</p>
-                          <p className="text-sm text-gray-600">{submittedProject.toolsUsed.join(', ')}</p>
-                        </div>
-                        <div>
-                          <p className="text-sm font-medium text-gray-700">Student Role</p>
-                          <p className="text-sm text-gray-600">{submittedProject.studentRole}</p>
-                        </div>
+                <div className="mb-4">
+                  <p className="text-sm text-gray-600 mb-2">
+                    <strong>Milestone:</strong> {selectedMilestone.milestone.title}
+                  </p>
+                  <p className="text-sm text-gray-600 mb-2">
+                    <strong>Student:</strong> {getStudentName(selectedMilestone.roadmap.studentId)}
+                  </p>
+                  <p className="text-sm text-gray-600 mb-4">
+                    <strong>Duration:</strong> {selectedMilestone.milestone.estimatedDurationDays} days
+                  </p>
+                </div>
+
+                {/* Submitted Project */}
+                {selectedMilestone.milestone.submittedProjectId && (
+                  <div className="mb-6">
+                    <h4 className="text-md font-medium text-gray-900 mb-3">Submitted Project</h4>
+                    {loadingProject ? (
+                      <div className="text-center py-4">
+                        <div className="w-6 h-6 border-2 border-red-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
+                        <p className="text-sm text-gray-500 mt-2">Loading project...</p>
                       </div>
-                      <div className="mt-4">
-                        <p className="text-sm font-medium text-gray-700">Description</p>
-                        <p className="text-sm text-gray-600">{submittedProject.description}</p>
-                      </div>
-                      {submittedProject.evidence.demoLink && (
-                        <div className="mt-4">
-                          <p className="text-sm font-medium text-gray-700">Demo Link</p>
-                          <a href={submittedProject.evidence.demoLink} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 hover:underline">
-                            {submittedProject.evidence.demoLink}
-                          </a>
-                        </div>
-                      )}
-                      {submittedProject.attachments.images.length > 0 && (
-                        <div className="mt-4">
-                          <p className="text-sm font-medium text-gray-700">Images</p>
-                          <div className="flex gap-2 mt-2">
-                            {submittedProject.attachments.images.map((image, index) => (
-                              <img key={index} src={image} alt={`Project image ${index + 1}`} className="w-16 h-16 object-cover rounded" />
-                            ))}
+                    ) : submittedProject ? (
+                      <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div>
+                            <p className="text-sm font-medium text-gray-700">Title</p>
+                            <p className="text-sm text-gray-600">{submittedProject.title}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm font-medium text-gray-700">Category</p>
+                            <p className="text-sm text-gray-600">{submittedProject.category}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm font-medium text-gray-700">Tools Used</p>
+                            <p className="text-sm text-gray-600">{submittedProject.toolsUsed.join(', ')}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm font-medium text-gray-700">Student Role</p>
+                            <p className="text-sm text-gray-600">{submittedProject.studentRole}</p>
                           </div>
                         </div>
-                      )}
-                    </div>
-                  ) : (
-                    <div className="text-center py-4 text-gray-500">
-                      <p>Failed to load submitted project.</p>
-                    </div>
-                  )}
+                        <div className="mt-4">
+                          <p className="text-sm font-medium text-gray-700">Description</p>
+                          <p className="text-sm text-gray-600">{submittedProject.description}</p>
+                        </div>
+                        {submittedProject.evidence.demoLink && (
+                          <div className="mt-4">
+                            <p className="text-sm font-medium text-gray-700">Demo Link</p>
+                            <a href={submittedProject.evidence.demoLink} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 hover:underline">
+                              {submittedProject.evidence.demoLink}
+                            </a>
+                          </div>
+                        )}
+                        {submittedProject.attachments.images.length > 0 && (
+                          <div className="mt-4">
+                            <p className="text-sm font-medium text-gray-700">Images</p>
+                            <div className="flex gap-2 mt-2">
+                              {submittedProject.attachments.images.map((image, index) => (
+                                <img key={index} src={image} alt={`Project image ${index + 1}`} className="w-16 h-16 object-cover rounded" />
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <div className="text-center py-4 text-gray-500">
+                        <p>Failed to load submitted project.</p>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Rejection Reason
+                  </label>
+                  <textarea
+                    value={trainerFeedback}
+                    onChange={(e) => setTrainerFeedback(e.target.value)}
+                    placeholder="Explain why the milestone completion is being rejected..."
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                    rows={4}
+                  />
                 </div>
-              )}
 
-              <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Rejection Reason
-                </label>
-                <textarea
-                  value={trainerFeedback}
-                  onChange={(e) => setTrainerFeedback(e.target.value)}
-                  placeholder="Explain why the milestone completion is being rejected..."
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
-                  rows={4}
-                />
-              </div>
-
-              <div className="flex gap-3">
-                <button
-                  onClick={() => setShowRejectionModal(false)}
-                  className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={handleRejectMilestone}
-                  disabled={!trainerFeedback.trim() || isApproving}
-                  className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isApproving ? 'Rejecting...' : 'Reject'}
-                </button>
+                <div className="flex gap-3">
+                  <button
+                    onClick={() => setShowRejectionModal(false)}
+                    className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={handleRejectMilestone}
+                    disabled={!trainerFeedback.trim() || isApproving}
+                    className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isApproving ? 'Rejecting...' : 'Reject'}
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
 
         </main>
       </div>
