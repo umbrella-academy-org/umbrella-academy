@@ -69,13 +69,13 @@ export const BookingProvider = ({ children }: { children: React.ReactNode }) => 
         } else if (user?.role === 'trainer') {
             fetchTrainerBookings();
         }
-  
+
     }, [user?._id]);
 
     const approveBooking = async (bookingId: string, approvalData: TrainerApprovalRequest) => {
         try {
             await bookingService.approveBooking(bookingId, approvalData);
-            await fetchBookings(); // Refresh bookings
+            await fetchTrainerBookings()
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Failed to approve booking');
             throw err;
@@ -85,7 +85,7 @@ export const BookingProvider = ({ children }: { children: React.ReactNode }) => 
     const rejectBooking = async (bookingId: string, reason: string) => {
         try {
             await bookingService.rejectBooking(bookingId, reason);
-            await fetchBookings(); // Refresh bookings
+            await fetchTrainerBookings(); // Refresh bookings
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Failed to reject booking');
             throw err;
@@ -93,7 +93,11 @@ export const BookingProvider = ({ children }: { children: React.ReactNode }) => 
     };
 
     const refreshBookings = async () => {
-        await fetchBookings();
+        if (user?.role === 'student') {
+            await fetchStudentBookings();
+        } else if (user?.role === 'trainer') {
+            await fetchTrainerBookings();
+        }
     };
 
     return (

@@ -1,3 +1,4 @@
+import { BaseUser } from "./user";
 
 export enum BookingStatus {
   PENDING = 'pending',
@@ -24,8 +25,8 @@ export interface TrainerApprovalRequest {
 
 export interface Booking  {
   id: string;
-  studentId: string;
-  trainerId: string;
+  studentId: BaseUser;
+  trainerId: BaseUser;
   requestedTime: Date;
   learningGoals: string;
   status: BookingStatus;

@@ -48,6 +48,7 @@ export interface Milestone {
   status: RoadmapStepStatus;
   completedAt: Date | null;
   trainerFeedback?: string;
+  submittedProjectId?: string;
 }
 
 export interface Roadmap {

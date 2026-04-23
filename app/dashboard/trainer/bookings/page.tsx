@@ -113,8 +113,8 @@ export default function TrainerBookingsPage() {
   };
 
   const filteredBookings = (activeTab === 'pending' ? trainerPendingBookings : trainerAllBookings).filter(booking => {
-    const matchesSearch = getStudentName(booking.studentId).toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         getStudentEmail(booking.studentId).toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearch = getStudentName(booking.studentId._id).toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         getStudentEmail(booking.studentId._id).toLowerCase().includes(searchTerm.toLowerCase());
     const matchesStatus = statusFilter === 'all' || booking.status === statusFilter;
     return matchesSearch && matchesStatus;
   });
@@ -287,8 +287,8 @@ export default function TrainerBookingsPage() {
                           <User className="w-5 h-5 text-gray-400" />
                         </div>
                         <div>
-                          <h3 className="font-medium text-gray-900">{getStudentName(booking.studentId)}</h3>
-                          <p className="text-sm text-gray-500">{getStudentEmail(booking.studentId)}</p>
+                          <h3 className="font-medium text-gray-900">{getStudentName(booking.studentId._id)}</h3>
+                          <p className="text-sm text-gray-500">{getStudentEmail(booking.studentId._id)}</p>
                         </div>
                       </div>
 

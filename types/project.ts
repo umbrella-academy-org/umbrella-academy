@@ -18,6 +18,7 @@ export interface ProjectEvidence {
 export interface Project {
   id: string;
   studentId: string;
+  milestoneId?: string;
   title: string;
   description: string;
   category: string;             // e.g., "Robotics", "UI/UX", "Coding"

@@ -16,6 +16,7 @@ import { FinancialProvider } from './FinancialContext';
 import { SystemProvider } from './SystemContext';
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
 import { BookingProvider } from './BookingContext';
+import { ProjectProvider } from './ProjectContext';
 
 interface AppProvidersProps {
   children: React.ReactNode;
@@ -27,13 +28,15 @@ export function AppProviders({ children }: AppProvidersProps) {
       <AuthProvider>
         <UserProvider>
           <BookingProvider>
-          <RoadmapProvider>
-            <FinancialProvider>
-              <SystemProvider>
-                {children}
-              </SystemProvider>
-            </FinancialProvider>
-          </RoadmapProvider>
+            <RoadmapProvider>
+              <ProjectProvider>
+                <FinancialProvider>
+                  <SystemProvider>
+                    {children}
+                  </SystemProvider>
+                </FinancialProvider>
+              </ProjectProvider>
+            </RoadmapProvider>
           </BookingProvider>
         </UserProvider>
       </AuthProvider>
