@@ -49,8 +49,6 @@ export default function TrainerRoadmapsPage() {
   const trainerRoadmaps = roadmaps.filter(roadmap => roadmap.trainerId === user?._id);
   const handleAddMilestone = () => {
     if (newMilestone.title && newMilestone.description && newMilestone.estimatedDurationDays) {
-
-
       setMilestones([...milestones, newMilestone]);
       setNewMilestone({ title: '', description: '', requiredProjects: [], estimatedDurationDays: 0, skillsToLearn: [], tasks: [], order: 0, status: RoadmapStepStatus.LOCKED, completedAt: null });
       setIsCreatingMilestone(false);
