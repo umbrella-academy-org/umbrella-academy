@@ -31,12 +31,12 @@ export default function TrainerStatsCards({
 
   // Calculate completed sessions from recent transactions
   const completedSessions = recentTransactions.filter(t => 
-    t.type === 'income' && t.status === 'completed'
+    t.type === 'payment' && t.status === 'completed'
   ).length;
 
   // Calculate monthly earnings from recent transactions
   const monthlyEarnings = recentTransactions
-    .filter(t => t.type === 'income' && t.status === 'completed')
+    .filter(t => t.type === 'payment' && t.status === 'completed')
     .reduce((sum, t) => sum + t.amount, 0);
 
   // Mock rating data (in real app, would come from student feedback)

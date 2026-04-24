@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Home, Calendar, CalendarCheck, CreditCard,  MessageSquare, X, Settings, Menu, User, LogOut, Flame, BookOpen, Award, Lock, Users, Tag, UserCheck, MapPin } from 'lucide-react';
+import { Home, Calendar, CalendarCheck, CreditCard,  MessageSquare, X, Settings, Menu, User, LogOut, Flame, BookOpen, Award, Lock, Users, Tag, UserCheck, MapPin, Server } from 'lucide-react';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
 import { useAuth } from '@/contexts';
 import { SidebarProps, SidebarItem } from '@/types';
@@ -106,6 +106,11 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
             icon: <MapPin className="w-5 h-5" />,
             label: 'Roadmap Approvals',
             href: '/dashboard/admin/roadmap-approvals'
+          },
+          {
+            icon: <Server className="w-5 h-5" />,
+            label: 'System Health',
+            href: '/dashboard/admin/system'
           }
         ];
       default: // student

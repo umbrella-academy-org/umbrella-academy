@@ -133,8 +133,7 @@ export default function UmbrellaAdminSystemPage() {
                         <div key={alert.id} className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
                           <div className={`w-2 h-2 rounded-full mt-2 ${
                             alert.type === 'warning' ? 'bg-yellow-500' :
-                            alert.type === 'error' ? 'bg-red-500' :
-                            alert.type === 'success' ? 'bg-green-500' : 'bg-blue-500'
+                            alert.type === 'error' ? 'bg-red-500' : 'bg-blue-500'
                           }`} />
                           <div className="flex-1">
                             <p className="text-sm text-gray-900">{alert.message}</p>
