@@ -1,9 +1,8 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { Wallet, Transaction, Subscription } from '@/types';
-import { apiClient } from '@/services/client';
-import { API_ENDPOINTS } from '@/services/constants';
+import { Subscription } from '@/types';
+import { financialService, type Wallet, type Transaction } from '@/services/financial';
 import { useAuth } from './AuthContext';
 
 interface FinancialContextType {
@@ -45,22 +44,34 @@ export function FinancialProvider({ children }: { children: React.ReactNode }) {
 
       if (currentUser.role === 'trainer') {
         // Fetch personal wallet
-        const walletRes = await apiClient.get<{ success: boolean; data: Wallet }>(API_ENDPOINTS.WALLET_ME);
+        const walletRes = await financialService.getMyWallet();
         const wallet = walletRes.data ?? null;
         setUserWallet(wallet);
         setWallets(wallet ? [wallet] : []);
         setTransactions(wallet?.transactions ?? []);
       } else if (currentUser.role === 'admin') {
         // Fetch all wallets
-        const walletsRes = await apiClient.get<{ success: boolean; data: Wallet[] }>(API_ENDPOINTS.WALLET);
+        const walletsRes = await financialService.getAllWallets();
         const allWallets = walletsRes.data ?? [];
         setWallets(allWallets);
-        setTransactions(allWallets.flatMap(w => w.transactions ?? []));
+        setTransactions(allWallets.flatMap((w: Wallet) => w.transactions ?? []));
         setUserWallet(null);
       } else if (currentUser.role === 'student') {
         // Fetch payment history
-        const paymentsRes = await apiClient.get<{ success: boolean; data: Transaction[] }>(API_ENDPOINTS.PAYMENTS);
-        setTransactions(paymentsRes.data ?? []);
+        const paymentsRes = await financialService.getMyPayments();
+        const payments = paymentsRes.data ?? [];
+        // Convert payments to transactions format
+        const paymentTransactions: Transaction[] = payments.map(p => ({
+          id: p.id,
+          walletId: '',
+          type: 'payment',
+          amount: p.amount,
+          status: p.status === 'success' ? 'completed' : p.status,
+          description: `${p.type} payment`,
+          date: p.paidAt,
+          reference: p.transactionRef,
+        }));
+        setTransactions(paymentTransactions);
         setWallets([]);
         setUserWallet(null);
       } else {
