@@ -10,7 +10,6 @@ import { Logo } from '../ui/Logo';
 export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps) {
   const [currentActive, setCurrentActive] = useState(activeItem);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [showNewUserGuide, setShowNewUserGuide] = useState(false);
   const { onboardingChecklist } = useAuth()
 
 
@@ -53,7 +52,7 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
           {
             icon: <MessageSquare className="w-5 h-5" />,
             label: 'Chat',
-            href: '/dashboard/trainer/chat'
+            href: '/dashboard/chat'
           },
           {
             icon: <BookOpen className="w-5 h-5" />,
@@ -69,21 +68,6 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
             icon: <CalendarCheck className="w-5 h-5" />,
             label: 'Bookings',
             href: '/dashboard/trainer/bookings'
-          },
-          {
-            icon: <Video className="w-5 h-5" />,
-            label: 'Live Session',
-            href: '/dashboard/trainer/live-session'
-          },
-          {
-            icon: <AlertCircle className="w-5 h-5" />,
-            label: 'Reports',
-            href: '/dashboard/trainer/reports'
-          },
-          {
-            icon: <CreditCard className="w-5 h-5" />,
-            label: 'Wallet',
-            href: '/dashboard/trainer/wallet'
           },
           {
             icon: <Settings className="w-5 h-5" />,

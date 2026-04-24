@@ -668,7 +668,7 @@ export default function TrainerRoadmapsPage() {
                   {milestones.length === 0 && !isCreatingMilestone && (
                     <div className="text-center py-8 text-gray-500 border-2 border-dashed border-gray-300 rounded-lg">
                       <Calendar className="w-12 h-12 text-gray-400 mx-auto mb-2" />
-                      <p>No milestones added yet. Click "Add Milestone" to get started.</p>
+                      <p>No milestones added yet. Click &quot;Add Milestone&quot; to get started.</p>
                     </div>
                   )}
                 </div>
@@ -960,7 +960,7 @@ export default function TrainerRoadmapsPage() {
                 </div>
 
                 {/* Submitted Project */}
-                {selectedMilestone.milestone.submittedProjectId && (
+                {selectedMilestone.milestone.submittedProjectIds && selectedMilestone.milestone.submittedProjectIds.length > 0 && (
                   <div className="mb-6">
                     <h4 className="text-md font-medium text-gray-900 mb-3">Submitted Project</h4>
                     {loadingProject ? (
