@@ -79,7 +79,7 @@ export default function TrainerDashboard() {
   const activeRoadmaps = trainerRoadmaps.filter(r => r.status === 'active');
   const pendingProjects = trainerRoadmaps.reduce((count, roadmap) => {
     return count + (roadmap.milestones?.filter(m => 
-      m.status === 'pending_approval'
+      m.status === 'pending-approval'
     ).length || 0);
   }, 0);
 

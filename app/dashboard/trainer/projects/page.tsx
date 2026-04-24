@@ -47,7 +47,7 @@ export default function TrainerProjectsPage() {
 
   // Filter projects for trainer's students
   const trainerStudentIds = students
-    .filter(s => s.trainerId === user?._id || s.assignedTrainerId === user?._id)
+    .filter(s => s.assignedTrainerId === user?._id)
     .map(s => s._id);
   
   const trainerProjects = projects.filter(p => trainerStudentIds.includes(p.studentId));
@@ -564,7 +564,7 @@ export default function TrainerProjectsPage() {
                   Your Feedback
                 </h3>
                 
-                {selectedProject.status === ProjectStatus.PENDING_APPROVAL || selectedProject.status === 'pending_approval' ? (
+                {(selectedProject.status as string) === 'pending_approval' ? (
                   // Input for pending projects
                   <>
                     <textarea
@@ -604,20 +604,20 @@ export default function TrainerProjectsPage() {
                 ) : (
                   // Show existing feedback for non-pending projects
                   <div className={`p-4 rounded-lg ${
-                    selectedProject.status === ProjectStatus.APPROVED || selectedProject.status === 'approved' ? 'bg-green-50 border border-green-200' :
-                    selectedProject.status === ProjectStatus.REJECTED || selectedProject.status === 'rejected' ? 'bg-red-50 border border-red-200' :
+                    (selectedProject.status as string) === 'approved' ? 'bg-green-50 border border-green-200' :
+                    (selectedProject.status as string) === 'rejected' ? 'bg-red-50 border border-red-200' :
                     'bg-gray-50 border border-gray-200'
                   }`}>
                     <p className={`text-sm ${
-                      selectedProject.status === ProjectStatus.APPROVED || selectedProject.status === 'approved' ? 'text-green-700' :
-                      selectedProject.status === ProjectStatus.REJECTED || selectedProject.status === 'rejected' ? 'text-red-700' :
+                      (selectedProject.status as string) === 'approved' ? 'text-green-700' :
+                      (selectedProject.status as string) === 'rejected' ? 'text-red-700' :
                       'text-gray-700'
                     }`}>
                       {selectedProject.trainerFeedback || 'No feedback provided.'}
                     </p>
                     {selectedProject.approvedAt && (
                       <p className="text-xs text-gray-500 mt-2">
-                        {(selectedProject.status === ProjectStatus.APPROVED || selectedProject.status === 'approved') ? 'Approved' : 'Updated'} on {new Date(selectedProject.approvedAt).toLocaleDateString()}
+                        {(selectedProject.status as string) === 'approved' ? 'Approved' : 'Updated'} on {new Date(selectedProject.approvedAt).toLocaleDateString()}
                       </p>
                     )}
                   </div>
