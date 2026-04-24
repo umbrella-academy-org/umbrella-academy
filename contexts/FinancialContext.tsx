@@ -1,8 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { Subscription } from '@/types';
-import { financialService, type Wallet, type Transaction } from '@/services/financial';
+import { financialService, type Wallet, type Transaction, type Subscription } from '@/services/financial';
 import { useAuth } from './AuthContext';
 
 interface FinancialContextType {

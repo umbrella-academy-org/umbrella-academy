@@ -27,7 +27,7 @@ export function SystemProvider({ children }: { children: React.ReactNode }) {
   const { user: currentUser } = useAuth();
 
   // Simple permission check function
-  const hasPermission = (permission: string): boolean => {
+  const hasPermission = ()=> {
     if (!currentUser) return false;
     // Only admins have system permissions
     return currentUser.role === 'admin';
@@ -55,7 +55,7 @@ export function SystemProvider({ children }: { children: React.ReactNode }) {
       }
 
       // Only admins can see system data
-      if (!hasPermission('manage_system') && !hasPermission('view_field_analytics')) {
+      if (!hasPermission()) {
         setMetrics([]);
         setAlerts([]);
         setServices([]);

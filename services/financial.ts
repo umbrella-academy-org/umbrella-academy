@@ -33,6 +33,20 @@ export interface Payment {
   paidAt: string;
 }
 
+export interface Subscription {
+  id: string;
+  studentId: string;
+  planName: string;
+  status: 'active' | 'inactive' | 'expired' | 'cancelled';
+  amount: number;
+  currency: string;
+  billingCycle: 'monthly' | 'yearly' | 'quarterly';
+  startDate: string;
+  endDate: string;
+  isActive: boolean;
+  autoRenew: boolean;
+}
+
 class FinancialService {
   async getMyWallet(): Promise<ApiResponse<Wallet>> {
     return apiClient.get<Wallet>(API_ENDPOINTS.WALLET_ME);

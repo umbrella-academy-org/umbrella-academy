@@ -6,7 +6,7 @@ import { UserRole } from '@/types/user';
 import StudentsHeader from '@/components/trainer/StudentsHeader';
 import StudentsFilters from '@/components/trainer/StudentsFilters';
 import StudentsTable from '@/components/trainer/StudentsTable';
-import { useUsers, useAuth, useRoadmaps } from '@/hooks';
+import { useAuth, useRoadmaps, useUsers } from '@/contexts';
 
 export default function TrainerStudentsPage() {
   const [searchQuery, setSearchQuery] = useState('');
