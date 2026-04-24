@@ -104,7 +104,6 @@ export default function TrainerRoadmapsPage() {
   };
 
   const handleViewMilestoneDetails = async (milestone: Milestone) => {
-    console.log(milestone)
     setSelectedMilestone(milestone);
     setTrainerFeedback(milestone.trainerFeedback || '');
     
