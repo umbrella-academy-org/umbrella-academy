@@ -4,6 +4,7 @@ import Sidebar from '@/components/dashboard/Sidebar';
 import { useSystem } from '@/contexts/SystemContext';
 import { Server, Database, Wifi, Shield, AlertTriangle, CheckCircle } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
+import { UserRole } from '@/types';
 
 const ICON_MAP: Record<string, LucideIcon> = {
   'Server Uptime': Server,

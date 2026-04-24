@@ -4,7 +4,6 @@ import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
 import { useAuth } from '@/contexts';
-import { mockUsers } from '@/data/users';
 import { Logo } from '@/components/ui/Logo';
 
 export default function LoginPage() {

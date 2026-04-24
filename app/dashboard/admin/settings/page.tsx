@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
 import { Settings, Shield } from 'lucide-react';
+import { UserRole } from '@/types';
 
 export default function UmbrellaAdminSettingsPage() {
     const [systemSettings, setSystemSettings] = useState({

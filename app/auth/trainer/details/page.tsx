@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Award, Briefcase, Calendar, Clock, FileText,  Video, Globe, Users } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
-import { UserRole } from '@/types';
+import { Trainer, UserRole } from '@/types';
 
 export default function TrainerDetailsPage() {
   const router = useRouter();
@@ -111,7 +111,7 @@ export default function TrainerDetailsPage() {
       };
 
       // Create trainer data object matching Trainer interface
-      const trainerData = {
+      const trainerData: Partial<Trainer> = {
         email: baseData.email,
         password: baseData.password,
         firstName: baseData.firstName,
@@ -121,14 +121,14 @@ export default function TrainerDetailsPage() {
         isActive: true,
         status: 'pending_approval',
         gender: formData.gender,
-        dateOfBirth: new Date(formData.dateOfBirth),
+        dateOfBirth: formData.dateOfBirth,
         isVerified: false,
         otpCode: '',
-        otpExpiry: new Date(),
+        otpExpiry: '',
         resetToken: '',
-        resetTokenExpiry: new Date(),
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        resetTokenExpiry: '',
+        createdAt: '',
+        updatedAt: '',
         cvUrl: formData.cvUrl,
         introVideoUrl: formData.introVideoUrl,
         experience: {

@@ -49,7 +49,7 @@ export default function StudentsTable({ searchQuery, selectedStatus, selectedCou
     });
   }, [filteredByRole, searchQuery, selectedStatus, selectedCourse]);
 
-  const handleCreateReport = (student: User) => {
+  const handleCreateReport = (student: Student) => {
     setSelectedStudent(student);
     setShowReportForm(true);
   };
@@ -223,8 +223,8 @@ export default function StudentsTable({ searchQuery, selectedStatus, selectedCou
       {/* Report Form Modal */}
       {showReportForm && selectedStudent && (
         <StudentReportForm
-          studentId={selectedStudent.id}
-          studentName={selectedStudent.name}
+          studentId={selectedStudent._id}
+          studentName={`${selectedStudent.firstName} ${selectedStudent.lastName}`}
           onSubmit={handleReportSubmit}
           onCancel={() => {
             setShowReportForm(false);
