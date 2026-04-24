@@ -52,7 +52,7 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
           {
             icon: <MessageSquare className="w-5 h-5" />,
             label: 'Chat',
-            href: '/dashboard/chat'
+            href: '/dashboard/trainer/chat'
           },
           {
             icon: <BookOpen className="w-5 h-5" />,

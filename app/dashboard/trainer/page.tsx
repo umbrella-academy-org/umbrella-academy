@@ -4,12 +4,10 @@ import { useState, useEffect } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
 
 import TrainerStatsCards from '@/components/dashboard/TrainerStatsCards';
-import MonthlySessionsChart from '@/components/dashboard/MonthlySessionsChart';
 import TotalRoadmaps from '@/components/dashboard/TotalRoadmaps';
 import TrainingCapacity from '@/components/dashboard/TrainingCapacity';
 import ScheduledEvents from '@/components/dashboard/ScheduledEvents';
 import Calendar from '@/components/dashboard/Calendar';
-import LiveSessions from '@/components/dashboard/LiveSessions';
 import { useAuth, useRoadmaps, useUsers, useFinancial } from '@/contexts';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
 import { UserRole } from '@/types';
@@ -120,16 +118,13 @@ export default function TrainerDashboard() {
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 sm:gap-6 lg:gap-8">
               {/* Left Column - Main Content */}
               <div className="lg:col-span-3 space-y-4 sm:space-y-6 lg:space-y-8">
-                {/* Monthly Sessions Chart */}
-                <div className="animate-fade-in" style={{ animationDelay: '200ms' }}>
-                  <MonthlySessionsChart userType="trainer" />
-                </div>
+     
 
                 {/* Total Roadmaps */}
                 <div className="animate-fade-in" style={{ animationDelay: '300ms' }}>
                   <TotalRoadmaps
                     roadmaps={trainerStudentRoadmaps}
-                    userType="trainer"
+                    userType={UserRole.TRAINER}
                   />
                 </div>
 
@@ -138,7 +133,7 @@ export default function TrainerDashboard() {
                   <Calendar
                     selectedDateRange={selectedDateRange}
                     onDateRangeChange={setSelectedDateRange}
-                    userType="trainer"
+                    userType={UserRole.TRAINER}
                   />
                 </div>
               </div>
@@ -159,10 +154,7 @@ export default function TrainerDashboard() {
                   <ScheduledEvents userType="trainer" />
                 </div>
 
-                {/* Live Sessions */}
-                <div className="animate-slide-up" style={{ animationDelay: '700ms' }}>
-                  <LiveSessions userType="trainer" />
-                </div>
+               
               </div>
             </div>
           </div>

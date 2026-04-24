@@ -7,7 +7,7 @@ import StudentReportForm from '@/components/trainer/StudentReportForm';
 import { useUsers } from '@/contexts/UserContext';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRoadmaps } from '@/contexts/RoadmapContext';
-import { User } from '@/types';
+import { Student } from '@/types';
 
 interface StudentsTableProps {
   searchQuery: string;
@@ -18,7 +18,7 @@ interface StudentsTableProps {
 export default function StudentsTable({ searchQuery, selectedStatus, selectedCourse }: StudentsTableProps) {
   const [selectedStudents, setSelectedStudents] = useState<Record<string, unknown>[]>([]);
   const [showReportForm, setShowReportForm] = useState(false);
-  const [selectedStudent, setSelectedStudent] = useState<User | null>(null);
+  const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
 
   const { students, isLoading } = useUsers();
   const { user } = useAuth();
@@ -34,8 +34,9 @@ export default function StudentsTable({ searchQuery, selectedStatus, selectedCou
   const filteredStudents = useMemo(() => {
     return filteredByRole.filter(student => {
       const course = 'N/A';
+      const studentName = `${student.firstName} ${student.lastName}`;
       const matchesSearch = searchQuery === '' ||
-        student.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        studentName.toLowerCase().includes(searchQuery.toLowerCase()) ||
         student.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
         course.toLowerCase().includes(searchQuery.toLowerCase());
 
@@ -82,9 +83,10 @@ export default function StudentsTable({ searchQuery, selectedStatus, selectedCou
 
   // Transform data for DataTable
   const tableData = filteredStudents.map(student => {
-    const avatar = student.name.slice(0, 2).toUpperCase();
+    const studentName = `${student.firstName} ${student.lastName}`;
+    const avatar = student.firstName.slice(0, 2).toUpperCase();
     const course = 'N/A';
-    const joinDate = student.joinDate ?? 'N/A';
+    const joinDate = student.createdAt ?? 'N/A';
     const progress = 0;
     const sessionsCompleted = 0;
     const totalSessions = 0;
@@ -92,14 +94,14 @@ export default function StudentsTable({ searchQuery, selectedStatus, selectedCou
     const trend: string = 'stable';
 
     return {
-      id: student.id,
+      id: student._id,
       student: (
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 bg-linear-to-br from-gray-400 to-gray-600 rounded-full flex items-center justify-center text-white font-medium text-sm">
             {avatar}
           </div>
           <div>
-            <div className="text-sm font-medium text-gray-900">{student.name}</div>
+            <div className="text-sm font-medium text-gray-900">{studentName}</div>
             <div className="text-sm text-gray-500 flex items-center gap-1">
               <Mail className="w-3 h-3" />
               {student.email}

@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 import { useAuth, useRoadmaps } from '@/contexts';
 import Image from 'next/image';
-import { Student } from '@/types';
+import { Student, UserRole } from '@/types';
 
 export default function StudentProfilePage() {
     const { user, isLoading: authLoading } = useAuth();
@@ -60,9 +60,8 @@ export default function StudentProfilePage() {
     // Derived from user context
     const name = user?.firstName && user?.lastName ? `${user.firstName} ${user.lastName}` : 'Jane Mukamana';
     const email = user?.email || 'jane.mukamana@student.umbrella.rw';
-    const bio = user?.profileData?.bio || 'Dedicated trainee focusing on live collaborative sessions and practical software implementation within the Umbrella Tech Field.';
     const field = 'Tech Field';
-    const joinDate = new Date(user?.createdAt).toLocaleDateString() || 'Sep 2024';
+    const joinDate = user?.createdAt ? new Date(user.createdAt).toLocaleDateString() : 'Sep 2024';
 
     return (
         <div className="flex h-screen bg-[#FDFDFC]">
@@ -91,13 +90,9 @@ export default function StudentProfilePage() {
                         <div className="flex flex-col md:flex-row items-end gap-6 -mt-16 px-8 relative z-10">
                             <div className="relative">
                                 <div className="w-32 h-32 rounded-lg bg-white p-1 shadow-xl border border-gray-100">
-                                    {user?.avatar ? (
-                                        <Image src={user.avatar} alt="Avatar" width={128} height={128} className="w-full h-full object-cover rounded-lg" />
-                                    ) : (
-                                        <div className="w-full h-full bg-linear-to-br from-yellow-500 to-yellow-600 flex items-center justify-center text-white text-4xl font-black rounded-lg">
-                                            {name.charAt(0)}
-                                        </div>
-                                    )}
+                                    <div className="w-full h-full bg-linear-to-br from-yellow-500 to-yellow-600 flex items-center justify-center text-white text-4xl font-black rounded-lg">
+                                        {name.charAt(0)}
+                                    </div>
                                 </div>
                                 <div className="absolute bottom-2 right-2 w-4 h-4 bg-yellow-600 border-2 border-white rounded-full" />
                             </div>
@@ -170,7 +165,7 @@ export default function StudentProfilePage() {
                             {/* Bio Block */}
                             <div className="bg-white rounded-lg border border-gray-100 shadow-sm p-8 space-y-4">
                                 <h3 className="text-xs font-black text-gray-400  ">About Me</h3>
-                                <p className="text-sm font-medium text-gray-600 leading-relaxed italic">{bio}</p>
+                                <p className="text-sm font-medium text-gray-600 leading-relaxed italic">Dedicated trainee focusing on live collaborative sessions and practical software implementation within the Umbrella Tech Field.</p>
                                 <div className="flex gap-2 pt-2">
                                     <SocialLink icon={<Linkedin className="w-4 h-4" />} />
                                     <SocialLink icon={<Github className="w-4 h-4" />} />
@@ -243,29 +238,29 @@ export default function StudentProfilePage() {
                                     <div className="space-y-6">
                                         <MiniInfo label="Academy Email" value={email} icon={<Mail className="w-4 h-4" />} />
                                         <MiniInfo label="Phone Number" value={profileData.phone} icon={<Phone className="w-4 h-4" />} />
-                                        <MiniInfo label="Join Date" value={createdAt.toLocaleDateString()} icon={<Calendar className="w-4 h-4" />} />
+                                        <MiniInfo label="Join Date" value={joinDate} icon={<Calendar className="w-4 h-4" />} />
                                     </div>
                                 </div>
                             </div>
 
-                            {/* Preferences Recap */}
+                            {/* Student Stats */}
                             <div className="bg-black rounded-lg p-8 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
                                 <div className="space-y-2">
-                                    <h4 className="text-lg font-bold">Trainee Academic Preferences</h4>
-                                    <p className="text-gray-400 text-sm font-medium">Your current session availability and learning style</p>
+                                    <h4 className="text-lg font-bold">Trainee Academic Status</h4>
+                                    <p className="text-gray-400 text-sm font-medium">Your current learning progress and subscription status</p>
                                 </div>
                                 <div className="flex gap-10">
                                     <div className="text-center">
-                                        <p className="text-[10px] font-black text-gray-500   mb-1">Time Slot</p>
-                                        <p className="text-sm font-bold text-gray-400">{studentUser?.availability?.preferredTimeSlots ? studentUser.availability.preferredTimeSlots[0] : 'None'}</p>
+                                        <p className="text-[10px] font-black text-gray-500   mb-1">Onboarding</p>
+                                        <p className="text-sm font-bold text-gray-400">{studentUser?.onboardingStatus?.learningStarted ? 'In Progress' : 'Started'}</p>
                                     </div>
                                     <div className="text-center">
-                                        <p className="text-[10px] font-black text-gray-500   mb-1">Weekly Commitment</p>
-                                        <p className="text-sm font-bold text-gray-400">{studentUser?.availability?.weeklyAvailableHours || 20} Hours</p>
+                                        <p className="text-[10px] font-black text-gray-500   mb-1">Subscription</p>
+                                        <p className="text-sm font-bold text-gray-400">{studentUser?.hasActiveSubscription ? 'Active' : 'Inactive'}</p>
                                     </div>
                                     <div className="text-center">
-                                        <p className="text-[10px] font-black text-gray-500   mb-1">Learning Pace</p>
-                                        <p className="text-sm font-bold text-gray-400">{studentUser?.learningPreferences?.pace || 'Standard'}</p>
+                                        <p className="text-[10px] font-black text-gray-500   mb-1">Orientation</p>
+                                        <p className="text-sm font-bold text-gray-400">{studentUser?.hasPaidOrientation ? 'Paid' : 'Pending'}</p>
                                     </div>
                                 </div>
                             </div>

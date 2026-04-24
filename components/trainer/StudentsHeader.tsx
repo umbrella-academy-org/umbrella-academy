@@ -1,10 +1,10 @@
 'use client';
 
 import { Users, TrendingUp, Clock, Star } from 'lucide-react';
-import { User } from '@/types/user';
+import { Student } from '@/types';
 
 interface StudentsHeaderProps {
-  students: User[];
+  students: Student[];
 }
 
 export default function StudentsHeader({ students }: StudentsHeaderProps) {

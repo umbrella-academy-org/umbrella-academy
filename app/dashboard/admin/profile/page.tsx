@@ -9,12 +9,10 @@ import { UserRole } from '@/types';
 export default function UmbrellaAdminProfilePage() {
     const { user } = useAuth();
 
-    const [profileData] = useState({
-        name: user?.firstName && user?.lastName ? `${user.firstName} ${user.lastName}` : 'Super Admin',
-        email: user?.email || 'admin@umbrellaacademy.rw',
-        role: 'Umbrella System Administrator',
-        joinDate: new Date(user?.createdAt).toLocaleDateString() || 'Jan 2020'
-    });
+    // Derived from user context - only using fields from BaseUser type
+    const name = user?.firstName && user?.lastName ? `${user.firstName} ${user.lastName}` : 'Super Admin';
+    const email = user?.email || 'admin@umbrellaacademy.rw';
+    const joinDate = user?.createdAt ? new Date(user.createdAt).toLocaleDateString() : 'Jan 2020';
 
     return (
         <div className="flex h-screen bg-[#FDFDFC]">
@@ -38,7 +36,7 @@ export default function UmbrellaAdminProfilePage() {
                                     <div className="relative group">
                                         <div className="w-32 h-32 rounded-full bg-white p-1.5 shadow-2xl shadow-gray-200/50 transform group-hover:scale-105 transition-all duration-500">
                                             <div className="w-full h-full bg-linear-to-br from-gray-50 to-gray-100 rounded-full flex items-center justify-center text-gray-700 text-4xl font-extrabold border border-gray-200 ">
-                                                {profileData.name.split(' ').map(n => n[0]).join('')}
+                                                {name.split(' ').map(n => n[0]).join('')}
                                             </div>
                                         </div>
                                         <div className="absolute -bottom-0 -right-0 w-10 h-10 bg-yellow-600 border-4 border-white rounded-full flex items-center justify-center shadow-lg">
@@ -49,7 +47,7 @@ export default function UmbrellaAdminProfilePage() {
                                     <div className="flex-1 flex flex-col md:flex-row md:items-center justify-between gap-6 pb-2 mt-20">
                                         <div>
                                             <div className="flex items-center gap-3">
-                                                <h1 className="text-2xl font-semibold text-gray-900  ">{profileData.name}</h1>
+                                                <h1 className="text-2xl font-semibold text-gray-900  ">{name}</h1>
                                                 <div className="px-2.5 py-1 bg-gray-50 text-gray-700 border border-gray-100 rounded-full text-[10px] font-black ">SYSTEM ROOT</div>
                                             </div>
                                             <p className="text-gray-500 font-semibold flex items-center gap-2 mt-1.5">
@@ -97,11 +95,11 @@ export default function UmbrellaAdminProfilePage() {
                                     <div className="grid grid-cols-2 gap-6">
                                         <div className="p-6 bg-gray-50 rounded-[1.5rem] border border-transparent hover:border-gray-100 transition-all">
                                             <label className="text-[10px] font-black text-gray-400    mb-1 block">Primary Email</label>
-                                            <p className="text-gray-900 font-semibold break-all">{profileData.email}</p>
+                                            <p className="text-gray-900 font-semibold break-all">{email}</p>
                                         </div>
                                         <div className="p-6 bg-gray-50 rounded-[1.5rem] border border-transparent hover:border-gray-100 transition-all">
-                                            <label className="text-[10px] font-black text-gray-400    mb-1 block">Creation Date</label>
-                                            <p className="text-gray-900 font-semibold">{profileData.createdAt.toLocaleDateString()}</p>
+                                            <label className="text-[10px] font-black text-gray-400    mb-1 block">Join Date</label>
+                                            <p className="text-gray-900 font-semibold">{joinDate}</p>
                                         </div>
                                     </div>
                                 </div>

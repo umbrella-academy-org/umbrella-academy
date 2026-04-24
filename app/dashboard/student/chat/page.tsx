@@ -6,6 +6,7 @@ import Link from 'next/link';
 
 import Sidebar from '@/components/dashboard/Sidebar';
 import ChatInterface from '@/components/chat/ChatInterface';
+import { UserRole } from '@/types';
 
 function ChatPageContent() {
     const searchParams = useSearchParams();

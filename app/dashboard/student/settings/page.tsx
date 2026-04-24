@@ -5,6 +5,7 @@ import Sidebar from '@/components/dashboard/Sidebar';
 
 import { Settings, Lock, Bell, Eye, Moon, Globe, Shield, CreditCard, LogOut, ChevronRight, Save, Check } from 'lucide-react';
 import { useAuth } from '@/contexts';
+import { UserRole } from '@/types';
 
 export default function StudentSettingsPage() {
     const { logout } = useAuth();
