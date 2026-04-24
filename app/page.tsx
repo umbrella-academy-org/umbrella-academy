@@ -10,7 +10,6 @@ import { CategoriesGrid } from "@/components/CategoriesGrid";
 import { FeaturedPrograms } from "@/components/FeaturedPrograms";
 import { NewsHighlights } from "@/components/NewsHighlights";
 import { HowItWorks } from "@/components/HowItWorks";
-import { PlatformRoles } from "@/components/PlatformRoles";
 import { Benefits } from "@/components/Benefits";
 import { Testimonials } from "@/components/Testimonials";
 import { CTA } from "@/components/CTA";
