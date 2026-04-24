@@ -116,7 +116,7 @@ export default function CurrentPlan() {
 
         <a
           href="/post-signup/subscription/renew"
-          className="flex items-center gap-2 text-gray-600 hover:text-gray-700 font-medium text-sm transition-colors"
+           className="flex items-center gap-2 text-gray-600 hover:text-gray-700 font-medium text-sm transition-colors"
         >
           Upgrade plan
           <ArrowRight className="w-4 h-4" />

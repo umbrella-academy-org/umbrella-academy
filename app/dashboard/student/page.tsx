@@ -5,8 +5,6 @@ import { CheckCircle, Lock, CreditCard, Calendar, BookOpen } from 'lucide-react'
 import { useAuth } from '@/contexts/AuthContext';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
 import { OnboardingChecklist, UserRole } from '@/types';
-import OrientationPaymentModal from '@/components/payment/OrientationPaymentModal';
-import SubscriptionPaymentModal from '@/components/payment/SubscriptionPaymentModal';
 import BookingCalendar from '@/components/booking/BookingCalendar';
 import Sidebar from '@/components/dashboard/Sidebar';
 
@@ -15,8 +13,6 @@ export default function StudentDashboard() {
   const { navigate } = useNavigationWithLoading();
 
   // Modal states
-  const [showOrientationPayment, setShowOrientationPayment] = useState(false);
-  const [showSubscriptionPayment, setShowSubscriptionPayment] = useState(false);
   const [showBookingCalendar, setShowBookingCalendar] = useState(false);
 
   // Redirect if not authenticated or not a student
@@ -82,7 +78,7 @@ export default function StudentDashboard() {
             {/* Main CTA Button */}
             {!onboardingChecklist.bookingPayed && (
               <button
-                onClick={() => setShowOrientationPayment(true)}
+                onClick={() => navigate('/dashboard/student/pay/orientation')}
                 className="px-6 py-3 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors flex items-center gap-2"
               >
                 <CreditCard className="w-5 h-5" />
@@ -92,7 +88,7 @@ export default function StudentDashboard() {
 
             {onboardingChecklist.bookingPayed && !onboardingChecklist.subscriptionPayed && (
               <button
-                onClick={() => setShowSubscriptionPayment(true)}
+                onClick={() => navigate('/dashboard/student/pay/subscription')}
                 className="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center gap-2"
               >
                 <CreditCard className="w-5 h-5" />
@@ -167,7 +163,7 @@ export default function StudentDashboard() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               {!onboardingChecklist.bookingPayed && (
                 <button
-                  onClick={() => setShowOrientationPayment(true)}
+                  onClick={() => navigate('/dashboard/student/pay/orientation')}
                   className="bg-white border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors text-left"
                 >
                   <CreditCard className="w-8 h-8 text-green-600 mb-2" />
@@ -189,7 +185,7 @@ export default function StudentDashboard() {
 
               {onboardingChecklist.orientationBooked && !onboardingChecklist.subscriptionPayed && (
                 <button
-                  onClick={() => setShowSubscriptionPayment(true)}
+                  onClick={() => navigate('/dashboard/student/pay/subscription')}
                   className="bg-white border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors text-left"
                 >
                   <CreditCard className="w-8 h-8 text-purple-600 mb-2" />
@@ -214,20 +210,6 @@ export default function StudentDashboard() {
       </div>
 
       {/* Modals */}
-      {showOrientationPayment && (
-        <OrientationPaymentModal
-          onClose={() => setShowOrientationPayment(false)}
-          onSuccess={() => setShowOrientationPayment(false)}
-        />
-      )}
-
-      {showSubscriptionPayment && (
-        <SubscriptionPaymentModal
-          onClose={() => setShowSubscriptionPayment(false)}
-          onSuccess={() => setShowSubscriptionPayment(false)}
-        />
-      )}
-
       {showBookingCalendar && (
         <BookingCalendar
           onClose={() => setShowBookingCalendar(false)}
