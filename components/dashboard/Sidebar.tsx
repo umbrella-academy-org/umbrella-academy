@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Home, Calendar, CalendarCheck, CreditCard,  MessageSquare, X, Settings, Menu, User, LogOut, Flame, BookOpen, Award, Lock, Users, Tag, UserCheck, MapPin, Server } from 'lucide-react';
+import { Home, Calendar, CalendarCheck, CreditCard,  MessageSquare, X, Settings, Menu, User, LogOut, Flame, BookOpen, Award, Lock, Users, Tag, UserCheck, MapPin, Server, Folder } from 'lucide-react';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
 import { useAuth } from '@/contexts';
 import { SidebarProps, SidebarItem } from '@/types';
@@ -57,7 +57,12 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
           {
             icon: <BookOpen className="w-5 h-5" />,
             label: 'Roadmaps',
-            href: '/dashboard/trainer/calendar'
+            href: '/dashboard/trainer/roadmaps'
+          },
+          {
+            icon: <Folder className="w-5 h-5" />,
+            label: 'Projects',
+            href: '/dashboard/trainer/projects'
           },
           {
             icon: <User className="w-5 h-5" />,
@@ -142,6 +147,13 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
             href: '/dashboard/student/portfolio',
             disabled: !(onboardingChecklist?.learningStarted || false),
             disabledReason: 'Start learning to unlock'
+          },
+          {
+            icon: <Folder className="w-5 h-5" />,
+            label: 'Projects',
+            href: '/dashboard/student/projects',
+            disabled: !(onboardingChecklist?.roadmapReceived || false),
+            disabledReason: 'Complete orientation session to unlock'
           },
           {
             icon: <MessageSquare className="w-5 h-5" />,

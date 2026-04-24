@@ -13,6 +13,16 @@ class ProjectService {
         const response = apiClient.get<Project[]>(API_ENDPOINTS.PROJECT);
         return response;
     }
+
+    async approveProject(projectId: string, trainerFeedback?: string) {
+        const response = await apiClient.post<Project>(API_ENDPOINTS.PROJECT_APPROVE(projectId), { trainerFeedback });
+        return response;
+    }
+
+    async rejectProject(projectId: string, trainerFeedback?: string) {
+        const response = await apiClient.post<Project>(API_ENDPOINTS.PROJECT_REJECT(projectId), { trainerFeedback });
+        return response;
+    }
 }
 
 export const projectService = new ProjectService();

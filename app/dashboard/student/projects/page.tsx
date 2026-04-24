@@ -1,0 +1,520 @@
+'use client';
+
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import Sidebar from '@/components/dashboard/Sidebar';
+import { useProjects } from '@/contexts/ProjectContext';
+import { useAuth } from '@/contexts/AuthContext';
+import { UserRole, ProjectStatus, type Project } from '@/types';
+import { 
+  Folder, 
+  Clock, 
+  CheckCircle, 
+  XCircle, 
+  Hourglass, 
+  ExternalLink, 
+  FileText, 
+  Image as ImageIcon, 
+  Wrench,
+  User,
+  Calendar,
+  Eye,
+  Search,
+  Filter,
+  Grid,
+  List,
+  ChevronRight,
+  Plus
+} from 'lucide-react';
+
+export default function StudentProjectsPage() {
+  const router = useRouter();
+  const { user } = useAuth();
+  const { projects, isLoading } = useProjects();
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [statusFilter, setStatusFilter] = useState<ProjectStatus | 'all'>('all');
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
+  // Filter projects for current student
+  const studentProjects = projects.filter(p => p.studentId === user?._id);
+
+  // Apply filters
+  const filteredProjects = studentProjects.filter(project => {
+    const matchesSearch = 
+      project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      project.category.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesStatus = statusFilter === 'all' || project.status === statusFilter;
+    return matchesSearch && matchesStatus;
+  });
+
+  // Stats
+  const stats = {
+    total: studentProjects.length,
+    approved: studentProjects.filter(p => p.status === ProjectStatus.APPROVED).length,
+    pending: studentProjects.filter(p => p.status === ProjectStatus.PENDING_APPROVAL).length,
+    rejected: studentProjects.filter(p => p.status === ProjectStatus.REJECTED).length,
+    draft: studentProjects.filter(p => p.status === ProjectStatus.DRAFT).length,
+  };
+
+  const getStatusIcon = (status: ProjectStatus) => {
+    switch (status) {
+      case ProjectStatus.APPROVED:
+        return <CheckCircle className="w-5 h-5 text-green-600" />;
+      case ProjectStatus.PENDING_APPROVAL:
+        return <Hourglass className="w-5 h-5 text-yellow-600" />;
+      case ProjectStatus.REJECTED:
+        return <XCircle className="w-5 h-5 text-red-600" />;
+      case ProjectStatus.DRAFT:
+        return <Clock className="w-5 h-5 text-gray-500" />;
+    }
+  };
+
+  const getStatusColor = (status: ProjectStatus) => {
+    switch (status) {
+      case ProjectStatus.APPROVED:
+        return 'bg-green-50 border-green-200 text-green-700';
+      case ProjectStatus.PENDING_APPROVAL:
+        return 'bg-yellow-50 border-yellow-200 text-yellow-700';
+      case ProjectStatus.REJECTED:
+        return 'bg-red-50 border-red-200 text-red-700';
+      case ProjectStatus.DRAFT:
+        return 'bg-gray-50 border-gray-200 text-gray-700';
+    }
+  };
+
+  const getStatusLabel = (status: ProjectStatus) => {
+    switch (status) {
+      case ProjectStatus.APPROVED:
+        return 'Approved';
+      case ProjectStatus.PENDING_APPROVAL:
+        return 'Pending Approval';
+      case ProjectStatus.REJECTED:
+        return 'Rejected';
+      case ProjectStatus.DRAFT:
+        return 'Draft';
+    }
+  };
+
+  return (
+    <div className="flex h-screen bg-gray-50">
+      <Sidebar activeItem="Projects" userType={UserRole.STUDENT} />
+
+      <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
+        <main className="flex-1 overflow-auto">
+          <div className="p-6">
+            {/* Header */}
+            <div className="mb-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h1 className="text-2xl font-semibold text-gray-900">My Projects</h1>
+                  <p className="text-gray-600 mt-1">View and manage all your submitted projects</p>
+                </div>
+                <button 
+                  onClick={() => router.push('/dashboard/student/projects/create')}
+                  className="flex items-center gap-2 px-4 py-2 bg-yellow-600 text-white rounded-lg font-medium hover:bg-yellow-700 transition-colors"
+                >
+                  <Plus className="w-4 h-4" />
+                  New Project
+                </button>
+              </div>
+            </div>
+
+            {/* Stats Cards */}
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
+              {[
+                { label: 'Total', value: stats.total, icon: Folder, color: 'text-gray-600', bg: 'bg-gray-100' },
+                { label: 'Approved', value: stats.approved, icon: CheckCircle, color: 'text-green-600', bg: 'bg-green-100' },
+                { label: 'Pending', value: stats.pending, icon: Hourglass, color: 'text-yellow-600', bg: 'bg-yellow-100' },
+                { label: 'Rejected', value: stats.rejected, icon: XCircle, color: 'text-red-600', bg: 'bg-red-100' },
+                { label: 'Drafts', value: stats.draft, icon: Clock, color: 'text-gray-600', bg: 'bg-gray-100' },
+              ].map((stat) => (
+                <div key={stat.label} className="bg-white rounded-xl p-4 border border-gray-100 shadow-sm">
+                  <div className="flex items-center gap-3">
+                    <div className={`w-10 h-10 ${stat.bg} rounded-lg flex items-center justify-center`}>
+                      <stat.icon className={`w-5 h-5 ${stat.color}`} />
+                    </div>
+                    <div>
+                      <div className="text-2xl font-bold text-gray-900">{stat.value}</div>
+                      <div className="text-xs text-gray-500">{stat.label}</div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Filters */}
+            <div className="flex flex-col sm:flex-row gap-4 mb-6">
+              <div className="relative flex-1 max-w-md">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <input
+                  type="text"
+                  placeholder="Search projects..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                />
+              </div>
+              <div className="flex gap-2">
+                <div className="relative">
+                  <Filter className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                  <select
+                    value={statusFilter}
+                    onChange={(e) => setStatusFilter(e.target.value as ProjectStatus | 'all')}
+                    className="pl-10 pr-8 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 appearance-none bg-white"
+                  >
+                    <option value="all">All Status</option>
+                    <option value={ProjectStatus.APPROVED}>Approved</option>
+                    <option value={ProjectStatus.PENDING_APPROVAL}>Pending</option>
+                    <option value={ProjectStatus.REJECTED}>Rejected</option>
+                    <option value={ProjectStatus.DRAFT}>Draft</option>
+                  </select>
+                </div>
+                <div className="flex border border-gray-300 rounded-lg overflow-hidden">
+                  <button
+                    onClick={() => setViewMode('grid')}
+                    className={`p-2 ${viewMode === 'grid' ? 'bg-yellow-50 text-yellow-600' : 'bg-white text-gray-600'}`}
+                  >
+                    <Grid className="w-4 h-4" />
+                  </button>
+                  <button
+                    onClick={() => setViewMode('list')}
+                    className={`p-2 ${viewMode === 'list' ? 'bg-yellow-50 text-yellow-600' : 'bg-white text-gray-600'}`}
+                  >
+                    <List className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Projects Display */}
+            {isLoading ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {[...Array(6)].map((_, i) => (
+                  <div key={i} className="bg-white rounded-xl p-6 border border-gray-100 animate-pulse">
+                    <div className="h-4 w-3/4 bg-gray-200 rounded mb-3" />
+                    <div className="h-3 w-full bg-gray-200 rounded mb-2" />
+                    <div className="h-3 w-2/3 bg-gray-200 rounded" />
+                  </div>
+                ))}
+              </div>
+            ) : filteredProjects.length === 0 ? (
+              <div className="text-center py-12">
+                <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Folder className="w-8 h-8 text-gray-400" />
+                </div>
+                <h3 className="text-lg font-medium text-gray-900 mb-2">No Projects Found</h3>
+                <p className="text-gray-600 mb-4">
+                  {studentProjects.length === 0 
+                    ? "You haven't submitted any projects yet." 
+                    : "No projects match your filters."}
+                </p>
+                {studentProjects.length === 0 && (
+                  <button 
+                    onClick={() => router.push('/dashboard/student/projects/create')}
+                    className="px-6 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700"
+                  >
+                    Submit Your First Project
+                  </button>
+                )}
+              </div>
+            ) : viewMode === 'grid' ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filteredProjects.map((project) => (
+                  <div
+                    key={project.id}
+                    onClick={() => setSelectedProject(project)}
+                    className="bg-white rounded-xl p-6 border border-gray-100 shadow-sm hover:shadow-lg hover:border-yellow-300 transition-all cursor-pointer group"
+                  >
+                    {/* Header */}
+                    <div className="flex items-start justify-between mb-4">
+                      <div className={`px-3 py-1 rounded-full text-xs font-medium border ${getStatusColor(project.status)}`}>
+                        <div className="flex items-center gap-1.5">
+                          {getStatusIcon(project.status)}
+                          <span>{getStatusLabel(project.status)}</span>
+                        </div>
+                      </div>
+                      {project.isPublic && (
+                        <span className="px-2 py-1 bg-blue-50 text-blue-700 text-xs rounded-full">
+                          Public
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Title & Category */}
+                    <h3 className="font-semibold text-gray-900 text-lg mb-1 group-hover:text-yellow-700 transition-colors">
+                      {project.title}
+                    </h3>
+                    <p className="text-sm text-gray-500 mb-3">{project.category}</p>
+
+                    {/* Description */}
+                    <p className="text-sm text-gray-600 line-clamp-2 mb-4">
+                      {project.description}
+                    </p>
+
+                    {/* Tools */}
+                    {project.toolsUsed && project.toolsUsed.length > 0 && (
+                      <div className="mb-4">
+                        <div className="flex flex-wrap gap-1">
+                          {project.toolsUsed.slice(0, 3).map((tool, i) => (
+                            <span key={i} className="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs">
+                              {tool}
+                            </span>
+                          ))}
+                          {project.toolsUsed.length > 3 && (
+                            <span className="px-2 py-1 text-gray-500 text-xs">
+                              +{project.toolsUsed.length - 3}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Footer */}
+                    <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                      <div className="flex items-center gap-3 text-sm text-gray-500">
+                        <span className="flex items-center gap-1">
+                          <Calendar className="w-4 h-4" />
+                          {new Date(project.createdAt).toLocaleDateString()}
+                        </span>
+                      </div>
+                      <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-yellow-600 group-hover:translate-x-1 transition-all" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+                <table className="w-full">
+                  <thead className="bg-gray-50">
+                    <tr>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Project</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Category</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Tools</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Created</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-100">
+                    {filteredProjects.map((project) => (
+                      <tr
+                        key={project.id}
+                        onClick={() => setSelectedProject(project)}
+                        className="hover:bg-gray-50 cursor-pointer"
+                      >
+                        <td className="px-4 py-3">
+                          <div>
+                            <p className="font-medium text-gray-900">{project.title}</p>
+                            <p className="text-sm text-gray-500 line-clamp-1">{project.description}</p>
+                          </div>
+                        </td>
+                        <td className="px-4 py-3">
+                          <span className="text-sm text-gray-700">{project.category}</span>
+                        </td>
+                        <td className="px-4 py-3">
+                          <span className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium border ${getStatusColor(project.status)}`}>
+                            {getStatusIcon(project.status)}
+                            {getStatusLabel(project.status)}
+                          </span>
+                        </td>
+                        <td className="px-4 py-3">
+                          <div className="flex flex-wrap gap-1">
+                            {project.toolsUsed?.slice(0, 2).map((tool, i) => (
+                              <span key={i} className="px-2 py-0.5 bg-gray-100 text-gray-700 rounded text-xs">
+                                {tool}
+                              </span>
+                            ))}
+                            {project.toolsUsed && project.toolsUsed.length > 2 && (
+                              <span className="text-xs text-gray-500">+{project.toolsUsed.length - 2}</span>
+                            )}
+                          </div>
+                        </td>
+                        <td className="px-4 py-3 text-sm text-gray-500">
+                          {new Date(project.createdAt).toLocaleDateString()}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
+        </main>
+      </div>
+
+      {/* Project Detail Modal */}
+      {selectedProject && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            {/* Modal Header */}
+            <div className="sticky top-0 bg-white border-b border-gray-200 p-6 flex items-start justify-between">
+              <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <span className={`px-3 py-1 rounded-full text-xs font-medium border ${getStatusColor(selectedProject.status)}`}>
+                    <div className="flex items-center gap-1">
+                      {getStatusIcon(selectedProject.status)}
+                      <span>{getStatusLabel(selectedProject.status)}</span>
+                    </div>
+                  </span>
+                  {selectedProject.isPublic && (
+                    <span className="px-2 py-1 bg-blue-50 text-blue-700 text-xs rounded-full">
+                      Public
+                    </span>
+                  )}
+                </div>
+                <h2 className="text-2xl font-bold text-gray-900">{selectedProject.title}</h2>
+                <p className="text-sm text-gray-500 mt-1">{selectedProject.category}</p>
+              </div>
+              <button
+                onClick={() => setSelectedProject(null)}
+                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              >
+                <XCircle className="w-5 h-5 text-gray-400" />
+              </button>
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-6 space-y-6">
+              {/* Description */}
+              <div>
+                <h3 className="text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
+                  <FileText className="w-4 h-4" />
+                  Description
+                </h3>
+                <p className="text-gray-600 leading-relaxed">{selectedProject.description}</p>
+              </div>
+
+              {/* Tools Used */}
+              {selectedProject.toolsUsed && selectedProject.toolsUsed.length > 0 && (
+                <div>
+                  <h3 className="text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
+                    <Wrench className="w-4 h-4" />
+                    Tools & Technologies
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedProject.toolsUsed.map((tool, i) => (
+                      <span key={i} className="px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg text-sm">
+                        {tool}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Role */}
+              {selectedProject.studentRole && (
+                <div>
+                  <h3 className="text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
+                    <User className="w-4 h-4" />
+                    Your Role
+                  </h3>
+                  <p className="text-gray-600">{selectedProject.studentRole}</p>
+                </div>
+              )}
+
+              {/* Evidence Links */}
+              {selectedProject.evidence && Object.values(selectedProject.evidence).some(v => v) && (
+                <div>
+                  <h3 className="text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
+                    <ExternalLink className="w-4 h-4" />
+                    Project Links
+                  </h3>
+                  <div className="grid grid-cols-2 gap-3">
+                    {selectedProject.evidence.demoLink && (
+                      <a 
+                        href={selectedProject.evidence.demoLink} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 p-3 bg-blue-50 rounded-lg text-blue-700 hover:bg-blue-100 transition-colors"
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                        <span className="text-sm font-medium">Live Demo</span>
+                      </a>
+                    )}
+                    {selectedProject.evidence.videoDemoLink && (
+                      <a 
+                        href={selectedProject.evidence.videoDemoLink} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 p-3 bg-red-50 rounded-lg text-red-700 hover:bg-red-100 transition-colors"
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                        <span className="text-sm font-medium">Video Demo</span>
+                      </a>
+                    )}
+                    {selectedProject.evidence.designLink && (
+                      <a 
+                        href={selectedProject.evidence.designLink} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 p-3 bg-purple-50 rounded-lg text-purple-700 hover:bg-purple-100 transition-colors"
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                        <span className="text-sm font-medium">Design</span>
+                      </a>
+                    )}
+                    {selectedProject.evidence.documentationLink && (
+                      <a 
+                        href={selectedProject.evidence.documentationLink} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 p-3 bg-gray-100 rounded-lg text-gray-700 hover:bg-gray-200 transition-colors"
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                        <span className="text-sm font-medium">Documentation</span>
+                      </a>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* Attachments */}
+              {selectedProject.attachments && (
+                <div>
+                  <h3 className="text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
+                    <ImageIcon className="w-4 h-4" />
+                    Attachments
+                  </h3>
+                  <div className="space-y-2">
+                    {selectedProject.attachments.images && selectedProject.attachments.images.length > 0 && (
+                      <p className="text-sm text-gray-600">
+                        {selectedProject.attachments.images.length} image(s) attached
+                      </p>
+                    )}
+                    {selectedProject.attachments.pdfs && selectedProject.attachments.pdfs.length > 0 && (
+                      <p className="text-sm text-gray-600">
+                        {selectedProject.attachments.pdfs.length} PDF(s) attached
+                      </p>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* Trainer Feedback */}
+              {selectedProject.trainerFeedback && (
+                <div className="p-4 bg-blue-50 border border-blue-100 rounded-xl">
+                  <h3 className="text-sm font-semibold text-blue-900 mb-2">Trainer Feedback</h3>
+                  <p className="text-sm text-blue-700">{selectedProject.trainerFeedback}</p>
+                  {selectedProject.approvedAt && (
+                    <p className="text-xs text-blue-600 mt-2">
+                      Approved on {new Date(selectedProject.approvedAt).toLocaleDateString()}
+                    </p>
+                  )}
+                </div>
+              )}
+
+              {/* Dates */}
+              <div className="flex items-center gap-4 text-sm text-gray-500 pt-4 border-t border-gray-100">
+                <span className="flex items-center gap-1">
+                  <Calendar className="w-4 h-4" />
+                  Created: {new Date(selectedProject.createdAt).toLocaleDateString()}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
