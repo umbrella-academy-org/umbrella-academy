@@ -1,31 +1,24 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
-import { SystemMetric, SystemAlert, ServiceStatus } from '@/types';
-import {
-  mockSystemMetrics,
-  mockSystemAlerts,
-  mockSystemStats,
-} from '@/data';
-import { apiClient } from '@/services/client';
-import { API_ENDPOINTS } from '@/services/constants';
+import { systemService, type SystemMetric, type SystemAlert, type ServiceStatus, type SystemStats } from '@/services/system';
 import { useAuth } from './AuthContext';
 
 interface SystemContextType {
   metrics: SystemMetric[];
   alerts: SystemAlert[];
   services: ServiceStatus[];
-  systemStats: typeof mockSystemStats;
+  systemStats: SystemStats | null;
   healthScore: number;
   isLoading: boolean;
   error: string | null;
+  refreshSystemData: () => Promise<void>;
+  hasPermission: (permission: string) => boolean;
   getHealthyMetricsFromContext: () => SystemMetric[];
   getWarningMetricsFromContext: () => SystemMetric[];
   getErrorMetricsFromContext: () => SystemMetric[];
   getRecentAlertsFromContext: (hours?: number) => SystemAlert[];
   getCriticalAlertsFromContext: () => SystemAlert[];
-  refreshSystemData: () => Promise<void>;
-  hasPermission: (permission: string) => boolean;
 }
 
 const SystemContext = createContext<SystemContextType | undefined>(undefined);
@@ -43,7 +36,7 @@ export function SystemProvider({ children }: { children: React.ReactNode }) {
   const [metrics, setMetrics] = useState<SystemMetric[]>([]);
   const [alerts, setAlerts] = useState<SystemAlert[]>([]);
   const [services, setServices] = useState<ServiceStatus[]>([]);
-  const [systemStats, setSystemStats] = useState<typeof mockSystemStats>(mockSystemStats);
+  const [systemStats, setSystemStats] = useState<SystemStats | null>(null);
   const [healthScore, setHealthScore] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -70,28 +63,17 @@ export function SystemProvider({ children }: { children: React.ReactNode }) {
         return;
       }
 
-      const response = await apiClient.get<{
-        success: boolean;
-        data: {
-          metrics: SystemMetric[];
-          alerts: SystemAlert[];
-          services: ServiceStatus[];
-        };
-      }>(API_ENDPOINTS.SYSTEM);
+      const response = await systemService.getSystemData();
 
-      let fetchedMetrics = response.data.metrics;
-      let fetchedAlerts = response.data.alerts;
-      const fetchedServices = response.data.services;
-
-      // Field admins see a limited subset — now only admin role exists
-      if (currentUser.role === 'admin') {
-        // Admin sees all metrics
-      }
+      const fetchedMetrics = response.data?.metrics ?? [];
+      const fetchedAlerts = response.data?.alerts ?? [];
+      const fetchedServices = response.data?.services ?? [];
+      const fetchedStats = response.data?.stats ?? null;
 
       setMetrics(fetchedMetrics);
       setAlerts(fetchedAlerts);
       setServices(fetchedServices);
-      setSystemStats(mockSystemStats);
+      setSystemStats(fetchedStats);
 
       // Compute health score: percentage of metrics with status === 'healthy'
       const total = fetchedMetrics.length;
@@ -102,23 +84,11 @@ export function SystemProvider({ children }: { children: React.ReactNode }) {
       console.error('Error loading system data:', err);
       setError('Failed to load system data');
 
-      // Fall back to mock data
-      let filteredMetrics: SystemMetric[] = [];
-      let filteredAlerts: SystemAlert[] = [];
-
-      if (currentUser?.role === 'admin') {
-        filteredMetrics = mockSystemMetrics;
-        filteredAlerts = mockSystemAlerts;
-      }
-
-      setMetrics(filteredMetrics);
-      setAlerts(filteredAlerts);
+      setMetrics([]);
+      setAlerts([]);
       setServices([]);
-      setSystemStats(mockSystemStats);
-
-      const total = filteredMetrics.length;
-      const healthy = filteredMetrics.filter(m => m.status === 'healthy').length;
-      setHealthScore(total > 0 ? Math.round((healthy / total) * 100) : 0);
+      setSystemStats(null);
+      setHealthScore(0);
     } finally {
       setIsLoading(false);
     }

@@ -31,11 +31,12 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     setError(null);
     try {
       const studentResponse = await userService.getStudents();
-      const trianerResponse = await userService.getTrainers();
-      const students = studentResponse.data;
-      const trainers = trianerResponse.data;
-      setTrainers(trainers || []);
-      setStudents(students || []);
+      const trainerResponse = await userService.getTrainers();
+      const studentsData = studentResponse.data || [];
+      const trainersData = trainerResponse.data || [];
+      setTrainers(trainersData);
+      setStudents(studentsData);
+      setUsers([...studentsData, ...trainersData]);
     } catch {
       setError('Failed to load users');
     } finally {
@@ -57,7 +58,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
 
   const getUsersByRole = (role: UserRole) => users.filter(u => u.role === role);
-  const getUserByIdFromContext = (id: string) => users.find(u => u.id === id);
+  const getUserByIdFromContext = (id: string) => users.find(u => u._id === id);
 
   return (
     <UserContext.Provider value={{

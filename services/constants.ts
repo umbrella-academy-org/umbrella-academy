@@ -49,6 +49,8 @@ export const API_ENDPOINTS = {
   NOTIFICATIONS: '/api/notifications',
   NOTIFICATION_BY_ID: (id: string) => `/api/notifications/${id}`,
   SYSTEM: '/api/system',
+  SYSTEM_DATABASE: '/api/system/database',
+  SYSTEM_MEMORY: '/api/system/memory',
   TRAINERS_PENDING: '/api/trainers/pending',
 
   ADMIN_ANALYTICS: '/api/admin/analytics',

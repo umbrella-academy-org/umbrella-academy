@@ -3,8 +3,10 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { Send, Paperclip, MoreVertical, Phone, Video, Search as SearchIcon, Smile, AlertCircle, MessageSquare } from 'lucide-react';
 import { messageService, socketService } from '@/services';
-import type { ChatContactEntry, ChatMessage } from '@/services/messages';
+import type { ChatMessage } from '@/services/messages';
 import { useAuth } from '@/contexts/AuthContext';
+import { useUsers } from '@/contexts/UserContext';
+import type { BaseUser } from '@/types';
 
 interface DisplayMessage {
     id: string;
@@ -22,9 +24,8 @@ function formatTime(iso: string): string {
 
 export default function ChatInterface({ userType }: { userType: string }) {
     const { user } = useAuth();
-    const [contacts, setContacts] = useState<ChatContactEntry[]>([]);
-    const [contactsLoading, setContactsLoading] = useState(true);
-    const [activeContact, setActiveContact] = useState<ChatContactEntry | null>(null);
+    const { users, isLoading: contactsLoading } = useUsers();
+    const [activeContact, setActiveContact] = useState<BaseUser | null>(null);
     const [messages, setMessages] = useState<DisplayMessage[]>([]);
     const [messagesLoading, setMessagesLoading] = useState(false);
     const [message, setMessage] = useState('');
@@ -38,18 +39,8 @@ export default function ChatInterface({ userType }: { userType: string }) {
         scrollToBottom();
     }, [messages]);
 
-    // Fetch contacts on mount
-    useEffect(() => {
-        setContactsLoading(true);
-        messageService.getContacts()
-            .then((res) => {
-                if (res.success) setContacts(res.data);
-            })
-            .catch(() => {
-                // leave contacts empty on error
-            })
-            .finally(() => setContactsLoading(false));
-    }, []);
+    // Filter contacts from users (exclude current user)
+    const contacts = users.filter(u => u._id !== user?._id);
 
     // Connect socket and listen for incoming messages
     useEffect(() => {
@@ -60,8 +51,8 @@ export default function ChatInterface({ userType }: { userType: string }) {
             setActiveContact((current) => {
                 if (!current) return current;
                 const isFromActiveContact =
-                    msg.senderId === current.contact._id ||
-                    msg.recipientId === current.contact._id;
+                    msg.senderId === current._id ||
+                    msg.recipientId === current._id;
                 if (isFromActiveContact) {
                     setMessages((prev) => [
                         ...prev,
@@ -85,12 +76,12 @@ export default function ChatInterface({ userType }: { userType: string }) {
     }, [user?._id]);
 
     // Fetch messages when a contact is selected
-    const handleSelectContact = useCallback(async (entry: ChatContactEntry) => {
-        setActiveContact(entry);
+    const handleSelectContact = useCallback(async (contact: BaseUser) => {
+        setActiveContact(contact);
         setMessagesLoading(true);
         try {
-            const res = await messageService.getMessages(entry.contact._id);
-            if (res.success) {
+            const res = await messageService.getMessages(contact._id);
+            if (res.success && res.data) {
                 setMessages(
                     res.data.map((m) => ({
                         id: m._id,
@@ -127,7 +118,7 @@ export default function ChatInterface({ userType }: { userType: string }) {
         setMessage('');
 
         try {
-            socketService.sendMessage(activeContact.contact._id, text);
+            socketService.sendMessage(activeContact._id, text);
         } catch {
             // Mark as failed, restore text
             setMessages((prev) =>
@@ -173,34 +164,27 @@ export default function ChatInterface({ userType }: { userType: string }) {
                             <p className="text-xs text-gray-400 mt-1">Your conversations will appear here</p>
                         </div>
                     ) : (
-                        contacts.map((entry) => {
-                            const { contact, lastMessage, lastMessageAt } = entry;
+                        contacts.map((contact) => {
                             const displayName = `${contact.firstName} ${contact.lastName}`;
-                            const timeLabel = lastMessageAt ? formatTime(lastMessageAt) : '';
                             return (
                                 <button
                                     key={contact._id}
-                                    onClick={() => handleSelectContact(entry)}
-                                    className={`w-full flex items-center gap-4 p-4 hover:bg-gray-50 transition-all border-l-4 ${activeContact?.contact._id === contact._id ? 'bg-gray-50 border-yellow-600' : 'border-transparent'}`}
+                                    onClick={() => handleSelectContact(contact)}
+                                    className={`w-full flex items-center gap-4 p-4 hover:bg-gray-50 transition-all border-l-4 ${activeContact?._id === contact._id ? 'bg-gray-50 border-yellow-600' : 'border-transparent'}`}
                                 >
                                     <div className="relative">
-                                        {contact.avatar ? (
-                                            <img src={contact.avatar} alt={displayName} className="w-12 h-12 rounded-full object-cover shadow-sm" />
-                                        ) : (
-                                            <div className="w-12 h-12 rounded-full bg-yellow-100 flex items-center justify-center shadow-sm">
-                                                <span className="text-yellow-700 font-bold text-sm">
-                                                    {contact.firstName[0]}{contact.lastName[0]}
-                                                </span>
-                                            </div>
-                                        )}
+                                        <div className="w-12 h-12 rounded-full bg-yellow-100 flex items-center justify-center shadow-sm">
+                                            <span className="text-yellow-700 font-bold text-sm">
+                                                {contact.firstName[0]}{contact.lastName[0]}
+                                            </span>
+                                        </div>
                                     </div>
                                     <div className="flex-1 text-left min-w-0">
                                         <div className="flex justify-between items-center mb-0.5">
                                             <h4 className="font-semibold text-gray-900 text-sm truncate">{displayName}</h4>
-                                            <span className="text-[10px] text-gray-400 font-medium">{timeLabel}</span>
                                         </div>
-                                        <p className="text-xs text-gray-500 truncate">
-                                            {lastMessage?.text ?? 'No messages yet'}
+                                        <p className="text-xs text-gray-500 truncate capitalize">
+                                            {contact.role}
                                         </p>
                                     </div>
                                 </button>
@@ -218,21 +202,17 @@ export default function ChatInterface({ userType }: { userType: string }) {
                         <div className="p-4 bg-white border-b border-gray-100 flex items-center justify-between shadow-sm relative z-10">
                             <div className="flex items-center gap-4">
                                 <div className="relative">
-                                    {activeContact.contact.avatar ? (
-                                        <img src={activeContact.contact.avatar} alt={`${activeContact.contact.firstName} ${activeContact.contact.lastName}`} className="w-10 h-10 rounded-full object-cover" />
-                                    ) : (
-                                        <div className="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center">
-                                            <span className="text-yellow-700 font-bold text-xs">
-                                                {activeContact.contact.firstName[0]}{activeContact.contact.lastName[0]}
-                                            </span>
-                                        </div>
-                                    )}
+                                    <div className="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center">
+                                        <span className="text-yellow-700 font-bold text-xs">
+                                            {activeContact.firstName[0]}{activeContact.lastName[0]}
+                                        </span>
+                                    </div>
                                 </div>
                                 <div>
                                     <h3 className="font-bold text-gray-900 text-sm">
-                                        {activeContact.contact.firstName} {activeContact.contact.lastName}
+                                        {activeContact.firstName} {activeContact.lastName}
                                     </h3>
-                                    <p className="text-[10px] text-gray-500 font-medium capitalize">{activeContact.contact.role}</p>
+                                    <p className="text-[10px] text-gray-500 font-medium capitalize">{activeContact.role}</p>
                                 </div>
                             </div>
                             <div className="flex items-center gap-2">

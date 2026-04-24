@@ -1,5 +1,6 @@
 import { apiClient } from './client';
 import { API_ENDPOINTS } from './constants';
+import type { ApiResponse } from '@/types';
 
 export interface Notification {
   _id: string;
@@ -13,12 +14,12 @@ export interface Notification {
 }
 
 class NotificationService {
-  async getNotifications(): Promise<{ success: boolean; data: Notification[] }> {
-    return apiClient.get<{ success: boolean; data: Notification[] }>(API_ENDPOINTS.NOTIFICATIONS);
+  async getNotifications(): Promise<ApiResponse<Notification[]>> {
+    return apiClient.get<Notification[]>(API_ENDPOINTS.NOTIFICATIONS);
   }
 
-  async markAsRead(id: string): Promise<{ success: boolean; data: Notification }> {
-    return apiClient.put<{ success: boolean; data: Notification }>(API_ENDPOINTS.NOTIFICATION_BY_ID(id));
+  async markAsRead(id: string): Promise<ApiResponse<Notification>> {
+    return apiClient.put<Notification>(API_ENDPOINTS.NOTIFICATION_BY_ID(id));
   }
 }
 
