@@ -62,7 +62,7 @@ export default function StudentProfilePage() {
     const email = user?.email || 'jane.mukamana@student.umbrella.rw';
     const bio = user?.profileData?.bio || 'Dedicated trainee focusing on live collaborative sessions and practical software implementation within the Umbrella Tech Field.';
     const field = 'Tech Field';
-    const joinDate = user?.createdAt.toLocaleDateString() || 'Sep 2024';
+    const joinDate = new Date(user?.createdAt).toLocaleDateString() || 'Sep 2024';
 
     return (
         <div className="flex h-screen bg-[#FDFDFC]">

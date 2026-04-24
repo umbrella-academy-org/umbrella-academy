@@ -22,7 +22,7 @@ export default function TrainerProfilePage() {
         expertise: ['Full Stack Development', 'Cloud Architecture', 'React & Next.js', 'System Design'],
         experience: '8+ Years',
         field: 'Software Engineering',
-        joinDate: user?.createdAt.toLocaleDateString() || 'Jan 2023'
+        joinDate: new Date(user?.createdAt).toLocaleDateString() || 'Jan 2023'
     });
 
     const handleSave = () => {

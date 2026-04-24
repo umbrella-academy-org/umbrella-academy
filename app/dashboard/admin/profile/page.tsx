@@ -13,7 +13,7 @@ export default function UmbrellaAdminProfilePage() {
         name: user?.firstName && user?.lastName ? `${user.firstName} ${user.lastName}` : 'Super Admin',
         email: user?.email || 'admin@umbrellaacademy.rw',
         role: 'Umbrella System Administrator',
-        joinDate: user?.createdAt.toLocaleDateString() || 'Jan 2020'
+        joinDate: new Date(user?.createdAt).toLocaleDateString() || 'Jan 2020'
     });
 
     return (
