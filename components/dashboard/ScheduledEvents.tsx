@@ -2,11 +2,10 @@
 
 import { Bell, ChevronRight, Calendar, Clock } from 'lucide-react';
 import { useState } from 'react';
-import { UserType } from '@/types';
 import { useRoadmaps } from '@/contexts';
 
 interface ScheduledEventsProps {
-  userType: UserType;
+  userType: 'trainer' | 'student' | 'admin';
 }
 
 export default function ScheduledEvents({ userType }: ScheduledEventsProps) {

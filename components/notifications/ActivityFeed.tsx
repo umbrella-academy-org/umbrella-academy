@@ -22,7 +22,7 @@ export default function ActivityFeed({ searchQuery, selectedActivity, onActivity
     try {
       const response = await notificationService.getNotifications();
       if (response.success) {
-        setNotifications(response.data);
+        setNotifications(response.data ?? []);
       }
     } catch {
       setError('Failed to load notifications. Please try again.');

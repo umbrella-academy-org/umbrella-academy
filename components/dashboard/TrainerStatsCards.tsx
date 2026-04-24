@@ -2,7 +2,7 @@
 
 import { Users, CheckCircle, DollarSign, Star, Bell } from 'lucide-react';
 import { useState } from 'react';
-import { Transaction } from '@/types';
+import { Transaction } from '@/services/financial';
 
 interface TrainerStatsCardsProps {
   studentsCount: number;

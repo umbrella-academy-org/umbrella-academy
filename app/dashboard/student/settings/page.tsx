@@ -19,9 +19,7 @@ export default function StudentSettingsPage() {
         marketingEmail: false
     });
 
-    const [security, setSecurity] = useState({
-        twoFactor: false,
-    });
+    const [security, setSecurity] = useState({ twoFactor: false, });
 
     return (
         <div className="flex h-screen bg-white">
