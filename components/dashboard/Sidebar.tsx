@@ -36,6 +36,25 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
   // Define navigation items based on user type
   const getNavigationItems = (): SidebarItem[] => {
     switch (currentUserType) {
+      case 'guardian':
+        return [
+          {
+            icon: <Home className="w-5 h-5" />,
+            label: 'Dashboard',
+            href: '/dashboard/guardian',
+            active: true
+          },
+          {
+            icon: <User className="w-5 h-5" />,
+            label: 'Profile',
+            href: '/dashboard/guardian/profile'
+          },
+          {
+            icon: <Settings className="w-5 h-5" />,
+            label: 'Settings',
+            href: '/dashboard/guardian/settings'
+          },
+        ];
       case 'trainer':
         return [
           {

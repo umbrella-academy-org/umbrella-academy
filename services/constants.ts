@@ -59,6 +59,15 @@ export const API_ENDPOINTS = {
   ADMIN_REJECT_TRAINER: (id: string) => `/api/admin/trainers/${id}/reject`,
   ADMIN_FEEDBACK_BY_ID: (id: string) => `/api/admin/feedback/${id}`,
   ADMIN_FEEDBACK_RESPONSE: (id: string) => `/api/admin/feedback/${id}/response`,
+  
+  // Guardian
+  GUARDIAN_VERIFY_INVITE: '/api/guardian/invite/verify',
+  GUARDIAN_SET_PASSWORD: '/api/guardian/set-password',
+  GUARDIAN_LOGIN: '/api/guardian/login',
+  GUARDIAN_DECLINE_INVITE: '/api/guardian/invite/decline',
+  GUARDIAN_STUDENTS: '/api/guardian/students',
+  GUARDIAN_STUDENT_BY_ID: (id: string) => `/api/guardian/students/${id}`,
+  
   FILES: {
     UPLOAD_AVATAR: '/api/files/avatar',
     UPLOAD_MESSAGE: '/api/files/message',
