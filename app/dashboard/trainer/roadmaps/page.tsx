@@ -13,7 +13,7 @@ import {
   Map, Clock, CheckCircle, Lock, PlayCircle, PauseCircle, XCircle, 
   Target, BookOpen, ChevronRight, Search, Filter, Grid, List,
   User, Calendar, CheckSquare, XSquare, Folder, MessageSquare,
-  ArrowLeft, ThumbsUp, ThumbsDown, AlertCircle
+  ArrowLeft, ThumbsUp, ThumbsDown, AlertCircle, Plus
 } from 'lucide-react';
 
 export default function TrainerRoadmapsPage() {
@@ -179,9 +179,18 @@ export default function TrainerRoadmapsPage() {
             {viewMode === 'list' ? (
               <>
                 {/* Header */}
-                <div className="mb-6">
-                  <h1 className="text-2xl font-semibold text-gray-900">Student Roadmaps</h1>
-                  <p className="text-gray-600 mt-1">View and manage all your assigned student roadmaps</p>
+                <div className="flex items-start justify-between mb-6">
+                  <div>
+                    <h1 className="text-2xl font-semibold text-gray-900">Student Roadmaps</h1>
+                    <p className="text-gray-600 mt-1">View and manage all your assigned student roadmaps</p>
+                  </div>
+                  <button
+                    onClick={() => router.push('/dashboard/trainer/roadmaps/create')}
+                    className="flex items-center gap-2 px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors"
+                  >
+                    <Plus className="w-4 h-4" />
+                    Create New Roadmap
+                  </button>
                 </div>
 
                 {/* Stats */}
