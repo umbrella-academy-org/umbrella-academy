@@ -617,7 +617,7 @@ export default function TrainerProjectsPage() {
                     </p>
                     {selectedProject.approvedAt && (
                       <p className="text-xs text-gray-500 mt-2">
-                        {(selectedProject.status as string) === 'approved' ? 'Approved' : 'Updated'} on {new Date(selectedProject.approvedAt).toLocaleDateString()}
+                        {(selectedProject.status === ProjectStatus.APPROVED  ? 'Approved' : 'Updated')} on {new Date(selectedProject.approvedAt).toLocaleDateString()}
                       </p>
                     )}
                   </div>

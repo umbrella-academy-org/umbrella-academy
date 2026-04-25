@@ -1,7 +1,7 @@
 import { BASE_URL } from './constants';
 import { ApiResponse } from '@/types';
 
-const API_CONFIG = { BASE_URL, TIMEOUT: 20000 };
+const API_CONFIG = { BASE_URL, TIMEOUT: 30000 };
 const HTTP_STATUS = { UNAUTHORIZED: 401, FORBIDDEN: 403 };
 
 class ApiClient {
