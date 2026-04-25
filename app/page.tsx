@@ -24,6 +24,7 @@ export default function Home() {
   // Redirect authenticated users to their dashboard
   useEffect(() => {
     if (isAuthenticated && user) {
+      console.log(user.role)
       const dashboardRoutes: Record<UserRole, string> = {
         'student': '/dashboard/student',
         'trainer': '/dashboard/trainer',
