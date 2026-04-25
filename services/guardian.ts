@@ -7,17 +7,12 @@ export interface VerifyInviteRequest {
 }
 
 export interface VerifyInviteResponse {
-  valid: boolean;
   guardian?: {
     email: string;
     firstName: string;
     lastName: string;
   };
-  student?: {
-    firstName: string;
-    lastName: string;
-  };
-  expiresAt?: string;
+  studentName?: string;
 }
 
 export interface SetPasswordRequest {

@@ -36,23 +36,17 @@ function SetPasswordContent() {
     const verifyToken = async () => {
       try {
         const response = await guardianService.verifyInvite(token);
-        if (response.success && response.data?.valid) {
+        if (response.success && response.data) {
           setIsValid(true);
           setGuardianInfo(response.data.guardian || null);
-          setStudentInfo(response.data.student || null);
-          
-          // Check if expired
-          if (response.data.expiresAt) {
-            const expiryDate = new Date(response.data.expiresAt);
-            if (expiryDate < new Date()) {
-              setIsExpired(true);
-            }
-          }
+          setStudentInfo(response.data.studentName ? { firstName: response.data.studentName.split(' ')[0], lastName: response.data.studentName.split(' ')[1] } :   null);         
         } else {
           setIsValid(false);
+          setError(response.message || 'Invalid invitation token');
         }
       } catch {
         setIsValid(false);
+        setError('An error occurred while verifying the token. Please try again.');
       } finally {
         setIsLoading(false);
       }
@@ -87,10 +81,7 @@ function SetPasswordContent() {
       const response = await guardianService.setPassword(token, password);
       if (response.success) {
         setSuccess(true);
-        // Redirect to login after 3 seconds
-        setTimeout(() => {
-          router.push('/auth/login');
-        }, 3000);
+       
       } else {
         setError(response.message || 'Failed to set password');
       }
