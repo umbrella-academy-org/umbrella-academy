@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { authService } from '@/services/auth';
-import { BaseUser, OnboardingChecklist, Student, StudentRegister, Trainer, UserRole } from '@/types';
+import { BaseUser, OnboardingChecklist, Student, StudentRegister, Trainer, UserRole, Guardian, GuardianInviteState } from '@/types';
 import { useRouter } from 'next/navigation';
 
 interface AuthContextType {
@@ -36,15 +36,61 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const checkSession = async () => {
-      const user = localStorage.getItem('user');
-      if (user) {
-        const parsedUser = JSON.parse(user);
+      const storedUser = localStorage.getItem('user');
+      const token = localStorage.getItem('auth_token');
+
+      if (storedUser && token) {
+        const parsedUser = JSON.parse(storedUser);
+
+        // Check various user states before allowing access
+
+        // 1. Check if email is verified
+        if (!parsedUser.isEmailVerified) {
+          // Redirect to verification page
+          localStorage.setItem('userEmail', parsedUser.email);
+          await authService.sendOtp(parsedUser.email);
+          setIsLoading(false);
+          router.push('/auth/verify');
+          return;
+        }
+
+        // 2. Check trainer approval status
+        if (parsedUser.role === UserRole.TRAINER) {
+          const trainer = parsedUser as Trainer;
+          if (trainer.approvalStatus === 'pending') {
+            setIsLoading(false);
+            router.push('/auth/pending-approval');
+            return;
+          }
+        }
+
+        // 3. Check guardian invite state
+        if (parsedUser.role === UserRole.GUARDIAN) {
+          const guardian = parsedUser as Guardian;
+          if (guardian.inviteState === GuardianInviteState.INVITED) {
+            // Guardian needs to set password - but they should have done this via email link
+            // If they're here, something went wrong - clear session
+            localStorage.removeItem('auth_token');
+            localStorage.removeItem('user');
+            setIsLoading(false);
+            router.push('/auth/login');
+            return;
+          }
+        }
+
+        // All checks passed - restore session
         setUser(parsedUser);
         setIsAuthenticated(true);
+
+        // Fetch student onboarding checklist if needed
         if (parsedUser.role === UserRole.STUDENT) {
-          const response = await authService.getOnboardingChecklist();
-          if (response.success && response.data) {
-            setOnboardingChecklist(response.data);
+          try {
+            const response = await authService.getOnboardingChecklist();
+            if (response.success && response.data) {
+              setOnboardingChecklist(response.data);
+            }
+          } catch {
+            // Silently fail - not critical
           }
         }
       }
@@ -57,7 +103,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (user) {
       // User changed - handle any side effects here
-      if (user.role === UserRole.STUDENT && !onboardingChecklist) {
+      if (user.role === UserRole.STUDENT) {
         authService.getOnboardingChecklist().then(response => {
           if (response.success && response.data) {
             setOnboardingChecklist(response.data);
@@ -65,7 +111,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         });
       }
     }
-  }, [user?._id]); // Only re-run when user ID changes, not the entire object
+  }, [user?._id]); 
 
 
 
@@ -75,18 +121,34 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const response = await authService.login(email, password);
       if (response.success && response.data) {
         const userData = response.data.user;
-        
+
+        // Clear any previous errors
+        setError(null);
+
         // Check if trainer is pending approval
         if (userData.role === UserRole.TRAINER) {
           const trainer = userData as Trainer;
           if (trainer.approvalStatus === 'pending') {
-            // Don't log in pending trainers, redirect to pending approval page
-            router.push(`/auth/pending-approval?email=${encodeURIComponent(email)}`);
+           localStorage.setItem('auth_token', response.data.token);
+           localStorage.setItem('user', JSON.stringify(userData));
             setIsLoading(false);
+            router.push(`/auth/pending-approval`);
             return;
           }
         }
-        
+
+        // Check if guardian needs to set password (invited state)
+        if (userData.role === UserRole.GUARDIAN) {
+          const guardian = userData as Guardian;
+          if (guardian.inviteState === GuardianInviteState.INVITED) {
+            // Don't store auth data - they need to use the invite link
+            setIsLoading(false);
+            router.push('/auth/login');
+            setError('Please use the invitation email link to set up your account.');
+            return;
+          }
+        }
+
         setUser(userData);
         setIsAuthenticated(true);
         localStorage.setItem('auth_token', response.data.token);
@@ -138,7 +200,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const logout = async () => {
-    try { await authService.logout(); } catch { /* ignore */ } finally { setUser(null); }
+    try {
+      await authService.logout();
+    } catch {
+      // ignore API errors
+    } finally {
+      // Clear all auth state
+      setUser(null);
+      setIsAuthenticated(false);
+      setError(null);
+      localStorage.removeItem('auth_token');
+      localStorage.removeItem('user');
+      localStorage.removeItem('userEmail');
+    }
   };
 
 
