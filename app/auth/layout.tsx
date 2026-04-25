@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Join Umbrella Academy",
+    title: "Join Dreamize Academy",
     description: "Create your account at Umbrella Academy and start your learning journey with expert mentors and industry trainers.",
 };
 

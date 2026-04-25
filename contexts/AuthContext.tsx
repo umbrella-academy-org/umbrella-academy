@@ -74,10 +74,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       const response = await authService.login(email, password);
       if (response.success && response.data) {
-        setUser(response.data.user);
+        const userData = response.data.user;
+        
+        // Check if trainer is pending approval
+        if (userData.role === UserRole.TRAINER) {
+          const trainer = userData as Trainer;
+          if (trainer.approvalStatus === 'pending') {
+            // Don't log in pending trainers, redirect to pending approval page
+            router.push(`/auth/pending-approval?email=${encodeURIComponent(email)}`);
+            setIsLoading(false);
+            return;
+          }
+        }
+        
+        setUser(userData);
         setIsAuthenticated(true);
         localStorage.setItem('auth_token', response.data.token);
-        localStorage.setItem('user', JSON.stringify(response.data.user));
+        localStorage.setItem('user', JSON.stringify(userData));
       }
       else {
         setError(response.message);
