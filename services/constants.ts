@@ -1,6 +1,6 @@
 // Dreamize API Configuration
 
-export const BASE_URL = 'http://localhost:5000';
+export const BASE_URL = process.env.NODE_ENV === 'production' ? 'https://umbrella-academy-backend.onrender.com' : 'http://localhost:5000';
 
 export const API_ENDPOINTS = {
   AUTH_REGISTER: '/api/auth/register',
