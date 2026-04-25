@@ -25,7 +25,7 @@ export default function PendingApprovalContent() {
     return (
         <div className="flex min-h-screen bg-gray-50">
             {/* Left side - Content */}
-            <div className="flex flex-[2] flex-col justify-between p-8 bg-white">
+            <div className="flex flex-[2] flex-col justify-between p-8 bg-white overflow-auto h-screen">
                 <div className="flex flex-col flex-1 max-w-md mx-auto w-full justify-center">
                     {/* Logo */}
                     <div className="mb-8 text-center">

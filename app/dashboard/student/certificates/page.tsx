@@ -2,7 +2,7 @@
 
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
-import { Student } from '@/types';
+import { Student, UserRole } from '@/types';
 import Sidebar from '@/components/dashboard/Sidebar';
 import { 
   Award, 
@@ -41,7 +41,7 @@ export default function CertificatesPage() {
   if (!hasActiveSubscription) {
     return (
       <div className="flex h-screen bg-gray-50">
-        <Sidebar activeItem="Certificates" userType="student" />
+        <Sidebar activeItem="Certificates" userType={UserRole.STUDENT} />
         <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
           <main className="flex-1 overflow-y-auto p-6">
             <div className="max-w-4xl mx-auto">
@@ -82,7 +82,7 @@ export default function CertificatesPage() {
 
   return (
     <div className="flex h-screen bg-gray-50">
-      <Sidebar activeItem="Certificates" userType="student" />
+      <Sidebar activeItem="Certificates" userType={UserRole.STUDENT} />
       
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
         <main className="flex-1 overflow-y-auto p-6">

@@ -40,12 +40,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const token = localStorage.getItem('auth_token');
 
       if (storedUser && token) {
-        const parsedUser = JSON.parse(storedUser);
+        const parsedUser:BaseUser = JSON.parse(storedUser);
 
         // Check various user states before allowing access
 
         // 1. Check if email is verified
-        if (!parsedUser.isEmailVerified) {
+        if (!parsedUser.isVerified) {
           // Redirect to verification page
           localStorage.setItem('userEmail', parsedUser.email);
           await authService.sendOtp(parsedUser.email);
@@ -160,6 +160,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           localStorage.setItem('userEmail', email);
           authService.sendOtp(email);
           router.push('/auth/verify');
+        }else if (response.message.includes('pending approval')) {
+          router.push('/auth/pending-approval');
         }
       }
     } catch (err: unknown) {
