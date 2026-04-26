@@ -1,3 +1,4 @@
+import { BaseUser } from "./user";
 
 export type RoadmapStatus = 'draft' | 'pending-approval' | 'approved' | 'active' | 'paused' | 'completed' | 'rejected';
 export type PhaseStatus = 'pending' | 'active' | 'completed';
@@ -54,8 +55,8 @@ export interface Milestone {
 
 export interface Roadmap {
   id: string;
-  studentId: string;
-  trainerId: string;
+  studentId: BaseUser;
+  trainerId: BaseUser;
   title: string;
   status: RoadmapStatus;
   approvedBy?: string;

@@ -172,11 +172,11 @@ export default function RoadmapApprovalsPage() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                       <div className="flex items-center gap-2 text-sm text-gray-600">
                         <User className="w-4 h-4" />
-                        Student: {roadmap.studentId}
+                        Student: {roadmap.studentId.firstName} {roadmap.studentId.lastName}
                       </div>
                       <div className="flex items-center gap-2 text-sm text-gray-600">
                         <Award className="w-4 h-4" />
-                        Trainer: {roadmap.trainerId}
+                        Trainer: {roadmap.trainerId.firstName} {roadmap.trainerId.lastName}
                       </div>
                       <div className="flex items-center gap-2 text-sm text-gray-600">
                         <Calendar className="w-4 h-4" />
@@ -222,7 +222,7 @@ export default function RoadmapApprovalsPage() {
 
       {/* Roadmap Details Modal */}
       {showDetails && selectedRoadmap && (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50 flex justify-center items-center">
+        <div className="fixed inset-0 bg-black/50 overflow-y-auto h-full w-full z-50 flex justify-center items-center">
           <div className="relative p-8 bg-white w-full max-w-2xl mx-auto rounded-lg shadow-lg">
             <button
               className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
@@ -241,11 +241,11 @@ export default function RoadmapApprovalsPage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="flex items-center gap-2 text-sm text-gray-600">
                       <User className="w-4 h-4" />
-                      Student: {selectedRoadmap.studentId}
+                      Student: {selectedRoadmap.studentId.firstName} {selectedRoadmap.studentId.lastName}
                     </div>
                     <div className="flex items-center gap-2 text-sm text-gray-600">
                       <Award className="w-4 h-4" />
-                      Trainer: {selectedRoadmap.trainerId}
+                      Trainer: {selectedRoadmap.trainerId.firstName} {selectedRoadmap.trainerId.lastName}
                     </div>
                     <div className="flex items-center gap-2 text-sm text-gray-600">
                       <Calendar className="w-4 h-4" />

@@ -3,31 +3,15 @@
 import { useState } from 'react';
 import { X, Calendar, Clock, User, CheckCircle, MessageSquare } from 'lucide-react';
 import { useUsers } from '@/contexts';
-import { Trainer, BookingStatus, StudentBookingRequest } from '@/types';
+import { Trainer,  StudentBookingRequest } from '@/types';
 import { useBooking } from '@/hooks/useBooking';
-
-interface OrientationBooking extends Document {
-  id: string;
-  studentId: string;
-  trainerId: string;
-  requestedTime: Date;
-  alternativeTime?: Date;
-  learningGoals: string;
-  status: BookingStatus;
-  rejectionReason?: string;
-  meetingLink?: string;
-  createdAt: Date;
-}
 
 interface BookingCalendarProps {
   onClose: () => void;
   onSuccess: () => void;
 }
 
-interface TimeSlot {
-  time: string;
-  available: boolean;
-}
+
 
 export default function BookingCalendar({ onClose, onSuccess }: BookingCalendarProps) {
   const { trainers } = useUsers()
@@ -37,13 +21,6 @@ export default function BookingCalendar({ onClose, onSuccess }: BookingCalendarP
   const [selectedTime, setSelectedTime] = useState<string>('');
   const [learningGoals, setLearningGoals] = useState('');
   const [bookingStep, setBookingStep] = useState<'select' | 'confirm' | 'submitting' | 'success'>('select');
-
-  // Generate available dates for the next 7 days
-  const availableDates = Array.from({ length: 7 }, (_, i) => {
-    const date = new Date();
-    date.setDate(date.getDate() + i + 1);
-    return date.toISOString().split('T')[0];
-  });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
