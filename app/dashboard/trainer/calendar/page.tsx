@@ -46,7 +46,7 @@ export default function TrainerRoadmapsPage() {
   });
 
   // Filter roadmaps for current trainer
-  const trainerRoadmaps = roadmaps.filter(roadmap => roadmap.trainerId === user?._id);
+  const trainerRoadmaps = roadmaps.filter(roadmap => roadmap.trainerId._id === user?._id);
   const handleAddMilestone = () => {
     if (newMilestone.title && newMilestone.description && newMilestone.estimatedDurationDays) {
       setMilestones([...milestones, newMilestone]);
@@ -357,7 +357,7 @@ export default function TrainerRoadmapsPage() {
                               {roadmap.status.replace('-', ' ').charAt(0).toUpperCase() + roadmap.status.slice(1).replace('-', ' ')}
                             </div>
                           </div>
-                          <p className="text-sm text-gray-500">Student: {getStudentName(roadmap.studentId)}</p>
+                          <p className="text-sm text-gray-500">Student: {getStudentName(roadmap.studentId._id)}</p>
                           <p className="text-xs text-gray-400">Created: {new Date(roadmap.createdAt).toLocaleDateString()}</p>
                           {roadmap.approvedAt && (
                             <p className="text-xs text-gray-400">Approved: {new Date(roadmap.approvedAt).toLocaleDateString()}</p>
@@ -702,7 +702,7 @@ export default function TrainerRoadmapsPage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <p className="text-sm text-gray-500">Student</p>
-                      <p className="font-medium text-gray-900">{getStudentName(selectedRoadmap.studentId)}</p>
+                      <p className="font-medium text-gray-900">{getStudentName(selectedRoadmap.studentId._id)}</p>
                     </div>
                     <div>
                       <p className="text-sm text-gray-500">Status</p>
@@ -849,7 +849,7 @@ export default function TrainerRoadmapsPage() {
                     <strong>Milestone:</strong> {selectedMilestone.milestone.title}
                   </p>
                   <p className="text-sm text-gray-600 mb-2">
-                    <strong>Student:</strong> {getStudentName(selectedMilestone.roadmap.studentId)}
+                    <strong>Student:</strong> {getStudentName(selectedMilestone.roadmap.studentId._id)}
                   </p>
                   <p className="text-sm text-gray-600 mb-4">
                     <strong>Duration:</strong> {selectedMilestone.milestone.estimatedDurationDays} days
@@ -959,7 +959,7 @@ export default function TrainerRoadmapsPage() {
                     <strong>Milestone:</strong> {selectedMilestone.milestone.title}
                   </p>
                   <p className="text-sm text-gray-600 mb-2">
-                    <strong>Student:</strong> {getStudentName(selectedMilestone.roadmap.studentId)}
+                    <strong>Student:</strong> {getStudentName(selectedMilestone.roadmap.studentId._id)}
                   </p>
                   <p className="text-sm text-gray-600 mb-4">
                     <strong>Duration:</strong> {selectedMilestone.milestone.estimatedDurationDays} days

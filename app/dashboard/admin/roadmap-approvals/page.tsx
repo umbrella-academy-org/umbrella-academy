@@ -19,12 +19,7 @@ export default function RoadmapApprovalsPage() {
   const [roadmaps, setRoadmaps] = useState<Roadmap[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
-  // Load pending roadmaps on component mount
-  useEffect(() => {
-    loadPendingRoadmaps();
-  },[]);
-
+  
   const loadPendingRoadmaps = async () => {
     setLoading(true);
     setError(null);
@@ -38,6 +33,12 @@ export default function RoadmapApprovalsPage() {
       setLoading(false);
     }
   };
+
+  // Load pending roadmaps on component mount
+  useEffect(() => {
+    loadPendingRoadmaps();
+  },[]);
+
 
   const handleApprove = async (roadmapId: string) => {
     setActionLoading(true);

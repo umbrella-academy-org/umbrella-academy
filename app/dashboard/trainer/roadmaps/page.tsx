@@ -371,7 +371,7 @@ export default function TrainerRoadmapsPage() {
                         </div>
                         <h1 className="text-3xl font-bold mb-2">{selectedRoadmap.title}</h1>
                         {(() => {
-                          const student = students.find(s => s._id === selectedRoadmap.studentId);
+                          const student = students.find(s => s._id === selectedRoadmap.studentId._id);
                           return (
                             <div className="flex items-center gap-2 text-white/90">
                               <User className="w-5 h-5" />
