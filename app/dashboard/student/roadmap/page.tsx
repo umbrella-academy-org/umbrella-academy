@@ -6,7 +6,7 @@ import { useAuth, useRoadmaps } from '@/contexts';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
 import { roadmapService } from '@/services/roadmap';
 import { Milestone, UserRole, RoadmapStepStatus, Roadmap, RoadmapStatus } from '@/types';
-import { Map, Clock, CheckCircle, Lock, PlayCircle, PauseCircle, XCircle, Calendar, Target, BookOpen, ChevronRight, X } from 'lucide-react';
+import { Map, Clock, CheckCircle, Lock, PlayCircle, PauseCircle, XCircle, Calendar, Target, BookOpen, ChevronRight, X, Link2, FileText, Image as ImageIcon, FilePlus, ExternalLink, Youtube, Figma, Github, Code, Tag, Briefcase, Layers, Plus, Trash2 } from 'lucide-react';
 
 export default function StudentRoadmapPage() {
   const { user, isAuthenticated, isLoading: authLoading } = useAuth();
@@ -16,13 +16,23 @@ export default function StudentRoadmapPage() {
   const [selectedMilestone, setSelectedMilestone] = useState<Milestone | null>(null);
   const [showProjectModal, setShowProjectModal] = useState(false);
   const [projectSubmission, setProjectSubmission] = useState({
+    title: '',
     description: '',
+    category: '',
+    studentRole: '',
+    toolsUsed: [] as string[],
     evidence: {
+      demoLink: '',
       videoDemoLink: '',
       designLink: '',
-      fileDownloadLink: ''
+      documentationLink: '',
+      fileDownloadLink: '',
+      externalLink: ''
     },
-    toolsUsed: [] as string[]
+    attachments: {
+      images: [] as string[],
+      pdfs: [] as string[]
+    }
   });
   const [completingMilestone, setCompletingMilestone] = useState(false);
   const [selectedRoadmap, setSelectedRoadmap] = useState<Roadmap | null>(null);
@@ -154,13 +164,23 @@ export default function StudentRoadmapPage() {
       setShowProjectModal(false);
       setSelectedMilestone(null);
       setProjectSubmission({
+        title: '',
         description: '',
+        category: '',
+        studentRole: '',
+        toolsUsed: [],
         evidence: {
+          demoLink: '',
           videoDemoLink: '',
           designLink: '',
-          fileDownloadLink: ''
+          documentationLink: '',
+          fileDownloadLink: '',
+          externalLink: ''
         },
-        toolsUsed: []
+        attachments: {
+          images: [],
+          pdfs: []
+        }
       });
     } catch (error) {
       console.error('Failed to complete milestone:', error);
@@ -556,119 +576,458 @@ export default function StudentRoadmapPage() {
           )}
         </main>
       </div>
-      {/* Project Submission Modal */}
+      {/* Project Submission Modal - Improved UI */}
       {showProjectModal && selectedMilestone && (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50 flex justify-center items-center">
-          <div className="relative bg-white rounded-lg shadow-xl max-w-md w-full mx-4 p-6">
-            <button
-              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
-              onClick={() => setShowProjectModal(false)}
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">
-              Complete Milestone: {selectedMilestone.title}
-            </h3>
-
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Project Description
-                </label>
-                <textarea
-                  value={projectSubmission.description}
-                  onChange={(e) => setProjectSubmission({ ...projectSubmission, description: e.target.value })}
-                  rows={4}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-yellow-500 focus:border-yellow-500"
-                  placeholder="Describe your project and what you learned"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Tools Used (comma-separated)
-                </label>
-                <input
-                  type="text"
-                  value={projectSubmission.toolsUsed.join(', ')}
-                  onChange={(e) => setProjectSubmission({ ...projectSubmission, toolsUsed: e.target.value.split(',').map(tool => tool.trim()).filter(tool => tool) })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-yellow-500 focus:border-yellow-500"
-                  placeholder="React Native, Firebase, Redux, Expo"
-                />
-              </div>
-
-              <div className="space-y-3">
-                <label className="block text-sm font-medium text-gray-700">
-                  Project Evidence
-                </label>
-
-                <div>
-                  <label className="block text-xs font-medium text-gray-600 mb-1">
-                    Video Demo Link
-                  </label>
-                  <input
-                    type="url"
-                    value={projectSubmission.evidence.videoDemoLink}
-                    onChange={(e) => setProjectSubmission({
-                      ...projectSubmission,
-                      evidence: { ...projectSubmission.evidence, videoDemoLink: e.target.value }
-                    })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-yellow-500 focus:border-yellow-500"
-                    placeholder="https://youtu.be/mobile-demo"
-                  />
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm overflow-y-auto h-full w-full z-50 flex justify-center items-start py-8">
+          <div className="relative bg-white rounded-2xl shadow-2xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            {/* Header */}
+            <div className="sticky top-0 bg-gradient-to-r from-yellow-500 to-yellow-600 p-6 rounded-t-2xl z-10">
+              <button
+                className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors"
+                onClick={() => setShowProjectModal(false)}
+              >
+                <X className="w-6 h-6" />
+              </button>
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                  <Target className="w-6 h-6 text-white" />
                 </div>
-
                 <div>
-                  <label className="block text-xs font-medium text-gray-600 mb-1">
-                    Design Link (Figma, Adobe XD)
-                  </label>
-                  <input
-                    type="url"
-                    value={projectSubmission.evidence.designLink}
-                    onChange={(e) => setProjectSubmission({
-                      ...projectSubmission,
-                      evidence: { ...projectSubmission.evidence, designLink: e.target.value }
-                    })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-yellow-500 focus:border-yellow-500"
-                    placeholder="https://figma.com/file/mobile-design"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-medium text-gray-600 mb-1">
-                    File Download Link
-                  </label>
-                  <input
-                    type="url"
-                    value={projectSubmission.evidence.fileDownloadLink}
-                    onChange={(e) => setProjectSubmission({
-                      ...projectSubmission,
-                      evidence: { ...projectSubmission.evidence, fileDownloadLink: e.target.value }
-                    })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-yellow-500 focus:border-yellow-500"
-                    placeholder="https://drive.google.com/file/mobile-apk"
-                  />
+                  <h3 className="text-xl font-bold text-white">
+                    Complete Milestone
+                  </h3>
+                  <p className="text-white/80 text-sm">{selectedMilestone.title}</p>
                 </div>
               </div>
             </div>
 
-            <div className="mt-6 flex justify-end gap-3">
-              <button
-                onClick={() => setShowProjectModal(false)}
-                className="px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleProjectSubmit}
-                disabled={completingMilestone || !projectSubmission.description.trim()}
-                className="px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {completingMilestone ? 'Submitting...' : 'Submit Project'}
-              </button>
+            {/* Form Content */}
+            <div className="p-6 space-y-6">
+              {/* Project Overview Section */}
+              <div className="bg-gray-50 rounded-xl p-5 border border-gray-100">
+                <h4 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                  <Briefcase className="w-4 h-4 text-yellow-600" />
+                  Project Overview
+                </h4>
+                <div className="space-y-4">
+                  {/* Project Title */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                      Project Title <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      value={projectSubmission.title}
+                      onChange={(e) => setProjectSubmission({ ...projectSubmission, title: e.target.value })}
+                      className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 text-sm"
+                      placeholder="e.g., Smart Home Automation System"
+                    />
+                  </div>
+
+                  {/* Category & Role Row */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                        Category
+                      </label>
+                      <select
+                        value={projectSubmission.category}
+                        onChange={(e) => setProjectSubmission({ ...projectSubmission, category: e.target.value })}
+                        className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 text-sm bg-white"
+                      >
+                        <option value="">Select category</option>
+                        <option value="Robotics">Robotics</option>
+                        <option value="UI/UX">UI/UX Design</option>
+                        <option value="Coding">Coding</option>
+                        <option value="Data Science">Data Science</option>
+                        <option value="Mobile App">Mobile App</option>
+                        <option value="Web Development">Web Development</option>
+                        <option value="AI/ML">AI/ML</option>
+                        <option value="IoT">IoT</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                        Your Role
+                      </label>
+                      <input
+                        type="text"
+                        value={projectSubmission.studentRole}
+                        onChange={(e) => setProjectSubmission({ ...projectSubmission, studentRole: e.target.value })}
+                        className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 text-sm"
+                        placeholder="e.g., Lead Developer"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Description */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                      Description <span className="text-red-500">*</span>
+                    </label>
+                    <textarea
+                      value={projectSubmission.description}
+                      onChange={(e) => setProjectSubmission({ ...projectSubmission, description: e.target.value })}
+                      rows={4}
+                      className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 text-sm resize-none"
+                      placeholder="Describe your project, what problem it solves, and what you learned from it..."
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Tools Used Section */}
+              <div className="bg-gray-50 rounded-xl p-5 border border-gray-100">
+                <h4 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                  <Layers className="w-4 h-4 text-blue-600" />
+                  Tools & Technologies Used
+                </h4>
+                <div className="space-y-3">
+                  {/* Tags Display */}
+                  {projectSubmission.toolsUsed.length > 0 && (
+                    <div className="flex flex-wrap gap-2">
+                      {projectSubmission.toolsUsed.map((tool, index) => (
+                        <span
+                          key={index}
+                          className="inline-flex items-center gap-1 px-3 py-1.5 bg-blue-100 text-blue-700 rounded-lg text-sm font-medium"
+                        >
+                          <Code className="w-3.5 h-3.5" />
+                          {tool}
+                          <button
+                            onClick={() => setProjectSubmission({
+                              ...projectSubmission,
+                              toolsUsed: projectSubmission.toolsUsed.filter((_, i) => i !== index)
+                            })}
+                            className="ml-1 text-blue-500 hover:text-blue-700"
+                          >
+                            <X className="w-3.5 h-3.5" />
+                          </button>
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                  {/* Add Tool Input */}
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      id="toolInput"
+                      placeholder="e.g., Python, React Native, OpenCV"
+                      className="flex-1 px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 text-sm"
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                          e.preventDefault();
+                          const input = e.target as HTMLInputElement;
+                          const value = input.value.trim();
+                          if (value && !projectSubmission.toolsUsed.includes(value)) {
+                            setProjectSubmission({
+                              ...projectSubmission,
+                              toolsUsed: [...projectSubmission.toolsUsed, value]
+                            });
+                            input.value = '';
+                          }
+                        }
+                      }}
+                    />
+                    <button
+                      onClick={() => {
+                        const input = document.getElementById('toolInput') as HTMLInputElement;
+                        const value = input.value.trim();
+                        if (value && !projectSubmission.toolsUsed.includes(value)) {
+                          setProjectSubmission({
+                            ...projectSubmission,
+                            toolsUsed: [...projectSubmission.toolsUsed, value]
+                          });
+                          input.value = '';
+                        }
+                      }}
+                      className="px-4 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
+                    >
+                      <Plus className="w-4 h-4" />
+                    </button>
+                  </div>
+                  <p className="text-xs text-gray-500">Press Enter or click + to add a tool</p>
+                </div>
+              </div>
+
+              {/* Project Evidence Section */}
+              <div className="bg-gray-50 rounded-xl p-5 border border-gray-100">
+                <h4 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                  <Link2 className="w-4 h-4 text-green-600" />
+                  Project Evidence (Links)
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {/* Demo Link */}
+                  <div>
+                    <label className="flex items-center gap-1.5 text-xs font-medium text-gray-600 mb-1.5">
+                      <ExternalLink className="w-3.5 h-3.5" />
+                      Live Demo URL
+                    </label>
+                    <input
+                      type="url"
+                      value={projectSubmission.evidence.demoLink}
+                      onChange={(e) => setProjectSubmission({
+                        ...projectSubmission,
+                        evidence: { ...projectSubmission.evidence, demoLink: e.target.value }
+                      })}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 text-sm"
+                      placeholder="https://my-demo.example.com"
+                    />
+                  </div>
+
+                  {/* Video Demo Link */}
+                  <div>
+                    <label className="flex items-center gap-1.5 text-xs font-medium text-gray-600 mb-1.5">
+                      <Youtube className="w-3.5 h-3.5" />
+                      Video Demo (YouTube, etc.)
+                    </label>
+                    <input
+                      type="url"
+                      value={projectSubmission.evidence.videoDemoLink}
+                      onChange={(e) => setProjectSubmission({
+                        ...projectSubmission,
+                        evidence: { ...projectSubmission.evidence, videoDemoLink: e.target.value }
+                      })}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 text-sm"
+                      placeholder="https://youtube.com/watch?v=..."
+                    />
+                  </div>
+
+                  {/* Design Link */}
+                  <div>
+                    <label className="flex items-center gap-1.5 text-xs font-medium text-gray-600 mb-1.5">
+                      <Figma className="w-3.5 h-3.5" />
+                      Design (Figma, Adobe XD)
+                    </label>
+                    <input
+                      type="url"
+                      value={projectSubmission.evidence.designLink}
+                      onChange={(e) => setProjectSubmission({
+                        ...projectSubmission,
+                        evidence: { ...projectSubmission.evidence, designLink: e.target.value }
+                      })}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 text-sm"
+                      placeholder="https://figma.com/file/..."
+                    />
+                  </div>
+
+                  {/* Documentation Link */}
+                  <div>
+                    <label className="flex items-center gap-1.5 text-xs font-medium text-gray-600 mb-1.5">
+                      <FileText className="w-3.5 h-3.5" />
+                      Documentation
+                    </label>
+                    <input
+                      type="url"
+                      value={projectSubmission.evidence.documentationLink}
+                      onChange={(e) => setProjectSubmission({
+                        ...projectSubmission,
+                        evidence: { ...projectSubmission.evidence, documentationLink: e.target.value }
+                      })}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 text-sm"
+                      placeholder="https://docs.example.com"
+                    />
+                  </div>
+
+                  {/* File Download Link */}
+                  <div>
+                    <label className="flex items-center gap-1.5 text-xs font-medium text-gray-600 mb-1.5">
+                      <FilePlus className="w-3.5 h-3.5" />
+                      File Download
+                    </label>
+                    <input
+                      type="url"
+                      value={projectSubmission.evidence.fileDownloadLink}
+                      onChange={(e) => setProjectSubmission({
+                        ...projectSubmission,
+                        evidence: { ...projectSubmission.evidence, fileDownloadLink: e.target.value }
+                      })}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 text-sm"
+                      placeholder="https://drive.google.com/file/..."
+                    />
+                  </div>
+
+                  {/* External Link */}
+                  <div>
+                    <label className="flex items-center gap-1.5 text-xs font-medium text-gray-600 mb-1.5">
+                      <Github className="w-3.5 h-3.5" />
+                      GitHub / Other External
+                    </label>
+                    <input
+                      type="url"
+                      value={projectSubmission.evidence.externalLink}
+                      onChange={(e) => setProjectSubmission({
+                        ...projectSubmission,
+                        evidence: { ...projectSubmission.evidence, externalLink: e.target.value }
+                      })}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 text-sm"
+                      placeholder="https://github.com/..."
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Attachments Section */}
+              <div className="bg-gray-50 rounded-xl p-5 border border-gray-100">
+                <h4 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                  <ImageIcon className="w-4 h-4 text-purple-600" />
+                  Attachments (Images & PDFs)
+                </h4>
+                
+                {/* Images */}
+                <div className="mb-4">
+                  <label className="flex items-center gap-1.5 text-xs font-medium text-gray-600 mb-2">
+                    <ImageIcon className="w-3.5 h-3.5" />
+                    Image URLs
+                  </label>
+                  {projectSubmission.attachments.images.length > 0 && (
+                    <div className="flex flex-wrap gap-2 mb-2">
+                      {projectSubmission.attachments.images.map((url, index) => (
+                        <span
+                          key={index}
+                          className="inline-flex items-center gap-1 px-3 py-1.5 bg-purple-100 text-purple-700 rounded-lg text-sm"
+                        >
+                          <ImageIcon className="w-3.5 h-3.5" />
+                          <span className="max-w-[150px] truncate">{url.split('/').pop() || `Image ${index + 1}`}</span>
+                          <button
+                            onClick={() => setProjectSubmission({
+                              ...projectSubmission,
+                              attachments: {
+                                ...projectSubmission.attachments,
+                                images: projectSubmission.attachments.images.filter((_, i) => i !== index)
+                              }
+                            })}
+                            className="ml-1 text-purple-500 hover:text-purple-700"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                  <div className="flex gap-2">
+                    <input
+                      type="url"
+                      id="imageInput"
+                      placeholder="https://cdn.example.com/image.jpg"
+                      className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 text-sm"
+                    />
+                    <button
+                      onClick={() => {
+                        const input = document.getElementById('imageInput') as HTMLInputElement;
+                        const value = input.value.trim();
+                        if (value) {
+                          setProjectSubmission({
+                            ...projectSubmission,
+                            attachments: {
+                              ...projectSubmission.attachments,
+                              images: [...projectSubmission.attachments.images, value]
+                            }
+                          });
+                          input.value = '';
+                        }
+                      }}
+                      className="px-3 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors text-sm"
+                    >
+                      <Plus className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+
+                {/* PDFs */}
+                <div>
+                  <label className="flex items-center gap-1.5 text-xs font-medium text-gray-600 mb-2">
+                    <FileText className="w-3.5 h-3.5" />
+                    PDF Document URLs
+                  </label>
+                  {projectSubmission.attachments.pdfs.length > 0 && (
+                    <div className="flex flex-wrap gap-2 mb-2">
+                      {projectSubmission.attachments.pdfs.map((url, index) => (
+                        <span
+                          key={index}
+                          className="inline-flex items-center gap-1 px-3 py-1.5 bg-orange-100 text-orange-700 rounded-lg text-sm"
+                        >
+                          <FileText className="w-3.5 h-3.5" />
+                          <span className="max-w-[150px] truncate">{url.split('/').pop() || `PDF ${index + 1}`}</span>
+                          <button
+                            onClick={() => setProjectSubmission({
+                              ...projectSubmission,
+                              attachments: {
+                                ...projectSubmission.attachments,
+                                pdfs: projectSubmission.attachments.pdfs.filter((_, i) => i !== index)
+                              }
+                            })}
+                            className="ml-1 text-orange-500 hover:text-orange-700"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                  <div className="flex gap-2">
+                    <input
+                      type="url"
+                      id="pdfInput"
+                      placeholder="https://cdn.example.com/document.pdf"
+                      className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 text-sm"
+                    />
+                    <button
+                      onClick={() => {
+                        const input = document.getElementById('pdfInput') as HTMLInputElement;
+                        const value = input.value.trim();
+                        if (value) {
+                          setProjectSubmission({
+                            ...projectSubmission,
+                            attachments: {
+                              ...projectSubmission.attachments,
+                              pdfs: [...projectSubmission.attachments.pdfs, value]
+                            }
+                          });
+                          input.value = '';
+                        }
+                      }}
+                      className="px-3 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors text-sm"
+                    >
+                      <Plus className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Footer */}
+            <div className="sticky bottom-0 bg-white border-t border-gray-200 p-6 rounded-b-2xl">
+              <div className="flex justify-between items-center">
+                <p className="text-xs text-gray-500">
+                  <span className="text-red-500">*</span> Required fields
+                </p>
+                <div className="flex gap-3">
+                  <button
+                    onClick={() => setShowProjectModal(false)}
+                    className="px-5 py-2.5 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors font-medium"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={handleProjectSubmit}
+                    disabled={completingMilestone || !projectSubmission.title.trim() || !projectSubmission.description.trim()}
+                    className="px-5 py-2.5 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white rounded-lg hover:from-yellow-600 hover:to-yellow-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed font-medium shadow-md"
+                  >
+                    {completingMilestone ? (
+                      <span className="flex items-center gap-2">
+                        <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                        Submitting...
+                      </span>
+                    ) : (
+                      <span className="flex items-center gap-2">
+                        <CheckCircle className="w-4 h-4" />
+                        Submit Project
+                      </span>
+                    )}
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
