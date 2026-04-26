@@ -13,7 +13,9 @@ import {
   Map, Clock, CheckCircle, Lock, PlayCircle, PauseCircle, XCircle, 
   Target, BookOpen, ChevronRight, Search, Filter, Grid, List,
   User, Calendar, CheckSquare, XSquare, Folder, MessageSquare,
-  ArrowLeft, ThumbsUp, ThumbsDown, AlertCircle, Plus
+  ArrowLeft, ThumbsUp, ThumbsDown, AlertCircle, Plus, X, Award,
+  Link2, FileText, Image as ImageIcon, FilePlus, ExternalLink, 
+  Youtube, Figma, Github, Code, Eye, Wrench, ChevronLeft
 } from 'lucide-react';
 
 export default function TrainerRoadmapsPage() {
@@ -31,6 +33,7 @@ export default function TrainerRoadmapsPage() {
   const [trainerFeedback, setTrainerFeedback] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
   const [milestoneProjects, setMilestoneProjects] = useState<Project[]>([]);
+  const [viewingProjectDetail, setViewingProjectDetail] = useState<Project | null>(null);
 
   // Filter roadmaps for current trainer
   const trainerRoadmaps = roadmaps.filter(r => r.trainerId._id === user?._id);
@@ -553,190 +556,467 @@ export default function TrainerRoadmapsPage() {
       {/* Milestone Approval Modal */}
       {showApprovalModal && selectedMilestone && selectedRoadmap && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            {/* Modal Header */}
-            <div className="sticky top-0 bg-white border-b border-gray-200 p-6 flex items-start justify-between">
-              <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <span className={`px-3 py-1 rounded-full text-xs font-medium border ${getMilestoneStatusColor(selectedMilestone.status)}`}>
-                    {selectedMilestone.status.replace('-', ' ').charAt(0).toUpperCase() + selectedMilestone.status.slice(1).replace('-', ' ')}
-                  </span>
-                </div>
-                <h2 className="text-2xl font-bold text-gray-900">{selectedMilestone.title}</h2>
-              </div>
-              <button
-                onClick={() => setShowApprovalModal(false)}
-                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-              >
-                <XCircle className="w-5 h-5 text-gray-400" />
-              </button>
-            </div>
-
-            {/* Modal Content */}
-            <div className="p-6 space-y-6">
-              {/* Description */}
-              <div>
-                <h3 className="text-sm font-semibold text-gray-700 mb-2">Description</h3>
-                <p className="text-gray-600">{selectedMilestone.description}</p>
-              </div>
-
-              {/* Skills */}
-              {selectedMilestone.skillsToLearn && selectedMilestone.skillsToLearn.length > 0 && (
-                <div>
-                  <h3 className="text-sm font-semibold text-gray-700 mb-2">Skills to Learn</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {selectedMilestone.skillsToLearn.map((skill, i) => (
-                      <span key={i} className="px-3 py-1.5 bg-blue-50 text-blue-700 rounded-lg text-sm border border-blue-100">
-                        {skill}
+          <div className="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+            {!viewingProjectDetail ? (
+              <>
+                {/* Milestone Overview */}
+                <div className="sticky top-0 bg-white border-b border-gray-200 p-6 flex items-start justify-between">
+                  <div>
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className={`px-3 py-1 rounded-full text-xs font-medium border ${getMilestoneStatusColor(selectedMilestone.status)}`}>
+                        {selectedMilestone.status.replace('-', ' ').charAt(0).toUpperCase() + selectedMilestone.status.slice(1).replace('-', ' ')}
                       </span>
-                    ))}
+                    </div>
+                    <h2 className="text-2xl font-bold text-gray-900">{selectedMilestone.title}</h2>
                   </div>
+                  <button
+                    onClick={() => setShowApprovalModal(false)}
+                    className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                  >
+                    <X className="w-5 h-5 text-gray-400" />
+                  </button>
                 </div>
-              )}
 
-              {/* Tasks */}
-              {selectedMilestone.tasks && selectedMilestone.tasks.length > 0 && (
-                <div>
-                  <h3 className="text-sm font-semibold text-gray-700 mb-2">Tasks</h3>
-                  <ul className="space-y-1">
-                    {selectedMilestone.tasks.map((task, i) => (
-                      <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
-                        <div className="w-1.5 h-1.5 bg-yellow-500 rounded-full mt-1.5 flex-shrink-0" />
-                        {task}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
+                <div className="p-6 space-y-6">
+                  {/* Description */}
+                  <div>
+                    <h3 className="text-sm font-semibold text-gray-700 mb-2">Description</h3>
+                    <p className="text-gray-600">{selectedMilestone.description}</p>
+                  </div>
 
-              {/* Submitted Projects */}
-              {milestoneProjects.length > 0 && (
-                <div>
-                  <h3 className="text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
-                    <Folder className="w-4 h-4" />
-                    Submitted Projects ({milestoneProjects.length})
-                  </h3>
-                  <div className="space-y-3">
-                    {milestoneProjects.map((project) => (
-                      <div key={project.id} className={`p-4 rounded-lg border ${
-                        project.status === ProjectStatus.APPROVED ? 'bg-green-50 border-green-200' :
-                        project.status === ProjectStatus.REJECTED ? 'bg-red-50 border-red-200' :
-                        project.status === ProjectStatus.PENDING_APPROVAL ? 'bg-yellow-50 border-yellow-200' :
-                        'bg-gray-50 border-gray-200'
-                      }`}>
-                        <div className="flex items-start justify-between">
-                          <div>
-                            <h4 className="font-medium text-gray-900">{project.title}</h4>
-                            <p className="text-sm text-gray-600 line-clamp-2">{project.description}</p>
-                            <div className="flex items-center gap-2 mt-2">
-                              <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
-                                project.status === ProjectStatus.APPROVED ? 'bg-green-100 text-green-700' :
-                                project.status === ProjectStatus.REJECTED ? 'bg-red-100 text-red-700' :
-                                project.status === ProjectStatus.PENDING_APPROVAL ? 'bg-yellow-100 text-yellow-700' :
-                                'bg-gray-100 text-gray-700'
-                              }`}>
-                                {project.status.replace('_', ' ')}
-                              </span>
-                            </div>
-                          </div>
-                          {/* Quick Approve/Reject for Projects */}
-                          {project.status === ProjectStatus.PENDING_APPROVAL && (
-                            <div className="flex gap-2">
-                              <button
-                                onClick={async () => {
-                                  await projectService.approveProject(project.id);
-                                  const updated = await projectService.getProjectData(project.id);
-                                  if (updated.data) {
-                                    setMilestoneProjects(prev => prev.map(p => p.id === project.id ? updated.data! : p));
-                                  }
-                                }}
-                                className="p-2 bg-green-100 text-green-600 rounded-lg hover:bg-green-200 transition-colors"
-                                title="Approve Project"
-                              >
-                                <ThumbsUp className="w-4 h-4" />
-                              </button>
-                              <button
-                                onClick={async () => {
-                                  await projectService.rejectProject(project.id);
-                                  const updated = await projectService.getProjectData(project.id);
-                                  if (updated.data) {
-                                    setMilestoneProjects(prev => prev.map(p => p.id === project.id ? updated.data! : p));
-                                  }
-                                }}
-                                className="p-2 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition-colors"
-                                title="Reject Project"
-                              >
-                                <ThumbsDown className="w-4 h-4" />
-                              </button>
-                            </div>
-                          )}
-                        </div>
+                  {/* Skills */}
+                  {selectedMilestone.skillsToLearn && selectedMilestone.skillsToLearn.length > 0 && (
+                    <div>
+                      <h3 className="text-sm font-semibold text-gray-700 mb-2">Skills to Learn</h3>
+                      <div className="flex flex-wrap gap-2">
+                        {selectedMilestone.skillsToLearn.map((skill, i) => (
+                          <span key={i} className="px-3 py-1.5 bg-blue-50 text-blue-700 rounded-lg text-sm border border-blue-100">
+                            {skill}
+                          </span>
+                        ))}
                       </div>
-                    ))}
-                  </div>
-                  
-                  {/* Project Approval Warning */}
-                  {!allProjectsApproved() && pendingProjectsCount() > 0 && (
-                    <div className="mt-3 p-3 bg-orange-50 border border-orange-200 rounded-lg flex items-start gap-2">
-                      <AlertCircle className="w-5 h-5 text-orange-600 flex-shrink-0 mt-0.5" />
-                      <p className="text-sm text-orange-700">
-                        <span className="font-medium">Action Required:</span> {pendingProjectsCount()} project(s) need approval before you can approve this milestone.
-                      </p>
                     </div>
                   )}
+
+                  {/* Tasks */}
+                  {selectedMilestone.tasks && selectedMilestone.tasks.length > 0 && (
+                    <div>
+                      <h3 className="text-sm font-semibold text-gray-700 mb-2">Tasks</h3>
+                      <ul className="space-y-1">
+                        {selectedMilestone.tasks.map((task, i) => (
+                          <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
+                            <div className="w-1.5 h-1.5 bg-yellow-500 rounded-full mt-1.5 flex-shrink-0" />
+                            {task}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {/* Submitted Projects */}
+                  {milestoneProjects.length > 0 && (
+                    <div>
+                      <h3 className="text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
+                        <Folder className="w-4 h-4" />
+                        Submitted Projects ({milestoneProjects.length})
+                      </h3>
+                      <div className="space-y-3">
+                        {milestoneProjects.map((project) => (
+                          <div key={project.id} className={`p-4 rounded-lg border ${
+                            project.status === ProjectStatus.APPROVED ? 'bg-green-50 border-green-200' :
+                            project.status === ProjectStatus.REJECTED ? 'bg-red-50 border-red-200' :
+                            project.status === ProjectStatus.PENDING_APPROVAL ? 'bg-yellow-50 border-yellow-200' :
+                            'bg-gray-50 border-gray-200'
+                          }`}>
+                            <div className="flex items-start justify-between gap-4">
+                              <div className="flex-1">
+                                <div className="flex items-center gap-2 mb-1">
+                                  <h4 className="font-medium text-gray-900">{project.title}</h4>
+                                  <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
+                                    project.status === ProjectStatus.APPROVED ? 'bg-green-100 text-green-700' :
+                                    project.status === ProjectStatus.REJECTED ? 'bg-red-100 text-red-700' :
+                                    project.status === ProjectStatus.PENDING_APPROVAL ? 'bg-yellow-100 text-yellow-700' :
+                                    'bg-gray-100 text-gray-700'
+                                  }`}>
+                                    {project.status.replace('_', ' ')}
+                                  </span>
+                                </div>
+                                <p className="text-sm text-gray-600 line-clamp-2">{project.description}</p>
+                                <div className="flex items-center gap-2 mt-2 text-xs text-gray-500">
+                                  <span>{project.category}</span>
+                                  {project.toolsUsed && project.toolsUsed.length > 0 && (
+                                    <>
+                                      <span>•</span>
+                                      <span>{project.toolsUsed.slice(0, 3).join(', ')}{project.toolsUsed.length > 3 ? ` +${project.toolsUsed.length - 3}` : ''}</span>
+                                    </>
+                                  )}
+                                </div>
+                              </div>
+                              <div className="flex flex-col gap-2">
+                                {/* View Details Button */}
+                                <button
+                                  onClick={() => setViewingProjectDetail(project)}
+                                  className="px-3 py-1.5 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition-colors text-sm font-medium flex items-center gap-1.5"
+                                >
+                                  <Eye className="w-3.5 h-3.5" />
+                                  View Details
+                                </button>
+                                {/* Quick Approve/Reject */}
+                                {project.status === ProjectStatus.PENDING_APPROVAL && (
+                                  <div className="flex gap-1">
+                                    <button
+                                      onClick={async () => {
+                                        await projectService.approveProject(project.id);
+                                        const updated = await projectService.getProjectData(project.id);
+                                        if (updated.data) {
+                                          setMilestoneProjects(prev => prev.map(p => p.id === project.id ? updated.data! : p));
+                                        }
+                                      }}
+                                      className="flex-1 p-1.5 bg-green-100 text-green-600 rounded hover:bg-green-200 transition-colors"
+                                      title="Approve"
+                                    >
+                                      <ThumbsUp className="w-3.5 h-3.5" />
+                                    </button>
+                                    <button
+                                      onClick={async () => {
+                                        await projectService.rejectProject(project.id);
+                                        const updated = await projectService.getProjectData(project.id);
+                                        if (updated.data) {
+                                          setMilestoneProjects(prev => prev.map(p => p.id === project.id ? updated.data! : p));
+                                        }
+                                      }}
+                                      className="flex-1 p-1.5 bg-red-100 text-red-600 rounded hover:bg-red-200 transition-colors"
+                                      title="Reject"
+                                    >
+                                      <ThumbsDown className="w-3.5 h-3.5" />
+                                    </button>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                      
+                      {/* Project Approval Warning */}
+                      {!allProjectsApproved() && pendingProjectsCount() > 0 && (
+                        <div className="mt-3 p-3 bg-orange-50 border border-orange-200 rounded-lg flex items-start gap-2">
+                          <AlertCircle className="w-5 h-5 text-orange-600 flex-shrink-0 mt-0.5" />
+                          <p className="text-sm text-orange-700">
+                            <span className="font-medium">Action Required:</span> {pendingProjectsCount()} project(s) need approval before you can approve this milestone.
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Required Projects Notice */}
+                  {selectedMilestone.requiredProjects && selectedMilestone.requiredProjects.length > 0 && milestoneProjects.length === 0 && (
+                    <div className="p-4 bg-gray-50 rounded-lg">
+                      <p className="text-sm text-gray-600">
+                        <span className="font-medium">Required Projects:</span> {selectedMilestone.requiredProjects.join(', ')}
+                      </p>
+                      <p className="text-sm text-gray-500 mt-1">Waiting for student to submit projects...</p>
+                    </div>
+                  )}
+
+                  {/* Trainer Feedback Input */}
+                  <div>
+                    <h3 className="text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
+                      <MessageSquare className="w-4 h-4" />
+                      Your Feedback
+                    </h3>
+                    <textarea
+                      value={trainerFeedback}
+                      onChange={(e) => setTrainerFeedback(e.target.value)}
+                      placeholder="Provide feedback on this milestone and associated projects..."
+                      rows={4}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 resize-none"
+                    />
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="flex gap-3 pt-4 border-t border-gray-200">
+                    <button
+                      onClick={() => setShowApprovalModal(false)}
+                      className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      onClick={handleRejectMilestone}
+                      disabled={isProcessing || !trainerFeedback.trim()}
+                      className="flex-1 px-4 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {isProcessing ? 'Processing...' : 'Reject Milestone'}
+                    </button>
+                    <button
+                      onClick={handleApproveMilestone}
+                      disabled={isProcessing || !allProjectsApproved()}
+                      className="flex-1 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                    >
+                      <CheckSquare className="w-4 h-4" />
+                      {isProcessing ? 'Processing...' : 'Approve Milestone'}
+                    </button>
+                  </div>
                 </div>
-              )}
-
-              {/* Required Projects Notice */}
-              {selectedMilestone.requiredProjects && selectedMilestone.requiredProjects.length > 0 && milestoneProjects.length === 0 && (
-                <div className="p-4 bg-gray-50 rounded-lg">
-                  <p className="text-sm text-gray-600">
-                    <span className="font-medium">Required Projects:</span> {selectedMilestone.requiredProjects.join(', ')}
-                  </p>
-                  <p className="text-sm text-gray-500 mt-1">Waiting for student to submit projects...</p>
+              </>
+            ) : (
+              <>
+                {/* Project Detail View */}
+                <div className="sticky top-0 bg-gradient-to-r from-yellow-500 to-yellow-600 p-6 rounded-t-2xl z-10">
+                  <button
+                    onClick={() => setViewingProjectDetail(null)}
+                    className="absolute top-4 left-4 p-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors text-white"
+                  >
+                    <ChevronLeft className="w-5 h-5" />
+                  </button>
+                  <button
+                    onClick={() => setShowApprovalModal(false)}
+                    className="absolute top-4 right-4 p-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors text-white"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                  
+                  <div className="pt-8">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className={`px-3 py-1 rounded-full text-xs font-medium border bg-white/90 backdrop-blur-sm`}>
+                        {viewingProjectDetail.status.replace('_', ' ')}
+                      </span>
+                      {viewingProjectDetail.isPublic && (
+                        <span className="px-2 py-1 bg-blue-500/20 text-white text-xs rounded-full backdrop-blur-sm border border-blue-400/30">
+                          Public
+                        </span>
+                      )}
+                    </div>
+                    <h2 className="text-2xl font-bold text-white">{viewingProjectDetail.title}</h2>
+                    <p className="text-white/80 text-sm mt-1">{viewingProjectDetail.category}</p>
+                  </div>
                 </div>
-              )}
 
-              {/* Trainer Feedback Input */}
-              <div>
-                <h3 className="text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
-                  <MessageSquare className="w-4 h-4" />
-                  Your Feedback
-                </h3>
-                <textarea
-                  value={trainerFeedback}
-                  onChange={(e) => setTrainerFeedback(e.target.value)}
-                  placeholder="Provide feedback on this milestone and associated projects..."
-                  rows={4}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 resize-none"
-                />
-              </div>
+                <div className="p-6 space-y-6">
+                  {/* Student Role */}
+                  {viewingProjectDetail.studentRole && (
+                    <div className="p-4 bg-yellow-50 rounded-xl border border-yellow-100">
+                      <h3 className="text-sm font-semibold text-yellow-800 mb-1 flex items-center gap-2">
+                        <Award className="w-4 h-4" />
+                        Student's Role
+                      </h3>
+                      <p className="text-yellow-700 font-medium">{viewingProjectDetail.studentRole}</p>
+                    </div>
+                  )}
 
-              {/* Action Buttons */}
-              <div className="flex gap-3 pt-4 border-t border-gray-200">
-                <button
-                  onClick={() => setShowApprovalModal(false)}
-                  className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={handleRejectMilestone}
-                  disabled={isProcessing || !trainerFeedback.trim()}
-                  className="flex-1 px-4 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isProcessing ? 'Processing...' : 'Reject Milestone'}
-                </button>
-                <button
-                  onClick={handleApproveMilestone}
-                  disabled={isProcessing || !allProjectsApproved()}
-                  className="flex-1 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                >
-                  <CheckSquare className="w-4 h-4" />
-                  {isProcessing ? 'Processing...' : 'Approve Milestone'}
-                </button>
-              </div>
-            </div>
+                  {/* Description */}
+                  <div className="bg-gray-50 rounded-xl p-5 border border-gray-100">
+                    <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                      <FileText className="w-4 h-4 text-gray-600" />
+                      Project Description
+                    </h3>
+                    <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">{viewingProjectDetail.description}</p>
+                  </div>
+
+                  {/* Tools Used */}
+                  {viewingProjectDetail.toolsUsed && viewingProjectDetail.toolsUsed.length > 0 && (
+                    <div className="bg-gray-50 rounded-xl p-5 border border-gray-100">
+                      <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                        <Wrench className="w-4 h-4 text-blue-600" />
+                        Tools & Technologies
+                      </h3>
+                      <div className="flex flex-wrap gap-2">
+                        {viewingProjectDetail.toolsUsed.map((tool, i) => (
+                          <span key={i} className="px-3 py-1.5 bg-blue-100 text-blue-700 rounded-lg text-sm font-medium">
+                            {tool}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Evidence Links */}
+                  {viewingProjectDetail.evidence && Object.values(viewingProjectDetail.evidence).some(v => v) && (
+                    <div className="bg-gray-50 rounded-xl p-5 border border-gray-100">
+                      <h3 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                        <Link2 className="w-4 h-4 text-green-600" />
+                        Project Evidence & Links
+                      </h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        {viewingProjectDetail.evidence.demoLink && (
+                          <a href={viewingProjectDetail.evidence.demoLink} target="_blank" rel="noopener noreferrer"
+                            className="flex items-center gap-3 p-3 bg-blue-50 rounded-xl text-blue-700 hover:bg-blue-100 transition-colors group">
+                            <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center group-hover:bg-blue-200">
+                              <ExternalLink className="w-5 h-5" />
+                            </div>
+                            <div>
+                              <p className="text-sm font-medium">Live Demo</p>
+                              <p className="text-xs text-blue-600 truncate max-w-[150px]">{viewingProjectDetail.evidence.demoLink}</p>
+                            </div>
+                          </a>
+                        )}
+                        {viewingProjectDetail.evidence.videoDemoLink && (
+                          <a href={viewingProjectDetail.evidence.videoDemoLink} target="_blank" rel="noopener noreferrer"
+                            className="flex items-center gap-3 p-3 bg-red-50 rounded-xl text-red-700 hover:bg-red-100 transition-colors group">
+                            <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center group-hover:bg-red-200">
+                              <Youtube className="w-5 h-5" />
+                            </div>
+                            <div>
+                              <p className="text-sm font-medium">Video Demo</p>
+                              <p className="text-xs text-red-600 truncate max-w-[150px]">{viewingProjectDetail.evidence.videoDemoLink}</p>
+                            </div>
+                          </a>
+                        )}
+                        {viewingProjectDetail.evidence.designLink && (
+                          <a href={viewingProjectDetail.evidence.designLink} target="_blank" rel="noopener noreferrer"
+                            className="flex items-center gap-3 p-3 bg-purple-50 rounded-xl text-purple-700 hover:bg-purple-100 transition-colors group">
+                            <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center group-hover:bg-purple-200">
+                              <Figma className="w-5 h-5" />
+                            </div>
+                            <div>
+                              <p className="text-sm font-medium">Design Files</p>
+                              <p className="text-xs text-purple-600 truncate max-w-[150px]">{viewingProjectDetail.evidence.designLink}</p>
+                            </div>
+                          </a>
+                        )}
+                        {viewingProjectDetail.evidence.documentationLink && (
+                          <a href={viewingProjectDetail.evidence.documentationLink} target="_blank" rel="noopener noreferrer"
+                            className="flex items-center gap-3 p-3 bg-gray-100 rounded-xl text-gray-700 hover:bg-gray-200 transition-colors group">
+                            <div className="w-10 h-10 bg-gray-200 rounded-lg flex items-center justify-center group-hover:bg-gray-300">
+                              <FileText className="w-5 h-5" />
+                            </div>
+                            <div>
+                              <p className="text-sm font-medium">Documentation</p>
+                              <p className="text-xs text-gray-600 truncate max-w-[150px]">{viewingProjectDetail.evidence.documentationLink}</p>
+                            </div>
+                          </a>
+                        )}
+                        {viewingProjectDetail.evidence.fileDownloadLink && (
+                          <a href={viewingProjectDetail.evidence.fileDownloadLink} target="_blank" rel="noopener noreferrer"
+                            className="flex items-center gap-3 p-3 bg-green-50 rounded-xl text-green-700 hover:bg-green-100 transition-colors group">
+                            <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center group-hover:bg-green-200">
+                              <FilePlus className="w-5 h-5" />
+                            </div>
+                            <div>
+                              <p className="text-sm font-medium">Download Files</p>
+                              <p className="text-xs text-green-600 truncate max-w-[150px]">{viewingProjectDetail.evidence.fileDownloadLink}</p>
+                            </div>
+                          </a>
+                        )}
+                        {viewingProjectDetail.evidence.externalLink && (
+                          <a href={viewingProjectDetail.evidence.externalLink} target="_blank" rel="noopener noreferrer"
+                            className="flex items-center gap-3 p-3 bg-orange-50 rounded-xl text-orange-700 hover:bg-orange-100 transition-colors group">
+                            <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center group-hover:bg-orange-200">
+                              <Github className="w-5 h-5" />
+                            </div>
+                            <div>
+                              <p className="text-sm font-medium">External Link</p>
+                              <p className="text-xs text-orange-600 truncate max-w-[150px]">{viewingProjectDetail.evidence.externalLink}</p>
+                            </div>
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Attachments - Image Thumbnails */}
+                  {viewingProjectDetail.attachments && (
+                    <div className="bg-gray-50 rounded-xl p-5 border border-gray-100">
+                      <h3 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                        <ImageIcon className="w-4 h-4 text-purple-600" />
+                        Attachments
+                      </h3>
+                      
+                      {/* Images */}
+                      {viewingProjectDetail.attachments.images && viewingProjectDetail.attachments.images.length > 0 && (
+                        <div className="mb-4">
+                          <p className="text-xs font-medium text-gray-600 mb-2">Images ({viewingProjectDetail.attachments.images.length})</p>
+                          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                            {viewingProjectDetail.attachments.images.map((url, index) => (
+                              <a key={index} href={url} target="_blank" rel="noopener noreferrer"
+                                className="group relative aspect-square rounded-xl overflow-hidden bg-gray-100 border border-gray-200 hover:border-purple-400 transition-all">
+                                <img src={url} alt={`Project image ${index + 1}`}
+                                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                  loading="lazy"
+                                  onError={(e) => {
+                                    (e.target as HTMLImageElement).src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="%239CA3AF" stroke-width="1.5"%3E%3Crect x="3" y="3" width="18" height="18" rx="2"/%3E%3Ccircle cx="8.5" cy="8.5" r="1.5"/%3E%3Cpath d="M21 15l-5-5L5 21"/%3E%3C/svg%3E';
+                                    (e.target as HTMLImageElement).className = 'w-full h-full object-contain p-4 opacity-50';
+                                  }}
+                                />
+                                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                                  <ExternalLink className="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-opacity drop-shadow-lg" />
+                                </div>
+                              </a>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                      
+                      {/* PDFs */}
+                      {viewingProjectDetail.attachments.pdfs && viewingProjectDetail.attachments.pdfs.length > 0 && (
+                        <div>
+                          <p className="text-xs font-medium text-gray-600 mb-2">PDF Documents ({viewingProjectDetail.attachments.pdfs.length})</p>
+                          <div className="space-y-2">
+                            {viewingProjectDetail.attachments.pdfs.map((url, index) => (
+                              <a key={index} href={url} target="_blank" rel="noopener noreferrer"
+                                className="flex items-center gap-3 p-2.5 bg-orange-50 rounded-lg text-orange-700 hover:bg-orange-100 transition-colors">
+                                <FileText className="w-4 h-4 flex-shrink-0" />
+                                <span className="text-sm truncate flex-1">{url.split('/').pop() || `PDF ${index + 1}`}</span>
+                                <ExternalLink className="w-3.5 h-3.5 flex-shrink-0" />
+                              </a>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Project Actions */}
+                  {viewingProjectDetail.status === ProjectStatus.PENDING_APPROVAL && (
+                    <div className="flex gap-3 pt-4 border-t border-gray-200">
+                      <button
+                        onClick={async () => {
+                          await projectService.rejectProject(viewingProjectDetail.id, trainerFeedback);
+                          const updated = await projectService.getProjectData(viewingProjectDetail.id);
+                          if (updated.data) {
+                            setMilestoneProjects(prev => prev.map(p => p.id === viewingProjectDetail.id ? updated.data! : p));
+                            setViewingProjectDetail(updated.data);
+                          }
+                        }}
+                        disabled={isProcessing}
+                        className="flex-1 px-4 py-3 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition-colors disabled:opacity-50 font-medium flex items-center justify-center gap-2"
+                      >
+                        <ThumbsDown className="w-4 h-4" />
+                        Reject Project
+                      </button>
+                      <button
+                        onClick={async () => {
+                          await projectService.approveProject(viewingProjectDetail.id, trainerFeedback);
+                          const updated = await projectService.getProjectData(viewingProjectDetail.id);
+                          if (updated.data) {
+                            setMilestoneProjects(prev => prev.map(p => p.id === viewingProjectDetail.id ? updated.data! : p));
+                            setViewingProjectDetail(updated.data);
+                          }
+                        }}
+                        disabled={isProcessing}
+                        className="flex-1 px-4 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50 font-medium flex items-center justify-center gap-2"
+                      >
+                        <ThumbsUp className="w-4 h-4" />
+                        Approve Project
+                      </button>
+                    </div>
+                  )}
+
+                  {/* Back Button */}
+                  <div className="flex justify-center">
+                    <button
+                      onClick={() => setViewingProjectDetail(null)}
+                      className="px-6 py-2.5 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors font-medium flex items-center gap-2"
+                    >
+                      <ChevronLeft className="w-4 h-4" />
+                      Back to Milestone Overview
+                    </button>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </div>
       )}
