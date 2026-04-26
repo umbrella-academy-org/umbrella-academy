@@ -558,24 +558,34 @@ export default function StudentProjectsPage() {
                     Attachments
                   </h3>
                   
-                  {/* Images */}
+                  {/* Images - Display as thumbnails */}
                   {selectedProject.attachments.images && selectedProject.attachments.images.length > 0 && (
                     <div className="mb-4">
                       <p className="text-xs font-medium text-gray-600 mb-2">
                         Images ({selectedProject.attachments.images.length})
                       </p>
-                      <div className="space-y-2">
+                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
                         {selectedProject.attachments.images.map((url, index) => (
                           <a 
                             key={index}
                             href={url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-3 p-2.5 bg-purple-50 rounded-lg text-purple-700 hover:bg-purple-100 transition-colors"
+                            className="group relative aspect-square rounded-xl overflow-hidden bg-gray-100 border border-gray-200 hover:border-purple-400 transition-all"
                           >
-                            <ImageIcon className="w-4 h-4 flex-shrink-0" />
-                            <span className="text-sm truncate flex-1">{url.split('/').pop() || `Image ${index + 1}`}</span>
-                            <ExternalLink className="w-3.5 h-3.5 flex-shrink-0" />
+                            <img 
+                              src={url} 
+                              alt={`Project image ${index + 1}`}
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                              loading="lazy"
+                              onError={(e) => {
+                                (e.target as HTMLImageElement).src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="%239CA3AF" stroke-width="1.5"%3E%3Crect x="3" y="3" width="18" height="18" rx="2"/%3E%3Ccircle cx="8.5" cy="8.5" r="1.5"/%3E%3Cpath d="M21 15l-5-5L5 21"/%3E%3C/svg%3E';
+                                (e.target as HTMLImageElement).className = 'w-full h-full object-contain p-4 opacity-50';
+                              }}
+                            />
+                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                              <ExternalLink className="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-opacity drop-shadow-lg" />
+                            </div>
                           </a>
                         ))}
                       </div>
