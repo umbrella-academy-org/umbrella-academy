@@ -125,7 +125,7 @@ export default function TrainerRoadmapsPage() {
 
     setIsApproving(true);
     try {
-      await roadmapService.approveMilestoneCompletion(
+      await roadmapService.approveMilestone(
         selectedMilestone.roadmap.id,
         selectedMilestone.milestone.order,
         trainerFeedback
@@ -147,12 +147,10 @@ export default function TrainerRoadmapsPage() {
 
     setIsApproving(true);
     try {
-      // For rejection, we might need a different endpoint or update the milestone status back to active
-      // For now, let's use the same approval endpoint but with rejection feedback
-      await roadmapService.approveMilestoneCompletion(
+      await roadmapService.rejectMilestone(
         selectedMilestone.roadmap.id,
         selectedMilestone.milestone.order,
-        `REJECTED: ${trainerFeedback}`
+        trainerFeedback
       );
       await refreshRoadmaps();
       setShowRejectionModal(false);
@@ -775,18 +773,29 @@ export default function TrainerRoadmapsPage() {
                           <p className="text-gray-500 mb-1">Status</p>
                           <select
                             value={milestone.status}
-                            onChange={(e) => {
-                              const updatedMilestones = selectedRoadmap.milestones.map((m, i) =>
-                                i === index
-                                  ? { ...m, status: e.target.value as RoadmapStepStatus }
-                                  : m
-                              );
-                              setSelectedRoadmap({ ...selectedRoadmap, milestones: updatedMilestones });
+                            onChange={async (e) => {
+                              const newStatus = e.target.value as RoadmapStepStatus;
+                              setIsApproving(true);
+                              try {
+                                await roadmapService.updateMilestoneStatus(selectedRoadmap.id, milestone.order, newStatus);
+                                await refreshRoadmaps();
+                                // Update local state to reflect the change
+                                const updatedMilestones = selectedRoadmap.milestones.map((m, i) =>
+                                  i === index ? { ...m, status: newStatus } : m
+                                );
+                                setSelectedRoadmap({ ...selectedRoadmap, milestones: updatedMilestones });
+                              } catch (error) {
+                                console.error('Failed to update milestone status:', error);
+                              } finally {
+                                setIsApproving(false);
+                              }
                             }}
-                            className="px-2 py-1 border border-gray-300 rounded text-sm"
+                            disabled={isApproving}
+                            className="px-2 py-1 border border-gray-300 rounded text-sm disabled:opacity-50 disabled:cursor-not-allowed"
                           >
                             <option value={RoadmapStepStatus.LOCKED}>Locked</option>
                             <option value={RoadmapStepStatus.ACTIVE}>Active</option>
+                            <option value={RoadmapStepStatus.PENDING_APPROVAL}>Pending Approval</option>
                             <option value={RoadmapStepStatus.COMPLETED}>Completed</option>
                           </select>
                         </div>

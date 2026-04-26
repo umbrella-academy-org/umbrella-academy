@@ -1,4 +1,4 @@
-import { Roadmap } from "@/types/roadmap";
+import { Roadmap, RoadmapStepStatus } from "@/types/roadmap";
 import { apiClient } from "./client";
 import { API_ENDPOINTS } from "./constants";
 
@@ -54,11 +54,6 @@ class RoadmapService {
         return response.data;
     }
 
-    async approveMilestoneCompletion(roadmapId: string, milestoneOrder: number, trainerFeedback: string) {
-        const response = await apiClient.post<any>(API_ENDPOINTS.MILESTONE_APPROVE(roadmapId, milestoneOrder), { trainerFeedback });
-        return response.data;
-    }
-
     async approveMilestone(roadmapId: string, milestoneOrder: number, trainerFeedback: string) {
         const response = await apiClient.post<any>(API_ENDPOINTS.MILESTONE_APPROVE(roadmapId, milestoneOrder), { trainerFeedback });
         return response.data;
@@ -67,6 +62,15 @@ class RoadmapService {
     async rejectMilestone(roadmapId: string, milestoneOrder: number, trainerFeedback: string) {
         const response = await apiClient.post<any>(`/api/roadmaps/${roadmapId}/milestones/${milestoneOrder}/reject`, { trainerFeedback });
         return response.data;
+    }
+
+    async updateMilestoneStatus(roadmapId: string, milestoneOrder: number, status: RoadmapStepStatus, trainerFeedback?: string) {
+        const roadmap = await this.getRoadmapById(roadmapId);
+        const updatedMilestones = roadmap.milestones.map(m =>
+            m.order === milestoneOrder ? { ...m, status, ...(trainerFeedback && { trainerFeedback }) } : m
+        );
+        const response = await this.updateRoadmap(roadmapId, { milestones: updatedMilestones });
+        return response;
     }
 }
 

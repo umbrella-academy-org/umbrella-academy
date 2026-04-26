@@ -33,11 +33,11 @@ export default function TrainerRoadmapsPage() {
   const [milestoneProjects, setMilestoneProjects] = useState<Project[]>([]);
 
   // Filter roadmaps for current trainer
-  const trainerRoadmaps = roadmaps.filter(r => r.trainerId === user?._id);
+  const trainerRoadmaps = roadmaps.filter(r => r.trainerId._id === user?._id);
 
   // Apply filters
   const filteredRoadmaps = trainerRoadmaps.filter(roadmap => {
-    const student = students.find(s => s._id === roadmap.studentId);
+    const student = students.find(s => s._id === roadmap.studentId._id);
     const matchesSearch = 
       roadmap.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       student?.firstName?.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -161,12 +161,31 @@ export default function TrainerRoadmapsPage() {
   };
 
   const allProjectsApproved = () => {
-    if (!milestoneProjects.length) return true; // No projects required
+    if (!milestoneProjects.length) return true;
     return milestoneProjects.every(p => p.status === ProjectStatus.APPROVED);
   };
 
   const pendingProjectsCount = () => {
     return milestoneProjects.filter(p => p.status === ProjectStatus.PENDING_APPROVAL).length;
+  };
+
+  const handleMilestoneStatusChange = async (milestone: Milestone, newStatus: RoadmapStepStatus) => {
+    if (!selectedRoadmap) return;
+    
+    setIsProcessing(true);
+    try {
+      await roadmapService.updateMilestoneStatus(selectedRoadmap.id, milestone.order, newStatus);
+      await refreshRoadmaps();
+      // Update local state to reflect the change
+      const updatedMilestones = selectedRoadmap.milestones.map(m =>
+        m.order === milestone.order ? { ...m, status: newStatus } : m
+      );
+      setSelectedRoadmap({ ...selectedRoadmap, milestones: updatedMilestones });
+    } catch (error) {
+      console.error('Failed to update milestone status:', error);
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   return (
@@ -260,7 +279,7 @@ export default function TrainerRoadmapsPage() {
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {filteredRoadmaps.map((roadmap) => {
-                      const student = students.find(s => s._id === roadmap.studentId);
+                      const student = students.find(s => s._id === roadmap.studentId._id);
                       const progress = calculateRoadmapProgress(roadmap);
                       
                       return (
@@ -461,13 +480,28 @@ export default function TrainerRoadmapsPage() {
                                   </div>
                                 </div>
                                 
-                                {/* View Details Button */}
-                                <button
-                                  onClick={() => handleViewMilestoneDetails(milestone)}
-                                  className="px-4 py-2 bg-yellow-600 text-white text-sm font-medium rounded-lg hover:bg-yellow-700 transition-colors shadow-sm"
-                                >
-                                  {isPending ? 'Review & Approve' : 'View Details'}
-                                </button>
+                                {/* Status Dropdown */}
+                                <div className="flex items-center gap-2">
+                                  <select
+                                    value={milestone.status}
+                                    onChange={(e) => handleMilestoneStatusChange(milestone, e.target.value as RoadmapStepStatus)}
+                                    disabled={isProcessing}
+                                    className="px-3 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-yellow-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                                  >
+                                    <option value={RoadmapStepStatus.LOCKED}>Locked</option>
+                                    <option value={RoadmapStepStatus.ACTIVE}>Active</option>
+                                    <option value={RoadmapStepStatus.PENDING_APPROVAL}>Pending Approval</option>
+                                    <option value={RoadmapStepStatus.COMPLETED}>Completed</option>
+                                  </select>
+                                  
+                                  {/* View Details Button */}
+                                  <button
+                                    onClick={() => handleViewMilestoneDetails(milestone)}
+                                    className="px-4 py-2 bg-yellow-600 text-white text-sm font-medium rounded-lg hover:bg-yellow-700 transition-colors shadow-sm"
+                                  >
+                                    {isPending ? 'Review & Approve' : 'View Details'}
+                                  </button>
+                                </div>
                               </div>
 
                               {/* Description */}
