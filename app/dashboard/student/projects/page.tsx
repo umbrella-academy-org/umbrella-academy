@@ -24,7 +24,16 @@ import {
   Grid,
   List,
   ChevronRight,
-  Plus
+  Plus,
+  X,
+  Award,
+  Target,
+  Link2,
+  Youtube,
+  Figma,
+  Github,
+  FilePlus,
+  Trash2
 } from 'lucide-react';
 
 export default function StudentProjectsPage() {
@@ -343,58 +352,89 @@ export default function StudentProjectsPage() {
         </main>
       </div>
 
-      {/* Project Detail Modal */}
+      {/* Project Detail Modal - Full Page Style */}
       {selectedProject && (
-        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            {/* Modal Header */}
-            <div className="sticky top-0 bg-white border-b border-gray-200 p-6 flex items-start justify-between">
-              <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <span className={`px-3 py-1 rounded-full text-xs font-medium border ${getStatusColor(selectedProject.status)}`}>
-                    <div className="flex items-center gap-1">
-                      {getStatusIcon(selectedProject.status)}
-                      <span>{getStatusLabel(selectedProject.status)}</span>
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-start justify-center p-4 overflow-y-auto">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-3xl w-full my-8 max-h-[90vh] overflow-y-auto">
+            {/* Hero Header */}
+            <div className="sticky top-0 z-10">
+              <div className="bg-gradient-to-r from-yellow-500 to-yellow-600 p-8 rounded-t-2xl relative">
+                <button
+                  onClick={() => setSelectedProject(null)}
+                  className="absolute top-4 right-4 p-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors text-white"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+                
+                <div className="flex items-start justify-between">
+                  <div className="flex-1">
+                    {/* Status & Public Badge */}
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className={`px-3 py-1 rounded-full text-xs font-medium border bg-white/90 backdrop-blur-sm`}>
+                        <div className="flex items-center gap-1">
+                          {getStatusIcon(selectedProject.status)}
+                          <span>{getStatusLabel(selectedProject.status)}</span>
+                        </div>
+                      </span>
+                      {selectedProject.isPublic && (
+                        <span className="px-2 py-1 bg-blue-500/20 text-white text-xs rounded-full backdrop-blur-sm border border-blue-400/30">
+                          Public
+                        </span>
+                      )}
                     </div>
-                  </span>
-                  {selectedProject.isPublic && (
-                    <span className="px-2 py-1 bg-blue-50 text-blue-700 text-xs rounded-full">
-                      Public
-                    </span>
-                  )}
+                    
+                    <h2 className="text-3xl font-bold text-white mb-2">{selectedProject.title}</h2>
+                    <div className="flex items-center gap-4 text-white/90 text-sm">
+                      <span className="flex items-center gap-1">
+                        <Target className="w-4 h-4" />
+                        {selectedProject.category}
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <Calendar className="w-4 h-4" />
+                        {new Date(selectedProject.createdAt).toLocaleDateString('en-US', { 
+                          year: 'numeric', 
+                          month: 'long', 
+                          day: 'numeric' 
+                        })}
+                      </span>
+                    </div>
+                  </div>
                 </div>
-                <h2 className="text-2xl font-bold text-gray-900">{selectedProject.title}</h2>
-                <p className="text-sm text-gray-500 mt-1">{selectedProject.category}</p>
               </div>
-              <button
-                onClick={() => setSelectedProject(null)}
-                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-              >
-                <XCircle className="w-5 h-5 text-gray-400" />
-              </button>
             </div>
 
             {/* Modal Content */}
-            <div className="p-6 space-y-6">
+            <div className="p-8 space-y-6">
+              {/* Role Card */}
+              {selectedProject.studentRole && (
+                <div className="p-4 bg-yellow-50 rounded-xl border border-yellow-100">
+                  <h3 className="text-sm font-semibold text-yellow-800 mb-1 flex items-center gap-2">
+                    <Award className="w-4 h-4" />
+                    Your Role
+                  </h3>
+                  <p className="text-yellow-700 font-medium">{selectedProject.studentRole}</p>
+                </div>
+              )}
+
               {/* Description */}
-              <div>
-                <h3 className="text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
-                  <FileText className="w-4 h-4" />
-                  Description
+              <div className="bg-gray-50 rounded-xl p-5 border border-gray-100">
+                <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                  <FileText className="w-4 h-4 text-gray-600" />
+                  Project Description
                 </h3>
-                <p className="text-gray-600 leading-relaxed">{selectedProject.description}</p>
+                <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">{selectedProject.description}</p>
               </div>
 
               {/* Tools Used */}
               {selectedProject.toolsUsed && selectedProject.toolsUsed.length > 0 && (
-                <div>
-                  <h3 className="text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
-                    <Wrench className="w-4 h-4" />
-                    Tools & Technologies
+                <div className="bg-gray-50 rounded-xl p-5 border border-gray-100">
+                  <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                    <Wrench className="w-4 h-4 text-blue-600" />
+                    Tools & Technologies Used
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {selectedProject.toolsUsed.map((tool, i) => (
-                      <span key={i} className="px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg text-sm">
+                      <span key={i} className="px-3 py-1.5 bg-blue-100 text-blue-700 rounded-lg text-sm font-medium">
                         {tool}
                       </span>
                     ))}
@@ -402,34 +442,28 @@ export default function StudentProjectsPage() {
                 </div>
               )}
 
-              {/* Role */}
-              {selectedProject.studentRole && (
-                <div>
-                  <h3 className="text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
-                    <User className="w-4 h-4" />
-                    Your Role
-                  </h3>
-                  <p className="text-gray-600">{selectedProject.studentRole}</p>
-                </div>
-              )}
-
-              {/* Evidence Links */}
+              {/* Evidence Links - All 6 Links */}
               {selectedProject.evidence && Object.values(selectedProject.evidence).some(v => v) && (
-                <div>
-                  <h3 className="text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
-                    <ExternalLink className="w-4 h-4" />
-                    Project Links
+                <div className="bg-gray-50 rounded-xl p-5 border border-gray-100">
+                  <h3 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                    <Link2 className="w-4 h-4 text-green-600" />
+                    Project Evidence & Links
                   </h3>
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {selectedProject.evidence.demoLink && (
                       <a 
                         href={selectedProject.evidence.demoLink} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 p-3 bg-blue-50 rounded-lg text-blue-700 hover:bg-blue-100 transition-colors"
+                        className="flex items-center gap-3 p-3 bg-blue-50 rounded-xl text-blue-700 hover:bg-blue-100 transition-colors group"
                       >
-                        <ExternalLink className="w-4 h-4" />
-                        <span className="text-sm font-medium">Live Demo</span>
+                        <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center group-hover:bg-blue-200 transition-colors">
+                          <ExternalLink className="w-5 h-5" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium">Live Demo</p>
+                          <p className="text-xs text-blue-600 truncate max-w-[150px]">{selectedProject.evidence.demoLink}</p>
+                        </div>
                       </a>
                     )}
                     {selectedProject.evidence.videoDemoLink && (
@@ -437,10 +471,15 @@ export default function StudentProjectsPage() {
                         href={selectedProject.evidence.videoDemoLink} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 p-3 bg-red-50 rounded-lg text-red-700 hover:bg-red-100 transition-colors"
+                        className="flex items-center gap-3 p-3 bg-red-50 rounded-xl text-red-700 hover:bg-red-100 transition-colors group"
                       >
-                        <ExternalLink className="w-4 h-4" />
-                        <span className="text-sm font-medium">Video Demo</span>
+                        <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center group-hover:bg-red-200 transition-colors">
+                          <Youtube className="w-5 h-5" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium">Video Demo</p>
+                          <p className="text-xs text-red-600 truncate max-w-[150px]">{selectedProject.evidence.videoDemoLink}</p>
+                        </div>
                       </a>
                     )}
                     {selectedProject.evidence.designLink && (
@@ -448,10 +487,15 @@ export default function StudentProjectsPage() {
                         href={selectedProject.evidence.designLink} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 p-3 bg-purple-50 rounded-lg text-purple-700 hover:bg-purple-100 transition-colors"
+                        className="flex items-center gap-3 p-3 bg-purple-50 rounded-xl text-purple-700 hover:bg-purple-100 transition-colors group"
                       >
-                        <ExternalLink className="w-4 h-4" />
-                        <span className="text-sm font-medium">Design</span>
+                        <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center group-hover:bg-purple-200 transition-colors">
+                          <Figma className="w-5 h-5" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium">Design Files</p>
+                          <p className="text-xs text-purple-600 truncate max-w-[150px]">{selectedProject.evidence.designLink}</p>
+                        </div>
                       </a>
                     )}
                     {selectedProject.evidence.documentationLink && (
@@ -459,58 +503,144 @@ export default function StudentProjectsPage() {
                         href={selectedProject.evidence.documentationLink} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 p-3 bg-gray-100 rounded-lg text-gray-700 hover:bg-gray-200 transition-colors"
+                        className="flex items-center gap-3 p-3 bg-gray-100 rounded-xl text-gray-700 hover:bg-gray-200 transition-colors group"
                       >
-                        <ExternalLink className="w-4 h-4" />
-                        <span className="text-sm font-medium">Documentation</span>
+                        <div className="w-10 h-10 bg-gray-200 rounded-lg flex items-center justify-center group-hover:bg-gray-300 transition-colors">
+                          <FileText className="w-5 h-5" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium">Documentation</p>
+                          <p className="text-xs text-gray-600 truncate max-w-[150px]">{selectedProject.evidence.documentationLink}</p>
+                        </div>
+                      </a>
+                    )}
+                    {selectedProject.evidence.fileDownloadLink && (
+                      <a 
+                        href={selectedProject.evidence.fileDownloadLink} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-3 p-3 bg-green-50 rounded-xl text-green-700 hover:bg-green-100 transition-colors group"
+                      >
+                        <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center group-hover:bg-green-200 transition-colors">
+                          <FilePlus className="w-5 h-5" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium">Download Files</p>
+                          <p className="text-xs text-green-600 truncate max-w-[150px]">{selectedProject.evidence.fileDownloadLink}</p>
+                        </div>
+                      </a>
+                    )}
+                    {selectedProject.evidence.externalLink && (
+                      <a 
+                        href={selectedProject.evidence.externalLink} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-3 p-3 bg-orange-50 rounded-xl text-orange-700 hover:bg-orange-100 transition-colors group"
+                      >
+                        <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center group-hover:bg-orange-200 transition-colors">
+                          <Github className="w-5 h-5" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium">External Link</p>
+                          <p className="text-xs text-orange-600 truncate max-w-[150px]">{selectedProject.evidence.externalLink}</p>
+                        </div>
                       </a>
                     )}
                   </div>
                 </div>
               )}
 
-              {/* Attachments */}
+              {/* Attachments - Clickable URLs */}
               {selectedProject.attachments && (
-                <div>
-                  <h3 className="text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
-                    <ImageIcon className="w-4 h-4" />
+                <div className="bg-gray-50 rounded-xl p-5 border border-gray-100">
+                  <h3 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                    <ImageIcon className="w-4 h-4 text-purple-600" />
                     Attachments
                   </h3>
-                  <div className="space-y-2">
-                    {selectedProject.attachments.images && selectedProject.attachments.images.length > 0 && (
-                      <p className="text-sm text-gray-600">
-                        {selectedProject.attachments.images.length} image(s) attached
+                  
+                  {/* Images */}
+                  {selectedProject.attachments.images && selectedProject.attachments.images.length > 0 && (
+                    <div className="mb-4">
+                      <p className="text-xs font-medium text-gray-600 mb-2">
+                        Images ({selectedProject.attachments.images.length})
                       </p>
-                    )}
-                    {selectedProject.attachments.pdfs && selectedProject.attachments.pdfs.length > 0 && (
-                      <p className="text-sm text-gray-600">
-                        {selectedProject.attachments.pdfs.length} PDF(s) attached
+                      <div className="space-y-2">
+                        {selectedProject.attachments.images.map((url, index) => (
+                          <a 
+                            key={index}
+                            href={url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-3 p-2.5 bg-purple-50 rounded-lg text-purple-700 hover:bg-purple-100 transition-colors"
+                          >
+                            <ImageIcon className="w-4 h-4 flex-shrink-0" />
+                            <span className="text-sm truncate flex-1">{url.split('/').pop() || `Image ${index + 1}`}</span>
+                            <ExternalLink className="w-3.5 h-3.5 flex-shrink-0" />
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  
+                  {/* PDFs */}
+                  {selectedProject.attachments.pdfs && selectedProject.attachments.pdfs.length > 0 && (
+                    <div>
+                      <p className="text-xs font-medium text-gray-600 mb-2">
+                        PDF Documents ({selectedProject.attachments.pdfs.length})
                       </p>
-                    )}
-                  </div>
+                      <div className="space-y-2">
+                        {selectedProject.attachments.pdfs.map((url, index) => (
+                          <a 
+                            key={index}
+                            href={url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-3 p-2.5 bg-orange-50 rounded-lg text-orange-700 hover:bg-orange-100 transition-colors"
+                          >
+                            <FileText className="w-4 h-4 flex-shrink-0" />
+                            <span className="text-sm truncate flex-1">{url.split('/').pop() || `PDF ${index + 1}`}</span>
+                            <ExternalLink className="w-3.5 h-3.5 flex-shrink-0" />
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
 
               {/* Trainer Feedback */}
               {selectedProject.trainerFeedback && (
-                <div className="p-4 bg-blue-50 border border-blue-100 rounded-xl">
-                  <h3 className="text-sm font-semibold text-blue-900 mb-2">Trainer Feedback</h3>
-                  <p className="text-sm text-blue-700">{selectedProject.trainerFeedback}</p>
+                <div className="p-5 bg-blue-50 border border-blue-100 rounded-xl">
+                  <h3 className="text-sm font-semibold text-blue-900 mb-2 flex items-center gap-2">
+                    <User className="w-4 h-4" />
+                    Trainer Feedback
+                  </h3>
+                  <p className="text-sm text-blue-700 leading-relaxed">{selectedProject.trainerFeedback}</p>
                   {selectedProject.approvedAt && (
-                    <p className="text-xs text-blue-600 mt-2">
-                      Approved on {new Date(selectedProject.approvedAt).toLocaleDateString()}
+                    <p className="text-xs text-blue-600 mt-3 flex items-center gap-1">
+                      <CheckCircle className="w-3.5 h-3.5" />
+                      Approved on {new Date(selectedProject.approvedAt).toLocaleDateString('en-US', { 
+                        year: 'numeric', 
+                        month: 'long', 
+                        day: 'numeric' 
+                      })}
                     </p>
                   )}
                 </div>
               )}
+            </div>
 
-              {/* Dates */}
-              <div className="flex items-center gap-4 text-sm text-gray-500 pt-4 border-t border-gray-100">
-                <span className="flex items-center gap-1">
-                  <Calendar className="w-4 h-4" />
-                  Created: {new Date(selectedProject.createdAt).toLocaleDateString()}
-                </span>
-              </div>
+            {/* Footer */}
+            <div className="sticky bottom-0 bg-white border-t border-gray-200 p-6 rounded-b-2xl flex justify-between items-center">
+              <p className="text-sm text-gray-500">
+                Project ID: <span className="font-mono text-xs">{selectedProject.id}</span>
+              </p>
+              <button
+                onClick={() => setSelectedProject(null)}
+                className="px-6 py-2.5 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors font-medium"
+              >
+                Close
+              </button>
             </div>
           </div>
         </div>
