@@ -9,7 +9,7 @@ interface StudentsHeaderProps {
 
 export default function StudentsHeader({ students }: StudentsHeaderProps) {
   const total = students.length;
-  const active = students.filter(s => s.status === 'active').length;
+  const active = students.filter(s => s.isVerified).length;
 
   const stats = [
     {

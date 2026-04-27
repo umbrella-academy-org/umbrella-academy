@@ -40,7 +40,7 @@ export default function StudentsTable({ searchQuery, selectedStatus, selectedCou
         student.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
         course.toLowerCase().includes(searchQuery.toLowerCase());
 
-      const matchesStatus = selectedStatus === 'all' || student.status === selectedStatus;
+      const matchesStatus = selectedStatus === 'all' || student.isVerified === (selectedStatus === 'verified');
 
       const matchesCourse = selectedCourse === 'all' ||
         course.toLowerCase().includes(selectedCourse.replace('-', ' '));
@@ -118,11 +118,7 @@ export default function StudentsTable({ searchQuery, selectedStatus, selectedCou
           </div>
         </div>
       ),
-      status: (
-        <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-          ● {student.status.charAt(0).toUpperCase() + student.status.slice(1)}
-        </span>
-      ),
+   
       progress: (
         <div className="flex items-center gap-2">
           <div className="flex-1 bg-gray-200 rounded-full h-2 w-20">
