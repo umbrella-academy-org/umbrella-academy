@@ -1,22 +1,20 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
-import { Roadmap } from "@/types/roadmap";
+import { CreateRoadmapData, Roadmap } from "@/types/roadmap";
 import { roadmapService } from "@/services/roadmap";
 
 interface RoadmapContextType {
     roadmaps: Roadmap[];
     studentRoadmaps: Roadmap[];
-    liveSessions: any[]; // For backward compatibility
     loading: boolean;
     isLoading: boolean;
     error: string | null;
-    createRoadmap: (data: Partial<Roadmap>) => Promise<Roadmap>;
+    createRoadmap: (data: CreateRoadmapData) => Promise<Roadmap>;
     refreshRoadmaps: () => Promise<void>;
     // Backward compatibility methods
     getStudentRoadmaps: () => Roadmap[];
     getRoadmapByIdFromContext: (id: string) => Roadmap | undefined;
-    getUpcomingLiveSessions: () => any[];
 }
 
 const RoadmapContext = createContext<RoadmapContextType | null>(null);
@@ -41,7 +39,7 @@ export const RoadmapProvider = ({ children }: { children: React.ReactNode }) => 
         }
     };
 
-    const createRoadmap = async (data: Partial<Roadmap>): Promise<Roadmap> => {
+    const createRoadmap = async (data: CreateRoadmapData): Promise<Roadmap> => {
         try {
             setError(null);
             const newRoadmap = await roadmapService.createRoadmap(data);
@@ -62,7 +60,6 @@ export const RoadmapProvider = ({ children }: { children: React.ReactNode }) => 
     // Backward compatibility methods
     const getStudentRoadmaps = () => roadmaps;
     const getRoadmapByIdFromContext = (id: string) => roadmaps.find(r => r.id === id);
-    const getUpcomingLiveSessions = () => []; // Empty array for backward compatibility
 
     useEffect(() => {
         fetchRoadmaps();
@@ -72,7 +69,6 @@ export const RoadmapProvider = ({ children }: { children: React.ReactNode }) => 
         <RoadmapContext.Provider value={{
             roadmaps,
             studentRoadmaps: roadmaps, // For backward compatibility
-            liveSessions: [], // For backward compatibility
             loading,
             isLoading: loading, // For backward compatibility
             error,
@@ -80,7 +76,6 @@ export const RoadmapProvider = ({ children }: { children: React.ReactNode }) => 
             refreshRoadmaps,
             getStudentRoadmaps,
             getRoadmapByIdFromContext,
-            getUpcomingLiveSessions
         }}>
             {children}
         </RoadmapContext.Provider>

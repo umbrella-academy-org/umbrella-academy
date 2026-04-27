@@ -5,17 +5,16 @@ import Sidebar from '@/components/dashboard/Sidebar';
 import { useAuth, useRoadmaps, useUsers } from '@/contexts';
 import { roadmapService } from '@/services/roadmap';
 import { projectService } from '@/services/project';
-import { Roadmap, Milestone, RoadmapStepStatus } from '@/types/roadmap';
+import { Roadmap, Milestone, RoadmapStepStatus, CreateRoadmapData } from '@/types/roadmap';
 import { Project } from '@/types/project';
 import { UserRole } from '@/types/user';
-import { Plus, Clock, CheckCircle, Edit, Trash2, Users, Target, Calendar, BookOpen, Award } from 'lucide-react';
+import { Plus, Clock, CheckCircle, Edit, Trash2, Target, Calendar, BookOpen, Award } from 'lucide-react';
 
 
 export default function TrainerRoadmapsPage() {
   const { user } = useAuth();
   const { students } = useUsers()
   const { roadmaps, loading, createRoadmap, refreshRoadmaps } = useRoadmaps();
-  const [showCreateModal, setShowCreateModal] = useState(false);
   const [selectedRoadmap, setSelectedRoadmap] = useState<Roadmap | null>(null);
   const [viewMode, setViewMode] = useState<'list' | 'create' | 'edit'>('list');
 
@@ -75,7 +74,7 @@ export default function TrainerRoadmapsPage() {
       completedAt: null
     }));
 
-    const newRoadmap: Partial<Roadmap> = {
+    const newRoadmap: CreateRoadmapData = {
       studentId: selectedStudentId,
       trainerId: user?._id || '',
       title: roadmapTitle,

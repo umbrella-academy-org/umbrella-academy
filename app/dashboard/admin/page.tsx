@@ -61,7 +61,7 @@ export default function UmbrellaAdminDashboard() {
   const totalRevenue = getTotalBalance();
   const totalStudents = students?.length || 0;
   const totalTrainers = trainers?.length || 0;
-  const pendingTrainers = trainers?.filter(t => t.status === 'pending').length || 0;
+  const pendingTrainers = trainers?.filter(t => t.approvalStatus === 'pending').length || 0;
 
   return (
     <div className="flex h-screen bg-white">

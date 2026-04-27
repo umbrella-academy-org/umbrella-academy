@@ -49,7 +49,7 @@ export default function GuardianDashboard() {
         if (response.success && response.data) {
           // Enrich students with roadmap data
           const enrichedStudents = response.data.map(student => {
-            const roadmap = studentRoadmaps.find(r => r.studentId === student._id);
+            const roadmap = studentRoadmaps.find(r => r.studentId._id === student._id);
             const milestones = roadmap?.milestones || [];
             const completedMilestones = milestones.filter(m => m.status === RoadmapStepStatus.COMPLETED).length;
             const progress = milestones.length > 0 ? Math.round((completedMilestones / milestones.length) * 100) : 0;

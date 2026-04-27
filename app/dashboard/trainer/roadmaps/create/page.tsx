@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth, useUsers, useRoadmaps } from '@/contexts';
 import { Student, UserRole } from '@/types';
-import { Milestone, RoadmapStepStatus } from '@/types/roadmap';
+import { CreateRoadmapData, Milestone, RoadmapStepStatus } from '@/types/roadmap';
 import Sidebar from '@/components/dashboard/Sidebar';
 import {
   Map, Search, User, Plus, X, ChevronLeft, CheckCircle,
@@ -67,13 +67,14 @@ export default function CreateRoadmapPage() {
     setMilestones(updated);
   };
 
-  const handleUpdateMilestone = (index: number, field: keyof Milestone, value: any) => {
+  const handleUpdateMilestone = (index: number, field: keyof Milestone, value: string[] | number | string) => {
     const updated = [...milestones];
     updated[index] = { ...updated[index], [field]: value };
     setMilestones(updated);
   };
 
   const handleSubmit = async () => {
+    if (!user) return;
     if (!selectedStudent || !roadmapTitle.trim() || milestones.length === 0) return;
 
     setIsSubmitting(true);
@@ -81,9 +82,9 @@ export default function CreateRoadmapPage() {
 
     try {
       // Prepare data according to backend requirements
-      const roadmapData = {
+      const roadmapData: CreateRoadmapData = {
         studentId: selectedStudent._id,
-        trainerId: user?._id,
+        trainerId: user._id,
         title: roadmapTitle,
         status: 'pending-approval',
         milestones: milestones.map(m => ({
@@ -92,8 +93,7 @@ export default function CreateRoadmapPage() {
           skillsToLearn: m.skillsToLearn || [],
           requiredProjects: m.requiredProjects || []
         })),
-        createdAt: new Date(),
-        updatedAt: new Date()
+
       };
 
       await createRoadmap(roadmapData);

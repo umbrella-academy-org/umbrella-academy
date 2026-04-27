@@ -67,3 +67,10 @@ export interface Roadmap {
   updatedAt: Date;
 }
 
+export interface CreateRoadmapData {
+  studentId: string;
+  trainerId: string;
+  title: string;
+  milestones: Milestone[];
+  status:RoadmapStatus
+}

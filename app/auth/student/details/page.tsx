@@ -98,7 +98,6 @@ export default function StudentDetailsPage() {
         phoneNumber: baseData.phoneNumber,
         role: UserRole.STUDENT,
         isActive: true,
-        status: 'active',
         gender: formData.gender,
         dateOfBirth: new Date(formData.dateOfBirth).toISOString().split('T')[0],
         isVerified: false,

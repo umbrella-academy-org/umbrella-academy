@@ -1,10 +1,10 @@
-import { Roadmap, RoadmapStepStatus } from "@/types/roadmap";
+import { CreateRoadmapData, Roadmap, RoadmapStepStatus } from "@/types/roadmap";
 import { apiClient } from "./client";
 import { API_ENDPOINTS } from "./constants";
 
 class RoadmapService {
 
-    async createRoadmap(data: Partial<Roadmap>) {
+    async createRoadmap(data: CreateRoadmapData) {
         const response = await apiClient.post<Roadmap>(API_ENDPOINTS.ROADMAPS, data);
         return response.data;
     }
@@ -49,24 +49,24 @@ class RoadmapService {
         return response.data;
     }
 
-    async completeMilestone(roadmapId: string, milestoneOrder: number, projectData: any) {
-        const response = await apiClient.post<any>(API_ENDPOINTS.MILESTONE_COMPLETE(roadmapId, milestoneOrder), projectData);
+    async completeMilestone(roadmapId: string, milestoneOrder: number, projectData: Partial<Roadmap>) {
+        const response = await apiClient.post<Roadmap>(API_ENDPOINTS.MILESTONE_COMPLETE(roadmapId, milestoneOrder), projectData);
         return response.data;
     }
 
     async approveMilestone(roadmapId: string, milestoneOrder: number, trainerFeedback: string) {
-        const response = await apiClient.post<any>(API_ENDPOINTS.MILESTONE_APPROVE(roadmapId, milestoneOrder), { trainerFeedback });
+        const response = await apiClient.post<Roadmap>(API_ENDPOINTS.MILESTONE_APPROVE(roadmapId, milestoneOrder), { trainerFeedback });
         return response.data;
     }
 
     async rejectMilestone(roadmapId: string, milestoneOrder: number, trainerFeedback: string) {
-        const response = await apiClient.post<any>(`/api/roadmaps/${roadmapId}/milestones/${milestoneOrder}/reject`, { trainerFeedback });
+        const response = await apiClient.post<Roadmap>(`/api/roadmaps/${roadmapId}/milestones/${milestoneOrder}/reject`, { trainerFeedback });
         return response.data;
     }
 
     async updateMilestoneStatus(roadmapId: string, milestoneOrder: number, status: RoadmapStepStatus, trainerFeedback?: string) {
         const roadmap = await this.getRoadmapById(roadmapId);
-        const updatedMilestones = roadmap.milestones.map(m =>
+        const updatedMilestones = roadmap?.milestones.map(m =>
             m.order === milestoneOrder ? { ...m, status, ...(trainerFeedback && { trainerFeedback }) } : m
         );
         const response = await this.updateRoadmap(roadmapId, { milestones: updatedMilestones });

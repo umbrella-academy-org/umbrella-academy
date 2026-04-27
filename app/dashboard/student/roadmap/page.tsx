@@ -6,11 +6,11 @@ import { useAuth, useRoadmaps } from '@/contexts';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
 import { roadmapService } from '@/services/roadmap';
 import { Milestone, UserRole, RoadmapStepStatus, Roadmap, RoadmapStatus } from '@/types';
-import { Map, Clock, CheckCircle, Lock, PlayCircle, PauseCircle, XCircle, Calendar, Target, BookOpen, ChevronRight, X, Link2, FileText, Image as ImageIcon, FilePlus, ExternalLink, Youtube, Figma, Github, Code, Tag, Briefcase, Layers, Plus, Trash2 } from 'lucide-react';
+import { Map, Clock, CheckCircle, Lock, PlayCircle, PauseCircle, XCircle, Target, BookOpen, ChevronRight, X, Link2, FileText, Image as ImageIcon, FilePlus, ExternalLink, Youtube, Figma, Github, Code, Tag, Briefcase, Layers, Plus, Trash2 } from 'lucide-react';
 
 export default function StudentRoadmapPage() {
   const { user, isAuthenticated, isLoading: authLoading } = useAuth();
-  const { studentRoadmaps, isLoading: roadmapsLoading, getUpcomingLiveSessions, refreshRoadmaps } = useRoadmaps();
+  const { studentRoadmaps, isLoading: roadmapsLoading, refreshRoadmaps } = useRoadmaps();
   const { navigate } = useNavigationWithLoading();
 
   const [selectedMilestone, setSelectedMilestone] = useState<Milestone | null>(null);
@@ -142,7 +142,7 @@ export default function StudentRoadmapPage() {
 
 
 
-  const handleCompleteMilestone = async (milestone: any, index: number) => {
+  const handleCompleteMilestone = async (milestone: Milestone, index: number) => {
     setSelectedMilestone(milestone);
     setShowProjectModal(true);
   };

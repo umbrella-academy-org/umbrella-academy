@@ -142,8 +142,8 @@ export default function TrainerApprovalsPage() {
                         <h3 className="text-lg font-semibold text-gray-900">
                           {trainer.firstName} {trainer.lastName}
                         </h3>
-                        <span className={`px-2 py-1 rounded-full text-xs font-medium border ${getStatusColor(trainer.status)}`}>
-                          {trainer.status}
+                        <span className={`px-2 py-1 rounded-full text-xs font-medium border ${getStatusColor(trainer.approvalStatus)}`}>
+                          {trainer.approvalStatus}
                         </span>
                       </div>
                       

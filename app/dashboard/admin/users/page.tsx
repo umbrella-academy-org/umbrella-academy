@@ -59,7 +59,7 @@ export default function UmbrellaAdminUsersPage() {
   };
 
   const totalUsers = students.length + trainers.length;
-  const activeUsers = [...students, ...trainers].filter(u => u.status === 'active').length;
+  const activeUsers = [...students, ...trainers].filter(u => u.isVerified === true).length;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

@@ -119,7 +119,6 @@ export default function TrainerDetailsPage() {
         phoneNumber: baseData.phoneNumber,
         role: UserRole.TRAINER as const,
         isActive: true,
-        status: 'pending_approval',
         gender: formData.gender,
         dateOfBirth: formData.dateOfBirth,
         isVerified: false,
