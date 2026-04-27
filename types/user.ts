@@ -38,7 +38,6 @@ export interface BaseUser  {
   phoneNumber: string;
   role: UserRole;
   isActive: boolean;
-  status: string;
   gender: string;
   dateOfBirth: string;
   isVerified: boolean;

@@ -40,8 +40,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const token = localStorage.getItem('auth_token');
 
       if (storedUser && token) {
-        const parsedUser:BaseUser = JSON.parse(storedUser);
-
+        const parsedUser: BaseUser = JSON.parse(storedUser);
+        console.log('Restoring session for user:', parsedUser);
         // Check various user states before allowing access
 
         // 1. Check if email is verified
@@ -111,7 +111,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         });
       }
     }
-  }, [user?._id]); 
+  }, [user?._id]);
 
 
 
@@ -129,8 +129,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         if (userData.role === UserRole.TRAINER) {
           const trainer = userData as Trainer;
           if (trainer.approvalStatus === 'pending') {
-           localStorage.setItem('auth_token', response.data.token);
-           localStorage.setItem('user', JSON.stringify(userData));
+            localStorage.setItem('auth_token', response.data.token);
+            localStorage.setItem('user', JSON.stringify(userData));
             setIsLoading(false);
             router.push(`/auth/pending-approval`);
             return;
@@ -160,7 +160,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           localStorage.setItem('userEmail', email);
           authService.sendOtp(email);
           router.push('/auth/verify');
-        }else if (response.message.includes('pending approval')) {
+        } else if (response.message.includes('pending approval')) {
           router.push('/auth/pending-approval');
         }
       }
