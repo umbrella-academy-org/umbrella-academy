@@ -148,7 +148,8 @@ export default function StudentDetailModal({ student, roadmap, onClose }: Studen
               <Wallet className="w-4 h-4" />
               Subscription Status
             </h3>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-3">
+              {/* Active Subscription Flag */}
               <div className="flex items-center justify-between">
                 <span className="text-sm text-blue-700">Active Subscription</span>
                 <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium ${
@@ -157,6 +158,20 @@ export default function StudentDetailModal({ student, roadmap, onClose }: Studen
                   {student.hasActiveSubscription ? 'Yes' : 'No'}
                 </span>
               </div>
+
+              {/* Onboarding Checklist - Subscription Paid */}
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-blue-700">Subscription Paid (Onboarding)</span>
+                <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium ${
+                  student.onboardingStatus?.subscriptionPayed 
+                    ? 'bg-green-100 text-green-800' 
+                    : 'bg-yellow-100 text-yellow-800'
+                }`}>
+                  {student.onboardingStatus?.subscriptionPayed ? 'Paid' : 'Pending'}
+                </span>
+              </div>
+
+              {/* Orientation Paid */}
               <div className="flex items-center justify-between">
                 <span className="text-sm text-blue-700">Orientation Paid</span>
                 <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium ${
@@ -165,9 +180,11 @@ export default function StudentDetailModal({ student, roadmap, onClose }: Studen
                   {student.hasPaidOrientation ? 'Yes' : 'Pending'}
                 </span>
               </div>
+
+              {/* Expiry Date */}
               {student.subscriptionExpiryDate && (
-                <div className="col-span-2 flex items-center justify-between">
-                  <span className="text-sm text-blue-700">Expires</span>
+                <div className="pt-3 border-t border-blue-200 flex items-center justify-between">
+                  <span className="text-sm text-blue-700">Subscription Expires</span>
                   <span className="text-sm font-medium text-blue-900">
                     {new Date(student.subscriptionExpiryDate).toLocaleDateString()}
                   </span>
