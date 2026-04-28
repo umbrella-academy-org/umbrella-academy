@@ -1,64 +1,101 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { Mail, Calendar, TrendingUp, TrendingDown } from 'lucide-react';
+import { Mail, Calendar, Eye, CheckCircle, XCircle, AlertCircle, GraduationCap } from 'lucide-react';
 import DataTable from '@/components/ui/DataTable';
-import StudentReportForm from '@/components/trainer/StudentReportForm';
 import { useUsers } from '@/contexts/UserContext';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRoadmaps } from '@/contexts/RoadmapContext';
 import { Student } from '@/types';
+import { RoadmapStepStatus } from '@/types/roadmap';
+import StudentDetailModal from './StudentDetailModal';
 
 interface StudentsTableProps {
   searchQuery: string;
   selectedStatus: string;
-  selectedCourse: string;
 }
 
-export default function StudentsTable({ searchQuery, selectedStatus, selectedCourse }: StudentsTableProps) {
+// Status badge component
+const StatusBadge = ({ isActive, isVerified }: { isActive: boolean; isVerified: boolean }) => {
+  if (!isActive) {
+    return (
+      <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800">
+        <XCircle className="w-3 h-3 mr-1" />
+        Inactive
+      </span>
+    );
+  }
+  if (!isVerified) {
+    return (
+      <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+        <AlertCircle className="w-3 h-3 mr-1" />
+        Pending
+      </span>
+    );
+  }
+  return (
+    <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+      <CheckCircle className="w-3 h-3 mr-1" />
+      Active
+    </span>
+  );
+};
+
+export default function StudentsTable({ searchQuery, selectedStatus }: StudentsTableProps) {
   const [selectedStudents, setSelectedStudents] = useState<Record<string, unknown>[]>([]);
-  const [showReportForm, setShowReportForm] = useState(false);
   const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
+  const [showDetailModal, setShowDetailModal] = useState(false);
 
   const { students, isLoading } = useUsers();
   const { user } = useAuth();
-  const { studentRoadmaps } = useRoadmaps();
+  const { roadmaps, getRoadmapByIdFromContext } = useRoadmaps();
 
-  // Filter students by role
-  const filteredByRole = useMemo(() => {
+  // Filter students assigned to current trainer
+  const myStudents = useMemo(() => {
     if (!user) return [];
-    return students;
-  }, [students, user, studentRoadmaps]);
+    return students.filter(student => student.assignedTrainerId === user._id);
+  }, [students, user]);
 
-  // Filter students based on search and filters
+  // Filter students based on search and status
   const filteredStudents = useMemo(() => {
-    return filteredByRole.filter(student => {
-      const course = 'N/A';
+    return myStudents.filter(student => {
       const studentName = `${student.firstName} ${student.lastName}`;
       const matchesSearch = searchQuery === '' ||
         studentName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        student.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        course.toLowerCase().includes(searchQuery.toLowerCase());
+        student.email.toLowerCase().includes(searchQuery.toLowerCase());
 
-      const matchesStatus = selectedStatus === 'all' || student.isVerified === (selectedStatus === 'verified');
+      // Status filter logic
+      let matchesStatus = true;
+      if (selectedStatus === 'active') {
+        matchesStatus = student.isActive && student.isVerified;
+      } else if (selectedStatus === 'inactive') {
+        matchesStatus = !student.isActive;
+      } else if (selectedStatus === 'pending') {
+        matchesStatus = student.isActive && !student.isVerified;
+      }
 
-      const matchesCourse = selectedCourse === 'all' ||
-        course.toLowerCase().includes(selectedCourse.replace('-', ' '));
-
-      return matchesSearch && matchesStatus && matchesCourse;
+      return matchesSearch && matchesStatus;
     });
-  }, [filteredByRole, searchQuery, selectedStatus, selectedCourse]);
+  }, [myStudents, searchQuery, selectedStatus]);
 
-  const handleCreateReport = (student: Student) => {
-    setSelectedStudent(student);
-    setShowReportForm(true);
+  // Calculate progress from roadmap
+  const getStudentProgress = (student: Student): number => {
+    if (!student.currentRoadmapId) return 0;
+    const roadmap = getRoadmapByIdFromContext(student.currentRoadmapId);
+    if (!roadmap || !roadmap.milestones || roadmap.milestones.length === 0) return 0;
+    const completed = roadmap.milestones.filter(m => m.status === RoadmapStepStatus.COMPLETED).length;
+    return Math.round((completed / roadmap.milestones.length) * 100);
   };
 
-  const handleReportSubmit = (report: unknown) => {
-    console.log('Report submitted:', report);
-    alert('Report submitted successfully! It will be sent to the mentor for review.');
-    setShowReportForm(false);
-    setSelectedStudent(null);
+  // Get student's roadmap
+  const getStudentRoadmap = (student: Student) => {
+    if (!student.currentRoadmapId) return undefined;
+    return getRoadmapByIdFromContext(student.currentRoadmapId);
+  };
+
+  const handleViewDetails = (student: Student) => {
+    setSelectedStudent(student);
+    setShowDetailModal(true);
   };
 
   // Loading skeleton
@@ -66,7 +103,7 @@ export default function StudentsTable({ searchQuery, selectedStatus, selectedCou
     return (
       <div className="space-y-4 animate-pulse">
         {[...Array(5)].map((_, i) => (
-          <div key={i} className="h-16 bg-gray-200 rounded-lg" />
+          <div key={i} className="h-16 bg-gray-100 rounded-lg" />
         ))}
       </div>
     );
@@ -75,8 +112,18 @@ export default function StudentsTable({ searchQuery, selectedStatus, selectedCou
   // Empty state
   if (filteredStudents.length === 0) {
     return (
-      <div className="text-center py-12 text-gray-500">
-        No students assigned yet.
+      <div className="text-center py-12">
+        <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <GraduationCap className="w-8 h-8 text-gray-400" />
+        </div>
+        <h3 className="text-lg font-medium text-gray-900 mb-1">
+          {myStudents.length === 0 ? 'No students assigned' : 'No students match your search'}
+        </h3>
+        <p className="text-gray-500">
+          {myStudents.length === 0 
+            ? 'Students assigned to you will appear here' 
+            : 'Try adjusting your search or filters'}
+        </p>
       </div>
     );
   }
@@ -84,20 +131,16 @@ export default function StudentsTable({ searchQuery, selectedStatus, selectedCou
   // Transform data for DataTable
   const tableData = filteredStudents.map(student => {
     const studentName = `${student.firstName} ${student.lastName}`;
-    const avatar = student.firstName.slice(0, 2).toUpperCase();
-    const course = 'N/A';
-    const joinDate = student.createdAt ?? 'N/A';
-    const progress = 0;
-    const sessionsCompleted = 0;
-    const totalSessions = 0;
-    const lastActivity = 'N/A';
-    const trend: string = 'stable';
+    const avatar = getInitials(student.firstName, student.lastName);
+    const joinDate = student.createdAt;
+    const progress = getStudentProgress(student);
+    const roadmap = getStudentRoadmap(student);
 
     return {
       id: student._id,
       student: (
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-linear-to-br from-gray-400 to-gray-600 rounded-full flex items-center justify-center text-white font-medium text-sm">
+          <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-medium text-sm">
             {avatar}
           </div>
           <div>
@@ -109,53 +152,51 @@ export default function StudentsTable({ searchQuery, selectedStatus, selectedCou
           </div>
         </div>
       ),
-      course: (
+      roadmap: (
         <div>
-          <div className="text-sm text-gray-900">{course}</div>
+          <div className="text-sm font-medium text-gray-900">
+            {roadmap?.title || 'No roadmap assigned'}
+          </div>
           <div className="text-sm text-gray-500 flex items-center gap-1">
             <Calendar className="w-3 h-3" />
-            Joined {joinDate !== 'N/A' ? new Date(joinDate).toLocaleDateString() : 'N/A'}
+            Joined {new Date(joinDate).toLocaleDateString()}
           </div>
         </div>
       ),
-   
+      status: (
+        <StatusBadge isActive={student.isActive} isVerified={student.isVerified} />
+      ),
+      subscription: (
+        <div>
+          <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
+            student.hasActiveSubscription ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+          }`}>
+            {student.hasActiveSubscription ? 'Active' : 'Inactive'}
+          </span>
+          <div className="text-xs text-gray-500 mt-1">
+            {student.hasPaidOrientation ? 'Orientation paid' : 'Orientation pending'}
+          </div>
+        </div>
+      ),
       progress: (
         <div className="flex items-center gap-2">
-          <div className="flex-1 bg-gray-200 rounded-full h-2 w-20">
+          <div className="flex-1 bg-gray-200 rounded-full h-2 w-24">
             <div
-              className="bg-linear-to-r from-gray-500 to-gray-600 h-2 rounded-full transition-all duration-500"
+              className="bg-blue-500 h-2 rounded-full transition-all duration-500"
               style={{ width: `${progress}%` }}
             />
           </div>
-          <span className="text-sm font-medium text-gray-900">{progress}%</span>
-          {trend === 'up' ? <TrendingUp className="w-3 h-3 text-gray-500" /> :
-            trend === 'down' ? <TrendingDown className="w-3 h-3 text-gray-500" /> :
-              <div className="w-3 h-3 bg-gray-400 rounded-full" />}
+          <span className="text-sm font-medium text-gray-900 w-10">{progress}%</span>
         </div>
       ),
-      sessions: (
-        <div>
-          <div className="text-sm text-gray-900">
-            {sessionsCompleted}/{totalSessions}
-          </div>
-          <div className="text-sm text-gray-500">
-            {totalSessions > 0 ? Math.round((sessionsCompleted / totalSessions) * 100) : 0}% complete
-          </div>
-        </div>
-      ),
-      lastActivity,
       actions: (
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => handleCreateReport(student)}
-            className="px-3 py-1 bg-yellow-600 text-white text-xs rounded hover:bg-yellow-700"
-          >
-            Create Report
-          </button>
-          <button className="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded hover:bg-gray-200">
-            View Details
-          </button>
-        </div>
+        <button
+          onClick={() => handleViewDetails(student)}
+          className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 text-blue-700 text-xs font-medium rounded-lg hover:bg-blue-100 transition-colors"
+        >
+          <Eye className="w-3.5 h-3.5" />
+          View Details
+        </button>
       ),
       _original: student
     };
@@ -163,11 +204,10 @@ export default function StudentsTable({ searchQuery, selectedStatus, selectedCou
 
   const columns = [
     { key: 'student', label: 'Student', sortable: true, filterable: true, searchable: true },
-    { key: 'course', label: 'Course', sortable: true, filterable: true, searchable: true },
+    { key: 'roadmap', label: 'Roadmap', sortable: true, filterable: true, searchable: true },
     { key: 'status', label: 'Status', sortable: true, filterable: true, searchable: false },
+    { key: 'subscription', label: 'Subscription', sortable: true, filterable: true, searchable: false },
     { key: 'progress', label: 'Progress', sortable: true, filterable: false, searchable: false },
-    { key: 'sessions', label: 'Sessions', sortable: true, filterable: false, searchable: false },
-    { key: 'lastActivity', label: 'Last Activity', sortable: true, filterable: false, searchable: true },
     { key: 'actions', label: 'Actions', sortable: false, filterable: false, searchable: false }
   ];
 
@@ -196,13 +236,15 @@ export default function StudentsTable({ searchQuery, selectedStatus, selectedCou
               <button className="px-3 py-1.5 text-xs font-medium text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
                 Send Message
               </button>
-              <button className="px-3 py-1.5 text-xs font-medium text-white bg-yellow-600 rounded-lg hover:bg-yellow-700 transition-colors">
-                Remove Selected
-              </button>
             </div>
           </div>
         </div>
       )}
+
+      {/* Results Count */}
+      <div className="text-sm text-gray-600">
+        Showing {filteredStudents.length} of {myStudents.length} assigned students
+      </div>
 
       {/* DataTable */}
       <DataTable
@@ -216,14 +258,13 @@ export default function StudentsTable({ searchQuery, selectedStatus, selectedCou
         onSearchChange={handleSearchChange}
       />
 
-      {/* Report Form Modal */}
-      {showReportForm && selectedStudent && (
-        <StudentReportForm
-          studentId={selectedStudent._id}
-          studentName={`${selectedStudent.firstName} ${selectedStudent.lastName}`}
-          onSubmit={handleReportSubmit}
-          onCancel={() => {
-            setShowReportForm(false);
+      {/* Student Detail Modal */}
+      {showDetailModal && selectedStudent && (
+        <StudentDetailModal
+          student={selectedStudent}
+          roadmap={getStudentRoadmap(selectedStudent)}
+          onClose={() => {
+            setShowDetailModal(false);
             setSelectedStudent(null);
           }}
         />
@@ -231,3 +272,8 @@ export default function StudentsTable({ searchQuery, selectedStatus, selectedCou
     </div>
   );
 }
+
+// Helper function
+const getInitials = (firstName: string, lastName: string) => {
+  return `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase();
+};
