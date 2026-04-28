@@ -5,7 +5,7 @@ import {
   CheckCircle, XCircle, AlertCircle, Edit2, Clock, MapPin,
   FileText, Award, BookOpen, CreditCard
 } from 'lucide-react';
-import { BaseUser, UserRole, Student, Trainer } from '@/types';
+import { BaseUser, UserRole, Student, Trainer, Guardian } from '@/types';
 
 interface UserDetailModalProps {
   user: BaseUser;
@@ -16,6 +16,7 @@ interface UserDetailModalProps {
 // Type guards
 const isStudent = (user: BaseUser): user is Student => user.role === UserRole.STUDENT;
 const isTrainer = (user: BaseUser): user is Trainer => user.role === UserRole.TRAINER;
+const isGuardian = (user: BaseUser): user is Guardian => user.role === UserRole.GUARDIAN;
 
 const getInitials = (firstName: string, lastName: string) => {
   return `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase();
@@ -27,6 +28,8 @@ const getAvatarColor = (role: UserRole) => {
       return 'bg-blue-500';
     case UserRole.TRAINER:
       return 'bg-purple-500';
+    case UserRole.GUARDIAN:
+      return 'bg-teal-500';
     case UserRole.ADMIN:
       return 'bg-red-500';
     default:
@@ -62,6 +65,7 @@ const StatusBadge = ({ isActive, isVerified }: { isActive: boolean; isVerified: 
 export default function UserDetailModal({ user, onClose, onEdit }: UserDetailModalProps) {
   const student = isStudent(user) ? user : null;
   const trainer = isTrainer(user) ? user : null;
+  const guardian = isGuardian(user) ? user : null;
 
   return (
     <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
@@ -317,6 +321,54 @@ export default function UserDetailModal({ user, onClose, onEdit }: UserDetailMod
                     >
                       Watch Video
                     </a>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Guardian-specific Information */}
+          {guardian && (
+            <div className="bg-teal-50 rounded-xl p-5 border border-teal-100">
+              <h3 className="text-sm font-semibold text-teal-900 uppercase tracking-wider mb-4 flex items-center gap-2">
+                <Users className="w-4 h-4" />
+                Guardian Information
+              </h3>
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-teal-700">Invite Status</span>
+                  <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium ${
+                    guardian.inviteState === 'active'
+                      ? 'bg-green-100 text-green-800'
+                      : guardian.inviteState === 'invited'
+                      ? 'bg-yellow-100 text-yellow-800'
+                      : 'bg-red-100 text-red-800'
+                  }`}>
+                    {guardian.inviteState}
+                  </span>
+                </div>
+                {guardian.inviteSentAt && (
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-teal-700">Invite Sent</span>
+                    <span className="text-sm font-medium text-teal-900">
+                      {new Date(guardian.inviteSentAt).toLocaleDateString()}
+                    </span>
+                  </div>
+                )}
+                {guardian.passwordSetAt && (
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-teal-700">Password Set</span>
+                    <span className="text-sm font-medium text-teal-900">
+                      {new Date(guardian.passwordSetAt).toLocaleDateString()}
+                    </span>
+                  </div>
+                )}
+                {guardian.linkedStudentIds && guardian.linkedStudentIds.length > 0 && (
+                  <div className="pt-4 border-t border-teal-200">
+                    <p className="text-sm font-medium text-teal-900 mb-2">Linked Students</p>
+                    <p className="text-sm text-teal-700">
+                      {guardian.linkedStudentIds.length} student(s) linked
+                    </p>
                   </div>
                 )}
               </div>

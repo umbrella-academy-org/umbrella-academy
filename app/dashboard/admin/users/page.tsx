@@ -5,7 +5,7 @@ import Sidebar from '@/components/dashboard/Sidebar';
 import {
   Plus, Users, UserCheck, Shield, GraduationCap, X, Search,
   Mail, Phone, Calendar, MoreVertical, Eye, Edit2, Trash2,
-  CheckCircle, XCircle, AlertCircle, Filter, Download
+  CheckCircle, XCircle, AlertCircle, Filter, Download, UserCircle
 } from 'lucide-react';
 import { useAdminContext } from '@/contexts';
 import { useAdmin } from '@/hooks/useAdmin';
@@ -49,6 +49,8 @@ const getAvatarColor = (role: UserRole) => {
       return 'bg-blue-500';
     case UserRole.TRAINER:
       return 'bg-purple-500';
+    case UserRole.GUARDIAN:
+      return 'bg-teal-500';
     case UserRole.ADMIN:
       return 'bg-red-500';
     default:
@@ -100,7 +102,7 @@ function SkeletonCard() {
 }
 
 export default function UmbrellaAdminUsersPage() {
-  const [selectedTab, setSelectedTab] = useState<'students' | 'trainers' | 'admins'>('students');
+  const [selectedTab, setSelectedTab] = useState<'students' | 'trainers' | 'guardians' | 'admins'>('students');
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<'all' | 'active' | 'inactive' | 'pending'>('all');
 
@@ -127,6 +129,9 @@ export default function UmbrellaAdminUsersPage() {
         break;
       case 'trainers':
         filtered = users.filter(u => u.role === UserRole.TRAINER);
+        break;
+      case 'guardians':
+        filtered = users.filter(u => u.role === UserRole.GUARDIAN);
         break;
       case 'admins':
         filtered = users.filter(u => u.role === UserRole.ADMIN);
@@ -163,8 +168,9 @@ export default function UmbrellaAdminUsersPage() {
   const pendingUsers = users.filter(u => u.isActive && !u.isVerified).length;
   const inactiveUsers = users.filter(u => !u.isActive).length;
 
-  // Derive students from users array
+  // Derive students and guardians from users array
   const students = users.filter(u => u.role === UserRole.STUDENT);
+  const guardians = users.filter(u => u.role === UserRole.GUARDIAN);
 
   const handleCreateSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -218,6 +224,7 @@ export default function UmbrellaAdminUsersPage() {
   const tabs = [
     { key: 'students', label: 'Students', count: students.length, icon: GraduationCap, color: 'blue' },
     { key: 'trainers', label: 'Trainers', count: trainers.length, icon: Users, color: 'purple' },
+    { key: 'guardians', label: 'Guardians', count: guardians.length, icon: UserCircle, color: 'teal' },
     { key: 'admins', label: 'Admins', count: users.filter(u => u.role === UserRole.ADMIN).length, icon: Shield, color: 'red' },
   ] as const;
 
@@ -442,6 +449,7 @@ export default function UmbrellaAdminUsersPage() {
                             <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium ${
                               user.role === UserRole.STUDENT ? 'bg-blue-100 text-blue-800' :
                               user.role === UserRole.TRAINER ? 'bg-purple-100 text-purple-800' :
+                              user.role === UserRole.GUARDIAN ? 'bg-teal-100 text-teal-800' :
                               'bg-red-100 text-red-800'
                             }`}>
                               {user.role}
