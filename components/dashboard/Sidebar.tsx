@@ -245,7 +245,7 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
       {/* Mobile Menu Button */}
       <button
         onClick={() => setIsMobileMenuOpen(true)}
-        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-gray-900 text-white rounded-lg"
+        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-black text-white rounded-lg"
       >
         <Menu className="w-6 h-6" />
       </button>
@@ -260,7 +260,7 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
 
       {/* Sidebar */}
       <div className={`
-        fixed lg:static inset-y-0 left-0 z-50 w-64 pb-20 bg-gray-900 text-white flex flex-col h-screen overflow-y-scroll
+        fixed lg:static inset-y-0 left-0 z-50 w-64 pb-20 bg-background text-white flex flex-col h-screen overflow-y-scroll
         transform transition-transform duration-300 ease-in-out lg:transform-none
         ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
       `}>
@@ -326,69 +326,7 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
           ))}
         </nav>
 
-        {/* Learning Progress Info (Student only) */}
-        {currentUserType === 'student' && (
-          <div className="mx-4 my-6 p-4 rounded-xl bg-gray-800/50 border border-gray-700/50">
-            <div className="flex items-center justify-between mb-4">
-              <div className="relative w-16 h-16">
-                <svg className="w-full h-full transform -rotate-90">
-                  <circle
-                    cx="32"
-                    cy="32"
-                    r="28"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                    fill="transparent"
-                    className="text-gray-700"
-                  />
-                  <circle
-                    cx="32"
-                    cy="32"
-                    r="28"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                    fill="transparent"
-                    strokeDasharray={175.9}
-                    strokeDashoffset={175.9 * (1 - userInfo.progressValue / 100)}
-                    className="text-yellow-500"
-                  />
-                </svg>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-xl font-bold text-yellow-500">{userInfo.progressValue}%</span>
-                </div>
-              </div>
 
-              <div className="flex flex-col items-end">
-                <div className="flex items-center gap-1 text-[10px] text-gray-400 uppercase tracking-wider mb-1">
-                  <Flame className="w-3 h-3 text-orange-500" />
-                  <span>3 Day Streak</span>
-                </div>
-                <div className="text-right">
-                  <span className="block text-xs font-medium text-white mb-0.5">
-                    {userInfo.progressLabel}
-                  </span>
-                  <a
-                    href={userInfo.renewHref}
-                    className="text-sm text-yellow-500 hover:text-yellow-500"
-                  >
-                    {userInfo.renewLabel}
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <div className="flex items-center justify-between text-xs">
-                <span className="text-gray-400">Monthly Target</span>
-                <span className="text-white font-medium">12/15 hrs</span>
-              </div>
-              <div className="w-full bg-gray-700 rounded-full h-1.5 overflow-hidden">
-                <div className="bg-yellow-500 h-full w-[80%]" />
-              </div>
-            </div>
-          </div>
-        )}
-        
         {/* User Profile */}
         <div className="p-3 lg:p-4 border-t border-gray-800">
           <div className="flex items-center gap-3">

@@ -54,6 +54,7 @@ export default function ChatInterface({ userType }: { userType: string }) {
                     msg.senderId === current._id ||
                     msg.recipientId === current._id;
                 if (isFromActiveContact) {
+                   console.log(messages.some(m => m.id === msg._id), 'Duplicate message?');
                     setMessages((prev) => [
                         ...prev,
                         {
