@@ -22,7 +22,7 @@ export function Input({ id, type = 'text', value, onChange, placeholder, error, 
                 
                 onChange={onChange}
                 placeholder={placeholder}
-                className={`w-full px-4 py-3 pr-12 border rounded-full focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${ error ? 'border-red-500' : 'border-gray-300'
+                className={`w-full px-4 py-3 pr-12 border rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 placeholder:text-gray-400 ${ error ? 'border-red-500' : 'border-gray-300'
                     }`}
                 required={required}
                 disabled={isLoading}

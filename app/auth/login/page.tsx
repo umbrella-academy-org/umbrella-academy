@@ -77,7 +77,7 @@ export default function LoginPage() {
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
                 Email
               </label>
-              <input
+              <Input
                 type="email"
                 id="email"
                 value={email}
@@ -86,10 +86,8 @@ export default function LoginPage() {
                   setLocalErrors((prev: { email: string; password: string }) => ({ ...prev, email: '' }));
                 }}
                 placeholder="Enter your email"
-                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${localErrors.email || error ? 'border-red-500' : 'border-gray-300'
-                  }`}
+                error={localErrors.email}
                 required
-                disabled={isLoading}
               />
               {localErrors.email && <p className="mt-2 text-sm text-red-500">{localErrors.email}</p>}
             </div>
