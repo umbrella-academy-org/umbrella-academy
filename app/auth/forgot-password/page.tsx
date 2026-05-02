@@ -1,126 +1,97 @@
 'use client';
 
-import Image from 'next/image';
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { Logo } from '@/components/ui/Logo';
+import { AuthContainer } from '@/components/auth/auth-container';
+import { AuthCard } from '@/components/auth/auth-card';
+import { PremiumInput } from '@/components/ui/premium-input';
+import { PremiumButton } from '@/components/ui/premium-button';
+import { Mail, ArrowLeft, ArrowRight } from 'lucide-react';
 import { authService } from '@/services/auth';
 
 export default function ForgotPasswordPage() {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleContinue = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    setIsLoading(true);
 
     if (!email) {
       setError('Email is required');
+      setIsLoading(false);
       return;
     }
     if (!/\S+@\S+\.\S+/.test(email)) {
       setError('Please enter a valid email address');
+      setIsLoading(false);
       return;
     }
 
     try {
       await authService.forgotPassword(email);
+      // Store email and flow type for the OTP + reset flow
+      localStorage.setItem('resetEmail', email);
+      localStorage.setItem('authFlow', 'reset-password');
+      router.push('/auth/verify');
     } catch {
       setError('Something went wrong. Please try again.');
-      return;
+    } finally {
+      setIsLoading(false);
     }
-
-    // Store email and flow type for the OTP + reset flow
-    localStorage.setItem('resetEmail', email);
-    localStorage.setItem('authFlow', 'reset-password');
-    router.push('/auth/verify');
   };
 
   return (
-    <div className="flex h-screen">
-      {/* Left side - Form */}
-      <div className="flex flex-2 flex-col justify-between p-8 bg-white">
-        <div className="flex flex-col items-center justify-center flex-1 max-w-md mx-auto w-full">
-          {/* Back button */}
-          <button
-            onClick={() => router.back()}
-            className="self-start flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-8"
+    <AuthContainer>
+      <AuthCard 
+        title="Forgot Password?" 
+        subtitle="Don't worry! Enter your email below and we'll send you instructions to reset it."
+      >
+        <button
+          onClick={() => router.back()}
+          className="absolute top-8 left-8 p-2 text-slate-400 hover:text-primary hover:bg-primary/5 rounded-full transition-all group"
+        >
+          <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
+        </button>
+
+        <form onSubmit={handleContinue} className="space-y-6 mt-4">
+          <PremiumInput
+            label="Email Address"
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              setError('');
+            }}
+            placeholder="jane@example.com"
+            error={error}
+            icon={<Mail size={20} />}
+            required
+          />
+
+          <PremiumButton 
+            type="submit" 
+            isLoading={isLoading}
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-            Go back
-          </button>
+            Continue
+            <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+          </PremiumButton>
+        </form>
 
-          <div className="mb-8">
-            <Logo size="lg" />
-          </div>
-
-          {/* Title */}
-          <h1 className="text-3xl font-semibold text-gray-900 mb-2">
-            Forgot Your Password?
-          </h1>
-          <p className="text-gray-500 mb-8">
-            Enter your email and we'll help you reset it.
-          </p>
-
-          {/* Form */}
-          <form onSubmit={handleContinue} className="w-full space-y-4">
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                  setError('');
-                }}
-                placeholder="Enter your email"
-                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${error ? 'border-gray-500' : 'border-gray-300'
-                  }`}
-                required
-              />
-              {error && <p className="mt-2 text-sm text-gray-500">{error}</p>}
-            </div>
-
-            <button
-              type="submit"
-              className="w-full bg-yellow-600 text-white py-3 rounded-lg font-medium hover:bg-yellow-700 transition-colors"
-            >
-              Continue
-            </button>
-          </form>
-
-          {/* Remember password link */}
-          <p className="mt-6 text-sm text-gray-600">
-            Remember password?{' '}
-            <a href="/auth/login" className="text-gray-600 hover:text-gray-700 font-medium">
-              Sign In
-            </a>
-          </p>
+        <div className="mt-8 text-center text-[15px] text-slate-500 font-light">
+          Remember password?{' '}
+          <a href="/auth/login" className="text-primary font-bold hover:underline">
+            Sign In
+          </a>
         </div>
 
-        {/* Footer */}
-        <div className="text-sm text-gray-500">
+        <div className="mt-12 text-center text-[12px] text-slate-400 uppercase tracking-widest font-bold">
           © Dreamize 2025
         </div>
-      </div>
-
-      {/* Right side - Image */}
-      <div className="hidden lg:block flex-1 relative overflow-hidden">
-        <Image
-          src="/real/image.jpeg"
-          alt="Sunset with flowers"
-          fill
-          className="object-cover object-center scale-105"
-          priority
-          quality={100}
-        />
-      </div>
-    </div>
+      </AuthCard>
+    </AuthContainer>
   );
 }
+
