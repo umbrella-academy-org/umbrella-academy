@@ -2,10 +2,15 @@
 
 import { useState, useEffect } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
-import { Plus, Ticket, CheckCircle, XCircle, Search, X, Tag, User, Percent, Calendar } from 'lucide-react';
+import { 
+  Tag, Plus, X, Search, Edit2, Trash2, Check, Download, Filter, 
+  Calendar, Mail, Percent, Info, Ticket, DollarSign, Clock, LayoutGrid, List,
+  AlertCircle, ChevronRight, Zap, Target, CheckCircle, XCircle, Sparkles, Wand2, User
+} from 'lucide-react';
 import { UserRole, type PromoCode } from '@/types';
 import { apiClient } from '@/services/client';
-import { API_ENDPOINTS } from '@/services/constants';
+import { PremiumInput } from '@/components/ui/premium-input';
+import { PremiumButton } from '@/components/ui/premium-button';
 
 interface PromoCodeForm {
   code: string;
@@ -59,6 +64,7 @@ export default function PromoCodesPage() {
 
   const usedCount = promoCodes.filter(pc => pc.isUsed).length;
   const activeCount = promoCodes.filter(pc => !pc.isUsed && new Date(pc.expiresAt) > new Date()).length;
+  const expiredCount = promoCodes.filter(pc => !pc.isUsed && new Date(pc.expiresAt) <= new Date()).length;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -101,180 +107,157 @@ export default function PromoCodesPage() {
   };
 
   return (
-    <div className="flex h-screen bg-white">
+    <div className="flex h-screen bg-[#F8FAFC]">
       <Sidebar activeItem="Promo Codes" userType={UserRole.ADMIN} />
 
-      <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
-        <main className="flex-1 overflow-auto">
-          <div className="p-3 lg:p-4">
-            <div className="mb-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h1 className="text-2xl font-semibold text-gray-900 mb-2">Promo Codes</h1>
-                  <p className="text-gray-600">Manage discount codes for students</p>
+      <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+        {/* Header */}
+        <header className="bg-white/80 backdrop-blur-md border-b border-slate-100 px-8 py-5 sticky top-0 z-10">
+          <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-[12px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full uppercase tracking-wider">Marketing Assets</span>
+                <span className="text-slate-300">•</span>
+                <span className="text-[12px] font-medium text-slate-400 italic">Discounts & Promos</span>
+              </div>
+              <h1 className="text-2xl font-bold text-slate-900">Promo Code Manager</h1>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => { setShowModal(true); setForm(EMPTY_FORM); setError(null); setSuccess(false); }}
+                className="px-6 py-2.5 bg-slate-900 text-white rounded-xl font-bold text-[14px] hover:bg-slate-800 transition-all shadow-lg shadow-slate-900/10 flex items-center gap-2 group"
+              >
+                <Plus className="w-4 h-4 text-primary group-hover:rotate-90 transition-transform" />
+                Issue New Code
+              </button>
+            </div>
+          </div>
+        </header>
+
+        <main className="flex-1 p-8 overflow-y-auto">
+          <div className="max-w-7xl mx-auto">
+            
+            {/* Promotion Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+              {[
+                { label: 'Total Issued', value: promoCodes.length, icon: Ticket, color: 'text-slate-600', bg: 'bg-slate-100' },
+                { label: 'Redeemed', value: usedCount, icon: CheckCircle, color: 'text-green-500', bg: 'bg-green-50' },
+                { label: 'Available', value: activeCount, icon: Sparkles, color: 'text-primary', bg: 'bg-primary/10' },
+                { label: 'Expired', value: expiredCount, icon: XCircle, color: 'text-red-400', bg: 'bg-red-50' },
+              ].map((stat) => (
+                <div key={stat.label} className="bg-white border border-slate-100 rounded-[32px] p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all group">
+                   <div className={`w-12 h-12 ${stat.bg} rounded-2xl flex items-center justify-center mb-4 transition-transform group-hover:scale-110`}>
+                      <stat.icon className={`w-6 h-6 ${stat.color}`} />
+                   </div>
+                   <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">{stat.label}</p>
+                   <p className="text-3xl font-black text-slate-900 mt-1">{stat.value}</p>
                 </div>
-                <button
-                  onClick={() => { setShowModal(true); setForm(EMPTY_FORM); setError(null); setSuccess(false); }}
-                  className="flex items-center gap-2 px-4 py-2 bg-yellow-600 text-white rounded-lg font-medium hover:bg-yellow-700 transition-colors"
-                >
-                  <Plus className="w-4 h-4" />
-                  Create Code
-                </button>
+              ))}
+            </div>
+
+            {/* Content Container */}
+            <div className="bg-white rounded-[40px] border border-slate-100 shadow-sm overflow-hidden">
+              
+              <div className="p-8 border-b border-slate-50 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                <div>
+                   <h2 className="text-xl font-bold text-slate-900">Active Inventory</h2>
+                   <p className="text-slate-500 text-sm font-light italic">Track and audit all issued promotional vouchers</p>
+                </div>
+
+                <div className="relative group max-w-md w-full">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4 group-focus-within:text-primary transition-colors" />
+                  <input 
+                    type="text" 
+                    placeholder="Search by code or student identity..." 
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="pl-10 pr-4 py-2.5 bg-slate-50 border-none rounded-xl text-sm focus:ring-2 focus:ring-primary/20 transition-all w-full"
+                  />
+                </div>
               </div>
-            </div>
 
-            {/* Stats Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-              {isLoading ? (
-                <>
-                  {[...Array(4)].map((_, i) => (
-                    <div key={i} className="bg-white rounded-lg shadow-sm border border-gray-100 p-6 animate-pulse">
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <div className="h-3 w-24 bg-gray-200 rounded mb-3" />
-                          <div className="h-7 w-12 bg-gray-200 rounded" />
-                        </div>
-                        <div className="w-8 h-8 bg-gray-200 rounded" />
-                      </div>
-                    </div>
-                  ))}
-                </>
-              ) : (
-                <>
-                  <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-sm font-medium text-gray-600">Total Codes</p>
-                        <p className="text-2xl font-bold text-gray-900">{promoCodes.length}</p>
-                      </div>
-                      <Ticket className="w-8 h-8 text-gray-500" />
-                    </div>
+              <div className="overflow-x-auto">
+                {isLoading ? (
+                   <div className="p-20 text-center">
+                    <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+                    <p className="text-slate-400 font-medium">Syncing Promotions...</p>
                   </div>
-                  <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-sm font-medium text-gray-600">Used</p>
-                        <p className="text-2xl font-bold text-gray-900">{usedCount}</p>
-                      </div>
-                      <CheckCircle className="w-8 h-8 text-green-500" />
+                ) : filteredPromoCodes.length === 0 ? (
+                  <div className="p-20 text-center">
+                    <div className="w-20 h-20 bg-slate-50 rounded-[32px] flex items-center justify-center mx-auto mb-6">
+                      <Ticket size={40} className="text-slate-200" />
                     </div>
+                    <h3 className="text-xl font-bold text-slate-900 mb-2">No Codes Found</h3>
+                    <p className="text-slate-500 font-light">Refine your search parameters to locate a voucher.</p>
                   </div>
-                  <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-sm font-medium text-gray-600">Active</p>
-                        <p className="text-2xl font-bold text-gray-900">{activeCount}</p>
-                      </div>
-                      <Tag className="w-8 h-8 text-yellow-600" />
-                    </div>
-                  </div>
-                  <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-sm font-medium text-gray-600">Expired</p>
-                        <p className="text-2xl font-bold text-gray-900">
-                          {promoCodes.filter(pc => !pc.isUsed && new Date(pc.expiresAt) <= new Date()).length}
-                        </p>
-                      </div>
-                      <XCircle className="w-8 h-8 text-red-500" />
-                    </div>
-                  </div>
-                </>
-              )}
-            </div>
-
-            {/* Search */}
-            <div className="mb-6">
-              <div className="relative max-w-md">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                <input
-                  type="text"
-                  placeholder="Search by code or student email..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500"
-                />
-              </div>
-            </div>
-
-            {/* Promo Codes Table */}
-            <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
-              <table className="w-full">
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Code</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Student</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Discount</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Expires</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Reason</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-100">
-                  {isLoading ? (
-                    [...Array(5)].map((_, i) => (
-                      <tr key={i} className="animate-pulse">
-                        <td className="px-4 py-3"><div className="h-4 w-20 bg-gray-200 rounded" /></td>
-                        <td className="px-4 py-3"><div className="h-4 w-32 bg-gray-200 rounded" /></td>
-                        <td className="px-4 py-3"><div className="h-4 w-16 bg-gray-200 rounded" /></td>
-                        <td className="px-4 py-3"><div className="h-4 w-12 bg-gray-200 rounded" /></td>
-                        <td className="px-4 py-3"><div className="h-4 w-20 bg-gray-200 rounded" /></td>
-                        <td className="px-4 py-3"><div className="h-4 w-24 bg-gray-200 rounded" /></td>
+                ) : (
+                  <table className="w-full text-left border-collapse">
+                    <thead>
+                      <tr className="bg-slate-50/50">
+                        <th className="px-8 py-5 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Voucher Code</th>
+                        <th className="px-8 py-5 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Assigned Recipient</th>
+                        <th className="px-8 py-5 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Benefit</th>
+                        <th className="px-8 py-5 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Status</th>
+                        <th className="px-8 py-5 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Validity</th>
+                        <th className="px-8 py-5 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400 text-right">Reference</th>
                       </tr>
-                    ))
-                  ) : filteredPromoCodes.length === 0 ? (
-                    <tr>
-                      <td colSpan={6} className="px-4 py-8 text-center text-gray-500">
-                        No promo codes found
-                      </td>
-                    </tr>
-                  ) : (
-                    filteredPromoCodes.map((pc) => (
-                      <tr key={pc.code} className="hover:bg-gray-50">
-                        <td className="px-4 py-3">
-                          <span className="font-mono font-medium text-gray-900">{pc.code}</span>
-                        </td>
-                        <td className="px-4 py-3">
-                          <div className="flex items-center gap-2">
-                            <User className="w-4 h-4 text-gray-400" />
-                            <span className="text-sm text-gray-700">{pc.assignedStudentEmail}</span>
-                          </div>
-                        </td>
-                        <td className="px-4 py-3">
-                          <div className="flex items-center gap-1">
-                            <Percent className="w-3 h-3 text-gray-400" />
-                            <span className="text-sm text-gray-700">
-                              {pc.discountPercentage > 0 ? `${pc.discountPercentage}%` : `${pc.discountAmount} RWF`}
+                    </thead>
+                    <tbody className="divide-y divide-slate-50">
+                      {filteredPromoCodes.map((pc) => (
+                        <tr key={pc.code} className="group hover:bg-slate-50/50 transition-all duration-300">
+                          <td className="px-8 py-5">
+                            <div className="flex items-center gap-3">
+                              <div className="w-10 h-10 bg-slate-50 rounded-xl flex items-center justify-center group-hover:bg-white group-hover:shadow-sm transition-all border border-slate-100/50">
+                                <Ticket size={18} className="text-slate-400 group-hover:text-primary transition-colors" />
+                              </div>
+                              <span className="font-mono text-sm font-black text-slate-900 group-hover:text-primary transition-colors">{pc.code}</span>
+                            </div>
+                          </td>
+                          <td className="px-8 py-5">
+                            <div className="flex items-center gap-2">
+                              <div className="w-8 h-8 bg-slate-900 rounded-lg flex items-center justify-center text-white text-[10px] font-black">@</div>
+                              <span className="text-[13px] font-medium text-slate-600 truncate max-w-[200px]">{pc.assignedStudentEmail}</span>
+                            </div>
+                          </td>
+                          <td className="px-8 py-5">
+                            <div className="flex flex-col">
+                               <span className="text-[15px] font-black text-slate-900">
+                                 {pc.discountPercentage > 0 ? `${pc.discountPercentage}% OFF` : `${pc.discountAmount.toLocaleString()} RWF`}
+                               </span>
+                               <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Single Use Voucher</span>
+                            </div>
+                          </td>
+                          <td className="px-8 py-5">
+                            <span className={`inline-flex items-center px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider ${
+                              pc.isUsed
+                                ? 'bg-green-50 text-green-600 border border-green-100'
+                                : new Date(pc.expiresAt) > new Date()
+                                ? 'bg-primary/10 text-primary border border-primary/20'
+                                : 'bg-red-50 text-red-600 border border-red-100'
+                            }`}>
+                              {pc.isUsed ? 'Redeemed' : new Date(pc.expiresAt) > new Date() ? 'Active' : 'Expired'}
                             </span>
-                          </div>
-                        </td>
-                        <td className="px-4 py-3">
-                          <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
-                            pc.isUsed
-                              ? 'bg-green-100 text-green-700'
-                              : new Date(pc.expiresAt) > new Date()
-                              ? 'bg-yellow-100 text-yellow-700'
-                              : 'bg-red-100 text-red-700'
-                          }`}>
-                            {pc.isUsed ? 'Used' : new Date(pc.expiresAt) > new Date() ? 'Active' : 'Expired'}
-                          </span>
-                        </td>
-                        <td className="px-4 py-3">
-                          <div className="flex items-center gap-1">
-                            <Calendar className="w-3 h-3 text-gray-400" />
-                            <span className="text-sm text-gray-700">
+                          </td>
+                          <td className="px-8 py-5">
+                            <div className="flex items-center gap-2 text-[13px] text-slate-600 font-medium">
+                              <Calendar size={14} className="text-slate-400" />
                               {new Date(pc.expiresAt).toLocaleDateString()}
-                            </span>
-                          </div>
-                        </td>
-                        <td className="px-4 py-3">
-                          <span className="text-sm text-gray-600 truncate max-w-xs">{pc.reason}</span>
-                        </td>
-                      </tr>
-                    ))
-                  )}
-                </tbody>
-              </table>
+                            </div>
+                          </td>
+                          <td className="px-8 py-5 text-right">
+                            <span className="text-[12px] font-medium text-slate-400 italic max-w-[150px] truncate inline-block">{pc.reason}</span>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                )}
+              </div>
+            </div>
+
+            <div className="mt-12 text-center">
+               <p className="text-slate-400 text-[11px] font-bold tracking-[0.3em] uppercase italic">© Dreamize Africa 2025 • Promo Inventory Protocol</p>
             </div>
           </div>
         </main>
@@ -282,127 +265,129 @@ export default function PromoCodesPage() {
 
       {/* Create Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-xl shadow-xl w-full max-w-md p-6">
-            <div className="flex items-center justify-between mb-5">
-              <h2 className="text-lg font-semibold text-gray-900">Create Promo Code</h2>
-              <button onClick={() => setShowModal(false)} className="text-gray-400 hover:text-gray-700">
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            {success && (
-              <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded-lg text-sm text-green-700">
-                Promo code created successfully!
-              </div>
-            )}
-
-            {error && (
-              <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">
-                {error}
-              </div>
-            )}
-
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Code *</label>
-                <div className="flex gap-2">
-                  <input
-                    type="text"
-                    value={form.code}
-                    onChange={e => setForm({ ...form, code: e.target.value.toUpperCase() })}
-                    placeholder="e.g., UMB-123456"
-                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500"
-                    required
-                  />
-                  <button
-                    type="button"
-                    onClick={generateCode}
-                    className="px-3 py-2 bg-gray-100 text-gray-700 rounded-lg text-sm hover:bg-gray-200"
-                  >
-                    Generate
-                  </button>
+        <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-md z-[100] flex items-center justify-center p-4">
+          <div className="bg-white rounded-[40px] shadow-2xl w-full max-w-xl p-10 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 blur-[80px] rounded-full -mr-32 -mt-32" />
+            
+            <div className="relative z-10">
+              <div className="flex items-center justify-between mb-8">
+                <div>
+                  <h2 className="text-2xl font-black text-slate-900">Mint Promo Voucher</h2>
+                  <p className="text-slate-500 font-light mt-1">Generate a secure discount credential</p>
                 </div>
+                <button
+                  onClick={() => setShowModal(false)}
+                  className="w-10 h-10 flex items-center justify-center bg-slate-50 hover:bg-slate-100 rounded-2xl transition-all"
+                >
+                  <X className="w-5 h-5 text-slate-400" />
+                </button>
               </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Student Email *</label>
-                <input
+              {success && (
+                <div className="mb-6 p-4 bg-green-50 border border-green-100 rounded-[20px] flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500" />
+                  <p className="text-sm text-green-700 font-bold">Voucher minted successfully!</p>
+                </div>
+              )}
+
+              {error && (
+                <div className="mb-6 p-4 bg-red-50 border border-red-100 rounded-[20px] flex items-center gap-3">
+                  <AlertCircle className="w-5 h-5 text-red-500" />
+                  <p className="text-sm text-red-700 font-medium">{error}</p>
+                </div>
+              )}
+
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div>
+                  <label className="block text-[13px] font-bold text-slate-700 ml-1 mb-2">Voucher Code</label>
+                  <div className="flex gap-3">
+                    <div className="flex-1">
+                      <PremiumInput
+                        label=""
+                        icon={<Ticket size={20} />}
+                        placeholder="E.g. UMB-XYZ123"
+                        value={form.code}
+                        onChange={e => setForm({ ...form, code: e.target.value.toUpperCase() })}
+                      />
+                    </div>
+                    <button
+                      type="button"
+                      onClick={generateCode}
+                      className="px-6 h-[52px] bg-slate-900 text-white rounded-2xl font-bold text-[13px] hover:bg-slate-800 transition-all flex items-center gap-2"
+                    >
+                      <Wand2 size={16} className="text-primary" />
+                      Auto-Gen
+                    </button>
+                  </div>
+                </div>
+
+                <PremiumInput
+                  label="Target Student Email"
+                  icon={<Mail size={20} />}
                   type="email"
+                  placeholder="student@dreamize.rw"
                   value={form.assignedStudentEmail}
                   onChange={e => setForm({ ...form, assignedStudentEmail: e.target.value })}
-                  placeholder="student@example.com"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500"
-                  required
                 />
-              </div>
 
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Discount %</label>
-                  <input
+                <div className="grid grid-cols-2 gap-4">
+                   <PremiumInput
+                    label="Discount %"
+                    icon={<Percent size={20} />}
                     type="number"
-                    min="0"
-                    max="100"
-                    value={form.discountPercentage}
+                    placeholder="0"
+                    value={form.discountPercentage.toString()}
                     onChange={e => setForm({ ...form, discountPercentage: parseInt(e.target.value) || 0 })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500"
                   />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Fixed Amount (RWF)</label>
-                  <input
+                   <PremiumInput
+                    label="Fixed Amount (RWF)"
+                    icon={<DollarSign size={20} />}
                     type="number"
-                    min="0"
-                    value={form.discountAmount}
+                    placeholder="0"
+                    value={form.discountAmount.toString()}
                     onChange={e => setForm({ ...form, discountAmount: parseInt(e.target.value) || 0 })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500"
                   />
                 </div>
-              </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Reason *</label>
-                <textarea
-                  value={form.reason}
-                  onChange={e => setForm({ ...form, reason: e.target.value })}
-                  placeholder="Why is this promo code being created?"
-                  rows={3}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 resize-none"
-                  required
-                />
-              </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <PremiumInput
+                    label="Expiration Date"
+                    icon={<Calendar size={20} />}
+                    type="date"
+                    value={form.expiresAt}
+                    onChange={e => setForm({ ...form, expiresAt: e.target.value })}
+                  />
+                  <PremiumInput
+                    label="Creation Reason"
+                    icon={<Info size={20} />}
+                    placeholder="Scholarship..."
+                    value={form.reason}
+                    onChange={e => setForm({ ...form, reason: e.target.value })}
+                  />
+                </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Expires At *</label>
-                <input
-                  type="date"
-                  value={form.expiresAt}
-                  onChange={e => setForm({ ...form, expiresAt: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500"
-                  required
-                />
-              </div>
-
-              <div className="flex gap-3 pt-2">
-                <button
-                  type="submit"
-                  className="flex-1 py-2 bg-yellow-600 text-white rounded-lg text-sm font-medium hover:bg-yellow-700 transition-colors"
-                >
-                  Create Code
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setShowModal(false)}
-                  className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg text-sm hover:bg-gray-50"
-                >
-                  Cancel
-                </button>
-              </div>
-            </form>
+                <div className="flex gap-4 pt-4">
+                  <PremiumButton
+                    type="submit"
+                    className="flex-1"
+                  >
+                    Authorize Issuance
+                  </PremiumButton>
+                  <button
+                    type="button"
+                    onClick={() => setShowModal(false)}
+                    className="px-8 py-3 bg-slate-100 text-slate-600 rounded-2xl font-bold text-sm hover:bg-slate-200 transition-all"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       )}
     </div>
   );
 }
+
+// Add missing icon

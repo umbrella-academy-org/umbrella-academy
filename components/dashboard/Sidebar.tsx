@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Home, Calendar, CalendarCheck, CreditCard, MessageSquare, X, Settings, Menu, User, LogOut, Lock, Users, Award, BookOpen, MapPin, Search } from 'lucide-react';
+import { Home, Calendar, CalendarCheck, CreditCard, MessageSquare, X, Settings, Menu, User, LogOut, Lock, Users, Award, BookOpen, MapPin, Search, Ticket, Server, UserCheck } from 'lucide-react';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
 import { useAuth } from '@/contexts';
 import { SidebarProps, SidebarItem } from '@/types';
@@ -48,8 +48,13 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
         return [
           { icon: <Home className="w-5 h-5" />, label: 'Dashboard', href: '/dashboard/admin', active: true },
           { icon: <Users className="w-5 h-5" />, label: 'Users', href: '/dashboard/admin/users' },
+          { icon: <Ticket className="w-5 h-5" />, label: 'Promo Codes', href: '/dashboard/admin/promo-codes' },
+          {icon: <UserCheck className="w-5 h-5" />, label: 'Trainer approval', href: '/dashboard/admin/trainer-approvals' },
+          { icon: <UserCheck className="w-5 h-5" />, label: 'Roadmap approval', href: '/dashboard/admin/roadmap-approvals' },
           { icon: <CreditCard className="w-5 h-5" />, label: 'Payments', href: '/dashboard/admin/payments' },
-          { icon: <Settings className="w-5 h-5" />, label: 'Settings', href: '/dashboard/admin/system' },
+          { icon: <Server className="w-5 h-5" />, label: 'Server', href: '/dashboard/admin/system' },
+          { icon: <Settings className="w-5 h-5" />, label: 'Settings', href: '/dashboard/admin/settings' },
+          { icon: <User className="w-5 h-5" />, label: 'Profile', href: '/dashboard/admin/profile' },
         ];
       default:
         return [

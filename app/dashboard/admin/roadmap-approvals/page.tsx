@@ -6,7 +6,8 @@ import { UserRole } from '@/types/user';
 import { Roadmap, RoadmapStatus } from '@/types/roadmap';
 import { useAuth, useAdminContext } from '@/contexts';
 import { adminService } from '@/services/admin';
-import { MapPin, Clock, X, Check, Mail, Calendar, Award, FileText, Eye, AlertCircle, User } from 'lucide-react';
+import { MapPin, Clock, X, Check, Mail, Calendar, Award, FileText, Eye, AlertCircle, User, Compass, Target, ChevronRight, GraduationCap, ThumbsUp, ThumbsDown, BookOpen } from 'lucide-react';
+import { PremiumButton } from '@/components/ui/premium-button';
 
 export default function RoadmapApprovalsPage() {
   const { user } = useAuth();
@@ -34,22 +35,15 @@ export default function RoadmapApprovalsPage() {
     }
   };
 
-  // Load pending roadmaps on component mount
   useEffect(() => {
     loadPendingRoadmaps();
   },[]);
 
-
   const handleApprove = async (roadmapId: string) => {
     setActionLoading(true);
     try {
-      // Call admin service to approve roadmap
       await adminService.approveRoadmap(roadmapId, user?._id || 'admin');
-      
-      // Refresh roadmaps list to get updated data
       await loadPendingRoadmaps();
-      
-      // Close details modal
       setShowDetails(false);
       setSelectedRoadmap(null);
     } catch (error) {
@@ -61,15 +55,10 @@ export default function RoadmapApprovalsPage() {
 
   const handleReject = async () => {
     if (!selectedRoadmap || !rejectionReason.trim()) return;
-    
     setActionLoading(true);
     try {
-      // Call admin service to reject roadmap
       await adminService.rejectRoadmap(selectedRoadmap.id, rejectionReason);
-      
-      // Refresh roadmaps list to get updated data
       await loadPendingRoadmaps();
-      
       setShowRejectionModal(false);
       setShowDetails(false);
       setSelectedRoadmap(null);
@@ -86,21 +75,6 @@ export default function RoadmapApprovalsPage() {
     setShowDetails(true);
   };
 
-  const getStatusColor = (status: RoadmapStatus) => {
-    switch (status) {
-      case 'pending-approval':
-        return 'bg-yellow-100 text-yellow-800 border-yellow-200';
-      case 'approved':
-        return 'bg-green-100 text-green-800 border-green-200';
-      case 'rejected':
-        return 'bg-red-100 text-red-800 border-red-200';
-      case 'active':
-        return 'bg-blue-100 text-blue-800 border-blue-200';
-      default:
-        return 'bg-gray-100 text-gray-800 border-gray-200';
-    }
-  };
-
   const formatDate = (date: string | Date) => {
     return new Date(date).toLocaleDateString('en-US', {
       year: 'numeric',
@@ -109,264 +83,258 @@ export default function RoadmapApprovalsPage() {
     });
   };
 
-  if (loading) {
-    return (
-      <div className="flex h-screen bg-white">
-        <Sidebar activeItem="Roadmap Approvals" userType={UserRole.ADMIN} />
-        <div className="flex-1 flex flex-col">
-          <div className="h-16 bg-gray-100 animate-pulse"></div>
-          <div className="flex-1 p-6 space-y-6">
-            <div className="h-8 bg-gray-200 rounded animate-pulse"></div>
-            <div className="space-y-4">
-              {[...Array(3)].map((_, i) => (
-                <div key={i} className="h-32 bg-gray-200 rounded animate-pulse"></div>
-              ))}
+  return (
+    <div className="flex h-screen bg-[#F8FAFC]">
+      <Sidebar activeItem="Roadmap Approvals" userType={UserRole.ADMIN} />
+
+      <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+        {/* Header */}
+        <header className="bg-white/80 backdrop-blur-md border-b border-slate-100 px-8 py-5 sticky top-0 z-10">
+          <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-[12px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full uppercase tracking-wider">Curriculum Oversight</span>
+                <span className="text-slate-300">•</span>
+                <span className="text-[12px] font-medium text-slate-400 italic">Pedagogical Review</span>
+              </div>
+              <h1 className="text-2xl font-bold text-slate-900">Roadmap Approval Queue</h1>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 px-4 py-2 bg-indigo-50 rounded-2xl border border-indigo-100">
+                <Compass className="w-4 h-4 text-indigo-500" />
+                <span className="text-sm font-bold text-indigo-600">{roadmaps.length} Pending Peer-Review</span>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="flex h-screen bg-gray-50">
-      <Sidebar activeItem="Roadmap Approvals" userType={UserRole.ADMIN} />
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <header className="bg-white shadow-sm h-16 flex items-center px-6 border-b border-gray-200">
-          <h1 className="text-xl font-semibold text-gray-900">Roadmap Approvals ({roadmaps.length})</h1>
         </header>
-        <main className="flex-1 overflow-y-auto p-6">
-          <div className="space-y-6">
+
+        <main className="flex-1 p-8 overflow-y-auto">
+          <div className="max-w-7xl mx-auto">
+            
             {error && (
-              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
-                {error}
+              <div className="mb-6 p-4 bg-red-50 border border-red-100 rounded-[20px] flex items-center gap-3">
+                <AlertCircle className="w-5 h-5 text-red-500" />
+                <p className="text-sm text-red-700 font-medium">{error}</p>
               </div>
             )}
-            
-            {roadmaps.length === 0 ? (
-              <div className="text-center py-10 bg-white rounded-lg shadow-sm border border-gray-100">
-                <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <MapPin className="w-8 h-8 text-yellow-600" />
+
+            {loading ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {[...Array(6)].map((_, i) => (
+                  <div key={i} className="h-80 bg-white border border-slate-100 rounded-[32px] animate-pulse" />
+                ))}
+              </div>
+            ) : roadmaps.length === 0 ? (
+              <div className="text-center py-20 bg-white border border-slate-100 rounded-[40px] shadow-sm">
+                <div className="w-20 h-20 bg-slate-50 rounded-[32px] flex items-center justify-center mx-auto mb-6">
+                  <Target size={40} className="text-slate-200" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">No Pending Roadmap Approvals</h3>
-                <p className="text-sm text-gray-600">All roadmaps have been reviewed. Check back later for new submissions.</p>
+                <h3 className="text-xl font-bold text-slate-900 mb-2">Curriculum Clear</h3>
+                <p className="text-slate-500 font-light">All submitted learning paths have been audited.</p>
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {roadmaps.map((roadmap) => (
-                  <div key={roadmap.id} className="bg-white rounded-lg shadow-sm border border-gray-100 p-5 flex flex-col">
-                    <div className="flex items-center mb-3">
-                      <div className="flex-shrink-0 h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 font-medium">
-                        <MapPin className="w-5 h-5" />
+                  <div key={roadmap.id} className="bg-white border border-slate-100 rounded-[32px] p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all group flex flex-col">
+                    <div className="flex items-center gap-3 mb-5">
+                      <div className="w-12 h-12 bg-slate-900 rounded-2xl flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                        <MapPin size={22} />
                       </div>
-                      <div className="ml-3">
-                        <p className="text-sm font-medium text-gray-900">{roadmap.title}</p>
-                        <p className="text-xs text-gray-500">Roadmap ID: {roadmap.id}</p>
-                      </div>
-                    </div>
-                    <div className="mb-4">
-                      <span className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusColor(roadmap.status)}`}>
-                        {roadmap.status}
-                      </span>
-                    </div>
-                    
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                      <div className="flex items-center gap-2 text-sm text-gray-600">
-                        <User className="w-4 h-4" />
-                        Student: {roadmap.studentId.firstName} {roadmap.studentId.lastName}
-                      </div>
-                      <div className="flex items-center gap-2 text-sm text-gray-600">
-                        <Award className="w-4 h-4" />
-                        Trainer: {roadmap.trainerId.firstName} {roadmap.trainerId.lastName}
-                      </div>
-                      <div className="flex items-center gap-2 text-sm text-gray-600">
-                        <Calendar className="w-4 h-4" />
-                        Created {formatDate(roadmap.createdAt)}
-                      </div>
-                      <div className="flex items-center gap-2 text-sm text-gray-600">
-                        <Clock className="w-4 h-4" />
-                        {roadmap.milestones.length} milestones
+                      <div>
+                         <h3 className="text-[15px] font-black text-slate-900 line-clamp-1 group-hover:text-primary transition-colors">{roadmap.title}</h3>
+                         <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">ID: {roadmap.id.slice(-6)}</p>
                       </div>
                     </div>
 
-                    <div className="mb-4">
-                      <p className="text-sm font-medium text-gray-700 mb-2">Milestones:</p>
-                      <div className="space-y-2">
-                        {roadmap.milestones.slice(0, 3).map((milestone, index) => (
-                          <div key={index} className="text-xs bg-gray-50 p-2 rounded">
-                            <p className="font-medium text-gray-700">{milestone.title}</p>
-                            <p className="text-gray-600">{milestone.estimatedDurationDays} days</p>
+                    <div className="space-y-4 mb-6 flex-1">
+                       <div className="bg-slate-50 rounded-2xl p-4 border border-slate-100/50">
+                          <div className="flex items-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">
+                             <GraduationCap size={14} className="text-primary" /> Recipient
                           </div>
-                        ))}
-                        {roadmap.milestones.length > 3 && (
-                          <p className="text-xs text-gray-500">+{roadmap.milestones.length - 3} more milestones</p>
-                        )}
-                      </div>
+                          <p className="text-sm font-black text-slate-900">{roadmap.studentId.firstName} {roadmap.studentId.lastName}</p>
+                       </div>
+
+                       <div className="bg-slate-50 rounded-2xl p-4 border border-slate-100/50">
+                          <div className="flex items-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">
+                             <Award size={14} className="text-primary" /> Architect
+                          </div>
+                          <p className="text-sm font-black text-slate-900">{roadmap.trainerId.firstName} {roadmap.trainerId.lastName}</p>
+                       </div>
                     </div>
 
-                    <div className="flex items-center gap-2 ml-4">
-                      <button
-                        onClick={() => viewRoadmapDetails(roadmap)}
-                        className="px-3 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors flex items-center gap-2"
-                      >
-                        <Eye className="w-4 h-4" />
-                        View Details
-                      </button>
+                    <div className="flex items-center justify-between py-4 border-t border-slate-50">
+                       <div className="flex items-center gap-2 text-[11px] font-bold text-slate-500">
+                          <Clock size={12} />
+                          {roadmap.milestones.length} Milestones
+                       </div>
+                       <button 
+                         onClick={() => viewRoadmapDetails(roadmap)}
+                         className="flex items-center gap-1 text-[11px] font-black text-primary uppercase tracking-widest hover:gap-2 transition-all"
+                       >
+                         Full Dossier <ChevronRight size={14} />
+                       </button>
                     </div>
                   </div>
                 ))}
               </div>
             )}
+
+            <div className="mt-12 text-center">
+               <p className="text-slate-400 text-[11px] font-bold tracking-[0.3em] uppercase italic">© Dreamize Africa 2025 • Learning Path Vetting Protocol</p>
+            </div>
           </div>
         </main>
       </div>
 
       {/* Roadmap Details Modal */}
       {showDetails && selectedRoadmap && (
-        <div className="fixed inset-0 bg-black/50 overflow-y-auto h-full w-full z-50 flex justify-center items-center">
-          <div className="relative p-8 bg-white w-full max-w-2xl mx-auto rounded-lg shadow-lg">
-            <button
-              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
-              onClick={() => setShowDetails(false)}
-            >
-              <X className="w-6 h-6" />
-            </button>
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Roadmap Details</h2>
+        <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-md z-[100] flex items-center justify-center p-4">
+          <div className="bg-white rounded-[40px] shadow-2xl w-full max-w-4xl overflow-hidden relative">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 blur-[80px] rounded-full -mr-32 -mt-32" />
             
-            <div className="space-y-6">
-                {/* Basic Info */}
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                    {selectedRoadmap.title}
-                  </h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="flex items-center gap-2 text-sm text-gray-600">
-                      <User className="w-4 h-4" />
-                      Student: {selectedRoadmap.studentId.firstName} {selectedRoadmap.studentId.lastName}
-                    </div>
-                    <div className="flex items-center gap-2 text-sm text-gray-600">
-                      <Award className="w-4 h-4" />
-                      Trainer: {selectedRoadmap.trainerId.firstName} {selectedRoadmap.trainerId.lastName}
-                    </div>
-                    <div className="flex items-center gap-2 text-sm text-gray-600">
-                      <Calendar className="w-4 h-4" />
-                      {formatDate(selectedRoadmap.createdAt)}
-                    </div>
-                    <div className="flex items-center gap-2 text-sm text-gray-600">
-                      <Clock className="w-4 h-4" />
-                      Status: {selectedRoadmap.status}
-                    </div>
-                  </div>
+            <div className="p-10 relative z-10 flex flex-col max-h-[90vh]">
+              <div className="flex items-center justify-between mb-8">
+                <div className="flex items-center gap-4">
+                   <div className="w-16 h-16 bg-slate-900 rounded-[20px] flex items-center justify-center text-primary shadow-2xl">
+                      <Compass size={32} />
+                   </div>
+                   <div>
+                      <h2 className="text-2xl font-black text-slate-900">{selectedRoadmap.title}</h2>
+                      <p className="text-slate-500 font-light mt-1 italic">Vetting learning sequence architectural integrity</p>
+                   </div>
                 </div>
+                <button
+                  onClick={() => setShowDetails(false)}
+                  className="w-12 h-12 flex items-center justify-center bg-slate-50 hover:bg-slate-100 rounded-2xl transition-all"
+                >
+                  <X className="w-6 h-6 text-slate-400" />
+                </button>
+              </div>
 
-                {/* Milestones */}
-                <div>
-                  <h4 className="font-semibold text-gray-900 mb-2">Milestones</h4>
-                  <div className="space-y-3">
-                    {selectedRoadmap.milestones.map((milestone, index) => (
-                      <div key={index} className="border border-gray-200 rounded-lg p-4">
-                        <div className="flex items-center justify-between mb-2">
-                          <h5 className="font-medium text-gray-900">{milestone.title}</h5>
-                          <span className={`px-2 py-1 text-xs rounded-full ${milestone.status === 'completed' ? 'bg-green-100 text-green-700' : milestone.status === 'active' ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-700'}`}>
-                            {milestone.status}
-                          </span>
-                        </div>
-                        <p className="text-sm text-gray-600 mb-2">{milestone.description}</p>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                          <div>
-                            <p className="font-medium text-gray-700">Duration:</p>
-                            <p className="text-gray-600">{milestone.estimatedDurationDays} days</p>
-                          </div>
-                          <div>
-                            <p className="font-medium text-gray-700">Tasks:</p>
-                            <p className="text-gray-600">{milestone.tasks.length} tasks</p>
-                          </div>
-                        </div>
-                        {milestone.skillsToLearn.length > 0 && (
-                          <div className="mt-2">
-                            <p className="font-medium text-gray-700 mb-1">Skills to Learn:</p>
-                            <div className="flex flex-wrap gap-2">
-                              {milestone.skillsToLearn.map((skill, skillIndex) => (
-                                <span key={skillIndex} className="px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs">
-                                  {skill}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-                        )}
+              <div className="overflow-y-auto pr-4 flex-1 space-y-8">
+                 {/* Metadata Bar */}
+                 <div className="grid grid-cols-4 gap-4">
+                    {[
+                      { label: 'Student', val: `${selectedRoadmap.studentId.firstName} ${selectedRoadmap.studentId.lastName}`, icon: GraduationCap },
+                      { label: 'Trainer', val: `${selectedRoadmap.trainerId.firstName} ${selectedRoadmap.trainerId.lastName}`, icon: Award },
+                      { label: 'Created', val: formatDate(selectedRoadmap.createdAt), icon: Calendar },
+                      { label: 'Status', val: selectedRoadmap.status.replace('-', ' '), icon: Target },
+                    ].map((item, i) => (
+                      <div key={i} className="bg-slate-50 rounded-2xl p-4 border border-slate-100">
+                         <div className="flex items-center gap-2 text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">
+                            <item.icon size={12} className="text-primary" /> {item.label}
+                         </div>
+                         <p className="text-[13px] font-black text-slate-900 truncate">{item.val}</p>
                       </div>
                     ))}
-                  </div>
-                </div>
+                 </div>
 
-                {/* Action Buttons */}
-                <div className="flex items-center gap-3 pt-4 border-t border-gray-200">
-                  <button
-                    onClick={() => handleApprove(selectedRoadmap.id)}
-                    disabled={actionLoading}
-                    className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
-                  >
-                    <Check className="w-4 h-4" />
-                    {actionLoading ? 'Processing...' : 'Approve'}
-                  </button>
-                  <button
-                    onClick={() => setShowRejectionModal(true)}
-                    disabled={actionLoading}
-                    className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
-                  >
-                    <X className="w-4 h-4" />
-                    {actionLoading ? 'Processing...' : 'Reject'}
-                  </button>
-                </div>
+                 {/* Milestones Visualization */}
+                 <div className="space-y-4">
+                    <h4 className="font-bold text-slate-900 uppercase tracking-wider text-[13px] ml-1">Curriculum Milestones</h4>
+                    <div className="space-y-4">
+                      {selectedRoadmap.milestones.map((milestone, index) => (
+                        <div key={index} className="bg-white border border-slate-100 rounded-[24px] p-6 hover:shadow-lg transition-all group">
+                          <div className="flex items-start justify-between mb-4">
+                            <div className="flex items-center gap-3">
+                               <div className="w-8 h-8 bg-slate-900 rounded-lg flex items-center justify-center text-white text-xs font-black">
+                                  {index + 1}
+                               </div>
+                               <h5 className="font-black text-slate-900 group-hover:text-primary transition-colors">{milestone.title}</h5>
+                            </div>
+                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest bg-slate-50 px-2 py-1 rounded-md">
+                              {milestone.estimatedDurationDays} Days Est.
+                            </span>
+                          </div>
+                          <p className="text-sm text-slate-500 font-light mb-4 leading-relaxed">{milestone.description}</p>
+                          
+                          <div className="flex flex-wrap gap-2">
+                             {milestone.skillsToLearn.map((skill, si) => (
+                               <span key={si} className="px-2.5 py-1 bg-primary/5 text-primary rounded-lg text-[10px] font-bold uppercase tracking-wider border border-primary/10">
+                                 {skill}
+                               </span>
+                             ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                 </div>
               </div>
-            
-            <div className="mt-6 flex justify-end">
-              <button
-                className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200"
-                onClick={() => setShowDetails(false)}
-              >
-                Close
-              </button>
+
+              {/* Action Footer */}
+              <div className="flex items-center gap-4 mt-10 pt-8 border-t border-slate-100">
+                <div className="flex-1">
+                   <PremiumButton
+                    onClick={() => handleApprove(selectedRoadmap.id)}
+                    isLoading={actionLoading}
+                    className="w-full !py-4"
+                  >
+                    <div className="flex items-center justify-center gap-2">
+                       <ThumbsUp size={18} />
+                       Approve Learning Path
+                    </div>
+                  </PremiumButton>
+                </div>
+                <button
+                  onClick={() => setShowRejectionModal(true)}
+                  disabled={actionLoading}
+                  className="px-10 py-4 bg-red-50 text-red-600 rounded-[20px] font-bold text-sm hover:bg-red-600 hover:text-white transition-all flex items-center gap-2"
+                >
+                  <ThumbsDown size={18} />
+                  Reject
+                </button>
+              </div>
             </div>
           </div>
         </div>
       )}
 
-      {/* Rejection Reason Modal */}
+      {/* Rejection Modal */}
       {showRejectionModal && (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50 flex justify-center items-center">
-          <div className="relative p-8 bg-white w-full max-w-md mx-auto rounded-lg shadow-lg">
-            <button
-              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
-              onClick={() => setShowRejectionModal(false)}
-            >
-              <X className="w-6 h-6" />
-            </button>
-            <h2 className="text-xl font-bold text-gray-900 mb-4">Reject Roadmap</h2>
-            <p className="text-gray-600 mb-4">Please provide a reason for rejecting this roadmap.</p>
-            <textarea
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-yellow-500 focus:border-yellow-500"
-              rows={4}
-              value={rejectionReason}
-              onChange={(e) => setRejectionReason(e.target.value)}
-              placeholder="e.g., Incomplete milestones, unclear objectives, insufficient detail, etc."
-            ></textarea>
-            <div className="mt-6 flex justify-end gap-3">
-              <button
-                className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200"
-                onClick={() => setShowRejectionModal(false)}
-              >
-                Cancel
-              </button>
-              <button
-                onClick={() => selectedRoadmap && handleReject()}
-                disabled={actionLoading || !rejectionReason}
-                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
-              >
-                <X className="w-4 h-4" />
-                {actionLoading ? 'Processing...' : 'Reject Roadmap'}
-              </button>
-            </div>
+        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 z-[110]">
+          <div className="bg-white rounded-[40px] max-w-md w-full shadow-2xl p-10 relative overflow-hidden">
+             <div className="relative z-10">
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="text-2xl font-black text-slate-900">Decline Roadmap</h3>
+                  <button
+                    onClick={() => setShowRejectionModal(false)}
+                    className="w-8 h-8 flex items-center justify-center bg-slate-50 hover:bg-slate-100 rounded-xl transition-all"
+                  >
+                    <X className="w-5 h-5 text-slate-400" />
+                  </button>
+                </div>
+
+                <div className="mb-8">
+                  <div className="flex items-center gap-2 text-red-500 mb-4 bg-red-50 p-3 rounded-xl border border-red-100">
+                    <AlertCircle className="w-5 h-5 flex-shrink-0" />
+                    <p className="text-xs font-bold uppercase tracking-wider italic">Vetting feedback required</p>
+                  </div>
+                  <textarea
+                    value={rejectionReason}
+                    onChange={(e) => setRejectionReason(e.target.value)}
+                    className="w-full px-5 py-4 bg-slate-50 border-2 border-slate-50 rounded-2xl text-[14px] font-medium focus:bg-white focus:border-red-200 focus:ring-0 transition-all outline-none appearance-none resize-none"
+                    rows={4}
+                    placeholder="Describe architectural flaws or pedagogical missing pieces..."
+                  />
+                </div>
+
+                <div className="flex flex-col gap-3">
+                  <button
+                    onClick={handleReject}
+                    disabled={!rejectionReason.trim() || actionLoading}
+                    className="w-full py-4 bg-red-600 text-white rounded-2xl font-bold text-sm hover:bg-red-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-red-600/10"
+                  >
+                    {actionLoading ? 'Processing...' : 'Confirm Rejection'}
+                  </button>
+                  <button
+                    onClick={() => { setShowRejectionModal(false); setRejectionReason(''); }}
+                    className="w-full py-4 bg-slate-100 text-slate-600 rounded-2xl font-bold text-sm hover:bg-slate-200 transition-all"
+                  >
+                    Cancel
+                  </button>
+                </div>
+             </div>
           </div>
         </div>
       )}
