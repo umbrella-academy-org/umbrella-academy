@@ -484,7 +484,7 @@ export default function TrainerBookingsPage() {
                       onChange={(e) => setApprovalData({...approvalData, sessionFormat: 'online'})}
                       className="mr-2"
                     />
-                    <span className="text-sm text-gray-700">Online</span>
+                    <span className="text-sm text-slate-700">Online</span>
                   </label>
                   <label className="flex items-center">
                     <input
@@ -494,27 +494,27 @@ export default function TrainerBookingsPage() {
                       onChange={(e) => setApprovalData({...approvalData, sessionFormat: 'in-person'})}
                       className="mr-2"
                     />
-                    <span className="text-sm text-gray-700">In-Person</span>
+                    <span className="text-sm text-slate-700">In-Person</span>
                   </label>
                 </div>
               </div>
 
               {/* Session Duration */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Session Duration (minutes)</label>
+                <label className="block text-sm font-medium text-slate-700 mb-2">Session Duration (minutes)</label>
                 <input
                   type="number"
                   min="30"
                   max="180"
                   value={approvalData.sessionDuration}
                   onChange={(e) => setApprovalData({...approvalData, sessionDuration: parseInt(e.target.value) || 60})}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-50 rounded-xl focus:bg-white focus:border-primary/20 focus:ring-0 transition-all outline-none"
                 />
               </div>
 
               {/* Session Location */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-slate-700 mb-2">
                   {approvalData.sessionFormat === 'online' ? 'Meeting Link' : 'Location'}
                 </label>
                 <input
@@ -522,43 +522,43 @@ export default function TrainerBookingsPage() {
                   value={approvalData.sessionLocation}
                   onChange={(e) => setApprovalData({...approvalData, sessionLocation: e.target.value})}
                   placeholder={approvalData.sessionFormat === 'online' ? 'https://zoom.us/j/...' : 'Enter physical address'}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-50 rounded-xl focus:bg-white focus:border-primary/20 focus:ring-0 transition-all outline-none"
                 />
               </div>
 
               {/* Approval Notes */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Approval Notes</label>
+                <label className="block text-sm font-medium text-slate-700 mb-2">Approval Notes</label>
                 <textarea
                   value={approvalData.approvalNotes}
                   onChange={(e) => setApprovalData({...approvalData, approvalNotes: e.target.value})}
                   placeholder="Share your thoughts about this booking request..."
                   rows={3}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-50 rounded-xl focus:bg-white focus:border-primary/20 focus:ring-0 transition-all outline-none resize-none"
                 />
               </div>
 
               {/* Preparation Requirements */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Preparation Requirements</label>
+                <label className="block text-sm font-medium text-slate-700 mb-2">Preparation Requirements</label>
                 <textarea
                   value={approvalData.preparationRequirements}
                   onChange={(e) => setApprovalData({...approvalData, preparationRequirements: e.target.value})}
                   placeholder="What should the student prepare before the session?"
                   rows={3}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-50 rounded-xl focus:bg-white focus:border-primary/20 focus:ring-0 transition-all outline-none resize-none"
                 />
               </div>
 
               {/* Next Steps */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Next Steps</label>
+                <label className="block text-sm font-medium text-slate-700 mb-2">Next Steps</label>
                 <textarea
                   value={approvalData.nextSteps}
                   onChange={(e) => setApprovalData({...approvalData, nextSteps: e.target.value})}
                   placeholder="What should the student do after this session?"
                   rows={3}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-50 rounded-xl focus:bg-white focus:border-primary/20 focus:ring-0 transition-all outline-none resize-none"
                 />
               </div>
             </div>
@@ -566,14 +566,14 @@ export default function TrainerBookingsPage() {
             <div className="flex gap-3 mt-6">
               <button
                 onClick={closeApproveModal}
-                className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                className="flex-1 px-4 py-2 border border-slate-200 text-slate-700 rounded-full hover:bg-slate-50 transition-colors"
               >
                 Cancel
               </button>
               <button
                 onClick={handleConfirmApprove}
                 disabled={!approvalData.approvalNotes.trim() || !approvalData.sessionLocation.trim()}
-                className="flex-1 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex-1 px-4 py-2 bg-slate-900 text-white rounded-full hover:bg-slate-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Approve Booking
               </button>

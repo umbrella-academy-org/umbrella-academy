@@ -58,7 +58,7 @@ export default function StudentDashboard() {
   const progressPercentage = (completedSteps / totalSteps) * 100;
 
   return (
-    <div className="flex h-screen bg-[#F8FAFC]">
+    <div className="flex h-screen bg-[#FDF9F2]">
       <Sidebar
         activeItem="Home"
         userType={UserRole.STUDENT}
@@ -74,7 +74,7 @@ export default function StudentDashboard() {
                 <span className="text-slate-300">•</span>
                 <span className="text-[12px] font-medium text-slate-400 italic">Level 1 Mentee</span>
               </div>
-              <h1 className="text-2xl font-bold text-slate-900 flex items-center gap-2">
+              <h1 className="text-3xl font-playfair font-semibold text-slate-900 flex items-center gap-2">
                 Welcome back, {user.firstName}
                 <span className="animate-bounce">👋</span>
               </h1>
@@ -84,7 +84,7 @@ export default function StudentDashboard() {
                {!onboardingChecklist.bookingPayed && (
                 <button
                   onClick={() => navigate('/dashboard/student/pay/orientation')}
-                  className="px-6 py-2.5 bg-primary text-white rounded-xl font-bold text-[14px] hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 flex items-center gap-2 group"
+                  className="px-6 py-2.5 bg-slate-900 text-white rounded-full font-bold text-[14px] hover:bg-slate-800 transition-all shadow-lg shadow-slate-900/10 flex items-center gap-2 group"
                 >
                   <CreditCard className="w-4 h-4 group-hover:rotate-12 transition-transform" />
                   Complete Orientation
@@ -94,7 +94,7 @@ export default function StudentDashboard() {
               {onboardingChecklist.bookingPayed && !onboardingChecklist.subscriptionPayed && (
                 <button
                   onClick={() => navigate('/dashboard/student/pay/subscription')}
-                  className="px-6 py-2.5 bg-slate-900 text-white rounded-xl font-bold text-[14px] hover:bg-slate-800 transition-all shadow-lg shadow-slate-900/10 flex items-center gap-2 group"
+                  className="px-6 py-2.5 bg-slate-900 text-white rounded-full font-bold text-[14px] hover:bg-slate-800 transition-all shadow-lg shadow-slate-900/10 flex items-center gap-2 group"
                 >
                   <Zap className="w-4 h-4 text-primary group-hover:scale-110 transition-transform" />
                   Activate Full Access
@@ -192,7 +192,7 @@ export default function StudentDashboard() {
 
             {/* Onboarding Checklist - Grid Layout */}
             <div className="mb-12">
-              <h2 className="text-xl font-bold text-slate-900 mb-6 ml-1 flex items-center gap-2">
+              <h2 className="text-2xl font-playfair font-semibold text-slate-900 mb-6 ml-1 flex items-center gap-2">
                 Journey Checklist
                 <div className="h-px bg-slate-100 flex-1 ml-4" />
               </h2>
@@ -223,7 +223,7 @@ export default function StudentDashboard() {
                           {isDone ? <CheckCircle size={20} /> : <Lock size={20} />}
                         </div>
                         <div className="flex-1">
-                          <h3 className={`text-[15px] font-bold ${isDone ? 'text-slate-900' : 'text-slate-400'}`}>{step.label}</h3>
+                          <h3 className={`text-[15px] font-playfair font-semibold ${isDone ? 'text-slate-900' : 'text-slate-400'}`}>{step.label}</h3>
                           <p className="text-[13px] text-slate-500 font-light mt-0.5">{step.description}</p>
                         </div>
                         <div className="text-slate-200 font-black text-2xl group-hover:text-primary/10 transition-colors">
@@ -247,7 +247,7 @@ export default function StudentDashboard() {
                <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 blur-[120px] rounded-full -mr-48 -mt-48" />
                
                <div className="relative z-10">
-                  <h2 className="text-2xl font-bold text-white mb-8">Priority Actions</h2>
+                  <h2 className="text-2xl font-playfair font-semibold text-white mb-8">Priority Actions</h2>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {!onboardingChecklist.bookingPayed && (
@@ -258,7 +258,7 @@ export default function StudentDashboard() {
                         <div className="w-12 h-12 bg-primary/20 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                           <CreditCard className="w-6 h-6 text-primary" />
                         </div>
-                        <h3 className="text-white font-bold mb-1">Pay Fee</h3>
+                        <h3 className="text-white font-playfair font-semibold mb-1">Pay Fee</h3>
                         <p className="text-slate-500 text-sm font-light">Start your roadmap path</p>
                         <div className="mt-4 flex items-center text-primary text-xs font-bold gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                           GO TO PAYMENT <ArrowRight size={14} />
@@ -274,7 +274,7 @@ export default function StudentDashboard() {
                         <div className="w-12 h-12 bg-blue-500/20 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                           <Calendar className="w-6 h-6 text-blue-400" />
                         </div>
-                        <h3 className="text-white font-bold mb-1">Book Meeting</h3>
+                        <h3 className="text-white font-playfair font-semibold mb-1">Book Meeting</h3>
                         <p className="text-slate-500 text-sm font-light">Talk to your mentor</p>
                         <div className="mt-4 flex items-center text-blue-400 text-xs font-bold gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                           OPEN CALENDAR <ArrowRight size={14} />
@@ -290,7 +290,7 @@ export default function StudentDashboard() {
                         <div className="w-12 h-12 bg-purple-500/20 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                           <Zap className="w-6 h-6 text-purple-400" />
                         </div>
-                        <h3 className="text-white font-bold mb-1">Upgrade Now</h3>
+                        <h3 className="text-white font-playfair font-semibold mb-1">Upgrade Now</h3>
                         <p className="text-slate-500 text-sm font-light">Unlock all features</p>
                         <div className="mt-4 flex items-center text-purple-400 text-xs font-bold gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                           BECOME PREMIUM <ArrowRight size={14} />
@@ -312,7 +312,7 @@ export default function StudentDashboard() {
                       }`}>
                         <BookOpen className={`w-6 h-6 ${onboardingChecklist.roadmapReceived ? 'text-green-400' : 'text-slate-600'}`} />
                       </div>
-                      <h3 className="text-white font-bold mb-1">My Roadmap</h3>
+                      <h3 className="text-white font-playfair font-semibold mb-1">My Roadmap</h3>
                       <p className="text-slate-500 text-sm font-light">View your blueprint</p>
                     </button>
                   </div>

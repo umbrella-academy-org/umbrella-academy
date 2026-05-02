@@ -14,7 +14,7 @@ export default function NotificationsPage() {
   const [selectedActivity, setSelectedActivity] = useState<string | null>(null);
 
   return (
-    <div className="flex h-screen bg-white">
+    <div className="flex h-screen bg-[#FDF9F2]">
       {/* Sidebar - Fixed */}
       <Sidebar activeItem="Notifications" />
 
@@ -22,7 +22,7 @@ export default function NotificationsPage() {
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
         {/* Notifications Content - Scrollable */}
         <main className="flex-1 overflow-auto">
-          <div className="p-3 lg:p-4">
+          <div className="p-8">
             {/* Notifications Header */}
             <NotificationsHeader />
 
@@ -35,7 +35,7 @@ export default function NotificationsPage() {
             />
 
             {/* Main Notifications Grid */}
-            <div className="grid grid-cols-1 xl:grid-cols-5 gap-3 lg:gap-4 mt-4 lg:mt-6">
+            <div className="grid grid-cols-1 xl:grid-cols-5 gap-4 mt-6">
               {/* Left Column - Activity Feed (3 columns on xl) */}
               <div className="xl:col-span-3">
                 <ActivityFeed

@@ -40,30 +40,30 @@ export default function PortfolioPage() {
   // Locked state - subscription required
   if (!hasActiveSubscription) {
     return (
-      <div className="flex h-screen bg-gray-50">
+      <div className="flex h-screen bg-[#FDF9F2]">
         <Sidebar activeItem="Portfolio" userType={UserRole.STUDENT} />
         <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
-          <main className="flex-1 overflow-y-auto p-6">
+          <main className="flex-1 overflow-y-auto p-8">
             <div className="max-w-4xl mx-auto">
               {/* Header */}
               <div className="mb-8">
-                <h1 className="text-3xl font-semibold text-gray-900">My Portfolio</h1>
-                <p className="text-gray-600 mt-1">Showcase your work and achievements</p>
+                <h1 className="text-3xl font-playfair font-semibold text-slate-900">My Portfolio</h1>
+                <p className="text-slate-500 font-light mt-1">Showcase your work and achievements</p>
               </div>
 
               {/* Locked Message */}
-              <div className="bg-white rounded-xl border border-gray-200 p-12 text-center">
-                <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Lock className="w-8 h-8 text-yellow-600" />
+              <div className="bg-white rounded-[40px] border border-slate-100 p-12 text-center">
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Lock className="w-8 h-8 text-primary" />
                 </div>
-                <h2 className="text-xl font-semibold text-gray-900 mb-2">Portfolio Locked</h2>
-                <p className="text-gray-600 mb-6 max-w-md mx-auto">
+                <h2 className="text-xl font-playfair font-semibold text-slate-900 mb-2">Portfolio Locked</h2>
+                <p className="text-slate-500 font-light mb-6 max-w-md mx-auto">
                   Your portfolio is where you showcase completed projects and achievements. 
                   Subscribe to unlock this feature and build your professional profile.
                 </p>
                 <button 
                   onClick={() => router.push('/dashboard/student/pay/subscription')}
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-full hover:bg-slate-800 transition-colors"
                 >
                   <CreditCard className="w-5 h-5" />
                   Subscribe to Unlock (100,000 RWF/month)
@@ -97,141 +97,162 @@ export default function PortfolioPage() {
   const approvedProjects = projects.filter(p => p.status === 'approved');
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen bg-[#FDF9F2]">
       <Sidebar activeItem="Portfolio" userType={UserRole.STUDENT} />
       
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
-        <main className="flex-1 overflow-y-auto p-6">
-          <div className="max-w-7xl mx-auto">
+        <main className="flex-1 overflow-y-auto p-8">
+          <div className="max-w-6xl mx-auto">
             {/* Header */}
-            <div className="flex items-center justify-between mb-8">
-              <div>
-                <h1 className="text-3xl font-semibold text-gray-900">My Portfolio</h1>
-                <p className="text-gray-600 mt-1">Showcase your approved projects and achievements</p>
-              </div>
-              <div className="flex items-center gap-3">
-                <button className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 flex items-center gap-2">
-                  <Download className="w-4 h-4" />
-                  Export
-                </button>
-                <button className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 flex items-center gap-2">
-                  <Share2 className="w-4 h-4" />
-                  Share
-                </button>
+            <div className="mb-8">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h1 className="text-3xl font-playfair font-semibold text-slate-900">My Portfolio</h1>
+                  <p className="text-slate-500 font-light mt-1">Showcase your work and achievements</p>
+                </div>
+                <div className="flex gap-3">
+                  <button className="flex items-center gap-2 px-4 py-2 border border-slate-200 rounded-full text-slate-600 hover:bg-slate-50 transition-colors">
+                    <Download className="w-4 h-4" />
+                    Export
+                  </button>
+                  <button className="flex items-center gap-2 px-4 py-2 border border-slate-200 rounded-full text-slate-600 hover:bg-slate-50 transition-colors">
+                    <Share2 className="w-4 h-4" />
+                    Share
+                  </button>
+                </div>
               </div>
             </div>
 
-            {/* Tabs */}
-            <div className="bg-white border border-gray-200 rounded-t-xl">
-              <div className="flex">
-                {[
-                  { id: 'projects', label: 'Projects', count: approvedProjects.length },
-                  { id: 'achievements', label: 'Certificates', count: 0 }, // Will be updated when certificate context ready
-                ].map((tab) => (
-                  <button
-                    key={tab.id}
-                    onClick={() => setActiveTab(tab.id as any)}
-                    className={`flex-1 py-4 px-6 text-sm font-medium border-b-2 ${
-                      activeTab === tab.id
-                        ? 'border-yellow-500 text-yellow-600'
-                        : 'border-transparent text-gray-500 hover:text-gray-700'
-                    }`}
-                  >
-                    {tab.label}
-                    <span className="ml-2 bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full text-xs">
-                      {tab.count}
-                    </span>
-                  </button>
-                ))}
-              </div>
+            {/* Tab Navigation */}
+            <div className="flex gap-1 mb-8 bg-slate-100 rounded-full p-1 max-w-xs">
+              <button
+                onClick={() => setActiveTab('projects')}
+                className={`flex-1 px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                  activeTab === 'projects' 
+                    ? 'bg-white text-slate-900 shadow-sm' 
+                    : 'text-slate-600 hover:text-slate-900'
+                }`}
+              >
+                Projects
+              </button>
+              <button
+                onClick={() => setActiveTab('achievements')}
+                className={`flex-1 px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                  activeTab === 'achievements' 
+                    ? 'bg-white text-slate-900 shadow-sm' 
+                    : 'text-slate-600 hover:text-slate-900'
+                }`}
+              >
+                Achievements
+              </button>
             </div>
 
             {/* Content */}
-            <div className="bg-white border-x border-b border-gray-200 rounded-b-xl p-6">
-              {isLoading ? (
-                <div className="text-center py-12">
-                  <div className="animate-spin w-8 h-8 border-2 border-yellow-600 border-t-transparent rounded-full mx-auto mb-4"></div>
-                  <p className="text-gray-600">Loading projects...</p>
-                </div>
-              ) : activeTab === 'projects' ? (
-                <div>
-                  {approvedProjects.length === 0 ? (
-                    <div className="text-center py-12">
-                      <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <Briefcase className="w-8 h-8 text-gray-400" />
+            {activeTab === 'projects' ? (
+              <div>
+                {isLoading ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {[...Array(6)].map((_, i) => (
+                      <div key={i} className="bg-white rounded-[32px] p-6 border border-slate-100 animate-pulse">
+                        <div className="h-4 w-3/4 bg-slate-200 rounded-xl mb-3" />
+                        <div className="h-3 w-full bg-slate-200 rounded-xl mb-2" />
+                        <div className="h-3 w-2/3 bg-slate-200 rounded-xl" />
                       </div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2">No Approved Projects Yet</h3>
-                      <p className="text-gray-600 mb-4">Complete milestones and submit projects for trainer approval.</p>
-                      <button 
-                        onClick={() => router.push('/dashboard/student/roadmap')}
-                        className="px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700"
-                      >
-                        Go to Roadmap
-                      </button>
+                    ))}
+                  </div>
+                ) : approvedProjects.length === 0 ? (
+                  <div className="text-center py-12">
+                    <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Briefcase className="w-8 h-8 text-slate-400" />
                     </div>
-                  ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                      {approvedProjects.map((project) => (
-                        <div key={project.id} className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
-                          {/* Project Header */}
-                          <div className="aspect-video bg-gray-100 relative">
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                            <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-lg flex items-center gap-1">
-                              <FileText className="w-4 h-4" />
-                              <span className="text-xs font-medium">{project.category}</span>
+                    <h3 className="text-lg font-playfair font-semibold text-slate-900 mb-2">No Projects Yet</h3>
+                    <p className="text-slate-500 font-light mb-4">
+                      Complete and get your projects approved to showcase them here.
+                    </p>
+                    <button 
+                      onClick={() => router.push('/dashboard/student/projects')}
+                      className="px-6 py-3 bg-slate-900 text-white rounded-full hover:bg-slate-800"
+                    >
+                      View My Projects
+                    </button>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {approvedProjects.map((project) => (
+                      <div key={project.id} className="bg-white rounded-[32px] border border-slate-100 shadow-sm hover:shadow-xl transition-all group">
+                        <div className="p-6">
+                          {/* Header */}
+                          <div className="flex items-center gap-3 mb-4">
+                            <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
+                              {getTypeIcon(project.category)}
                             </div>
-                            {project.isPublic && (
-                              <div className="absolute top-3 right-3 bg-yellow-500 text-white px-2 py-1 rounded-lg flex items-center gap-1">
-                                <Star className="w-3 h-3" />
-                                <span className="text-xs font-medium">Public</span>
-                              </div>
-                            )}
-                            <div className="absolute bottom-3 left-3 right-3">
-                              <h3 className="text-white font-semibold text-lg">{project.title}</h3>
+                            <div className="flex-1">
+                              <h3 className="font-playfair font-semibold text-slate-900 group-hover:text-primary transition-colors">
+                                {project.title}
+                              </h3>
+                              <p className="text-sm text-slate-500 font-light">{project.category}</p>
                             </div>
                           </div>
 
-                          {/* Project Details */}
-                          <div className="p-4">
-                            <p className="text-gray-600 text-sm mb-3 line-clamp-2">{project.description}</p>
-                            
-                            {/* Tools Used */}
-                            {project.toolsUsed && project.toolsUsed.length > 0 && (
-                              <div className="flex flex-wrap gap-1 mb-3">
-                                {project.toolsUsed.map((tool, index) => (
-                                  <span key={index} className="px-2 py-1 bg-blue-50 text-blue-700 text-xs rounded-full">
+                          {/* Status */}
+                          <div className="mb-4">
+                            <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(project.status)}`}>
+                              {project.status.replace('_', ' ').charAt(0).toUpperCase() + project.status.slice(1).replace('_', ' ')}
+                            </span>
+                          </div>
+
+                          {/* Description */}
+                          <p className="text-slate-600 font-light text-sm mb-4 line-clamp-2">
+                            {project.description}
+                          </p>
+
+                          {/* Tools */}
+                          {project.toolsUsed && project.toolsUsed.length > 0 && (
+                            <div className="mb-4">
+                              <div className="flex flex-wrap gap-1">
+                                {project.toolsUsed.slice(0, 3).map((tool, i) => (
+                                  <span key={i} className="px-2 py-1 bg-slate-100 text-slate-700 rounded-xl text-xs">
                                     {tool}
                                   </span>
                                 ))}
+                                {project.toolsUsed.length > 3 && (
+                                  <span className="px-2 py-1 text-slate-500 text-xs">
+                                    +{project.toolsUsed.length - 3}
+                                  </span>
+                                )}
                               </div>
-                            )}
+                            </div>
+                          )}
 
-                            {/* Status & Date */}
-                            <div className="flex items-center justify-between">
-                              <span className={`text-xs px-2 py-1 rounded-full ${getStatusColor(project.status)}`}>
-                                {project.status === 'approved' ? 'Approved' : project.status}
-                              </span>
-                              <span className="text-xs text-gray-500">
-                                {project.approvedAt ? new Date(project.approvedAt).toLocaleDateString() : 'Pending'}
+                          {/* Footer */}
+                          <div className="flex items-center justify-between pt-4 border-t border-slate-100">
+                            <div className="flex items-center gap-3 text-sm text-slate-500">
+                              <span className="flex items-center gap-1">
+                                <Calendar className="w-4 h-4" />
+                                {new Date(project.createdAt).toLocaleDateString()}
                               </span>
                             </div>
+                            <button className="text-primary hover:text-primary/80 transition-colors">
+                              <ExternalLink className="w-4 h-4" />
+                            </button>
                           </div>
                         </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ) : (
-                /* Achievements/Certificates Tab */
-                <div className="text-center py-12">
-                  <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Award className="w-8 h-8 text-gray-400" />
+                      </div>
+                    ))}
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Certificates Coming Soon</h3>
-                  <p className="text-gray-600">Certificates will be auto-generated when you complete milestones.</p>
+                )}
+              </div>
+            ) : (
+              <div className="text-center py-12">
+                <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Award className="w-8 h-8 text-slate-400" />
                 </div>
-              )}
-            </div>
+                <h3 className="text-lg font-playfair font-semibold text-slate-900 mb-2">Achievements Coming Soon</h3>
+                <p className="text-slate-500 font-light">
+                  Track your milestones and certifications here.
+                </p>
+              </div>
+            )}
           </div>
         </main>
       </div>

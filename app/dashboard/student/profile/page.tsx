@@ -64,23 +64,23 @@ export default function StudentProfilePage() {
     const joinDate = user?.createdAt ? new Date(user.createdAt).toLocaleDateString() : 'Sep 2024';
 
     return (
-        <div className="flex h-screen bg-[#FDFDFC]">
+        <div className="flex h-screen bg-[#FDF9F2]">
             <Sidebar activeItem="Profile" userType={UserRole.STUDENT} />
 
             <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
                 <main className="flex-1 overflow-y-auto">
                     {/* Header Banner - Rounded LG */}
-                    <div className="max-w-[1400px] mx-auto px-6 pt-6">
-                        <div className="relative h-60 w-full rounded-lg overflow-hidden shadow-sm border border-gray-100">
+                    <div className="max-w-[1400px] mx-auto px-8 pt-8">
+                        <div className="relative h-60 w-full rounded-[32px] overflow-hidden shadow-xl border border-slate-100">
                             <Image
                                 src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop"
                                 alt="Cover"
                                 fill
                                 className="object-cover opacity-90"
                             />
-                            <div className="absolute inset-0 bg-linear-to-r from-gray-900/40 to-transparent" />
+                            <div className="absolute inset-0 bg-gradient-to-r from-slate-900/40 to-transparent" />
                             <div className="absolute top-4 right-4">
-                                <button className="p-2 bg-white/20 backdrop-blur-md rounded-lg text-white hover:bg-white/30 transition-all border border-white/20">
+                                <button className="p-2 bg-white/20 backdrop-blur-md rounded-xl text-white hover:bg-white/30 transition-all border border-white/20">
                                     <Camera className="w-5 h-5" />
                                 </button>
                             </div>
@@ -89,28 +89,28 @@ export default function StudentProfilePage() {
                         {/* Profile Info Overlap */}
                         <div className="flex flex-col md:flex-row items-end gap-6 -mt-16 px-8 relative z-10">
                             <div className="relative">
-                                <div className="w-32 h-32 rounded-lg bg-white p-1 shadow-xl border border-gray-100">
-                                    <div className="w-full h-full bg-linear-to-br from-yellow-500 to-yellow-600 flex items-center justify-center text-white text-4xl font-black rounded-lg">
+                                <div className="w-32 h-32 rounded-[32px] bg-white p-1 shadow-xl border border-slate-100">
+                                    <div className="w-full h-full bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center text-white text-4xl font-black rounded-[32px]">
                                         {name.charAt(0)}
                                     </div>
                                 </div>
-                                <div className="absolute bottom-2 right-2 w-4 h-4 bg-yellow-600 border-2 border-white rounded-full" />
+                                <div className="absolute bottom-2 right-2 w-4 h-4 bg-primary border-2 border-white rounded-full" />
                             </div>
 
                             <div className="flex-1 pb-2">
                                 <div className="flex flex-wrap items-center justify-between gap-4">
                                     <div className="space-y-1">
-                                        <h1 className="text-3xl font-bold text-gray-900">{name}</h1>
-                                        <div className="flex items-center gap-4 text-sm font-medium text-gray-500">
-                                            <span className="flex items-center gap-1.5"><MapPin className="w-4 h-4 text-gray-600" /> {profileData.location}</span>
-                                            <span className="flex items-center gap-1.5 text-gray-700 font-bold"><Zap className="w-4 h-4" /> {profileData.role}</span>
+                                        <h1 className="text-3xl font-playfair font-semibold text-slate-900">{name}</h1>
+                                        <div className="flex items-center gap-4 text-sm font-medium text-slate-500">
+                                            <span className="flex items-center gap-1.5"><MapPin className="w-4 h-4 text-slate-600" /> {profileData.location}</span>
+                                            <span className="flex items-center gap-1.5 text-slate-700 font-bold"><Zap className="w-4 h-4" /> {profileData.role}</span>
                                         </div>
                                     </div>
                                     <div className="flex items-center gap-3">
-                                        <button className="px-5 py-2.5 bg-yellow-600 text-white font-bold rounded-lg hover:bg-yellow-700 transition-all shadow-md active:scale-95 text-sm">
+                                        <button className="px-5 py-2.5 bg-slate-900 text-white font-bold rounded-full hover:bg-slate-800 transition-all shadow-md active:scale-95 text-sm">
                                             Edit Details
                                         </button>
-                                        <button className="p-2.5 bg-white border border-gray-200 text-gray-600 rounded-lg hover:bg-gray-50 shadow-sm transition-all">
+                                        <button className="p-2.5 bg-white border border-slate-200 text-slate-600 rounded-full hover:bg-slate-50 shadow-sm transition-all">
                                             <Settings className="w-5 h-5" />
                                         </button>
                                     </div>
@@ -120,35 +120,35 @@ export default function StudentProfilePage() {
                     </div>
 
                     {/* Stats Grid - Rounded LG */}
-                    <div className="max-w-[1400px] mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6 mt-10">
+                    <div className="max-w-[1400px] mx-auto px-8 grid grid-cols-2 md:grid-cols-4 gap-6 mt-10">
                         {authLoading || roadmapLoading ? (
                             <>
                                 {[...Array(4)].map((_, i) => (
-                                    <div key={i} className="p-6 bg-white rounded-lg border border-gray-100 shadow-sm animate-pulse">
-                                        <div className="h-10 w-10 bg-gray-100 rounded-lg mx-auto mb-3" />
-                                        <div className="h-3 bg-gray-100 rounded w-2/3 mx-auto mb-2" />
-                                        <div className="h-7 bg-gray-100 rounded w-1/2 mx-auto" />
+                                    <div key={i} className="p-6 bg-white rounded-[32px] border border-slate-100 shadow-sm animate-pulse">
+                                        <div className="h-10 w-10 bg-slate-100 rounded-xl mx-auto mb-3" />
+                                        <div className="h-3 bg-slate-100 rounded-xl w-2/3 mx-auto mb-2" />
+                                        <div className="h-7 bg-slate-100 rounded-xl w-1/2 mx-auto" />
                                     </div>
                                 ))}
                             </>
                         ) : (
                             <>
-                                <SimpleStat icon={<Video className="w-5 h-5" />} label="Total Milestones" value={totalMilestones} color="text-yellow-600" />
-                                <SimpleStat icon={<TrendingUp className="w-5 h-5" />} label="Engagement" value={`${profileData.engagementScore}%`} color="text-yellow-600" />
+                                <SimpleStat icon={<Video className="w-5 h-5" />} label="Total Milestones" value={totalMilestones} color="text-primary" />
+                                <SimpleStat icon={<TrendingUp className="w-5 h-5" />} label="Engagement" value={`${profileData.engagementScore}%`} color="text-primary" />
                             </>
                         )}
                     </div>
 
-                    <div className="max-w-[1400px] mx-auto p-6 grid grid-cols-1 lg:grid-cols-3 gap-8 pb-20">
+                    <div className="max-w-[1400px] mx-auto p-8 grid grid-cols-1 lg:grid-cols-3 gap-8 pb-20">
                         {/* Sidebar Column */}
                         <div className="space-y-8">
                             {/* Navigation */}
-                            <div className="bg-white rounded-lg border border-gray-100 shadow-sm p-2">
+                            <div className="bg-white rounded-[32px] border border-slate-100 shadow-sm p-2">
                                 {['Overview', 'Live Roadmap', 'Resources', 'Account Settings'].map((tab) => (
                                     <button
                                         key={tab}
                                         onClick={() => setActiveTab(tab)}
-                                        className={`w-full flex items-center justify-between p-3.5 rounded-lg text-sm font-bold transition-all ${activeTab === tab ? 'bg-gray-50 text-gray-800' : 'text-gray-500 hover:bg-gray-50'}`}
+                                        className={`w-full flex items-center justify-between p-3.5 rounded-xl text-sm font-bold transition-all ${activeTab === tab ? 'bg-slate-50 text-slate-800' : 'text-slate-500 hover:bg-slate-50'}`}
                                     >
                                         <span className="flex items-center gap-3">
                                             {tab === 'Overview' && <Layout className="w-4.5 h-4.5" />}
@@ -163,9 +163,9 @@ export default function StudentProfilePage() {
                             </div>
 
                             {/* Bio Block */}
-                            <div className="bg-white rounded-lg border border-gray-100 shadow-sm p-8 space-y-4">
-                                <h3 className="text-xs font-black text-gray-400  ">About Me</h3>
-                                <p className="text-sm font-medium text-gray-600 leading-relaxed italic">Dedicated trainee focusing on live collaborative sessions and practical software implementation within the Umbrella Tech Field.</p>
+                            <div className="bg-white rounded-[32px] border border-slate-100 shadow-sm p-8 space-y-4">
+                                <h3 className="text-xs font-black text-slate-400">About Me</h3>
+                                <p className="text-sm font-medium text-slate-600 leading-relaxed italic">Dedicated trainee focusing on live collaborative sessions and practical software implementation within the Umbrella Tech Field.</p>
                                 <div className="flex gap-2 pt-2">
                                     <SocialLink icon={<Linkedin className="w-4 h-4" />} />
                                     <SocialLink icon={<Github className="w-4 h-4" />} />
@@ -178,33 +178,33 @@ export default function StudentProfilePage() {
                         <div className="lg:col-span-2 space-y-8">
 
                             {/* Live Session Roadmap */}
-                            <div className="bg-white rounded-lg border border-gray-100 shadow-sm p-8 space-y-8">
+                            <div className="bg-white rounded-[32px] border border-slate-100 shadow-sm p-8 space-y-8">
                                 <div className="flex items-center justify-between">
-                                    <h3 className="text-xl font-bold text-gray-900">Live Session Roadmap</h3>
-                                    <span className="text-[10px] font-black text-gray-600  bg-gray-50 px-2.5 py-1 rounded-full border border-gray-100">Active Field: {field}</span>
+                                    <h3 className="text-xl font-playfair font-semibold text-slate-900">Live Session Roadmap</h3>
+                                    <span className="text-[10px] font-black text-slate-600 bg-slate-50 px-2.5 py-1 rounded-full border border-slate-100">Active Field: {field}</span>
                                 </div>
                                 {authLoading || roadmapLoading ? (
                                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-pulse">
                                         {[...Array(3)].map((_, i) => (
-                                            <div key={i} className="p-5 rounded-lg border border-gray-100 bg-gray-50/30">
-                                                <div className="h-4 bg-gray-100 rounded w-1/2 mb-3" />
-                                                <div className="h-4 bg-gray-100 rounded w-3/4 mb-2" />
-                                                <div className="h-3 bg-gray-100 rounded w-1/3" />
+                                            <div key={i} className="p-5 rounded-xl border border-slate-100 bg-slate-50/30">
+                                                <div className="h-4 bg-slate-100 rounded-xl w-1/2 mb-3" />
+                                                <div className="h-4 bg-slate-100 rounded-xl w-3/4 mb-2" />
+                                                <div className="h-3 bg-slate-100 rounded-xl w-1/3" />
                                             </div>
                                         ))}
                                     </div>
                                 ) : activeRoadmap === null ? (
-                                    <p className="text-sm text-gray-400 font-medium text-center py-6">No active roadmap.</p>
+                                    <p className="text-sm text-slate-400 font-medium text-center py-6">No active roadmap.</p>
                                 ) : (
                                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                         {liveRoadmap.map((item, i) => (
-                                            <div key={i} className={`p-5 rounded-lg border ${item.status === 'Completed' ? 'bg-gray-50/30 border-gray-100' : item.status === 'In Progress' ? 'bg-gray-50/30 border-gray-100' : 'bg-gray-50/30 border-gray-100'}`}>
+                                            <div key={i} className={`p-5 rounded-xl border ${item.status === 'Completed' ? 'bg-slate-50/30 border-slate-100' : item.status === 'In Progress' ? 'bg-slate-50/30 border-slate-100' : 'bg-slate-50/30 border-slate-100'}`}>
                                                 <div className="flex items-center justify-between mb-3">
-                                                    <span className={`text-[9px] font-black  px-2 py-0.5 rounded ${item.status === 'Completed' ? 'bg-gray-100 text-gray-700' : item.status === 'In Progress' ? 'bg-gray-100 text-gray-700' : 'bg-gray-200 text-gray-600'}`}>{item.status}</span>
-                                                    <Clock className="w-3.5 h-3.5 text-gray-400" />
+                                                    <span className={`text-[9px] font-black px-2 py-0.5 rounded-xl ${item.status === 'Completed' ? 'bg-slate-100 text-slate-700' : item.status === 'In Progress' ? 'bg-primary/10 text-primary' : 'bg-slate-200 text-slate-600'}`}>{item.status}</span>
+                                                    <Clock className="w-3.5 h-3.5 text-slate-400" />
                                                 </div>
-                                                <h4 className="font-bold text-gray-800 text-sm mb-1">{item.title}</h4>
-                                                <p className="text-[10px] text-gray-500 font-bold">{item.date}</p>
+                                                <h4 className="font-bold text-slate-800 text-sm mb-1">{item.title}</h4>
+                                                <p className="text-[10px] text-slate-500 font-bold">{item.date}</p>
                                             </div>
                                         ))}
                                     </div>
@@ -213,18 +213,18 @@ export default function StudentProfilePage() {
 
                             {/* Technical Arsenal & Info Grid */}
                             <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
-                                <div className="md:col-span-3 bg-white rounded-lg border border-gray-100 shadow-sm p-8 space-y-6">
-                                    <h3 className="text-xl font-bold text-gray-900">Technical Arsenal</h3>
+                                <div className="md:col-span-3 bg-white rounded-[32px] border border-slate-100 shadow-sm p-8 space-y-6">
+                                    <h3 className="text-xl font-playfair font-semibold text-slate-900">Technical Arsenal</h3>
                                     <div className="space-y-5">
                                         {profileData.skills.map((skill) => (
                                             <div key={skill.name} className="space-y-2">
                                                 <div className="flex items-center justify-between text-xs font-bold">
-                                                    <span className="text-gray-700">{skill.name}</span>
-                                                    <span className="text-gray-400 ">{skill.level}</span>
+                                                    <span className="text-slate-700">{skill.name}</span>
+                                                    <span className="text-slate-400">{skill.level}</span>
                                                 </div>
-                                                <div className="h-1.5 w-full bg-gray-50 rounded-full overflow-hidden">
+                                                <div className="h-1.5 w-full bg-slate-50 rounded-full overflow-hidden">
                                                     <div
-                                                        className={`h-full ${skill.color} transition-all duration-1000`}
+                                                        className={`h-full bg-primary transition-all duration-1000`}
                                                         style={{ width: skill.level === 'Advanced' ? '85%' : '60%' }}
                                                     />
                                                 </div>
@@ -233,8 +233,8 @@ export default function StudentProfilePage() {
                                     </div>
                                 </div>
 
-                                <div className="md:col-span-2 bg-white rounded-lg border border-gray-100 shadow-sm p-8 space-y-6">
-                                    <h3 className="text-xl font-bold text-gray-900">Contact Details</h3>
+                                <div className="md:col-span-2 bg-white rounded-[32px] border border-slate-100 shadow-sm p-8 space-y-6">
+                                    <h3 className="text-xl font-playfair font-semibold text-slate-900">Contact Details</h3>
                                     <div className="space-y-6">
                                         <MiniInfo label="Academy Email" value={email} icon={<Mail className="w-4 h-4" />} />
                                         <MiniInfo label="Phone Number" value={profileData.phone} icon={<Phone className="w-4 h-4" />} />
@@ -244,23 +244,23 @@ export default function StudentProfilePage() {
                             </div>
 
                             {/* Student Stats */}
-                            <div className="bg-black rounded-lg p-8 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
+                            <div className="bg-slate-900 rounded-[32px] p-8 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
                                 <div className="space-y-2">
                                     <h4 className="text-lg font-bold">Trainee Academic Status</h4>
-                                    <p className="text-gray-400 text-sm font-medium">Your current learning progress and subscription status</p>
+                                    <p className="text-white/60 text-sm font-medium">Your current learning progress and subscription status</p>
                                 </div>
                                 <div className="flex gap-10">
                                     <div className="text-center">
-                                        <p className="text-[10px] font-black text-gray-500   mb-1">Onboarding</p>
-                                        <p className="text-sm font-bold text-gray-400">{studentUser?.onboardingStatus?.learningStarted ? 'In Progress' : 'Started'}</p>
+                                        <p className="text-[10px] font-black text-white/60 mb-1">Onboarding</p>
+                                        <p className="text-sm font-bold text-white">{studentUser?.onboardingStatus?.learningStarted ? 'In Progress' : 'Started'}</p>
                                     </div>
                                     <div className="text-center">
-                                        <p className="text-[10px] font-black text-gray-500   mb-1">Subscription</p>
-                                        <p className="text-sm font-bold text-gray-400">{studentUser?.hasActiveSubscription ? 'Active' : 'Inactive'}</p>
+                                        <p className="text-[10px] font-black text-white/60 mb-1">Subscription</p>
+                                        <p className="text-sm font-bold text-white">{studentUser?.hasActiveSubscription ? 'Active' : 'Inactive'}</p>
                                     </div>
                                     <div className="text-center">
-                                        <p className="text-[10px] font-black text-gray-500   mb-1">Orientation</p>
-                                        <p className="text-sm font-bold text-gray-400">{studentUser?.hasPaidOrientation ? 'Paid' : 'Pending'}</p>
+                                        <p className="text-[10px] font-black text-white/60 mb-1">Orientation</p>
+                                        <p className="text-sm font-bold text-white">{studentUser?.hasPaidOrientation ? 'Paid' : 'Pending'}</p>
                                     </div>
                                 </div>
                             </div>
@@ -274,19 +274,19 @@ export default function StudentProfilePage() {
 
 function SimpleStat({ icon, label, value, color }: { icon: React.ReactNode, label: string, value: string | number, color: string }) {
     return (
-        <div className="p-6 bg-white rounded-lg border border-gray-100 shadow-sm flex flex-col items-center justify-center text-center space-y-2 group hover:border-gray-200 transition-all">
-            <div className={`p-2.5 rounded-lg bg-gray-50 group-hover:bg-gray-50 transition-colors ${color}`}>
+        <div className="p-6 bg-white rounded-[32px] border border-slate-100 shadow-sm flex flex-col items-center justify-center text-center space-y-2 group hover:border-slate-200 transition-all">
+            <div className={`p-2.5 rounded-xl bg-slate-50 group-hover:bg-slate-50 transition-colors ${color}`}>
                 {icon}
             </div>
-            <p className="text-[10px] font-black text-gray-400  ">{label}</p>
-            <p className="text-2xl font-black text-gray-900">{value}</p>
+            <p className="text-[10px] font-black text-slate-400">{label}</p>
+            <p className="text-2xl font-black text-slate-900">{value}</p>
         </div>
     );
 }
 
 function SocialLink({ icon }: { icon: React.ReactNode }) {
     return (
-        <button className="p-2.5 bg-gray-50 text-gray-400 rounded-lg border border-gray-100 hover:bg-gray-50 hover:text-gray-600 transition-all active:scale-95">
+        <button className="p-2.5 bg-slate-50 text-slate-400 rounded-xl border border-slate-100 hover:bg-slate-50 hover:text-slate-600 transition-all active:scale-95">
             {icon}
         </button>
     );
@@ -295,7 +295,7 @@ function SocialLink({ icon }: { icon: React.ReactNode }) {
 function MiniInfo({ label, value, icon }: { label: string, value: string, icon: React.ReactNode }) {
     return (
         <div className="space-y-1.5 flex flex-col">
-            <span className="text-[10px] font-black text-gray-400   flex items-center gap-2">
+            <span className="text-[10px] font-black text-slate-400 flex items-center gap-2">
                 {icon} {label}
             </span>
             <span className="text-sm font-bold text-gray-800 break-all">{value}</span>

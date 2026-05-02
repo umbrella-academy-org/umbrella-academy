@@ -22,15 +22,15 @@ export default function StudentSettingsPage() {
     const [security, setSecurity] = useState({ twoFactor: false, });
 
     return (
-        <div className="flex h-screen bg-white">
+        <div className="flex h-screen bg-[#FDF9F2]">
             <Sidebar activeItem="Settings" userType={UserRole.STUDENT} />
 
             <div className="flex-1 flex flex-col min-w-0">
-                <main className="flex-1 p-4 lg:p-8 overflow-y-auto bg-gray-50/30">
+                <main className="flex-1 p-8 overflow-y-auto">
                     <div className="max-w-5xl mx-auto">
                         <div className="mb-8">
-                            <h1 className="text-3xl font-semibold text-gray-900 mb-2">Settings</h1>
-                            <p className="text-gray-500">Manage your account preferences, security, and notifications.</p>
+                            <h1 className="text-3xl font-playfair font-semibold text-slate-900 mb-2">Settings</h1>
+                            <p className="text-slate-500 font-light">Manage your account preferences, security, and notifications.</p>
                         </div>
 
                         <div className="flex flex-col lg:flex-row gap-8">
@@ -47,9 +47,9 @@ export default function StudentSettingsPage() {
                                         <button
                                             key={item.id}
                                             onClick={() => setActiveSection(item.id)}
-                                            className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all ${activeSection === item.id
-                                                ? 'bg-yellow-600 text-white shadow-md'
-                                                : 'text-gray-600 hover:bg-white hover:text-gray-900 border border-transparent hover:border-gray-100'
+                                            className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeSection === item.id
+                                                ? 'bg-slate-900 text-white shadow-md'
+                                                : 'text-slate-600 hover:bg-white hover:text-slate-900 border border-transparent hover:border-slate-100'
                                                 }`}
                                         >
                                             {item.icon}
@@ -58,7 +58,7 @@ export default function StudentSettingsPage() {
                                     ))}
                                     <button
                                         onClick={() => logout()}
-                                        className="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-500 hover:bg-gray-50 transition-all mt-4"
+                                        className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-500 hover:bg-slate-50 transition-all mt-4"
                                     >
                                         <LogOut className="w-4 h-4" />
                                         Sign Out
@@ -68,56 +68,56 @@ export default function StudentSettingsPage() {
 
                             {/* Settings Content */}
                             <div className="flex-1">
-                                <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 lg:p-8 animate-fade-in">
+                                <div className="bg-white rounded-[40px] border border-slate-100 shadow-sm p-6 lg:p-8 animate-fade-in">
 
                                     {activeSection === 'account' && (
                                         <div className="space-y-8">
                                             <div>
-                                                <h3 className="text-lg font-semibold text-gray-900 mb-6">Password & Security</h3>
+                                                <h3 className="text-lg font-playfair font-semibold text-slate-900 mb-6">Password & Security</h3>
                                                 <div className="space-y-6">
                                                     <div className="grid grid-cols-1 gap-4">
                                                         <div>
-                                                            <label className="block text-sm font-medium text-gray-700 mb-2">Current Password</label>
+                                                            <label className="block text-sm font-medium text-slate-700 mb-2">Current Password</label>
                                                             <input
                                                                 type="password"
                                                                 placeholder="••••••••"
-                                                                className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-yellow-600 outline-none transition-all"
+                                                                className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-50 rounded-xl focus:bg-white focus:border-primary/20 focus:ring-0 outline-none transition-all"
                                                             />
                                                         </div>
                                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                             <div>
-                                                                <label className="block text-sm font-medium text-gray-700 mb-2">New Password</label>
+                                                                <label className="block text-sm font-medium text-slate-700 mb-2">New Password</label>
                                                                 <input
                                                                     type="password"
                                                                     placeholder="••••••••"
-                                                                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-yellow-600 outline-none transition-all"
+                                                                    className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-50 rounded-xl focus:bg-white focus:border-primary/20 focus:ring-0 outline-none transition-all"
                                                                 />
                                                             </div>
                                                             <div>
-                                                                <label className="block text-sm font-medium text-gray-700 mb-2">Confirm New Password</label>
+                                                                <label className="block text-sm font-medium text-slate-700 mb-2">Confirm New Password</label>
                                                                 <input
                                                                     type="password"
                                                                     placeholder="••••••••"
-                                                                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-yellow-600 outline-none transition-all"
+                                                                    className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-50 rounded-xl focus:bg-white focus:border-primary/20 focus:ring-0 outline-none transition-all"
                                                                 />
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <button className="px-6 py-2.5 bg-yellow-600 text-white rounded-lg font-semibold hover:bg-yellow-700 shadow-md active:scale-95 transition-all">
+                                                    <button className="px-6 py-2.5 bg-slate-900 text-white rounded-full font-semibold hover:bg-slate-800 shadow-md active:scale-95 transition-all">
                                                         Update Password
                                                     </button>
                                                 </div>
                                             </div>
 
-                                            <div className="pt-8 border-t border-gray-50">
+                                            <div className="pt-8 border-t border-slate-100">
                                                 <div className="flex items-center justify-between">
                                                     <div>
-                                                        <h4 className="text-sm font-semibold text-gray-900">Two-Factor Authentication</h4>
-                                                        <p className="text-xs text-gray-500 mt-1">Enhance your account security by enabling 2FA.</p>
+                                                        <h4 className="text-sm font-semibold text-slate-900">Two-Factor Authentication</h4>
+                                                        <p className="text-xs text-slate-500 mt-1">Enhance your account security by enabling 2FA.</p>
                                                     </div>
                                                     <button
                                                         onClick={() => setSecurity({ ...security, twoFactor: !security.twoFactor })}
-                                                        className={`w-12 h-6 rounded-full transition-all relative ${security.twoFactor ? 'bg-yellow-600' : 'bg-gray-200'}`}
+                                                        className={`w-12 h-6 rounded-full transition-all relative ${security.twoFactor ? 'bg-primary' : 'bg-slate-200'}`}
                                                     >
                                                         <div className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-all ${security.twoFactor ? 'left-7' : 'left-1'}`} />
                                                     </button>
@@ -128,7 +128,7 @@ export default function StudentSettingsPage() {
 
                                     {activeSection === 'notifications' && (
                                         <div className="space-y-8">
-                                            <h3 className="text-lg font-semibold text-gray-900 mb-6">Notification Preferences</h3>
+                                            <h3 className="text-lg font-playfair font-semibold text-slate-900 mb-6">Notification Preferences</h3>
                                             <div className="space-y-2">
                                                 {[
                                                     { id: 'emailAlerts', title: 'Email Alerts', desc: 'Receive updates about your account and roadmap via email.' },
@@ -137,14 +137,14 @@ export default function StudentSettingsPage() {
                                                     { id: 'roadmapUpdates', title: 'Roadmap Progress', desc: 'Get updates when your trainer approves or comments on your roadmap.' },
                                                     { id: 'marketingEmail', title: 'Marketing Communications', desc: 'Receive newsletters and special offers from Umbrella Academy.' }
                                                 ].map((pref) => (
-                                                    <div key={pref.id} className="flex items-center justify-between p-4 hover:bg-gray-50 rounded-lg transition-all border border-transparent hover:border-gray-50">
+                                                    <div key={pref.id} className="flex items-center justify-between p-4 hover:bg-slate-50 rounded-xl transition-all border border-transparent hover:border-slate-50">
                                                         <div>
-                                                            <h4 className="text-sm font-semibold text-gray-900">{pref.title}</h4>
-                                                            <p className="text-xs text-gray-500 mt-0.5">{pref.desc}</p>
+                                                            <h4 className="text-sm font-semibold text-slate-900">{pref.title}</h4>
+                                                            <p className="text-xs text-slate-500 mt-0.5">{pref.desc}</p>
                                                         </div>
                                                         <button
                                                             onClick={() => setNotifications({ ...notifications, [pref.id]: !notifications[pref.id as keyof typeof notifications] })}
-                                                            className={`w-12 h-6 rounded-full transition-all relative shrink-0 ${notifications[pref.id as keyof typeof notifications] ? 'bg-yellow-600' : 'bg-gray-200'}`}
+                                                            className={`w-12 h-6 rounded-full transition-all relative shrink-0 ${notifications[pref.id as keyof typeof notifications] ? 'bg-primary' : 'bg-slate-200'}`}
                                                         >
                                                             <div className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-all ${notifications[pref.id as keyof typeof notifications] ? 'left-7' : 'left-1'}`} />
                                                         </button>
@@ -156,11 +156,11 @@ export default function StudentSettingsPage() {
 
                                     {activeSection === 'appearance' && (
                                         <div className="space-y-8">
-                                            <h3 className="text-lg font-semibold text-gray-900 mb-6">Visual Preferences</h3>
+                                            <h3 className="text-lg font-playfair font-semibold text-slate-900 mb-6">Visual Preferences</h3>
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                                <button className="flex items-center justify-between p-4 rounded-lg border-2 border-yellow-600 bg-gray-50 text-gray-600 shadow-sm">
+                                                <button className="flex items-center justify-between p-4 rounded-xl border-2 border-primary bg-slate-50 text-slate-600 shadow-sm">
                                                     <div className="flex items-center gap-3">
-                                                        <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center border border-gray-100">
+                                                        <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center border border-slate-100">
                                                             <Globe className="w-5 h-5" />
                                                         </div>
                                                         <div className="text-left">
@@ -168,14 +168,14 @@ export default function StudentSettingsPage() {
                                                             <p className="text-[10px] font-medium opacity-70">Best for daytime learning</p>
                                                         </div>
                                                     </div>
-                                                    <div className="w-5 h-5 rounded-full bg-yellow-600 flex items-center justify-center">
+                                                    <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center">
                                                         <Check className="w-3 h-3 text-white" />
                                                     </div>
                                                 </button>
-                                                <button className="flex items-center justify-between p-4 rounded-lg border-2 border-gray-100 bg-white text-gray-400 hover:border-gray-200 transition-all opacity-50 grayscale">
+                                                <button className="flex items-center justify-between p-4 rounded-xl border-2 border-slate-100 bg-white text-slate-400 hover:border-slate-200 transition-all opacity-50 grayscale">
                                                     <div className="flex items-center gap-3">
-                                                        <div className="w-10 h-10 rounded-lg bg-black flex items-center justify-center border border-gray-800">
-                                                            <Moon className="w-5 h-5 text-gray-400" />
+                                                        <div className="w-10 h-10 rounded-xl bg-black flex items-center justify-center border border-slate-800">
+                                                            <Moon className="w-5 h-5 text-slate-400" />
                                                         </div>
                                                         <div className="text-left">
                                                             <p className="text-sm font-bold">Dark Mode</p>
@@ -189,11 +189,11 @@ export default function StudentSettingsPage() {
 
                                     {(activeSection === 'privacy' || activeSection === 'billing') && (
                                         <div className="flex flex-col items-center justify-center py-20 text-center">
-                                            <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center text-gray-300 mb-4">
+                                            <div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center text-slate-300 mb-4">
                                                 <Save className="w-8 h-8" />
                                             </div>
-                                            <h3 className="text-lg font-semibold text-gray-900">Module Update Required</h3>
-                                            <p className="text-sm text-gray-500 max-w-xs mt-2">This configuration module is currently being optimized for your wing. Please check back later.</p>
+                                            <h3 className="text-lg font-playfair font-semibold text-slate-900">Module Update Required</h3>
+                                            <p className="text-sm text-slate-500 max-w-xs mt-2">This configuration module is currently being optimized for your wing. Please check back later.</p>
                                         </div>
                                     )}
 
