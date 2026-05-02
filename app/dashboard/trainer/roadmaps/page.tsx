@@ -71,21 +71,21 @@ export default function TrainerRoadmapsPage() {
   const getStatusColor = (status: RoadmapStatus) => {
     switch (status) {
       case 'active': return 'bg-green-50 border-green-200 text-green-700';
-      case 'completed': return 'bg-blue-50 border-blue-200 text-blue-700';
-      case 'paused': return 'bg-yellow-50 border-yellow-200 text-yellow-700';
+      case 'completed': return 'bg-primary/10 border-primary/20 text-primary';
+      case 'paused': return 'bg-slate-50 border-slate-200 text-slate-700';
       case 'rejected': return 'bg-red-50 border-red-200 text-red-700';
-      case 'pending-approval': return 'bg-yellow-50 border-yellow-200 text-yellow-700';
-      default: return 'bg-gray-50 border-gray-200 text-gray-700';
+      case 'pending-approval': return 'bg-primary/10 border-primary/20 text-primary';
+      default: return 'bg-slate-50 border-slate-200 text-slate-700';
     }
   };
 
   const getMilestoneStatusColor = (status: RoadmapStepStatus) => {
     switch (status) {
       case RoadmapStepStatus.COMPLETED: return 'bg-green-100 text-green-700 border-green-200';
-      case RoadmapStepStatus.ACTIVE: return 'bg-blue-100 text-blue-700 border-blue-200';
-      case RoadmapStepStatus.PENDING_APPROVAL: return 'bg-yellow-100 text-yellow-700 border-yellow-200';
-      case RoadmapStepStatus.LOCKED: return 'bg-gray-100 text-gray-700 border-gray-200';
-      default: return 'bg-gray-100 text-gray-700 border-gray-200';
+      case RoadmapStepStatus.ACTIVE: return 'bg-primary/10 text-primary border-primary/20';
+      case RoadmapStepStatus.PENDING_APPROVAL: return 'bg-primary/10 text-primary border-primary/20';
+      case RoadmapStepStatus.LOCKED: return 'bg-slate-100 text-slate-700 border-slate-200';
+      default: return 'bg-slate-100 text-slate-700 border-slate-200';
     }
   };
 
@@ -192,23 +192,23 @@ export default function TrainerRoadmapsPage() {
   };
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen bg-[#FDF9F2]">
       <Sidebar activeItem="Roadmaps" userType={UserRole.TRAINER} />
 
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
         <main className="flex-1 overflow-auto">
-          <div className="p-6">
+          <div className="p-8">
             {viewMode === 'list' ? (
               <>
                 {/* Header */}
-                <div className="flex items-start justify-between mb-6">
+                <div className="flex items-start justify-between mb-8">
                   <div>
-                    <h1 className="text-2xl font-semibold text-gray-900">Student Roadmaps</h1>
-                    <p className="text-gray-600 mt-1">View and manage all your assigned student roadmaps</p>
+                    <h1 className="text-3xl font-playfair font-semibold text-slate-900">Student Roadmaps</h1>
+                    <p className="text-slate-500 font-light mt-1">View and manage all your assigned student roadmaps</p>
                   </div>
                   <button
                     onClick={() => router.push('/dashboard/trainer/roadmaps/create')}
-                    className="flex items-center gap-2 px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors"
+                    className="flex items-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-full font-bold hover:bg-slate-800 transition-all shadow-lg shadow-slate-900/10"
                   >
                     <Plus className="w-4 h-4" />
                     Create New Roadmap
@@ -216,21 +216,21 @@ export default function TrainerRoadmapsPage() {
                 </div>
 
                 {/* Stats */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
                   {[
-                    { label: 'Total', value: stats.total, icon: Map, color: 'text-gray-600', bg: 'bg-gray-100' },
-                    { label: 'Active', value: stats.active, icon: PlayCircle, color: 'text-green-600', bg: 'bg-green-100' },
-                    { label: 'Pending', value: stats.pending, icon: Clock, color: 'text-yellow-600', bg: 'bg-yellow-100' },
-                    { label: 'Completed', value: stats.completed, icon: CheckCircle, color: 'text-blue-600', bg: 'bg-blue-100' },
+                    { label: 'Total', value: stats.total, icon: Map, color: 'text-primary', bg: 'bg-primary/10' },
+                    { label: 'Active', value: stats.active, icon: PlayCircle, color: 'text-primary', bg: 'bg-primary/10' },
+                    { label: 'Pending', value: stats.pending, icon: Clock, color: 'text-primary', bg: 'bg-primary/10' },
+                    { label: 'Completed', value: stats.completed, icon: CheckCircle, color: 'text-primary', bg: 'bg-primary/10' },
                   ].map((stat) => (
-                    <div key={stat.label} className="bg-white rounded-xl p-4 border border-gray-100 shadow-sm">
+                    <div key={stat.label} className="bg-white rounded-[32px] p-6 border border-slate-100 shadow-sm hover:shadow-lg transition-all">
                       <div className="flex items-center gap-3">
-                        <div className={`w-10 h-10 ${stat.bg} rounded-lg flex items-center justify-center`}>
-                          <stat.icon className={`w-5 h-5 ${stat.color}`} />
+                        <div className={`w-12 h-12 ${stat.bg} rounded-2xl flex items-center justify-center`}>
+                          <stat.icon className={`w-6 h-6 ${stat.color}`} />
                         </div>
                         <div>
-                          <div className="text-2xl font-bold text-gray-900">{stat.value}</div>
-                          <div className="text-xs text-gray-500">{stat.label}</div>
+                          <div className="text-2xl font-playfair font-semibold text-slate-900">{stat.value}</div>
+                          <div className="text-xs text-slate-400 font-bold uppercase tracking-wider">{stat.label}</div>
                         </div>
                       </div>
                     </div>
@@ -238,23 +238,23 @@ export default function TrainerRoadmapsPage() {
                 </div>
 
                 {/* Filters */}
-                <div className="flex flex-col sm:flex-row gap-4 mb-6">
+                <div className="flex flex-col sm:flex-row gap-4 mb-8">
                   <div className="relative flex-1 max-w-md">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
                     <input
                       type="text"
                       placeholder="Search by title or student name..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                      className="w-full pl-12 pr-4 py-4 bg-slate-50 border-2 border-slate-50 rounded-2xl text-sm focus:bg-white focus:border-primary/20 focus:ring-0 transition-all outline-none"
                     />
                   </div>
                   <div className="relative">
-                    <Filter className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                    <Filter className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                     <select
                       value={statusFilter}
                       onChange={(e) => setStatusFilter(e.target.value as RoadmapStatus | 'all')}
-                      className="pl-10 pr-8 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 appearance-none bg-white"
+                      className="pl-12 pr-8 py-4 bg-slate-50 border-2 border-slate-50 rounded-2xl text-sm focus:bg-white focus:border-primary/20 focus:ring-0 transition-all outline-none appearance-none cursor-pointer text-slate-700"
                     >
                       <option value="all">All Status</option>
                       <option value="active">Active</option>
@@ -269,11 +269,11 @@ export default function TrainerRoadmapsPage() {
                 {/* Roadmaps Grid */}
                 {filteredRoadmaps.length === 0 ? (
                   <div className="text-center py-12">
-                    <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <Map className="w-8 h-8 text-gray-400" />
+                    <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Map className="w-8 h-8 text-slate-400" />
                     </div>
-                    <h3 className="text-lg font-medium text-gray-900 mb-2">No Roadmaps Found</h3>
-                    <p className="text-gray-600">
+                    <h3 className="text-lg font-playfair font-semibold text-slate-900 mb-2">No Roadmaps Found</h3>
+                    <p className="text-slate-500 font-light">
                       {trainerRoadmaps.length === 0 
                         ? "You don't have any assigned roadmaps yet." 
                         : "No roadmaps match your filters."}
@@ -289,57 +289,57 @@ export default function TrainerRoadmapsPage() {
                         <div
                           key={roadmap.id}
                           onClick={() => handleRoadmapClick(roadmap)}
-                          className="bg-white rounded-xl p-6 border border-gray-100 shadow-sm hover:shadow-lg hover:border-yellow-300 transition-all cursor-pointer group"
+                          className="bg-white rounded-[32px] p-6 border border-slate-100 shadow-sm hover:shadow-xl hover:border-primary/20 transition-all cursor-pointer group"
                         >
                           {/* Header */}
                           <div className="flex items-start justify-between mb-4">
-                            <div className={`p-3 rounded-lg ${getStatusColor(roadmap.status)}`}>
+                            <div className={`p-3 rounded-xl ${getStatusColor(roadmap.status)}`}>
                               <Map className="w-6 h-6" />
                             </div>
                             <div className="flex items-center gap-2">
                               {getStatusIcon(roadmap.status)}
-                              <span className="text-sm font-medium capitalize">{roadmap.status.replace('-', ' ')}</span>
+                              <span className="text-sm font-medium capitalize text-slate-600">{roadmap.status.replace('-', ' ')}</span>
                             </div>
                           </div>
 
                           {/* Student Info */}
                           <div className="flex items-center gap-2 mb-3">
-                            <div className="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center">
-                              <User className="w-4 h-4 text-yellow-600" />
+                            <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
+                              <User className="w-4 h-4 text-primary" />
                             </div>
-                            <span className="text-sm font-medium text-gray-700">
+                            <span className="text-sm font-medium text-slate-700">
                               {student?.firstName} {student?.lastName}
                             </span>
                           </div>
 
                           {/* Title */}
-                          <h3 className="font-semibold text-gray-900 text-lg mb-2 group-hover:text-yellow-700 transition-colors">
+                          <h3 className="font-playfair font-semibold text-slate-900 text-lg mb-2 group-hover:text-primary transition-colors">
                             {roadmap.title}
                           </h3>
 
                           {/* Progress */}
                           <div className="mb-4">
                             <div className="flex justify-between text-sm mb-1">
-                              <span className="text-gray-600">Progress</span>
-                              <span className="font-medium text-gray-900">{progress}%</span>
+                              <span className="text-slate-500">Progress</span>
+                              <span className="font-medium text-slate-900">{progress}%</span>
                             </div>
-                            <div className="w-full bg-gray-200 rounded-full h-2">
+                            <div className="w-full bg-slate-100 rounded-full h-2">
                               <div
-                                className="bg-yellow-600 h-2 rounded-full transition-all duration-300"
+                                className="bg-primary h-2 rounded-full transition-all duration-300"
                                 style={{ width: `${progress}%` }}
                               />
                             </div>
                           </div>
 
                           {/* Stats */}
-                          <div className="flex justify-between text-sm text-gray-500">
+                          <div className="flex justify-between text-sm text-slate-500">
                             <span>{roadmap.milestones?.length || 0} milestones</span>
                             <span>{roadmap.milestones?.filter(m => m.status === RoadmapStepStatus.PENDING_APPROVAL).length || 0} pending</span>
                           </div>
 
                           {/* View Details */}
-                          <div className="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between text-yellow-600">
-                            <span className="text-sm font-medium">View Details</span>
+                          <div className="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between text-primary">
+                            <span className="text-sm font-bold uppercase tracking-wider">View Details</span>
                             <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                           </div>
                         </div>
@@ -354,57 +354,60 @@ export default function TrainerRoadmapsPage() {
                 <div className="mb-6">
                   <button
                     onClick={handleBackToList}
-                    className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors mb-4 group"
+                    className="flex items-center gap-2 text-slate-600 hover:text-slate-900 transition-colors mb-4 group font-medium"
                   >
                     <ChevronRight className="w-4 h-4 rotate-180 group-hover:-translate-x-1 transition-transform" />
                     Back to Roadmaps
                   </button>
                   
                   {/* Hero Section */}
-                  <div className="bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-2xl p-8 text-white shadow-lg">
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-3 mb-3">
-                          <span className="px-3 py-1 rounded-full text-sm font-medium bg-white/20 backdrop-blur-sm border border-white/30">
-                            {selectedRoadmap.status.replace('-', ' ').charAt(0).toUpperCase() + selectedRoadmap.status.slice(1).replace('-', ' ')}
-                          </span>
-                          <span className="text-sm text-white/80">
-                            {selectedRoadmap.milestones?.length || 0} milestones
-                          </span>
+                  <div className="bg-slate-900 rounded-[40px] p-8 md:p-12 text-white shadow-xl relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-bl from-primary/20 to-transparent opacity-60" />
+                    <div className="relative z-10">
+                      <div className="flex items-start justify-between">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-3 mb-3">
+                            <span className="px-3 py-1 rounded-full text-sm font-medium bg-white/20 backdrop-blur-sm border border-white/30">
+                              {selectedRoadmap.status.replace('-', ' ').charAt(0).toUpperCase() + selectedRoadmap.status.slice(1).replace('-', ' ')}
+                            </span>
+                            <span className="text-sm text-white/80">
+                              {selectedRoadmap.milestones?.length || 0} milestones
+                            </span>
+                          </div>
+                          <h1 className="text-3xl md:text-4xl font-playfair font-semibold mb-2">{selectedRoadmap.title}</h1>
+                          {(() => {
+                            const student = students.find(s => s._id === selectedRoadmap.studentId._id);
+                            return (
+                              <div className="flex items-center gap-2 text-white/90">
+                                <User className="w-5 h-5" />
+                                <span>Student: {student?.firstName} {student?.lastName}</span>
+                              </div>
+                            );
+                          })()}
                         </div>
-                        <h1 className="text-3xl font-bold mb-2">{selectedRoadmap.title}</h1>
-                        {(() => {
-                          const student = students.find(s => s._id === selectedRoadmap.studentId._id);
-                          return (
-                            <div className="flex items-center gap-2 text-white/90">
-                              <User className="w-5 h-5" />
-                              <span>Student: {student?.firstName} {student?.lastName}</span>
-                            </div>
-                          );
-                        })()}
                       </div>
-                    </div>
 
-                    {/* Progress Bar */}
-                    <div className="mt-6">
-                      <div className="flex justify-between text-sm mb-2">
-                        <span className="text-white/80">Overall Progress</span>
-                        <span className="font-semibold">{calculateRoadmapProgress(selectedRoadmap)}%</span>
-                      </div>
-                      <div className="w-full bg-white/20 rounded-full h-3">
-                        <div
-                          className="bg-white h-3 rounded-full transition-all duration-500 shadow-sm"
-                          style={{ width: `${calculateRoadmapProgress(selectedRoadmap)}%` }}
-                        />
+                      {/* Progress Bar */}
+                      <div className="mt-6">
+                        <div className="flex justify-between text-sm mb-2">
+                          <span className="text-white/80">Overall Progress</span>
+                          <span className="font-semibold">{calculateRoadmapProgress(selectedRoadmap)}%</span>
+                        </div>
+                        <div className="w-full bg-white/20 rounded-full h-3">
+                          <div
+                            className="bg-primary h-3 rounded-full transition-all duration-500 shadow-sm"
+                            style={{ width: `${calculateRoadmapProgress(selectedRoadmap)}%` }}
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
 
                 {/* Timeline Milestones */}
-                <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
-                  <h2 className="text-xl font-semibold text-gray-900 mb-6 flex items-center gap-2">
-                    <Target className="w-5 h-5 text-yellow-600" />
+                <div className="bg-white rounded-[32px] border border-slate-100 shadow-sm p-6">
+                  <h2 className="text-2xl font-playfair font-semibold text-slate-900 mb-6 flex items-center gap-2">
+                    <Target className="w-5 h-5 text-primary" />
                     Learning Milestones
                   </h2>
                   <div className="space-y-0">
@@ -449,27 +452,27 @@ export default function TrainerRoadmapsPage() {
 
                           {/* Content Card */}
                           <div className="flex-1 pb-8">
-                            <div className={`rounded-xl p-5 border transition-all ${
-                              isPending ? 'bg-yellow-50/50 border-yellow-200 shadow-md' :
-                              isActive ? 'bg-blue-50/30 border-blue-100' :
+                            <div className={`rounded-[24px] p-6 border transition-all ${
+                              isPending ? 'bg-primary/5 border-primary/20 shadow-md' :
+                              isActive ? 'bg-primary/5 border-primary/20' :
                               isCompleted ? 'bg-green-50/30 border-green-100' :
-                              'bg-gray-50 border-gray-100'
+                              'bg-slate-50 border-slate-100'
                             }`}>
                               {/* Header */}
                               <div className="flex items-start justify-between gap-4 mb-3">
                                 <div className="flex-1">
                                   <div className="flex items-center gap-3 mb-1">
-                                    <h3 className="font-semibold text-gray-900 text-lg">{milestone.title}</h3>
+                                    <h3 className="font-playfair font-semibold text-slate-900 text-lg">{milestone.title}</h3>
                                     <span className={`px-2.5 py-0.5 rounded-full text-xs font-medium border ${getMilestoneStatusColor(milestone.status)}`}>
                                       {milestone.status.replace('-', ' ').charAt(0).toUpperCase() + milestone.status.slice(1).replace('-', ' ')}
                                     </span>
                                     {pendingProjects > 0 && (
-                                      <span className="px-2 py-0.5 bg-orange-100 text-orange-700 rounded-full text-xs font-medium">
+                                      <span className="px-2 py-0.5 bg-primary/10 text-primary rounded-full text-xs font-bold uppercase tracking-wider">
                                         {pendingProjects} project{pendingProjects > 1 ? 's' : ''} to review
                                       </span>
                                     )}
                                   </div>
-                                  <div className="flex items-center gap-4 text-sm text-gray-500">
+                                  <div className="flex items-center gap-4 text-sm text-slate-500">
                                     <span className="flex items-center gap-1">
                                       <Clock className="w-4 h-4" />
                                       {milestone.estimatedDurationDays} days
@@ -489,7 +492,7 @@ export default function TrainerRoadmapsPage() {
                                     value={milestone.status}
                                     onChange={(e) => handleMilestoneStatusChange(milestone, e.target.value as RoadmapStepStatus)}
                                     disabled={isProcessing}
-                                    className="px-3 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-yellow-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="px-3 py-2 border border-slate-200 rounded-xl text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 disabled:opacity-50 disabled:cursor-not-allowed"
                                   >
                                     <option value={RoadmapStepStatus.LOCKED}>Locked</option>
                                     <option value={RoadmapStepStatus.ACTIVE}>Active</option>
@@ -500,7 +503,7 @@ export default function TrainerRoadmapsPage() {
                                   {/* View Details Button */}
                                   <button
                                     onClick={() => handleViewMilestoneDetails(milestone)}
-                                    className="px-4 py-2 bg-yellow-600 text-white text-sm font-medium rounded-lg hover:bg-yellow-700 transition-colors shadow-sm"
+                                    className="px-4 py-2 bg-slate-900 text-white text-sm font-bold rounded-xl hover:bg-slate-800 transition-colors shadow-sm"
                                   >
                                     {isPending ? 'Review & Approve' : 'View Details'}
                                   </button>
@@ -508,14 +511,14 @@ export default function TrainerRoadmapsPage() {
                               </div>
 
                               {/* Description */}
-                              <p className="text-gray-600 mb-4 leading-relaxed">{milestone.description}</p>
+                              <p className="text-slate-600 font-light mb-4 leading-relaxed">{milestone.description}</p>
 
                               {/* Skills */}
                               {milestone.skillsToLearn && milestone.skillsToLearn.length > 0 && (
                                 <div className="mb-3">
                                   <div className="flex flex-wrap gap-1.5">
                                     {milestone.skillsToLearn.map((skill, i) => (
-                                      <span key={i} className="px-2.5 py-1 bg-blue-50 text-blue-700 rounded-md text-xs font-medium border border-blue-100">
+                                      <span key={i} className="px-2.5 py-1 bg-primary/10 text-primary rounded-md text-xs font-medium border border-primary/20">
                                         {skill}
                                       </span>
                                     ))}
@@ -525,17 +528,17 @@ export default function TrainerRoadmapsPage() {
 
                               {/* Required Projects Preview */}
                               {milestone.requiredProjects && milestone.requiredProjects.length > 0 && (
-                                <div className="flex items-center gap-2 text-sm text-gray-600">
-                                  <Folder className="w-4 h-4 text-orange-500" />
+                                <div className="flex items-center gap-2 text-sm text-slate-600">
+                                  <Folder className="w-4 h-4 text-primary" />
                                   <span>{milestone.requiredProjects.length} required project(s)</span>
                                 </div>
                               )}
 
                               {/* Trainer Feedback Preview */}
                               {milestone.trainerFeedback && (
-                                <div className="mt-3 p-3 bg-blue-50 border border-blue-100 rounded-lg">
-                                  <p className="text-sm text-blue-700">
-                                    <span className="font-medium">Your Feedback:</span> {milestone.trainerFeedback.substring(0, 100)}
+                                <div className="mt-3 p-3 bg-primary/5 border border-primary/10 rounded-xl">
+                                  <p className="text-sm text-primary">
+                                    <span className="font-semibold">Your Feedback:</span> {milestone.trainerFeedback.substring(0, 100)}
                                     {milestone.trainerFeedback.length > 100 && '...'}
                                   </p>
                                 </div>

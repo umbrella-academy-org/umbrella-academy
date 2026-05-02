@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import Sidebar from '@/components/dashboard/Sidebar';
 import { UserRole } from '@/types/user';
 import StudentsHeader from '@/components/trainer/StudentsHeader';
@@ -12,7 +13,7 @@ export default function TrainerStudentsPage() {
   const [selectedStatus, setSelectedStatus] = useState('all');
 
   return (
-    <div className="flex h-screen bg-[#F8FAFC]">
+    <div className="flex h-screen bg-[#FDF9F2]">
       <Sidebar activeItem="Students" userType={UserRole.TRAINER} />
 
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
@@ -25,7 +26,12 @@ export default function TrainerStudentsPage() {
 
         <main className="flex-1 p-8 overflow-y-auto">
           <div className="max-w-7xl mx-auto space-y-8">
-            <div className="bg-white rounded-[32px] border border-slate-100 p-8 shadow-sm">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="bg-white rounded-[32px] border border-slate-100 p-8 shadow-sm"
+            >
                 <StudentsFilters
                   searchQuery={searchQuery}
                   onSearchChange={setSearchQuery}
@@ -39,10 +45,10 @@ export default function TrainerStudentsPage() {
                       selectedStatus={selectedStatus}
                     />
                 </div>
-            </div>
+            </motion.div>
             
             <div className="text-center py-8">
-               <p className="text-slate-400 text-[11px] font-bold tracking-[0.3em] uppercase italic">© Dreamize Trainer Network 2025 • Student Directory</p>
+               <p className="text-slate-400 text-[11px] font-bold tracking-[0.3em] uppercase">© Dreamize Trainer Network 2025 • Student Directory</p>
             </div>
           </div>
         </main>

@@ -122,7 +122,7 @@ export default function TrainerBookingsPage() {
   const getStatusColor = (status: BookingStatus) => {
     switch (status) {
       case BookingStatus.PENDING:
-        return 'bg-yellow-100 text-yellow-800 border-yellow-200';
+        return 'bg-primary/10 text-primary border-primary/20';
       case BookingStatus.APPROVED:
         return 'bg-green-100 text-green-800 border-green-200';
       case BookingStatus.REJECTED:
@@ -130,9 +130,9 @@ export default function TrainerBookingsPage() {
       case BookingStatus.COMPLETED:
         return 'bg-blue-100 text-blue-800 border-blue-200';
       case BookingStatus.CANCELLED:
-        return 'bg-gray-100 text-gray-800 border-gray-200';
+        return 'bg-slate-100 text-slate-800 border-slate-200';
       default:
-        return 'bg-gray-100 text-gray-800 border-gray-200';
+        return 'bg-slate-100 text-slate-800 border-slate-200';
     }
   };
 
@@ -167,20 +167,20 @@ export default function TrainerBookingsPage() {
   }
 
   return (
-    <div className="flex h-screen bg-white">
+    <div className="flex h-screen bg-[#FDF9F2]">
       <Sidebar activeItem="Bookings" userType={UserRole.TRAINER} />
       
       <div className="flex-1 flex flex-col min-w-0">
         {/* Header */}
-        <header className="bg-white border-b border-gray-200 px-8 py-4">
+        <header className="bg-white border-b border-slate-100 px-8 py-4">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">Booking Management</h1>
-              <p className="text-gray-500">Manage student booking requests</p>
+              <h1 className="text-3xl font-playfair font-semibold text-slate-900">Booking Management</h1>
+              <p className="text-slate-500 font-light">Manage student booking requests</p>
             </div>
             <button
               onClick={refreshBookings}
-              className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              className="flex items-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-full hover:bg-slate-800 transition-colors"
             >
               <RefreshCw className="w-4 h-4" />
               Refresh
@@ -200,14 +200,14 @@ export default function TrainerBookingsPage() {
           )}
 
           {/* Tabs */}
-          <div className="mb-6">
-            <div className="flex gap-4 border-b border-gray-200">
+          <div className="mb-8">
+            <div className="flex gap-4 border-b border-slate-100">
               <button
                 onClick={() => setActiveTab('pending')}
                 className={`pb-3 px-1 font-medium text-sm transition-colors ${
                   activeTab === 'pending'
-                    ? 'text-blue-600 border-b-2 border-blue-600'
-                    : 'text-gray-500 hover:text-gray-700'
+                    ? 'text-primary border-b-2 border-primary'
+                    : 'text-slate-500 hover:text-slate-700'
                 }`}
               >
                 Pending ({trainerPendingBookings.length})
@@ -216,8 +216,8 @@ export default function TrainerBookingsPage() {
                 onClick={() => setActiveTab('all')}
                 className={`pb-3 px-1 font-medium text-sm transition-colors ${
                   activeTab === 'all'
-                    ? 'text-blue-600 border-b-2 border-blue-600'
-                    : 'text-gray-500 hover:text-gray-700'
+                    ? 'text-primary border-b-2 border-primary'
+                    : 'text-slate-500 hover:text-slate-700'
                 }`}
               >
                 All Bookings ({trainerAllBookings.length})
@@ -226,27 +226,27 @@ export default function TrainerBookingsPage() {
           </div>
 
           {/* Filters */}
-          <div className="mb-6 flex flex-col sm:flex-row gap-4">
+          <div className="mb-8 flex flex-col sm:flex-row gap-4">
             <div className="flex-1">
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-slate-400" />
                 <input
                   type="text"
                   placeholder="Search by student name or email..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full pl-12 pr-4 py-4 bg-slate-50 border-2 border-slate-50 rounded-2xl focus:bg-white focus:border-primary/20 focus:ring-0 transition-all outline-none"
                 />
               </div>
             </div>
             {activeTab === 'all' && (
               <div className="sm:w-48">
                 <div className="relative">
-                  <Filter className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                  <Filter className="absolute left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-400" />
                   <select
                     value={statusFilter}
                     onChange={(e) => setStatusFilter(e.target.value as BookingStatus | 'all')}
-                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none"
+                    className="w-full pl-12 pr-4 py-4 bg-slate-50 border-2 border-slate-50 rounded-2xl focus:bg-white focus:border-primary/20 focus:ring-0 transition-all outline-none appearance-none cursor-pointer text-slate-700"
                   >
                     <option value="all">All Status</option>
                     <option value={BookingStatus.PENDING}>Pending</option>
@@ -264,11 +264,11 @@ export default function TrainerBookingsPage() {
           <div className="space-y-4">
             {filteredBookings.length === 0 ? (
               <div className="text-center py-12">
-                <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Calendar className="w-8 h-8 text-gray-400" />
+                <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Calendar className="w-8 h-8 text-slate-400" />
                 </div>
-                <h3 className="text-lg font-medium text-gray-900 mb-2">No bookings found</h3>
-                <p className="text-gray-500">
+                <h3 className="text-lg font-playfair font-semibold text-slate-900 mb-2">No bookings found</h3>
+                <p className="text-slate-500 font-light">
                   {searchTerm || statusFilter !== 'all' 
                     ? 'Try adjusting your filters' 
                     : activeTab === 'pending' 
@@ -278,25 +278,25 @@ export default function TrainerBookingsPage() {
               </div>
             ) : (
               filteredBookings.map((booking) => (
-                <div key={booking.id} className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
+                <div key={booking.id} className="bg-white border border-slate-100 rounded-[32px] p-6 hover:shadow-xl transition-shadow">
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
                       {/* Student Info */}
                       <div className="flex items-center gap-3 mb-4">
-                        <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
-                          <User className="w-5 h-5 text-gray-400" />
+                        <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
+                          <User className="w-5 h-5 text-primary" />
                         </div>
                         <div>
-                          <h3 className="font-medium text-gray-900">{getStudentName(booking.studentId._id)}</h3>
-                          <p className="text-sm text-gray-500">{getStudentEmail(booking.studentId._id)}</p>
+                          <h3 className="font-medium text-slate-900">{getStudentName(booking.studentId._id)}</h3>
+                          <p className="text-sm text-slate-500">{getStudentEmail(booking.studentId._id)}</p>
                         </div>
                       </div>
 
                       {/* Booking Details */}
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                         <div className="flex items-center gap-2">
-                          <Calendar className="w-4 h-4 text-gray-400" />
-                          <span className="text-sm text-gray-600">
+                          <Calendar className="w-4 h-4 text-slate-400" />
+                          <span className="text-sm text-slate-600">
                             {formatDate(booking.requestedTime)}
                           </span>
                         </div>
@@ -310,10 +310,10 @@ export default function TrainerBookingsPage() {
                       {/* Learning Goals */}
                       <div className="mb-4">
                         <div className="flex items-center gap-2 mb-2">
-                          <MessageSquare className="w-4 h-4 text-gray-400" />
-                          <span className="text-sm font-medium text-gray-700">Learning Goals</span>
+                          <MessageSquare className="w-4 h-4 text-slate-400" />
+                          <span className="text-sm font-medium text-slate-700">Learning Goals</span>
                         </div>
-                        <p className="text-sm text-gray-600 bg-gray-50 rounded-lg p-3">
+                        <p className="text-sm text-slate-600 font-light bg-slate-50 rounded-xl p-3">
                           {booking.learningGoals}
                         </p>
                       </div>
@@ -325,7 +325,7 @@ export default function TrainerBookingsPage() {
                             <XCircle className="w-4 h-4 text-red-500" />
                             <span className="text-sm font-medium text-red-700">Rejection Reason</span>
                           </div>
-                          <p className="text-sm text-red-600 bg-red-50 rounded-lg p-3">
+                          <p className="text-sm text-red-600 font-light bg-red-50 rounded-xl p-3">
                             {booking.rejectionReason}
                           </p>
                         </div>
@@ -341,20 +341,20 @@ export default function TrainerBookingsPage() {
                           
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div className="flex items-center gap-2">
-                              <Clock className="w-4 h-4 text-gray-400" />
-                              <span className="text-sm text-gray-600">
+                              <Clock className="w-4 h-4 text-slate-400" />
+                              <span className="text-sm text-slate-600">
                                 Duration: {booking.sessionDuration} minutes
                               </span>
                             </div>
                             <div className="flex items-center gap-2">
-                              <Video className="w-4 h-4 text-gray-400" />
-                              <span className="text-sm text-gray-600">
+                              <Video className="w-4 h-4 text-slate-400" />
+                              <span className="text-sm text-slate-600">
                                 Format: {booking.sessionFormat}
                               </span>
                             </div>
                             <div className="flex items-center gap-2">
-                              <MapPin className="w-4 h-4 text-gray-400" />
-                              <span className="text-sm text-gray-600">
+                              <MapPin className="w-4 h-4 text-slate-400" />
+                              <span className="text-sm text-slate-600">
                                 Location: {booking.sessionLocation}
                               </span>
                             </div>
@@ -363,10 +363,10 @@ export default function TrainerBookingsPage() {
                           {booking.approvalNotes && (
                             <div>
                               <div className="flex items-center gap-2 mb-2">
-                                <MessageSquare className="w-4 h-4 text-gray-400" />
-                                <span className="text-sm font-medium text-gray-700">Approval Notes</span>
+                                <MessageSquare className="w-4 h-4 text-slate-400" />
+                                <span className="text-sm font-medium text-slate-700">Approval Notes</span>
                               </div>
-                              <p className="text-sm text-gray-600 bg-green-50 rounded-lg p-3">
+                              <p className="text-sm text-slate-600 font-light bg-green-50 rounded-xl p-3">
                                 {booking.approvalNotes}
                               </p>
                             </div>
@@ -375,10 +375,10 @@ export default function TrainerBookingsPage() {
                           {booking.preparationRequirements && (
                             <div>
                               <div className="flex items-center gap-2 mb-2">
-                                <FileText className="w-4 h-4 text-gray-400" />
-                                <span className="text-sm font-medium text-gray-700">Preparation Requirements</span>
+                                <FileText className="w-4 h-4 text-slate-400" />
+                                <span className="text-sm font-medium text-slate-700">Preparation Requirements</span>
                               </div>
-                              <p className="text-sm text-gray-600 bg-blue-50 rounded-lg p-3">
+                              <p className="text-sm text-slate-600 font-light bg-blue-50 rounded-xl p-3">
                                 {booking.preparationRequirements}
                               </p>
                             </div>
@@ -387,10 +387,10 @@ export default function TrainerBookingsPage() {
                           {booking.nextSteps && (
                             <div>
                               <div className="flex items-center gap-2 mb-2">
-                                <CheckCircle className="w-4 h-4 text-gray-400" />
-                                <span className="text-sm font-medium text-gray-700">Next Steps</span>
+                                <CheckCircle className="w-4 h-4 text-slate-400" />
+                                <span className="text-sm font-medium text-slate-700">Next Steps</span>
                               </div>
-                              <p className="text-sm text-gray-600 bg-yellow-50 rounded-lg p-3">
+                              <p className="text-sm text-slate-600 font-light bg-primary/5 rounded-xl p-3">
                                 {booking.nextSteps}
                               </p>
                             </div>
@@ -405,14 +405,14 @@ export default function TrainerBookingsPage() {
                         <div className="flex flex-col gap-2">
                           <button
                             onClick={() => handleApprove(booking.id)}
-                            className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+                            className="flex items-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-full hover:bg-slate-800 transition-colors"
                           >
                             <CheckCircle className="w-4 h-4" />
                             Approve
                           </button>
                           <button
                             onClick={() => openRejectModal(booking.id)}
-                            className="flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+                            className="flex items-center gap-2 px-4 py-2 bg-red-50 text-red-700 rounded-full hover:bg-red-100 transition-colors"
                           >
                             <XCircle className="w-4 h-4" />
                             Reject
@@ -430,10 +430,10 @@ export default function TrainerBookingsPage() {
 
       {/* Reject Modal */}
       {showRejectModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg max-w-md w-full mx-4 p-6">
-            <h3 className="text-lg font-medium text-gray-900 mb-4">Reject Booking Request</h3>
-            <p className="text-sm text-gray-600 mb-4">
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-[32px] max-w-md w-full mx-4 p-6">
+            <h3 className="text-lg font-playfair font-semibold text-slate-900 mb-4">Reject Booking Request</h3>
+            <p className="text-sm text-slate-600 font-light mb-4">
               Please provide a reason for rejecting this booking request. This will be shared with the student.
             </p>
             <textarea
@@ -441,19 +441,19 @@ export default function TrainerBookingsPage() {
               onChange={(e) => setRejectionReason(e.target.value)}
               placeholder="Enter rejection reason..."
               rows={4}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
+              className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-50 rounded-xl focus:bg-white focus:border-primary/20 focus:ring-0 transition-all outline-none resize-none"
             />
             <div className="flex gap-3 mt-4">
               <button
                 onClick={closeRejectModal}
-                className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                className="flex-1 px-4 py-2 border border-slate-200 text-slate-700 rounded-full hover:bg-slate-50 transition-colors"
               >
                 Cancel
               </button>
               <button
                 onClick={handleReject}
                 disabled={!rejectionReason.trim()}
-                className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex-1 px-4 py-2 bg-red-600 text-white rounded-full hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Reject Booking
               </button>
@@ -464,17 +464,17 @@ export default function TrainerBookingsPage() {
 
       {/* Approval Modal */}
       {showApproveModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg max-w-2xl w-full mx-4 p-6 max-h-[90vh] overflow-y-auto">
-            <h3 className="text-lg font-medium text-gray-900 mb-4">Approve Booking Request</h3>
-            <p className="text-sm text-gray-600 mb-6">
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-[32px] max-w-2xl w-full mx-4 p-6 max-h-[90vh] overflow-y-auto">
+            <h3 className="text-lg font-playfair font-semibold text-slate-900 mb-4">Approve Booking Request</h3>
+            <p className="text-sm text-slate-600 font-light mb-6">
               Provide session details and guidance for the student. This information will help them prepare for the orientation session.
             </p>
             
             <div className="space-y-4">
               {/* Session Format */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Session Format</label>
+                <label className="block text-sm font-medium text-slate-700 mb-2">Session Format</label>
                 <div className="flex gap-4">
                   <label className="flex items-center">
                     <input
