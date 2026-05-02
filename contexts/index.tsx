@@ -23,20 +23,20 @@ interface AppProvidersProps {
 
 export function AppProviders({ children }: AppProvidersProps) {
   return (
-      <AuthProvider>
-        <UserProvider>
-          <BookingProvider>
-            <RoadmapProvider>
-              <ProjectProvider>
-                <FinancialProvider>
-                  <SystemProvider>
-                    {children}
-                  </SystemProvider>
-                </FinancialProvider>
-              </ProjectProvider>
-            </RoadmapProvider>
-          </BookingProvider>
-        </UserProvider>
-      </AuthProvider>
+    <AuthProvider>
+      <UserProvider>
+        <BookingProvider>
+          <RoadmapProvider>
+            <ProjectProvider>
+              <FinancialProvider>
+                <SystemProvider>
+                  {children}
+                </SystemProvider>
+              </FinancialProvider>
+            </ProjectProvider>
+          </RoadmapProvider>
+        </BookingProvider>
+      </UserProvider>
+    </AuthProvider>
   );
 }

@@ -1,8 +1,12 @@
-'use client';
+'use client'
 
-import Image from 'next/image';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { AuthContainer } from '@/components/auth/auth-container';
+import { AuthCard } from '@/components/auth/auth-card';
+import { PremiumInput } from '@/components/ui/premium-input';
+import { PremiumButton } from '@/components/ui/premium-button';
+import { User, Mail, Lock, Phone, ArrowLeft, ArrowRight, Briefcase } from 'lucide-react';
 
 export default function TrainerRegisterPage() {
   const router = useRouter();
@@ -67,182 +71,121 @@ export default function TrainerRegisterPage() {
   };
 
   return (
-    <div className="flex h-screen">
-      {/* Left side - Form */}
-      <div className="flex flex-[2] flex-col justify-between p-8 bg-white overflow-y-scroll">
-        <div className="flex flex-col flex-1 max-w-md mx-auto w-full">
-          {/* Go back button */}
-          <button
-            onClick={() => router.push('/auth/signup')}
-            className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-8"
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-            Go back
-          </button>
+    <AuthContainer>
+      <AuthCard 
+        title="Trainer Registration" 
+        subtitle="Join our community of expert mentors and inspire the next generation."
+      >
+        <button
+          onClick={() => router.push('/auth/signup')}
+          className="absolute top-8 left-8 p-2 text-slate-400 hover:text-primary hover:bg-primary/5 rounded-full transition-all group"
+        >
+          <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
+        </button>
 
-          <div className="flex flex-col items-center justify-center flex-1">
-            {/* Logo */}
-            <div className="mb-8">
-              <div className="w-16 h-16 bg-green-600 rounded-2xl flex items-center justify-center">
-                <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2V6" />
-                </svg>
-              </div>
-            </div>
-
-            {/* Title */}
-            <h1 className="text-3xl font-semibold text-gray-900 mb-2">
-              Trainer Registration
-            </h1>
-            <p className="text-gray-500 mb-8 text-center">
-              Join our platform to share your expertise and inspire learners.
-            </p>
-
-            {/* Form */}
-            <form onSubmit={handleContinue} className="w-full space-y-4">
-              {/* First Name and Last Name */}
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-2">
-                    First Name
-                  </label>
-                  <input
-                    type="text"
-                    id="firstName"
-                    value={formData.firstName}
-                    onChange={(e) => handleChange('firstName', e.target.value)}
-                    placeholder="eg. John"
-                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${errors.firstName ? 'border-red-500' : 'border-gray-300'
-                      }`}
-                    required
-                  />
-                  {errors.firstName && <p className="mt-1 text-sm text-red-500">{errors.firstName}</p>}
-                </div>
-                <div>
-                  <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-2">
-                    Last Name
-                  </label>
-                  <input
-                    type="text"
-                    id="lastName"
-                    value={formData.lastName}
-                    onChange={(e) => handleChange('lastName', e.target.value)}
-                    placeholder="eg. Doe"
-                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${errors.lastName ? 'border-red-500' : 'border-gray-300'
-                      }`}
-                    required
-                  />
-                  {errors.lastName && <p className="mt-1 text-sm text-red-500">{errors.lastName}</p>}
-                </div>
-              </div>
-
-              {/* Email */}
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  value={formData.email}
-                  onChange={(e) => handleChange('email', e.target.value)}
-                  placeholder="eg. johndoe@example.com"
-                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${errors.email ? 'border-red-500' : 'border-gray-300'
-                    }`}
-                  required
-                />
-                {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email}</p>}
-              </div>
-
-              {/* Password */}
-              <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
-                  Password
-                </label>
-                <input
-                  type="password"
-                  id="password"
-                  value={formData.password}
-                  onChange={(e) => handleChange('password', e.target.value)}
-                  placeholder="Create a strong password"
-                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${errors.password ? 'border-red-500' : 'border-gray-300'
-                    }`}
-                  required
-                />
-                {errors.password && <p className="mt-1 text-sm text-red-500">{errors.password}</p>}
-              </div>
-
-              {/* Confirm Password */}
-              <div>
-                <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-2">
-                  Confirm Password
-                </label>
-                <input
-                  type="password"
-                  id="confirmPassword"
-                  value={formData.confirmPassword}
-                  onChange={(e) => handleChange('confirmPassword', e.target.value)}
-                  placeholder="Confirm your password"
-                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${errors.confirmPassword ? 'border-red-500' : 'border-gray-300'
-                    }`}
-                  required
-                />
-                {errors.confirmPassword && <p className="mt-1 text-sm text-red-500">{errors.confirmPassword}</p>}
-              </div>
-
-              {/* Phone Number */}
-              <div>
-                <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-700 mb-2">
-                  Phone Number
-                </label>
-                <input
-                  type="tel"
-                  id="phoneNumber"
-                  value={formData.phoneNumber}
-                  onChange={(e) => handleChange('phoneNumber', e.target.value)}
-                  placeholder="+250 7XX-XXX-XXX"
-                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent text-gray-900 placeholder:text-gray-400 ${errors.phoneNumber ? 'border-red-500' : 'border-gray-300'
-                    }`}
-                  required
-                />
-                {errors.phoneNumber && <p className="mt-1 text-sm text-red-500">{errors.phoneNumber}</p>}
-              </div>
-
-              <button
-                type="submit"
-                className="w-full bg-green-600 text-white py-3 rounded-lg font-medium hover:bg-green-700 transition-colors"
-              >
-                Continue to Details
-              </button>
-
-              {/* Progress dots */}
-              <div className="flex justify-center gap-2 pt-4">
-                <div className="w-8 h-2 bg-green-600 rounded-full"></div>
-                <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
-              </div>
-            </form>
+        <form onSubmit={handleContinue} className="space-y-5 mt-4">
+          <div className="grid grid-cols-2 gap-4">
+            <PremiumInput
+              label="First Name"
+              type="text"
+              id="firstName"
+              value={formData.firstName}
+              onChange={(e) => handleChange('firstName', e.target.value)}
+              placeholder="John"
+              error={errors.firstName}
+              icon={<User size={18} />}
+              required
+            />
+            <PremiumInput
+              label="Last Name"
+              type="text"
+              id="lastName"
+              value={formData.lastName}
+              onChange={(e) => handleChange('lastName', e.target.value)}
+              placeholder="Doe"
+              error={errors.lastName}
+              icon={<User size={18} />}
+              required
+            />
           </div>
+
+          <PremiumInput
+            label="Email Address"
+            type="email"
+            id="email"
+            value={formData.email}
+            onChange={(e) => handleChange('email', e.target.value)}
+            placeholder="trainer@example.com"
+            error={errors.email}
+            icon={<Mail size={20} />}
+            required
+          />
+
+          <PremiumInput
+            label="Phone Number"
+            type="tel"
+            id="phoneNumber"
+            value={formData.phoneNumber}
+            onChange={(e) => handleChange('phoneNumber', e.target.value)}
+            placeholder="+250 7XX-XXX-XXX"
+            error={errors.phoneNumber}
+            icon={<Phone size={20} />}
+            required
+          />
+
+          <div className="grid grid-cols-2 gap-4">
+            <PremiumInput
+              label="Password"
+              type="password"
+              id="password"
+              value={formData.password}
+              onChange={(e) => handleChange('password', e.target.value)}
+              placeholder="••••••••"
+              error={errors.password}
+              icon={<Lock size={18} />}
+              required
+            />
+            <PremiumInput
+              label="Confirm"
+              type="password"
+              id="confirmPassword"
+              value={formData.confirmPassword}
+              onChange={(e) => handleChange('confirmPassword', e.target.value)}
+              placeholder="••••••••"
+              error={errors.confirmPassword}
+              icon={<Lock size={18} />}
+              required
+            />
+          </div>
+
+          <div className="pt-2">
+            <PremiumButton type="submit">
+              Continue to Details
+              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+            </PremiumButton>
+          </div>
+
+          {/* Progress indicators */}
+          <div className="flex justify-center items-center gap-3 pt-4">
+            <div className="h-2 w-12 bg-primary rounded-full shadow-sm shadow-primary/20"></div>
+            <div className="h-2 w-2 bg-slate-200 rounded-full"></div>
+          </div>
+        </form>
+
+        <div className="mt-8 text-center text-[15px] text-slate-500 font-light">
+          Already have an account?{' '}
+          <button
+            onClick={() => router.push('/auth/login')}
+            className="text-primary font-bold hover:underline"
+          >
+            Sign In
+          </button>
         </div>
 
-        {/* Footer */}
-        <div className="text-sm text-gray-500">
+        <div className="mt-10 text-center text-[12px] text-slate-400 uppercase tracking-widest font-bold">
           © Dreamize 2025
         </div>
-      </div>
-
-      {/* Right side - Image */}
-      <div className="hidden lg:block flex-[1] relative overflow-hidden">
-        <Image
-          src="/real/image.jpeg"
-          alt="Trainer teaching environment"
-          fill
-          className="object-cover object-center scale-105"
-          priority
-          quality={100}
-        />
-      </div>
-    </div>
+      </AuthCard>
+    </AuthContainer>
   );
 }

@@ -1,11 +1,11 @@
-'use client';
-
 import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
-import Image from 'next/image';
-import { Logo } from '@/components/ui/Logo';
+import { AuthContainer } from '@/components/auth/auth-container';
+import { AuthCard } from '@/components/auth/auth-card';
+import { PremiumInput } from '@/components/ui/premium-input';
+import { PremiumButton } from '@/components/ui/premium-button';
 import { guardianService } from '@/services/guardian';
-import { Lock, Eye, EyeOff, CheckCircle, AlertCircle, XCircle, User, UserCircle } from 'lucide-react';
+import { Lock, Eye, EyeOff, CheckCircle, AlertCircle, XCircle, User, UserCircle, GraduationCap, ArrowRight, Mail } from 'lucide-react';
 
 function SetPasswordContent() {
   const router = useRouter();
@@ -15,14 +15,11 @@ function SetPasswordContent() {
   const [isLoading, setIsLoading] = useState(true);
   const [isVerifying, setIsVerifying] = useState(false);
   const [isValid, setIsValid] = useState(false);
-  const [isExpired, setIsExpired] = useState(false);
   const [guardianInfo, setGuardianInfo] = useState<{ email: string; firstName: string; lastName: string } | null>(null);
   const [studentInfo, setStudentInfo] = useState<{ firstName: string; lastName: string } | null>(null);
   
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
 
@@ -117,250 +114,144 @@ function SetPasswordContent() {
   // Loading state
   if (isLoading) {
     return (
-      <div className="flex h-screen bg-gray-50">
-        <div className="flex-1 flex items-center justify-center">
-          <div className="text-center">
-            <div className="animate-spin w-8 h-8 border-2 border-yellow-600 border-t-transparent rounded-full mx-auto mb-4"></div>
-            <p className="text-gray-600">Verifying invitation...</p>
+      <AuthContainer>
+        <div className="flex flex-col items-center justify-center p-12">
+          <div className="relative w-16 h-16 mb-6">
+            <div className="absolute inset-0 border-4 border-primary/20 rounded-full"></div>
+            <div className="absolute inset-0 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
           </div>
+          <p className="text-slate-500 font-medium animate-pulse">Verifying invitation...</p>
         </div>
-      </div>
+      </AuthContainer>
     );
   }
 
   // Invalid or missing token
   if (!token || !isValid) {
     return (
-      <div className="flex h-screen bg-gray-50">
-        <div className="flex-1 flex items-center justify-center p-4">
-          <div className="bg-white rounded-xl shadow-sm p-8 max-w-md w-full text-center">
-            <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <XCircle className="w-8 h-8 text-red-600" />
+      <AuthContainer>
+        <AuthCard title="Invalid Link" subtitle="This invitation has expired or is no longer valid.">
+          <div className="flex flex-col items-center gap-6">
+            <div className="w-20 h-20 bg-red-50 rounded-full flex items-center justify-center text-red-500">
+              <XCircle size={40} />
             </div>
-            <h1 className="text-2xl font-semibold text-gray-900 mb-2">Invalid Invitation</h1>
-            <p className="text-gray-600 mb-6">
-              This invitation link is invalid or has already been used.
-            </p>
-            <button
-              onClick={() => router.push('/auth/login')}
-              className="w-full py-3 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors"
-            >
+            <p className="text-center text-slate-600">Please contact the student or administrator to request a new invitation link.</p>
+            <PremiumButton onClick={() => router.push('/auth/login')}>
               Go to Login
-            </button>
+            </PremiumButton>
           </div>
-        </div>
-      </div>
-    );
-  }
-
-  // Expired token
-  if (isExpired) {
-    return (
-      <div className="flex h-screen bg-gray-50">
-        <div className="flex-1 flex items-center justify-center p-4">
-          <div className="bg-white rounded-xl shadow-sm p-8 max-w-md w-full text-center">
-            <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <AlertCircle className="w-8 h-8 text-red-600" />
-            </div>
-            <h1 className="text-2xl font-semibold text-gray-900 mb-2">Invitation Expired</h1>
-            <p className="text-gray-600 mb-6">
-              This invitation has expired. Please contact the student or platform admin for a new invitation.
-            </p>
-            <button
-              onClick={() => router.push('/auth/login')}
-              className="w-full py-3 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors"
-            >
-              Go to Login
-            </button>
-          </div>
-        </div>
-      </div>
+        </AuthCard>
+      </AuthContainer>
     );
   }
 
   // Success state
   if (success) {
     return (
-      <div className="flex h-screen bg-gray-50">
-        <div className="flex-1 flex items-center justify-center p-4">
-          <div className="bg-white rounded-xl shadow-sm p-8 max-w-md w-full text-center">
-            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <CheckCircle className="w-8 h-8 text-green-600" />
+      <AuthContainer>
+        <AuthCard title="Welcome Aboard!" subtitle="Your guardian account is now active.">
+          <div className="flex flex-col items-center gap-6">
+            <div className="w-24 h-24 bg-green-50 rounded-full flex items-center justify-center text-green-500 relative">
+              <CheckCircle size={48} />
+              <div className="absolute inset-0 border-4 border-green-500/20 rounded-full animate-ping"></div>
             </div>
-            <h1 className="text-2xl font-semibold text-gray-900 mb-2">Welcome!</h1>
-            <p className="text-gray-600 mb-6">
-              Your account has been activated successfully. Redirecting to login...
-            </p>
+            <p className="text-center text-slate-600 font-medium">Redirecting you to the login page...</p>
           </div>
-        </div>
-      </div>
+        </AuthCard>
+      </AuthContainer>
     );
   }
 
   return (
-    <div className="flex h-screen bg-gray-50">
-      {/* Left side - Form */}
-      <div className="flex flex-[2] flex-col justify-between p-8 bg-white overflow-y-auto">
-        <div className="flex flex-col flex-1 max-w-md mx-auto w-full justify-center">
-          {/* Logo */}
-          <div className="mb-8 text-center">
-            <Logo size="lg" />
+    <AuthContainer>
+      <AuthCard 
+        title={`Welcome, ${guardianInfo?.firstName || 'Guardian'}`} 
+        subtitle="You've been invited to oversee a student's learning journey."
+      >
+        <div className="bg-primary/5 border border-primary/10 rounded-2xl p-6 mb-8 flex items-center gap-4">
+          <div className="w-12 h-12 bg-white rounded-xl shadow-sm border border-primary/10 flex items-center justify-center text-primary">
+            <GraduationCap size={24} />
           </div>
-
-          {/* Welcome Message */}
-          <div className="text-center mb-8">
-            <h1 className="text-2xl font-semibold text-gray-900 mb-2">
-              Welcome, {guardianInfo?.firstName || 'Guardian'}!
-            </h1>
-            <p className="text-gray-600">
-              You&apos;ve been invited to monitor {studentInfo?.firstName} {studentInfo?.lastName}&apos;s learning progress.
-            </p>
+          <div>
+            <p className="text-[12px] text-slate-500 font-bold uppercase tracking-widest">Student to Monitor</p>
+            <p className="text-[16px] font-bold text-slate-800">{studentInfo?.firstName} {studentInfo?.lastName}</p>
           </div>
-
-          {/* Student Card */}
-          <div className="bg-yellow-50 rounded-lg p-4 mb-6 flex items-center gap-3">
-            <div className="w-10 h-10 bg-yellow-200 rounded-full flex items-center justify-center">
-              <UserCircle className="w-5 h-5 text-yellow-700" />
-            </div>
-            <div>
-              <p className="text-sm font-medium text-gray-900">
-                {studentInfo?.firstName} {studentInfo?.lastName}
-              </p>
-              <p className="text-sm text-gray-600">Student</p>
-            </div>
-          </div>
-
-          {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Email Display (Read-only) */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Email
-              </label>
-              <div className="flex items-center gap-2 px-4 py-3 bg-gray-100 rounded-lg text-gray-700">
-                <User className="w-4 h-4 text-gray-500" />
-                <span>{guardianInfo?.email}</span>
-              </div>
-            </div>
-
-            {/* Password */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Create Password
-              </label>
-              <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                <input
-                  type={showPassword ? 'text' : 'password'}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Enter password"
-                  className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
-                  required
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
-                >
-                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-                </button>
-              </div>
-              <p className="text-xs text-gray-500 mt-1">Must be at least 8 characters</p>
-            </div>
-
-            {/* Confirm Password */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Confirm Password
-              </label>
-              <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                <input
-                  type={showConfirmPassword ? 'text' : 'password'}
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  placeholder="Confirm password"
-                  className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
-                  required
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
-                >
-                  {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-                </button>
-              </div>
-            </div>
-
-            {/* Error Message */}
-            {error && (
-              <div className="flex items-center gap-2 text-red-600 text-sm">
-                <AlertCircle className="w-4 h-4" />
-                <span>{error}</span>
-              </div>
-            )}
-
-            {/* Submit Button */}
-            <button
-              type="submit"
-              disabled={isVerifying}
-              className="w-full py-3 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {isVerifying ? 'Creating Account...' : 'Create Account & Accept Invitation'}
-            </button>
-
-            {/* Decline Link */}
-            <button
-              type="button"
-              onClick={handleDecline}
-              disabled={isVerifying}
-              className="w-full py-2 text-gray-500 hover:text-gray-700 text-sm transition-colors"
-            >
-              Decline Invitation
-            </button>
-          </form>
-
-          {/* Info */}
-          <p className="text-xs text-gray-500 text-center mt-6">
-            By accepting, you&apos;ll be able to view {studentInfo?.firstName}&apos;s progress, certificates, and projects.
-            You cannot edit any information.
-          </p>
         </div>
 
-        {/* Footer */}
-        <div className="text-sm text-gray-500 text-center">
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <div className="space-y-1">
+            <label className="block text-[13px] font-bold text-slate-400 uppercase tracking-widest ml-1">
+              Your Email
+            </label>
+            <div className="flex items-center gap-3 px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl text-slate-500 font-medium italic">
+              <Mail size={18} />
+              <span>{guardianInfo?.email}</span>
+            </div>
+          </div>
+
+          <PremiumInput
+            label="Create Password"
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="••••••••"
+            error={error && error.includes('match') ? '' : error}
+            icon={<Lock size={18} />}
+            required
+          />
+
+          <PremiumInput
+            label="Confirm Password"
+            type="password"
+            id="confirmPassword"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            placeholder="••••••••"
+            error={error && error.includes('match') ? error : ''}
+            icon={<Lock size={18} />}
+            required
+          />
+
+          <div className="pt-4">
+            <PremiumButton type="submit" isLoading={isVerifying}>
+              Accept & Activate
+              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+            </PremiumButton>
+          </div>
+
+          <button
+            type="button"
+            onClick={handleDecline}
+            disabled={isVerifying}
+            className="w-full py-2 text-slate-400 hover:text-red-500 text-[14px] font-medium transition-colors"
+          >
+            Decline Invitation
+          </button>
+        </form>
+
+        <p className="text-[12px] text-slate-400 text-center mt-8 font-light italic leading-relaxed">
+          By accepting, you&apos;ll be able to view {studentInfo?.firstName}&apos;s progress, certificates, and projects. 
+          Your account is view-only for safety and privacy.
+        </p>
+
+        <div className="mt-10 text-center text-[12px] text-slate-300 uppercase tracking-widest font-bold">
           © Dreamize 2025
         </div>
-      </div>
-
-      {/* Right side - Image */}
-      <div className="hidden lg:block flex-1 relative overflow-hidden">
-        <Image
-          src="/real/image.jpeg"
-          alt="Dreamize Africa"
-          fill
-          className="object-cover object-center scale-105"
-          priority
-          quality={100}
-        />
-      </div>
-    </div>
+      </AuthCard>
+    </AuthContainer>
   );
 }
 
 export default function SetPasswordPage() {
   return (
     <Suspense fallback={
-      <div className="flex h-screen bg-gray-50">
-        <div className="flex-1 flex items-center justify-center">
-          <div className="text-center">
-            <div className="animate-spin w-8 h-8 border-2 border-yellow-600 border-t-transparent rounded-full mx-auto mb-4"></div>
-            <p className="text-gray-600">Loading...</p>
-          </div>
+      <AuthContainer>
+        <div className="flex flex-col items-center justify-center p-12">
+          <div className="animate-spin w-8 h-8 border-4 border-primary border-t-transparent rounded-full mb-4"></div>
+          <p className="text-slate-500">Loading...</p>
         </div>
-      </div>
+      </AuthContainer>
     }>
       <SetPasswordContent />
     </Suspense>
