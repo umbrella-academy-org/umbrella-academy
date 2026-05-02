@@ -1,3 +1,4 @@
+'use client'
 import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { AuthContainer } from '@/components/auth/auth-container';
@@ -17,7 +18,7 @@ function SetPasswordContent() {
   const [isValid, setIsValid] = useState(false);
   const [guardianInfo, setGuardianInfo] = useState<{ email: string; firstName: string; lastName: string } | null>(null);
   const [studentInfo, setStudentInfo] = useState<{ firstName: string; lastName: string } | null>(null);
-  
+
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
@@ -36,7 +37,7 @@ function SetPasswordContent() {
         if (response.success && response.data) {
           setIsValid(true);
           setGuardianInfo(response.data.guardian || null);
-          setStudentInfo(response.data.studentName ? { firstName: response.data.studentName.split(' ')[0], lastName: response.data.studentName.split(' ')[1] } :   null);         
+          setStudentInfo(response.data.studentName ? { firstName: response.data.studentName.split(' ')[0], lastName: response.data.studentName.split(' ')[1] } : null);
         } else {
           setIsValid(false);
           setError(response.message || 'Invalid invitation token');
@@ -78,7 +79,7 @@ function SetPasswordContent() {
       const response = await guardianService.setPassword(token, password);
       if (response.success) {
         setSuccess(true);
-       
+        router.push('/auth/login');
       } else {
         setError(response.message || 'Failed to set password');
       }
@@ -91,7 +92,7 @@ function SetPasswordContent() {
 
   const handleDecline = async () => {
     if (!token) return;
-    
+
     if (!confirm('Are you sure you want to decline this invitation?')) {
       return;
     }
@@ -164,8 +165,8 @@ function SetPasswordContent() {
 
   return (
     <AuthContainer>
-      <AuthCard 
-        title={`Welcome, ${guardianInfo?.firstName || 'Guardian'}`} 
+      <AuthCard
+        title={`Welcome, ${guardianInfo?.firstName || 'Guardian'}`}
         subtitle="You've been invited to oversee a student's learning journey."
       >
         <div className="bg-primary/5 border border-primary/10 rounded-2xl p-6 mb-8 flex items-center gap-4">
@@ -231,7 +232,7 @@ function SetPasswordContent() {
         </form>
 
         <p className="text-[12px] text-slate-400 text-center mt-8 font-light italic leading-relaxed">
-          By accepting, you&apos;ll be able to view {studentInfo?.firstName}&apos;s progress, certificates, and projects. 
+          By accepting, you&apos;ll be able to view {studentInfo?.firstName}&apos;s progress, certificates, and projects.
           Your account is view-only for safety and privacy.
         </p>
 

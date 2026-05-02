@@ -19,7 +19,7 @@ interface StudentsTableProps {
 const StatusBadge = ({ isActive, isVerified }: { isActive: boolean; isVerified: boolean }) => {
   if (!isActive) {
     return (
-      <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800">
+      <span className="inline-flex items-center px-2.5 py-1 rounded-md text-[10px] font-bold bg-red-100 text-red-700 uppercase tracking-widest border border-red-200">
         <XCircle className="w-3 h-3 mr-1" />
         Inactive
       </span>
@@ -27,14 +27,14 @@ const StatusBadge = ({ isActive, isVerified }: { isActive: boolean; isVerified: 
   }
   if (!isVerified) {
     return (
-      <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+      <span className="inline-flex items-center px-2.5 py-1 rounded-md text-[10px] font-bold bg-orange-100 text-orange-700 uppercase tracking-widest border border-orange-200">
         <AlertCircle className="w-3 h-3 mr-1" />
         Pending
       </span>
     );
   }
   return (
-    <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+    <span className="inline-flex items-center px-2.5 py-1 rounded-md text-[10px] font-bold bg-green-100 text-green-700 uppercase tracking-widest border border-green-200">
       <CheckCircle className="w-3 h-3 mr-1" />
       Active
     </span>
@@ -103,7 +103,7 @@ export default function StudentsTable({ searchQuery, selectedStatus }: StudentsT
     return (
       <div className="space-y-4 animate-pulse">
         {[...Array(5)].map((_, i) => (
-          <div key={i} className="h-16 bg-gray-100 rounded-lg" />
+          <div key={i} className="h-20 bg-slate-50 border border-slate-100 rounded-2xl" />
         ))}
       </div>
     );
@@ -112,17 +112,17 @@ export default function StudentsTable({ searchQuery, selectedStatus }: StudentsT
   // Empty state
   if (filteredStudents.length === 0) {
     return (
-      <div className="text-center py-12">
-        <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <GraduationCap className="w-8 h-8 text-gray-400" />
+      <div className="text-center py-20 bg-slate-50 rounded-[32px] border border-slate-100">
+        <div className="w-20 h-20 bg-white shadow-sm rounded-[24px] flex items-center justify-center mx-auto mb-6">
+          <GraduationCap className="w-10 h-10 text-slate-300" />
         </div>
-        <h3 className="text-lg font-medium text-gray-900 mb-1">
-          {myStudents.length === 0 ? 'No students assigned' : 'No students match your search'}
+        <h3 className="text-xl font-black text-slate-900 mb-2">
+          {myStudents.length === 0 ? 'No Mentees Assigned' : 'No Matches Found'}
         </h3>
-        <p className="text-gray-500">
+        <p className="text-slate-500 font-medium max-w-sm mx-auto">
           {myStudents.length === 0 
-            ? 'Students assigned to you will appear here' 
-            : 'Try adjusting your search or filters'}
+            ? 'Students assigned to your mentorship group will appear here.' 
+            : 'Try adjusting your search query or filters.'}
         </p>
       </div>
     );
@@ -139,13 +139,13 @@ export default function StudentsTable({ searchQuery, selectedStatus }: StudentsT
     return {
       id: student._id,
       student: (
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-medium text-sm">
+        <div className="flex items-center gap-4">
+          <div className="w-12 h-12 bg-slate-900 rounded-[16px] flex items-center justify-center text-primary font-black text-sm shadow-md">
             {avatar}
           </div>
           <div>
-            <div className="text-sm font-medium text-gray-900">{studentName}</div>
-            <div className="text-sm text-gray-500 flex items-center gap-1">
+            <div className="text-[14px] font-black text-slate-900">{studentName}</div>
+            <div className="text-xs text-slate-500 font-medium flex items-center gap-1.5 mt-0.5">
               <Mail className="w-3 h-3" />
               {student.email}
             </div>
@@ -154,10 +154,10 @@ export default function StudentsTable({ searchQuery, selectedStatus }: StudentsT
       ),
       roadmap: (
         <div>
-          <div className="text-sm font-medium text-gray-900">
-            {roadmap?.title || 'No roadmap assigned'}
+          <div className="text-[13px] font-bold text-slate-900">
+            {roadmap?.title || 'No architecture assigned'}
           </div>
-          <div className="text-sm text-gray-500 flex items-center gap-1">
+          <div className="text-xs text-slate-400 font-medium flex items-center gap-1.5 mt-0.5 uppercase tracking-widest">
             <Calendar className="w-3 h-3" />
             Joined {new Date(joinDate).toLocaleDateString()}
           </div>
@@ -168,34 +168,34 @@ export default function StudentsTable({ searchQuery, selectedStatus }: StudentsT
       ),
       subscription: (
         <div>
-          <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
-            student.hasActiveSubscription ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+          <span className={`inline-flex items-center px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-widest ${
+            student.hasActiveSubscription ? 'bg-primary/10 text-primary border border-primary/20' : 'bg-slate-100 text-slate-500 border border-slate-200'
           }`}>
-            {student.hasActiveSubscription ? 'Active' : 'Inactive'}
+            {student.hasActiveSubscription ? 'Premium' : 'Standard'}
           </span>
-          <div className="text-xs text-gray-500 mt-1">
-            {student.hasPaidOrientation ? 'Orientation paid' : 'Orientation pending'}
+          <div className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-1.5">
+            {student.hasPaidOrientation ? 'Orientation Complete' : 'Awaiting Orientation'}
           </div>
         </div>
       ),
       progress: (
-        <div className="flex items-center gap-2">
-          <div className="flex-1 bg-gray-200 rounded-full h-2 w-24">
+        <div className="flex items-center gap-3">
+          <div className="flex-1 bg-slate-100 rounded-full h-2 w-24 overflow-hidden">
             <div
-              className="bg-blue-500 h-2 rounded-full transition-all duration-500"
+              className="bg-primary h-full rounded-full transition-all duration-1000 ease-out"
               style={{ width: `${progress}%` }}
             />
           </div>
-          <span className="text-sm font-medium text-gray-900 w-10">{progress}%</span>
+          <span className="text-xs font-black text-slate-700 w-10">{progress}%</span>
         </div>
       ),
       actions: (
         <button
           onClick={() => handleViewDetails(student)}
-          className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 text-blue-700 text-xs font-medium rounded-lg hover:bg-blue-100 transition-colors"
+          className="flex items-center justify-center gap-2 px-4 py-2 bg-slate-50 text-slate-700 border border-slate-200 text-[11px] font-bold uppercase tracking-widest rounded-xl hover:bg-slate-900 hover:text-primary hover:border-slate-900 transition-all group"
         >
-          <Eye className="w-3.5 h-3.5" />
-          View Details
+          <Eye className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" />
+          Dossier
         </button>
       ),
       _original: student
@@ -227,14 +227,15 @@ export default function StudentsTable({ searchQuery, selectedStatus }: StudentsT
     <div className="space-y-6">
       {/* Selected Actions */}
       {selectedStudents.length > 0 && (
-        <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+        <div className="bg-primary/5 border border-primary/20 rounded-[20px] p-4 animate-in fade-in slide-in-from-top-2">
           <div className="flex items-center justify-between">
-            <span className="text-sm font-medium text-gray-800">
-              {selectedStudents.length} student{selectedStudents.length > 1 ? 's' : ''} selected
+            <span className="text-[13px] font-black text-slate-900 flex items-center gap-2">
+              <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+              {selectedStudents.length} Mentee{selectedStudents.length > 1 ? 's' : ''} Selected
             </span>
-            <div className="flex items-center gap-2">
-              <button className="px-3 py-1.5 text-xs font-medium text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
-                Send Message
+            <div className="flex items-center gap-3">
+              <button className="px-6 py-2.5 bg-slate-900 text-white font-bold text-[11px] uppercase tracking-widest rounded-xl hover:bg-slate-800 transition-colors">
+                Transmit Message
               </button>
             </div>
           </div>
@@ -242,8 +243,8 @@ export default function StudentsTable({ searchQuery, selectedStatus }: StudentsT
       )}
 
       {/* Results Count */}
-      <div className="text-sm text-gray-600">
-        Showing {filteredStudents.length} of {myStudents.length} assigned students
+      <div className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">
+        Showing {filteredStudents.length} of {myStudents.length} total mentees
       </div>
 
       {/* DataTable */}
