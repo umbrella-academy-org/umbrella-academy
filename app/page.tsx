@@ -1,71 +1,30 @@
-'use client';
+import { Navbar } from '@/components/navbar';
+import { PremiumHero } from '@/components/premium-hero';
+import { PathwayCards } from '@/components/pathway-cards';
+import { JoyfulEnvironment } from '@/components/joyful-environment';
+import { ProgramsShowcase } from '@/components/programs-showcase';
+import { MomentsGallery } from '@/components/moments-gallery';
+import { TestimonialsSection } from '@/components/testimonials-section';
+import { CTASection } from '@/components/cta-section';
+import { Footer } from '@/components/footer';
 
-import { useNavigationWithLoading } from '@/lib/utils/navigation';
-import { useAuth } from '@/contexts';
-import { useEffect } from 'react';
-import { Header } from "@/components/Header";
-import { Hero } from "@/components/Hero";
-import { BrandsMarquee } from "@/components/BrandsMarquee";
-import { CategoriesGrid } from "@/components/CategoriesGrid";
-import { FeaturedPrograms } from "@/components/FeaturedPrograms";
-import { NewsHighlights } from "@/components/NewsHighlights";
-import { HowItWorks } from "@/components/HowItWorks";
-import { Benefits } from "@/components/Benefits";
-import { Testimonials } from "@/components/Testimonials";
-import { CTA } from "@/components/CTA";
-import { Footer } from "@/components/Footer";
-import { Logo } from "@/components/ui/Logo";
-import { UserRole } from '@/types';
+export const metadata = {
+  title: 'Dreamize Africa | Building Africa\'s Tech Talent Pipeline',
+  description: 'Prepare young Africans for technology careers through early career guidance, hands-on learning, and real-world project experience.',
+};
 
 export default function Home() {
-  const { navigate } = useNavigationWithLoading();
-  const { isAuthenticated, user, isLoading } = useAuth();
-
-  // Redirect authenticated users to their dashboard
-  useEffect(() => {
-    if (isAuthenticated && user) {
-      console.log(user.role)
-      const dashboardRoutes: Record<UserRole, string> = {
-        'student': '/dashboard/student',
-        'trainer': '/dashboard/trainer',
-        'admin': '/dashboard/admin',
-        'guardian': '/dashboard/guardian',
-        'sales_manager': '/dashboard/sales_manager'
-      };
-      if (dashboardRoutes[user.role]) {
-        navigate(dashboardRoutes[user.role]);
-      }
-    }
-  }, [isAuthenticated, user]);
-
-  if (isLoading) {
-    return (
-      <div className="flex h-screen items-center justify-center bg-white">
-        <Logo size="lg" />
-      </div>
-    );
-  }
-
   return (
-    <div className="bg-white h-screen overflow-auto">
-      <Header />
-      <main>
-        <div id="hero">
-          <Hero />
-        </div>
-        <div id="brand-marquee">
-          <BrandsMarquee />
-        </div>
-        <CategoriesGrid />
-        <FeaturedPrograms />
-        <NewsHighlights />
-        <HowItWorks />
-        {/* <PlatformRoles /> */}
-        <Benefits />
-        <Testimonials />
-        <CTA />
-      </main>
+    <>
+      <Navbar />
+      <PremiumHero />
+      <PathwayCards />
+      <JoyfulEnvironment />
+      <ProgramsShowcase />
+      <MomentsGallery />
+      <TestimonialsSection />
+      <CTASection />
       <Footer />
-    </div>
+    </>
   );
 }
