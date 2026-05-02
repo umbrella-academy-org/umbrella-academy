@@ -95,7 +95,7 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
         </button>
 
         <div className="p-6 lg:p-8 border-b border-white/5">
-          <Logo />
+          <Logo size="md" />
         </div>
 
         <nav className="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
