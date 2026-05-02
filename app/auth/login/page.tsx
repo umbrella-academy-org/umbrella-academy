@@ -1,12 +1,8 @@
 'use client';
 
-import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
 import { useAuth } from '@/contexts';
-import { Logo } from '@/components/ui/Logo';
-import { Button } from '@/components/ui/Button';
-import { Input } from '@/components/ui/Input';
 import { AuthContainer } from '@/components/auth/auth-container';
 import { AuthCard } from '@/components/auth/auth-card';
 import { PremiumInput } from '@/components/ui/premium-input';

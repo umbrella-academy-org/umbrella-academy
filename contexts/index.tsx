@@ -14,7 +14,6 @@ import { UserProvider } from './UserContext';
 import { RoadmapProvider } from './RoadmapContext';
 import { FinancialProvider } from './FinancialContext';
 import { SystemProvider } from './SystemContext';
-import { ThemeProvider } from '@/components/providers/ThemeProvider';
 import { BookingProvider } from './BookingContext';
 import { ProjectProvider } from './ProjectContext';
 
@@ -24,7 +23,6 @@ interface AppProvidersProps {
 
 export function AppProviders({ children }: AppProvidersProps) {
   return (
-    <ThemeProvider defaultMode="system" enableSystem={true}>
       <AuthProvider>
         <UserProvider>
           <BookingProvider>
@@ -40,6 +38,5 @@ export function AppProviders({ children }: AppProvidersProps) {
           </BookingProvider>
         </UserProvider>
       </AuthProvider>
-    </ThemeProvider>
   );
 }

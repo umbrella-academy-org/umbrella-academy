@@ -51,12 +51,14 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet" />
       </head>
+      <AppProviders>
       <body className="font-sans antialiased" suppressHydrationWarning>
-        <AppProviders>
+       
           {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
-        </AppProviders>
+    
       </body>
+      </AppProviders>
     </html>
   )
 }

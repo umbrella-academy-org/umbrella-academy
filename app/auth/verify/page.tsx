@@ -1,5 +1,7 @@
 'use client';
 
+import { useState, useEffect, useRef } from 'react';
+import { useRouter } from 'next/navigation';
 import { AuthContainer } from '@/components/auth/auth-container';
 import { AuthCard } from '@/components/auth/auth-card';
 import { PremiumButton } from '@/components/ui/premium-button';
@@ -201,9 +203,6 @@ export default function VerifyPage() {
         </div>
       </AuthCard>
     </AuthContainer>
-  );
-}
-
   );
 }
 
