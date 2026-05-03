@@ -33,7 +33,7 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
         return [
           { icon: <Home className="w-5 h-5" />, label: 'Dashboard', href: '/dashboard/guardian', active: true },
           { icon: <User className="w-5 h-5" />, label: 'Profile', href: '/dashboard/guardian/profile' },
-          { icon: <Settings className="w-5 h-5" />, label: 'Settings', href: '/dashboard/settings' },
+          { icon: <Settings className="w-5 h-5" />, label: 'Settings', href: '/dashboard/guardian/settings' },
         ];
       case 'trainer':
         return [
@@ -43,6 +43,7 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
           { icon: <Award className="w-5 h-5" />, label: 'Projects', href: '/dashboard/trainer/projects' },
           { icon: <CalendarCheck className="w-5 h-5" />, label: 'Bookings', href: '/dashboard/trainer/bookings' },
           { icon: <MessageSquare className="w-5 h-5" />, label: 'Chat', href: '/dashboard/trainer/chat' },
+          { icon: <User className="w-5 h-5" />, label: 'Profile', href: '/dashboard/trainer/profile' },
         ];
       case 'admin':
         return [
