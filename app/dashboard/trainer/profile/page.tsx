@@ -37,8 +37,8 @@ export default function TrainerProfilePage() {
                 <main className="flex-1 p-8 overflow-y-auto">
                     <div className="max-w-full mx-auto">
                         {/* Profile Header Card */}
-                        <div className="bg-white rounded-[40px] border border-slate-100 shadow-xl shadow-slate-200/50 overflow-hidden mb-8">
-                            <div className="h-48 bg-gradient-to-br from-slate-900 to-slate-800 relative overflow-hidden">
+                        <div className="bg-white rounded-[32px] border border-slate-100 shadow-sm overflow-hidden mb-8">
+                            <div className="h-40 bg-gradient-to-br from-slate-900 to-slate-800 relative overflow-hidden">
                                 {/* Decorative Abstract Shapes */}
                                 <div className="absolute top-0 left-0 w-full h-full opacity-20">
                                     <div className="absolute -top-24 -left-24 w-64 h-64 bg-primary rounded-full blur-3xl" />
@@ -46,8 +46,8 @@ export default function TrainerProfilePage() {
                                 </div>
                             </div>
 
-                            <div className="px-10 py-10">
-                                <div className="flex flex-col md:flex-row md:items-end -mt-16 gap-8">
+                            <div className="px-8 py-8">
+                                <div className="flex flex-col md:flex-row md:items-end -mt-12 gap-6">
                                     <div className="relative group">
                                         <div className="w-32 h-32 rounded-full bg-white p-1.5 shadow-2xl shadow-slate-200/50 transform group-hover:scale-105 transition-all duration-500">
                                             <div className="w-full h-full bg-gradient-to-br from-slate-50 to-slate-100 rounded-full flex items-center justify-center text-slate-700 text-4xl font-extrabold border border-slate-200">
@@ -107,15 +107,15 @@ export default function TrainerProfilePage() {
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                             {/* Left Column - Personal Info */}
                             <div className="lg:col-span-2 space-y-8">
-                                <div className="bg-white rounded-[32px] border border-slate-100 shadow-xl shadow-slate-200/30 p-10">
-                                    <div className="flex items-center gap-4 mb-8">
+                                <div className="bg-white rounded-[32px] border border-slate-100 shadow-sm p-8">
+                                    <div className="flex items-center gap-4 mb-6">
                                         <div className="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center text-slate-600">
                                             <User className="w-6 h-6" />
                                         </div>
                                         <h3 className="text-xl font-playfair font-semibold text-slate-900">Personal Information</h3>
                                     </div>
 
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
                                         <div className="space-y-2">
                                             <label className="text-xs font-bold text-slate-400 uppercase tracking-wider ml-1">Full Name</label>
                                             {isEditing ? (
@@ -197,8 +197,8 @@ export default function TrainerProfilePage() {
                                     </div>
                                 </div>
 
-                                <div className="bg-white rounded-[32px] border border-slate-100 shadow-xl shadow-slate-200/30 p-10">
-                                    <div className="flex items-center gap-4 mb-8">
+                                <div className="bg-white rounded-[32px] border border-slate-100 shadow-sm p-8">
+                                    <div className="flex items-center gap-4 mb-6">
                                         <div className="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center text-slate-600">
                                             <Award className="w-6 h-6" />
                                         </div>
@@ -222,7 +222,7 @@ export default function TrainerProfilePage() {
                                             </div>
                                         </div>
 
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
                                             <div className="flex items-center gap-6 p-6 bg-slate-50/30 rounded-[32px] border border-slate-100/50 group hover:bg-slate-50 transition-colors">
                                                 <div className="w-14 h-14 bg-white rounded-xl flex items-center justify-center text-slate-600 shadow-sm transform group-hover:scale-110 transition-transform duration-500">
                                                     <Zap className="w-7 h-7" />

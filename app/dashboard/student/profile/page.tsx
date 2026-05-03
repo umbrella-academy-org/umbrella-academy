@@ -48,17 +48,18 @@ export default function StudentProfilePage() {
         role: 'Software Engineering Trainee',
         phone: '+250 788 000 000',
         location: 'Kigali, Rwanda',
-        engagementScore: 88,
+        engagementScore: 92,
+        bio: 'Dedicated trainee focusing on live collaborative sessions and practical software implementation within the Umbrella Tech Field.',
         skills: [
-            { name: 'React Architecture', level: 'Advanced', color: 'bg-yellow-600' },
-            { name: 'Node.js Systems', level: 'Intermediate', color: 'bg-yellow-600' },
-            { name: 'TypeScript', level: 'Intermediate', color: 'bg-yellow-600' },
-            { name: 'UI/UX Principles', level: 'Advanced', color: 'bg-yellow-600' },
-        ],
+            { name: 'React & Next.js', level: 'Advanced' },
+            { name: 'TypeScript', level: 'Intermediate' },
+            { name: 'Node.js', level: 'Intermediate' },
+            { name: 'UI/UX Design', level: 'Basic' }
+        ]
     };
 
     // Derived from user context
-    const name = user?.firstName && user?.lastName ? `${user.firstName} ${user.lastName}` : 'Jane Mukamana';
+    const name = user?.firstName && user?.lastName ? `${user.firstName} ${user.lastName}` : 'John Doe';
     const email = user?.email || 'jane.mukamana@student.umbrella.rw';
     const field = 'Tech Field';
     const joinDate = user?.createdAt ? new Date(user.createdAt).toLocaleDateString() : 'Sep 2024';
@@ -165,7 +166,7 @@ export default function StudentProfilePage() {
                             {/* Bio Block */}
                             <div className="bg-white rounded-[32px] border border-slate-100 shadow-sm p-8 space-y-4">
                                 <h3 className="text-xs font-black text-slate-400">About Me</h3>
-                                <p className="text-sm font-medium text-slate-600 leading-relaxed italic">Dedicated trainee focusing on live collaborative sessions and practical software implementation within the Umbrella Tech Field.</p>
+                                <p className="text-sm font-medium text-slate-600 leading-relaxed italic">{profileData.bio}</p>
                                 <div className="flex gap-2 pt-2">
                                     <SocialLink icon={<Linkedin className="w-4 h-4" />} />
                                     <SocialLink icon={<Github className="w-4 h-4" />} />
