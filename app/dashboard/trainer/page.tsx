@@ -190,58 +190,58 @@ export default function TrainerDashboard() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="mb-10 relative pt-[120px] pb-[100px] px-10 bg-[#FDF9F2] rounded-[40px] overflow-hidden border border-slate-100"
+              className="mb-10 relative pt-[80px] pb-[60px] px-8 bg-slate-900 rounded-[32px] overflow-hidden border border-slate-100"
             >
                {/* Floating Decorative Outline Icons */}
                <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.3]">
-                  <motion.div animate={{ y: [0, -10, 0], rotate: [0, 5, 0] }} transition={{ duration: 6, repeat: Infinity }} className="absolute top-20 left-10 text-slate-800">
-                    <Star className="w-12 h-12" strokeWidth={1} />
+                  <motion.div animate={{ y: [0, -10, 0], rotate: [0, 5, 0] }} transition={{ duration: 6, repeat: Infinity }} className="absolute top-20 left-10 text-white">
+                    <Star className="w-8 h-8" strokeWidth={1} />
                   </motion.div>
-                  <motion.div animate={{ y: [0, 15, 0], rotate: [0, -10, 0] }} transition={{ duration: 8, repeat: Infinity }} className="absolute top-40 right-20 text-slate-800">
-                    <Compass className="w-16 h-16" strokeWidth={1} />
+                  <motion.div animate={{ y: [0, 15, 0], rotate: [0, -10, 0] }} transition={{ duration: 8, repeat: Infinity }} className="absolute top-40 right-20 text-white">
+                    <Compass className="w-12 h-12" strokeWidth={1} />
                   </motion.div>
-                  <motion.div animate={{ y: [0, -15, 0], rotate: [0, 15, 0] }} transition={{ duration: 7, repeat: Infinity }} className="absolute bottom-40 left-32 text-slate-800">
-                    <Book className="w-14 h-14" strokeWidth={1} />
+                  <motion.div animate={{ y: [0, -15, 0], rotate: [0, 15, 0] }} transition={{ duration: 7, repeat: Infinity }} className="absolute bottom-40 left-32 text-white">
+                    <Book className="w-10 h-10" strokeWidth={1} />
                   </motion.div>
-                  <motion.div animate={{ y: [0, 10, 0], rotate: [0, -5, 0] }} transition={{ duration: 5, repeat: Infinity }} className="absolute bottom-20 right-40 text-slate-800">
-                    <Clock className="w-20 h-20" strokeWidth={1} />
+                  <motion.div animate={{ y: [0, 10, 0], rotate: [0, -5, 0] }} transition={{ duration: 5, repeat: Infinity }} className="absolute bottom-20 right-40 text-white">
+                    <Clock className="w-14 h-14" strokeWidth={1} />
                   </motion.div>
-                  <motion.div animate={{ rotate: [0, 20, 0] }} transition={{ duration: 10, repeat: Infinity }} className="absolute top-32 lg:left-1/3 text-slate-800 opacity-50">
-                    <Sun className="w-10 h-10" strokeWidth={1} />
+                  <motion.div animate={{ rotate: [0, 20, 0] }} transition={{ duration: 10, repeat: Infinity }} className="absolute top-32 lg:left-1/3 text-white opacity-50">
+                    <Sun className="w-8 h-8" strokeWidth={1} />
                   </motion.div>
                </div>
                
                <div className="relative z-10">
-                  <div className="flex items-center gap-3 mb-4">
-                     <Sparkles className="text-primary w-5 h-5" />
-                     <span className="text-primary text-[11px] font-bold uppercase tracking-[0.3em]">Knowledge Architect</span>
+                  <div className="flex items-center gap-3 mb-3">
+                     <Sparkles className="text-primary w-4 h-4" />
+                     <span className="text-primary text-[10px] font-bold uppercase tracking-[0.3em]">Knowledge Architect</span>
                   </div>
-                  <h2 className="text-4xl lg:text-5xl font-playfair font-semibold text-slate-900 mb-6 leading-tight">
+                  <h2 className="text-3xl lg:text-4xl font-playfair font-semibold text-white mb-4 leading-tight">
                      Good Morning, <br />
                      <span className="relative inline-block px-1">
                         <span className="relative z-20">{user.firstName} {user.lastName}</span>
-                        <span className="absolute z-10 inset-0 -top-1 -bottom-1 -left-1 -right-1 bg-primary/30 rounded-[60px] transform -rotate-1"></span>
+                        <span className="absolute z-10 inset-0 -top-1 -bottom-1 -left-1 -right-1 bg-primary/30 rounded-[40px] transform -rotate-1"></span>
                      </span>
                   </h2>
-                  <p className="text-slate-600 font-light max-w-lg leading-relaxed text-[15px]">
+                  <p className="text-white/80 font-light max-w-lg leading-relaxed text-sm">
                      Empowering {trainerStudents.length} high-potential students through strategic mentorship and pedagogical excellence.
                   </p>
                   
-                  <div className="flex flex-col sm:flex-row gap-4 mt-8">
+                  <div className="flex flex-col sm:flex-row gap-3 mt-6">
                      <button 
                         onClick={() => navigate('/dashboard/trainer/roadmaps/create')}
-                        className="px-8 py-4 bg-primary text-slate-900 rounded-full font-bold text-[14px] hover:shadow-xl hover:shadow-primary/20 hover:-translate-y-1 transition-all flex items-center justify-center gap-2"
+                        className="px-6 py-3 bg-primary text-slate-900 rounded-full font-bold text-sm hover:shadow-xl hover:shadow-primary/20 hover:-translate-y-1 transition-all flex items-center justify-center gap-2"
                      >
                         New Roadmap Architecture
-                        <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                        <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                      </button>
-                     <div className="bg-white border border-slate-200 rounded-full px-6 py-4 flex items-center justify-between shadow-sm">
+                     <div className="bg-white/10 backdrop-blur border border-white/20 rounded-full px-4 py-3 flex items-center justify-between shadow-sm">
                         <div>
-                           <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Queue Status</p>
-                           <p className="text-slate-900 font-semibold text-sm">{pendingProjects} Pending Audits</p>
+                           <p className="text-[10px] font-bold text-white/60 uppercase tracking-widest mb-1">Queue Status</p>
+                           <p className="text-white font-semibold text-sm">{pendingProjects} Pending Audits</p>
                         </div>
-                        <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
-                           <Clock className="text-primary w-5 h-5" />
+                        <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
+                           <Clock className="text-primary w-4 h-4" />
                         </div>
                      </div>
                   </div>
@@ -256,16 +256,16 @@ export default function TrainerDashboard() {
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12"
             >
               {stats.map((stat) => (
-                <div key={stat.label} className="bg-white border border-slate-100 rounded-[32px] p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all group">
+                <div key={stat.label} className="bg-white border border-slate-100 rounded-[32px] p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all group">
                   <div className="flex items-center justify-between mb-4">
-                    <div className={`w-14 h-14 ${stat.bg} rounded-2xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110`}>
-                      <stat.icon className={`w-7 h-7 ${stat.color}`} />
+                    <div className={`w-12 h-12 ${stat.bg} rounded-2xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110`}>
+                      <stat.icon className={`w-6 h-6 ${stat.color}`} />
                     </div>
-                    <CheckCircle className="text-slate-50 w-8 h-8 group-hover:text-primary/10 transition-colors" />
+                    <CheckCircle className="text-slate-50 w-6 h-6 group-hover:text-primary/10 transition-colors" />
                   </div>
                   <p className="text-[11px] text-slate-400 font-bold uppercase tracking-[0.2em]">{stat.label}</p>
                   <div className="flex items-baseline gap-1 mt-1">
-                     <p className="text-3xl font-playfair font-semibold text-slate-900">{stat.value}</p>
+                     <p className="text-2xl font-playfair font-semibold text-slate-900">{stat.value}</p>
                      {stat.suffix && <span className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">{stat.suffix}</span>}
                   </div>
                 </div>
@@ -292,10 +292,10 @@ export default function TrainerDashboard() {
                    <button
                      key={action.title}
                      onClick={() => navigate(action.href)}
-                     className="bg-white border border-slate-100 p-8 rounded-[40px] text-left hover:border-primary/20 hover:shadow-2xl hover:shadow-primary/5 transition-all group relative overflow-hidden"
+                     className="bg-white border border-slate-100 p-6 rounded-[32px] text-left hover:border-primary/20 hover:shadow-xl hover:shadow-primary/5 transition-all group relative overflow-hidden"
                    >
-                     <div className={`w-14 h-14 ${action.color} rounded-[20px] flex items-center justify-center mb-6 shadow-xl shadow-black/5 transition-transform group-hover:scale-110 group-hover:rotate-3`}>
-                        <action.icon className="w-7 h-7 text-white" />
+                     <div className={`w-12 h-12 ${action.color} rounded-[16px] flex items-center justify-center mb-4 shadow-lg shadow-black/5 transition-transform group-hover:scale-110 group-hover:rotate-3`}>
+                        <action.icon className="w-6 h-6 text-white" />
                      </div>
                      <h3 className="text-xl font-playfair font-semibold text-slate-900 mb-2 leading-tight">{action.title}</h3>
                      <p className="text-[13px] text-slate-500 font-light leading-relaxed">{action.description}</p>

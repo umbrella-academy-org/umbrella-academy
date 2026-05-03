@@ -90,7 +90,7 @@ export default function GuardianDashboard() {
 
   if (isLoading) {
     return (
-      <div className="flex h-screen bg-[#F8FAFC]">
+      <div className="flex h-screen bg-[#FDF9F2]">
         <Sidebar activeItem="Dashboard" userType={UserRole.GUARDIAN} />
         <div className="flex-1 flex flex-col">
           <div className="h-20 bg-white border-b border-slate-100 animate-pulse"></div>
@@ -132,7 +132,7 @@ export default function GuardianDashboard() {
   };
 
   return (
-    <div className="flex h-screen bg-[#F8FAFC]">
+    <div className="flex h-screen bg-[#FDF9F2]">
       <Sidebar activeItem="Dashboard" userType={UserRole.GUARDIAN} />
 
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
@@ -145,7 +145,7 @@ export default function GuardianDashboard() {
                 <span className="text-slate-300">•</span>
                 <span className="text-[12px] font-medium text-slate-400 italic">Account Overview</span>
               </div>
-              <h1 className="text-2xl font-bold text-slate-900">
+              <h1 className="text-2xl font-playfair font-bold text-slate-900">
                 Welcome, {user?.firstName || 'Guardian'}
               </h1>
             </div>
@@ -156,7 +156,7 @@ export default function GuardianDashboard() {
                   <input 
                     type="text" 
                     placeholder="Search students..." 
-                    className="pl-10 pr-4 py-2 bg-slate-100 border-none rounded-xl text-sm focus:ring-2 focus:ring-primary/20 transition-all w-64"
+                    className="pl-10 pr-4 py-2 bg-slate-50 border-2 border-slate-50 rounded-xl text-sm focus:bg-white focus:border-primary/20 focus:ring-0 outline-none transition-all w-64"
                   />
                </div>
             </div>
@@ -167,22 +167,22 @@ export default function GuardianDashboard() {
           <div className="max-w-7xl mx-auto">
             
             {error && (
-              <div className="mb-8 flex items-center gap-3 text-red-600 bg-red-50 p-4 rounded-2xl border border-red-100">
+              <div className="mb-8 flex items-center gap-3 text-red-600 bg-red-50 p-4 rounded-full border border-red-100">
                 <AlertCircle size={20} />
                 <span className="font-medium text-sm">{error}</span>
               </div>
             )}
 
             {students.length === 0 ? (
-              <div className="bg-white rounded-[40px] p-16 text-center border border-slate-100 shadow-sm">
-                <div className="w-20 h-20 bg-slate-50 rounded-3xl flex items-center justify-center mx-auto mb-6">
-                  <Users className="w-10 h-10 text-slate-300" />
+              <div className="bg-white rounded-[32px] p-12 text-center border border-slate-100 shadow-sm">
+                <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <Users className="w-8 h-8 text-slate-300" />
                 </div>
-                <h2 className="text-2xl font-bold text-slate-900 mb-2">No Students Linked</h2>
-                <p className="text-slate-500 max-w-sm mx-auto font-light leading-relaxed">
+                <h2 className="text-xl font-playfair font-bold text-slate-900 mb-2">No Students Linked</h2>
+                <p className="text-slate-500 max-w-sm mx-auto font-light leading-relaxed text-sm">
                   Your guardian account is ready, but no students are linked yet. Students can add your email during their registration.
                 </p>
-                <button className="mt-8 px-6 py-3 bg-slate-900 text-white rounded-xl font-bold text-sm hover:bg-slate-800 transition-all">
+                <button className="mt-6 px-6 py-3 bg-slate-900 text-white rounded-full font-bold text-sm hover:bg-slate-800 transition-all">
                    How it works
                 </button>
               </div>
@@ -196,20 +196,20 @@ export default function GuardianDashboard() {
                     <button
                       key={student._id}
                       onClick={() => setSelectedStudent(student)}
-                      className={`w-full p-5 rounded-3xl border text-left transition-all duration-300 relative overflow-hidden group ${
+                      className={`w-full p-4 rounded-2xl border text-left transition-all duration-300 relative overflow-hidden group ${
                         selectedStudent?._id === student._id
                         ? 'bg-slate-900 border-slate-800 shadow-xl shadow-slate-900/10'
                         : 'bg-white border-slate-100 hover:border-primary/20'
                       }`}
                     >
-                      <div className="flex items-center gap-4 relative z-10">
-                        <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-transform group-hover:scale-105 ${
+                      <div className="flex items-center gap-3 relative z-10">
+                        <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-transform group-hover:scale-105 ${
                           selectedStudent?._id === student._id ? 'bg-primary/20 text-primary' : 'bg-slate-50 text-slate-400'
                         }`}>
-                          <UserCircle size={24} />
+                          <UserCircle size={20} />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <h4 className={`font-bold truncate ${selectedStudent?._id === student._id ? 'text-white' : 'text-slate-900'}`}>
+                          <h4 className={`font-bold truncate text-sm ${selectedStudent?._id === student._id ? 'text-white' : 'text-slate-900'}`}>
                             {student.firstName} {student.lastName}
                           </h4>
                           <div className="flex items-center gap-2 mt-0.5">
@@ -241,27 +241,27 @@ export default function GuardianDashboard() {
                   <div className="lg:col-span-8 space-y-6">
                     
                     {/* Student Profile Card */}
-                    <div className="bg-white rounded-[40px] p-8 border border-slate-100 shadow-sm">
-                      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
-                         <div className="flex items-center gap-5">
-                            <div className="w-20 h-20 bg-primary/10 rounded-[28px] flex items-center justify-center text-primary border border-primary/20 relative">
-                               <GraduationCap size={32} />
-                               <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-white rounded-full border-4 border-[#F8FAFC] flex items-center justify-center">
+                    <div className="bg-white rounded-[32px] p-6 border border-slate-100 shadow-sm">
+                      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                         <div className="flex items-center gap-4">
+                            <div className="w-16 h-16 bg-primary/10 rounded-[20px] flex items-center justify-center text-primary border border-primary/20 relative">
+                               <GraduationCap size={24} />
+                               <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-white rounded-full border-4 border-[#FDF9F2] flex items-center justify-center">
                                   <div className="w-2 h-2 bg-green-500 rounded-full" />
                                </div>
                             </div>
                             <div>
-                               <h2 className="text-2xl font-black text-slate-900">{selectedStudent.firstName} {selectedStudent.lastName}</h2>
-                               <p className="text-slate-500 font-medium">{selectedStudent.email}</p>
+                               <h2 className="text-xl font-black text-slate-900">{selectedStudent.firstName} {selectedStudent.lastName}</h2>
+                               <p className="text-slate-500 font-medium text-sm">{selectedStudent.email}</p>
                             </div>
                          </div>
-                         <div className={`px-4 py-2 rounded-2xl text-xs font-bold uppercase tracking-widest flex items-center gap-2 ${getSubscriptionStatus(selectedStudent).bg} ${getSubscriptionStatus(selectedStudent).color}`}>
+                         <div className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest flex items-center gap-2 ${getSubscriptionStatus(selectedStudent).bg} ${getSubscriptionStatus(selectedStudent).color}`}>
                             <div className={`w-2 h-2 rounded-full ${getSubscriptionStatus(selectedStudent).color.replace('text', 'bg')}`} />
                             Subscription {getSubscriptionStatus(selectedStudent).label}
                          </div>
                       </div>
 
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                         {[
                           { label: 'Progress', value: `${selectedStudent.progress}%`, icon: Map, color: 'text-blue-500', bg: 'bg-blue-50' },
                           { label: 'Milestones', value: `${selectedStudent.roadmap?.milestones?.filter(m => m.status === RoadmapStepStatus.COMPLETED).length || 0}/${selectedStudent.roadmap?.milestones?.length || 0}`, icon: CheckCircle, color: 'text-green-500', bg: 'bg-green-50' },

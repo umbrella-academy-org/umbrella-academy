@@ -128,10 +128,10 @@ export default function ChatInterface({ userType }: { userType: string }) {
     return (
         <div className="flex h-full bg-white rounded-[40px] border border-slate-100 shadow-xl shadow-slate-200/50 overflow-hidden min-h-[600px] relative">
             {/* Sidebar - Contact List */}
-            <div className="w-full md:w-96 border-r border-slate-100 flex flex-col bg-[#FDFDFF]">
-                <div className="p-8 border-b border-slate-50">
+            <div className="w-full md:w-96 border-r border-slate-100 flex flex-col bg-[#FDF9F2]">
+                <div className="p-8 border-b border-slate-100">
                     <div className="flex items-center justify-between mb-6">
-                       <h2 className="text-2xl font-black text-slate-900 tracking-tight">Messages</h2>
+                       <h2 className="text-2xl font-playfair font-black text-slate-900 tracking-tight">Messages</h2>
                        <div className="w-10 h-10 bg-slate-100 rounded-2xl flex items-center justify-center text-slate-400">
                           <MessageSquare size={18} />
                        </div>
@@ -225,7 +225,7 @@ export default function ChatInterface({ userType }: { userType: string }) {
                                     </div>
                                 </div>
                                 <div>
-                                    <h3 className="font-black text-slate-900 text-[15px] tracking-tight">
+                                    <h3 className="font-playfair font-black text-slate-900 text-[15px] tracking-tight">
                                         {activeContact.firstName} {activeContact.lastName}
                                     </h3>
                                     <div className="flex items-center gap-2 mt-0.5">
@@ -249,7 +249,7 @@ export default function ChatInterface({ userType }: { userType: string }) {
                         </div>
 
                         {/* Messages Area */}
-                        <div className="flex-1 overflow-y-auto p-8 space-y-6 custom-scrollbar bg-slate-50/30">
+                        <div className="flex-1 overflow-y-auto p-8 space-y-6 custom-scrollbar bg-[#FDF9F2]">
                             {messagesLoading ? (
                                 <div className="space-y-6">
                                     {[1, 2, 3].map((i) => (
@@ -263,7 +263,7 @@ export default function ChatInterface({ userType }: { userType: string }) {
                                     <div className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mb-4">
                                        <Smile size={32} className="text-slate-300" />
                                     </div>
-                                    <p className="text-sm font-black text-slate-400 uppercase tracking-[0.2em]">Secure Channel Established</p>
+                                    <p className="text-sm font-playfair font-black text-slate-400 uppercase tracking-[0.2em]">Secure Channel Established</p>
                                     <p className="text-xs text-slate-300 mt-2 italic">Waiting for initial transmission...</p>
                                 </div>
                             ) : (

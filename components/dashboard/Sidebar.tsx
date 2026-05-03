@@ -60,7 +60,13 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
         return [
           { icon: <Home className="w-5 h-5" />, label: 'Home', href: '/dashboard/student', active: true },
           { icon: <BookOpen className="w-5 h-5" />, label: 'My Roadmap', href: '/dashboard/student/roadmap' },
-          { icon: <Calendar className="w-5 h-5" />, label: 'My Bookings', href: '/dashboard/student/bookings' },
+          { icon: <Award className="w-5 h-5" />, label: 'Projects', href: '/dashboard/student/projects' },
+          { icon: <User className="w-5 h-5" />, label: 'Portfolio', href: '/dashboard/student/portfolio' },
+          { icon: <Calendar className="w-5 h-5" />, label: 'Calendar', href: '/dashboard/student/calendar' },
+          { icon: <Award className="w-5 h-5" />, label: 'Certificates', href: '/dashboard/student/certificates' },
+          { icon: <User className="w-5 h-5" />, label: 'Profile', href: '/dashboard/student/profile' },
+          { icon: <Settings className="w-5 h-5" />, label: 'Settings', href: '/dashboard/student/settings' },
+          { icon: <MessageSquare className="w-5 h-5" />, label: 'Chat', href: '/dashboard/student/chat' },
           { icon: <CreditCard className="w-5 h-5" />, label: 'Subscription', href: '/dashboard/student/subscription' },
         ];
     }

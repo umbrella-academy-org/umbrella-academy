@@ -17,7 +17,7 @@ function ChatPageContent() {
             {roadmap && (
                 <div className="fixed right-0 w-fit z-50 p-4 bg-transparent">
                     <Link href="/post-signup/roadmap">
-                        <button className="px-4 py-2 text-sm font-medium text-white bg-yellow-600 rounded-2xl hover:bg-yellow-700">
+                        <button className="px-4 py-2 text-sm font-medium text-white bg-slate-900 rounded-full hover:bg-slate-800 shadow-md">
                             Return to Roadmap Creation
                         </button>
                     </Link>
@@ -30,11 +30,11 @@ function ChatPageContent() {
 
 export default function StudentChatPage() {
     return (
-        <div className="flex h-screen bg-white">
+        <div className="flex h-screen bg-[#FDF9F2]">
             <Sidebar activeItem="Chat" userType={UserRole.STUDENT} />
 
             <div className="flex-1 flex flex-col min-w-0">
-                <main className="flex-1 overflow-hidden bg-gray-50/30 relative">
+                <main className="flex-1 overflow-hidden relative">
                     <Suspense fallback={<ChatInterface userType={UserRole.STUDENT} />}>
                         <ChatPageContent />
                     </Suspense>

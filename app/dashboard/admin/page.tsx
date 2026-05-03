@@ -76,7 +76,7 @@ export default function UmbrellaAdminDashboard() {
   ];
 
   return (
-    <div className="flex h-screen bg-[#F8FAFC]">
+    <div className="flex h-screen bg-[#FDF9F2]">
       <Sidebar activeItem="Dashboard" userType={UserRole.ADMIN} />
 
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
@@ -85,11 +85,11 @@ export default function UmbrellaAdminDashboard() {
           <div className="max-w-7xl mx-auto flex items-center justify-between">
             <div>
               <div className="flex items-center gap-2 mb-1">
-                <span className="text-[12px] font-bold text-red-500 bg-red-50 px-2 py-0.5 rounded-full uppercase tracking-wider flex items-center gap-1">
-                  <div className="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse" /> Admin Level 10
+                <span className="text-[12px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full uppercase tracking-wider flex items-center gap-1">
+                  <div className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse" /> Admin Level 10
                 </span>
               </div>
-              <h1 className="text-2xl font-bold text-slate-900">
+              <h1 className="text-2xl font-playfair font-bold text-slate-900">
                 Command Center
               </h1>
             </div>
@@ -110,25 +110,25 @@ export default function UmbrellaAdminDashboard() {
           <div className="max-w-7xl mx-auto">
             
             {/* Real-time Revenue Card */}
-            <div className="mb-10 bg-slate-900 rounded-[40px] p-10 relative overflow-hidden group">
-               <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 blur-[120px] rounded-full -mr-48 -mt-48 transition-transform duration-1000 group-hover:scale-110" />
+            <div className="mb-10 bg-slate-900 rounded-[32px] p-8 relative overflow-hidden group">
+               <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-primary/10 blur-[80px] rounded-full -mr-32 -mt-32 transition-transform duration-1000 group-hover:scale-110" />
                
-               <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+               <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
                   <div className="lg:col-span-7">
-                     <p className="text-primary text-xs font-bold uppercase tracking-[0.3em] mb-3">Revenue Performance</p>
-                     <h2 className="text-5xl font-black text-white mb-4">
-                        {totalRevenue.toLocaleString()} <span className="text-2xl font-light text-slate-500">RWF</span>
+                     <p className="text-primary text-xs font-bold uppercase tracking-[0.3em] mb-2">Revenue Performance</p>
+                     <h2 className="text-4xl font-playfair font-black text-white mb-3">
+                        {totalRevenue.toLocaleString()} <span className="text-xl font-light text-slate-500">RWF</span>
                      </h2>
-                     <p className="text-slate-400 font-light max-w-md leading-relaxed">
+                     <p className="text-slate-400 font-light max-w-md leading-relaxed text-sm">
                         Aggregate revenue generated through orientation fees and monthly subscriptions across all student tiers.
                      </p>
                   </div>
-                  <div className="lg:col-span-5 flex flex-col gap-3">
-                     <button className="w-full py-4 bg-primary text-white rounded-2xl font-bold text-sm hover:bg-primary/90 transition-all flex items-center justify-center gap-2">
+                  <div className="lg:col-span-5 flex flex-col gap-2">
+                     <button className="w-full py-3 bg-primary text-white rounded-full font-bold text-sm hover:bg-primary/90 transition-all flex items-center justify-center gap-2">
                         Detailed Financial Audit
-                        <ArrowRight size={18} />
+                        <ArrowRight size={16} />
                      </button>
-                     <button className="w-full py-4 bg-white/5 border border-white/10 text-white rounded-2xl font-bold text-sm hover:bg-white/10 transition-all">
+                     <button className="w-full py-3 bg-white/5 border border-white/10 text-white rounded-full font-bold text-sm hover:bg-white/10 transition-all">
                         Payout Management
                      </button>
                   </div>
@@ -150,7 +150,7 @@ export default function UmbrellaAdminDashboard() {
 
             {/* Admin Management Grid */}
             <div className="mb-12">
-               <h2 className="text-xl font-bold text-slate-900 mb-8 flex items-center gap-2">
+               <h2 className="text-xl font-playfair font-bold text-slate-900 mb-8 flex items-center gap-2">
                  System Management
                  <div className="h-px bg-slate-100 flex-1 ml-4" />
                </h2>
@@ -160,17 +160,17 @@ export default function UmbrellaAdminDashboard() {
                    <button
                      key={action.title}
                      onClick={() => navigate(action.href)}
-                     className="bg-white border border-slate-100 p-8 rounded-[40px] text-left hover:border-primary/20 hover:shadow-2xl hover:shadow-primary/5 transition-all group relative overflow-hidden"
+                     className="bg-white border border-slate-100 p-6 rounded-[32px] text-left hover:border-primary/20 hover:shadow-xl hover:shadow-primary/5 transition-all group relative overflow-hidden"
                    >
-                     <div className="flex items-center justify-between mb-6">
-                        <div className={`w-14 h-14 ${action.color} rounded-[20px] flex items-center justify-center shadow-lg shadow-black/5`}>
-                           <action.icon className="w-7 h-7 text-white" />
+                     <div className="flex items-center justify-between mb-4">
+                        <div className={`w-12 h-12 ${action.color} rounded-[16px] flex items-center justify-center shadow-lg shadow-black/5`}>
+                           <action.icon className="w-6 h-6 text-white" />
                         </div>
-                        <div className="w-10 h-10 bg-slate-50 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                           <ArrowRight size={20} className="text-slate-900" />
+                        <div className="w-8 h-8 bg-slate-50 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                           <ArrowRight size={16} className="text-slate-900" />
                         </div>
                      </div>
-                     <h3 className="text-xl font-bold text-slate-900 mb-2">{action.title}</h3>
+                     <h3 className="text-lg font-bold text-slate-900 mb-2">{action.title}</h3>
                      <p className="text-sm text-slate-500 font-light leading-relaxed">{action.desc}</p>
                    </button>
                  ))}
@@ -178,25 +178,25 @@ export default function UmbrellaAdminDashboard() {
             </div>
 
             {/* Infrastructure Widget */}
-            <div className="bg-slate-50 rounded-[40px] p-8 border border-slate-200 flex flex-col md:flex-row items-center justify-between gap-8">
-               <div className="flex items-center gap-6">
-                  <div className="w-16 h-16 bg-white rounded-3xl shadow-sm flex items-center justify-center text-primary border border-slate-100">
-                     <Zap size={32} />
+            <div className="bg-slate-50 rounded-[32px] p-6 border border-slate-200 flex flex-col md:flex-row items-center justify-between gap-6">
+               <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-white rounded-2xl shadow-sm flex items-center justify-center text-primary border border-slate-100">
+                     <Zap size={24} />
                   </div>
                   <div>
-                     <h4 className="text-lg font-bold text-slate-900">Infrastructure Health</h4>
+                     <h4 className="text-base font-playfair font-bold text-slate-900">Infrastructure Health</h4>
                      <p className="text-slate-500 text-sm font-light italic">All services are operating at maximum efficiency. 99.9% uptime maintained.</p>
                   </div>
                </div>
                <div className="flex items-center gap-4">
                   <div className="text-right">
                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Active Instances</p>
-                     <p className="text-lg font-black text-slate-900">14 Nodes</p>
+                     <p className="text-base font-black text-slate-900">14 Nodes</p>
                   </div>
-                  <div className="h-10 w-px bg-slate-200" />
+                  <div className="h-8 w-px bg-slate-200" />
                   <div className="text-right">
                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Latency</p>
-                     <p className="text-lg font-black text-slate-900 text-green-500">24ms</p>
+                     <p className="text-base font-black text-slate-900 text-green-500">24ms</p>
                   </div>
                </div>
             </div>

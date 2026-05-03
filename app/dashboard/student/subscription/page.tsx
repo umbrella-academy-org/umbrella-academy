@@ -8,12 +8,12 @@ import BillingInvoices from '@/components/subscription/BillingInvoices';
 
 export default function SubscriptionPage() {
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen bg-[#FDF9F2]">
       <Sidebar activeItem="Subscription" />
 
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
         <main className="flex-1 overflow-auto">
-          <div className="p-4 lg:p-6 max-w-6xl mx-auto">
+          <div className="p-8 max-w-6xl mx-auto">
             {/* Header */}
             <SubscriptionHeader />
 
