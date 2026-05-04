@@ -82,7 +82,7 @@ const StatusBadge = ({ isActive, isVerified }: { isActive: boolean; isVerified: 
 };
 
 export default function UmbrellaAdminUsersPage() {
-  const [selectedTab, setSelectedTab] = useState<'students' | 'trainers' | 'guardians' | 'admins'>('students');
+  const [selectedTab, setSelectedTab] = useState<'students' | 'trainers' | 'guardians' | 'admins' | 'sales_managers'>('students');
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<'all' | 'active' | 'inactive' | 'pending'>('all');
 
@@ -104,6 +104,7 @@ export default function UmbrellaAdminUsersPage() {
       case 'students': filtered = users.filter(u => u.role === UserRole.STUDENT); break;
       case 'trainers': filtered = users.filter(u => u.role === UserRole.TRAINER); break;
       case 'guardians': filtered = users.filter(u => u.role === UserRole.GUARDIAN); break;
+      case 'sales_managers': filtered = users.filter(u => u.role === UserRole.SALES_MANAGER); break;
       case 'admins': filtered = users.filter(u => u.role === UserRole.ADMIN); break;
     }
     if (searchQuery) {
@@ -181,6 +182,7 @@ export default function UmbrellaAdminUsersPage() {
     { key: 'trainers', label: 'Trainers', count: trainers.length, icon: Users },
     { key: 'guardians', label: 'Guardians', count: users.filter(u => u.role === UserRole.GUARDIAN).length, icon: UserCircle },
     { key: 'admins', label: 'Admins', count: users.filter(u => u.role === UserRole.ADMIN).length, icon: Shield },
+    { key: 'sales_managers', label: 'Sales Managers', count: users.filter(u => u.role === UserRole.SALES_MANAGER).length, icon: UserCheck },
   ] as const;
 
   return (
@@ -203,7 +205,7 @@ export default function UmbrellaAdminUsersPage() {
             <div className="flex items-center gap-3">
               <button
                 onClick={() => { setShowCreateModal(true); setForm({ ...EMPTY_FORM, role: UserRole.SALES_MANAGER }); setLocalError(null); setSuccess(false); }}
-                className="px-6 py-2.5 bg-blue-600 text-white rounded-xl font-bold text-[14px] hover:bg-blue-700 transition-all shadow-lg shadow-blue-600/10 flex items-center gap-2 group"
+                className="px-6 py-2.5 bg-primary text-white rounded-2xl font-bold text-[14px] hover:bg-primary/90 transition-all shadow-lg shadow-blue-600/10 flex items-center gap-2 group"
               >
                 <UserPlus className="w-4 h-4 text-white" />
                 Add Sales Manager
