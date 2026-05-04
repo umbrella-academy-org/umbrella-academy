@@ -84,9 +84,25 @@ export default function UmbrellaAdminSystemPage() {
         <main className="flex-1 p-8 overflow-y-auto">
           <div className="max-w-7xl mx-auto">
             
+            {/* Section Header with Badge */}
+            <div className="mb-10">
+              <div className="relative inline-flex items-center justify-center mb-6">
+                <div className="absolute -top-[14px] -left-[14px] w-9 h-9 pointer-events-none text-primary">
+                  <svg viewBox="0 0 40 40" strokeWidth="4" stroke="currentColor" fill="none" strokeLinecap="round">
+                    <line x1="8" y1="8" x2="14" y2="14" />
+                    <line x1="2" y1="20" x2="10" y2="20" />
+                    <line x1="20" y1="2" x2="20" y2="10" />
+                  </svg>
+                </div>
+                <span className="text-sm font-semibold tracking-[0.5px] text-primary bg-primary/20 px-5 py-2 rounded-full shadow-sm border border-primary/10">
+                  Infrastructure Health
+                </span>
+              </div>
+            </div>
+
             {/* Error Notification */}
             {error && (
-               <div className="mb-10 p-6 bg-red-50 border border-red-100 rounded-[32px] flex items-center justify-between shadow-sm">
+               <div className="mb-10 p-6 bg-red-50 border border-red-100 rounded-[24px] flex items-center justify-between shadow-[0_20px_40px_rgba(0,0,0,0.06)]">
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 bg-red-100 rounded-2xl flex items-center justify-center">
                        <AlertTriangle className="text-red-600" />
@@ -104,20 +120,17 @@ export default function UmbrellaAdminSystemPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
               {isLoading
                 ? Array.from({ length: 4 }).map((_, i) => (
-                    <div key={i} className="h-32 bg-white border border-slate-100 rounded-[32px] animate-pulse" />
+                    <div key={i} className="h-32 bg-white border border-slate-100 rounded-[24px] animate-pulse" />
                   ))
                 : metrics.map((metric, index) => {
                     const Icon = ICON_MAP[metric.name] ?? Server;
                     return (
-                      <div key={index} className="bg-white border border-slate-100 rounded-[32px] p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all group">
-                         <div className="flex items-center justify-between mb-4">
-                            <div className={`w-12 h-12 ${METRIC_BG[metric.name] || 'bg-slate-50'} rounded-2xl flex items-center justify-center transition-transform group-hover:scale-110`}>
-                               <Icon className={`w-6 h-6 ${METRIC_COLORS[metric.name] || 'text-slate-400'}`} />
-                            </div>
-                            <Activity className="w-4 h-4 text-slate-100 group-hover:text-primary transition-colors" />
+                      <div key={index} className="bg-white border border-slate-100 rounded-[24px] p-8 shadow-[0_20px_40px_rgba(0,0,0,0.06)] hover:shadow-[0_25px_45px_rgba(0,0,0,0.1)] hover:-translate-y-2 hover:scale-[1.02] transition-all duration-300 group">
+                         <div className={`w-12 h-12 ${METRIC_BG[metric.name] || 'bg-slate-50'} rounded-xl flex items-center justify-center mb-5 transition-transform group-hover:scale-110`}>
+                            <Icon className={`w-5 h-5 ${METRIC_COLORS[metric.name] || 'text-slate-400'}`} />
                          </div>
-                         <p className="text-[11px] font-bold text-slate-400 uppercase tracking-[0.2em]">{metric.name}</p>
-                         <p className="text-2xl font-black text-slate-900 mt-1">{metric.value}</p>
+                         <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">{metric.name}</p>
+                         <p className="text-3xl font-bold text-slate-900 mt-2">{metric.value}</p>
                       </div>
                     );
                   })}
@@ -125,11 +138,11 @@ export default function UmbrellaAdminSystemPage() {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
               {/* Node Inventory / Service Status */}
-              <div className="bg-white rounded-[40px] border border-slate-100 shadow-sm overflow-hidden flex flex-col">
+              <div className="bg-white rounded-[24px] border border-slate-100 shadow-[0_20px_40px_rgba(0,0,0,0.06)] overflow-hidden flex flex-col">
                  <div className="p-8 border-b border-slate-50 flex items-center justify-between">
                     <div>
-                       <h3 className="text-xl font-black text-slate-900">Infrastructure Nodes</h3>
-                       <p className="text-slate-400 text-sm font-medium italic mt-0.5">Real-time service orchestration status</p>
+                       <h3 className="text-xl font-playfair font-bold text-slate-900">Infrastructure Nodes</h3>
+                       <p className="text-slate-400 text-sm font-light italic mt-0.5">Real-time service orchestration status</p>
                     </div>
                     <Settings className="w-5 h-5 text-slate-300" />
                  </div>
@@ -138,7 +151,7 @@ export default function UmbrellaAdminSystemPage() {
                       <div key={index} className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100 group hover:border-primary/20 transition-all">
                         <div className="flex items-center gap-4">
                            <div className={`w-2 h-2 rounded-full ${service.status === 'operational' ? 'bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.5)]' : 'bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.5)]'}`} />
-                           <span className="text-[14px] font-black text-slate-800 group-hover:text-primary transition-colors">{service.name}</span>
+                           <span className="text-[14px] font-playfair font-bold text-slate-800 group-hover:text-primary transition-colors">{service.name}</span>
                         </div>
                         <div className="flex items-center gap-3">
                            <span className={`text-[10px] px-2.5 py-1 rounded-lg font-bold uppercase tracking-wider ${service.status === 'operational' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
@@ -152,11 +165,11 @@ export default function UmbrellaAdminSystemPage() {
               </div>
 
               {/* Telemetry Alerts */}
-              <div className="bg-white rounded-[40px] border border-slate-100 shadow-sm overflow-hidden flex flex-col">
+              <div className="bg-white rounded-[24px] border border-slate-100 shadow-[0_20px_40px_rgba(0,0,0,0.06)] overflow-hidden flex flex-col">
                  <div className="p-8 border-b border-slate-50 flex items-center justify-between">
                     <div>
-                       <h3 className="text-xl font-black text-slate-900">System Telemetry</h3>
-                       <p className="text-slate-400 text-sm font-medium italic mt-0.5">Critical event & anomaly log</p>
+                       <h3 className="text-xl font-playfair font-bold text-slate-900">System Telemetry</h3>
+                       <p className="text-slate-400 text-sm font-light italic mt-0.5">Critical event & anomaly log</p>
                     </div>
                     <Bell className="w-5 h-5 text-slate-300" />
                  </div>
@@ -190,12 +203,12 @@ export default function UmbrellaAdminSystemPage() {
             </div>
 
             {/* Administrative Protocols */}
-            <div className="bg-slate-900 rounded-[40px] p-10 relative overflow-hidden shadow-2xl">
+            <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-[24px] p-10 relative overflow-hidden shadow-[0_30px_50px_rgba(0,0,0,0.15)]">
                <div className="absolute top-0 right-0 w-96 h-96 bg-primary/20 blur-[100px] rounded-full -mr-48 -mt-48" />
                <div className="relative z-10">
                   <div className="flex items-center gap-3 mb-8">
                      <Terminal size={24} className="text-primary" />
-                     <h3 className="text-2xl font-black text-white">System Protocols</h3>
+                     <h3 className="text-2xl font-playfair font-black text-white">System Protocols</h3>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -204,11 +217,11 @@ export default function UmbrellaAdminSystemPage() {
                       { title: 'Maintenance', desc: 'Schedule blackout windows', icon: HardDrive },
                       { title: 'Log Archive', desc: 'Access encrypted event logs', icon: Terminal },
                     ].map((action, i) => (
-                      <button key={i} className="p-8 bg-white/5 border border-white/10 rounded-[32px] hover:bg-white/10 hover:border-primary/30 transition-all text-left group">
-                         <div className="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-primary/20 transition-all">
-                            <action.icon className="text-slate-400 group-hover:text-primary transition-colors" size={24} />
+                      <button key={i} className="p-8 bg-white/5 border border-white/10 rounded-[24px] hover:bg-white/10 hover:border-primary/30 transition-all text-left group">
+                         <div className="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-primary/20 transition-all">
+                            <action.icon className="text-slate-400 group-hover:text-primary transition-colors" size={28} />
                          </div>
-                         <h4 className="text-lg font-black text-white mb-2">{action.title}</h4>
+                         <h4 className="text-xl font-playfair font-bold text-white mb-2">{action.title}</h4>
                          <p className="text-slate-500 text-sm font-medium italic mb-6">{action.desc}</p>
                          <div className="flex items-center gap-2 text-[11px] font-black text-primary uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0">
                             Execute Protocol <ArrowRight size={14} />

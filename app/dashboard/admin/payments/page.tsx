@@ -118,77 +118,93 @@ export default function PaymentsPage() {
         <main className="flex-1 p-8 overflow-y-auto">
           <div className="max-w-7xl mx-auto">
             
+            {/* Section Header with Badge */}
+            <div className="mb-10">
+              <div className="relative inline-flex items-center justify-center mb-6">
+                <div className="absolute -top-[14px] -left-[14px] w-9 h-9 pointer-events-none text-primary">
+                  <svg viewBox="0 0 40 40" strokeWidth="4" stroke="currentColor" fill="none" strokeLinecap="round">
+                    <line x1="8" y1="8" x2="14" y2="14" />
+                    <line x1="2" y1="20" x2="10" y2="20" />
+                    <line x1="20" y1="2" x2="20" y2="10" />
+                  </svg>
+                </div>
+                <span className="text-sm font-semibold tracking-[0.5px] text-primary bg-primary/20 px-5 py-2 rounded-full shadow-sm border border-primary/10">
+                  Financial Audit
+                </span>
+              </div>
+            </div>
+
             {/* Financial Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-              <div className="bg-slate-900 border border-slate-800 rounded-[32px] p-6 shadow-xl relative overflow-hidden group col-span-1 md:col-span-2">
+              <div className="bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-800 rounded-[24px] p-8 shadow-[0_30px_50px_rgba(0,0,0,0.15)] relative overflow-hidden group col-span-1 md:col-span-2">
                  <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 blur-[60px] rounded-full -mr-16 -mt-16" />
                  <div className="relative z-10">
-                    <div className="flex items-center justify-between mb-4">
-                       <div className="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center">
-                          <DollarSign className="w-6 h-6 text-primary" />
+                    <div className="flex items-center justify-between mb-5">
+                       <div className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center">
+                          <DollarSign className="w-5 h-5 text-primary" />
                        </div>
-                       <span className="text-[10px] font-bold text-primary bg-primary/10 px-2 py-1 rounded-full uppercase tracking-widest">Gross Revenue</span>
+                       <span className="text-[12px] font-sans font-semibold uppercase tracking-[2px] text-primary bg-primary/15 border border-primary/30 px-4 py-1.5 rounded-full">Gross Revenue</span>
                     </div>
                     <p className="text-slate-400 text-[11px] font-bold uppercase tracking-[0.2em]">Total Successful Volume</p>
                     <div className="flex items-baseline gap-2 mt-2">
-                       <p className="text-4xl font-black text-white">{totalRevenue.toLocaleString()}</p>
-                       <p className="text-xl font-bold text-primary/60 italic">RWF</p>
+                       <p className="text-4xl md:text-5xl font-playfair font-light text-white">{totalRevenue.toLocaleString()}</p>
+                       <p className="text-xl md:text-2xl font-light text-slate-400">RWF</p>
                     </div>
                  </div>
               </div>
 
-              <div className="bg-white border border-slate-100 rounded-[32px] p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all group">
-                 <div className="w-12 h-12 bg-orange-50 rounded-2xl flex items-center justify-center mb-4 transition-transform group-hover:scale-110">
-                    <Clock className="w-6 h-6 text-orange-500" />
+              <div className="bg-white border border-slate-100 rounded-[24px] p-8 shadow-[0_20px_40px_rgba(0,0,0,0.06)] hover:shadow-[0_25px_45px_rgba(0,0,0,0.1)] hover:-translate-y-2 hover:scale-[1.02] transition-all duration-300 group">
+                 <div className="w-12 h-12 bg-orange-50 rounded-xl flex items-center justify-center mb-5 transition-transform group-hover:scale-110">
+                    <Clock className="w-5 h-5 text-orange-500" />
                  </div>
-                 <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest text-center md:text-left">Pipeline</p>
-                 <p className="text-2xl font-black text-slate-900 mt-1 text-center md:text-left">{pendingAmount.toLocaleString()} <span className="text-sm font-bold text-slate-400 italic">RWF</span></p>
+                 <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">Pipeline</p>
+                 <p className="text-3xl font-bold text-slate-900 mt-2">{pendingAmount.toLocaleString()} <span className="text-sm font-bold text-slate-400 italic">RWF</span></p>
               </div>
 
-              <div className="bg-white border border-slate-100 rounded-[32px] p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all group">
-                 <div className="w-12 h-12 bg-green-50 rounded-2xl flex items-center justify-center mb-4 transition-transform group-hover:scale-110">
-                    <TrendingUp className="w-6 h-6 text-green-500" />
+              <div className="bg-white border border-slate-100 rounded-[24px] p-8 shadow-[0_20px_40px_rgba(0,0,0,0.06)] hover:shadow-[0_25px_45px_rgba(0,0,0,0.1)] hover:-translate-y-2 hover:scale-[1.02] transition-all duration-300 group">
+                 <div className="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center mb-5 transition-transform group-hover:scale-110">
+                    <TrendingUp className="w-5 h-5 text-green-500" />
                  </div>
-                 <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest text-center md:text-left">Success Count</p>
-                 <p className="text-3xl font-black text-slate-900 mt-1 text-center md:text-left">{successCount}</p>
+                 <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">Success Count</p>
+                 <p className="text-3xl font-bold text-slate-900 mt-2">{successCount}</p>
               </div>
             </div>
 
             {/* Quick Actions / Summary Stats */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-                <div className="bg-white rounded-[32px] border border-slate-100 p-6 flex items-center gap-6 group hover:border-primary/20 transition-all">
+                <div className="bg-white rounded-[24px] border border-slate-100 p-8 shadow-[0_20px_40px_rgba(0,0,0,0.06)] flex items-center gap-6 group hover:border-primary/30 hover:shadow-[0_25px_45px_rgba(0,0,0,0.1)] transition-all duration-300">
                    <div className="w-16 h-16 bg-slate-50 rounded-[24px] flex items-center justify-center group-hover:bg-primary/10 transition-colors">
                       <Wallet className="w-8 h-8 text-slate-300 group-hover:text-primary transition-colors" />
                    </div>
                    <div>
-                      <h3 className="text-lg font-black text-slate-900">Pending Approvals</h3>
-                      <p className="text-slate-500 text-sm font-light italic">Currently {pendingCount} transactions awaiting manual audit.</p>
+                      <h3 className="text-[22px] font-playfair font-bold text-slate-900">Pending Approvals</h3>
+                      <p className="text-[15px] text-slate-500 font-medium leading-relaxed">Currently {pendingCount} transactions awaiting manual audit.</p>
                    </div>
                    <div className="ml-auto">
-                      <div className="text-3xl font-black text-primary/40 group-hover:text-primary transition-colors">{pendingCount}</div>
+                      <div className="text-3xl font-bold text-primary/40 group-hover:text-primary transition-colors">{pendingCount}</div>
                    </div>
                 </div>
 
-                <div className="bg-white rounded-[32px] border border-slate-100 p-6 flex items-center gap-6 group hover:border-red-100 transition-all">
+                <div className="bg-white rounded-[24px] border border-slate-100 p-8 shadow-[0_20px_40px_rgba(0,0,0,0.06)] flex items-center gap-6 group hover:border-red-100 hover:shadow-[0_25px_45px_rgba(0,0,0,0.1)] transition-all duration-300">
                    <div className="w-16 h-16 bg-slate-50 rounded-[24px] flex items-center justify-center group-hover:bg-red-50 transition-colors">
                       <XCircle className="w-8 h-8 text-slate-300 group-hover:text-red-400 transition-colors" />
                    </div>
                    <div>
-                      <h3 className="text-lg font-black text-slate-900">Failed / Reversed</h3>
-                      <p className="text-slate-500 text-sm font-light italic">System has detected {failedCount} unsuccessful attempts.</p>
+                      <h3 className="text-[22px] font-playfair font-bold text-slate-900">Failed / Reversed</h3>
+                      <p className="text-[15px] text-slate-500 font-medium leading-relaxed">System has detected {failedCount} unsuccessful attempts.</p>
                    </div>
                    <div className="ml-auto">
-                      <div className="text-3xl font-black text-slate-200 group-hover:text-red-300 transition-colors">{failedCount}</div>
+                      <div className="text-3xl font-bold text-slate-200 group-hover:text-red-300 transition-colors">{failedCount}</div>
                    </div>
                 </div>
             </div>
 
             {/* Main Ledger Table */}
-            <div className="bg-white rounded-[40px] border border-slate-100 shadow-sm overflow-hidden">
+            <div className="bg-white rounded-[24px] border border-slate-100 shadow-[0_20px_40px_rgba(0,0,0,0.06)] overflow-hidden">
               <div className="p-8 border-b border-slate-50 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
                  <div>
-                    <h2 className="text-xl font-bold text-slate-900">Transaction Ledger</h2>
-                    <p className="text-slate-500 text-sm font-light">Comprehensive history of all financial activities</p>
+                    <h2 className="text-xl font-playfair font-bold text-slate-900">Transaction Ledger</h2>
+                    <p className="text-slate-500 text-sm font-light italic">Comprehensive history of all financial activities</p>
                  </div>
 
                  <div className="flex flex-wrap items-center gap-3">
@@ -234,12 +250,12 @@ export default function PaymentsPage() {
                 <table className="w-full text-left border-collapse">
                   <thead>
                     <tr className="bg-slate-50/50">
-                      <th className="px-8 py-5 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Transaction ID</th>
-                      <th className="px-8 py-5 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Payer Information</th>
-                      <th className="px-8 py-5 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Classification</th>
-                      <th className="px-8 py-5 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Amount</th>
-                      <th className="px-8 py-5 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Status</th>
-                      <th className="px-8 py-5 text-right text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Audit</th>
+                      <th className="px-8 py-5 text-[11px] font-bold uppercase tracking-widest text-slate-400">Transaction ID</th>
+                      <th className="px-8 py-5 text-[11px] font-bold uppercase tracking-widest text-slate-400">Payer Information</th>
+                      <th className="px-8 py-5 text-[11px] font-bold uppercase tracking-widest text-slate-400">Classification</th>
+                      <th className="px-8 py-5 text-[11px] font-bold uppercase tracking-widest text-slate-400">Amount</th>
+                      <th className="px-8 py-5 text-[11px] font-bold uppercase tracking-widest text-slate-400">Status</th>
+                      <th className="px-8 py-5 text-right text-[11px] font-bold uppercase tracking-widest text-slate-400">Audit</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-50">

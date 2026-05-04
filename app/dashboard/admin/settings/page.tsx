@@ -25,12 +25,12 @@ export default function UmbrellaAdminSettingsPage() {
     const Toggle = ({ enabled, onChange, label, desc, icon: Icon }: any) => (
       <div className="flex items-center justify-between p-6 bg-slate-50 rounded-[24px] border border-slate-100 group hover:border-primary/20 transition-all">
         <div className="flex items-center gap-4">
-           <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-colors ${enabled ? 'bg-primary/10 text-primary' : 'bg-slate-200 text-slate-400'}`}>
+           <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-colors ${enabled ? 'bg-primary/10 text-primary' : 'bg-slate-200 text-slate-400'}`}>
               <Icon size={20} />
            </div>
            <div>
-              <div className="text-[14px] font-black text-slate-900 uppercase tracking-tight">{label}</div>
-              <div className="text-xs text-slate-500 font-medium italic mt-0.5">{desc}</div>
+              <div className="text-[14px] font-playfair font-bold text-slate-900 uppercase tracking-tight">{label}</div>
+              <div className="text-xs text-slate-500 font-light italic mt-0.5">{desc}</div>
            </div>
         </div>
         <button
@@ -78,13 +78,29 @@ export default function UmbrellaAdminSettingsPage() {
                 <main className="flex-1 p-8 overflow-y-auto">
                     <div className="max-w-5xl mx-auto space-y-10">
                         
+                        {/* Section Header with Badge */}
+                        <div className="mb-10">
+                          <div className="relative inline-flex items-center justify-center mb-6">
+                            <div className="absolute -top-[14px] -left-[14px] w-9 h-9 pointer-events-none text-primary">
+                              <svg viewBox="0 0 40 40" strokeWidth="4" stroke="currentColor" fill="none" strokeLinecap="round">
+                                <line x1="8" y1="8" x2="14" y2="14" />
+                                <line x1="2" y1="20" x2="10" y2="20" />
+                                <line x1="20" y1="2" x2="20" y2="10" />
+                              </svg>
+                            </div>
+                            <span className="text-sm font-semibold tracking-[0.5px] text-primary bg-primary/20 px-5 py-2 rounded-full shadow-sm border border-primary/10">
+                              Global Configuration
+                            </span>
+                          </div>
+                        </div>
+
                         {/* Platform Branding Section */}
                         <section>
-                           <h2 className="text-xl font-black text-slate-900 mb-6 flex items-center gap-3">
+                           <h2 className="text-xl font-playfair font-bold text-slate-900 mb-6 flex items-center gap-3">
                               <Monitor className="text-primary" size={24} />
                               Branding & Localization
                            </h2>
-                           <div className="bg-white rounded-[40px] border border-slate-100 p-10 shadow-sm space-y-8">
+                           <div className="bg-white rounded-[24px] border border-slate-100 p-10 shadow-[0_20px_40px_rgba(0,0,0,0.06)] space-y-8">
                               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                  <PremiumInput
                                    label="Platform Name"
@@ -137,11 +153,11 @@ export default function UmbrellaAdminSettingsPage() {
 
                         {/* Security Protocols Section */}
                         <section>
-                           <h2 className="text-xl font-black text-slate-900 mb-6 flex items-center gap-3">
+                           <h2 className="text-xl font-playfair font-bold text-slate-900 mb-6 flex items-center gap-3">
                               <ShieldCheck className="text-primary" size={24} />
                               Security Protocols
                            </h2>
-                           <div className="bg-white rounded-[40px] border border-slate-100 p-10 shadow-sm space-y-4">
+                           <div className="bg-white rounded-[24px] border border-slate-100 p-10 shadow-[0_20px_40px_rgba(0,0,0,0.06)] space-y-4">
                                 <Toggle 
                                   enabled={systemSettings.requireMFA}
                                   onChange={(val: boolean) => setSystemSettings({ ...systemSettings, requireMFA: val })}
@@ -167,10 +183,10 @@ export default function UmbrellaAdminSettingsPage() {
                         </section>
 
                         {/* Dangerous Actions */}
-                        <section className="bg-red-50/50 rounded-[40px] p-10 border border-red-100">
+                        <section className="bg-red-50/50 rounded-[24px] p-10 border border-red-100">
                            <div className="flex items-center gap-3 mb-6">
                               <AlertTriangle className="text-red-500" size={24} />
-                              <h2 className="text-xl font-black text-red-900">Danger Zone</h2>
+                              <h2 className="text-xl font-playfair font-bold text-red-900">Danger Zone</h2>
                            </div>
                            <div className="flex flex-col md:flex-row gap-4">
                               <button className="flex-1 py-4 bg-white border border-red-200 text-red-600 rounded-2xl font-bold text-sm hover:bg-red-600 hover:text-white transition-all flex items-center justify-center gap-2 group">

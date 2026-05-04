@@ -112,6 +112,22 @@ export default function RoadmapApprovalsPage() {
         <main className="flex-1 p-8 overflow-y-auto">
           <div className="max-w-7xl mx-auto">
             
+            {/* Section Header with Badge */}
+            <div className="mb-10">
+              <div className="relative inline-flex items-center justify-center mb-6">
+                <div className="absolute -top-[14px] -left-[14px] w-9 h-9 pointer-events-none text-primary">
+                  <svg viewBox="0 0 40 40" strokeWidth="4" stroke="currentColor" fill="none" strokeLinecap="round">
+                    <line x1="8" y1="8" x2="14" y2="14" />
+                    <line x1="2" y1="20" x2="10" y2="20" />
+                    <line x1="20" y1="2" x2="20" y2="10" />
+                  </svg>
+                </div>
+                <span className="text-sm font-semibold tracking-[0.5px] text-primary bg-primary/20 px-5 py-2 rounded-full shadow-sm border border-primary/10">
+                  Pedagogical Review
+                </span>
+              </div>
+            </div>
+
             {error && (
               <div className="mb-6 p-4 bg-red-50 border border-red-100 rounded-[20px] flex items-center gap-3">
                 <AlertCircle className="w-5 h-5 text-red-500" />
@@ -122,11 +138,11 @@ export default function RoadmapApprovalsPage() {
             {loading ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {[...Array(6)].map((_, i) => (
-                  <div key={i} className="h-80 bg-white border border-slate-100 rounded-[32px] animate-pulse" />
+                  <div key={i} className="h-80 bg-white border border-slate-100 rounded-[24px] animate-pulse" />
                 ))}
               </div>
             ) : roadmaps.length === 0 ? (
-              <div className="text-center py-20 bg-white border border-slate-100 rounded-[40px] shadow-sm">
+              <div className="text-center py-20 bg-white border border-slate-100 rounded-[24px] shadow-[0_20px_40px_rgba(0,0,0,0.06)]">
                 <div className="w-20 h-20 bg-slate-50 rounded-[32px] flex items-center justify-center mx-auto mb-6">
                   <Target size={40} className="text-slate-200" />
                 </div>
@@ -136,13 +152,13 @@ export default function RoadmapApprovalsPage() {
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {roadmaps.map((roadmap) => (
-                  <div key={roadmap.id} className="bg-white border border-slate-100 rounded-[32px] p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all group flex flex-col">
+                  <div key={roadmap.id} className="bg-white border border-slate-100 rounded-[24px] p-8 shadow-[0_20px_40px_rgba(0,0,0,0.06)] hover:shadow-[0_25px_45px_rgba(0,0,0,0.1)] hover:-translate-y-2 hover:scale-[1.02] transition-all duration-300 group flex flex-col">
                     <div className="flex items-center gap-3 mb-5">
-                      <div className="w-12 h-12 bg-slate-900 rounded-2xl flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
-                        <MapPin size={22} />
+                      <div className="w-12 h-12 bg-slate-900 rounded-xl flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                        <MapPin size={20} />
                       </div>
                       <div>
-                         <h3 className="text-[15px] font-black text-slate-900 line-clamp-1 group-hover:text-primary transition-colors">{roadmap.title}</h3>
+                         <h3 className="text-[22px] font-playfair font-bold text-slate-900 line-clamp-1 group-hover:text-primary transition-colors">{roadmap.title}</h3>
                          <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">ID: {roadmap.id.slice(-6)}</p>
                       </div>
                     </div>
@@ -152,14 +168,14 @@ export default function RoadmapApprovalsPage() {
                           <div className="flex items-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">
                              <GraduationCap size={14} className="text-primary" /> Recipient
                           </div>
-                          <p className="text-sm font-black text-slate-900">{roadmap.studentId.firstName} {roadmap.studentId.lastName}</p>
+                          <p className="text-[15px] font-playfair font-bold text-slate-900">{roadmap.studentId.firstName} {roadmap.studentId.lastName}</p>
                        </div>
 
                        <div className="bg-slate-50 rounded-2xl p-4 border border-slate-100/50">
                           <div className="flex items-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">
                              <Award size={14} className="text-primary" /> Architect
                           </div>
-                          <p className="text-sm font-black text-slate-900">{roadmap.trainerId.firstName} {roadmap.trainerId.lastName}</p>
+                          <p className="text-[15px] font-playfair font-bold text-slate-900">{roadmap.trainerId.firstName} {roadmap.trainerId.lastName}</p>
                        </div>
                     </div>
 

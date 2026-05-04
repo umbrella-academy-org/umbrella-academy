@@ -41,8 +41,24 @@ export default function UmbrellaAdminProfilePage() {
                 <main className="flex-1 p-8 overflow-y-auto">
                     <div className="max-w-6xl mx-auto space-y-8">
                         
+                        {/* Section Header with Badge */}
+                        <div className="mb-10">
+                          <div className="relative inline-flex items-center justify-center mb-6">
+                            <div className="absolute -top-[14px] -left-[14px] w-9 h-9 pointer-events-none text-primary">
+                              <svg viewBox="0 0 40 40" strokeWidth="4" stroke="currentColor" fill="none" strokeLinecap="round">
+                                <line x1="8" y1="8" x2="14" y2="14" />
+                                <line x1="2" y1="20" x2="10" y2="20" />
+                                <line x1="20" y1="2" x2="20" y2="10" />
+                              </svg>
+                            </div>
+                            <span className="text-sm font-semibold tracking-[0.5px] text-primary bg-primary/20 px-5 py-2 rounded-full shadow-sm border border-primary/10">
+                              Personnel Dossier
+                            </span>
+                          </div>
+                        </div>
+
                         {/* Profile Hero Card */}
-                        <div className="bg-white rounded-[32px] border border-slate-100 shadow-sm overflow-hidden relative">
+                        <div className="bg-white rounded-[24px] border border-slate-100 shadow-[0_20px_40px_rgba(0,0,0,0.06)] overflow-hidden relative">
                            {/* Stylized Banner */}
                            <div className="h-40 bg-slate-900 relative overflow-hidden">
                               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,184,0,0.15),transparent)]" />
@@ -60,7 +76,7 @@ export default function UmbrellaAdminProfilePage() {
                               <div className="flex flex-col md:flex-row items-end -mt-12 gap-6">
                                  <div className="relative group">
                                     <div className="w-32 h-32 rounded-[24px] bg-white p-2 shadow-2xl shadow-slate-900/10 transition-transform duration-500 hover:scale-[1.02]">
-                                       <div className="w-full h-full bg-slate-900 rounded-[20px] flex items-center justify-center text-primary text-4xl font-black">
+                                       <div className="w-12 h-12 bg-slate-900 rounded-[20px] flex items-center justify-center text-white text-lg font-black shadow-lg">
                                           {name.split(' ').map(n => n[0]).join('')}
                                        </div>
                                     </div>
@@ -96,14 +112,14 @@ export default function UmbrellaAdminProfilePage() {
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                            {/* Access Tiers */}
                            <div className="lg:col-span-2 space-y-8">
-                              <div className="bg-white rounded-[32px] border border-slate-100 p-8 shadow-sm relative overflow-hidden group">
+                              <div className="bg-white rounded-[24px] border border-slate-100 p-8 shadow-[0_20px_40px_rgba(0,0,0,0.06)] relative overflow-hidden group">
                                  <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full -mr-12 -mt-12 blur-3xl group-hover:bg-primary/10 transition-colors" />
-                                 <h3 className="text-xl font-playfair font-bold text-slate-900 mb-6">Security Clearance</h3>
+                                 <h3 className="text-[22px] font-playfair font-bold text-slate-900 mb-6">Security Clearance</h3>
                                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div className="p-6 bg-slate-900 rounded-[24px] text-white shadow-xl shadow-slate-900/10 relative overflow-hidden group/card">
                                        <div className="relative z-10">
                                           <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] mb-3">Current Authorization</p>
-                                          <h4 className="text-2xl font-black mb-2 text-white group-hover/card:text-primary transition-colors">Level 10 Master</h4>
+                                          <h4 className="text-2xl font-playfair font-light mb-2 text-white group-hover/card:text-primary transition-colors">Level 10 Master</h4>
                                           <p className="text-xs text-slate-400 font-medium italic flex items-center gap-2">
                                              <div className="w-1.5 h-1.5 bg-primary rounded-full shadow-[0_0_8px_rgba(255,184,0,0.8)]" />
                                              Full System Decryption Enabled
@@ -115,7 +131,7 @@ export default function UmbrellaAdminProfilePage() {
                                     <div className="p-6 bg-slate-50 rounded-[24px] border border-slate-100 relative group/status overflow-hidden">
                                        <div className="relative z-10">
                                           <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] mb-3">Identity Integrity</p>
-                                          <h4 className="text-2xl font-black text-slate-900 mb-2 tracking-tight">Verified</h4>
+                                          <h4 className="text-2xl font-playfair font-light text-slate-900 mb-2 tracking-tight">Verified</h4>
                                           <p className="text-xs text-slate-500 font-medium italic">Biometric profile fully synchronized</p>
                                        </div>
                                        <ShieldCheck className="absolute bottom-4 right-4 w-10 h-10 text-slate-200/50 transform group-hover/status:scale-110 group-hover/status:text-primary/20 transition-all duration-700" />
@@ -123,8 +139,8 @@ export default function UmbrellaAdminProfilePage() {
                                  </div>
                               </div>
 
-                              <div className="bg-white rounded-[32px] border border-slate-100 p-8 shadow-sm">
-                                 <h3 className="text-xl font-playfair font-bold text-slate-900 mb-6">Access Log & Metadata</h3>
+                              <div className="bg-white rounded-[24px] border border-slate-100 p-8 shadow-[0_20px_40px_rgba(0,0,0,0.06)]">
+                                 <h3 className="text-[22px] font-playfair font-bold text-slate-900 mb-6">Access Log & Metadata</h3>
                                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div className="p-4 bg-slate-50 rounded-[20px] border border-transparent hover:border-primary/20 transition-all group">
                                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 block">Primary Identity Hash</label>
@@ -140,8 +156,8 @@ export default function UmbrellaAdminProfilePage() {
 
                            {/* Sidebar Actions */}
                            <div className="space-y-8">
-                              <div className="bg-white rounded-[32px] border border-slate-100 p-6 shadow-sm">
-                                 <h3 className="text-lg font-playfair font-bold text-slate-900 mb-6">Control Panel</h3>
+                              <div className="bg-white rounded-[24px] border border-slate-100 p-6 shadow-[0_20px_40px_rgba(0,0,0,0.06)]">
+                                 <h3 className="text-[22px] font-playfair font-bold text-slate-900 mb-6">Control Panel</h3>
                                  <div className="space-y-3">
                                     <ProfileControl icon={<Key className="w-5 h-5" />} label="Security Keys" />
                                     <ProfileControl icon={<Bell className="w-5 h-5" />} label="System Alerts" />
@@ -149,7 +165,7 @@ export default function UmbrellaAdminProfilePage() {
                                  </div>
                               </div>
 
-                              <div className="p-8 bg-slate-900 rounded-[32px] text-white shadow-2xl shadow-slate-900/20 relative overflow-hidden group">
+                              <div className="p-8 bg-gradient-to-br from-slate-900 to-slate-800 rounded-[24px] text-white shadow-[0_30px_50px_rgba(0,0,0,0.15)] relative overflow-hidden group">
                                  <div className="absolute top-0 right-0 w-24 h-24 bg-primary/10 rounded-full -mr-12 -mt-12 blur-[60px] group-hover:bg-primary/20 transition-colors" />
                                  <div className="relative z-10">
                                     <h4 className="text-xl font-playfair font-black mb-3 text-white">System Protocol Hub</h4>
@@ -180,7 +196,7 @@ function ProfileControl({ icon, label }: { icon: React.ReactNode, label: string 
                 <div className="w-10 h-10 bg-slate-50 rounded-xl flex items-center justify-center text-slate-400 group-hover:bg-primary group-hover:text-slate-900 transition-all">
                     {icon}
                 </div>
-                <span className="text-[13px] font-black text-slate-600 uppercase tracking-tight group-hover:text-slate-900">{label}</span>
+                <span className="text-[13px] font-playfair font-bold text-slate-600 uppercase tracking-tight group-hover:text-slate-900">{label}</span>
             </div>
             <ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-slate-900 group-hover:translate-x-1 transition-all" />
         </button>

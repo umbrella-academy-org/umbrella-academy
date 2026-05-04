@@ -90,14 +90,30 @@ export default function TrainerApprovalsPage() {
         <main className="flex-1 p-8 overflow-y-auto">
           <div className="max-w-5xl mx-auto">
             
+            {/* Section Header with Badge */}
+            <div className="mb-10">
+              <div className="relative inline-flex items-center justify-center mb-6">
+                <div className="absolute -top-[14px] -left-[14px] w-9 h-9 pointer-events-none text-primary">
+                  <svg viewBox="0 0 40 40" strokeWidth="4" stroke="currentColor" fill="none" strokeLinecap="round">
+                    <line x1="8" y1="8" x2="14" y2="14" />
+                    <line x1="2" y1="20" x2="10" y2="20" />
+                    <line x1="20" y1="2" x2="20" y2="10" />
+                  </svg>
+                </div>
+                <span className="text-sm font-semibold tracking-[0.5px] text-primary bg-primary/20 px-5 py-2 rounded-full shadow-sm border border-primary/10">
+                  Faculty Vetting
+                </span>
+              </div>
+            </div>
+
             {trainersLoading ? (
                <div className="space-y-6">
                 {[...Array(3)].map((_, i) => (
-                  <div key={i} className="h-48 bg-white border border-slate-100 rounded-[32px] animate-pulse" />
+                  <div key={i} className="h-48 bg-white border border-slate-100 rounded-[24px] animate-pulse" />
                 ))}
               </div>
             ) : pendingTrainers.length === 0 ? (
-              <div className="text-center py-20 bg-white border border-slate-100 rounded-[40px] shadow-sm">
+              <div className="text-center py-20 bg-white border border-slate-100 rounded-[24px] shadow-[0_20px_40px_rgba(0,0,0,0.06)]">
                 <div className="w-20 h-20 bg-slate-50 rounded-[32px] flex items-center justify-center mx-auto mb-6">
                   <ShieldCheck size={40} className="text-slate-200" />
                 </div>
@@ -107,17 +123,17 @@ export default function TrainerApprovalsPage() {
             ) : (
               <div className="space-y-6">
                 {pendingTrainers.map((trainer) => (
-                  <div key={trainer._id} className="bg-white border border-slate-100 rounded-[32px] p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all group relative overflow-hidden">
+                  <div key={trainer._id} className="bg-white border border-slate-100 rounded-[24px] p-8 shadow-[0_20px_40px_rgba(0,0,0,0.06)] hover:shadow-[0_25px_45px_rgba(0,0,0,0.1)] hover:-translate-y-2 hover:scale-[1.02] transition-all duration-300 group relative overflow-hidden">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16 blur-3xl group-hover:bg-primary/10 transition-colors" />
                     
                     <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-8 relative z-10">
                       <div className="flex-1">
                         <div className="flex items-center gap-4 mb-4">
-                           <div className="w-14 h-14 bg-slate-900 rounded-[20px] flex items-center justify-center text-white text-lg font-black shadow-lg">
+                           <div className="w-12 h-12 bg-slate-900 rounded-[20px] flex items-center justify-center text-white text-lg font-black shadow-lg">
                               {trainer.firstName[0]}{trainer.lastName[0]}
                            </div>
                            <div>
-                              <h3 className="text-xl font-bold text-slate-900 group-hover:text-primary transition-colors">
+                              <h3 className="text-[22px] font-playfair font-bold text-slate-900 group-hover:text-primary transition-colors">
                                 {trainer.firstName} {trainer.lastName}
                               </h3>
                               <p className="text-slate-400 text-sm font-medium">{trainer.email}</p>
@@ -125,11 +141,11 @@ export default function TrainerApprovalsPage() {
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-y-3 gap-x-8 mb-6">
-                           <div className="flex items-center gap-3 text-sm text-slate-600 font-medium">
+                           <div className="flex items-center gap-3 text-[15px] text-slate-600 font-medium">
                               <div className="w-8 h-8 bg-slate-50 rounded-lg flex items-center justify-center"><Briefcase size={14} className="text-slate-400" /></div>
                               {trainer.experience.yearsOfExperience} Years Experience
                            </div>
-                           <div className="flex items-center gap-3 text-sm text-slate-600 font-medium">
+                           <div className="flex items-center gap-3 text-[15px] text-slate-600 font-medium">
                               <div className="w-8 h-8 bg-slate-50 rounded-lg flex items-center justify-center"><Calendar size={14} className="text-slate-400" /></div>
                               Submitted {formatDate(trainer.createdAt)}
                            </div>

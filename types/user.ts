@@ -47,6 +47,7 @@ export interface BaseUser  {
   resetTokenExpiry: string;
   createdAt: string;
   updatedAt: string;
+  status?: 'active' | 'pending' | 'inactive';
 }
 
 export interface Guardian extends BaseUser {

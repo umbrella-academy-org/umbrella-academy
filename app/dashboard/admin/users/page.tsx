@@ -217,6 +217,22 @@ export default function UmbrellaAdminUsersPage() {
         <main className="flex-1 p-8 overflow-y-auto">
           <div className="max-w-7xl mx-auto">
             
+            {/* Section Header with Badge */}
+            <div className="mb-10">
+              <div className="relative inline-flex items-center justify-center mb-6">
+                <div className="absolute -top-[14px] -left-[14px] w-9 h-9 pointer-events-none text-primary">
+                  <svg viewBox="0 0 40 40" strokeWidth="4" stroke="currentColor" fill="none" strokeLinecap="round">
+                    <line x1="8" y1="8" x2="14" y2="14" />
+                    <line x1="2" y1="20" x2="10" y2="20" />
+                    <line x1="20" y1="2" x2="20" y2="10" />
+                  </svg>
+                </div>
+                <span className="text-sm font-semibold tracking-[0.5px] text-primary bg-primary/20 px-5 py-2 rounded-full shadow-sm border border-primary/10">
+                  User Directory
+                </span>
+              </div>
+            </div>
+
             {/* Stats Overview */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
               {[
@@ -225,18 +241,18 @@ export default function UmbrellaAdminUsersPage() {
                 { label: 'Pending', value: pendingUsers, icon: Clock, color: 'text-orange-500', bg: 'bg-orange-50' },
                 { label: 'Suspended', value: inactiveUsers, icon: XCircle, color: 'text-red-500', bg: 'bg-red-50' },
               ].map((stat) => (
-                <div key={stat.label} className="bg-white border border-slate-100 rounded-[32px] p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all group">
-                   <div className={`w-12 h-12 ${stat.bg} rounded-2xl flex items-center justify-center mb-4 transition-transform group-hover:scale-110`}>
-                      <stat.icon className={`w-6 h-6 ${stat.color}`} />
+                <div key={stat.label} className="bg-white border border-slate-100 rounded-[24px] p-8 shadow-[0_20px_40px_rgba(0,0,0,0.06)] hover:shadow-[0_25px_45px_rgba(0,0,0,0.1)] hover:-translate-y-2 hover:scale-[1.02] transition-all duration-300 group">
+                   <div className={`w-12 h-12 ${stat.bg} rounded-xl flex items-center justify-center mb-5 transition-transform group-hover:scale-110`}>
+                      <stat.icon className={`w-5 h-5 ${stat.color}`} />
                    </div>
                    <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">{stat.label}</p>
-                   <p className="text-3xl font-black text-slate-900 mt-1">{stat.value}</p>
+                   <p className="text-3xl font-bold text-slate-900 mt-2">{stat.value}</p>
                 </div>
               ))}
             </div>
 
             {/* Content Container */}
-            <div className="bg-white rounded-[40px] border border-slate-100 shadow-sm overflow-hidden">
+            <div className="bg-white rounded-[24px] border border-slate-100 shadow-[0_20px_40px_rgba(0,0,0,0.06)] overflow-hidden">
               
               {/* Tabs & Search Header */}
               <div className="p-8 border-b border-slate-50">
@@ -335,7 +351,7 @@ export default function UmbrellaAdminUsersPage() {
                                 <div className="font-bold text-slate-900 group-hover:text-primary transition-colors">
                                   {user.firstName} {user.lastName}
                                 </div>
-                                <div className="text-[13px] text-slate-500 font-light">{user.email}</div>
+                                <div className="text-sm text-slate-500 font-light">{user.email}</div>
                               </div>
                             </div>
                           </td>
@@ -346,7 +362,13 @@ export default function UmbrellaAdminUsersPage() {
                             </div>
                           </td>
                           <td className="px-8 py-5">
-                            <StatusBadge isActive={user.isActive} isVerified={user.isVerified} />
+                            <span className={`px-3 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wider ${
+                              user.status === 'active' ? 'bg-green-100 text-green-700' :
+                              user.status === 'pending' ? 'bg-orange-100 text-orange-700' :
+                              'bg-red-100 text-red-700'
+                            }`}>
+                              {user.status || 'unknown'}
+                            </span>
                           </td>
                           <td className="px-8 py-5">
                             <span className="text-[12px] font-black uppercase text-slate-400 tracking-widest">{user.role}</span>
@@ -394,7 +416,7 @@ export default function UmbrellaAdminUsersPage() {
             </div>
 
             <div className="mt-12 text-center">
-               <p className="text-slate-400 text-[11px] font-bold tracking-[0.3em] uppercase italic">© Dreamize Africa 2025 • Admin Directory Protocol</p>
+               <p className="text-slate-400 text-[11px] font-bold tracking-[0.3em] uppercase italic"> Dreamize Africa 2025 • Admin Directory Protocol</p>
             </div>
           </div>
         </main>
@@ -409,8 +431,8 @@ export default function UmbrellaAdminUsersPage() {
             <div className="relative z-10">
               <div className="flex items-center justify-between mb-8">
                 <div>
-                  <h2 className="text-2xl font-black text-slate-900">Provision New Identity</h2>
-                  <p className="text-slate-500 font-light mt-1">Configure global account credentials</p>
+                  <h2 className="text-xl font-playfair font-bold text-slate-900">User Directory</h2>
+                  <p className="text-slate-500 text-sm font-light italic">Manage all platform accounts and permissions</p>
                 </div>
                 <button
                   onClick={() => setShowCreateModal(false)}

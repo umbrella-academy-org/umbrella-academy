@@ -138,6 +138,22 @@ export default function PromoCodesPage() {
         <main className="flex-1 p-8 overflow-y-auto">
           <div className="max-w-7xl mx-auto">
             
+            {/* Section Header with Badge */}
+            <div className="mb-10">
+              <div className="relative inline-flex items-center justify-center mb-6">
+                <div className="absolute -top-[14px] -left-[14px] w-9 h-9 pointer-events-none text-primary">
+                  <svg viewBox="0 0 40 40" strokeWidth="4" stroke="currentColor" fill="none" strokeLinecap="round">
+                    <line x1="8" y1="8" x2="14" y2="14" />
+                    <line x1="2" y1="20" x2="10" y2="20" />
+                    <line x1="20" y1="2" x2="20" y2="10" />
+                  </svg>
+                </div>
+                <span className="text-sm font-semibold tracking-[0.5px] text-primary bg-primary/20 px-5 py-2 rounded-full shadow-sm border border-primary/10">
+                  Promo Inventory
+                </span>
+              </div>
+            </div>
+
             {/* Promotion Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
               {[
@@ -146,22 +162,22 @@ export default function PromoCodesPage() {
                 { label: 'Available', value: activeCount, icon: Sparkles, color: 'text-primary', bg: 'bg-primary/10' },
                 { label: 'Expired', value: expiredCount, icon: XCircle, color: 'text-red-400', bg: 'bg-red-50' },
               ].map((stat) => (
-                <div key={stat.label} className="bg-white border border-slate-100 rounded-[32px] p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all group">
-                   <div className={`w-12 h-12 ${stat.bg} rounded-2xl flex items-center justify-center mb-4 transition-transform group-hover:scale-110`}>
-                      <stat.icon className={`w-6 h-6 ${stat.color}`} />
+                <div key={stat.label} className="bg-white border border-slate-100 rounded-[24px] p-8 shadow-[0_20px_40px_rgba(0,0,0,0.06)] hover:shadow-[0_25px_45px_rgba(0,0,0,0.1)] hover:-translate-y-2 hover:scale-[1.02] transition-all duration-300 group">
+                   <div className={`w-12 h-12 ${stat.bg} rounded-xl flex items-center justify-center mb-5 transition-transform group-hover:scale-110`}>
+                      <stat.icon className={`w-5 h-5 ${stat.color}`} />
                    </div>
                    <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">{stat.label}</p>
-                   <p className="text-3xl font-black text-slate-900 mt-1">{stat.value}</p>
+                   <p className="text-3xl font-bold text-slate-900 mt-2">{stat.value}</p>
                 </div>
               ))}
             </div>
 
             {/* Content Container */}
-            <div className="bg-white rounded-[40px] border border-slate-100 shadow-sm overflow-hidden">
+            <div className="bg-white rounded-[24px] border border-slate-100 shadow-[0_20px_40px_rgba(0,0,0,0.06)] overflow-hidden">
               
               <div className="p-8 border-b border-slate-50 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
                 <div>
-                   <h2 className="text-xl font-bold text-slate-900">Active Inventory</h2>
+                   <h2 className="text-xl font-playfair font-bold text-slate-900">Active Inventory</h2>
                    <p className="text-slate-500 text-sm font-light italic">Track and audit all issued promotional vouchers</p>
                 </div>
 
@@ -195,11 +211,11 @@ export default function PromoCodesPage() {
                   <table className="w-full text-left border-collapse">
                     <thead>
                       <tr className="bg-slate-50/50">
-                        <th className="px-8 py-5 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Voucher Code</th>
-                        <th className="px-8 py-5 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Assigned Recipient</th>
-                        <th className="px-8 py-5 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Benefit</th>
-                        <th className="px-8 py-5 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Status</th>
-                        <th className="px-8 py-5 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Validity</th>
+                        <th className="px-8 py-5 text-[11px] font-bold uppercase tracking-widest text-slate-400">Promo Code</th>
+                        <th className="px-8 py-5 text-[11px] font-bold uppercase tracking-widest text-slate-400">Discount</th>
+                        <th className="px-8 py-5 text-[11px] font-bold uppercase tracking-widest text-slate-400">Usage</th>
+                        <th className="px-8 py-5 text-[11px] font-bold uppercase tracking-widest text-slate-400">Expiry</th>
+                        <th className="px-8 py-5 text-right text-[11px] font-bold uppercase tracking-widest text-slate-400">Actions</th>
                         <th className="px-8 py-5 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400 text-right">Reference</th>
                       </tr>
                     </thead>
