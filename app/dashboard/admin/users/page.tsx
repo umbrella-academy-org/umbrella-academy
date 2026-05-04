@@ -30,6 +30,7 @@ const ROLES: { value: UserRole; label: string }[] = [
   { value: UserRole.TRAINER, label: 'Trainer' },
   { value: UserRole.ADMIN, label: 'Admin' },
   { value: UserRole.GUARDIAN, label: 'Guardian' },
+  { value: UserRole.SALES_MANAGER, label: 'Sales Manager' },
 ];
 
 const EMPTY_FORM: CreateUserForm = {
@@ -201,11 +202,11 @@ export default function UmbrellaAdminUsersPage() {
 
             <div className="flex items-center gap-3">
               <button
-                onClick={() => { setShowCreateModal(true); setForm(EMPTY_FORM); setLocalError(null); setSuccess(false); }}
-                className="px-6 py-2.5 bg-slate-900 text-white rounded-xl font-bold text-[14px] hover:bg-slate-800 transition-all shadow-lg shadow-slate-900/10 flex items-center gap-2 group"
+                onClick={() => { setShowCreateModal(true); setForm({ ...EMPTY_FORM, role: UserRole.SALES_MANAGER }); setLocalError(null); setSuccess(false); }}
+                className="px-6 py-2.5 bg-blue-600 text-white rounded-xl font-bold text-[14px] hover:bg-blue-700 transition-all shadow-lg shadow-blue-600/10 flex items-center gap-2 group"
               >
-                <UserPlus className="w-4 h-4 text-primary" />
-                Add New User
+                <UserPlus className="w-4 h-4 text-white" />
+                Add Sales Manager
               </button>
             </div>
           </div>

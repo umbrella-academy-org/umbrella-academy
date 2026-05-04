@@ -57,6 +57,12 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
           { icon: <Settings className="w-5 h-5" />, label: 'Settings', href: '/dashboard/admin/settings' },
           { icon: <User className="w-5 h-5" />, label: 'Profile', href: '/dashboard/admin/profile' },
         ];
+      case 'sales_manager':
+        return [
+          { icon: <Home className="w-5 h-5" />, label: 'Dashboard', href: '/dashboard/sales', active: true },
+          { icon: <Users className="w-5 h-5" />, label: 'Leads', href: '/dashboard/sales/leads' },
+          { icon: <User className="w-5 h-5" />, label: 'Profile', href: '/dashboard/sales/profile' },
+        ];
       default:
         return [
           { icon: <Home className="w-5 h-5" />, label: 'Home', href: '/dashboard/student', active: true },
