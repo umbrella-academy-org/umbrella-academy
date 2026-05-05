@@ -25,7 +25,7 @@ export default function LoginPage() {
         'trainer': '/dashboard/trainer',
         'admin': '/dashboard/admin',
         'guardian': '/dashboard/guardian',
-        'sales_manager': '/dashboard/sales_manager'
+        'sales_manager': '/dashboard/sales'
       };
       navigate(dashboardRoutes[user.role]);
     }
