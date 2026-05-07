@@ -89,7 +89,7 @@ export function Navbar() {
         {/* CTA Button */}
         <div className="hidden lg:block flex-shrink-0">
           <Link
-            href="/contact"
+            href="/auth/signup"
             className="px-6 py-2.5 bg-primary text-primary-foreground rounded-full font-medium hover:bg-primary/90 hover:-translate-y-0.5 shadow-lg shadow-primary/20 transition-all flex items-center gap-2"
           >
             Apply Now
