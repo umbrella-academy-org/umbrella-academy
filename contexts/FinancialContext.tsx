@@ -41,21 +41,7 @@ export function FinancialProvider({ children }: { children: React.ReactNode }) {
         return;
       }
 
-      if (currentUser.role === 'trainer') {
-        // Fetch personal wallet
-        const walletRes = await financialService.getMyWallet();
-        const wallet = walletRes.data ?? null;
-        setUserWallet(wallet);
-        setWallets(wallet ? [wallet] : []);
-        setTransactions(wallet?.transactions ?? []);
-      } else if (currentUser.role === 'admin') {
-        // Fetch all wallets
-        const walletsRes = await financialService.getAllWallets();
-        const allWallets = walletsRes.data ?? [];
-        setWallets(allWallets);
-        setTransactions(allWallets.flatMap((w: Wallet) => w.transactions ?? []));
-        setUserWallet(null);
-      } else if (currentUser.role === 'student') {
+      if (currentUser.role === 'student') {
         // Fetch payment history
         const paymentsRes = await financialService.getMyPayments();
         const payments = paymentsRes.data ?? [];

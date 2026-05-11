@@ -48,14 +48,6 @@ export interface Subscription {
 }
 
 class FinancialService {
-  async getMyWallet(): Promise<ApiResponse<Wallet>> {
-    return apiClient.get<Wallet>(API_ENDPOINTS.WALLET_ME);
-  }
-
-  async getAllWallets(): Promise<ApiResponse<Wallet[]>> {
-    return apiClient.get<Wallet[]>(API_ENDPOINTS.WALLET);
-  }
-
   async getMyPayments(): Promise<ApiResponse<Payment[]>> {
     return apiClient.get<Payment[]>(API_ENDPOINTS.STATS_ME);
   }
