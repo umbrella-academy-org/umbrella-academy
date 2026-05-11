@@ -1,14 +1,16 @@
-import type { Metadata } from "next";
+'use client'
 
-export const metadata: Metadata = {
-    title: "Join Dreamize Academy",
-    description: "Create your account at Umbrella Academy and start your learning journey with expert mentors and industry trainers.",
-};
+import { useAuth } from "@/contexts/AuthContext"
+import { useEffect } from "react";
 
 export default function AuthLayout({
     children,
 }: {
     children: React.ReactNode;
 }) {
+    const { handleDashboardRedirect,isAuthenticated } = useAuth();
+    useEffect(() => {
+        handleDashboardRedirect();
+    },[isAuthenticated]);
     return children;
 }

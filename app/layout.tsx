@@ -52,12 +52,12 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet" />
       </head>
       <AppProviders>
-      <body className="font-sans antialiased" suppressHydrationWarning>
-       
+        <body className="font-sans antialiased" suppressHydrationWarning>
+
           {children}
-        {process.env.NODE_ENV === 'production' && <Analytics />}
-    
-      </body>
+          {process.env.NODE_ENV === 'production' && <Analytics />}
+
+        </body>
       </AppProviders>
     </html>
   )

@@ -18,6 +18,10 @@ export default function LoginPage() {
   const [localErrors, setLocalErrors] = useState({ email: '', password: '' });
 
   useEffect(() => {
+    setLocalErrors({ email: '', password: '' });
+  }, [])
+
+  useEffect(() => {
     if (isAuthenticated && user) {
       // Redirect based on user role
       const dashboardRoutes: Record<string, string> = {

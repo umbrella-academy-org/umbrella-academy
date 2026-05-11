@@ -15,6 +15,7 @@ interface AuthContextType {
   registerTrainer: (data: Partial<Trainer>) => Promise<void>;
   logout: () => void;
   onboardingChecklist: OnboardingChecklist
+  handleDashboardRedirect: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -96,6 +97,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
     checkSession();
   }, []);
+
+  const handleDashboardRedirect = () => {
+    if (user) {
+      const dashboardRoutes: Record<string, string> = {
+        'student': '/dashboard/student',
+        'trainer': '/dashboard/trainer',
+        'admin': '/dashboard/admin',
+        'guardian': '/dashboard/guardian',
+        'sales_manager': '/dashboard/sales'
+      };
+      router.push(dashboardRoutes[user.role]);
+    }
+  }
 
   // Separate effect to handle user changes (like login/logout)
   useEffect(() => {
@@ -232,7 +246,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       registerTrainer,
       logout,
       error,
-      onboardingChecklist
+      onboardingChecklist,
+      handleDashboardRedirect
     }}>
       {children}
     </AuthContext.Provider>
