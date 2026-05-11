@@ -6,15 +6,15 @@ import Sidebar from '@/components/dashboard/Sidebar';
 import { useProjects } from '@/contexts/ProjectContext';
 import { useAuth } from '@/contexts/AuthContext';
 import { UserRole, ProjectStatus, type Project } from '@/types';
-import { 
-  Folder, 
-  Clock, 
-  CheckCircle, 
-  XCircle, 
-  Hourglass, 
-  ExternalLink, 
-  FileText, 
-  Image as ImageIcon, 
+import {
+  Folder,
+  Clock,
+  CheckCircle,
+  XCircle,
+  Hourglass,
+  ExternalLink,
+  FileText,
+  Image as ImageIcon,
   Wrench,
   User,
   Calendar,
@@ -50,7 +50,7 @@ export default function StudentProjectsPage() {
 
   // Apply filters
   const filteredProjects = studentProjects.filter(project => {
-    const matchesSearch = 
+    const matchesSearch =
       project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
       project.category.toLowerCase().includes(searchQuery.toLowerCase());
@@ -120,7 +120,7 @@ export default function StudentProjectsPage() {
                   <h1 className="text-3xl font-playfair font-semibold text-slate-900">My Projects</h1>
                   <p className="text-slate-500 font-light mt-1">View and manage all your submitted projects</p>
                 </div>
-                <button 
+                <button
                   onClick={() => router.push('/dashboard/student/projects/create')}
                   className="flex items-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-full font-medium hover:bg-slate-800 transition-colors"
                 >
@@ -215,18 +215,10 @@ export default function StudentProjectsPage() {
                 </div>
                 <h3 className="text-lg font-playfair font-semibold text-slate-900 mb-2">No Projects Found</h3>
                 <p className="text-slate-500 font-light mb-4">
-                  {studentProjects.length === 0 
-                    ? "You haven't submitted any projects yet." 
+                  {studentProjects.length === 0
+                    ? "You haven't submitted any projects yet."
                     : "No projects match your filters."}
                 </p>
-                {studentProjects.length === 0 && (
-                  <button 
-                    onClick={() => router.push('/dashboard/student/projects/create')}
-                    className="px-6 py-3 bg-slate-900 text-white rounded-full hover:bg-slate-800"
-                  >
-                    Submit Your First Project
-                  </button>
-                )}
               </div>
             ) : viewMode === 'grid' ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -365,7 +357,7 @@ export default function StudentProjectsPage() {
                 >
                   <X className="w-5 h-5" />
                 </button>
-                
+
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
                     {/* Status & Public Badge */}
@@ -382,7 +374,7 @@ export default function StudentProjectsPage() {
                         </span>
                       )}
                     </div>
-                    
+
                     <h2 className="text-3xl font-playfair font-semibold text-white mb-2">{selectedProject.title}</h2>
                     <div className="flex items-center gap-4 text-white/90 text-sm">
                       <span className="flex items-center gap-1">
@@ -391,10 +383,10 @@ export default function StudentProjectsPage() {
                       </span>
                       <span className="flex items-center gap-1">
                         <Calendar className="w-4 h-4" />
-                        {new Date(selectedProject.createdAt).toLocaleDateString('en-US', { 
-                          year: 'numeric', 
-                          month: 'long', 
-                          day: 'numeric' 
+                        {new Date(selectedProject.createdAt).toLocaleDateString('en-US', {
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric'
                         })}
                       </span>
                     </div>
@@ -451,9 +443,9 @@ export default function StudentProjectsPage() {
                   </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {selectedProject.evidence.demoLink && (
-                      <a 
-                        href={selectedProject.evidence.demoLink} 
-                        target="_blank" 
+                      <a
+                        href={selectedProject.evidence.demoLink}
+                        target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-3 p-3 bg-blue-50 rounded-xl text-blue-700 hover:bg-blue-100 transition-colors group"
                       >
@@ -467,9 +459,9 @@ export default function StudentProjectsPage() {
                       </a>
                     )}
                     {selectedProject.evidence.videoDemoLink && (
-                      <a 
-                        href={selectedProject.evidence.videoDemoLink} 
-                        target="_blank" 
+                      <a
+                        href={selectedProject.evidence.videoDemoLink}
+                        target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-3 p-3 bg-red-50 rounded-xl text-red-700 hover:bg-red-100 transition-colors group"
                       >
@@ -483,9 +475,9 @@ export default function StudentProjectsPage() {
                       </a>
                     )}
                     {selectedProject.evidence.designLink && (
-                      <a 
-                        href={selectedProject.evidence.designLink} 
-                        target="_blank" 
+                      <a
+                        href={selectedProject.evidence.designLink}
+                        target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-3 p-3 bg-purple-50 rounded-xl text-purple-700 hover:bg-purple-100 transition-colors group"
                       >
@@ -499,9 +491,9 @@ export default function StudentProjectsPage() {
                       </a>
                     )}
                     {selectedProject.evidence.documentationLink && (
-                      <a 
-                        href={selectedProject.evidence.documentationLink} 
-                        target="_blank" 
+                      <a
+                        href={selectedProject.evidence.documentationLink}
+                        target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-3 p-3 bg-gray-100 rounded-xl text-gray-700 hover:bg-gray-200 transition-colors group"
                       >
@@ -515,9 +507,9 @@ export default function StudentProjectsPage() {
                       </a>
                     )}
                     {selectedProject.evidence.fileDownloadLink && (
-                      <a 
-                        href={selectedProject.evidence.fileDownloadLink} 
-                        target="_blank" 
+                      <a
+                        href={selectedProject.evidence.fileDownloadLink}
+                        target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-3 p-3 bg-green-50 rounded-xl text-green-700 hover:bg-green-100 transition-colors group"
                       >
@@ -531,9 +523,9 @@ export default function StudentProjectsPage() {
                       </a>
                     )}
                     {selectedProject.evidence.externalLink && (
-                      <a 
-                        href={selectedProject.evidence.externalLink} 
-                        target="_blank" 
+                      <a
+                        href={selectedProject.evidence.externalLink}
+                        target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-3 p-3 bg-orange-50 rounded-xl text-orange-700 hover:bg-orange-100 transition-colors group"
                       >
@@ -557,7 +549,7 @@ export default function StudentProjectsPage() {
                     <ImageIcon className="w-4 h-4 text-purple-600" />
                     Attachments
                   </h3>
-                  
+
                   {/* Images - Display as thumbnails */}
                   {selectedProject.attachments.images && selectedProject.attachments.images.length > 0 && (
                     <div className="mb-4">
@@ -566,15 +558,15 @@ export default function StudentProjectsPage() {
                       </p>
                       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
                         {selectedProject.attachments.images.map((url, index) => (
-                          <a 
+                          <a
                             key={index}
                             href={url}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="group relative aspect-square rounded-xl overflow-hidden bg-gray-100 border border-gray-200 hover:border-purple-400 transition-all"
                           >
-                            <img 
-                              src={url} 
+                            <img
+                              src={url}
                               alt={`Project image ${index + 1}`}
                               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                               loading="lazy"
@@ -591,7 +583,7 @@ export default function StudentProjectsPage() {
                       </div>
                     </div>
                   )}
-                  
+
                   {/* PDFs */}
                   {selectedProject.attachments.pdfs && selectedProject.attachments.pdfs.length > 0 && (
                     <div>
@@ -600,7 +592,7 @@ export default function StudentProjectsPage() {
                       </p>
                       <div className="space-y-2">
                         {selectedProject.attachments.pdfs.map((url, index) => (
-                          <a 
+                          <a
                             key={index}
                             href={url}
                             target="_blank"
@@ -629,10 +621,10 @@ export default function StudentProjectsPage() {
                   {selectedProject.approvedAt && (
                     <p className="text-xs text-blue-600 mt-3 flex items-center gap-1">
                       <CheckCircle className="w-3.5 h-3.5" />
-                      Approved on {new Date(selectedProject.approvedAt).toLocaleDateString('en-US', { 
-                        year: 'numeric', 
-                        month: 'long', 
-                        day: 'numeric' 
+                      Approved on {new Date(selectedProject.approvedAt).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
                       })}
                     </p>
                   )}

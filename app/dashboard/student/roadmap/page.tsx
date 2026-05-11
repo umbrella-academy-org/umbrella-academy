@@ -280,13 +280,7 @@ export default function StudentRoadmapPage() {
                     <Map className="w-8 h-8 text-slate-400" />
                   </div>
                   <h3 className="text-lg font-playfair font-semibold text-slate-900 mb-2">No Roadmaps Yet</h3>
-                  <p className="text-slate-500 font-light mb-4">Create your first learning roadmap to get started</p>
-                  <button
-                    onClick={() => navigate('/dashboard/student/roadmap/create')}
-                    className="px-6 py-3 bg-slate-900 text-white rounded-full hover:bg-slate-800"
-                  >
-                    Create Roadmap
-                  </button>
+                  <p className="text-slate-500 font-light mb-4">Tell your trainer to create your learning roadmap to get started</p>
                 </div>
               )}
             </>
@@ -408,27 +402,26 @@ export default function StudentRoadmapPage() {
                     const isActive = milestone.status === RoadmapStepStatus.ACTIVE;
                     const isCompleted = milestone.status === RoadmapStepStatus.COMPLETED;
                     const isPending = milestone.status === RoadmapStepStatus.PENDING_APPROVAL;
-                    
+
                     return (
                       <div key={index} className="relative flex gap-4">
                         {/* Timeline Line */}
                         {!isLast && (
-                          <div className="absolute left-5 top-12 w-0.5 h-full bg-slate-200" 
-                            style={{ 
-                              background: isCompleted ? 'linear-gradient(to bottom, #22c55e, #e5e7eb)' : 
-                                         isActive ? 'linear-gradient(to bottom, #3b82f6, #e5e7eb)' : '#e5e7eb'
+                          <div className="absolute left-5 top-12 w-0.5 h-full bg-slate-200"
+                            style={{
+                              background: isCompleted ? 'linear-gradient(to bottom, #22c55e, #e5e7eb)' :
+                                isActive ? 'linear-gradient(to bottom, #3b82f6, #e5e7eb)' : '#e5e7eb'
                             }}
                           />
                         )}
-                        
+
                         {/* Status Icon */}
                         <div className="relative z-10 flex-shrink-0">
-                          <div className={`w-10 h-10 rounded-full flex items-center justify-center border-4 ${
-                            isCompleted ? 'bg-green-500 border-green-100' :
-                            isActive ? 'bg-primary border-primary/20' :
-                            isPending ? 'bg-yellow-500 border-yellow-100' :
-                            'bg-slate-300 border-slate-100'
-                          }`}>
+                          <div className={`w-10 h-10 rounded-full flex items-center justify-center border-4 ${isCompleted ? 'bg-green-500 border-green-100' :
+                              isActive ? 'bg-primary border-primary/20' :
+                                isPending ? 'bg-yellow-500 border-yellow-100' :
+                                  'bg-slate-300 border-slate-100'
+                            }`}>
                             {isCompleted ? (
                               <CheckCircle className="w-5 h-5 text-white" />
                             ) : isActive ? (
@@ -443,12 +436,11 @@ export default function StudentRoadmapPage() {
 
                         {/* Content Card */}
                         <div className={`flex-1 pb-8 ${isLast ? '' : ''}`}>
-                          <div className={`rounded-[32px] p-5 border transition-all ${
-                            isActive ? 'bg-primary/5 border-primary/20 shadow-md' :
-                            isCompleted ? 'bg-green-50/30 border-green-100' :
-                            isPending ? 'bg-yellow-50/30 border-yellow-100' :
-                            'bg-slate-50 border-slate-100'
-                          }`}>
+                          <div className={`rounded-[32px] p-5 border transition-all ${isActive ? 'bg-primary/5 border-primary/20 shadow-md' :
+                              isCompleted ? 'bg-green-50/30 border-green-100' :
+                                isPending ? 'bg-yellow-50/30 border-yellow-100' :
+                                  'bg-slate-50 border-slate-100'
+                            }`}>
                             {/* Header Row */}
                             <div className="flex items-start justify-between gap-4 mb-3">
                               <div className="flex-1">
@@ -471,7 +463,7 @@ export default function StudentRoadmapPage() {
                                   )}
                                 </div>
                               </div>
-                              
+
                               {/* Action Button */}
                               {isActive && (
                                 <button
@@ -873,7 +865,7 @@ export default function StudentRoadmapPage() {
                   <ImageIcon className="w-4 h-4 text-purple-600" />
                   Attachments (Images & PDFs)
                 </h4>
-                
+
                 {/* Images */}
                 <div className="mb-4">
                   <label className="flex items-center gap-1.5 text-xs font-medium text-gray-600 mb-2">

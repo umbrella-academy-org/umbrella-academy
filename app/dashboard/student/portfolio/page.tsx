@@ -6,14 +6,14 @@ import { useProjects } from '@/contexts/ProjectContext';
 import { useRouter } from 'next/navigation';
 import { Student, UserRole } from '@/types';
 import Sidebar from '@/components/dashboard/Sidebar';
-import { 
-  Plus, 
-  Download, 
-  Share2, 
+import {
+  Plus,
+  Download,
+  Share2,
   Lock,
-  Code, 
-  Palette, 
-  Briefcase, 
+  Code,
+  Palette,
+  Briefcase,
   Award,
   Calendar,
   ExternalLink,
@@ -58,10 +58,10 @@ export default function PortfolioPage() {
                 </div>
                 <h2 className="text-xl font-playfair font-semibold text-slate-900 mb-2">Portfolio Locked</h2>
                 <p className="text-slate-500 font-light mb-6 max-w-md mx-auto">
-                  Your portfolio is where you showcase completed projects and achievements. 
+                  Your portfolio is where you showcase completed projects and achievements.
                   Subscribe to unlock this feature and build your professional profile.
                 </p>
-                <button 
+                <button
                   onClick={() => router.push('/dashboard/student/pay/subscription')}
                   className="inline-flex items-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-full hover:bg-slate-800 transition-colors"
                 >
@@ -99,7 +99,7 @@ export default function PortfolioPage() {
   return (
     <div className="flex h-screen bg-[#FDF9F2]">
       <Sidebar activeItem="Portfolio" userType={UserRole.STUDENT} />
-      
+
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
         <main className="flex-1 overflow-y-auto p-8">
           <div className="max-w-6xl mx-auto">
@@ -127,21 +127,19 @@ export default function PortfolioPage() {
             <div className="flex gap-1 mb-8 bg-slate-100 rounded-full p-1 max-w-xs">
               <button
                 onClick={() => setActiveTab('projects')}
-                className={`flex-1 px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                  activeTab === 'projects' 
-                    ? 'bg-white text-slate-900 shadow-sm' 
+                className={`flex-1 px-4 py-2 rounded-full text-sm font-medium transition-all ${activeTab === 'projects'
+                    ? 'bg-white text-slate-900 shadow-sm'
                     : 'text-slate-600 hover:text-slate-900'
-                }`}
+                  }`}
               >
                 Projects
               </button>
               <button
                 onClick={() => setActiveTab('achievements')}
-                className={`flex-1 px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                  activeTab === 'achievements' 
-                    ? 'bg-white text-slate-900 shadow-sm' 
+                className={`flex-1 px-4 py-2 rounded-full text-sm font-medium transition-all ${activeTab === 'achievements'
+                    ? 'bg-white text-slate-900 shadow-sm'
                     : 'text-slate-600 hover:text-slate-900'
-                }`}
+                  }`}
               >
                 Achievements
               </button>
@@ -169,7 +167,7 @@ export default function PortfolioPage() {
                     <p className="text-slate-500 font-light mb-4">
                       Complete and get your projects approved to showcase them here.
                     </p>
-                    <button 
+                    <button
                       onClick={() => router.push('/dashboard/student/projects')}
                       className="px-6 py-3 bg-slate-900 text-white rounded-full hover:bg-slate-800"
                     >

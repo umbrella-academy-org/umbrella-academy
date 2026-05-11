@@ -4,6 +4,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import { authService } from '@/services/auth';
 import { BaseUser, OnboardingChecklist, StudentRegister, Trainer, UserRole, Guardian, GuardianInviteState } from '@/types';
 import { useRouter } from 'next/navigation';
+import { userService } from '@/services';
 
 interface AuthContextType {
   error: string | null;
@@ -16,6 +17,7 @@ interface AuthContextType {
   logout: () => void;
   onboardingChecklist: OnboardingChecklist
   handleDashboardRedirect: () => void;
+  fetchOnboardingChecklist: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -111,18 +113,29 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
-  // Separate effect to handle user changes (like login/logout)
-  useEffect(() => {
-    if (user) {
-      // User changed - handle any side effects here
-      if (user.role === UserRole.STUDENT) {
-        authService.getOnboardingChecklist().then(response => {
-          if (response.success && response.data) {
-            setOnboardingChecklist(response.data);
-          }
-        });
+  const fetchOnboardingChecklist = async () => {
+    if (user && user.role === UserRole.STUDENT) {
+      try {
+        const currentStudent = await userService.getStudent()
+        console.log('Current student data:', currentStudent);
+        if (currentStudent.success && currentStudent.data) {
+          const student = currentStudent.data
+          localStorage.setItem('user', JSON.stringify(student ));
+          setUser(student);
+        }
+        const response = await authService.getOnboardingChecklist();
+        if (response.success && response.data) {
+          setOnboardingChecklist(response.data);
+        }
+      } catch {
+        // Silently fail - not critical
       }
     }
+  }
+
+  // Separate effect to handle user changes (like login/logout)
+  useEffect(() => {
+    fetchOnboardingChecklist();
   }, [user?._id]);
 
 
@@ -247,7 +260,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       logout,
       error,
       onboardingChecklist,
-      handleDashboardRedirect
+      handleDashboardRedirect,
+      fetchOnboardingChecklist
     }}>
       {children}
     </AuthContext.Provider>
