@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { authService } from '@/services/auth';
-import { BaseUser, OnboardingChecklist, Student, StudentRegister, Trainer, UserRole, Guardian, GuardianInviteState } from '@/types';
+import { BaseUser, OnboardingChecklist, StudentRegister, Trainer, UserRole, Guardian, GuardianInviteState } from '@/types';
 import { useRouter } from 'next/navigation';
 
 interface AuthContextType {
@@ -41,8 +41,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       if (storedUser && token) {
         const parsedUser: BaseUser = JSON.parse(storedUser);
-        console.log('Restoring session for user:', parsedUser);
-        // Check various user states before allowing access
 
         // 1. Check if email is verified
         if (!parsedUser.isVerified) {
@@ -176,7 +174,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       const response = await authService.registerStudent(data);
       if (response.success && response.data) {
+        localStorage.setItem('user', JSON.stringify(response.data.user));
+        localStorage.setItem('auth_token', response.data.token);
         setUser(response.data.user);
+        setIsAuthenticated(true);
         router.push("/auth/verify")
       }
     } catch (err: unknown) {
@@ -191,7 +192,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       const response = await authService.registerTrainer(data);
       if (response.success && response.data) {
+        localStorage.setItem('user', JSON.stringify(response.data.user));
+        localStorage.setItem('auth_token', response.data.token);
         setUser(response.data.user);
+        setIsAuthenticated(true);
         router.push("/auth/verify")
       }
     } catch (err: unknown) {
