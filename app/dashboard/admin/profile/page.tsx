@@ -1,186 +1,350 @@
 'use client';
 
+import { useState, useRef } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
-import { User, Mail, Shield, Bell, Calendar, MapPin, Camera, Edit2, Check, X, Phone, Globe, BookOpen, Award, Zap, Briefcase, Activity, Server, Database, Lock, ChevronRight, Fingerprint, Key, ShieldCheck, Settings, Star } from 'lucide-react';
+import { User, Mail, Shield, Bell, Calendar, MapPin, Camera, Edit2, Check, X, Phone, Globe, BookOpen, Briefcase, Award, ChevronRight, Settings, Star, Zap, Upload } from 'lucide-react';
 import { useAuth } from '@/contexts';
 import { UserRole } from '@/types';
+import { userService } from '@/services';
 
 export default function UmbrellaAdminProfilePage() {
-    const { user } = useAuth();
+    const { user, updateUserProfile } = useAuth();
+    const [isEditing, setIsEditing] = useState(false);
+    const [isUploading, setIsUploading] = useState(false);
+    const fileInputRef = useRef<HTMLInputElement>(null);
 
-    const name = user?.firstName && user?.lastName ? `${user.firstName} ${user.lastName}` : 'Super Admin';
-    const email = user?.email || 'admin@dreamize.rw';
-    const joinDate = user?.createdAt ? new Date(user.createdAt).toLocaleDateString() : 'January 2025';
+    const [profileData, setProfileData] = useState({
+        name: user?.firstName && user?.lastName ? `${user.firstName} ${user.lastName}` : 'Super Admin',
+        email: user?.email || 'admin@dreamize.rw',
+        phone: '+250 788 111 222',
+        location: 'Kigali, Rwanda',
+        bio: 'System Administrator with full access to all platform features and security protocols. Responsible for managing user accounts, system configurations, and maintaining platform integrity.',
+        expertise: ['System Administration', 'Security Management', 'Database Operations', 'Network Infrastructure'],
+        experience: '5+ Years',
+        field: 'System Administration',
+        joinDate: user?.createdAt ? new Date(user.createdAt).toLocaleDateString() : 'Jan 2025'
+    });
+
+    const handleSave = () => {
+        setIsEditing(false);
+    };
+
+    const handleProfilePictureUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        try {
+            setIsUploading(true);
+            const uploadResponse = await userService.uploadProfilePicture(file);
+            if (uploadResponse.url) {
+                await updateUserProfile({ profilePicture: uploadResponse.url });
+            }
+        } catch (error) {
+            console.error('Error uploading profile picture:', error);
+        } finally {
+            setIsUploading(false);
+        }
+    };
+
+    const handleProfilePictureClick = () => {
+        fileInputRef.current?.click();
+    };
 
     return (
         <div className="flex h-screen bg-[#FDF9F2]">
             <Sidebar activeItem="Profile" userType={UserRole.ADMIN} />
 
-            <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
-                {/* Header */}
-                <header className="bg-white/80 backdrop-blur-md border-b border-slate-100 px-8 py-5 sticky top-0 z-10">
-                  <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
-                    <div>
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="text-[12px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full uppercase tracking-wider">Identity Management</span>
-                        <span className="text-slate-300">•</span>
-                        <span className="text-[12px] font-medium text-slate-400 italic">User Profile</span>
-                      </div>
-                      <h1 className="text-2xl font-playfair font-bold text-slate-900">Personnel Dossier</h1>
-                    </div>
-
-                    <div className="flex items-center gap-3">
-                       <button className="px-6 py-3 bg-slate-900 text-white rounded-full font-bold text-sm hover:bg-slate-800 transition-all shadow-lg shadow-slate-900/10 flex items-center gap-2 group">
-                          <Edit2 size={16} className="text-primary group-hover:rotate-12 transition-transform" />
-                          Update Credentials
-                       </button>
-                    </div>
-                  </div>
-                </header>
-
+            <div className="flex-1 flex flex-col min-w-0">
                 <main className="flex-1 p-8 overflow-y-auto">
-                    <div className="max-w-6xl mx-auto space-y-8">
-                        
-                        {/* Section Header with Badge */}
-                        <div className="mb-10">
-                          <div className="relative inline-flex items-center justify-center mb-6">
-                            <div className="absolute -top-[14px] -left-[14px] w-9 h-9 pointer-events-none text-primary">
-                              <svg viewBox="0 0 40 40" strokeWidth="4" stroke="currentColor" fill="none" strokeLinecap="round">
-                                <line x1="8" y1="8" x2="14" y2="14" />
-                                <line x1="2" y1="20" x2="10" y2="20" />
-                                <line x1="20" y1="2" x2="20" y2="10" />
-                              </svg>
+                    <div className="max-w-full mx-auto">
+                        {/* Profile Header Card */}
+                        <div className="bg-white rounded-[32px] border border-slate-100 shadow-sm overflow-hidden mb-8">
+                            <div className="h-40 bg-gradient-to-br from-slate-900 to-slate-800 relative overflow-hidden">
+                                {/* Decorative Abstract Shapes */}
+                                <div className="absolute top-0 left-0 w-full h-full opacity-20">
+                                    <div className="absolute -top-24 -left-24 w-64 h-64 bg-primary rounded-full blur-3xl" />
+                                    <div className="absolute top-1/2 -right-12 w-48 h-48 bg-white rounded-full blur-2xl" />
+                                </div>
                             </div>
-                            <span className="text-sm font-semibold tracking-[0.5px] text-primary bg-primary/20 px-5 py-2 rounded-full shadow-sm border border-primary/10">
-                              Personnel Dossier
-                            </span>
-                          </div>
-                        </div>
 
-                        {/* Profile Hero Card */}
-                        <div className="bg-white rounded-[24px] border border-slate-100 shadow-[0_20px_40px_rgba(0,0,0,0.06)] overflow-hidden relative">
-                           {/* Stylized Banner */}
-                           <div className="h-40 bg-slate-900 relative overflow-hidden">
-                              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,184,0,0.15),transparent)]" />
-                              <div className="absolute top-0 left-0 w-full h-full opacity-10">
-                                 <div className="absolute top-8 left-8 w-24 h-24 bg-primary blur-3xl rounded-full" />
-                                 <div className="absolute bottom-8 right-16 w-48 h-48 bg-primary blur-[80px] rounded-full" />
-                              </div>
-                              <div className="absolute bottom-4 right-8 flex items-center gap-2">
-                                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                                 <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest italic">Encrypted Connection Active</span>
-                              </div>
-                           </div>
+                            <div className="px-8 py-8">
+                                <div className="flex flex-col md:flex-row md:items-end -mt-12 gap-6">
+                                    <div className="relative group">
+                                        <div className="w-32 h-32 rounded-full bg-white p-1.5 shadow-2xl shadow-slate-200/50 transform group-hover:scale-105 transition-all duration-500">
+                                            <div className="w-full h-full bg-gradient-to-br from-slate-50 to-slate-100 rounded-full flex items-center justify-center overflow-hidden">
+                                                {user?.profilePicture ? (
+                                                    <img
+                                                        src={user.profilePicture}
+                                                        alt={profileData.name}
+                                                        className="w-full h-full object-cover"
+                                                    />
+                                                ) : (
+                                                    <span className="text-slate-700 text-4xl font-extrabold">
+                                                        {profileData.name.split(' ').map(n => n[0]).join('')}
+                                                    </span>
+                                                )}
+                                            </div>
+                                        </div>
+                                        <div className="absolute -bottom-1 -right-1 w-10 h-10 bg-primary border-4 border-white rounded-full flex items-center justify-center" title="Verified Admin">
+                                            <Check className="w-5 h-5 text-white" />
+                                        </div>
+                                        <button
+                                            onClick={handleProfilePictureClick}
+                                            disabled={isUploading}
+                                            className="absolute inset-0 w-32 h-32 rounded-full bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity duration-300"
+                                            title="Change profile picture"
+                                        >
+                                            {isUploading ? (
+                                                <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                                            ) : (
+                                                <Upload className="w-6 h-6 text-white" />
+                                            )}
+                                        </button>
+                                        <input
+                                            ref={fileInputRef}
+                                            type="file"
+                                            accept="image/*"
+                                            onChange={handleProfilePictureUpload}
+                                            className="hidden"
+                                        />
+                                    </div>
 
-                           <div className="px-8 pb-8 relative">
-                              <div className="flex flex-col md:flex-row items-end -mt-12 gap-6">
-                                 <div className="relative group">
-                                    <div className="w-32 h-32 rounded-[24px] bg-white p-2 shadow-2xl shadow-slate-900/10 transition-transform duration-500 hover:scale-[1.02]">
-                                       <div className="w-12 h-12 bg-slate-900 rounded-[20px] flex items-center justify-center text-white text-lg font-black shadow-lg">
-                                          {name.split(' ').map(n => n[0]).join('')}
-                                       </div>
-                                    </div>
-                                    <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-primary border-4 border-white rounded-xl flex items-center justify-center shadow-xl rotate-3">
-                                       <ShieldCheck className="w-5 h-5 text-slate-900" />
-                                    </div>
-                                 </div>
+                                    <div className="flex-1 flex flex-col md:flex-row md:items-center justify-between gap-6 pb-2">
+                                        <div>
+                                            <div className="flex items-center gap-3">
+                                                <h1 className="text-3xl font-playfair font-semibold text-slate-900">{profileData.name}</h1>
+                                                <div className="px-2.5 py-1 bg-primary/10 text-primary border border-primary/20 rounded-full text-[10px] font-bold uppercase tracking-wider">System Admin</div>
+                                            </div>
+                                            <p className="text-slate-500 font-light flex items-center gap-2 mt-1.5">
+                                                <Briefcase className="w-4.5 h-4.5 text-slate-600" />
+                                                <span className="text-slate-600 capitalize">{profileData.field.replace(/-/g, ' ')} Field</span>
+                                                <span className="w-1 h-1 bg-slate-300 rounded-full" />
+                                                <span className="text-slate-400">Root Administrator</span>
+                                            </p>
+                                        </div>
 
-                                 <div className="flex-1 pb-2">
-                                    <div className="flex items-center gap-4 mb-2">
-                                       <h2 className="text-3xl font-playfair font-black text-slate-900 tracking-tight">{name}</h2>
-                                       <span className="px-3 py-1 bg-slate-900 text-white rounded-full text-[10px] font-black uppercase tracking-[0.2em] shadow-lg shadow-slate-900/10">ROOT_ADMIN</span>
+                                        <div className="flex gap-4">
+                                            {isEditing ? (
+                                                <>
+                                                    <button
+                                                        onClick={() => setIsEditing(false)}
+                                                        className="px-6 py-3 border border-slate-200 text-slate-600 rounded-full font-semibold hover:bg-slate-50 transition-all active:scale-95"
+                                                    >
+                                                        Cancel
+                                                    </button>
+                                                    <button
+                                                        onClick={handleSave}
+                                                        className="px-8 py-3 bg-slate-900 text-white rounded-full font-semibold hover:bg-slate-800 shadow-xl shadow-slate-200 active:scale-95 transition-all"
+                                                    >
+                                                        Save Changes
+                                                    </button>
+                                                </>
+                                            ) : (
+                                                <button
+                                                    onClick={() => setIsEditing(true)}
+                                                    className="flex items-center gap-2.5 px-8 py-3 bg-white border border-slate-200 text-slate-800 rounded-full font-semibold hover:border-primary hover:text-slate-600 shadow-sm hover:shadow-slate-100/50 transition-all active:scale-95 group"
+                                                >
+                                                    <Edit2 className="w-4.5 h-4.5 group-hover:rotate-12 transition-transform" />
+                                                    Edit Profile
+                                                </button>
+                                            )}
+                                        </div>
                                     </div>
-                                    <div className="flex flex-wrap items-center gap-6 text-slate-400 font-bold text-[13px] uppercase tracking-wider">
-                                       <div className="flex items-center gap-2">
-                                          <Mail size={16} className="text-primary" />
-                                          {email}
-                                       </div>
-                                       <div className="flex items-center gap-2">
-                                          <Calendar size={16} className="text-primary" />
-                                          Joined {joinDate}
-                                       </div>
-                                       <div className="flex items-center gap-2">
-                                          <Globe size={16} className="text-primary" />
-                                          Kigali, RW
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
+                                </div>
+                            </div>
                         </div>
 
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                           {/* Access Tiers */}
-                           <div className="lg:col-span-2 space-y-8">
-                              <div className="bg-white rounded-[24px] border border-slate-100 p-8 shadow-[0_20px_40px_rgba(0,0,0,0.06)] relative overflow-hidden group">
-                                 <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full -mr-12 -mt-12 blur-3xl group-hover:bg-primary/10 transition-colors" />
-                                 <h3 className="text-[22px] font-playfair font-bold text-slate-900 mb-6">Security Clearance</h3>
-                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div className="p-6 bg-slate-900 rounded-[24px] text-white shadow-xl shadow-slate-900/10 relative overflow-hidden group/card">
-                                       <div className="relative z-10">
-                                          <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] mb-3">Current Authorization</p>
-                                          <h4 className="text-2xl font-playfair font-light mb-2 text-white group-hover/card:text-primary transition-colors">Level 10 Master</h4>
-                                          <p className="text-xs text-slate-400 font-medium italic flex items-center gap-2">
-                                             <div className="w-1.5 h-1.5 bg-primary rounded-full shadow-[0_0_8px_rgba(255,184,0,0.8)]" />
-                                             Full System Decryption Enabled
-                                          </p>
-                                       </div>
-                                       <Fingerprint className="absolute -bottom-6 -right-6 w-24 h-24 text-white/5 group-hover/card:text-primary/5 transition-colors" />
+                            {/* Left Column - Personal Info */}
+                            <div className="lg:col-span-2 space-y-8">
+                                <div className="bg-white rounded-[32px] border border-slate-100 shadow-sm p-8">
+                                    <div className="flex items-center gap-4 mb-6">
+                                        <div className="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center text-slate-600">
+                                            <User className="w-6 h-6" />
+                                        </div>
+                                        <h3 className="text-xl font-playfair font-semibold text-slate-900">Personal Information</h3>
                                     </div>
 
-                                    <div className="p-6 bg-slate-50 rounded-[24px] border border-slate-100 relative group/status overflow-hidden">
-                                       <div className="relative z-10">
-                                          <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] mb-3">Identity Integrity</p>
-                                          <h4 className="text-2xl font-playfair font-light text-slate-900 mb-2 tracking-tight">Verified</h4>
-                                          <p className="text-xs text-slate-500 font-medium italic">Biometric profile fully synchronized</p>
-                                       </div>
-                                       <ShieldCheck className="absolute bottom-4 right-4 w-10 h-10 text-slate-200/50 transform group-hover/status:scale-110 group-hover/status:text-primary/20 transition-all duration-700" />
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
+                                        <div className="space-y-2">
+                                            <label className="text-xs font-bold text-slate-400 uppercase tracking-wider ml-1">Full Name</label>
+                                            {isEditing ? (
+                                                <input
+                                                    type="text"
+                                                    value={profileData.name}
+                                                    onChange={(e) => setProfileData({ ...profileData, name: e.target.value })}
+                                                    className="w-full px-5 py-3.5 bg-slate-50 border-2 border-slate-50 rounded-xl focus:bg-white focus:border-primary/20 focus:ring-0 outline-none transition-all font-medium"
+                                                />
+                                            ) : (
+                                                <div className="px-5 py-3.5 bg-slate-50/50 border border-transparent rounded-xl">
+                                                    <p className="text-slate-900 font-semibold">{profileData.name}</p>
+                                                </div>
+                                            )}
+                                        </div>
+                                        <div className="space-y-2">
+                                            <label className="text-xs font-bold text-slate-400 uppercase tracking-wider ml-1">Email Address</label>
+                                            {isEditing ? (
+                                                <input
+                                                    type="email"
+                                                    value={profileData.email}
+                                                    onChange={(e) => setProfileData({ ...profileData, email: e.target.value })}
+                                                    className="w-full px-5 py-3.5 bg-slate-50 border-2 border-slate-50 rounded-xl focus:bg-white focus:border-primary/20 focus:ring-0 outline-none transition-all font-medium"
+                                                />
+                                            ) : (
+                                                <div className="px-5 py-3.5 bg-slate-50/50 border border-transparent rounded-xl flex items-center justify-between">
+                                                    <p className="text-slate-900 font-semibold">{profileData.email}</p>
+                                                    <Mail className="w-4 h-4 text-slate-300" />
+                                                </div>
+                                            )}
+                                        </div>
+                                        <div className="space-y-2">
+                                            <label className="text-xs font-bold text-slate-400 uppercase tracking-wider ml-1">Phone Number</label>
+                                            {isEditing ? (
+                                                <input
+                                                    type="text"
+                                                    value={profileData.phone}
+                                                    onChange={(e) => setProfileData({ ...profileData, phone: e.target.value })}
+                                                    className="w-full px-5 py-3.5 bg-slate-50 border-2 border-slate-50 rounded-xl focus:bg-white focus:border-primary/20 focus:ring-0 outline-none transition-all font-medium"
+                                                />
+                                            ) : (
+                                                <div className="px-5 py-3.5 bg-slate-50/50 border border-transparent rounded-xl flex items-center justify-between">
+                                                    <p className="text-slate-900 font-semibold">{profileData.phone}</p>
+                                                    <Phone className="w-4 h-4 text-slate-300" />
+                                                </div>
+                                            )}
+                                        </div>
+                                        <div className="space-y-2">
+                                            <label className="text-xs font-bold text-slate-400 uppercase tracking-wider ml-1">Location</label>
+                                            {isEditing ? (
+                                                <input
+                                                    type="text"
+                                                    value={profileData.location}
+                                                    onChange={(e) => setProfileData({ ...profileData, location: e.target.value })}
+                                                    className="w-full px-5 py-3.5 bg-slate-50 border-2 border-slate-50 rounded-xl focus:bg-white focus:border-primary/20 focus:ring-0 outline-none transition-all font-medium"
+                                                />
+                                            ) : (
+                                                <div className="px-5 py-3.5 bg-slate-50/50 border border-transparent rounded-xl flex items-center justify-between">
+                                                    <p className="text-slate-900 font-semibold">{profileData.location}</p>
+                                                    <MapPin className="w-4 h-4 text-slate-300" />
+                                                </div>
+                                            )}
+                                        </div>
                                     </div>
-                                 </div>
-                              </div>
-
-                              <div className="bg-white rounded-[24px] border border-slate-100 p-8 shadow-[0_20px_40px_rgba(0,0,0,0.06)]">
-                                 <h3 className="text-[22px] font-playfair font-bold text-slate-900 mb-6">Access Log & Metadata</h3>
-                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div className="p-4 bg-slate-50 rounded-[20px] border border-transparent hover:border-primary/20 transition-all group">
-                                       <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 block">Primary Identity Hash</label>
-                                       <p className="text-slate-900 font-black text-sm truncate group-hover:text-primary transition-colors">{user?._id || 'sha256_root_umbrella_master'}</p>
+                                    <div className="mt-10 pt-10 border-t border-slate-50">
+                                        <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider ml-1 mb-4">Professional Bio</label>
+                                        {isEditing ? (
+                                            <textarea
+                                                value={profileData.bio}
+                                                onChange={(e) => setProfileData({ ...profileData, bio: e.target.value })}
+                                                rows={4}
+                                                className="w-full px-5 py-4 bg-slate-50 border-2 border-slate-50 rounded-xl focus:bg-white focus:border-primary/20 focus:ring-0 outline-none transition-all font-medium resize-none leading-relaxed"
+                                            />
+                                        ) : (
+                                            <div className="p-6 bg-slate-50/50 rounded-xl border border-transparent">
+                                                <p className="text-slate-700 font-light leading-relaxed">{profileData.bio}</p>
+                                            </div>
+                                        )}
                                     </div>
-                                    <div className="p-4 bg-slate-50 rounded-[20px] border border-transparent hover:border-primary/20 transition-all group">
-                                       <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 block">System Uptime Contribution</label>
-                                       <p className="text-slate-900 font-black text-sm group-hover:text-primary transition-colors">1,248 Productive Hours</p>
+                                </div>
+
+                                <div className="bg-white rounded-[32px] border border-slate-100 shadow-sm p-8">
+                                    <div className="flex items-center gap-4 mb-6">
+                                        <div className="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center text-slate-600">
+                                            <Award className="w-6 h-6" />
+                                        </div>
+                                        <h3 className="text-xl font-playfair font-semibold text-slate-900">Expertise & Experience</h3>
                                     </div>
-                                 </div>
-                              </div>
-                           </div>
 
-                           {/* Sidebar Actions */}
-                           <div className="space-y-8">
-                              <div className="bg-white rounded-[24px] border border-slate-100 p-6 shadow-[0_20px_40px_rgba(0,0,0,0.06)]">
-                                 <h3 className="text-[22px] font-playfair font-bold text-slate-900 mb-6">Control Panel</h3>
-                                 <div className="space-y-3">
-                                    <ProfileControl icon={<Key className="w-5 h-5" />} label="Security Keys" />
-                                    <ProfileControl icon={<Bell className="w-5 h-5" />} label="System Alerts" />
-                                    <ProfileControl icon={<Activity className="w-5 h-5" />} label="Activity Audit" />
-                                 </div>
-                              </div>
+                                    <div className="space-y-8">
+                                        <div>
+                                            <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider ml-1 mb-4">Top Skills & Specialties</label>
+                                            <div className="flex flex-wrap gap-3">
+                                                {profileData.expertise.map((skill, i) => (
+                                                    <span key={i} className="px-4 py-2 bg-slate-50 text-slate-700 border border-slate-100 rounded-xl text-xs font-bold uppercase tracking-wider shadow-sm">
+                                                        {skill}
+                                                    </span>
+                                                ))}
+                                                {isEditing && (
+                                                    <button className="px-4 py-2 border-2 border-dashed border-slate-200 text-slate-400 rounded-xl text-xs font-bold uppercase tracking-wider hover:border-slate-500 hover:text-slate-500 transition-all active:scale-95">
+                                                        + Add Expertise
+                                                    </button>
+                                                )}
+                                            </div>
+                                        </div>
 
-                              <div className="p-8 bg-gradient-to-br from-slate-900 to-slate-800 rounded-[24px] text-white shadow-[0_30px_50px_rgba(0,0,0,0.15)] relative overflow-hidden group">
-                                 <div className="absolute top-0 right-0 w-24 h-24 bg-primary/10 rounded-full -mr-12 -mt-12 blur-[60px] group-hover:bg-primary/20 transition-colors" />
-                                 <div className="relative z-10">
-                                    <h4 className="text-xl font-playfair font-black mb-3 text-white">System Protocol Hub</h4>
-                                    <p className="text-slate-400 text-xs font-medium mb-6 leading-relaxed italic">Access high-security overrides and administrative command line tools.</p>
-                                    <button className="w-full py-3 bg-white/10 hover:bg-primary hover:text-slate-900 border border-white/10 rounded-full font-black text-sm transition-all flex items-center justify-center gap-3 group/btn">
-                                       Launch Console
-                                       <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                                    </button>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+                                            <div className="flex items-center gap-6 p-6 bg-slate-50/30 rounded-[32px] border border-slate-100/50 group hover:bg-slate-50 transition-colors">
+                                                <div className="w-14 h-14 bg-white rounded-xl flex items-center justify-center text-slate-600 shadow-sm transform group-hover:scale-110 transition-transform duration-500">
+                                                    <Zap className="w-7 h-7" />
+                                                </div>
+                                                <div>
+                                                    <p className="text-xs font-bold text-slate-800/60 uppercase tracking-wider mb-1">Experience</p>
+                                                    <p className="text-lg font-playfair font-semibold text-slate-900">{profileData.experience}</p>
+                                                </div>
+                                            </div>
+                                            <div className="flex items-center gap-6 p-6 bg-slate-50/30 rounded-[32px] border border-slate-100/50 group hover:bg-slate-50 transition-colors">
+                                                <div className="w-14 h-14 bg-white rounded-xl flex items-center justify-center text-slate-600 shadow-sm transform group-hover:scale-110 transition-transform duration-500">
+                                                    <Calendar className="w-7 h-7" />
+                                                </div>
+                                                <div>
+                                                    <p className="text-xs font-bold text-slate-800/60 uppercase tracking-wider mb-1">Active Since</p>
+                                                    <p className="text-lg font-playfair font-semibold text-slate-900">{profileData.joinDate}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-                        <div className="py-10 text-center">
-                           <p className="text-slate-400 text-[11px] font-bold tracking-[0.4em] uppercase italic">© Dreamize Africa 2025 • Admin Personnel Protocol</p>
+                            {/* Right Column - Stats & Settings */}
+                            <div className="space-y-8">
+                                <div className="bg-white rounded-[32px] border border-slate-100 shadow-xl shadow-slate-200/30 p-8">
+                                    <h3 className="text-xl font-playfair font-semibold text-slate-900 mb-8 flex items-center gap-3">
+                                        <Star className="w-5 h-5 text-slate-500" />
+                                        Performance Stats
+                                    </h3>
+                                    <div className="space-y-4">
+                                        <div className="p-6 bg-slate-50 rounded-xl border border-slate-100 flex justify-between items-center group hover:bg-white hover:shadow-lg transition-all">
+                                            <span className="text-sm text-slate-500 font-bold uppercase tracking-wider">Users Managed</span>
+                                            <span className="text-2xl font-playfair font-semibold text-slate-900">1,248</span>
+                                        </div>
+                                        <div className="p-6 bg-slate-50 rounded-xl border border-slate-100 flex justify-between items-center group hover:bg-white hover:shadow-lg transition-all border-l-4 border-l-primary">
+                                            <span className="text-sm text-slate-500 font-bold uppercase tracking-wider">System Uptime</span>
+                                            <div className="flex items-center gap-2">
+                                                <Star className="w-4 h-4 text-primary fill-primary" />
+                                                <span className="text-2xl font-playfair font-semibold text-slate-900">99.9%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="bg-white rounded-[32px] border border-slate-100 shadow-xl shadow-slate-200/30 p-8">
+                                    <h3 className="text-xl font-playfair font-semibold text-slate-900 mb-8 flex items-center gap-3">
+                                        <Settings className="w-5 h-5 text-slate-400" />
+                                        Admin Hub
+                                    </h3>
+                                    <div className="space-y-3">
+                                        <SettingsItem icon={<Shield className="w-4.5 h-4.5" />} label="Security Settings" color="slate" />
+                                        <SettingsItem icon={<Bell className="w-4.5 h-4.5" />} label="System Alerts" color="slate" />
+                                        <SettingsItem icon={<Globe className="w-4.5 h-4.5" />} label="Platform Settings" color="slate" />
+                                    </div>
+                                </div>
+
+                                <div className="bg-slate-900 rounded-[32px] p-8 text-white relative overflow-hidden group">
+                                    <div className="relative z-10 text-center">
+                                        <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 text-primary rounded-full text-[10px] font-bold uppercase tracking-wider mb-4">
+                                            <Shield className="w-3 h-3" />
+                                            Root Access Verified
+                                        </div>
+                                        <h3 className="text-xl font-playfair font-semibold mb-2">Admin Badge</h3>
+                                        <p className="text-slate-400 text-xs font-medium mb-6 leading-relaxed">Your administrative credentials have been fully verified by the Academy board.</p>
+                                        <div className="w-16 h-16 bg-gradient-to-br from-slate-400 to-slate-600 rounded-xl mx-auto flex items-center justify-center shadow-lg shadow-slate-600/20 transform group-hover:rotate-12 transition-transform duration-500">
+                                            <Check className="w-8 h-8 text-white" />
+                                        </div>
+                                    </div>
+                                    <div className="absolute top-0 right-0 w-32 h-32 bg-yellow-600/10 rounded-full -mr-16 -mt-16 blur-3xl opacity-50" />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </main>
@@ -189,16 +353,22 @@ export default function UmbrellaAdminProfilePage() {
     );
 }
 
-function ProfileControl({ icon, label }: { icon: React.ReactNode, label: string }) {
+function SettingsItem({ icon, label, color }: { icon: React.ReactNode, label: string, color: string }) {
+    const colors = {
+        gray: 'bg-gray-50 text-gray-600 group-hover:bg-yellow-600',
+    };
+
+    const colorClasses = colors[color as keyof typeof colors] || colors.gray;
+
     return (
-        <button className="w-full flex items-center justify-between p-4 rounded-xl hover:bg-slate-50 transition-all group border border-transparent hover:border-slate-100">
+        <button className="w-full flex items-center justify-between p-4 rounded-lg hover:bg-gray-50 transition-all border border-transparent hover:border-gray-100 group">
             <div className="flex items-center gap-4">
-                <div className="w-10 h-10 bg-slate-50 rounded-xl flex items-center justify-center text-slate-400 group-hover:bg-primary group-hover:text-slate-900 transition-all">
+                <div className={`w-10 h-10 rounded-lg flex items-center justify-center group-hover:text-white transition-all duration-300 ${colorClasses}`}>
                     {icon}
                 </div>
-                <span className="text-[13px] font-playfair font-bold text-slate-600 uppercase tracking-tight group-hover:text-slate-900">{label}</span>
+                <span className="text-sm font-semibold text-gray-700 group-hover:text-gray-900">{label}</span>
             </div>
-            <ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-slate-900 group-hover:translate-x-1 transition-all" />
+            <ChevronRight className="w-5 h-5 text-gray-300 group-hover:text-gray-900 group-hover:translate-x-1 transition-all" />
         </button>
     );
 }

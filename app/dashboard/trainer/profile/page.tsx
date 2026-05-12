@@ -1,14 +1,17 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
-import { User, Mail, Shield, Bell, Calendar, MapPin, Camera, Edit2, Check, X, Phone, Globe, BookOpen, Briefcase, Award, ChevronRight, Settings, Star, Zap } from 'lucide-react';
+import { User, Mail, Shield, Bell, Calendar, MapPin, Camera, Edit2, Check, X, Phone, Globe, BookOpen, Briefcase, Award, ChevronRight, Settings, Star, Zap, Upload } from 'lucide-react';
 import { useAuth } from '@/contexts';
 import { Trainer, UserRole } from '@/types';
+import { userService } from '@/services';
 
 export default function TrainerProfilePage() {
-    const { user } = useAuth();
+    const { user, updateUserProfile } = useAuth();
     const [isEditing, setIsEditing] = useState(false);
+    const [isUploading, setIsUploading] = useState(false);
+    const fileInputRef = useRef<HTMLInputElement>(null);
 
     // Cast user to Trainer if available
     const trainerUser = user as Trainer;
@@ -27,6 +30,27 @@ export default function TrainerProfilePage() {
 
     const handleSave = () => {
         setIsEditing(false);
+    };
+
+    const handleProfilePictureUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        try {
+            setIsUploading(true);
+            const uploadResponse = await userService.uploadProfilePicture(file);
+            if (uploadResponse.url) {
+                await updateUserProfile({ profilePicture: uploadResponse.url });
+            }
+        } catch (error) {
+            console.error('Error uploading profile picture:', error);
+        } finally {
+            setIsUploading(false);
+        }
+    };
+
+    const handleProfilePictureClick = () => {
+        fileInputRef.current?.click();
     };
 
     return (
@@ -50,13 +74,42 @@ export default function TrainerProfilePage() {
                                 <div className="flex flex-col md:flex-row md:items-end -mt-12 gap-6">
                                     <div className="relative group">
                                         <div className="w-32 h-32 rounded-full bg-white p-1.5 shadow-2xl shadow-slate-200/50 transform group-hover:scale-105 transition-all duration-500">
-                                            <div className="w-full h-full bg-gradient-to-br from-slate-50 to-slate-100 rounded-full flex items-center justify-center text-slate-700 text-4xl font-extrabold border border-slate-200">
-                                                {profileData.name.split(' ').map(n => n[0]).join('')}
+                                            <div className="w-full h-full bg-gradient-to-br from-slate-50 to-slate-100 rounded-full flex items-center justify-center overflow-hidden">
+                                                {user?.profilePicture ? (
+                                                    <img
+                                                        src={user.profilePicture}
+                                                        alt={profileData.name}
+                                                        className="w-full h-full object-cover"
+                                                    />
+                                                ) : (
+                                                    <span className="text-slate-700 text-4xl font-extrabold">
+                                                        {profileData.name.split(' ').map(n => n[0]).join('')}
+                                                    </span>
+                                                )}
                                             </div>
                                         </div>
                                         <div className="absolute -bottom-1 -right-1 w-10 h-10 bg-primary border-4 border-white rounded-full flex items-center justify-center" title="Verified Trainer">
                                             <Check className="w-5 h-5 text-white" />
                                         </div>
+                                        <button
+                                            onClick={handleProfilePictureClick}
+                                            disabled={isUploading}
+                                            className="absolute inset-0 w-32 h-32 rounded-full bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity duration-300"
+                                            title="Change profile picture"
+                                        >
+                                            {isUploading ? (
+                                                <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                                            ) : (
+                                                <Upload className="w-6 h-6 text-white" />
+                                            )}
+                                        </button>
+                                        <input
+                                            ref={fileInputRef}
+                                            type="file"
+                                            accept="image/*"
+                                            onChange={handleProfilePictureUpload}
+                                            className="hidden"
+                                        />
                                     </div>
 
                                     <div className="flex-1 flex flex-col md:flex-row md:items-center justify-between gap-6 pb-2">

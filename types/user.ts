@@ -48,6 +48,7 @@ export interface BaseUser  {
   createdAt: string;
   updatedAt: string;
   status?: 'active' | 'pending' | 'inactive';
+  profilePicture?: string;
 }
 
 export interface Guardian extends BaseUser {

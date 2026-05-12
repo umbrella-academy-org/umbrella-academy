@@ -154,12 +154,20 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
         <div className="p-6 mt-auto border-t border-white/5 bg-white/[0.02]">
           <div className="flex items-center gap-4">
             <div className="relative group">
-              <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 transition-transform duration-300 group-hover:scale-105">
-                <span className="text-[14px] font-bold text-white">{userInitials}</span>
+              <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 transition-transform duration-300 group-hover:scale-105 overflow-hidden">
+                {user?.profilePicture ? (
+                  <img
+                    src={user.profilePicture}
+                    alt={userName}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <span className="text-[14px] font-bold text-white">{userInitials}</span>
+                )}
               </div>
               <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-2 border-[#0A0A0A] rounded-full" />
             </div>
-            
+
             <div className="flex-1 min-w-0">
               <div className="font-bold text-white text-[14px] truncate leading-tight">{userName}</div>
               <div className="text-[12px] text-slate-500 truncate mt-0.5">{userEmail}</div>

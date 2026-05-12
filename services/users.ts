@@ -27,6 +27,10 @@ class UserService {
   async updateUserStatus(id: string, status: 'active' | 'inactive' | 'suspended'): Promise<ApiResponse<BaseUser>> {
     return apiClient.put<BaseUser>(API_ENDPOINTS.USER_STATUS(id), { status });
   }
+
+  async uploadProfilePicture(file: File): Promise<{ url: string }> {
+    return apiClient.uploadFile<{ url: string }>(API_ENDPOINTS.FILES.UPLOAD_AVATAR, file);
+  }
 }
 
 export const userService = new UserService();

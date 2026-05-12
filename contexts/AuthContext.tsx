@@ -18,6 +18,7 @@ interface AuthContextType {
   onboardingChecklist: OnboardingChecklist
   handleDashboardRedirect: () => void;
   fetchOnboardingChecklist: () => Promise<void>;
+  updateUserProfile: (userData: Partial<BaseUser>) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -248,6 +249,22 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  const updateUserProfile = async (userData: Partial<BaseUser>) => {
+    if (!user) return;
+    
+    try {
+      const response = await userService.updateProfile(userData);
+      if (response.success && response.data) {
+        const updatedUser = { ...user, ...response.data };
+        setUser(updatedUser);
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+      }
+    } catch (error) {
+      console.error('Error updating user profile:', error);
+      throw error;
+    }
+  };
+
 
   return (
     <AuthContext.Provider value={{
@@ -261,7 +278,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       error,
       onboardingChecklist,
       handleDashboardRedirect,
-      fetchOnboardingChecklist
+      fetchOnboardingChecklist,
+      updateUserProfile
     }}>
       {children}
     </AuthContext.Provider>
