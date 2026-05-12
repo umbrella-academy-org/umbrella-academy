@@ -5,7 +5,7 @@ import Sidebar from '@/components/dashboard/Sidebar';
 import { User, Mail, Shield, Bell, Calendar, MapPin, Camera, Edit2, Check, X, Phone, Globe, BookOpen, Briefcase, Award, ChevronRight, Settings, Star, Zap, Upload } from 'lucide-react';
 import { useAuth } from '@/contexts';
 import { Guardian, UserRole } from '@/types';
-import { userService } from '@/services';
+import { BASE_URL, userService } from '@/services';
 
 export default function GuardianProfilePage() {
     const { user, updateUserProfile } = useAuth();
@@ -77,7 +77,7 @@ export default function GuardianProfilePage() {
                                             <div className="w-full h-full bg-gradient-to-br from-slate-50 to-slate-100 rounded-full flex items-center justify-center overflow-hidden">
                                                 {user?.profilePicture ? (
                                                     <img
-                                                        src={user.profilePicture}
+                                                        src={BASE_URL + user.profilePicture}
                                                         alt={profileData.name}
                                                         className="w-full h-full object-cover"
                                                     />
