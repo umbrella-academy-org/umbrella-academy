@@ -19,6 +19,7 @@ interface AuthContextType {
   handleDashboardRedirect: () => void;
   fetchOnboardingChecklist: () => Promise<void>;
   updateUserProfile: (userData: Partial<BaseUser>) => Promise<void>;
+  verifyOtp: (email: string, otpValue: string) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -121,7 +122,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         console.log('Current student data:', currentStudent);
         if (currentStudent.success && currentStudent.data) {
           const student = currentStudent.data
-          localStorage.setItem('user', JSON.stringify(student ));
+          localStorage.setItem('user', JSON.stringify(student));
           setUser(student);
         }
         const response = await authService.getOnboardingChecklist();
@@ -215,6 +216,36 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  const verifyOtp = async (email: string, otpValue: string) => {
+    try {
+      const response = await authService.verifyOtp(email, otpValue);
+      if (!response.success) {
+        setError(response.message || 'Verification failed. Please try again.');
+        setIsLoading(false);
+        return;
+      }
+      if (response.data) {
+        localStorage.setItem('auth_token', response.data.token);
+        localStorage.setItem('user', JSON.stringify(response.data.user));
+        setUser(response.data.user);
+        setIsAuthenticated(true);
+      }
+
+      // Check if this is a password reset flow
+      const authFlow = typeof window !== 'undefined' ? localStorage.getItem('authFlow') : null;
+      if (authFlow === 'reset-password') {
+        router.push('/auth/reset-password');
+      } else {
+        router.push('/auth/login');
+      }
+    }
+    catch {
+      setError('Invalid or expired code. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
   const registerTrainer = async (data: Partial<Trainer>): Promise<void> => {
     setIsLoading(true);
     try {
@@ -251,7 +282,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const updateUserProfile = async (userData: Partial<BaseUser>) => {
     if (!user) return;
-    
+
     try {
       const response = await userService.updateProfile(userData);
       if (response.success && response.data) {
@@ -279,7 +310,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       onboardingChecklist,
       handleDashboardRedirect,
       fetchOnboardingChecklist,
-      updateUserProfile
+      updateUserProfile,
+      verifyOtp
     }}>
       {children}
     </AuthContext.Provider>

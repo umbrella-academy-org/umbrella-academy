@@ -1,20 +1,20 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { useRouter } from 'next/navigation';
 import { AuthContainer } from '@/components/auth/auth-container';
 import { AuthCard } from '@/components/auth/auth-card';
 import { PremiumButton } from '@/components/ui/premium-button';
 import { ArrowLeft, ArrowRight, ShieldCheck } from 'lucide-react';
 import { authService } from '@/services/auth';
+import { useAuth } from '@/contexts';
 
 export default function VerifyPage() {
-  const router = useRouter();
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
   const [timer, setTimer] = useState(120);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+  const { verifyOtp } = useAuth()
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -73,20 +73,7 @@ export default function VerifyPage() {
       : '';
 
     try {
-      const response = await authService.verifyOtp(email, otpValue);
-      if (!response.success) {
-        setError(response.message || 'Verification failed. Please try again.');
-        setIsLoading(false);
-        return;
-      }
-
-      // Check if this is a password reset flow
-      const authFlow = typeof window !== 'undefined' ? localStorage.getItem('authFlow') : null;
-      if (authFlow === 'reset-password') {
-        router.push('/auth/reset-password');
-      } else {
-        router.push('/auth/login');
-      }
+      await verifyOtp(email, otpValue);
     } catch {
       setError('Invalid or expired code. Please try again.');
     } finally {
@@ -114,8 +101,8 @@ export default function VerifyPage() {
 
   return (
     <AuthContainer>
-      <AuthCard 
-        title="Verify Email" 
+      <AuthCard
+        title="Verify Email"
         subtitle="We've sent a 6-digit code to your inbox. Enter it below to proceed."
       >
         <button
@@ -158,7 +145,7 @@ export default function VerifyPage() {
               />
             ))}
           </div>
-          
+
           {error && (
             <p className="text-[14px] text-red-500 text-center font-medium italic">
               {error}
@@ -182,8 +169,8 @@ export default function VerifyPage() {
             )}
           </div>
 
-          <PremiumButton 
-            type="submit" 
+          <PremiumButton
+            type="submit"
             isLoading={isLoading}
           >
             Verify & Continue
