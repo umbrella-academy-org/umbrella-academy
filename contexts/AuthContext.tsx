@@ -184,7 +184,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       else {
         setError(response.message);
         if (response.message.includes('not verified')) {
-          localStorage.setItem('baseEmail', email);
+          localStorage.setItem('userEmail', email);
           authService.sendOtp(email);
           router.push('/auth/verify');
         } else if (response.message.includes('pending approval')) {

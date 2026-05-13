@@ -69,7 +69,7 @@ export default function VerifyPage() {
     }
 
     const email = typeof window !== 'undefined'
-      ? (localStorage.getItem('baseEmail') || '')
+      ? (localStorage.getItem('userEmail') || '')
       : '';
 
     try {

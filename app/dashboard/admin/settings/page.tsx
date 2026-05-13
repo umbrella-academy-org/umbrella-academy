@@ -9,7 +9,7 @@ import { PremiumButton } from '@/components/ui/premium-button';
 
 export default function UmbrellaAdminSettingsPage() {
     const [systemSettings, setSystemSettings] = useState({
-        platformName: 'Umbrella Academy',
+        platformName: 'Dreamize',
         defaultCurrency: 'RWF',
         timezone: 'Africa/Kigali',
         sessionTimeout: 30,
