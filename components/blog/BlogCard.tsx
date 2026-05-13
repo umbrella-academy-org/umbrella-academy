@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowUpRight } from "lucide-react";
+import Image from "next/image";
 
 interface BlogCardProps {
     image: string;
@@ -18,10 +19,12 @@ export function BlogCard({ image, category, title, description, author }: BlogCa
     return (
         <div className="group flex flex-col cursor-pointer">
             <div className="relative aspect-16/10 rounded-2xl overflow-hidden mb-6">
-                <img
+                <Image
                     src={image}
                     alt={title}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="absolute inset-0  object-cover transition-transform duration-700 group-hover:scale-105"
+                    width={500}
+                    height={500}
                 />
             </div>
 
@@ -44,7 +47,7 @@ export function BlogCard({ image, category, title, description, author }: BlogCa
 
             <div className="mt-8 flex items-center space-x-3">
                 <div className="w-10 h-10 rounded-full overflow-hidden shrink-0">
-                    <img src={author.avatar} alt={author.name} className="w-full h-full object-cover" />
+                    <Image src={author.avatar} alt={author.name} className="w-full h-full object-cover" />
                 </div>
                 <div className="flex flex-col">
                     <span className="text-sm font-bold text-gray-900">{author.name}</span>

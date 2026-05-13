@@ -9,6 +9,7 @@ import { Roadmap, Milestone, RoadmapStepStatus, CreateRoadmapData } from '@/type
 import { Project } from '@/types/project';
 import { UserRole } from '@/types/user';
 import { Plus, Clock, CheckCircle, Edit, Trash2, Target, Calendar, BookOpen, Award } from 'lucide-react';
+import Image from 'next/image';
 
 
 export default function TrainerRoadmapsPage() {
@@ -911,7 +912,10 @@ export default function TrainerRoadmapsPage() {
                             <p className="text-sm font-medium text-gray-700">Images</p>
                             <div className="flex gap-2 mt-2">
                               {submittedProject.attachments.images.map((image, index) => (
-                                <img key={index} src={image} alt={`Project image ${index + 1}`} className="w-16 h-16 object-cover rounded" />
+                                <Image key={index} src={image} alt={`Project image ${index + 1}`}
+                                  className="object-cover rounded"
+                                  height={300}
+                                  width={300} />
                               ))}
                             </div>
                           </div>
@@ -1021,7 +1025,7 @@ export default function TrainerRoadmapsPage() {
                             <p className="text-sm font-medium text-gray-700">Images</p>
                             <div className="flex gap-2 mt-2">
                               {submittedProject.attachments.images.map((image, index) => (
-                                <img key={index} src={image} alt={`Project image ${index + 1}`} className="w-16 h-16 object-cover rounded" />
+                                <Image key={index} src={image} alt={`Project image ${index + 1}`} className="w-16 h-16 object-cover rounded" />
                               ))}
                             </div>
                           </div>

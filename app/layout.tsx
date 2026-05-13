@@ -56,7 +56,7 @@ export default function RootLayout({
       <AppProviders>
         <body className="font-sans antialiased" suppressHydrationWarning>
           <AppProgressBar
-            color="#0070f3"
+            color="#ebd20f"
             height={3}
             showSpinner={false}
           />
