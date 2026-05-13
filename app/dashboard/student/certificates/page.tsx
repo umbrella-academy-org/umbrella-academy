@@ -1,7 +1,7 @@
 'use client';
 
 import { useAuth } from '@/contexts/AuthContext';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next-app-progress-bar';;
 import { Student, UserRole } from '@/types';
 import Sidebar from '@/components/dashboard/Sidebar';
 import { 

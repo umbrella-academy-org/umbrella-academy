@@ -2,7 +2,7 @@
 
 import { ArrowRight, Clock } from "lucide-react";
 import { useReveal } from "@/hooks/system/useReveal";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next-app-progress-bar";
 
 const programs = [
   { name: 'Software Engineering', duration: '6 months', image: '/real/image.jpeg' },

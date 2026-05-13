@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useProjects } from '@/contexts/ProjectContext';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next-app-progress-bar';;
 import { Student, UserRole } from '@/types';
 import Sidebar from '@/components/dashboard/Sidebar';
 import {

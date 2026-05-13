@@ -1,4 +1,4 @@
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next-app-progress-bar';;
 
 export function useNavigationWithLoading() {
   const router = useRouter();

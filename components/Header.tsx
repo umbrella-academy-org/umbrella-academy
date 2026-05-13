@@ -1,7 +1,7 @@
 "use client";
 
 import { Menu, X, Umbrella, Search } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next-app-progress-bar";
 import { useState, useEffect } from "react";
 import { Logo } from "./ui/Logo";
 

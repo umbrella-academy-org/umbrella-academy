@@ -2,7 +2,7 @@
 
 import { useReveal } from "@/hooks/system/useReveal";
 import { ArrowRight, Code, Film, Briefcase, Zap } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next-app-progress-bar";
 
 const categories = [
     {

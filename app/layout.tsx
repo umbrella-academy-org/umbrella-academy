@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 import { AppProviders } from '@/contexts';
+import { AppProgressBar } from 'next-app-progress-bar';
+
 
 const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
@@ -53,7 +55,11 @@ export default function RootLayout({
       </head>
       <AppProviders>
         <body className="font-sans antialiased" suppressHydrationWarning>
-
+          <AppProgressBar
+            color="#0070f3"
+            height={3}
+            showSpinner={false}
+          />
           {children}
           {process.env.NODE_ENV === 'production' && <Analytics />}
 

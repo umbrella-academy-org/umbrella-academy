@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowRight, PlayCircle } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next-app-progress-bar";
 import { useEffect, useState } from "react";
 
 const CATEGORIES = [
