@@ -1,3 +1,5 @@
+import { BaseUser } from "./user";
+
 export enum ProjectStatus {
   DRAFT = 'draft',
   PENDING_APPROVAL = 'pending_approval',
@@ -17,7 +19,7 @@ export interface ProjectEvidence {
 
 export interface Project {
   id: string;
-  studentId: string;
+  student: BaseUser;
   milestoneId?: string;
   title: string;
   description: string;

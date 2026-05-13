@@ -1,3 +1,4 @@
+import { BaseUser } from "./user";
 
 export enum PaymentType {
   ORIENTATION = 'orientation',
@@ -13,7 +14,7 @@ export enum SubscriptionColor {
 
 export interface Subscription {
   id: string;
-  studentId: string;
+  student: BaseUser;
   startDate: Date;
   expiryDate: Date;
   isActive: boolean;
@@ -42,7 +43,7 @@ export interface PromoCode {
 
 export interface Payment {
   id: string;
-  studentId: string;
+  student: BaseUser;
   type: PaymentType;
   amount: number; 
   promoCodeApplied?: string;
@@ -54,7 +55,7 @@ export interface Payment {
 
 export interface Subscription {
   id: string;
-  studentId: string;
+  student: BaseUser;
   startDate: Date;
   expiryDate: Date;
   isActive: boolean;

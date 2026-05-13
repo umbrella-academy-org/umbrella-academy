@@ -55,8 +55,8 @@ export interface Milestone {
 
 export interface Roadmap {
   id: string;
-  studentId: BaseUser;
-  trainerId: BaseUser;
+  student: BaseUser;
+  trainer: BaseUser;
   title: string;
   status: RoadmapStatus;
   approvedBy?: string;
