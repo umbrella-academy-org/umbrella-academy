@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowRight, Sparkles } from "lucide-react";
-import { useRouter } from "next-app-progress-bar";
+import { useRouter } from '@/hooks/useRouter';
 import { useReveal } from "@/hooks/system/useReveal";
 
 export function CTA() {

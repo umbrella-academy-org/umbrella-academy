@@ -1,20 +1,26 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import { useAuth } from '@/contexts/AuthContext';
-import { useRouter } from 'next-app-progress-bar';;
+import { useRouter } from '@/hooks/useRouter';
 import { Student, UserRole } from '@/types';
-import Sidebar from '@/components/dashboard/Sidebar';
-import { 
-  Award, 
-  Lock, 
-  CreditCard, 
-  Download, 
+import {
+  Award,
+  Lock,
+  CreditCard,
+  Download,
   Calendar,
   CheckCircle,
   FileText
 } from 'lucide-react';
 
-// Placeholder certificate interface - will be replaced with actual type when backend is ready
+// Dynamically import Sidebar - no server-side rendering
+const Sidebar = dynamic(
+  () => import('@/components/dashboard/Sidebar'),
+  { ssr: false }
+);
+
+// Placeholder certificate interface
 interface Certificate {
   id: string;
   studentName: string;
@@ -28,7 +34,6 @@ export default function CertificatesPage() {
   const { user, isAuthenticated } = useAuth();
   const router = useRouter();
 
-  // Cast user to Student to access subscription status
   const student = user as Student;
   const hasActiveSubscription = student?.hasActiveSubscription ?? false;
 
@@ -58,10 +63,10 @@ export default function CertificatesPage() {
                 </div>
                 <h2 className="text-xl font-playfair font-semibold text-slate-900 mb-2">Certificates Locked</h2>
                 <p className="text-slate-500 font-light mb-6 max-w-md mx-auto">
-                  Certificates are awarded when you complete milestones. 
+                  Certificates are awarded when you complete milestones.
                   Subscribe to unlock certificate generation and build your credentials.
                 </p>
-                <button 
+                <button
                   onClick={() => router.push('/dashboard/student/pay/subscription')}
                   className="inline-flex items-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-full hover:bg-slate-800 transition-colors"
                 >
@@ -76,14 +81,12 @@ export default function CertificatesPage() {
     );
   }
 
-  // For now, show empty state - certificates will be fetched from backend
-  // When backend is ready, replace this with actual data fetching
-  const certificates: Certificate[] = []; // Will be populated from API
+  const certificates: Certificate[] = [];
 
   return (
     <div className="flex min-h-screen lg:h-screen bg-[#FDF9F2]">
       <Sidebar activeItem="Certificates" userType={UserRole.STUDENT} />
-      
+
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
         <main className="flex-1 overflow-y-auto p-8">
           <div className="max-w-7xl mx-auto">
@@ -108,10 +111,10 @@ export default function CertificatesPage() {
                 </div>
                 <h2 className="text-xl font-playfair font-semibold text-slate-900 mb-2">No Certificates Yet</h2>
                 <p className="text-slate-500 font-light mb-6 max-w-md mx-auto">
-                  Complete milestones and get them approved by your trainer to earn certificates. 
+                  Complete milestones and get them approved by your trainer to earn certificates.
                   These will appear here for download.
                 </p>
-                <button 
+                <button
                   onClick={() => router.push('/dashboard/student/roadmap')}
                   className="inline-flex items-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-full hover:bg-slate-800 transition-colors"
                 >

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next-app-progress-bar';;
+import { useRouter } from '@/hooks/useRouter';;
 import { CreditCard, CheckCircle, ArrowLeft, Shield, Clock, Users } from 'lucide-react';
 import { usePayment } from '@/hooks/usePayment';
 import { useAuth } from '@/contexts/AuthContext';

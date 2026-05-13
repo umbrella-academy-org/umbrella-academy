@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next-app-progress-bar';;
+import { useRouter } from '@/hooks/useRouter';;
 import Sidebar from '@/components/dashboard/Sidebar';
 import { useAuth, useRoadmaps, useUsers } from '@/contexts';
 import { roadmapService } from '@/services/roadmap';

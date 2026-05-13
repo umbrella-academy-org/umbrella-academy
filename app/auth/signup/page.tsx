@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from 'next-app-progress-bar';
+import { useRouter } from '@/hooks/useRouter';
 import { AuthContainer } from '@/components/auth/auth-container';
 import { AuthCard } from '@/components/auth/auth-card';
 import { GraduationCap, Briefcase, ArrowRight } from 'lucide-react';

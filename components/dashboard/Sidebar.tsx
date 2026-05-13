@@ -139,8 +139,8 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
 
                 {item.icon && React.isValidElement(item.icon) && React.cloneElement(item.icon as React.ReactElement<any>, {
                   className: `w-5 h-5 transition-all duration-300 ${currentActive === item.label
-                      ? 'text-primary scale-110'
-                      : 'group-hover:text-white group-hover:scale-110'
+                    ? 'text-primary scale-110'
+                    : 'group-hover:text-white group-hover:scale-110'
                     }`
                 })}
 
@@ -157,12 +157,10 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
             <div className="relative group">
               <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center shadow-lg shadow-primary/20 transition-transform duration-300 group-hover:scale-105 overflow-hidden">
                 {user?.profilePicture ? (
-                  <Image
+                  <img
                     src={BASE_URL + user.profilePicture}
                     alt={userName}
-                    className="object-cover"
-                    width={500}
-                    height={500}
+                    className="w-full h-full object-cover"
                   />
                 ) : (
                   <span className="text-[14px] font-bold text-white">{userInitials}</span>

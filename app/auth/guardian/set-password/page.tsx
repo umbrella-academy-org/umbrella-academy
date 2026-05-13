@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect, Suspense } from 'react';
-import { useRouter } from 'next-app-progress-bar';
+import { useRouter } from '@/hooks/useRouter';
 import { useSearchParams } from 'next/navigation';
 import { AuthContainer } from '@/components/auth/auth-container';
 import { AuthCard } from '@/components/auth/auth-card';

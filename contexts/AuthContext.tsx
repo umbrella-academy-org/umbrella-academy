@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { authService } from '@/services/auth';
 import { BaseUser, OnboardingChecklist, StudentRegister, Trainer, UserRole, Guardian, GuardianInviteState } from '@/types';
-import { useRouter } from 'next-app-progress-bar';;
+import { useRouter } from '@/hooks/useRouter';;
 import { userService } from '@/services';
 
 interface AuthContextType {
