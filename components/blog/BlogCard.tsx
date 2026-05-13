@@ -13,7 +13,7 @@ interface BlogCardProps {
         avatar: string;
         date: string;
     };
-}
+} 
 
 export function BlogCard({ image, category, title, description, author }: BlogCardProps) {
     return (
