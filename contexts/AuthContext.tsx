@@ -187,9 +187,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           localStorage.setItem('userEmail', email);
           authService.sendOtp(email);
           router.push('/auth/verify');
+           setError('')
         } else if (response.message.includes('pending approval')) {
           router.push('/auth/pending-approval');
+           setError('')
         }
+       
       }
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Login failed. Please try again.');
