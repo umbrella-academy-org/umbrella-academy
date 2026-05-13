@@ -50,7 +50,7 @@ export default function TrainerProjectsPage() {
     .filter(s => s.assignedTrainerId === user?._id)
     .map(s => s._id);
   
-  const trainerProjects = projects.filter(p => trainerStudentIds.includes(p.studentId));
+  const trainerProjects = projects.filter(p => trainerStudentIds.includes(p.student._id));
 
   // Apply filters
   const filteredProjects = trainerProjects.filter(project => {
@@ -267,7 +267,7 @@ export default function TrainerProjectsPage() {
                         <User className="w-4 h-4 text-primary" />
                       </div>
                       <span className="text-sm font-medium text-slate-700">
-                        {getStudentName(project.studentId)}
+                        {getStudentName(project.student._id)}
                       </span>
                     </div>
 
@@ -338,7 +338,7 @@ export default function TrainerProjectsPage() {
                           </div>
                         </td>
                         <td className="px-6 py-4">
-                          <span className="text-sm text-slate-700">{getStudentName(project.studentId)}</span>
+                          <span className="text-sm text-slate-700">{getStudentName(project.student._id)}</span>
                         </td>
                         <td className="px-6 py-4">
                           <span className="text-sm text-slate-700">{project.category}</span>
@@ -398,7 +398,7 @@ export default function TrainerProjectsPage() {
                 <div className="flex items-center gap-4 mt-2 text-sm text-slate-500">
                   <span className="flex items-center gap-1">
                     <User className="w-4 h-4" />
-                    {getStudentName(selectedProject.studentId)}
+                    {getStudentName(selectedProject.student._id)}
                   </span>
                   <span className="flex items-center gap-1">
                     <Target className="w-4 h-4" />

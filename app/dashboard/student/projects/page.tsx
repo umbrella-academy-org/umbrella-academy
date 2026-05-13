@@ -46,7 +46,7 @@ export default function StudentProjectsPage() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   // Filter projects for current student
-  const studentProjects = projects.filter(p => p.studentId === user?._id);
+  const studentProjects = projects.filter(p => p.student._id === user?._id);
 
   // Apply filters
   const filteredProjects = studentProjects.filter(project => {

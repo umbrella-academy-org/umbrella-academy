@@ -77,10 +77,10 @@ export default function TrainerDashboard() {
 
   // Get trainer-specific data
   const trainerStudents = students.filter(student =>
-    studentRoadmaps.some(r => r.trainerId._id === user._id && r.studentId._id === student._id)
+    studentRoadmaps.some(r => r.trainer._id === user._id && r.student._id === student._id)
   );
 
-  const trainerRoadmaps = studentRoadmaps.filter(r => r.trainerId._id === user._id);
+  const trainerRoadmaps = studentRoadmaps.filter(r => r.trainer._id === user._id);
   const activeRoadmaps = trainerRoadmaps.filter(r => r.status === 'active');
   const pendingProjects = trainerRoadmaps.reduce((count, roadmap) => {
     return count + (roadmap.milestones?.filter(m => 

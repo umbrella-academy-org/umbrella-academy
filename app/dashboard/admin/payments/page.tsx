@@ -34,7 +34,7 @@ export default function PaymentsPage() {
   const filteredPayments = payments.filter(payment => {
     const matchesSearch =
       payment.transactionRef.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      payment.studentId.toLowerCase().includes(searchQuery.toLowerCase());
+      payment.student._id.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesStatus = statusFilter === 'all' || payment.status === statusFilter;
     const matchesType = typeFilter === 'all' || payment.type === typeFilter;
     return matchesSearch && matchesStatus && matchesType;
@@ -67,7 +67,7 @@ export default function PaymentsPage() {
     const csv = [
       ['ID', 'Student ID', 'Type', 'Amount', 'Final Amount', 'Status', 'Transaction Ref', 'Paid At'].join(','),
       ...filteredPayments.map(p => [
-        p.id, p.studentId, p.type, p.amount, p.finalAmount, p.status, p.transactionRef, new Date(p.paidAt).toLocaleString()
+        p.id, p.student._id, p.type, p.amount, p.finalAmount, p.status, p.transactionRef, new Date(p.paidAt).toLocaleString()
       ].join(','))
     ].join('\n');
     const blob = new Blob([csv], { type: 'text/csv' });
@@ -288,7 +288,7 @@ export default function PaymentsPage() {
                           <td className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
                             <div className="flex items-center gap-2">
                               <div className="w-8 h-8 bg-slate-900 rounded-lg flex items-center justify-center text-white text-[10px] font-black">ID</div>
-                              <span className="text-[13px] font-medium text-slate-600 truncate max-w-[150px]">{payment.studentId}</span>
+                              <span className="text-[13px] font-medium text-slate-600 truncate max-w-[150px]">{payment.student._id}</span>
                             </div>
                           </td>
                           <td className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5">

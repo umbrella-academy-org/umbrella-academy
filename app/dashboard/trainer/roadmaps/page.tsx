@@ -36,11 +36,11 @@ export default function TrainerRoadmapsPage() {
   const [viewingProjectDetail, setViewingProjectDetail] = useState<Project | null>(null);
 
   // Filter roadmaps for current trainer
-  const trainerRoadmaps = roadmaps.filter(r => r.trainerId._id === user?._id);
+  const trainerRoadmaps = roadmaps.filter(r => r.trainer._id === user?._id);
 
   // Apply filters
   const filteredRoadmaps = trainerRoadmaps.filter(roadmap => {
-    const student = students.find(s => s._id === roadmap.studentId._id);
+    const student = students.find(s => s._id === roadmap.student._id);
     const matchesSearch = 
       roadmap.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       student?.firstName?.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -282,7 +282,7 @@ export default function TrainerRoadmapsPage() {
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {filteredRoadmaps.map((roadmap) => {
-                      const student = students.find(s => s._id === roadmap.studentId._id);
+                      const student = students.find(s => s._id === roadmap.student._id);
                       const progress = calculateRoadmapProgress(roadmap);
                       
                       return (
@@ -376,7 +376,7 @@ export default function TrainerRoadmapsPage() {
                           </div>
                           <h1 className="text-3xl md:text-4xl font-playfair font-semibold mb-2">{selectedRoadmap.title}</h1>
                           {(() => {
-                            const student = students.find(s => s._id === selectedRoadmap.studentId._id);
+                            const student = students.find(s => s._id === selectedRoadmap.student._id);
                             return (
                               <div className="flex items-center gap-2 text-white/90">
                                 <User className="w-5 h-5" />

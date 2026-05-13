@@ -168,14 +168,14 @@ export default function RoadmapApprovalsPage() {
                           <div className="flex items-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">
                              <GraduationCap size={14} className="text-primary" /> Recipient
                           </div>
-                          <p className="text-[15px] font-playfair font-bold text-slate-900">{roadmap.studentId.firstName} {roadmap.studentId.lastName}</p>
+                          <p className="text-[15px] font-playfair font-bold text-slate-900">{roadmap.student.firstName} {roadmap.student.lastName}</p>
                        </div>
 
                        <div className="bg-slate-50 rounded-2xl p-4 border border-slate-100/50">
                           <div className="flex items-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">
                              <Award size={14} className="text-primary" /> Architect
                           </div>
-                          <p className="text-[15px] font-playfair font-bold text-slate-900">{roadmap.trainerId.firstName} {roadmap.trainerId.lastName}</p>
+                          <p className="text-[15px] font-playfair font-bold text-slate-900">{roadmap.trainer.firstName} {roadmap.trainer.lastName}</p>
                        </div>
                     </div>
 
@@ -232,8 +232,8 @@ export default function RoadmapApprovalsPage() {
                  {/* Metadata Bar */}
                  <div className="grid grid-cols-4 gap-4">
                     {[
-                      { label: 'Student', val: `${selectedRoadmap.studentId.firstName} ${selectedRoadmap.studentId.lastName}`, icon: GraduationCap },
-                      { label: 'Trainer', val: `${selectedRoadmap.trainerId.firstName} ${selectedRoadmap.trainerId.lastName}`, icon: Award },
+                      { label: 'Student', val: `${selectedRoadmap.student.firstName} ${selectedRoadmap.student.lastName}`, icon: GraduationCap },
+                      { label: 'Trainer', val: `${selectedRoadmap.trainer.firstName} ${selectedRoadmap.trainer.lastName}`, icon: Award },
                       { label: 'Created', val: formatDate(selectedRoadmap.createdAt), icon: Calendar },
                       { label: 'Status', val: selectedRoadmap.status.replace('-', ' '), icon: Target },
                     ].map((item, i) => (
