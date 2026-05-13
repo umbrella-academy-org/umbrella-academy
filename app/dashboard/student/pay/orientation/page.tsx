@@ -38,7 +38,7 @@ export default function OrientationPaymentPage() {
   };
 
   return (
-    <div className="flex h-screen bg-[#FDF9F2]">
+    <div className="flex min-h-screen lg:h-screen bg-[#FDF9F2]">
       <Sidebar activeItem="Home" userType={UserRole.STUDENT} />
 
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">

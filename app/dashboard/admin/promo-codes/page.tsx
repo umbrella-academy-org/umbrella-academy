@@ -107,12 +107,12 @@ export default function PromoCodesPage() {
   };
 
   return (
-    <div className="flex h-screen bg-[#F8FAFC]">
+    <div className="flex min-h-screen lg:h-screen bg-[#F8FAFC]">
       <Sidebar activeItem="Promo Codes" userType={UserRole.ADMIN} />
 
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
         {/* Header */}
-        <header className="bg-white/80 backdrop-blur-md border-b border-slate-100 px-8 py-5 sticky top-0 z-10">
+        <header className="bg-white/80 backdrop-blur-md border-b border-slate-100 px-4 sm:px-6 lg:px-8 py-4 sm:py-5 sticky top-0 z-10">
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
               <div className="flex items-center gap-2 mb-1">
@@ -135,7 +135,7 @@ export default function PromoCodesPage() {
           </div>
         </header>
 
-        <main className="flex-1 p-8 overflow-y-auto">
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto">
           <div className="max-w-7xl mx-auto">
             
             {/* Section Header with Badge */}
@@ -211,18 +211,18 @@ export default function PromoCodesPage() {
                   <table className="w-full text-left border-collapse">
                     <thead>
                       <tr className="bg-slate-50/50">
-                        <th className="px-8 py-5 text-[11px] font-bold uppercase tracking-widest text-slate-400">Promo Code</th>
-                        <th className="px-8 py-5 text-[11px] font-bold uppercase tracking-widest text-slate-400">Discount</th>
-                        <th className="px-8 py-5 text-[11px] font-bold uppercase tracking-widest text-slate-400">Usage</th>
-                        <th className="px-8 py-5 text-[11px] font-bold uppercase tracking-widest text-slate-400">Expiry</th>
-                        <th className="px-8 py-5 text-right text-[11px] font-bold uppercase tracking-widest text-slate-400">Actions</th>
-                        <th className="px-8 py-5 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400 text-right">Reference</th>
+                        <th className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5 text-[11px] font-bold uppercase tracking-widest text-slate-400">Promo Code</th>
+                        <th className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5 text-[11px] font-bold uppercase tracking-widest text-slate-400">Discount</th>
+                        <th className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5 text-[11px] font-bold uppercase tracking-widest text-slate-400">Usage</th>
+                        <th className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5 text-[11px] font-bold uppercase tracking-widest text-slate-400">Expiry</th>
+                        <th className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5 text-right text-[11px] font-bold uppercase tracking-widest text-slate-400">Actions</th>
+                        <th className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400 text-right">Reference</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-50">
                       {filteredPromoCodes.map((pc) => (
                         <tr key={pc.code} className="group hover:bg-slate-50/50 transition-all duration-300">
-                          <td className="px-8 py-5">
+                          <td className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
                             <div className="flex items-center gap-3">
                               <div className="w-10 h-10 bg-slate-50 rounded-xl flex items-center justify-center group-hover:bg-white group-hover:shadow-sm transition-all border border-slate-100/50">
                                 <Ticket size={18} className="text-slate-400 group-hover:text-primary transition-colors" />
@@ -230,13 +230,13 @@ export default function PromoCodesPage() {
                               <span className="font-mono text-sm font-black text-slate-900 group-hover:text-primary transition-colors">{pc.code}</span>
                             </div>
                           </td>
-                          <td className="px-8 py-5">
+                          <td className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
                             <div className="flex items-center gap-2">
                               <div className="w-8 h-8 bg-slate-900 rounded-lg flex items-center justify-center text-white text-[10px] font-black">@</div>
                               <span className="text-[13px] font-medium text-slate-600 truncate max-w-[200px]">{pc.assignedStudentEmail}</span>
                             </div>
                           </td>
-                          <td className="px-8 py-5">
+                          <td className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
                             <div className="flex flex-col">
                                <span className="text-[15px] font-black text-slate-900">
                                  {pc.discountPercentage > 0 ? `${pc.discountPercentage}% OFF` : `${pc.discountAmount.toLocaleString()} RWF`}
@@ -244,7 +244,7 @@ export default function PromoCodesPage() {
                                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Single Use Voucher</span>
                             </div>
                           </td>
-                          <td className="px-8 py-5">
+                          <td className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
                             <span className={`inline-flex items-center px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider ${
                               pc.isUsed
                                 ? 'bg-green-50 text-green-600 border border-green-100'
@@ -255,13 +255,13 @@ export default function PromoCodesPage() {
                               {pc.isUsed ? 'Redeemed' : new Date(pc.expiresAt) > new Date() ? 'Active' : 'Expired'}
                             </span>
                           </td>
-                          <td className="px-8 py-5">
+                          <td className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
                             <div className="flex items-center gap-2 text-[13px] text-slate-600 font-medium">
                               <Calendar size={14} className="text-slate-400" />
                               {new Date(pc.expiresAt).toLocaleDateString()}
                             </div>
                           </td>
-                          <td className="px-8 py-5 text-right">
+                          <td className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5 text-right">
                             <span className="text-[12px] font-medium text-slate-400 italic max-w-[150px] truncate inline-block">{pc.reason}</span>
                           </td>
                         </tr>
@@ -346,7 +346,7 @@ export default function PromoCodesPage() {
                   onChange={e => setForm({ ...form, assignedStudentEmail: e.target.value })}
                 />
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                    <PremiumInput
                     label="Discount %"
                     icon={<Percent size={20} />}
@@ -365,7 +365,7 @@ export default function PromoCodesPage() {
                   />
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <PremiumInput
                     label="Expiration Date"
                     icon={<Calendar size={20} />}

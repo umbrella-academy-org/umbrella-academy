@@ -146,7 +146,7 @@ export default function TrainerProjectsPage() {
   };
 
   return (
-    <div className="flex h-screen bg-[#FDF9F2]">
+    <div className="flex min-h-screen lg:h-screen bg-[#FDF9F2]">
       <Sidebar activeItem="Projects" userType={UserRole.TRAINER} />
 
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
@@ -159,7 +159,7 @@ export default function TrainerProjectsPage() {
             </div>
 
             {/* Stats Cards */}
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-6 mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6 mb-8">
               {[
                 { label: 'Total', value: stats.total, icon: Folder, color: 'text-primary', bg: 'bg-primary/10' },
                 { label: 'Approved', value: stats.approved, icon: CheckCircle, color: 'text-primary', bg: 'bg-primary/10' },
@@ -464,7 +464,7 @@ export default function TrainerProjectsPage() {
                     <ExternalLink className="w-4 h-4" />
                     Project Links
                   </h3>
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {selectedProject.evidence.demoLink && (
                       <a 
                         href={selectedProject.evidence.demoLink} 

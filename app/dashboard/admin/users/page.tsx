@@ -186,12 +186,12 @@ export default function UmbrellaAdminUsersPage() {
   ] as const;
 
   return (
-    <div className="flex h-screen bg-[#F8FAFC]">
+    <div className="flex min-h-screen lg:h-screen bg-[#F8FAFC]">
       <Sidebar activeItem="Users" userType={UserRole.ADMIN} />
 
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
         {/* Header */}
-        <header className="bg-white/80 backdrop-blur-md border-b border-slate-100 px-8 py-5 sticky top-0 z-10">
+        <header className="bg-white/80 backdrop-blur-md border-b border-slate-100 px-4 sm:px-6 lg:px-8 py-4 sm:py-5 sticky top-0 z-10">
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
               <div className="flex items-center gap-2 mb-1">
@@ -214,7 +214,7 @@ export default function UmbrellaAdminUsersPage() {
           </div>
         </header>
 
-        <main className="flex-1 p-8 overflow-y-auto">
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto">
           <div className="max-w-7xl mx-auto">
             
             {/* Section Header with Badge */}
@@ -258,7 +258,7 @@ export default function UmbrellaAdminUsersPage() {
               <div className="p-8 border-b border-slate-50">
                 <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
                   {/* Tabs */}
-                  <div className="flex bg-slate-100 p-1.5 rounded-2xl">
+                  <div className="flex bg-slate-100 p-1.5 rounded-2xl overflow-x-auto">
                     {tabs.map((tab) => {
                       const isActive = selectedTab === tab.key;
                       return (
@@ -290,7 +290,7 @@ export default function UmbrellaAdminUsersPage() {
                         placeholder="Filter by name or email..." 
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        className="pl-10 pr-4 py-2.5 bg-slate-50 border-none rounded-xl text-sm focus:ring-2 focus:ring-primary/20 transition-all w-64"
+                        className="pl-10 pr-4 py-2.5 bg-slate-50 border-none rounded-xl text-sm focus:ring-2 focus:ring-primary/20 transition-all w-full sm:w-64"
                       />
                     </div>
                     <div className="flex items-center gap-2 px-4 py-2.5 bg-slate-50 rounded-xl border-none">
@@ -332,17 +332,17 @@ export default function UmbrellaAdminUsersPage() {
                   <table className="w-full text-left border-collapse">
                     <thead>
                       <tr className="bg-slate-50/50">
-                        <th className="px-8 py-5 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">User Identity</th>
-                        <th className="px-8 py-5 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Contact Details</th>
-                        <th className="px-8 py-5 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Account Status</th>
-                        <th className="px-8 py-5 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Role</th>
-                        <th className="px-8 py-5 text-right text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Actions</th>
+                        <th className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">User Identity</th>
+                        <th className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Contact Details</th>
+                        <th className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Account Status</th>
+                        <th className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Role</th>
+                        <th className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5 text-right text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Actions</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-50">
                       {filteredUsers.map((user) => (
                         <tr key={user._id} className="group hover:bg-slate-50/50 transition-all duration-300">
-                          <td className="px-8 py-5">
+                          <td className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
                             <div className="flex items-center gap-4">
                               <div className={`w-12 h-12 rounded-[18px] flex items-center justify-center text-white font-black text-sm shadow-lg shadow-black/5 transition-transform group-hover:scale-110 ${getAvatarColor(user.role)}`}>
                                 {getInitials(user.firstName, user.lastName)}
@@ -355,13 +355,13 @@ export default function UmbrellaAdminUsersPage() {
                               </div>
                             </div>
                           </td>
-                          <td className="px-8 py-5">
+                          <td className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
                             <div className="flex items-center gap-2 text-[13px] text-slate-600 font-medium">
                               <Phone size={14} className="text-slate-400" />
                               {user.phoneNumber || 'N/A'}
                             </div>
                           </td>
-                          <td className="px-8 py-5">
+                          <td className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
                             <span className={`px-3 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wider ${
                               user.status === 'active' ? 'bg-green-100 text-green-700' :
                               user.status === 'pending' ? 'bg-orange-100 text-orange-700' :
@@ -370,10 +370,10 @@ export default function UmbrellaAdminUsersPage() {
                               {user.status || 'unknown'}
                             </span>
                           </td>
-                          <td className="px-8 py-5">
+                          <td className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
                             <span className="text-[12px] font-black uppercase text-slate-400 tracking-widest">{user.role}</span>
                           </td>
-                          <td className="px-8 py-5">
+                          <td className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
                             <div className="flex items-center justify-end gap-2">
                               <button
                                 onClick={() => handleViewUser(user)}
@@ -457,7 +457,7 @@ export default function UmbrellaAdminUsersPage() {
               )}
 
               <form onSubmit={handleCreateSubmit} className="space-y-6">
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <PremiumInput
                     label="First Name"
                     icon={<UserCircle size={20} />}
@@ -483,7 +483,7 @@ export default function UmbrellaAdminUsersPage() {
                   onChange={e => setForm({ ...form, email: e.target.value })}
                 />
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                    <PremiumInput
                     label="Phone Number"
                     icon={<Phone size={20} />}

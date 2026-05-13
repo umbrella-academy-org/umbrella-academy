@@ -18,12 +18,12 @@ export default function TrainerSettingsPage() {
     });
 
     return (
-        <div className="flex h-screen bg-[#FDF9F2]">
+        <div className="flex min-h-screen lg:h-screen bg-[#FDF9F2]">
             <Sidebar activeItem="Settings" userType={UserRole.TRAINER} />
 
             <div className="flex-1 flex flex-col min-w-0">
 
-                <main className="flex-1 p-4 lg:p-8 overflow-y-auto">
+                <main className="flex-1 p-4 lg:p-4 sm:p-6 lg:p-8 overflow-y-auto">
                     <div className="max-w-5xl mx-auto">
                         <div className="mb-8">
                             <h1 className="text-3xl font-playfair font-semibold text-slate-900 mb-2">Trainer Settings</h1>

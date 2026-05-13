@@ -192,7 +192,7 @@ export default function TrainerRoadmapsPage() {
   };
 
   return (
-    <div className="flex h-screen bg-[#FDF9F2]">
+    <div className="flex min-h-screen lg:h-screen bg-[#FDF9F2]">
       <Sidebar activeItem="Roadmaps" userType={UserRole.TRAINER} />
 
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
@@ -216,7 +216,7 @@ export default function TrainerRoadmapsPage() {
                 </div>
 
                 {/* Stats */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-8">
                   {[
                     { label: 'Total', value: stats.total, icon: Map, color: 'text-primary', bg: 'bg-primary/10' },
                     { label: 'Active', value: stats.active, icon: PlayCircle, color: 'text-primary', bg: 'bg-primary/10' },
@@ -931,7 +931,7 @@ export default function TrainerRoadmapsPage() {
                       {viewingProjectDetail.attachments.images && viewingProjectDetail.attachments.images.length > 0 && (
                         <div className="mb-4">
                           <p className="text-xs font-medium text-gray-600 mb-2">Images ({viewingProjectDetail.attachments.images.length})</p>
-                          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                          <div className="grid grid-cols-1 sm:grid-cols-2 sm:grid-cols-3 gap-3">
                             {viewingProjectDetail.attachments.images.map((url, index) => (
                               <a key={index} href={url} target="_blank" rel="noopener noreferrer"
                                 className="group relative aspect-square rounded-xl overflow-hidden bg-gray-100 border border-gray-200 hover:border-purple-400 transition-all">

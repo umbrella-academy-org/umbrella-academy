@@ -54,11 +54,11 @@ export default function TrainerProfilePage() {
     };
 
     return (
-        <div className="flex h-screen bg-[#FDF9F2]">
+        <div className="flex min-h-screen lg:h-screen bg-[#FDF9F2]">
             <Sidebar activeItem="Profile" userType={UserRole.TRAINER} />
 
             <div className="flex-1 flex flex-col min-w-0">
-                <main className="flex-1 p-8 overflow-y-auto">
+                <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto">
                     <div className="max-w-full mx-auto">
                         {/* Profile Header Card */}
                         <div className="bg-white rounded-[32px] border border-slate-100 shadow-sm overflow-hidden mb-8">

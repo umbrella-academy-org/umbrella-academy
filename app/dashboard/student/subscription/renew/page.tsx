@@ -28,7 +28,7 @@ export default function RenewSubscriptionPage() {
   };
 
   return (
-    <div className="flex h-screen bg-[#FDF9F2] w-full">
+    <div className="flex min-h-screen lg:h-screen bg-[#FDF9F2] w-full">
       {/* Sidebar - Fixed */}
       <Sidebar activeItem="Subscription" />
 

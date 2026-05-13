@@ -6,7 +6,7 @@ import { AuthContainer } from '@/components/auth/auth-container';
 import { AuthCard } from '@/components/auth/auth-card';
 import { PremiumInput } from '@/components/ui/premium-input';
 import { PremiumButton } from '@/components/ui/premium-button';
-import { Award, Briefcase, Calendar, Clock, FileText, Video, Globe, Users, ArrowLeft, ArrowRight } from 'lucide-react';
+import { Calendar, Clock, FileText, Video, ArrowLeft, ArrowRight } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { Trainer, UserRole } from '@/types';
 
@@ -144,7 +144,7 @@ export default function TrainerDetailsPage() {
       >
         <button
           onClick={() => router.push('/auth/trainer/register')}
-          className="absolute top-8 left-8 p-2 text-slate-400 hover:text-primary hover:bg-primary/5 rounded-full transition-all group"
+          className="absolute top-5 left-5 sm:top-8 sm:left-8 p-2 text-slate-400 hover:text-primary hover:bg-primary/5 rounded-full transition-all group"
         >
           <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
         </button>
@@ -156,7 +156,7 @@ export default function TrainerDetailsPage() {
               <span className="w-6 h-6 bg-primary/10 text-primary rounded-lg flex items-center justify-center text-[12px]">1</span>
               Personal Information
             </h3>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <PremiumInput
                 label="Date of Birth"
                 type="date"

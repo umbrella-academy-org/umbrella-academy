@@ -90,7 +90,7 @@ export default function GuardianDashboard() {
 
   if (isLoading) {
     return (
-      <div className="flex h-screen bg-[#FDF9F2]">
+      <div className="flex min-h-screen lg:h-screen bg-[#FDF9F2]">
         <Sidebar activeItem="Dashboard" userType={UserRole.GUARDIAN} />
         <div className="flex-1 flex flex-col">
           <div className="h-20 bg-white border-b border-slate-100 animate-pulse"></div>
@@ -132,12 +132,12 @@ export default function GuardianDashboard() {
   };
 
   return (
-    <div className="flex h-screen bg-[#FDF9F2]">
+    <div className="flex min-h-screen lg:h-screen bg-[#FDF9F2]">
       <Sidebar activeItem="Dashboard" userType={UserRole.GUARDIAN} />
 
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
         {/* Header */}
-        <header className="bg-white/80 backdrop-blur-md border-b border-slate-100 px-8 py-5 sticky top-0 z-10">
+        <header className="bg-white/80 backdrop-blur-md border-b border-slate-100 px-4 sm:px-6 lg:px-8 py-4 sm:py-5 sticky top-0 z-10">
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
               <div className="flex items-center gap-2 mb-1">
@@ -156,14 +156,14 @@ export default function GuardianDashboard() {
                   <input 
                     type="text" 
                     placeholder="Search students..." 
-                    className="pl-10 pr-4 py-2 bg-slate-50 border-2 border-slate-50 rounded-xl text-sm focus:bg-white focus:border-primary/20 focus:ring-0 outline-none transition-all w-64"
+                    className="pl-10 pr-4 py-2 bg-slate-50 border-2 border-slate-50 rounded-xl text-sm focus:bg-white focus:border-primary/20 focus:ring-0 outline-none transition-all w-full sm:w-64"
                   />
                </div>
             </div>
           </div>
         </header>
 
-        <main className="flex-1 p-8 overflow-y-auto">
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto">
           <div className="max-w-7xl mx-auto">
             
             {error && (
@@ -261,7 +261,7 @@ export default function GuardianDashboard() {
                          </div>
                       </div>
 
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
                         {[
                           { label: 'Progress', value: `${selectedStudent.progress}%`, icon: Map, color: 'text-blue-500', bg: 'bg-blue-50' },
                           { label: 'Milestones', value: `${selectedStudent.roadmap?.milestones?.filter(m => m.status === RoadmapStepStatus.COMPLETED).length || 0}/${selectedStudent.roadmap?.milestones?.length || 0}`, icon: CheckCircle, color: 'text-green-500', bg: 'bg-green-50' },

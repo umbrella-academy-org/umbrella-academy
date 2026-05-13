@@ -6,7 +6,7 @@ import { AuthContainer } from '@/components/auth/auth-container';
 import { AuthCard } from '@/components/auth/auth-card';
 import { PremiumInput } from '@/components/ui/premium-input';
 import { PremiumButton } from '@/components/ui/premium-button';
-import { Calendar, User, Mail, Phone, ArrowLeft, ArrowRight, ShieldCheck, Heart } from 'lucide-react';
+import { Calendar, User, Mail, Phone, ArrowLeft, ArrowRight, ShieldCheck } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { UserRole, StudentRegister } from '@/types';
 
@@ -129,13 +129,13 @@ export default function StudentDetailsPage() {
       >
         <button
           onClick={() => router.push('/auth/student/register')}
-          className="absolute top-8 left-8 p-2 text-slate-400 hover:text-primary hover:bg-primary/5 rounded-full transition-all group"
+          className="absolute top-5 left-5 sm:top-8 sm:left-8 p-2 text-slate-400 hover:text-primary hover:bg-primary/5 rounded-full transition-all group"
         >
           <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
         </button>
 
         <form onSubmit={handleContinue} className="space-y-6 mt-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <PremiumInput
               label="Date of Birth"
               type="date"
@@ -201,7 +201,7 @@ export default function StudentDetailsPage() {
                 required={showGuardianFields}
               />
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <PremiumInput
                   label="Guardian Email"
                   type="email"

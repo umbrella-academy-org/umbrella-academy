@@ -10,7 +10,7 @@ interface AuthContainerProps {
 
 export function AuthContainer({ children }: AuthContainerProps) {
   return (
-    <div className="relative min-h-screen bg-[#FDF9F2] overflow-hidden flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="relative min-h-screen bg-[#FDF9F2] overflow-hidden flex flex-col justify-center py-8 px-4 sm:py-12 sm:px-6 lg:px-8">
       {/* Floating Decorative Icons */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.4]">
         <motion.div 

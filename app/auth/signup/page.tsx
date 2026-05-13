@@ -41,16 +41,16 @@ export default function SignupPage() {
                 localStorage.setItem('userType', role.id);
                 router.push(role.path);
               }}
-              className="w-full group p-6 bg-white border border-slate-100 rounded-2xl hover:border-primary/50 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 text-left flex items-center gap-5"
+              className="w-full group p-4 sm:p-6 bg-white border border-slate-100 rounded-2xl hover:border-primary/50 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 text-left flex items-center gap-4 sm:gap-5"
             >
               <div className={`w-14 h-14 ${role.color} rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform`}>
                 {role.icon}
               </div>
-              <div className="flex-1">
+              <div className="flex-1 min-w-0">
                 <h3 className="text-[18px] font-bold text-slate-800 mb-1 group-hover:text-primary transition-colors">
                   {role.title}
                 </h3>
-                <p className="text-[14px] text-slate-500 font-light leading-snug">
+                <p className="text-[14px] text-slate-500 font-light leading-snug break-words">
                   {role.description}
                 </p>
               </div>

@@ -149,7 +149,7 @@ export default function TrainerBookingsPage() {
 
   if (loading) {
     return (
-      <div className="flex h-screen bg-white">
+      <div className="flex min-h-screen lg:h-screen bg-white">
         <Sidebar activeItem="Bookings" userType={UserRole.TRAINER} />
         <div className="flex-1 flex flex-col">
           <div className="h-16 bg-gray-100 animate-pulse"></div>
@@ -167,7 +167,7 @@ export default function TrainerBookingsPage() {
   }
 
   return (
-    <div className="flex h-screen bg-[#FDF9F2]">
+    <div className="flex min-h-screen lg:h-screen bg-[#FDF9F2]">
       <Sidebar activeItem="Bookings" userType={UserRole.TRAINER} />
       
       <div className="flex-1 flex flex-col min-w-0">

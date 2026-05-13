@@ -80,12 +80,12 @@ export default function PaymentsPage() {
   };
 
   return (
-    <div className="flex h-screen bg-[#F8FAFC]">
+    <div className="flex min-h-screen lg:h-screen bg-[#F8FAFC]">
       <Sidebar activeItem="Payments" userType={UserRole.ADMIN} />
 
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
         {/* Header */}
-        <header className="bg-white/80 backdrop-blur-md border-b border-slate-100 px-8 py-5 sticky top-0 z-10">
+        <header className="bg-white/80 backdrop-blur-md border-b border-slate-100 px-4 sm:px-6 lg:px-8 py-4 sm:py-5 sticky top-0 z-10">
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
               <div className="flex items-center gap-2 mb-1">
@@ -115,7 +115,7 @@ export default function PaymentsPage() {
           </div>
         </header>
 
-        <main className="flex-1 p-8 overflow-y-auto">
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto">
           <div className="max-w-7xl mx-auto">
             
             {/* Section Header with Badge */}
@@ -215,7 +215,7 @@ export default function PaymentsPage() {
                         placeholder="Search ref ID..." 
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        className="pl-10 pr-4 py-2.5 bg-slate-50 border-none rounded-xl text-sm focus:ring-2 focus:ring-primary/20 transition-all w-48 lg:w-64"
+                        className="pl-10 pr-4 py-2.5 bg-slate-50 border-none rounded-xl text-sm focus:ring-2 focus:ring-primary/20 transition-all w-full sm:w-48 lg:w-64"
                       />
                     </div>
                     <div className="flex items-center gap-2 px-4 py-2.5 bg-slate-50 rounded-xl">
@@ -250,19 +250,19 @@ export default function PaymentsPage() {
                 <table className="w-full text-left border-collapse">
                   <thead>
                     <tr className="bg-slate-50/50">
-                      <th className="px-8 py-5 text-[11px] font-bold uppercase tracking-widest text-slate-400">Transaction ID</th>
-                      <th className="px-8 py-5 text-[11px] font-bold uppercase tracking-widest text-slate-400">Payer Information</th>
-                      <th className="px-8 py-5 text-[11px] font-bold uppercase tracking-widest text-slate-400">Classification</th>
-                      <th className="px-8 py-5 text-[11px] font-bold uppercase tracking-widest text-slate-400">Amount</th>
-                      <th className="px-8 py-5 text-[11px] font-bold uppercase tracking-widest text-slate-400">Status</th>
-                      <th className="px-8 py-5 text-right text-[11px] font-bold uppercase tracking-widest text-slate-400">Audit</th>
+                      <th className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5 text-[11px] font-bold uppercase tracking-widest text-slate-400">Transaction ID</th>
+                      <th className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5 text-[11px] font-bold uppercase tracking-widest text-slate-400">Payer Information</th>
+                      <th className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5 text-[11px] font-bold uppercase tracking-widest text-slate-400">Classification</th>
+                      <th className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5 text-[11px] font-bold uppercase tracking-widest text-slate-400">Amount</th>
+                      <th className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5 text-[11px] font-bold uppercase tracking-widest text-slate-400">Status</th>
+                      <th className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5 text-right text-[11px] font-bold uppercase tracking-widest text-slate-400">Audit</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-50">
                     {isLoading ? (
                        [...Array(5)].map((_, i) => (
                         <tr key={i} className="animate-pulse">
-                          <td colSpan={6} className="px-8 py-5"><div className="h-10 bg-slate-50 rounded-xl w-full" /></td>
+                          <td colSpan={6} className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5"><div className="h-10 bg-slate-50 rounded-xl w-full" /></td>
                         </tr>
                       ))
                     ) : filteredPayments.length === 0 ? (
@@ -277,7 +277,7 @@ export default function PaymentsPage() {
                     ) : (
                       filteredPayments.map((payment) => (
                         <tr key={payment.id} className="group hover:bg-slate-50/50 transition-all duration-300">
-                          <td className="px-8 py-5">
+                          <td className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
                             <div className="flex items-center gap-3">
                               <div className="w-10 h-10 bg-slate-50 rounded-xl flex items-center justify-center group-hover:bg-white group-hover:shadow-sm transition-all">
                                 <CreditCard size={18} className="text-slate-400 group-hover:text-primary transition-colors" />
@@ -285,13 +285,13 @@ export default function PaymentsPage() {
                               <span className="font-mono text-sm font-bold text-slate-900">{payment.transactionRef}</span>
                             </div>
                           </td>
-                          <td className="px-8 py-5">
+                          <td className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
                             <div className="flex items-center gap-2">
                               <div className="w-8 h-8 bg-slate-900 rounded-lg flex items-center justify-center text-white text-[10px] font-black">ID</div>
                               <span className="text-[13px] font-medium text-slate-600 truncate max-w-[150px]">{payment.studentId}</span>
                             </div>
                           </td>
-                          <td className="px-8 py-5">
+                          <td className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
                             <span className={`inline-flex items-center px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider ${
                               payment.type === PaymentType.ORIENTATION
                                 ? 'bg-indigo-50 text-indigo-600 border border-indigo-100'
@@ -300,7 +300,7 @@ export default function PaymentsPage() {
                               {payment.type}
                             </span>
                           </td>
-                          <td className="px-8 py-5">
+                          <td className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
                             <div className="flex flex-col">
                                <span className="text-[15px] font-black text-slate-900">{payment.finalAmount.toLocaleString()} RWF</span>
                                {payment.promoCodeApplied && (
@@ -310,7 +310,7 @@ export default function PaymentsPage() {
                                )}
                             </div>
                           </td>
-                          <td className="px-8 py-5">
+                          <td className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
                             <span className={`inline-flex items-center px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider ${
                               payment.status === 'success'
                                 ? 'bg-green-50 text-green-600 border border-green-100'
@@ -321,7 +321,7 @@ export default function PaymentsPage() {
                               {payment.status}
                             </span>
                           </td>
-                          <td className="px-8 py-5 text-right">
+                          <td className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5 text-right">
                             {payment.status === 'pending' ? (
                               <button
                                 onClick={() => handleConfirmPayment(payment.id)}

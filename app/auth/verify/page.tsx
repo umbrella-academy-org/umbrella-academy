@@ -107,7 +107,7 @@ export default function VerifyPage() {
       >
         <button
           onClick={() => window.history.back()}
-          className="absolute top-8 left-8 p-2 text-slate-400 hover:text-primary hover:bg-primary/5 rounded-full transition-all group"
+          className="absolute top-5 left-5 sm:top-8 sm:left-8 p-2 text-slate-400 hover:text-primary hover:bg-primary/5 rounded-full transition-all group"
         >
           <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
         </button>
@@ -124,7 +124,7 @@ export default function VerifyPage() {
         </div>
 
         <form onSubmit={handleContinue} className="space-y-8">
-          <div className="flex gap-2 md:gap-3 justify-center">
+          <div className="flex gap-2 sm:gap-3 justify-center flex-wrap">
             {otp.map((digit, index) => (
               <input
                 key={index}
@@ -137,7 +137,7 @@ export default function VerifyPage() {
                 onKeyDown={(e) => handleKeyDown(index, e)}
                 onPaste={handlePaste}
                 className={`
-                  w-11 h-14 md:w-14 md:h-16 text-center text-xl font-bold border rounded-xl 
+                  w-10 h-12 sm:w-11 sm:h-14 md:w-14 md:h-16 text-center text-lg sm:text-xl font-bold border rounded-xl 
                   focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary 
                   transition-all bg-slate-50 text-slate-900
                   ${error ? 'border-red-500 ring-red-500/10' : 'border-slate-200'}

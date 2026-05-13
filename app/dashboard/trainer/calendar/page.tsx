@@ -239,7 +239,7 @@ export default function TrainerRoadmapsPage() {
 
   if (loading) {
     return (
-      <div className="flex h-screen bg-white">
+      <div className="flex min-h-screen lg:h-screen bg-white">
         <Sidebar activeItem="Roadmaps" userType={UserRole.TRAINER} />
         <div className="flex-1 flex flex-col">
           <div className="h-16 bg-gray-100 animate-pulse"></div>
@@ -257,7 +257,7 @@ export default function TrainerRoadmapsPage() {
   }
 
   return (
-    <div className="flex h-screen bg-white">
+    <div className="flex min-h-screen lg:h-screen bg-white">
       <Sidebar activeItem="Roadmaps" userType={UserRole.TRAINER} />
 
       <div className="flex-1 flex flex-col min-w-0">
@@ -637,7 +637,7 @@ export default function TrainerRoadmapsPage() {
                           />
                           <p className="text-xs text-gray-500 mt-1">Enter project requirements separated by commas</p>
                         </div>
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                           <div>
                             <label className="block text-sm font-medium text-gray-700 mb-2">
                               Duration (days)

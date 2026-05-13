@@ -50,7 +50,7 @@ export default function StudentCalendarPage() {
 
   if (loading) {
     return (
-      <div className="flex h-screen bg-[#FDF9F2]">
+      <div className="flex min-h-screen lg:h-screen bg-[#FDF9F2]">
         <Sidebar activeItem="Sessions & Calendar" userType={UserRole.STUDENT} />
         <div className="flex-1 flex flex-col">
           <div className="h-16 bg-slate-100 animate-pulse"></div>
@@ -68,7 +68,7 @@ export default function StudentCalendarPage() {
   }
 
   return (
-    <div className="flex h-screen bg-[#FDF9F2]">
+    <div className="flex min-h-screen lg:h-screen bg-[#FDF9F2]">
       <Sidebar activeItem="Sessions & Calendar" userType={UserRole.STUDENT} />
 
       <div className="flex-1 flex flex-col min-w-0">

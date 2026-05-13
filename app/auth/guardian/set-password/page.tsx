@@ -6,7 +6,7 @@ import { AuthCard } from '@/components/auth/auth-card';
 import { PremiumInput } from '@/components/ui/premium-input';
 import { PremiumButton } from '@/components/ui/premium-button';
 import { guardianService } from '@/services/guardian';
-import { Lock, Eye, EyeOff, CheckCircle, AlertCircle, XCircle, User, UserCircle, GraduationCap, ArrowRight, Mail } from 'lucide-react';
+import { Lock, CheckCircle, XCircle, GraduationCap, ArrowRight, Mail } from 'lucide-react';
 
 function SetPasswordContent() {
   const router = useRouter();
@@ -165,17 +165,17 @@ function SetPasswordContent() {
 
   return (
     <AuthContainer>
-      <AuthCard
+        <AuthCard
         title={`Welcome, ${guardianInfo?.firstName || 'Guardian'}`}
         subtitle="You've been invited to oversee a student's learning journey."
       >
-        <div className="bg-primary/5 border border-primary/10 rounded-2xl p-6 mb-8 flex items-center gap-4">
+        <div className="bg-primary/5 border border-primary/10 rounded-2xl p-4 sm:p-6 mb-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">
           <div className="w-12 h-12 bg-white rounded-xl shadow-sm border border-primary/10 flex items-center justify-center text-primary">
             <GraduationCap size={24} />
           </div>
-          <div>
+          <div className="min-w-0">
             <p className="text-[12px] text-slate-500 font-bold uppercase tracking-widest">Student to Monitor</p>
-            <p className="text-[16px] font-bold text-slate-800">{studentInfo?.firstName} {studentInfo?.lastName}</p>
+            <p className="text-[16px] font-bold text-slate-800 break-words">{studentInfo?.firstName} {studentInfo?.lastName}</p>
           </div>
         </div>
 
@@ -184,9 +184,9 @@ function SetPasswordContent() {
             <label className="block text-[13px] font-bold text-slate-400 uppercase tracking-widest ml-1">
               Your Email
             </label>
-            <div className="flex items-center gap-3 px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl text-slate-500 font-medium italic">
+            <div className="flex items-center gap-3 px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl text-slate-500 font-medium italic min-w-0">
               <Mail size={18} />
-              <span>{guardianInfo?.email}</span>
+              <span className="min-w-0 break-all">{guardianInfo?.email}</span>
             </div>
           </div>
 

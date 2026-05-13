@@ -52,7 +52,7 @@ export default function SubscriptionPaymentPage() {
   ];
 
   return (
-    <div className="flex h-screen bg-[#FDF9F2]">
+    <div className="flex min-h-screen lg:h-screen bg-[#FDF9F2]">
       <Sidebar activeItem="Home" userType={UserRole.STUDENT} />
 
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
@@ -85,7 +85,7 @@ export default function SubscriptionPaymentPage() {
                         {/* Billing Cycle Selection */}
                         <div>
                           <h2 className="text-lg font-playfair font-semibold text-slate-900 mb-4">Choose Your Plan</h2>
-                          <div className="grid grid-cols-2 gap-4">
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <button
                               type="button"
                               onClick={() => setBillingCycle('monthly')}

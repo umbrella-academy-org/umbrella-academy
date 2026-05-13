@@ -8,7 +8,7 @@ import BillingInvoices from '@/components/subscription/BillingInvoices';
 
 export default function SubscriptionPage() {
   return (
-    <div className="flex h-screen bg-[#FDF9F2]">
+    <div className="flex min-h-screen lg:h-screen bg-[#FDF9F2]">
       <Sidebar activeItem="Subscription" />
 
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">

@@ -88,7 +88,7 @@ export default function SalesManagerLeadsPage() {
 
   if (authLoading || usersLoading) {
     return (
-      <div className="flex h-screen bg-[#F8FAFC]">
+      <div className="flex min-h-screen lg:h-screen bg-[#F8FAFC]">
         <Sidebar activeItem="Leads" userType={UserRole.SALES_MANAGER} />
         <div className="flex-1 flex flex-col">
           <div className="h-20 bg-white border-b border-slate-100 animate-pulse"></div>
@@ -106,12 +106,12 @@ export default function SalesManagerLeadsPage() {
   }
 
   return (
-    <div className="flex h-screen bg-[#F8FAFC]">
+    <div className="flex min-h-screen lg:h-screen bg-[#F8FAFC]">
       <Sidebar activeItem="Leads" userType={UserRole.SALES_MANAGER} />
 
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
         {/* Header */}
-        <header className="bg-white/80 backdrop-blur-md border-b border-slate-100 px-8 py-5 sticky top-0 z-10">
+        <header className="bg-white/80 backdrop-blur-md border-b border-slate-100 px-4 sm:px-6 lg:px-8 py-4 sm:py-5 sticky top-0 z-10">
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
               <div className="flex items-center gap-2 mb-1">
@@ -130,7 +130,7 @@ export default function SalesManagerLeadsPage() {
           </div>
         </header>
 
-        <main className="flex-1 p-8 overflow-y-auto">
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto">
           <div className="max-w-7xl mx-auto">
             
             {/* Stats Overview */}
@@ -197,16 +197,16 @@ export default function SalesManagerLeadsPage() {
                   <table className="w-full text-left border-collapse">
                     <thead>
                       <tr className="bg-slate-50/50">
-                        <th className="px-8 py-5 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Student Identity</th>
-                        <th className="px-8 py-5 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Contact Details</th>
-                        <th className="px-8 py-5 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Registration Date</th>
-                        <th className="px-8 py-5 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Payment Status</th>
+                        <th className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Student Identity</th>
+                        <th className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Contact Details</th>
+                        <th className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Registration Date</th>
+                        <th className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Payment Status</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-50">
                       {filteredLeads.map((lead) => (
                         <tr key={lead._id} className="group hover:bg-slate-50/50 transition-all duration-300">
-                          <td className="px-8 py-5">
+                          <td className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
                             <div className="flex items-center gap-4">
                               <div className={`w-12 h-12 rounded-[18px] flex items-center justify-center text-white font-black text-sm shadow-lg shadow-black/5 transition-transform group-hover:scale-110 ${getAvatarColor(lead.hasPaidOrientation)}`}>
                                 {getInitials(lead.firstName, lead.lastName)}
@@ -219,7 +219,7 @@ export default function SalesManagerLeadsPage() {
                               </div>
                             </div>
                           </td>
-                          <td className="px-8 py-5">
+                          <td className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
                             <div className="space-y-2">
                               <div className="flex items-center gap-2 text-[13px] text-slate-600 font-medium">
                                 <Phone size={14} className="text-slate-400" />
@@ -231,13 +231,13 @@ export default function SalesManagerLeadsPage() {
                               </div>
                             </div>
                           </td>
-                          <td className="px-8 py-5">
+                          <td className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
                             <div className="flex items-center gap-2 text-[13px] text-slate-600 font-medium">
                               <Calendar size={14} className="text-slate-400" />
                               {new Date(lead.createdAt).toLocaleDateString()}
                             </div>
                           </td>
-                          <td className="px-8 py-5">
+                          <td className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
                             <StatusBadge hasPaid={lead.hasPaidOrientation} />
                           </td>
                         </tr>

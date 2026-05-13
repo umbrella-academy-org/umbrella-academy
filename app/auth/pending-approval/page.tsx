@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { AuthContainer } from '@/components/auth/auth-container';
 import { AuthCard } from '@/components/auth/auth-card';
-import { Clock, Mail, MessageSquare, LogOut, ArrowLeft, Hourglass, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { Clock, Mail, MessageSquare, LogOut, ArrowLeft, Hourglass } from 'lucide-react';
 import { useAuth } from '@/contexts';
 import { PremiumButton } from '@/components/ui/premium-button';
 
@@ -39,10 +39,10 @@ export default function PendingApprovalContent() {
                     </div>
                 </div>
 
-                <div className="bg-slate-50 border border-slate-100 rounded-2xl p-6 mb-8">
+                <div className="bg-slate-50 border border-slate-100 rounded-2xl p-4 sm:p-6 mb-8">
                     <div className="flex items-center gap-3 mb-4">
                         <div className="w-2.5 h-2.5 bg-primary rounded-full animate-ping"></div>
-                        <span className="font-bold text-slate-800 text-[14px] uppercase tracking-wider">Status: Pending Approval</span>
+                        <span className="font-bold text-slate-800 text-[14px] uppercase tracking-wider break-words">Status: Pending Approval</span>
                     </div>
 
                     <div className="space-y-4 text-[14px] text-slate-600">
@@ -50,9 +50,9 @@ export default function PendingApprovalContent() {
                             <Clock className="w-4 h-4 mt-0.5 text-primary/60" />
                             <p>Review typically takes <strong className="text-slate-900">1-3 business days</strong></p>
                         </div>
-                        <div className="flex items-start gap-3">
+                        <div className="flex items-start gap-3 min-w-0">
                             <Mail className="w-4 h-4 mt-0.5 text-primary/60" />
-                            <p>Notification will be sent to <strong className="text-slate-900">{email}</strong></p>
+                            <p className="min-w-0 break-all">Notification will be sent to <strong className="text-slate-900">{email}</strong></p>
                         </div>
                     </div>
                 </div>

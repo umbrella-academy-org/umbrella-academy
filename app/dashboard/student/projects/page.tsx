@@ -107,7 +107,7 @@ export default function StudentProjectsPage() {
   };
 
   return (
-    <div className="flex h-screen bg-[#FDF9F2]">
+    <div className="flex min-h-screen lg:h-screen bg-[#FDF9F2]">
       <Sidebar activeItem="Projects" userType={UserRole.STUDENT} />
 
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
@@ -131,7 +131,7 @@ export default function StudentProjectsPage() {
             </div>
 
             {/* Stats Cards */}
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 mb-8">
               {[
                 { label: 'Total', value: stats.total, icon: Folder, color: 'text-slate-600', bg: 'bg-slate-100' },
                 { label: 'Approved', value: stats.approved, icon: CheckCircle, color: 'text-green-600', bg: 'bg-green-100' },
@@ -556,7 +556,7 @@ export default function StudentProjectsPage() {
                       <p className="text-xs font-medium text-gray-600 mb-2">
                         Images ({selectedProject.attachments.images.length})
                       </p>
-                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
                         {selectedProject.attachments.images.map((url, index) => (
                           <a
                             key={index}

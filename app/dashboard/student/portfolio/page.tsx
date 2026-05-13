@@ -40,7 +40,7 @@ export default function PortfolioPage() {
   // Locked state - subscription required
   if (!hasActiveSubscription) {
     return (
-      <div className="flex h-screen bg-[#FDF9F2]">
+      <div className="flex min-h-screen lg:h-screen bg-[#FDF9F2]">
         <Sidebar activeItem="Portfolio" userType={UserRole.STUDENT} />
         <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
           <main className="flex-1 overflow-y-auto p-8">
@@ -97,7 +97,7 @@ export default function PortfolioPage() {
   const approvedProjects = projects.filter(p => p.status === 'approved');
 
   return (
-    <div className="flex h-screen bg-[#FDF9F2]">
+    <div className="flex min-h-screen lg:h-screen bg-[#FDF9F2]">
       <Sidebar activeItem="Portfolio" userType={UserRole.STUDENT} />
 
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">

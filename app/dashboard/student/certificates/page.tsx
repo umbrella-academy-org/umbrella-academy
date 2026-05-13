@@ -40,7 +40,7 @@ export default function CertificatesPage() {
   // Locked state - subscription required
   if (!hasActiveSubscription) {
     return (
-      <div className="flex h-screen bg-[#FDF9F2]">
+      <div className="flex min-h-screen lg:h-screen bg-[#FDF9F2]">
         <Sidebar activeItem="Certificates" userType={UserRole.STUDENT} />
         <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
           <main className="flex-1 overflow-y-auto p-8">
@@ -81,7 +81,7 @@ export default function CertificatesPage() {
   const certificates: Certificate[] = []; // Will be populated from API
 
   return (
-    <div className="flex h-screen bg-[#FDF9F2]">
+    <div className="flex min-h-screen lg:h-screen bg-[#FDF9F2]">
       <Sidebar activeItem="Certificates" userType={UserRole.STUDENT} />
       
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
