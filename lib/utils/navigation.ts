@@ -1,4 +1,4 @@
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/hooks/useRouter';;
 
 export function useNavigationWithLoading() {
   const router = useRouter();

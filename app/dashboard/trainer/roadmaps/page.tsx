@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/hooks/useRouter';;
 import Sidebar from '@/components/dashboard/Sidebar';
 import { useAuth, useRoadmaps, useUsers } from '@/contexts';
 import { roadmapService } from '@/services/roadmap';
@@ -17,6 +17,7 @@ import {
   Link2, FileText, Image as ImageIcon, FilePlus, ExternalLink, 
   Youtube, Figma, Github, Code, Eye, Wrench, ChevronLeft
 } from 'lucide-react';
+import Image from 'next/image';
 
 export default function TrainerRoadmapsPage() {
   const router = useRouter();
@@ -935,7 +936,8 @@ export default function TrainerRoadmapsPage() {
                             {viewingProjectDetail.attachments.images.map((url, index) => (
                               <a key={index} href={url} target="_blank" rel="noopener noreferrer"
                                 className="group relative aspect-square rounded-xl overflow-hidden bg-gray-100 border border-gray-200 hover:border-purple-400 transition-all">
-                                <img src={url} alt={`Project image ${index + 1}`}
+                                <Image src={url} alt={`Project image ${index + 1}`}
+                                height={200} width={200}
                                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                                   loading="lazy"
                                   onError={(e) => {

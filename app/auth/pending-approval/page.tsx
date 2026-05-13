@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/hooks/useRouter';;
 import { AuthContainer } from '@/components/auth/auth-container';
 import { AuthCard } from '@/components/auth/auth-card';
 import { Clock, Mail, MessageSquare, LogOut, ArrowLeft, Hourglass } from 'lucide-react';

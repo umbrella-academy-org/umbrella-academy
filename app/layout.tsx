@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 import { AppProviders } from '@/contexts';
+import ProgressBarProvider from '@/components/providers/ProgressBar';
+
 
 const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
@@ -53,8 +55,9 @@ export default function RootLayout({
       </head>
       <AppProviders>
         <body className="font-sans antialiased" suppressHydrationWarning>
-
-          {children}
+          <ProgressBarProvider>
+            {children}
+          </ProgressBarProvider>
           {process.env.NODE_ENV === 'production' && <Analytics />}
 
         </body>

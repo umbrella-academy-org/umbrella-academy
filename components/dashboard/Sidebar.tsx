@@ -6,6 +6,8 @@ import { useNavigationWithLoading } from '@/lib/utils/navigation';
 import { useAuth } from '@/contexts';
 import { SidebarProps, SidebarItem } from '@/types';
 import { Logo } from '../ui/Logo';
+import Image from 'next/image';
+import { BASE_URL } from '@/services';
 
 export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps) {
   const [currentActive, setCurrentActive] = useState(activeItem);
@@ -50,7 +52,7 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
           { icon: <Home className="w-5 h-5" />, label: 'Dashboard', href: '/dashboard/admin', active: true },
           { icon: <Users className="w-5 h-5" />, label: 'Users', href: '/dashboard/admin/users' },
           { icon: <Ticket className="w-5 h-5" />, label: 'Promo Codes', href: '/dashboard/admin/promo-codes' },
-          {icon: <UserCheck className="w-5 h-5" />, label: 'Trainer approval', href: '/dashboard/admin/trainer-approvals' },
+          { icon: <UserCheck className="w-5 h-5" />, label: 'Trainer approval', href: '/dashboard/admin/trainer-approvals' },
           { icon: <UserCheck className="w-5 h-5" />, label: 'Roadmap approval', href: '/dashboard/admin/roadmap-approvals' },
           { icon: <CreditCard className="w-5 h-5" />, label: 'Payments', href: '/dashboard/admin/payments' },
           { icon: <Server className="w-5 h-5" />, label: 'Server', href: '/dashboard/admin/system' },
@@ -136,15 +138,14 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
                 )}
 
                 {item.icon && React.isValidElement(item.icon) && React.cloneElement(item.icon as React.ReactElement<any>, {
-                  className: `w-5 h-5 transition-all duration-300 ${
-                    currentActive === item.label 
-                      ? 'text-primary scale-110' 
-                      : 'group-hover:text-white group-hover:scale-110'
-                  }`
+                  className: `w-5 h-5 transition-all duration-300 ${currentActive === item.label
+                    ? 'text-primary scale-110'
+                    : 'group-hover:text-white group-hover:scale-110'
+                    }`
                 })}
-                
+
                 <span className="flex-1 text-[14px] tracking-wide">{item.label}</span>
-                
+
                 {item.disabled && <Lock className="w-3.5 h-3.5 text-slate-500" />}
               </button>
             </div>
@@ -154,10 +155,10 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
         <div className="p-6 mt-auto border-t border-white/5 bg-white/[0.02]">
           <div className="flex items-center gap-4">
             <div className="relative group">
-              <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 transition-transform duration-300 group-hover:scale-105 overflow-hidden">
+              <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center shadow-lg shadow-primary/20 transition-transform duration-300 group-hover:scale-105 overflow-hidden">
                 {user?.profilePicture ? (
                   <img
-                    src={user.profilePicture}
+                    src={BASE_URL + user.profilePicture}
                     alt={userName}
                     className="w-full h-full object-cover"
                   />
@@ -173,9 +174,9 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
               <div className="text-[12px] text-slate-500 truncate mt-0.5">{userEmail}</div>
             </div>
           </div>
-          
+
           <div className="flex items-center gap-2 mt-5">
-            <button 
+            <button
               onClick={() => navigate('/dashboard/settings')}
               className="flex-1 flex items-center justify-center gap-2 py-2 px-3 bg-white/5 hover:bg-white/10 rounded-lg text-slate-400 hover:text-white transition-all text-[12px] font-medium"
             >

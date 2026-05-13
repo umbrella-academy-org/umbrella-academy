@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { authService } from '@/services/auth';
 import { BaseUser, OnboardingChecklist, StudentRegister, Trainer, UserRole, Guardian, GuardianInviteState } from '@/types';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/hooks/useRouter';;
 import { userService } from '@/services';
 
 interface AuthContextType {
@@ -119,7 +119,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (user && user.role === UserRole.STUDENT) {
       try {
         const currentStudent = await userService.getStudent()
-        console.log('Current student data:', currentStudent);
         if (currentStudent.success && currentStudent.data) {
           const student = currentStudent.data
           localStorage.setItem('user', JSON.stringify(student));

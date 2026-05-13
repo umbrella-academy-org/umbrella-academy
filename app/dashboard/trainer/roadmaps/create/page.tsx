@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/hooks/useRouter';;
 import { useAuth, useUsers, useRoadmaps } from '@/contexts';
 import { Student, UserRole } from '@/types';
 import { CreateRoadmapData, Milestone, RoadmapStepStatus } from '@/types/roadmap';

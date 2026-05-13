@@ -1,5 +1,3 @@
-// Centralized context exports for Umbrella Academy LMS
-
 export { AuthProvider, useAuth } from './AuthContext';
 export { AdminProvider, useAdminContext } from './AdminContext';
 export { UserProvider, useUsers } from './UserContext';

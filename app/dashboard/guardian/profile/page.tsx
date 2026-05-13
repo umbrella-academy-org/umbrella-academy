@@ -6,6 +6,7 @@ import { User, Mail, Shield, Bell, Calendar, MapPin, Camera, Edit2, Check, X, Ph
 import { useAuth } from '@/contexts';
 import { Guardian, UserRole } from '@/types';
 import { BASE_URL, userService } from '@/services';
+import Image from 'next/image';
 
 export default function GuardianProfilePage() {
     const { user, updateUserProfile } = useAuth();
@@ -76,10 +77,12 @@ export default function GuardianProfilePage() {
                                         <div className="w-32 h-32 rounded-full bg-white p-1.5 shadow-2xl shadow-slate-200/50 transform group-hover:scale-105 transition-all duration-500">
                                             <div className="w-full h-full bg-gradient-to-br from-slate-50 to-slate-100 rounded-full flex items-center justify-center overflow-hidden">
                                                 {user?.profilePicture ? (
-                                                    <img
+                                                    <Image
                                                         src={BASE_URL + user.profilePicture}
                                                         alt={profileData.name}
-                                                        className="w-full h-full object-cover"
+                                                        className="object-cover"
+                                                        width={500}
+                                                        height={500}
                                                     />
                                                 ) : (
                                                     <span className="text-slate-700 text-4xl font-extrabold">
