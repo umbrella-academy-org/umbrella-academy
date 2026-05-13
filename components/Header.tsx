@@ -28,7 +28,7 @@ export function Header() {
       <nav className="max-w-full mx-auto px-6 sm:px-10 lg:px-16">
         <div className="flex justify-between items-center">
           <div className="flex items-center space-x-12">
-            <Logo inverted={true} />
+            <Logo  />
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center space-x-10">
@@ -89,7 +89,7 @@ export function Header() {
         {isMenuOpen && (
           <div className="fixed inset-0 top-0 left-0 w-full h-screen bg-black z-100 flex flex-col items-center justify-center space-y-8 animate-fade-in text-center p-6">
             <div className="absolute top-6 left-6">
-              <Logo inverted={true} />
+              <Logo  />
             </div>
             <button
               onClick={() => setIsMenuOpen(false)}

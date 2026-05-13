@@ -18,16 +18,16 @@ export default function TrainerSettingsPage() {
     });
 
     return (
-        <div className="flex h-screen bg-white">
+        <div className="flex h-screen bg-[#FDF9F2]">
             <Sidebar activeItem="Settings" userType={UserRole.TRAINER} />
 
             <div className="flex-1 flex flex-col min-w-0">
 
-                <main className="flex-1 p-4 lg:p-8 overflow-y-auto bg-gray-50/30">
+                <main className="flex-1 p-4 lg:p-8 overflow-y-auto">
                     <div className="max-w-5xl mx-auto">
                         <div className="mb-8">
-                            <h1 className="text-3xl font-semibold text-gray-900 mb-2">Trainer Settings</h1>
-                            <p className="text-gray-500">Configure your professional profile, availability, and teaching preferences.</p>
+                            <h1 className="text-3xl font-playfair font-semibold text-slate-900 mb-2">Trainer Settings</h1>
+                            <p className="text-slate-500 font-light">Configure your professional profile, availability, and teaching preferences.</p>
                         </div>
 
                         <div className="flex flex-col lg:flex-row gap-8">
@@ -44,9 +44,9 @@ export default function TrainerSettingsPage() {
                                         <button
                                             key={item.id}
                                             onClick={() => setActiveSection(item.id)}
-                                            className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all ${activeSection === item.id
-                                                ? 'bg-yellow-600 text-white shadow-md'
-                                                : 'text-gray-600 hover:bg-white hover:text-gray-900 border border-transparent hover:border-gray-100'
+                                            className={`flex items-center gap-3 px-4 py-3 rounded-full text-sm font-medium transition-all ${activeSection === item.id
+                                                ? 'bg-slate-900 text-white shadow-md'
+                                                : 'text-slate-600 hover:bg-white hover:text-slate-900 border border-transparent hover:border-slate-100'
                                                 }`}
                                         >
                                             {item.icon}
@@ -55,7 +55,7 @@ export default function TrainerSettingsPage() {
                                     ))}
                                     <button
                                         onClick={() => logout()}
-                                        className="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-500 hover:bg-gray-50 transition-all mt-4"
+                                        className="flex items-center gap-3 px-4 py-3 rounded-full text-sm font-medium text-slate-500 hover:bg-white transition-all mt-4"
                                     >
                                         <LogOut className="w-4 h-4" />
                                         Sign Out
@@ -65,21 +65,21 @@ export default function TrainerSettingsPage() {
 
                             {/* Settings Content */}
                             <div className="flex-1">
-                                <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 lg:p-8 animate-fade-in">
+                                <div className="bg-white rounded-[32px] border border-slate-100 shadow-sm p-6 lg:p-8">
 
                                     {activeSection === 'account' && (
                                         <div className="space-y-8">
                                             <div>
-                                                <h3 className="text-lg font-semibold text-gray-900 mb-6">Security Settings</h3>
+                                                <h3 className="text-lg font-playfair font-semibold text-slate-900 mb-6">Security Settings</h3>
                                                 <div className="space-y-6">
                                                     <div>
-                                                        <label className="block text-sm font-medium text-gray-700 mb-2">Change Password</label>
+                                                        <label className="block text-sm font-medium text-slate-700 mb-2">Change Password</label>
                                                         <div className="grid grid-cols-1 gap-4">
-                                                            <input type="password" placeholder="Current Password" className="px-4 py-3 text-sm border border-gray-200 rounded-lg outline-none focus:ring-2 focus:ring-yellow-600" />
-                                                            <input type="password" placeholder="New Password" className="px-4 py-3 border text-sm border-gray-200 rounded-lg outline-none focus:ring-2 focus:ring-yellow-600" />
+                                                            <input type="password" placeholder="Current Password" className="px-4 py-3 text-sm bg-slate-50 border-2 border-slate-50 rounded-xl outline-none focus:bg-white focus:border-primary/20 focus:ring-0 transition-all" />
+                                                            <input type="password" placeholder="New Password" className="px-4 py-3 text-sm bg-slate-50 border-2 border-slate-50 rounded-xl outline-none focus:bg-white focus:border-primary/20 focus:ring-0 transition-all" />
                                                         </div>
                                                     </div>
-                                                    <button className="px-6 py-2.5 bg-yellow-600 text-white rounded-lg text-sm hover:bg-yellow-700 shadow-md">
+                                                    <button className="px-6 py-2.5 bg-slate-900 text-white rounded-full text-sm hover:bg-slate-800 shadow-md">
                                                         Update Security
                                                     </button>
                                                 </div>
@@ -89,7 +89,7 @@ export default function TrainerSettingsPage() {
 
                                     {activeSection === 'notif' && (
                                         <div className="space-y-6">
-                                            <h3 className="text-lg font-semibold text-gray-900 mb-4">Teaching Alerts</h3>
+                                            <h3 className="text-lg font-playfair font-semibold text-slate-900 mb-4">Teaching Alerts</h3>
                                             <div className="space-y-4">
                                                 {[
                                                     { id: 'emailAlerts', title: 'Email Summaries', desc: 'Daily summary of student progress and schedules.' },
@@ -98,12 +98,12 @@ export default function TrainerSettingsPage() {
                                                 ].map((pref) => (
                                                     <div key={pref.id} className="flex items-center justify-between">
                                                         <div>
-                                                            <h4 className="text-sm font-semibold text-gray-900">{pref.title}</h4>
-                                                            <p className="text-xs text-gray-500">{pref.desc}</p>
+                                                            <h4 className="text-sm font-semibold text-slate-900">{pref.title}</h4>
+                                                            <p className="text-xs text-slate-500 font-light">{pref.desc}</p>
                                                         </div>
                                                         <button
                                                             onClick={() => setNotifications({ ...notifications, [pref.id]: !notifications[pref.id as keyof typeof notifications] })}
-                                                            className={`w-12 h-6 rounded-full transition-all relative ${notifications[pref.id as keyof typeof notifications] ? 'bg-yellow-600' : 'bg-gray-200'}`}
+                                                            className={`w-12 h-6 rounded-full transition-all relative ${notifications[pref.id as keyof typeof notifications] ? 'bg-primary' : 'bg-slate-200'}`}
                                                         >
                                                             <div className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-all ${notifications[pref.id as keyof typeof notifications] ? 'left-7' : 'left-1'}`} />
                                                         </button>
@@ -115,11 +115,11 @@ export default function TrainerSettingsPage() {
 
                                     {(activeSection === 'teaching' || activeSection === 'wing' || activeSection === 'payouts') && (
                                         <div className="flex flex-col items-center justify-center py-20 text-center">
-                                            <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center text-gray-300 mb-4">
+                                            <div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center text-slate-300 mb-4">
                                                 <Settings className="w-8 h-8" />
                                             </div>
-                                            <h3 className="text-lg font-semibold text-gray-900">Module Optimization</h3>
-                                            <p className="text-sm text-gray-500 max-w-xs mt-2">We are currently refining these professional tools for better performance.</p>
+                                            <h3 className="text-lg font-playfair font-semibold text-slate-900">Module Optimization</h3>
+                                            <p className="text-sm text-slate-500 font-light max-w-xs mt-2">We are currently refining these professional tools for better performance.</p>
                                         </div>
                                     )}
 

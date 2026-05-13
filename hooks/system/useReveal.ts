@@ -1,32 +1,44 @@
+'use client';
+
 import { useEffect, useRef, useState } from 'react';
 
-export function useReveal() {
-    const ref = useRef<HTMLDivElement>(null);
-    const [isVisible, setIsVisible] = useState(false);
+interface UseRevealOptions {
+  threshold?: number;
+  rootMargin?: string;
+  triggerOnce?: boolean;
+}
 
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    setIsVisible(true);
-                    observer.unobserve(entry.target);
-                }
-            },
-            {
-                threshold: 0.1,
-            }
-        );
+export function useReveal<T extends HTMLElement = HTMLDivElement>(
+  options: UseRevealOptions = {}
+) {
+  const { threshold = 0.1, rootMargin = '0px', triggerOnce = true } = options;
+  const ref = useRef<T>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
-        if (ref.current) {
-            observer.observe(ref.current);
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          if (triggerOnce) {
+            observer.unobserve(element);
+          }
+        } else if (!triggerOnce) {
+          setIsVisible(false);
         }
+      },
+      { threshold, rootMargin }
+    );
 
-        return () => {
-            if (ref.current) {
-                observer.unobserve(ref.current);
-            }
-        };
-    }, []);
+    observer.observe(element);
 
-    return { ref, isVisible };
+    return () => {
+      observer.unobserve(element);
+    };
+  }, [threshold, rootMargin, triggerOnce]);
+
+  return { ref, isVisible };
 }

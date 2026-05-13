@@ -25,8 +25,8 @@ export interface TrainerApprovalRequest {
 
 export interface Booking  {
   id: string;
-  student: BaseUser;
-  trainer: BaseUser;
+  studentId: BaseUser;
+  trainerId: BaseUser;
   requestedTime: Date;
   learningGoals: string;
   status: BookingStatus;

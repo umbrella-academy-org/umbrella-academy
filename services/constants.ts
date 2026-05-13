@@ -1,6 +1,6 @@
 // Dreamize API Configuration
 
-export const BASE_URL = 'http://localhost:5000';
+export const BASE_URL = process.env.NODE_ENV === 'production' ? 'https://umbrella-academy-backend.onrender.com' : 'http://localhost:5000';
 
 export const API_ENDPOINTS = {
   AUTH_REGISTER: '/api/auth/register',
@@ -33,17 +33,22 @@ export const API_ENDPOINTS = {
   ROADMAP_REJECT: (id: string) => `/api/roadmaps/${id}/reject`,
   MILESTONE_COMPLETE: (roadmapId: string, milestoneOrder: number) => `/api/roadmaps/${roadmapId}/milestones/${milestoneOrder}/complete`,
   MILESTONE_APPROVE: (roadmapId: string, milestoneOrder: number) => `/api/roadmaps/${roadmapId}/milestones/${milestoneOrder}/approve`,
+  PROJECT: '/api/projects',
+  PROJECT_BY_ID: (id: string) => `/api/projects/${id}`,
+  PROJECT_SUBMIT: (id: string) => `/api/projects/${id}/submit`,
+  PROJECT_APPROVE: (id: string) => `/api/projects/${id}/approve`,
+  PROJECT_REJECT: (id: string) => `/api/projects/${id}/reject`,
   CHAT_CONTACTS: '/api/chat/contacts',
   CHAT_MESSAGES: (contactId: string) => `/api/chat/messages/${contactId}`,
   PAYMENT_ORIANTATION: '/api/payments/orientation',
   PAYMENT_SUBSCRIPTION: '/api/payments/subscription',
   PAYMENT_CONFIRM: (id: string) => `/api/payments/${id}/confirm`,
-  WALLET_ME: '/api/wallet/me',
-  WALLET: '/api/wallet',
   STATS_ME: '/api/stats/me',
   NOTIFICATIONS: '/api/notifications',
   NOTIFICATION_BY_ID: (id: string) => `/api/notifications/${id}`,
   SYSTEM: '/api/system',
+  SYSTEM_DATABASE: '/api/system/database',
+  SYSTEM_MEMORY: '/api/system/memory',
   TRAINERS_PENDING: '/api/trainers/pending',
 
   ADMIN_ANALYTICS: '/api/admin/analytics',
@@ -52,6 +57,15 @@ export const API_ENDPOINTS = {
   ADMIN_REJECT_TRAINER: (id: string) => `/api/admin/trainers/${id}/reject`,
   ADMIN_FEEDBACK_BY_ID: (id: string) => `/api/admin/feedback/${id}`,
   ADMIN_FEEDBACK_RESPONSE: (id: string) => `/api/admin/feedback/${id}/response`,
+  
+  // Guardian
+  GUARDIAN_VERIFY_INVITE: '/api/guardian/invite/verify',
+  GUARDIAN_SET_PASSWORD: '/api/guardian/set-password',
+  GUARDIAN_LOGIN: '/api/guardian/login',
+  GUARDIAN_DECLINE_INVITE: '/api/guardian/invite/decline',
+  GUARDIAN_STUDENTS: '/api/guardian/students',
+  GUARDIAN_STUDENT_BY_ID: (id: string) => `/api/guardian/students/${id}`,
+  
   FILES: {
     UPLOAD_AVATAR: '/api/files/avatar',
     UPLOAD_MESSAGE: '/api/files/message',

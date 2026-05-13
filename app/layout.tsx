@@ -1,106 +1,64 @@
-import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import LoadingBar from "@/components/ui/LoadingBar";
-import { AppProviders } from "@/contexts";
-import { SystemThemeScript } from "@/components/providers/ThemeProvider";
+import type { Metadata } from 'next'
+import { Geist, Geist_Mono } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/next'
+import './globals.css'
+import { AppProviders } from '@/contexts';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-export const viewport: Viewport = {
-  themeColor: "#ca8a04",
-  width: "device-width",
-  initialScale: 1,
-  maximumScale: 5,
-};
+const _geist = Geist({ subsets: ["latin"] });
+const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: {
-    default: "Dreamize | Next-Gen Learning Platform",
-    template: "%s | Dreamize"
-  },
-  description: "Join Dreamize LMS and learn from industry trainers, guided by expert mentors, inside structured learning companies. Accelerate your career with real-world skills and professional guidance.",
-  keywords: [
-    "LMS",
-    "Learning Management System",
-    "Professional Mentorship",
-    "Skills Development",
-    "Industry Training",
-    "Dreamize",
-    "Career Growth Rwanda",
-    "Digital Learning Platform"
-  ],
-  authors: [{ name: "Dreamize" }],
-  creator: "Dreamize",
-  publisher: "Dreamize",
-  metadataBase: new URL("https://dreamize.rw"),
-  alternates: {
-    canonical: "/",
-  },
+  metadataBase: new URL('https://dreamise-africa.vercel.app'), // Assuming this is the main domain or current vercel domain
+  title: 'Dreamize Africa | Building Africa&apos;s Tech Talent Pipeline',
+  description: 'Prepare young Africans for technology careers through early career guidance, hands-on learning, and real-world project experience.',
   openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: "/",
-    title: "Dreamize | Next-Gen Learning Platform",
-    description: "Structured learning platform connecting students with expert trainers and mentors across multiple fields. Real skills, real growth.",
-    siteName: "Dreamize",
+    title: 'Dreamize Africa',
+    description: 'Building Africa&apos;s tech talent pipeline through early career guidance and hands-on learning.',
+    url: 'https://dreamizeafrica.org',
+    siteName: 'Dreamize Africa',
     images: [
       {
-        url: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200",
-        width: 1200,
-        height: 630,
-        alt: "Dreamize - Professional Learning Environment",
+        url: '/images/logo.png',
+        width: 800,
+        height: 600,
+        alt: 'Dreamize Africa Logo',
       },
     ],
+    locale: 'en_US',
+    type: 'website',
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Dreamize | Next-Gen Learning Platform",
-    description: "Accelerate your career with industry-led training and expert mentorship. Join Dreamize today.",
-    images: ["https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200"],
-    creator: "@dreamize",
+    card: 'summary_large_image',
+    title: 'Dreamize Africa',
+    description: 'Building Africa&apos;s tech talent pipeline.',
+    images: ['/images/logo.png'],
   },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
+  icons: {
+    icon: '/images/logo.png',
+    apple: '/images/logo.png',
   },
-  category: "education",
-};
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <head>
-        <SystemThemeScript />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet" />
       </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-hidden bg-background text-foreground`}
-        suppressHydrationWarning={true}
-      >
-        <LoadingBar />
-        <AppProviders>
+      <AppProviders>
+        <body className="font-sans antialiased" suppressHydrationWarning>
+
           {children}
-        </AppProviders>
-      </body>
+          {process.env.NODE_ENV === 'production' && <Analytics />}
+
+        </body>
+      </AppProviders>
     </html>
-  );
+  )
 }

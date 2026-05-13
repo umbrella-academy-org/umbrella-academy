@@ -12,11 +12,7 @@ export enum GuardianInviteState {
   DECLINED = 'declined'
 }
 
-export interface Availability {
-  weeklyAvailableHours: number;
-  preferredTimeSlots: string[];
-  preferredDays: string[];
-}
+
 
 export interface OnboardingChecklist {
   accountCreated: boolean;
@@ -42,24 +38,25 @@ export interface BaseUser {
   phoneNumber: string;
   role: UserRole;
   isActive: boolean;
-  status: string;
   gender: string;
-  dateOfBirth: Date;
+  dateOfBirth: string;
   isVerified: boolean;
   otpCode: string;
-  otpExpiry: Date;
+  otpExpiry: string;
   resetToken: string;
-  resetTokenExpiry: Date;
-  createdAt: Date;
-  updatedAt: Date;
+  resetTokenExpiry: string;
+  createdAt: string;
+  updatedAt: string;
+  status?: 'active' | 'pending' | 'inactive';
+  profilePicture?: string;
 }
 
 export interface Guardian extends BaseUser {
   role: UserRole.GUARDIAN;
   linkedStudentIds: string[];
   inviteState: GuardianInviteState;
-  inviteSentAt: Date;
-  passwordSetAt: Date | null;
+  inviteSentAt: string;
+  passwordSetAt: string | null;
 }
 
 export interface Student extends BaseUser {
@@ -67,7 +64,7 @@ export interface Student extends BaseUser {
   guardianIds: string[];
   hasPaidOrientation: boolean;
   hasActiveSubscription: boolean;
-  subscriptionExpiryDate: Date | null;
+  subscriptionExpiryDate: string | null;
   onboardingStatus: OnboardingChecklist;
   assignedTrainerId: string | null;
   currentRoadmapId: string | null;
@@ -85,8 +82,8 @@ export interface Trainer extends BaseUser {
 }
 
 
-export interface StudentRegister extends BaseUser {
-  guardianName: string;
-  guardianEmail: string;
-  guardianPhoneNumber: string;
+export interface StudentRegister extends Partial<BaseUser> {
+    guardianName: string;
+    guardianEmail: string;
+    guardianPhoneNumber: string;
 }

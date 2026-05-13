@@ -1,82 +1,130 @@
 'use client';
 
-import { Users, TrendingUp, Clock, Star } from 'lucide-react';
-import { User } from '@/types/user';
+import { useMemo } from 'react';
+import { Users, TrendingUp, Clock, Star, GraduationCap, CheckCircle, Activity, Award } from 'lucide-react';
+import { useUsers } from '@/contexts/UserContext';
+import { useAuth } from '@/contexts/AuthContext';
+import { useRoadmaps } from '@/contexts/RoadmapContext';
+import { RoadmapStepStatus } from '@/types/roadmap';
 
-interface StudentsHeaderProps {
-  students: User[];
-}
+export default function StudentsHeader() {
+  const { students, isLoading } = useUsers();
+  const { user } = useAuth();
+  const { roadmaps } = useRoadmaps();
 
-export default function StudentsHeader({ students }: StudentsHeaderProps) {
-  const total = students.length;
-  const active = students.filter(s => s.status === 'active').length;
+  const myStudents = useMemo(() => {
+    if (!user) return [];
+    return students.filter(student => student.assignedTrainerId === user._id);
+  }, [students, user]);
 
-  const stats = [
+  const stats = useMemo(() => {
+    const total = myStudents.length;
+    const active = myStudents.filter(s => s.isActive && s.isVerified).length;
+    const pending = myStudents.filter(s => s.isActive && !s.isVerified).length;
+    const withSubscription = myStudents.filter(s => s.hasActiveSubscription).length;
+
+    let totalProgress = 0;
+    let studentsWithRoadmap = 0;
+
+    myStudents.forEach(student => {
+      if (student.currentRoadmapId) {
+        const roadmap = roadmaps.find(r => r.id === student.currentRoadmapId);
+        if (roadmap && roadmap.milestones && roadmap.milestones.length > 0) {
+          const completed = roadmap.milestones.filter(m => m.status === RoadmapStepStatus.COMPLETED).length;
+          totalProgress += (completed / roadmap.milestones.length) * 100;
+          studentsWithRoadmap++;
+        }
+      }
+    });
+
+    const avgProgress = studentsWithRoadmap > 0 ? Math.round(totalProgress / studentsWithRoadmap) : 0;
+
+    return {
+      total,
+      active,
+      pending,
+      withSubscription,
+      avgProgress
+    };
+  }, [myStudents, roadmaps]);
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-between animate-pulse">
+        <div>
+           <div className="h-4 w-32 bg-slate-200 rounded-lg mb-2" />
+           <div className="h-8 w-48 bg-slate-200 rounded-xl" />
+        </div>
+        <div className="flex gap-4">
+           {[...Array(4)].map((_, i) => (
+             <div key={i} className="h-16 w-32 bg-slate-100 rounded-2xl" />
+           ))}
+        </div>
+      </div>
+    );
+  }
+
+  const statCards = [
     {
-      icon: <Users className="w-5 h-5" />,
-      label: 'Total Students',
-      value: String(total),
-      change: '+3 this month',
-      color: 'text-gray-600 bg-gray-100'
+      icon: Users,
+      label: 'Mentees',
+      value: String(stats.total),
+      color: 'text-blue-500',
+      bg: 'bg-blue-50'
     },
     {
-      icon: <TrendingUp className="w-5 h-5" />,
-      label: 'Active Students',
-      value: String(active),
-      change: '+2 this week',
-      color: 'text-gray-600 bg-gray-100'
+      icon: CheckCircle,
+      label: 'Active',
+      value: String(stats.active),
+      color: 'text-green-500',
+      bg: 'bg-green-50'
     },
     {
-      icon: <Clock className="w-5 h-5" />,
-      label: 'Avg. Progress',
-      value: '67%',
-      change: '+5% vs last month',
-      color: 'text-gray-600 bg-gray-100'
+      icon: Activity,
+      label: 'Avg Progress',
+      value: `${stats.avgProgress}%`,
+      color: 'text-primary',
+      bg: 'bg-primary/10'
     },
     {
-      icon: <Star className="w-5 h-5" />,
-      label: 'Completion Rate',
-      value: '89%',
-      change: '+12% improvement',
-      color: 'text-gray-600 bg-gray-100'
+      icon: Award,
+      label: 'Subscribed',
+      value: String(stats.withSubscription),
+      color: 'text-purple-500',
+      bg: 'bg-purple-50'
     }
   ];
 
   return (
-    <div className="mb-6 animate-fade-in">
-      {/* Title */}
-      <div className="mb-6">
-        <h1 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-gray-900 mb-2">
-          My Students
+    <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 animate-in fade-in slide-in-from-top-4 duration-500">
+      <div>
+        <div className="flex items-center gap-2 mb-1">
+          <span className="text-[12px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full uppercase tracking-wider flex items-center gap-1">
+             <GraduationCap size={12} className="text-primary" /> Directory
+          </span>
+          <span className="text-slate-300">•</span>
+          <span className="text-[12px] font-medium text-slate-400 italic">Mentorship Group</span>
+        </div>
+        <h1 className="text-2xl font-black text-slate-900 tracking-tight">
+          Mentee Roster
         </h1>
-        <p className="text-sm sm:text-base text-gray-600">
-          Manage and track your students&apos; progress and performance.
-        </p>
       </div>
 
-      {/* Stats Cards */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4">
-        {stats.map((stat, index) => (
+      <div className="flex flex-wrap items-center gap-3">
+        {statCards.map((stat, index) => (
           <div 
             key={index}
-            className="bg-white rounded-lg p-4 shadow-sm border border-gray-100  hover:shadow-lg transition-all duration-300 animate-slide-up"
-            style={{ animationDelay: `${index * 100}ms` }}
+            className="flex items-center gap-3 bg-white border border-slate-100 rounded-[20px] px-4 py-2.5 shadow-sm hover:shadow-md transition-all group"
           >
-            <div className="flex items-center justify-between mb-3">
-              <div className={`p-2 rounded-lg ${stat.color}`}>
-                {stat.icon}
-              </div>
+            <div className={`w-10 h-10 ${stat.bg} rounded-xl flex items-center justify-center transition-transform group-hover:scale-110`}>
+              <stat.icon className={`w-5 h-5 ${stat.color}`} />
             </div>
-            
             <div>
-              <p className="text-xs font-medium text-gray-600 mb-1">
+              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">
                 {stat.label}
               </p>
-              <p className="text-xl lg:text-2xl font-bold text-gray-900 mb-1">
+              <p className="text-lg font-black text-slate-900 leading-none">
                 {stat.value}
-              </p>
-              <p className="text-xs text-gray-600 font-medium">
-                {stat.change}
               </p>
             </div>
           </div>

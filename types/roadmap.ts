@@ -39,7 +39,7 @@ export interface StudentBookingRequest {
 }
 
 export interface Milestone {
-  title: string;
+ title: string;
   description: string;
   skillsToLearn: string[];
   tasks: string[];
@@ -49,12 +49,14 @@ export interface Milestone {
   status: RoadmapStepStatus;
   completedAt: Date | null;
   trainerFeedback?: string;
+  submittedProjectIds?: string[]; // Track submitted projects for this milestone
+  completedProjectIds?: string[]; // Track approved projects for this milestone
 }
 
 export interface Roadmap {
   id: string;
-  student: BaseUser;
-  trainer: BaseUser;
+  studentId: BaseUser;
+  trainerId: BaseUser;
   title: string;
   status: RoadmapStatus;
   approvedBy?: string;
@@ -65,3 +67,10 @@ export interface Roadmap {
   updatedAt: Date;
 }
 
+export interface CreateRoadmapData {
+  studentId: string;
+  trainerId: string;
+  title: string;
+  milestones: Milestone[];
+  status:RoadmapStatus
+}

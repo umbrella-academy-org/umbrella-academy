@@ -3,31 +3,15 @@
 import { useState } from 'react';
 import { X, Calendar, Clock, User, CheckCircle, MessageSquare, Users, AlertCircle } from 'lucide-react';
 import { useUsers } from '@/contexts';
-import { Trainer, BookingStatus, StudentBookingRequest } from '@/types';
+import { Trainer,  StudentBookingRequest } from '@/types';
 import { useBooking } from '@/hooks/useBooking';
-
-interface OrientationBooking extends Document {
-  id: string;
-  studentId: string;
-  trainerId: string;
-  requestedTime: Date;
-  alternativeTime?: Date;
-  learningGoals: string;
-  status: BookingStatus;
-  rejectionReason?: string;
-  meetingLink?: string;
-  createdAt: Date;
-}
 
 interface BookingCalendarProps {
   onClose: () => void;
   onSuccess: () => void;
 }
 
-interface TimeSlot {
-  time: string;
-  available: boolean;
-}
+
 
 export default function BookingCalendar({ onClose, onSuccess }: BookingCalendarProps) {
   const { trainers, isLoading: trainersLoading } = useUsers()
@@ -37,13 +21,6 @@ export default function BookingCalendar({ onClose, onSuccess }: BookingCalendarP
   const [selectedTime, setSelectedTime] = useState<string>('');
   const [learningGoals, setLearningGoals] = useState('');
   const [bookingStep, setBookingStep] = useState<'select' | 'confirm' | 'submitting' | 'success'>('select');
-
-  // Generate available dates for the next 7 days
-  const availableDates = Array.from({ length: 7 }, (_, i) => {
-    const date = new Date();
-    date.setDate(date.getDate() + i + 1);
-    return date.toISOString().split('T')[0];
-  });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -152,118 +129,94 @@ export default function BookingCalendar({ onClose, onSuccess }: BookingCalendarP
         <div className="p-6">
           {bookingStep === 'select' && (
             <div className="space-y-6">
-              {/* Step 1: Select Mentor - Show all available trainers */}
+              {/* Step 1: Select Mentor */}
               <div>
                 <h3 className="font-medium text-gray-900 mb-4">Choose Your Mentor</h3>
-                
-                {trainersLoading ? (
-                  <div className="flex items-center justify-center py-8">
-                    <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-                    <span className="ml-3 text-gray-600">Loading available mentors...</span>
-                  </div>
-                ) : trainers.length === 0 ? (
-                  <div className="text-center py-8 px-4">
-                    <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <Users className="w-8 h-8 text-gray-400" />
-                    </div>
-                    <h4 className="text-lg font-medium text-gray-900 mb-2">No Mentors Available</h4>
-                    <p className="text-gray-500 mb-4">
-                      We're sorry, but there are currently no mentors available for booking.
-                      Please check back later or contact support for assistance.
-                    </p>
-                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-left">
-                      <div className="flex items-start gap-2">
-                        <AlertCircle className="w-5 h-5 text-blue-600 mt-0.5 shrink-0" />
-                        <div>
-                          <p className="text-sm font-medium text-blue-900">What you can do:</p>
-                          <ul className="text-sm text-blue-700 mt-1 space-y-1">
-                            <li>• Try booking again in a few hours</li>
-                            <li>• Contact our support team for help</li>
-                            <li>• Check your email for mentor availability updates</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
+                {trainers.length === 0 ? (
+                  <div className="text-center py-8">
+                    <p className="text-gray-500">No available trainers at this time. Booking cannot continue.</p>
                   </div>
                 ) : (
-                  <div className="space-y-3 max-h-64 overflow-y-auto">
+                  <div className="space-y-3 max-h-96 overflow-y-auto">
                     {trainers.map((trainer) => (
-                      <button
+                      <div
                         key={trainer._id}
-                        onClick={() => setSelectedTrainer(trainer)}
-                        className={`w-full p-4 border rounded-lg text-left transition-colors ${
+                        className={`p-4 border rounded-lg cursor-pointer transition-colors ${
                           selectedTrainer?._id === trainer._id
                             ? 'border-blue-500 bg-blue-50'
-                            : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
+                            : 'border-gray-200 hover:border-gray-300'
                         }`}
+                        onClick={() => setSelectedTrainer(trainer)}
                       >
                         <div className="flex items-center gap-3">
                           <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center">
                             <User className="w-6 h-6 text-gray-400" />
                           </div>
                           <div className="flex-1">
-                            <h4 className="font-medium text-gray-900">
-                              {trainer.firstName} {trainer.lastName}
-                            </h4>
-                            <p className="text-sm text-gray-500">
-                              {trainer.experience?.yearsOfExperience || 0} years experience
-                            </p>
-                            <p className="text-sm text-gray-500">
-                              {trainer.experience?.specializations?.join(', ') || 'General mentoring'}
-                            </p>
+                            <h4 className="font-medium text-gray-900">{trainer.firstName} {trainer.lastName}</h4>
+                            <p className="text-sm text-gray-500">{trainer.experience.yearsOfExperience} years experience</p>
+                            <p className="text-sm text-gray-500">Specializations: {trainer.experience.specializations.join(', ')}</p>
+                            <p className="text-sm text-gray-500">Skills: {trainer.skills.join(', ')}</p>
                           </div>
                           {selectedTrainer?._id === trainer._id && (
-                            <CheckCircle className="w-5 h-5 text-blue-600 shrink-0" />
+                            <CheckCircle className="w-5 h-5 text-blue-600" />
                           )}
                         </div>
-                      </button>
+                      </div>
                     ))}
                   </div>
                 )}
               </div>
 
               {/* Step 2: Select Date - Use date picker */}
-              <div>
-                <h3 className="font-medium text-gray-900 mb-3">Select Date</h3>
-                <input
-                  type="date"
-                  value={selectedDate}
-                  onChange={(e) => setSelectedDate(e.target.value)}
-                  min={new Date().toISOString().split('T')[0]}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-                {selectedDate && (
-                  <p className="text-sm text-green-600 mt-2">Date selected: {selectedDate}</p>
-                )}
-              </div>
+              {selectedTrainer && (
+                <div>
+                  <h3 className="font-medium text-gray-900 mb-3">Select Date</h3>
+                  <input
+                    type="date"
+                    value={selectedDate}
+                    onChange={(e) => setSelectedDate(e.target.value)}
+                    min={new Date().toISOString().split('T')[0]}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                  {selectedDate && (
+                    <p className="text-sm text-green-600 mt-2">Date selected: {selectedDate}</p>
+                  )}
+                </div>
+              )}
 
               {/* Step 3: Select Time - Use time picker */}
-              <div>
-                <h3 className="font-medium text-gray-900 mb-3">Select Time</h3>
-                <input
-                  type="time"
-                  value={selectedTime}
-                  onChange={(e) => setSelectedTime(e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-                {selectedTime && (
-                  <p className="text-sm text-green-600 mt-2">Time selected: {selectedTime}</p>
-                )}
-              </div>
+              {selectedTrainer && selectedDate && (
+                <div>
+                  <h3 className="font-medium text-gray-900 mb-3">Select Time</h3>
+                  <input
+                    type="time"
+                    value={selectedTime}
+                    onChange={(e) => setSelectedTime(e.target.value)}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                  {selectedTime && (
+                    <p className="text-sm text-green-600 mt-2">Time selected: {selectedTime}</p>
+                  )}
+                </div>
+              )}
+
               {/* Step 4: Learning Goals */}
-              <div>
-                <h3 className="font-medium text-gray-900 mb-3">Your Learning Goals</h3>
-                <textarea
-                  value={learningGoals}
-                  onChange={(e) => setLearningGoals(e.target.value)}
-                  placeholder="Tell your mentor what you want to learn and achieve..."
-                  rows={4}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-                <p className="text-sm text-gray-500 mt-1">
-                  This helps your mentor prepare for your session
-                </p>
-              </div>
+              {selectedTrainer && selectedDate && selectedTime && (
+                <div>
+                  <h3 className="font-medium text-gray-900 mb-3">Your Learning Goals</h3>
+                  <textarea
+                    value={learningGoals}
+                    onChange={(e) => setLearningGoals(e.target.value)}
+                    placeholder="Tell your mentor what you want to learn and achieve..."
+                    rows={4}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                  <p className="text-sm text-gray-500 mt-1">
+                    This helps your mentor prepare for your session
+                  </p>
+                </div>
+              )}
 
               {/* Action Buttons */}
               <div className="flex gap-3">

@@ -28,7 +28,7 @@ export default function RenewSubscriptionPage() {
   };
 
   return (
-    <div className="flex h-screen bg-white w-full">
+    <div className="flex h-screen bg-[#FDF9F2] w-full">
       {/* Sidebar - Fixed */}
       <Sidebar activeItem="Subscription" />
 
@@ -36,13 +36,13 @@ export default function RenewSubscriptionPage() {
       <div className="w-full flex flex-col overflow-hidden lg:ml-0">
         {/* Renew Content - Scrollable */}
         <main className="w-full overflow-auto">
-          <div className="w-full p-3 lg:p-4">
+          <div className="w-full p-8">
           
             {/* Back Button */}
             <div className="mt-4 lg:mt-6 mb-4 lg:mb-6">
               <a
                 href="/post-signup/subscription"
-                className="bg-yellow-600 text-white px-3 lg:px-4 py-2 rounded-lg font-medium hover:bg-yellow-700 transition-colors inline-block text-sm lg:text-base"
+                className="bg-slate-900 text-white px-4 py-2 rounded-full font-medium hover:bg-slate-800 shadow-md transition-colors inline-block text-sm lg:text-base"
               >
                 ← Back
               </a>
