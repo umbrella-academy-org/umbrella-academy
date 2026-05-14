@@ -57,7 +57,7 @@ export function AuthContainer({ children }: AuthContainerProps) {
         </svg>
       </div>
 
-      <div className="relative z-10 w-full max-w-md mx-auto">
+      <div className="relative z-10 w-full max-w-xl mx-auto">
         {children}
       </div>
 

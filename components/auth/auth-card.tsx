@@ -17,7 +17,7 @@ export function AuthCard({ children, title, subtitle }: AuthCardProps) {
       
       <div className="relative z-10 flex flex-col items-center">
         <div className="mb-8 sm:mb-10 scale-90">
-          <Logo />
+          <Logo size='lg'/>
         </div>
 
         <h1 className="text-[28px] sm:text-[32px] md:text-[40px] font-playfair font-semibold text-foreground text-center leading-tight mb-3 break-words">
