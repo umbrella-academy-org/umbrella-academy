@@ -40,14 +40,15 @@ export default function ChatInterface({ userType: _userType }: { userType: strin
         scrollToBottom();
     }, [messages]);
 
-    const contacts = users.filter(u => 
-        u._id !== user?._id && 
+    const contacts = users.filter(u =>
+        u._id !== user?._id &&
         (`${u.firstName} ${u.lastName}`).toLowerCase().includes(searchQuery.toLowerCase())
     );
 
     useEffect(() => {
         socketService.connect();
         const handleIncoming = (data: { message: Record<string, unknown> }) => {
+            console.log('Received message via socket:');
             const msg = data.message as unknown as ChatMessage;
             setActiveContact((current) => {
                 if (!current) return current;
@@ -55,16 +56,18 @@ export default function ChatInterface({ userType: _userType }: { userType: strin
                     msg.senderId === current._id ||
                     msg.recipientId === current._id;
                 if (isFromActiveContact) {
-                    setMessages((prev) => [
-                        ...prev,
-                        {
-                            id: msg._id,
-                            senderId: msg.senderId,
-                            text: msg.text,
-                            timestamp: formatTime(msg.createdAt),
-                            isMe: msg.senderId === user?._id,
-                        },
-                    ]);
+                    const newMessage = {
+                        id: msg._id,
+                        senderId: msg.senderId,
+                        text: msg.text,
+                        timestamp: formatTime(msg.createdAt),
+                        isMe: msg.senderId === user?._id,
+                    }
+                    setMessages((prev) => {
+                        const messageExists = prev.some(m => m.id === msg._id)
+                        if (messageExists) return prev
+                        return [...prev, newMessage]
+                    });
                 }
                 return current;
             });
@@ -103,24 +106,10 @@ export default function ChatInterface({ userType: _userType }: { userType: strin
         if (!message.trim() || !activeContact) return;
 
         const text = message.trim();
-        const tempId = `temp-${Date.now()}`;
-
-        const optimistic: DisplayMessage = {
-            id: tempId,
-            senderId: user?._id ?? 'me',
-            text,
-            timestamp: formatTime(new Date().toISOString()),
-            isMe: true,
-        };
-        setMessages((prev) => [...prev, optimistic]);
         setMessage('');
-
         try {
             socketService.sendMessage(activeContact._id, text);
         } catch {
-            setMessages((prev) =>
-                prev.map((m) => (m.id === tempId ? { ...m, failed: true } : m))
-            );
             setMessage(text);
         }
     };
@@ -131,10 +120,10 @@ export default function ChatInterface({ userType: _userType }: { userType: strin
             <div className="w-full md:w-96 border-r border-slate-100 flex flex-col bg-[#FDF9F2]">
                 <div className="p-8 border-b border-slate-100">
                     <div className="flex items-center justify-between mb-6">
-                       <h2 className="text-2xl font-playfair font-black text-slate-900 tracking-tight">Messages</h2>
-                       <div className="w-10 h-10 bg-slate-100 rounded-2xl flex items-center justify-center text-slate-400">
-                          <MessageSquare size={18} />
-                       </div>
+                        <h2 className="text-2xl font-playfair font-black text-slate-900 tracking-tight">Messages</h2>
+                        <div className="w-10 h-10 bg-slate-100 rounded-2xl flex items-center justify-center text-slate-400">
+                            <MessageSquare size={18} />
+                        </div>
                     </div>
                     <div className="relative group">
                         <SearchIcon className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4 group-focus-within:text-primary transition-colors" />
@@ -164,46 +153,46 @@ export default function ChatInterface({ userType: _userType }: { userType: strin
                     ) : contacts.length === 0 ? (
                         <div className="flex flex-col items-center justify-center h-full p-10 text-center">
                             <div className="w-16 h-16 bg-slate-50 rounded-[24px] flex items-center justify-center mb-4">
-                               <MessageSquare className="w-8 h-8 text-slate-200" />
+                                <MessageSquare className="w-8 h-8 text-slate-200" />
                             </div>
                             <p className="text-[14px] text-slate-900 font-black uppercase tracking-widest">No Transmissions</p>
                             <p className="text-xs text-slate-400 mt-2 font-medium italic">Initiate a connection to begin</p>
                         </div>
                     ) : (
                         <div className="p-4 space-y-1">
-                          {contacts.map((contact) => {
-                              const displayName = `${contact.firstName} ${contact.lastName}`;
-                              const isActive = activeContact?._id === contact._id;
-                              return (
-                                  <button
-                                      key={contact._id}
-                                      onClick={() => handleSelectContact(contact)}
-                                      className={`w-full flex items-center gap-4 p-4 rounded-[24px] transition-all relative group ${isActive ? 'bg-slate-900 shadow-xl shadow-slate-900/10' : 'hover:bg-slate-50'}`}
-                                  >
-                                      <div className="relative">
-                                          <div className={`w-14 h-14 rounded-[20px] flex items-center justify-center text-lg font-black transition-transform group-hover:scale-105 ${isActive ? 'bg-primary text-slate-900' : 'bg-slate-100 text-slate-400'}`}>
-                                              {contact.firstName[0]}{contact.lastName[0]}
-                                          </div>
-                                          <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-white rounded-full flex items-center justify-center p-0.5 shadow-sm">
-                                             <Circle className="w-full h-full fill-green-500 text-green-500" />
-                                          </div>
-                                      </div>
-                                      <div className="flex-1 text-left min-w-0">
-                                          <div className="flex justify-between items-center mb-0.5">
-                                              <h4 className={`font-black text-[14px] truncate transition-colors ${isActive ? 'text-white' : 'text-slate-900'}`}>{displayName}</h4>
-                                          </div>
-                                          <div className="flex items-center gap-2">
-                                             <span className={`text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-md ${isActive ? 'bg-white/10 text-primary' : 'bg-slate-100 text-slate-400'}`}>
-                                                 {contact.role}
-                                             </span>
-                                          </div>
-                                      </div>
-                                      {isActive && (
-                                         <div className="absolute right-4 w-1.5 h-1.5 bg-primary rounded-full animate-pulse" />
-                                      )}
-                                  </button>
-                              );
-                          })}
+                            {contacts.map((contact) => {
+                                const displayName = `${contact.firstName} ${contact.lastName}`;
+                                const isActive = activeContact?._id === contact._id;
+                                return (
+                                    <button
+                                        key={contact._id}
+                                        onClick={() => handleSelectContact(contact)}
+                                        className={`w-full flex items-center gap-4 p-4 rounded-[24px] transition-all relative group ${isActive ? 'bg-slate-900 shadow-xl shadow-slate-900/10' : 'hover:bg-slate-50'}`}
+                                    >
+                                        <div className="relative">
+                                            <div className={`w-14 h-14 rounded-full flex items-center justify-center text-lg font-black transition-transform group-hover:scale-105 ${isActive ? 'bg-primary text-slate-900' : 'bg-slate-100 text-slate-400'}`}>
+                                                {contact.firstName[0]}{contact.lastName[0]}
+                                            </div>
+                                            <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-white rounded-full flex items-center justify-center p-0.5 shadow-sm">
+                                                <Circle className="w-full h-full fill-green-500 text-green-500" />
+                                            </div>
+                                        </div>
+                                        <div className="flex-1 text-left min-w-0">
+                                            <div className="flex justify-between items-center mb-0.5">
+                                                <h4 className={`font-black text-[14px] truncate transition-colors ${isActive ? 'text-white' : 'text-slate-900'}`}>{displayName}</h4>
+                                            </div>
+                                            <div className="flex items-center gap-2">
+                                                <span className={`text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-md ${isActive ? 'bg-white/10 text-primary' : 'bg-slate-100 text-slate-400'}`}>
+                                                    {contact.role}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        {isActive && (
+                                            <div className="absolute right-4 w-1.5 h-1.5 bg-primary rounded-full animate-pulse" />
+                                        )}
+                                    </button>
+                                );
+                            })}
                         </div>
                     )}
                 </div>
@@ -214,14 +203,14 @@ export default function ChatInterface({ userType: _userType }: { userType: strin
                 {activeContact ? (
                     <>
                         {/* Chat Header */}
-                        <div className="p-6 bg-white/80 backdrop-blur-md border-b border-slate-50 flex items-center justify-between shadow-sm relative z-10">
+                        <div className="p-6 bg-[#FDF9F2] border-b border-slate-100 flex items-center justify-between relative z-10">
                             <div className="flex items-center gap-4">
                                 <div className="relative">
-                                    <div className="w-12 h-12 rounded-[18px] bg-slate-900 flex items-center justify-center text-primary font-black text-sm shadow-lg">
+                                    <div className="w-12 h-12 rounded-full bg-slate-900 flex items-center justify-center text-primary font-black text-sm shadow-lg">
                                         {activeContact.firstName[0]}{activeContact.lastName[0]}
                                     </div>
                                     <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-white rounded-full flex items-center justify-center p-0.5">
-                                       <div className="w-full h-full bg-green-500 rounded-full" />
+                                        <div className="w-full h-full bg-green-500 rounded-full" />
                                     </div>
                                 </div>
                                 <div>
@@ -229,18 +218,12 @@ export default function ChatInterface({ userType: _userType }: { userType: strin
                                         {activeContact.firstName} {activeContact.lastName}
                                     </h3>
                                     <div className="flex items-center gap-2 mt-0.5">
-                                       <Shield size={10} className="text-primary" />
-                                       <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">{activeContact.role} Profile</span>
+                                        <Shield size={10} className="text-primary" />
+                                        <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">{activeContact.role} Profile</span>
                                     </div>
                                 </div>
                             </div>
                             <div className="flex items-center gap-3">
-                                <button type="button" className="w-10 h-10 flex items-center justify-center text-slate-400 hover:text-slate-900 transition-all hover:bg-slate-50 rounded-xl">
-                                    <Phone className="w-4 h-4" />
-                                </button>
-                                <button type="button" className="w-10 h-10 flex items-center justify-center text-slate-400 hover:text-slate-900 transition-all hover:bg-slate-50 rounded-xl">
-                                    <Video className="w-4 h-4" />
-                                </button>
                                 <div className="w-px h-6 bg-slate-100 mx-1" />
                                 <button type="button" className="w-10 h-10 flex items-center justify-center text-slate-400 hover:text-slate-900 transition-all hover:bg-slate-50 rounded-xl">
                                     <MoreVertical className="w-4 h-4" />
@@ -261,10 +244,10 @@ export default function ChatInterface({ userType: _userType }: { userType: strin
                             ) : messages.length === 0 ? (
                                 <div className="flex flex-col items-center justify-center h-full text-center opacity-40">
                                     <div className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mb-4">
-                                       <Smile size={32} className="text-slate-300" />
+                                        <Smile size={32} className="text-slate-300" />
                                     </div>
-                                    <p className="text-sm font-playfair font-black text-slate-400 uppercase tracking-[0.2em]">Secure Channel Established</p>
-                                    <p className="text-xs text-slate-300 mt-2 italic">Waiting for initial transmission...</p>
+                                    <p className="text-sm font-playfair font-black text-slate-400 uppercase tracking-[0.2em]">Say Hello</p>
+                                    <p className="text-xs text-slate-300 mt-2 italic">Start a conversation with {activeContact.firstName} {activeContact.lastName}</p>
                                 </div>
                             ) : (
                                 messages.map((msg) => (
@@ -282,10 +265,10 @@ export default function ChatInterface({ userType: _userType }: { userType: strin
                                                 )}
                                             </div>
                                             <div className={`flex items-center gap-2 mt-2 px-2 ${msg.isMe ? 'flex-row-reverse' : ''}`}>
-                                               <span className="text-[10px] text-slate-300 font-bold uppercase tracking-widest">
-                                                  {msg.failed ? 'Failed to Sync' : msg.timestamp}
-                                               </span>
-                                               {!msg.failed && msg.isMe && <div className="w-1 h-1 bg-primary rounded-full" />}
+                                                <span className="text-[10px] text-slate-300 font-bold uppercase tracking-widest">
+                                                    {msg.failed ? 'Failed to Sync' : msg.timestamp}
+                                                </span>
+                                                {!msg.failed && msg.isMe && <div className="w-1 h-1 bg-primary rounded-full" />}
                                             </div>
                                         </div>
                                     </div>
@@ -295,7 +278,7 @@ export default function ChatInterface({ userType: _userType }: { userType: strin
                         </div>
 
                         {/* Message Input */}
-                        <div className="p-8 bg-white border-t border-slate-50 relative z-10">
+                        <div className="p-8 bg-[#FDF9F2] border-t border-slate-100 relative z-10">
                             <form onSubmit={handleSend} className="flex items-center gap-4 bg-slate-50 p-2 rounded-[32px] border border-slate-100/50 focus-within:border-primary/20 focus-within:bg-white transition-all shadow-sm">
                                 <button type="button" className="w-12 h-12 flex items-center justify-center text-slate-400 hover:text-primary transition-all hover:bg-white rounded-full">
                                     <Paperclip className="w-5 h-5" />
@@ -303,7 +286,7 @@ export default function ChatInterface({ userType: _userType }: { userType: strin
                                 <div className="flex-1 relative">
                                     <input
                                         type="text"
-                                        placeholder="Secure message..."
+                                        placeholder="Start writing a message..."
                                         value={message}
                                         onChange={(e) => setMessage(e.target.value)}
                                         className="w-full px-2 py-3 bg-transparent outline-none text-[14px] font-medium placeholder:text-slate-300"
@@ -326,23 +309,23 @@ export default function ChatInterface({ userType: _userType }: { userType: strin
                     <div className="flex-1 flex flex-col items-center justify-center p-20 text-center bg-slate-50/10 relative">
                         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,184,0,0.03)_0%,transparent_70%)]" />
                         <div className="relative z-10">
-                           <div className="w-24 h-24 bg-white border border-slate-100 rounded-[40px] shadow-xl shadow-slate-200/50 flex items-center justify-center mb-8 mx-auto">
-                              <MessageSquare className="w-10 h-10 text-primary" />
-                           </div>
-                           <h3 className="text-3xl font-black text-slate-900 mb-3">Communication Hub</h3>
-                           <p className="text-slate-400 text-sm font-medium max-w-sm mx-auto leading-relaxed italic">
-                              Select a secure frequency from the personnel directory to initiate an encrypted data transmission.
-                           </p>
-                           <div className="mt-8 flex items-center justify-center gap-6">
-                              <div className="flex flex-col items-center gap-1">
-                                 <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
-                                 <span className="text-[10px] font-bold text-slate-300 uppercase tracking-widest">Socket: Connected</span>
-                              </div>
-                              <div className="flex flex-col items-center gap-1">
-                                 <div className="w-1.5 h-1.5 bg-primary rounded-full shadow-[0_0_5px_rgba(255,184,0,0.5)]" />
-                                 <span className="text-[10px] font-bold text-slate-300 uppercase tracking-widest">Encryption: AES-256</span>
-                              </div>
-                           </div>
+                            <div className="w-24 h-24 bg-white border border-slate-100 rounded-[40px] shadow-xl shadow-slate-200/50 flex items-center justify-center mb-8 mx-auto">
+                                <MessageSquare className="w-10 h-10 text-primary" />
+                            </div>
+                            <h3 className="text-3xl font-black text-slate-900 mb-3">Communication Hub</h3>
+                            <p className="text-slate-400 text-sm font-medium max-w-sm mx-auto leading-relaxed italic">
+                                Select a secure frequency from the personnel directory to initiate an encrypted data transmission.
+                            </p>
+                            <div className="mt-8 flex items-center justify-center gap-6">
+                                <div className="flex flex-col items-center gap-1">
+                                    <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
+                                    <span className="text-[10px] font-bold text-slate-300 uppercase tracking-widest">Socket: Connected</span>
+                                </div>
+                                <div className="flex flex-col items-center gap-1">
+                                    <div className="w-1.5 h-1.5 bg-primary rounded-full shadow-[0_0_5px_rgba(255,184,0,0.5)]" />
+                                    <span className="text-[10px] font-bold text-slate-300 uppercase tracking-widest">Encryption: AES-256</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 )}
