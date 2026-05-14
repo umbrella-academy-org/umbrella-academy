@@ -137,7 +137,7 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
                   <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary rounded-r-full shadow-[0_0_10px_rgba(205,164,41,0.5)]" />
                 )}
 
-                {item.icon && React.isValidElement(item.icon) && React.cloneElement(item.icon as React.ReactElement<any>, {
+                {item.icon && React.isValidElement(item.icon) && React.cloneElement(item.icon as React.ReactElement<{ className?: string }>, {
                   className: `w-5 h-5 transition-all duration-300 ${currentActive === item.label
                     ? 'text-primary scale-110'
                     : 'group-hover:text-white group-hover:scale-110'

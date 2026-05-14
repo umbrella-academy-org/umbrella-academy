@@ -222,7 +222,12 @@ export default function PaymentsPage() {
                       <Filter size={16} className="text-slate-400" />
                       <select
                         value={statusFilter}
-                        onChange={(e) => setStatusFilter(e.target.value as any)}
+                        onChange={(e) => {
+                          const v = e.target.value;
+                          if (v === 'all' || v === 'pending' || v === 'success' || v === 'failed') {
+                            setStatusFilter(v);
+                          }
+                        }}
                         className="bg-transparent border-none text-sm font-bold text-slate-600 focus:ring-0"
                       >
                         <option value="all">Status</option>
@@ -235,7 +240,12 @@ export default function PaymentsPage() {
                       <CreditCard size={16} className="text-slate-400" />
                       <select
                         value={typeFilter}
-                        onChange={(e) => setTypeFilter(e.target.value as any)}
+                        onChange={(e) => {
+                          const v = e.target.value;
+                          if (v === 'all' || v === 'orientation' || v === 'subscription') {
+                            setTypeFilter(v);
+                          }
+                        }}
                         className="bg-transparent border-none text-sm font-bold text-slate-600 focus:ring-0"
                       >
                         <option value="all">All Types</option>

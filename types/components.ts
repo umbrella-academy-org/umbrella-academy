@@ -1,7 +1,8 @@
+import type { ReactNode } from "react";
 import { UserRole, OnboardingChecklist } from "./user";
 
 export interface SidebarItem {
-  icon: any;
+  icon: ReactNode;
   label: string;
   href: string;
   active?: boolean;

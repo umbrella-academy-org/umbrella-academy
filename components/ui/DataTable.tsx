@@ -15,18 +15,20 @@ interface TableColumn {
 interface FilterCriteria {
   [key: string]: {
     type: 'text' | 'select' | 'date' | 'number';
-    value: any;
+    value: unknown;
     operator: 'equals' | 'contains' | 'greater' | 'less' | 'between';
   };
 }
 
+type RowRecord = Record<string, unknown> & { id?: string | number };
+
 interface DataTableProps {
-  data: any[];
+  data: RowRecord[];
   columns: TableColumn[];
   hasCheckboxes: boolean;
   hasFilters: boolean;
   hasSearch: boolean;
-  onSelectionChange: (selectedItems: any[]) => void;
+  onSelectionChange: (selectedItems: RowRecord[]) => void;
   onFilterChange: (filters: FilterCriteria) => void;
   onSearchChange: (searchQuery: string) => void;
 }
@@ -41,7 +43,7 @@ export default function DataTable({
   onFilterChange,
   onSearchChange
 }: DataTableProps) {
-  const [selectedItems, setSelectedItems] = useState<any[]>([]);
+  const [selectedItems, setSelectedItems] = useState<RowRecord[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [filters, setFilters] = useState<FilterCriteria>({});
   const [sortConfig, setSortConfig] = useState<{ key: string; direction: 'asc' | 'desc' } | null>(null);
@@ -59,7 +61,7 @@ export default function DataTable({
     setSortConfig({ key, direction });
   };
 
-  const handleItemSelect = (item: any, checked: boolean) => {
+  const handleItemSelect = (item: RowRecord, checked: boolean) => {
     let newSelection;
     if (checked) {
       newSelection = [...selectedItems, item];
@@ -83,7 +85,7 @@ export default function DataTable({
       columns.some(column => {
         if (column.searchable) {
           const value = item[column.key];
-          return value && value.toString().toLowerCase().includes(searchQuery.toLowerCase());
+          return value && String(value).toLowerCase().includes(searchQuery.toLowerCase());
         }
         return false;
       })
@@ -94,8 +96,10 @@ export default function DataTable({
     processedData.sort((a, b) => {
       const aValue = a[sortConfig.key];
       const bValue = b[sortConfig.key];
-      if (aValue < bValue) return sortConfig.direction === 'asc' ? -1 : 1;
-      if (aValue > bValue) return sortConfig.direction === 'asc' ? 1 : -1;
+      const aStr = aValue != null ? String(aValue) : '';
+      const bStr = bValue != null ? String(bValue) : '';
+      if (aStr < bStr) return sortConfig.direction === 'asc' ? -1 : 1;
+      if (aStr > bStr) return sortConfig.direction === 'asc' ? 1 : -1;
       return 0;
     });
   }
@@ -153,7 +157,7 @@ export default function DataTable({
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {processedData.map((item, index) => (
-              <tr key={item.id || index} className="hover:bg-gray-50">
+              <tr key={(item.id ?? index) as string | number} className="hover:bg-gray-50">
                 {hasCheckboxes && (
                   <td className="px-4 py-4">
                     <input
@@ -166,7 +170,7 @@ export default function DataTable({
                 )}
                 {columns.map((column) => (
                   <td key={column.key} className="px-4 py-4 text-sm text-gray-900">
-                    {item[column.key]}
+                    {String(item[column.key] ?? '')}
                   </td>
                 ))}
               </tr>

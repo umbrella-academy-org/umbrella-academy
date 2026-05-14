@@ -57,10 +57,14 @@ export async function generateMetadata({
 
 function estimateReadTime(body: unknown): number {
   if (!body || !Array.isArray(body)) return 1;
+
+  type PortableSpan = { text?: string };
+  type PortableBlock = { _type?: string; children?: PortableSpan[] };
+
   const text = body
-    .flatMap((block: any) =>
+    .flatMap((block: PortableBlock) =>
       block._type === 'block' && Array.isArray(block.children)
-        ? block.children.map((child: any) => child.text ?? '')
+        ? block.children.map((child: PortableSpan) => child.text ?? '')
         : []
     )
     .join(' ');

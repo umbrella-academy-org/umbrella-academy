@@ -297,7 +297,12 @@ export default function UmbrellaAdminUsersPage() {
                       <SlidersHorizontal size={16} className="text-slate-400" />
                       <select
                         value={statusFilter}
-                        onChange={(e) => setStatusFilter(e.target.value as any)}
+                        onChange={(e) => {
+                          const v = e.target.value;
+                          if (v === 'all' || v === 'active' || v === 'inactive' || v === 'pending') {
+                            setStatusFilter(v);
+                          }
+                        }}
                         className="bg-transparent border-none text-sm font-bold text-slate-600 focus:ring-0 cursor-pointer"
                       >
                         <option value="all">All Status</option>

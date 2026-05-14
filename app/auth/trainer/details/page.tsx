@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react';
-import { useRouter } from '@/hooks/useRouter';;
+import { useState, type SVGProps } from 'react';
+import { useRouter } from '@/hooks/useRouter';
 import { AuthContainer } from '@/components/auth/auth-container';
 import { AuthCard } from '@/components/auth/auth-card';
 import { PremiumInput } from '@/components/ui/premium-input';
@@ -313,7 +313,7 @@ export default function TrainerDetailsPage() {
   );
 }
 
-function ChevronDown(props: any) {
+function ChevronDown(props: SVGProps<SVGSVGElement>) {
   return (
     <svg 
       {...props} 

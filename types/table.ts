@@ -1,12 +1,16 @@
 // Table management interface definitions for trainer management system
 
+import type { ReactNode } from "react";
+
+export type DataTableRow = Record<string, unknown> & { id?: string | number };
+
 export interface DataTableProps {
-  data: any[];
+  data: DataTableRow[];
   columns: TableColumn[];
   hasCheckboxes: boolean;
   hasFilters: boolean;
   hasSearch: boolean;
-  onSelectionChange: (selectedItems: any[]) => void;
+  onSelectionChange: (selectedItems: DataTableRow[]) => void;
   onFilterChange: (filters: FilterCriteria) => void;
   onSearchChange: (searchQuery: string) => void;
 }
@@ -18,19 +22,19 @@ export interface TableColumn {
   filterable: boolean;
   searchable: boolean;
   width?: string;
-  render?: (value: any, row: any) => React.ReactNode;
+  render?: (value: unknown, row: DataTableRow) => ReactNode;
 }
 
 export interface FilterCriteria {
   [key: string]: {
     type: 'text' | 'select' | 'date' | 'number';
-    value: any;
+    value: unknown;
     operator: 'equals' | 'contains' | 'greater' | 'less' | 'between';
   };
 }
 
 export interface TableSelection {
-  selectedItems: any[];
+  selectedItems: DataTableRow[];
   isAllSelected: boolean;
   isPartiallySelected: boolean;
 }
