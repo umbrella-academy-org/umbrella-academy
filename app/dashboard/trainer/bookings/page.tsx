@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
 import { useBooking } from '@/contexts/BookingContext';
 import { useUsers } from '@/contexts';
-import { BookingStatus, Booking, TrainerApprovalRequest } from '@/types/booking';
+import { BookingStatus, TrainerApprovalRequest } from '@/types/booking';
 import { UserRole } from '@/types/user';
 import { Calendar, Clock, User, MessageSquare, CheckCircle, XCircle, AlertCircle, Filter, Search, RefreshCw, Video, MapPin, FileText } from 'lucide-react';
 
@@ -481,7 +481,7 @@ export default function TrainerBookingsPage() {
                       type="radio"
                       value="online"
                       checked={approvalData.sessionFormat === 'online'}
-                      onChange={(e) => setApprovalData({...approvalData, sessionFormat: 'online'})}
+                      onChange={() => setApprovalData({...approvalData, sessionFormat: 'online'})}
                       className="mr-2"
                     />
                     <span className="text-sm text-slate-700">Online</span>
@@ -491,7 +491,7 @@ export default function TrainerBookingsPage() {
                       type="radio"
                       value="in-person"
                       checked={approvalData.sessionFormat === 'in-person'}
-                      onChange={(e) => setApprovalData({...approvalData, sessionFormat: 'in-person'})}
+                      onChange={() => setApprovalData({...approvalData, sessionFormat: 'in-person'})}
                       className="mr-2"
                     />
                     <span className="text-sm text-slate-700">In-Person</span>

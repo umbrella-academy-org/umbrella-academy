@@ -26,10 +26,8 @@ import {
   ChevronRight,
   ThumbsUp,
   ThumbsDown,
-  ArrowLeft,
   Target,
   Award,
-  AlertCircle,
   MessageSquare
 } from 'lucide-react';
 

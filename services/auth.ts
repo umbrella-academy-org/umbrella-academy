@@ -1,7 +1,7 @@
 import { AuthResponse } from '@/types/auth';
 import { apiClient } from './client';
 import { API_ENDPOINTS } from './constants';
-import { ApiResponse, OnboardingChecklist, Student, StudentRegister, Trainer } from '@/types';
+import { ApiResponse, OnboardingChecklist, StudentRegister, Trainer } from '@/types';
 
 export interface LoginRequest {
   email: string;

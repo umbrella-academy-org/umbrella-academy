@@ -1,6 +1,6 @@
 'use client';
 
-import { RotateCcw, Calendar, CheckCircle, AlertCircle } from 'lucide-react';
+import { RotateCcw, CheckCircle, AlertCircle } from 'lucide-react';
 import { useFinancial, useAuth, useUsers } from '@/contexts';
 import { useMemo } from 'react';
 

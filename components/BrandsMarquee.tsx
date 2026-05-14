@@ -1,7 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
 const brands = [
     "Netflix", "Disney+", "BBC", "Amazon Prime", "Sky", "ITV", "National Lottery",
     "UK Cinema Association", "BFI", "Warner Bros", "Apple TV+", "Channel 4"

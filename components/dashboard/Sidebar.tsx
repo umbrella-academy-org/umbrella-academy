@@ -1,12 +1,11 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Home, Calendar, CalendarCheck, CreditCard, MessageSquare, X, Settings, Menu, User, LogOut, Lock, Users, Award, BookOpen, MapPin, Search, Ticket, Server, UserCheck } from 'lucide-react';
+import { Home, Calendar, CalendarCheck, CreditCard, MessageSquare, X, Settings, Menu, User, LogOut, Lock, Users, Award, BookOpen, Ticket, Server, UserCheck } from 'lucide-react';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
 import { useAuth } from '@/contexts';
 import { SidebarProps, SidebarItem } from '@/types';
 import { Logo } from '../ui/Logo';
-import Image from 'next/image';
 import { BASE_URL } from '@/services';
 
 export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps) {

@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
 
-import RenewHeader from '@/components/subscription/RenewHeader';
 import PaymentMethodForm from '@/components/subscription/PaymentMethodForm';
 
 export default function RenewSubscriptionPage() {

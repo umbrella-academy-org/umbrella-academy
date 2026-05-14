@@ -3,10 +3,11 @@
 import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
 import {
-  Plus, Users, UserCheck, Shield, GraduationCap, X, Search,
-  Mail, Phone, Calendar, Eye, Edit2, Trash2,
-  CheckCircle, XCircle, AlertCircle, Filter, Download, UserCircle,
-  ArrowRight, ShieldCheck, Activity, UserPlus, SlidersHorizontal, Lock, Clock
+  Users, UserCheck, Shield, GraduationCap, X, Search,
+  Mail, Phone,
+  Eye, Edit2, Trash2,
+  CheckCircle, XCircle, AlertCircle, Download, UserCircle,
+  UserPlus, SlidersHorizontal, Lock, Clock
 } from 'lucide-react';
 import { useAdminContext } from '@/contexts';
 import { useAdmin } from '@/hooks/useAdmin';
@@ -56,38 +57,13 @@ const getAvatarColor = (role: UserRole) => {
   }
 };
 
-const StatusBadge = ({ isActive, isVerified }: { isActive: boolean; isVerified: boolean }) => {
-  if (!isActive) {
-    return (
-      <span className="inline-flex items-center px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-red-50 text-red-600 border border-red-100">
-        <XCircle className="w-3 h-3 mr-1.5" />
-        Suspended
-      </span>
-    );
-  }
-  if (!isVerified) {
-    return (
-      <span className="inline-flex items-center px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-orange-50 text-orange-600 border border-orange-100">
-        <AlertCircle className="w-3 h-3 mr-1.5" />
-        Pending
-      </span>
-    );
-  }
-  return (
-    <span className="inline-flex items-center px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-green-50 text-green-600 border border-green-100">
-      <CheckCircle className="w-3 h-3 mr-1.5" />
-      Verified
-    </span>
-  );
-};
-
 export default function UmbrellaAdminUsersPage() {
   const [selectedTab, setSelectedTab] = useState<'students' | 'trainers' | 'guardians' | 'admins' | 'sales_managers'>('students');
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<'all' | 'active' | 'inactive' | 'pending'>('all');
 
   const { users, trainers, usersLoading, refreshUsers } = useAdminContext();
-  const { createUser, updateUser, deleteUser, updateUserStatus, isLoading: processing } = useAdmin();
+  const { createUser, updateUser, deleteUser, isLoading: processing } = useAdmin();
 
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showDetailModal, setShowDetailModal] = useState(false);

@@ -3,7 +3,7 @@
 import {
   X, Mail, Phone, Calendar, Shield, GraduationCap, Users,
   CheckCircle, XCircle, AlertCircle, Edit2, Clock, MapPin,
-  FileText, Award, BookOpen, CreditCard
+  FileText, Award
 } from 'lucide-react';
 import { BaseUser, UserRole, Student, Trainer, Guardian } from '@/types';
 

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { BaseUser, Trainer, Student, Guardian, UserRole } from '@/types/user';
+import { BaseUser, Trainer, UserRole } from '@/types/user';
 import { adminService, AdminPayment, type FeedbackTicket } from '@/services/admin';
 import { useAdmin, CreateUserData, UserStatus } from '@/hooks/useAdmin';
 import { useAuth } from './AuthContext';
@@ -106,7 +106,7 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
       const res = await adminService.getUsers();
       setUsers(res.data ?? []);
       setUsersError(null);
-    } catch (error) {
+    } catch {
       setUsersError('Failed to fetch users');
       setUsers([]);
     } finally {

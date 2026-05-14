@@ -7,10 +7,7 @@ import { useAuth, useRoadmaps, useUsers, useFinancial } from '@/contexts';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
 import { 
   Users, 
-  Map, 
-  Folder, 
   CalendarCheck, 
-  MessageSquare, 
   Wallet,
   ArrowRight,
   TrendingUp,

@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
 
-import { Settings, Lock, Bell, Eye, Moon, Globe, Shield, CreditCard, LogOut, ChevronRight, Save, Check } from 'lucide-react';
+import { Lock, Bell, Shield, Moon, CreditCard, LogOut, Globe, Check, Save } from 'lucide-react';
 import { useAuth } from '@/contexts';
 import { UserRole } from '@/types';
 

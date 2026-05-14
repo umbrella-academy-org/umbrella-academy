@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo } from 'react';
-import { Users, TrendingUp, Clock, Star, GraduationCap, CheckCircle, Activity, Award } from 'lucide-react';
+import { Users, GraduationCap, CheckCircle, Activity, Award } from 'lucide-react';
 import { useUsers } from '@/contexts/UserContext';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRoadmaps } from '@/contexts/RoadmapContext';

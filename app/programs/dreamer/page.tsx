@@ -35,15 +35,6 @@ export default function DreamerPage() {
     },
   ];
 
-  const skills = [
-    'Robotics & Embedded Systems',
-    'Basic Programming Concepts',
-    '3D Design & Digital Creativity',
-    'Technology Storytelling',
-    'Introduction to VR & AR',
-    'Tech Career Awareness',
-  ];
-
   return (
     <>
       <Navbar />

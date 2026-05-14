@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
 import {
   Users, Phone, Mail, Calendar, Search, Filter, Download,
-  CheckCircle, XCircle, AlertCircle, UserCircle, Clock
+  CheckCircle, Clock
 } from 'lucide-react';
 import { useAuth, useUsers } from '@/contexts';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';

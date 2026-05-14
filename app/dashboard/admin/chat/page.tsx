@@ -3,7 +3,7 @@
 import Sidebar from '@/components/dashboard/Sidebar';
 import { UserRole } from '@/types';
 import ChatInterface from '@/components/chat/ChatInterface';
-import { MessageSquare, ShieldCheck, Zap } from 'lucide-react';
+import { ShieldCheck } from 'lucide-react';
 
 export default function UmbrellaAdminChatPage() {
     return (

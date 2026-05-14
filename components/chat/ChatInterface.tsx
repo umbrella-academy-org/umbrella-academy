@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { Send, Paperclip, MoreVertical, Phone, Video, Search as SearchIcon, Smile, AlertCircle, MessageSquare, User, Circle, Shield, ArrowRight, X } from 'lucide-react';
+import { Send, Paperclip, MoreVertical, Phone, Video, Search as SearchIcon, Smile, AlertCircle, MessageSquare, Circle, Shield } from 'lucide-react';
 import { messageService, socketService } from '@/services';
 import type { ChatMessage } from '@/services/messages';
 import { useAuth } from '@/contexts/AuthContext';
@@ -22,7 +22,7 @@ function formatTime(iso: string): string {
     return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 }
 
-export default function ChatInterface({ userType }: { userType: string }) {
+export default function ChatInterface({ userType: _userType }: { userType: string }) {
     const { user } = useAuth();
     const { users, isLoading: contactsLoading } = useUsers();
     const [activeContact, setActiveContact] = useState<BaseUser | null>(null);

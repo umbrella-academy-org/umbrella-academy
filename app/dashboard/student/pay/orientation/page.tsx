@@ -1,16 +1,14 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from '@/hooks/useRouter';;
+import { useRouter } from '@/hooks/useRouter';
 import { CreditCard, CheckCircle, ArrowLeft, Shield, Clock, Users } from 'lucide-react';
 import { usePayment } from '@/hooks/usePayment';
-import { useAuth } from '@/contexts/AuthContext';
 import Sidebar from '@/components/dashboard/Sidebar';
 import { UserRole } from '@/types';
 
 export default function OrientationPaymentPage() {
   const router = useRouter();
-  const { user } = useAuth();
   const [isProcessing, setIsProcessing] = useState(false);
   const [paymentStep, setPaymentStep] = useState<'form' | 'processing' | 'success'>('form');
   const [formData, setFormData] = useState({

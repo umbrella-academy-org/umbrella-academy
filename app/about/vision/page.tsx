@@ -2,7 +2,6 @@ import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import { AboutNav } from '@/components/about-nav';
 import { PlayfulHero } from '@/components/playful-hero';
-import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
 
 export const metadata = {

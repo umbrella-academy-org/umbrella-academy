@@ -3,15 +3,14 @@
 import { useEffect, useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
 import { UserRole } from '@/types/user';
-import { Roadmap, RoadmapStatus } from '@/types/roadmap';
-import { useAuth, useAdminContext } from '@/contexts';
+import { Roadmap } from '@/types/roadmap';
+import { useAuth } from '@/contexts';
 import { adminService } from '@/services/admin';
-import { MapPin, Clock, X, Check, Mail, Calendar, Award, FileText, Eye, AlertCircle, User, Compass, Target, ChevronRight, GraduationCap, ThumbsUp, ThumbsDown, BookOpen } from 'lucide-react';
+import { MapPin, Clock, X, Calendar, Award, AlertCircle, Compass, Target, ChevronRight, GraduationCap, ThumbsUp, ThumbsDown } from 'lucide-react';
 import { PremiumButton } from '@/components/ui/premium-button';
 
 export default function RoadmapApprovalsPage() {
   const { user } = useAuth();
-  const { refreshTrainers } = useAdminContext();
   const [selectedRoadmap, setSelectedRoadmap] = useState<Roadmap | null>(null);
   const [showDetails, setShowDetails] = useState(false);
   const [rejectionReason, setRejectionReason] = useState('');

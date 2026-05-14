@@ -1,7 +1,6 @@
 'use client';
 
 import { Search, Filter, Download, X } from 'lucide-react';
-import { PremiumInput } from '@/components/ui/premium-input';
 
 interface StudentsFiltersProps {
   searchQuery: string;

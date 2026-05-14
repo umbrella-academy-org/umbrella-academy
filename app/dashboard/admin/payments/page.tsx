@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
-import { DollarSign, CheckCircle, XCircle, Clock, Search, Filter, Download, CreditCard, User, Calendar, RefreshCw, TrendingUp, Wallet, ArrowUpRight } from 'lucide-react';
+import { DollarSign, XCircle, Clock, Search, Filter, Download, CreditCard, RefreshCw, TrendingUp, Wallet, ArrowUpRight } from 'lucide-react';
 import { UserRole, type Payment, PaymentType } from '@/types';
 import { apiClient } from '@/services/client';
 

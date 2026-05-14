@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
 import { UserRole } from '@/types/user';
-import { Settings, Lock, Bell, Moon, Globe, Shield, CreditCard, LogOut, ChevronRight, Save, Check, Users, Video } from 'lucide-react';
+import { Settings, Lock, Bell, Globe, CreditCard, LogOut, Video } from 'lucide-react';
 import { useAuth } from '@/contexts';
 
 export default function TrainerSettingsPage() {

@@ -2,7 +2,7 @@
 
 import Sidebar from '@/components/dashboard/Sidebar';
 import { useSystem } from '@/contexts/SystemContext';
-import { Server, Database, Wifi, Shield, AlertTriangle, CheckCircle, Activity, Cpu, HardDrive, RefreshCw, Terminal, Bell, Settings, ArrowRight } from 'lucide-react';
+import { Server, Database, Wifi, Shield, AlertTriangle, Activity, Cpu, HardDrive, RefreshCw, Terminal, Bell, Settings, ArrowRight } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { UserRole } from '@/types';
 

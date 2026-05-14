@@ -2,8 +2,6 @@
 
 import { useAuth } from "@/contexts/AuthContext"
 import { useEffect } from "react";
-import { AppProgressBar } from 'next-app-progress-bar';
-
 
 export default function AuthLayout({
     children,

@@ -3,9 +3,8 @@
 import { useState } from 'react';
 import {
   X, Mail, Phone, User, CheckCircle, AlertCircle, Save,
-  ToggleLeft, ToggleRight
 } from 'lucide-react';
-import { BaseUser, UserRole, Student, Trainer } from '@/types';
+import { BaseUser, UserRole, Student } from '@/types';
 
 interface EditUserModalProps {
   user: BaseUser;
@@ -54,7 +53,7 @@ export default function EditUserModal({ user, onClose, onSave }: EditUserModalPr
 
     try {
       await onSave(formData);
-    } catch (err) {
+    } catch {
       setError('Failed to update user. Please try again.');
     } finally {
       setIsSaving(false);

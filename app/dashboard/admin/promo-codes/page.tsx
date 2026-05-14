@@ -3,9 +3,9 @@
 import { useState, useEffect } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
 import { 
-  Tag, Plus, X, Search, Edit2, Trash2, Check, Download, Filter, 
-  Calendar, Mail, Percent, Info, Ticket, DollarSign, Clock, LayoutGrid, List,
-  AlertCircle, ChevronRight, Zap, Target, CheckCircle, XCircle, Sparkles, Wand2, User
+  Plus, X, Search, 
+  Calendar, Mail, Percent, Info, Ticket, DollarSign,
+  AlertCircle, CheckCircle, XCircle, Sparkles, Wand2
 } from 'lucide-react';
 import { UserRole, type PromoCode } from '@/types';
 import { apiClient } from '@/services/client';

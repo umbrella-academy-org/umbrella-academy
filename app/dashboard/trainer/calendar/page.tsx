@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
 import { useAuth, useRoadmaps, useUsers } from '@/contexts';
 import { roadmapService } from '@/services/roadmap';

@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { authService } from '@/services/auth';
 import { BaseUser, OnboardingChecklist, StudentRegister, Trainer, UserRole, Guardian, GuardianInviteState } from '@/types';
-import { useRouter } from '@/hooks/useRouter';;
+import { useRouter } from '@/hooks/useRouter';
 import { userService } from '@/services';
 
 interface AuthContextType {
@@ -27,7 +27,6 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<BaseUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter()
   const [onboardingChecklist, setOnboardingChecklist] = useState<OnboardingChecklist>({
@@ -83,7 +82,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
         // All checks passed - restore session
         setUser(parsedUser);
-        setIsAuthenticated(true);
 
         // Fetch student onboarding checklist if needed
         if (parsedUser.role === UserRole.STUDENT) {
@@ -176,7 +174,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         }
 
         setUser(userData);
-        setIsAuthenticated(true);
         localStorage.setItem('auth_token', response.data.token);
         localStorage.setItem('user', JSON.stringify(userData));
       }
@@ -208,7 +205,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         localStorage.setItem('user', JSON.stringify(response.data.user));
         localStorage.setItem('auth_token', response.data.token);
         setUser(response.data.user);
-        setIsAuthenticated(true);
         router.push("/auth/verify")
       }
     } catch (err: unknown) {
@@ -230,7 +226,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         localStorage.setItem('auth_token', response.data.token);
         localStorage.setItem('user', JSON.stringify(response.data.user));
         setUser(response.data.user);
-        setIsAuthenticated(true);
       }
 
       // Check if this is a password reset flow
@@ -256,7 +251,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         localStorage.setItem('user', JSON.stringify(response.data.user));
         localStorage.setItem('auth_token', response.data.token);
         setUser(response.data.user);
-        setIsAuthenticated(true);
         router.push("/auth/verify")
       }
     } catch (err: unknown) {
@@ -274,7 +268,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } finally {
       // Clear all auth state
       setUser(null);
-      setIsAuthenticated(false);
       setError(null);
       localStorage.removeItem('auth_token');
       localStorage.removeItem('user');

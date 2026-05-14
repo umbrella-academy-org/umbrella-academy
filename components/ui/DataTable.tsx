@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Search, Filter, ChevronDown, ChevronUp } from 'lucide-react';
+import { Search, ChevronDown, ChevronUp } from 'lucide-react';
 
 interface TableColumn {
   key: string;
@@ -37,15 +37,14 @@ export default function DataTable({
   data,
   columns,
   hasCheckboxes,
-  hasFilters,
+  hasFilters: _hasFilters,
   hasSearch,
   onSelectionChange,
-  onFilterChange,
+  onFilterChange: _onFilterChange,
   onSearchChange
 }: DataTableProps) {
   const [selectedItems, setSelectedItems] = useState<RowRecord[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [filters, setFilters] = useState<FilterCriteria>({});
   const [sortConfig, setSortConfig] = useState<{ key: string; direction: 'asc' | 'desc' } | null>(null);
 
   const handleSearch = (query: string) => {

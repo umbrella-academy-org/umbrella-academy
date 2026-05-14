@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from '@/hooks/useRouter';;
+import { useRouter } from '@/hooks/useRouter';
 import Sidebar from '@/components/dashboard/Sidebar';
 import { useProjects } from '@/contexts/ProjectContext';
 import { useAuth } from '@/contexts/AuthContext';
@@ -18,7 +18,6 @@ import {
   Wrench,
   User,
   Calendar,
-  Eye,
   Search,
   Filter,
   Grid,
@@ -32,8 +31,7 @@ import {
   Youtube,
   Figma,
   Github,
-  FilePlus,
-  Trash2
+  FilePlus
 } from 'lucide-react';
 import Image from 'next/image';
 

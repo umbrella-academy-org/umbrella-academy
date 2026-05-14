@@ -58,7 +58,7 @@ export default function StoriesPage() {
         <div className="max-w-4xl mx-auto space-y-16">
 
           <div className="space-y-[60px] md:space-y-[100px]">
-            {stories.map((story, index) => (
+            {stories.map((story) => (
               <motion.div 
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
