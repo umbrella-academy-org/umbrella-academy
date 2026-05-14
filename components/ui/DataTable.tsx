@@ -169,7 +169,7 @@ export default function DataTable({
                 )}
                 {columns.map((column) => (
                   <td key={column.key} className="px-4 py-4 text-sm text-gray-900">
-                    {String(item[column.key] ?? '')}
+                    {(item[column.key] ?? '') as string}
                   </td>
                 ))}
               </tr>
