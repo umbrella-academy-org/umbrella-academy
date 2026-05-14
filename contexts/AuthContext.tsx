@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { authService } from '@/services/auth';
 import { BaseUser, OnboardingChecklist, StudentRegister, Trainer, UserRole, Guardian, GuardianInviteState } from '@/types';
-import { useRouter } from '@/hooks/useRouter';;
+import { useRouter } from '@/hooks/useRouter';
 import { userService } from '@/services';
 
 interface AuthContextType {
@@ -27,7 +27,6 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<BaseUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter()
   const [onboardingChecklist, setOnboardingChecklist] = useState<OnboardingChecklist>({
@@ -43,9 +42,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const checkSession = async () => {
       const storedUser = localStorage.getItem('user');
       const token = localStorage.getItem('auth_token');
+      const storedTrainer = localStorage.getItem('user');
 
       if (storedUser && token) {
         const parsedUser: BaseUser = JSON.parse(storedUser);
+        const parsedTrainer: Trainer = JSON.parse(storedTrainer || '{}');
 
         // 1. Check if email is verified
         if (!parsedUser.isVerified) {
@@ -60,7 +61,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         // 2. Check trainer approval status
         if (parsedUser.role === UserRole.TRAINER) {
           const trainer = parsedUser as Trainer;
+
           if (trainer.approvalStatus === 'pending') {
+            const response = await userService.getTrainer()
+            if (response.success && response.data) {
+              const trainerData = response.data
+              localStorage.setItem('user', JSON.stringify(trainerData));
+              if(trainerData.approvalStatus === 'approved') {
+                setUser(trainerData);
+                setIsLoading(false);
+                router.push('/dashboard/trainer');
+                return;
+              }
+            }
             setIsLoading(false);
             router.push('/auth/pending-approval');
             return;
@@ -83,7 +96,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
         // All checks passed - restore session
         setUser(parsedUser);
-        setIsAuthenticated(true);
 
         // Fetch student onboarding checklist if needed
         if (parsedUser.role === UserRole.STUDENT) {
@@ -176,7 +188,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         }
 
         setUser(userData);
-        setIsAuthenticated(true);
         localStorage.setItem('auth_token', response.data.token);
         localStorage.setItem('user', JSON.stringify(userData));
       }
@@ -186,12 +197,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           localStorage.setItem('userEmail', email);
           authService.sendOtp(email);
           router.push('/auth/verify');
-           setError('')
+          setError('')
         } else if (response.message.includes('pending approval')) {
           router.push('/auth/pending-approval');
-           setError('')
+          setError('')
         }
-       
+
       }
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Login failed. Please try again.');
@@ -208,7 +219,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         localStorage.setItem('user', JSON.stringify(response.data.user));
         localStorage.setItem('auth_token', response.data.token);
         setUser(response.data.user);
-        setIsAuthenticated(true);
         router.push("/auth/verify")
       }
     } catch (err: unknown) {
@@ -230,7 +240,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         localStorage.setItem('auth_token', response.data.token);
         localStorage.setItem('user', JSON.stringify(response.data.user));
         setUser(response.data.user);
-        setIsAuthenticated(true);
+        if (response.data.user.role === UserRole.TRAINER && (response.data.user as Trainer).approvalStatus === 'pending') {
+          router.push('/auth/pending-approval');
+          return;
+        }
       }
 
       // Check if this is a password reset flow
@@ -256,7 +269,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         localStorage.setItem('user', JSON.stringify(response.data.user));
         localStorage.setItem('auth_token', response.data.token);
         setUser(response.data.user);
-        setIsAuthenticated(true);
         router.push("/auth/verify")
       }
     } catch (err: unknown) {
@@ -274,7 +286,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } finally {
       // Clear all auth state
       setUser(null);
-      setIsAuthenticated(false);
       setError(null);
       localStorage.removeItem('auth_token');
       localStorage.removeItem('user');

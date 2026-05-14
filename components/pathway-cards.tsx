@@ -182,7 +182,7 @@ export function PathwayCards() {
       </div>
 
       {/* Stats Row appearing gracefully below the unpinned block */}
-      <div className="relative z-10 bg-background pb-[80px] lg:pb-[140px] px-6">
+      <div className="relative z-10 bg-background pb-[80px] lg:pb-[50px] px-6">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-center items-center md:items-stretch divide-y md:divide-y-0 md:divide-x divide-border border-t border-border py-10 w-full mt-10">
           {[
             { label: 'Students Enrolled', value: 500, suffix: '+' },

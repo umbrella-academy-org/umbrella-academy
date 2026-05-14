@@ -43,7 +43,7 @@ export function ProgramsShowcase() {
   const [activeIdx, setActiveIdx] = useState(0);
 
   return (
-    <section className="relative py-[80px] lg:py-[120px] px-6 bg-background overflow-hidden">
+    <section className="relative py-[40px]  px-6 bg-background overflow-hidden">
       <div className="max-w-[1200px] mx-auto">
 
         {/* ── TOP BLOCK ── */}
@@ -91,7 +91,7 @@ export function ProgramsShowcase() {
         </motion.div>
 
         {/* ── TWO-COLUMN BLOCK ── */}
-        <div className="grid lg:grid-cols-[45%_1fr] gap-[50px] lg:gap-[70px] items-start mb-[60px]">
+        <div className="grid lg:grid-cols-[45%_1fr] gap-[50px] lg:gap-[70px] items-start">
 
           {/* Left — Program Feature Items */}
           <div className="flex flex-col gap-0">

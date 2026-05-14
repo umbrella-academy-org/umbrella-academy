@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { apiClient } from '@/services/client';
 import { API_ENDPOINTS } from '@/services/constants';
-import { BaseUser, UserRole, Trainer, Student } from '@/types';
+import { BaseUser, UserRole } from '@/types';
 import { adminService, AdminPayment, FeedbackTicket } from '@/services/admin';
-import { Roadmap, RoadmapStatus } from '@/types/roadmap';
+import { Roadmap } from '@/types/roadmap';
 
 // Types
 export type UserStatus = 'active' | 'inactive' | 'suspended' | 'paused';

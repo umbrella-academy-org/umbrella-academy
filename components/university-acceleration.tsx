@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { School, GraduationCap, FastForward, Lightbulb, Rocket, FlaskConical } from 'lucide-react';
 
 export function UniversityAcceleration() {

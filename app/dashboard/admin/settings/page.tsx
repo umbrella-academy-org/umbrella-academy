@@ -2,10 +2,9 @@
 
 import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
-import { Settings, Shield, Globe, Clock, Wallet, Bell, Save, RotateCcw, ShieldCheck, Database, Zap, ArrowRight, Lock, Eye, Monitor, AlertTriangle } from 'lucide-react';
+import { Shield, Globe, Clock, Wallet, Save, RotateCcw, ShieldCheck, Database, Zap, Lock, Monitor, AlertTriangle, type LucideIcon } from 'lucide-react';
 import { UserRole } from '@/types';
 import { PremiumInput } from '@/components/ui/premium-input';
-import { PremiumButton } from '@/components/ui/premium-button';
 
 export default function UmbrellaAdminSettingsPage() {
     const [systemSettings, setSystemSettings] = useState({
@@ -22,7 +21,19 @@ export default function UmbrellaAdminSettingsPage() {
         console.log('Saving system settings:', systemSettings);
     };
 
-    const Toggle = ({ enabled, onChange, label, desc, icon: Icon }: any) => (
+    const Toggle = ({
+        enabled,
+        onChange,
+        label,
+        desc,
+        icon: Icon,
+    }: {
+        enabled: boolean;
+        onChange: (next: boolean) => void;
+        label: string;
+        desc: string;
+        icon: LucideIcon;
+    }) => (
       <div className="flex items-center justify-between p-6 bg-slate-50 rounded-[24px] border border-slate-100 group hover:border-primary/20 transition-all">
         <div className="flex items-center gap-4">
            <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-colors ${enabled ? 'bg-primary/10 text-primary' : 'bg-slate-200 text-slate-400'}`}>

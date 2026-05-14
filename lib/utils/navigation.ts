@@ -1,12 +1,12 @@
-import { useRouter } from '@/hooks/useRouter';;
+import { useRouter } from '@/hooks/useRouter';
 
 export function useNavigationWithLoading() {
   const router = useRouter();
 
   const navigate = (href: string) => {
     // Trigger loading bar immediately
-    if (typeof window !== 'undefined' && (window as any).startNavigation) {
-      (window as any).startNavigation();
+    if (typeof window !== 'undefined' && window.startNavigation) {
+      window.startNavigation();
     }
     
     // Navigate
@@ -18,7 +18,7 @@ export function useNavigationWithLoading() {
 
 // Global function to trigger loading bar for any navigation
 export const triggerLoadingBar = () => {
-  if (typeof window !== 'undefined' && (window as any).startNavigation) {
-    (window as any).startNavigation();
+  if (typeof window !== 'undefined' && window.startNavigation) {
+    window.startNavigation();
   }
 };

@@ -5,7 +5,7 @@ import Sidebar from '@/components/dashboard/Sidebar';
 import { UserRole, Trainer } from '@/types/user';
 import { useAuth, useAdminContext } from '@/contexts';
 import { adminService } from '@/services/admin';
-import { UserCheck, Clock, X, Check, Mail, Calendar, Award, FileText, Eye, AlertCircle, ShieldCheck, Briefcase, ChevronRight, Video, ExternalLink, ThumbsUp, ThumbsDown } from 'lucide-react';
+import { Clock, X, Check, Mail, Calendar, Award, FileText, Eye, AlertCircle, ShieldCheck, Briefcase, Video, ExternalLink, ThumbsUp, ThumbsDown } from 'lucide-react';
 import { PremiumButton } from '@/components/ui/premium-button';
 
 export default function TrainerApprovalsPage() {

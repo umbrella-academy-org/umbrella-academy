@@ -1,15 +1,12 @@
 'use client';
 
-  import { useState, useEffect } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
-import { useAuth } from '@/contexts';
 import { Booking, BookingStatus } from '@/types/booking';
 import { UserRole } from '@/types/user';
-import { Calendar, Clock, MapPin, Video, User } from 'lucide-react';
+import { Calendar, Clock, MapPin, Video } from 'lucide-react';
 import { useBooking } from '@/contexts/BookingContext';
 
 export default function StudentCalendarPage() {
-  const { user } = useAuth();
   const { studentBookings: sessions,loading } = useBooking();
 
   console.log(sessions)

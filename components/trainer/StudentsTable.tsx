@@ -48,7 +48,7 @@ export default function StudentsTable({ searchQuery, selectedStatus }: StudentsT
 
   const { students, isLoading } = useUsers();
   const { user } = useAuth();
-  const { roadmaps, getRoadmapByIdFromContext } = useRoadmaps();
+  const { getRoadmapByIdFromContext } = useRoadmaps();
 
   // Filter students assigned to current trainer
   const myStudents = useMemo(() => {

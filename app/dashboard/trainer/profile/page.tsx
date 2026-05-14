@@ -2,9 +2,9 @@
 
 import { useState, useRef } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
-import { User, Mail, Shield, Bell, Calendar, MapPin, Camera, Edit2, Check, X, Phone, Globe, BookOpen, Briefcase, Award, ChevronRight, Settings, Star, Zap, Upload } from 'lucide-react';
+import { User, Mail, Shield, Bell, Calendar, MapPin, Edit2, Check, Phone, Globe, Briefcase, Award, ChevronRight, Settings, Star, Zap, Upload } from 'lucide-react';
 import { useAuth } from '@/contexts';
-import { Trainer, UserRole } from '@/types';
+import { UserRole } from '@/types';
 import { BASE_URL, userService } from '@/services';
 import Image from 'next/image';
 
@@ -13,9 +13,6 @@ export default function TrainerProfilePage() {
     const [isEditing, setIsEditing] = useState(false);
     const [isUploading, setIsUploading] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
-
-    // Cast user to Trainer if available
-    const trainerUser = user as Trainer;
 
     const [profileData, setProfileData] = useState({
         name: user?.firstName && user?.lastName ? `${user.firstName} ${user.lastName}` : 'Demi Wilkinson',

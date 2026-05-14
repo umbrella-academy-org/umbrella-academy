@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from '@/hooks/useRouter';;
+import { useRouter } from '@/hooks/useRouter';
 import Sidebar from '@/components/dashboard/Sidebar';
 import { useAuth, useRoadmaps, useUsers } from '@/contexts';
 import { roadmapService } from '@/services/roadmap';
@@ -11,11 +11,11 @@ import { Project, ProjectStatus } from '@/types/project';
 import { UserRole } from '@/types';
 import { 
   Map, Clock, CheckCircle, Lock, PlayCircle, PauseCircle, XCircle, 
-  Target, BookOpen, ChevronRight, Search, Filter, Grid, List,
-  User, Calendar, CheckSquare, XSquare, Folder, MessageSquare,
-  ArrowLeft, ThumbsUp, ThumbsDown, AlertCircle, Plus, X, Award,
+  Target, ChevronRight, Search, Filter,
+  User, CheckSquare, Folder, MessageSquare,
+  ThumbsUp, ThumbsDown, AlertCircle, Plus, X, Award,
   Link2, FileText, Image as ImageIcon, FilePlus, ExternalLink, 
-  Youtube, Figma, Github, Code, Eye, Wrench, ChevronLeft
+  Youtube, Figma, Github, Eye, Wrench, ChevronLeft
 } from 'lucide-react';
 import Image from 'next/image';
 

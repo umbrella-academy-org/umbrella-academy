@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
 import {
   Users, Phone, Mail, Calendar, Search, Filter, Download,
-  CheckCircle, XCircle, AlertCircle, UserCircle, Clock
+  CheckCircle, Clock
 } from 'lucide-react';
 import { useAuth, useUsers } from '@/contexts';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
@@ -172,7 +172,12 @@ export default function SalesManagerLeadsPage() {
                     <Filter size={16} className="text-slate-400" />
                     <select
                       value={statusFilter}
-                      onChange={(e) => setStatusFilter(e.target.value as any)}
+                      onChange={(e) => {
+                        const v = e.target.value;
+                        if (v === 'all' || v === 'free' || v === 'paid') {
+                          setStatusFilter(v);
+                        }
+                      }}
                       className="bg-transparent border-none text-sm font-bold text-slate-600 focus:ring-0 cursor-pointer"
                     >
                       <option value="all">All Students</option>

@@ -55,7 +55,7 @@ export default function LoadingBar() {
     };
 
     // Create global function to trigger loading
-    (window as any).startNavigation = startLoading;
+    window.startNavigation = startLoading;
 
     // Listen for browser navigation
     const handlePopState = () => {
@@ -85,6 +85,7 @@ export default function LoadingBar() {
       cancelAnimationFrame(animationFrame);
       clearTimeout(fallbackTimer);
       window.removeEventListener('popstate', handlePopState);
+      delete window.startNavigation;
     };
   }, [loading, pathname]);
 

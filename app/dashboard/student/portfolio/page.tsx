@@ -3,14 +3,13 @@
 import { useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useProjects } from '@/contexts/ProjectContext';
-import { useRouter } from '@/hooks/useRouter';;
+import { useRouter } from '@/hooks/useRouter';
 import { Student, UserRole } from '@/types';
 import Sidebar from '@/components/dashboard/Sidebar';
 import {
-  Plus,
   Download,
   Share2,
-  Lock,
+  Lock as LockIcon,
   Code,
   Palette,
   Briefcase,
@@ -18,7 +17,6 @@ import {
   Calendar,
   ExternalLink,
   FileText,
-  Star,
   CreditCard
 } from 'lucide-react';
 
@@ -54,7 +52,7 @@ export default function PortfolioPage() {
               {/* Locked Message */}
               <div className="bg-white rounded-[40px] border border-slate-100 p-12 text-center">
                 <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Lock className="w-8 h-8 text-primary" />
+                  <LockIcon className="w-8 h-8 text-primary" />
                 </div>
                 <h2 className="text-xl font-playfair font-semibold text-slate-900 mb-2">Portfolio Locked</h2>
                 <p className="text-slate-500 font-light mb-6 max-w-md mx-auto">

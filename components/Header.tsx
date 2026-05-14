@@ -1,6 +1,6 @@
 "use client";
 
-import { Menu, X, Umbrella, Search } from "lucide-react";
+import { Menu, X, Search } from "lucide-react";
 import { useRouter } from '@/hooks/useRouter';
 import { useState, useEffect } from "react";
 import { Logo } from "./ui/Logo";

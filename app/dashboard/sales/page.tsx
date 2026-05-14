@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
 import { useAuth, useUsers } from '@/contexts';
 import { useNavigationWithLoading } from '@/lib/utils/navigation';
-import { Users, Phone, Mail, Calendar, ArrowRight, TrendingUp, Clock, UserCheck } from 'lucide-react';
+import { Users, Phone, Calendar, ArrowRight, TrendingUp, Clock, UserCheck } from 'lucide-react';
 import { UserRole } from '@/types/user';
 
 export default function SalesManagerDashboard() {

@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
 import { UserRole } from '@/types';
-import { Settings, Lock, Bell, Globe, Shield, LogOut, ChevronRight, Moon, User } from 'lucide-react';
+import { Lock, Bell, Shield, LogOut } from 'lucide-react';
 import { useAuth } from '@/contexts';
 
 export default function GuardianSettingsPage() {

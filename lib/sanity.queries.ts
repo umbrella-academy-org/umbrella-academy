@@ -1,4 +1,8 @@
+import type { SanityImageSource } from '@sanity/image-url';
+import type { PortableTextBlock, PortableTextProps } from '@portabletext/react';
 import { groq } from 'next-sanity';
+
+export type PostPortableBody = PortableTextProps<PortableTextBlock>['value'];
 
 export const postsQuery = groq`*[_type == "post" && defined(slug.current) && defined(publishedAt)] | order(publishedAt desc) {
   _id,
@@ -59,7 +63,7 @@ export const categoriesQuery = groq`*[_type == "category"] | order(title asc) {
 
 export interface Author {
   name: string;
-  image?: any;
+  image?: SanityImageSource;
   bio?: string;
 }
 
@@ -74,8 +78,8 @@ export interface Post {
   title: string;
   slug: string;
   excerpt?: string;
-  mainImage?: any;
-  body?: any;
+  mainImage?: SanityImageSource;
+  body?: PostPortableBody;
   publishedAt: string;
   featured?: boolean;
   author?: Author;

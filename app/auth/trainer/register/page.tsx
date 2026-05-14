@@ -1,12 +1,12 @@
 'use client'
 
 import { useState } from 'react';
-import { useRouter } from '@/hooks/useRouter';;
+import { useRouter } from '@/hooks/useRouter';
 import { AuthContainer } from '@/components/auth/auth-container';
 import { AuthCard } from '@/components/auth/auth-card';
 import { PremiumInput } from '@/components/ui/premium-input';
 import { PremiumButton } from '@/components/ui/premium-button';
-import { User, Mail, Lock, Phone, ArrowLeft, ArrowRight, Briefcase } from 'lucide-react';
+import { User, Mail, Lock, Phone, ArrowLeft, ArrowRight } from 'lucide-react';
 
 export default function TrainerRegisterPage() {
   const router = useRouter();

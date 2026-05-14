@@ -53,7 +53,6 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       setUsers([]);
       setIsLoading(false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser]);
 
 

@@ -92,7 +92,7 @@ class ApiClient {
   async uploadFile<T>(
     endpoint: string,
     file: File,
-    onUploadProgress?: (event: { loaded: number; total?: number }) => void
+    _onUploadProgress?: (event: { loaded: number; total?: number }) => void
   ): Promise<T> {
     const formData = new FormData();
     formData.append('file', file);

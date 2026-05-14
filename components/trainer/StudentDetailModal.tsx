@@ -2,10 +2,10 @@
 
 import { useMemo } from 'react';
 import {
-  X, Mail, Phone, Calendar, GraduationCap, CheckCircle, XCircle, AlertCircle,
-  Clock, MapPin, FileText, Users, ArrowRight, BookOpen, Wallet, Zap, Shield, Target
+  X, Phone, Calendar, GraduationCap, CheckCircle, XCircle, AlertCircle,
+  Clock, MapPin, ArrowRight, BookOpen, Wallet, Zap, Shield, Target
 } from 'lucide-react';
-import { Student, Roadmap, UserRole } from '@/types';
+import { Student, Roadmap } from '@/types';
 import { RoadmapStepStatus } from '@/types/roadmap';
 
 interface StudentDetailModalProps {

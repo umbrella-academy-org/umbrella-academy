@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { X, Calendar, Clock, User, CheckCircle, MessageSquare, Users, AlertCircle } from 'lucide-react';
+import { X, Calendar, Clock, User, CheckCircle, MessageSquare } from 'lucide-react';
 import { useUsers } from '@/contexts';
 import { Trainer,  StudentBookingRequest } from '@/types';
 import { useBooking } from '@/hooks/useBooking';
@@ -14,8 +14,8 @@ interface BookingCalendarProps {
 
 
 export default function BookingCalendar({ onClose, onSuccess }: BookingCalendarProps) {
-  const { trainers, isLoading: trainersLoading } = useUsers()
-  const { createBooking, isLoading, error } = useBooking();
+  const { trainers } = useUsers()
+  const { createBooking, isLoading } = useBooking();
   const [selectedTrainer, setSelectedTrainer] = useState<Trainer | null>(null);
   const [selectedDate, setSelectedDate] = useState<string>('');
   const [selectedTime, setSelectedTime] = useState<string>('');

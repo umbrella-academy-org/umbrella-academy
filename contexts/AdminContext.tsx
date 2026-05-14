@@ -1,8 +1,8 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { BaseUser, Trainer, Student, Guardian, UserRole } from '@/types/user';
-import { adminService, AdminPayment } from '@/services/admin';
+import { BaseUser, Trainer, UserRole } from '@/types/user';
+import { adminService, AdminPayment, type FeedbackTicket } from '@/services/admin';
 import { useAdmin, CreateUserData, UserStatus } from '@/hooks/useAdmin';
 import { useAuth } from './AuthContext';
 
@@ -35,7 +35,7 @@ interface AdminContextType {
   analyticsError: string | null;
   refreshAnalytics: () => Promise<void>;
   // Feedback
-  tickets: any[];
+  tickets: FeedbackTicket[];
   ticketsLoading: boolean;
   ticketsError: string | null;
   refreshTickets: () => Promise<void>;
@@ -93,7 +93,7 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
   const [analyticsLoading, setAnalyticsLoading] = useState(false);
   const [analyticsError, setAnalyticsError] = useState<string | null>(null);
   
-  const [tickets, setTickets] = useState<any[]>([]);
+  const [tickets, setTickets] = useState<FeedbackTicket[]>([]);
   const [ticketsLoading, setTicketsLoading] = useState(false);
   const [ticketsError, setTicketsError] = useState<string | null>(null);
 
@@ -106,7 +106,7 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
       const res = await adminService.getUsers();
       setUsers(res.data ?? []);
       setUsersError(null);
-    } catch (error) {
+    } catch {
       setUsersError('Failed to fetch users');
       setUsers([]);
     } finally {

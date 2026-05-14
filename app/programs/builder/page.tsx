@@ -4,37 +4,8 @@ import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import { ProgramsNav } from '@/components/programs-nav';
 import { PlayfulHero } from '@/components/playful-hero';
-import { motion } from 'framer-motion';
-import { Target, Users, Wrench, Rocket } from 'lucide-react';
 
 export default function BuilderPage() {
-  const steps = [
-    {
-      phase: '1',
-      title: 'Problem Selection',
-      desc: 'Identify and choose real problems from your community to solve.',
-      icon: <Target className="w-6 h-6" />
-    },
-    {
-      phase: '2',
-      title: 'Team Formation',
-      desc: 'Work collaboratively with peers, mentors, and industry pros.',
-      icon: <Users className="w-6 h-6" />
-    },
-    {
-      phase: '3',
-      title: 'Build & Learn',
-      desc: 'Code working solutions while developing industry-standard skills.',
-      icon: <Wrench className="w-6 h-6" />
-    },
-    {
-      phase: '4',
-      title: 'Launch Project',
-      desc: 'Deploy your project and add it securely to your tech portfolio.',
-      icon: <Rocket className="w-6 h-6" />
-    },
-  ];
-
   return (
     <>
       <Navbar />

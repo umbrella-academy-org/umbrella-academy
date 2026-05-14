@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react';
-import { useRouter } from '@/hooks/useRouter';;
+import { useState, type SVGProps } from 'react';
+import { useRouter } from '@/hooks/useRouter';
 import { AuthContainer } from '@/components/auth/auth-container';
 import { AuthCard } from '@/components/auth/auth-card';
 import { PremiumInput } from '@/components/ui/premium-input';
@@ -34,7 +34,7 @@ export default function StudentDetailsPage() {
   const handleChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
     setErrors(prev => ({ ...prev, [field]: '' }));
-    
+
     // Check if student is under 15 to show guardian fields
     if (field === 'dateOfBirth' && value) {
       const birthDate = new Date(value);
@@ -58,7 +58,7 @@ export default function StudentDetailsPage() {
 
     if (!formData.dateOfBirth) newErrors.dateOfBirth = 'Date of birth is required';
     if (!formData.gender) newErrors.gender = 'Please select your gender';
-    
+
     // Check if guardian fields are required
     if (formData.dateOfBirth) {
       const birthDate = new Date(formData.dateOfBirth);
@@ -66,7 +66,7 @@ export default function StudentDetailsPage() {
       const age = today.getFullYear() - birthDate.getFullYear();
       const monthDiff = today.getMonth() - birthDate.getMonth();
       const actualAge = monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate()) ? age - 1 : age;
-      
+
       if (actualAge < 15) {
         if (!formData.guardianName) newErrors.guardianName = 'Guardian name is required for students under 15';
         if (!formData.guardianEmail) newErrors.guardianEmail = 'Guardian email is required for students under 15';
@@ -102,7 +102,7 @@ export default function StudentDetailsPage() {
         dateOfBirth: new Date(formData.dateOfBirth).toISOString().split('T')[0],
         isVerified: false,
         otpCode: '',
-        otpExpiry:"",
+        otpExpiry: "",
         resetToken: '',
         resetTokenExpiry: "",
         createdAt: "",
@@ -123,8 +123,8 @@ export default function StudentDetailsPage() {
 
   return (
     <AuthContainer>
-      <AuthCard 
-        title="Personalize Your Journey" 
+      <AuthCard
+        title="Personalize Your Journey"
         subtitle="Help us tailor the Dreamize experience to your unique profile."
       >
         <button
@@ -140,6 +140,7 @@ export default function StudentDetailsPage() {
               label="Date of Birth"
               type="date"
               id="dateOfBirth"
+              max={new Date().toISOString().split('T')[0]}
               value={formData.dateOfBirth}
               onChange={(e) => handleChange('dateOfBirth', e.target.value)}
               error={errors.dateOfBirth}
@@ -188,7 +189,7 @@ export default function StudentDetailsPage() {
                   <p className="text-[12px] text-slate-500">Required for students under 15 years old.</p>
                 </div>
               </div>
-              
+
               <PremiumInput
                 label="Guardian Full Name"
                 type="text"
@@ -229,8 +230,8 @@ export default function StudentDetailsPage() {
           )}
 
           <div className="pt-2">
-            <PremiumButton 
-              type="submit" 
+            <PremiumButton
+              type="submit"
               isLoading={isLoading}
             >
               {isLoading ? 'Creating Account...' : 'Complete Registration'}
@@ -253,21 +254,21 @@ export default function StudentDetailsPage() {
   );
 }
 
-function ChevronDown(props: any) {
+function ChevronDown(props: SVGProps<SVGSVGElement>) {
   return (
-    <svg 
-      {...props} 
-      xmlns="http://www.w3.org/2000/svg" 
-      width="24" 
-      height="24" 
-      viewBox="0 0 24 24" 
-      fill="none" 
-      stroke="currentColor" 
-      strokeWidth="2" 
-      strokeLinecap="round" 
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <path d="m6 9 6 6 6-6"/>
+      <path d="m6 9 6 6 6-6" />
     </svg>
   );
 }

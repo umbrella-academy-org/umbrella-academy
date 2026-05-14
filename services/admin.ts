@@ -1,7 +1,7 @@
 import { apiClient } from './client';
 import { API_ENDPOINTS } from './constants';
 import { ApiResponse, BaseUser, Trainer, Student } from '@/types';
-import { Roadmap, RoadmapStatus, RoadmapStepStatus } from '@/types/roadmap';
+import { Roadmap } from '@/types/roadmap';
 
 // Admin-specific types
 export interface AdminPayment {
