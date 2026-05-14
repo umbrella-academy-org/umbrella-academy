@@ -42,9 +42,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const checkSession = async () => {
       const storedUser = localStorage.getItem('user');
       const token = localStorage.getItem('auth_token');
+      const storedTrainer = localStorage.getItem('user');
 
       if (storedUser && token) {
         const parsedUser: BaseUser = JSON.parse(storedUser);
+        const parsedTrainer: Trainer = JSON.parse(storedTrainer || '{}');
 
         // 1. Check if email is verified
         if (!parsedUser.isVerified) {
@@ -59,7 +61,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         // 2. Check trainer approval status
         if (parsedUser.role === UserRole.TRAINER) {
           const trainer = parsedUser as Trainer;
+
           if (trainer.approvalStatus === 'pending') {
+            const response = await userService.getTrainer()
+            if (response.success && response.data) {
+              const trainerData = response.data
+              localStorage.setItem('user', JSON.stringify(trainerData));
+              if(trainerData.approvalStatus === 'approved') {
+                setUser(trainerData);
+                setIsLoading(false);
+                router.push('/dashboard/trainer');
+                return;
+              }
+            }
             setIsLoading(false);
             router.push('/auth/pending-approval');
             return;
@@ -183,12 +197,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           localStorage.setItem('userEmail', email);
           authService.sendOtp(email);
           router.push('/auth/verify');
-           setError('')
+          setError('')
         } else if (response.message.includes('pending approval')) {
           router.push('/auth/pending-approval');
-           setError('')
+          setError('')
         }
-       
+
       }
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Login failed. Please try again.');
@@ -226,7 +240,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         localStorage.setItem('auth_token', response.data.token);
         localStorage.setItem('user', JSON.stringify(response.data.user));
         setUser(response.data.user);
-        if(response.data.user.role === UserRole.TRAINER && (response.data.user as Trainer).approvalStatus === 'pending') {
+        if (response.data.user.role === UserRole.TRAINER && (response.data.user as Trainer).approvalStatus === 'pending') {
           router.push('/auth/pending-approval');
           return;
         }
