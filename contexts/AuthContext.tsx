@@ -226,6 +226,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         localStorage.setItem('auth_token', response.data.token);
         localStorage.setItem('user', JSON.stringify(response.data.user));
         setUser(response.data.user);
+        if(response.data.user.role === UserRole.TRAINER && (response.data.user as Trainer).approvalStatus === 'pending') {
+          router.push('/auth/pending-approval');
+          return;
+        }
       }
 
       // Check if this is a password reset flow
