@@ -51,6 +51,7 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
           { icon: <Home className="w-5 h-5" />, label: 'Dashboard', href: '/dashboard/admin', active: true },
           { icon: <Users className="w-5 h-5" />, label: 'Users', href: '/dashboard/admin/users' },
           { icon: <Ticket className="w-5 h-5" />, label: 'Promo Codes', href: '/dashboard/admin/promo-codes' },
+          { icon: <MessageSquare className="w-5 h-5" />, label: 'Chat', href: '/dashboard/admin/chat' },
           { icon: <UserCheck className="w-5 h-5" />, label: 'Trainer approval', href: '/dashboard/admin/trainer-approvals' },
           { icon: <UserCheck className="w-5 h-5" />, label: 'Roadmap approval', href: '/dashboard/admin/roadmap-approvals' },
           { icon: <CreditCard className="w-5 h-5" />, label: 'Payments', href: '/dashboard/admin/payments' },
