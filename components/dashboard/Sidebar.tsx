@@ -114,7 +114,8 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
           <X className="w-6 h-6" />
         </button>
 
-        <div className="p-6 lg:p-8 border-b border-white/5">
+        <div className="p-6 lg:p-8 border-b border-white/5 cursor-pointer"
+          onClick={() => navigate(`/dashboard/${currentUserType}`)}>
           <Logo size="md" />
         </div>
 
