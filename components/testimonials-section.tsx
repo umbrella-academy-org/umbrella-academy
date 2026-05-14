@@ -91,7 +91,7 @@ export function TestimonialsSection() {
   const trackRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section className="relative py-[80px] lg:py-[120px] bg-slate-50/60 overflow-hidden">
+    <section className="relative pt-[80px] bg-slate-50/60 overflow-hidden">
 
       {/* ── HEADER ── */}
       <div className="px-6 max-w-[1200px] mx-auto">

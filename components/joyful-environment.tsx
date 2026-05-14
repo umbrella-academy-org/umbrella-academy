@@ -16,7 +16,7 @@ export function JoyfulEnvironment() {
   const parallaxY = useTransform(scrollYProgress, [0, 1], [40, -40]);
 
   return (
-    <section ref={containerRef} style={{ position: 'relative' }} className="relative bg-background py-[80px] lg:py-[120px] px-6 w-full overflow-hidden">
+    <section ref={containerRef} style={{ position: 'relative' }} className="relative bg-background px-6 w-full overflow-hidden">
       <div className="max-w-[1200px] mx-auto flex flex-col lg:grid lg:grid-cols-2 gap-[60px] lg:gap-[80px] items-center">
         
         {/* Left Column (Content) */}

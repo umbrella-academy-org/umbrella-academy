@@ -27,7 +27,7 @@ export function MomentsGallery() {
   }, [paused, next]);
 
   return (
-    <section className="relative py-[80px] lg:py-[120px] px-6 bg-background overflow-hidden">
+    <section className="relative pt-[80px]  px-6 bg-background overflow-hidden">
       <div className="max-w-[1200px] mx-auto">
 
         {/* ── HEADER ── */}
