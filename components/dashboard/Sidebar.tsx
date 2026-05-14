@@ -176,7 +176,7 @@ export default function Sidebar({ activeItem = 'Home', userType }: SidebarProps)
 
           <div className="flex items-center gap-2 mt-5">
             <button
-              onClick={() => navigate('/dashboard/settings')}
+              onClick={() => navigate(`/dashboard/${currentUserType}/settings`)}
               className="flex-1 flex items-center justify-center gap-2 py-2 px-3 bg-white/5 hover:bg-white/10 rounded-lg text-slate-400 hover:text-white transition-all text-[12px] font-medium"
             >
               <Settings className="w-3.5 h-3.5" />
