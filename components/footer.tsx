@@ -40,8 +40,6 @@ const quickLinks = [
 const programs = [
   { label: 'The Dreamer', href: '/programs/dreamer' },
   { label: 'The Builder', href: '/programs/builder' },
-  { label: 'Robotics & IoT', href: '/programs/robotics' },
-  { label: 'Digital Creative Arts', href: '/programs/creative' },
   { label: 'Podcast & Outreach', href: '/programs/podcast' },
 ];
 
