@@ -48,8 +48,7 @@ export default function StudentRoadmapPage() {
     if (!authLoading && user && user.role !== 'student') {
       const dashboardRoutes: Record<string, string> = {
         'trainer': '/dashboard/trainer',
-        'company-admin': '/dashboard/field-admin',
-        'umbrella-admin': '/dashboard/umbrella-admin'
+        'admin': '/dashboard/admin'
       };
       navigate(dashboardRoutes[user.role] || '/');
     }

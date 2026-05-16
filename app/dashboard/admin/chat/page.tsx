@@ -5,7 +5,7 @@ import { UserRole } from '@/types';
 import ChatInterface from '@/components/chat/ChatInterface';
 import { ShieldCheck } from 'lucide-react';
 
-export default function UmbrellaAdminChatPage() {
+export default function AdminChatPage() {
     return (
         <div className="flex min-h-screen lg:h-screen bg-[#F8FAFC]">
             <Sidebar activeItem="Chat" userType={UserRole.ADMIN} />
